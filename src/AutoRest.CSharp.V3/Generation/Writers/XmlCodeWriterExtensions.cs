@@ -202,7 +202,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
 
             var elementVariable = new CodeWriterDeclaration(serialization.Name.ToVariableName() + "Element");
-            using (writer.Scope($"if ({element}.Element({serialization.Name:L}) is {typeof(XElement)} {elementVariable:D})"))
+            writer.Line($"if ({element}.Element({serialization.Name:L}) is {typeof(XElement)} {elementVariable:D})");
+            using (writer.Scope())
             {
                 writer.ToDeserializeElementCall(serialization,
                     valueCallback,

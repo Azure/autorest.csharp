@@ -20,8 +20,8 @@ namespace body_dictionary
     internal partial class DictionaryRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of DictionaryRestClient. </summary>
         public DictionaryRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -32,13 +32,13 @@ namespace body_dictionary
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -52,12 +52,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -80,7 +80,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -94,12 +94,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -122,7 +122,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -148,12 +148,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -176,7 +176,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -190,12 +190,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -218,7 +218,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -230,7 +230,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutEmptyRequest(IDictionary<string, string> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -260,18 +260,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
             scope.Start();
             try
             {
                 using var message = CreatePutEmptyRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -291,18 +291,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
             scope.Start();
             try
             {
                 using var message = CreatePutEmptyRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -314,7 +314,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetNullValueRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -328,12 +328,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetNullValue");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullValue");
             scope.Start();
             try
             {
                 using var message = CreateGetNullValueRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -363,7 +363,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -377,12 +377,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetNullValue(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetNullValue");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullValue");
             scope.Start();
             try
             {
                 using var message = CreateGetNullValueRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -412,7 +412,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -424,7 +424,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetNullKeyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -438,12 +438,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetNullKey");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullKey");
             scope.Start();
             try
             {
                 using var message = CreateGetNullKeyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -473,7 +473,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -487,12 +487,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetNullKey(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetNullKey");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullKey");
             scope.Start();
             try
             {
                 using var message = CreateGetNullKeyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -522,7 +522,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -534,7 +534,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetEmptyStringKeyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -548,12 +548,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetEmptyStringKey");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmptyStringKey");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyStringKeyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -583,7 +583,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -597,12 +597,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetEmptyStringKey(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetEmptyStringKey");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmptyStringKey");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyStringKeyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -632,7 +632,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -644,7 +644,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetInvalidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -658,12 +658,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -693,7 +693,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -707,12 +707,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -742,7 +742,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -754,7 +754,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetBooleanTfftRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -768,12 +768,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetBooleanTfft");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanTfft");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanTfftRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -796,7 +796,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -810,12 +810,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetBooleanTfft");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanTfft");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanTfftRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -838,7 +838,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -850,7 +850,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutBooleanTfftRequest(IDictionary<string, bool> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -880,18 +880,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
             scope.Start();
             try
             {
                 using var message = CreatePutBooleanTfftRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -911,18 +911,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
             scope.Start();
             try
             {
                 using var message = CreatePutBooleanTfftRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -934,7 +934,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetBooleanInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -948,12 +948,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -976,7 +976,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -990,12 +990,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1018,7 +1018,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1030,7 +1030,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetBooleanInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1044,12 +1044,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1072,7 +1072,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1086,12 +1086,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetBooleanInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1114,7 +1114,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1126,7 +1126,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetIntegerValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1140,12 +1140,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetIntegerValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntegerValid");
             scope.Start();
             try
             {
                 using var message = CreateGetIntegerValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1168,7 +1168,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1182,12 +1182,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetIntegerValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntegerValid");
             scope.Start();
             try
             {
                 using var message = CreateGetIntegerValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1210,7 +1210,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1222,7 +1222,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutIntegerValidRequest(IDictionary<string, int> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1252,18 +1252,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
             scope.Start();
             try
             {
                 using var message = CreatePutIntegerValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1283,18 +1283,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
             scope.Start();
             try
             {
                 using var message = CreatePutIntegerValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1306,7 +1306,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetIntInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1320,12 +1320,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetIntInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1348,7 +1348,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1362,12 +1362,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetIntInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1390,7 +1390,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1402,7 +1402,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetIntInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1416,12 +1416,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetIntInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1444,7 +1444,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1458,12 +1458,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetIntInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1486,7 +1486,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1498,7 +1498,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetLongValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1512,12 +1512,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetLongValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongValid");
             scope.Start();
             try
             {
                 using var message = CreateGetLongValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1540,7 +1540,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1554,12 +1554,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetLongValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongValid");
             scope.Start();
             try
             {
                 using var message = CreateGetLongValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1582,7 +1582,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1594,7 +1594,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutLongValidRequest(IDictionary<string, long> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1624,18 +1624,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
             scope.Start();
             try
             {
                 using var message = CreatePutLongValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1655,18 +1655,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
             scope.Start();
             try
             {
                 using var message = CreatePutLongValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1678,7 +1678,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetLongInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1692,12 +1692,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetLongInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1720,7 +1720,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1734,12 +1734,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetLongInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1762,7 +1762,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1774,7 +1774,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetLongInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1788,12 +1788,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetLongInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1816,7 +1816,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1830,12 +1830,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetLongInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1858,7 +1858,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1870,7 +1870,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetFloatValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1884,12 +1884,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetFloatValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatValid");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1912,7 +1912,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1926,12 +1926,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetFloatValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatValid");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1954,7 +1954,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1966,7 +1966,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutFloatValidRequest(IDictionary<string, float> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1996,18 +1996,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
             scope.Start();
             try
             {
                 using var message = CreatePutFloatValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2027,18 +2027,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
             scope.Start();
             try
             {
                 using var message = CreatePutFloatValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2050,7 +2050,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetFloatInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2064,12 +2064,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2092,7 +2092,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2106,12 +2106,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2134,7 +2134,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2146,7 +2146,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetFloatInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2160,12 +2160,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2188,7 +2188,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2202,12 +2202,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetFloatInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2230,7 +2230,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2242,7 +2242,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDoubleValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2256,12 +2256,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDoubleValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2284,7 +2284,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2298,12 +2298,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDoubleValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2326,7 +2326,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2338,7 +2338,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutDoubleValidRequest(IDictionary<string, double> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2368,18 +2368,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDoubleValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2399,18 +2399,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDoubleValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2422,7 +2422,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDoubleInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2436,12 +2436,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2464,7 +2464,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2478,12 +2478,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2506,7 +2506,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2518,7 +2518,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDoubleInvalidStringRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2532,12 +2532,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleInvalidStringRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2560,7 +2560,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2574,12 +2574,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidString");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidString");
             scope.Start();
             try
             {
                 using var message = CreateGetDoubleInvalidStringRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2602,7 +2602,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2614,7 +2614,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetStringValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2628,12 +2628,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetStringValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringValid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2663,7 +2663,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2677,12 +2677,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetStringValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringValid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2712,7 +2712,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2724,7 +2724,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutStringValidRequest(IDictionary<string, string> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2754,18 +2754,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
             scope.Start();
             try
             {
                 using var message = CreatePutStringValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2785,18 +2785,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
             scope.Start();
             try
             {
                 using var message = CreatePutStringValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2808,7 +2808,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetStringWithNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2822,12 +2822,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetStringWithNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithNull");
             scope.Start();
             try
             {
                 using var message = CreateGetStringWithNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2857,7 +2857,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2871,12 +2871,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetStringWithNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithNull");
             scope.Start();
             try
             {
                 using var message = CreateGetStringWithNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2906,7 +2906,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -2918,7 +2918,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetStringWithInvalidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2932,12 +2932,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetStringWithInvalid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringWithInvalidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -2967,7 +2967,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -2981,12 +2981,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetStringWithInvalid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetStringWithInvalidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3016,7 +3016,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3028,7 +3028,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDateValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3042,12 +3042,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3070,7 +3070,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3084,12 +3084,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3112,7 +3112,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3124,7 +3124,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutDateValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -3154,18 +3154,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3185,18 +3185,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3208,7 +3208,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDateInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3222,12 +3222,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDateInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3250,7 +3250,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3264,12 +3264,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDateInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3292,7 +3292,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3304,7 +3304,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDateInvalidCharsRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3318,12 +3318,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetDateInvalidCharsRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3346,7 +3346,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3360,12 +3360,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetDateInvalidCharsRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3388,7 +3388,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3400,7 +3400,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDateTimeValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3414,12 +3414,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3442,7 +3442,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3456,12 +3456,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3484,7 +3484,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3496,7 +3496,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutDateTimeValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -3526,18 +3526,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateTimeValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3557,18 +3557,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateTimeValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3580,7 +3580,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDateTimeInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3594,12 +3594,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3622,7 +3622,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3636,12 +3636,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3664,7 +3664,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3676,7 +3676,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDateTimeInvalidCharsRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3690,12 +3690,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeInvalidCharsRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3718,7 +3718,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3732,12 +3732,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidChars");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidChars");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeInvalidCharsRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3760,7 +3760,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3772,7 +3772,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDateTimeRfc1123ValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3786,12 +3786,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeRfc1123Valid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeRfc1123ValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3814,7 +3814,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3828,12 +3828,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeRfc1123Valid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using var message = CreateGetDateTimeRfc1123ValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3856,7 +3856,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3868,7 +3868,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutDateTimeRfc1123ValidRequest(IDictionary<string, DateTimeOffset> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -3898,18 +3898,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -3929,18 +3929,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
             scope.Start();
             try
             {
                 using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -3952,7 +3952,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDurationValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3966,12 +3966,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDurationValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDurationValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDurationValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -3994,7 +3994,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4008,12 +4008,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDurationValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDurationValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDurationValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4036,7 +4036,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4048,7 +4048,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutDurationValidRequest(IDictionary<string, TimeSpan> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -4078,18 +4078,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDurationValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4109,18 +4109,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDurationValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4132,7 +4132,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetByteValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4146,12 +4146,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetByteValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteValid");
             scope.Start();
             try
             {
                 using var message = CreateGetByteValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4181,7 +4181,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4195,12 +4195,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetByteValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteValid");
             scope.Start();
             try
             {
                 using var message = CreateGetByteValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4230,7 +4230,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4242,7 +4242,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutByteValidRequest(IDictionary<string, byte[]> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -4272,18 +4272,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
             scope.Start();
             try
             {
                 using var message = CreatePutByteValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4303,18 +4303,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
             scope.Start();
             try
             {
                 using var message = CreatePutByteValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4326,7 +4326,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetByteInvalidNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4340,12 +4340,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetByteInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetByteInvalidNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4375,7 +4375,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4389,12 +4389,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetByteInvalidNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteInvalidNull");
             scope.Start();
             try
             {
                 using var message = CreateGetByteInvalidNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4424,7 +4424,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4436,7 +4436,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetBase64UrlRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4450,12 +4450,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetBase64Url");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBase64Url");
             scope.Start();
             try
             {
                 using var message = CreateGetBase64UrlRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4485,7 +4485,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4499,12 +4499,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetBase64Url");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBase64Url");
             scope.Start();
             try
             {
                 using var message = CreateGetBase64UrlRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4534,7 +4534,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4546,7 +4546,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetComplexNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4560,12 +4560,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexNull");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4595,7 +4595,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4609,12 +4609,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexNull");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4644,7 +4644,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4656,7 +4656,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetComplexEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4670,12 +4670,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4705,7 +4705,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4719,12 +4719,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4754,7 +4754,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4766,7 +4766,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetComplexItemNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4780,12 +4780,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexItemNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4815,7 +4815,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4829,12 +4829,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexItemNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4864,7 +4864,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4876,7 +4876,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetComplexItemEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -4890,12 +4890,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexItemEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4925,7 +4925,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -4939,12 +4939,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexItemEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -4974,7 +4974,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -4986,7 +4986,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetComplexValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5000,12 +5000,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexValid");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5035,7 +5035,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5049,12 +5049,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetComplexValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexValid");
             scope.Start();
             try
             {
                 using var message = CreateGetComplexValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5084,7 +5084,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5096,7 +5096,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutComplexValidRequest(IDictionary<string, Widget> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -5126,18 +5126,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
             scope.Start();
             try
             {
                 using var message = CreatePutComplexValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5157,18 +5157,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
             scope.Start();
             try
             {
                 using var message = CreatePutComplexValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5180,7 +5180,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetArrayNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5194,12 +5194,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5241,7 +5241,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5255,12 +5255,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5302,7 +5302,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5314,7 +5314,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetArrayEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5328,12 +5328,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5375,7 +5375,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5389,12 +5389,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5436,7 +5436,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5448,7 +5448,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetArrayItemNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5462,12 +5462,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayItemNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5509,7 +5509,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5523,12 +5523,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayItemNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5570,7 +5570,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5582,7 +5582,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetArrayItemEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5596,12 +5596,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayItemEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5643,7 +5643,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5657,12 +5657,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayItemEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5704,7 +5704,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5716,7 +5716,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetArrayValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5730,12 +5730,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5777,7 +5777,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5791,12 +5791,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
             scope.Start();
             try
             {
                 using var message = CreateGetArrayValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5838,7 +5838,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5850,7 +5850,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutArrayValidRequest(IDictionary<string, IList<string>> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -5885,18 +5885,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
             scope.Start();
             try
             {
                 using var message = CreatePutArrayValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -5916,18 +5916,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
             scope.Start();
             try
             {
                 using var message = CreatePutArrayValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -5939,7 +5939,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDictionaryNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -5953,12 +5953,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -5988,7 +5988,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6002,12 +6002,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6037,7 +6037,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6049,7 +6049,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDictionaryEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6063,12 +6063,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6098,7 +6098,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6112,12 +6112,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6147,7 +6147,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6159,7 +6159,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDictionaryItemNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6173,12 +6173,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryItemNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6208,7 +6208,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6222,12 +6222,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryItemNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6257,7 +6257,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6269,7 +6269,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDictionaryItemEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6283,12 +6283,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryItemEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6318,7 +6318,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6332,12 +6332,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryItemEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6367,7 +6367,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6379,7 +6379,7 @@ namespace body_dictionary
 
         internal HttpMessage CreateGetDictionaryValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -6393,12 +6393,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6428,7 +6428,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6442,12 +6442,12 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
             scope.Start();
             try
             {
                 using var message = CreateGetDictionaryValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -6477,7 +6477,7 @@ namespace body_dictionary
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -6489,7 +6489,7 @@ namespace body_dictionary
 
         internal HttpMessage CreatePutDictionaryValidRequest(IDictionary<string, object> arrayBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -6519,18 +6519,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDictionaryValidRequest(arrayBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -6550,18 +6550,18 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
             scope.Start();
             try
             {
                 using var message = CreatePutDictionaryValidRequest(arrayBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

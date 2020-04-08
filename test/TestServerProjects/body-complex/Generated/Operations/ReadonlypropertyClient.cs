@@ -15,8 +15,8 @@ namespace body_complex
 {
     public partial class ReadonlypropertyClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ReadonlypropertyRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ReadonlypropertyClient for mocking. </summary>
         protected ReadonlypropertyClient()
@@ -26,8 +26,8 @@ namespace body_complex
         internal ReadonlypropertyClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new ReadonlypropertyRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get complex types that have readonly properties. </summary>

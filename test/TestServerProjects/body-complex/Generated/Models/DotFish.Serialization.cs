@@ -21,13 +21,13 @@ namespace body_complex.Models
                     case "DotSalmon": return DotSalmon.DeserializeDotSalmon(element);
                 }
             }
-            string fishtype = default;
+            string fishType = default;
             string species = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fish.type"))
                 {
-                    fishtype = property.Value.GetString();
+                    fishType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("species"))
@@ -40,7 +40,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DotFish(fishtype, species);
+            return new DotFish(fishType, species);
         }
     }
 }

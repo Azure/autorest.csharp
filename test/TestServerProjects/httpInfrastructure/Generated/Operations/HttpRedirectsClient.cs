@@ -15,8 +15,8 @@ namespace httpInfrastructure
 {
     public partial class HttpRedirectsClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal HttpRedirectsRestClient RestClient { get; }
         /// <summary> Initializes a new instance of HttpRedirectsClient for mocking. </summary>
         protected HttpRedirectsClient()
@@ -26,8 +26,8 @@ namespace httpInfrastructure
         internal HttpRedirectsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new HttpRedirectsRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>

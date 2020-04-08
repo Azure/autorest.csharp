@@ -17,8 +17,8 @@ namespace custom_baseUrl
     internal partial class PathsRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of PathsRestClient. </summary>
         public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
@@ -29,13 +29,13 @@ namespace custom_baseUrl
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetEmptyRequest(string accountName)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -57,18 +57,18 @@ namespace custom_baseUrl
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyRequest(accountName);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -88,18 +88,18 @@ namespace custom_baseUrl
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyRequest(accountName);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

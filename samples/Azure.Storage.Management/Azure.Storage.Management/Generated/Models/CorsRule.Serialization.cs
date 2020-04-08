@@ -25,25 +25,25 @@ namespace Azure.Storage.Management.Models
             writer.WriteEndArray();
             writer.WritePropertyName("allowedMethods");
             writer.WriteStartArray();
-            foreach (var item0 in AllowedMethods)
+            foreach (var item in AllowedMethods)
             {
-                writer.WriteStringValue(item0.ToString());
+                writer.WriteStringValue(item.ToString());
             }
             writer.WriteEndArray();
             writer.WritePropertyName("maxAgeInSeconds");
             writer.WriteNumberValue(MaxAgeInSeconds);
             writer.WritePropertyName("exposedHeaders");
             writer.WriteStartArray();
-            foreach (var item1 in ExposedHeaders)
+            foreach (var item in ExposedHeaders)
             {
-                writer.WriteStringValue(item1);
+                writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
             writer.WritePropertyName("allowedHeaders");
             writer.WriteStartArray();
-            foreach (var item2 in AllowedHeaders)
+            foreach (var item in AllowedHeaders)
             {
-                writer.WriteStringValue(item2);
+                writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

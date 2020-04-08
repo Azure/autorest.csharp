@@ -19,8 +19,8 @@ namespace Azure.Storage.Tables
     {
         private string url;
         private string version;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
@@ -36,13 +36,13 @@ namespace Azure.Storage.Tables
 
             this.url = url;
             this.version = version;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateSetPropertiesRequest(StorageServiceProperties storageServiceProperties, int? timeout, string requestId)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -79,19 +79,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(storageServiceProperties));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.SetProperties");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SetProperties");
             scope.Start();
             try
             {
                 using var message = CreateSetPropertiesRequest(storageServiceProperties, timeout, requestId);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceSetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -113,19 +113,19 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(storageServiceProperties));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.SetProperties");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SetProperties");
             scope.Start();
             try
             {
                 using var message = CreateSetPropertiesRequest(storageServiceProperties, timeout, requestId);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceSetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return ResponseWithHeaders.FromValue(headers, message.Response);
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -137,7 +137,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateGetPropertiesRequest(int? timeout, string requestId)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -164,12 +164,12 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<StorageServiceProperties, ServiceGetPropertiesHeaders>> GetPropertiesAsync(int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetProperties");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetProperties");
             scope.Start();
             try
             {
                 using var message = CreateGetPropertiesRequest(timeout, requestId);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -184,7 +184,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -200,12 +200,12 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<StorageServiceProperties, ServiceGetPropertiesHeaders> GetProperties(int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetProperties");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetProperties");
             scope.Start();
             try
             {
                 using var message = CreateGetPropertiesRequest(timeout, requestId);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetPropertiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -220,7 +220,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -232,7 +232,7 @@ namespace Azure.Storage.Tables
 
         internal HttpMessage CreateGetStatisticsRequest(int? timeout, string requestId)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -259,12 +259,12 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<StorageServiceStats, ServiceGetStatisticsHeaders>> GetStatisticsAsync(int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
             scope.Start();
             try
             {
                 using var message = CreateGetStatisticsRequest(timeout, requestId);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 var headers = new ServiceGetStatisticsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -279,7 +279,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -295,12 +295,12 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<StorageServiceStats, ServiceGetStatisticsHeaders> GetStatistics(int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
             scope.Start();
             try
             {
                 using var message = CreateGetStatisticsRequest(timeout, requestId);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 var headers = new ServiceGetStatisticsHeaders(message.Response);
                 switch (message.Response.Status)
                 {
@@ -315,7 +315,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

@@ -14,8 +14,8 @@ namespace httpInfrastructure
 {
     public partial class HttpRetryClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal HttpRetryRestClient RestClient { get; }
         /// <summary> Initializes a new instance of HttpRetryClient for mocking. </summary>
         protected HttpRetryClient()
@@ -25,8 +25,8 @@ namespace httpInfrastructure
         internal HttpRetryClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new HttpRetryRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>

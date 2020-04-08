@@ -87,7 +87,7 @@ namespace CognitiveSearch.Models
             IList<FieldMapping> fieldMappings = default;
             IList<FieldMapping> outputFieldMappings = default;
             bool? disabled = default;
-            string odataetag = default;
+            string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -198,11 +198,11 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    odataetag = property.Value.GetString();
+                    odataEtag = property.Value.GetString();
                     continue;
                 }
             }
-            return new Indexer(name, description, dataSourceName, skillsetName, targetIndexName, schedule, parameters, fieldMappings, outputFieldMappings, disabled, odataetag);
+            return new Indexer(name, description, dataSourceName, skillsetName, targetIndexName, schedule, parameters, fieldMappings, outputFieldMappings, disabled, odataEtag);
         }
     }
 }

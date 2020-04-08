@@ -18,8 +18,8 @@ namespace httpInfrastructure
     internal partial class HttpSuccessRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of HttpSuccessRestClient. </summary>
         public HttpSuccessRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace httpInfrastructure
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateHead200Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -50,18 +50,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head200Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
                 using var message = CreateHead200Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -75,18 +75,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head200(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
                 using var message = CreateHead200Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -98,7 +98,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateGet200Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -112,12 +112,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> Get200Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
             try
             {
                 using var message = CreateGet200Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -128,7 +128,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -142,12 +142,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> Get200(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
             try
             {
                 using var message = CreateGet200Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -158,7 +158,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -170,7 +170,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateOptions200Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -184,12 +184,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> Options200Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
             try
             {
                 using var message = CreateOptions200Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -200,7 +200,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -214,12 +214,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> Options200(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
             try
             {
                 using var message = CreateOptions200Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -230,7 +230,7 @@ namespace httpInfrastructure
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -242,7 +242,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut200Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -260,18 +260,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put200Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
             scope.Start();
             try
             {
                 using var message = CreatePut200Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -285,18 +285,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put200(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
             scope.Start();
             try
             {
                 using var message = CreatePut200Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -308,7 +308,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePatch200Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -326,18 +326,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch200Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
             scope.Start();
             try
             {
                 using var message = CreatePatch200Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -351,18 +351,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch200(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
             scope.Start();
             try
             {
                 using var message = CreatePatch200Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -374,7 +374,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePost200Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -392,18 +392,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post200Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
             scope.Start();
             try
             {
                 using var message = CreatePost200Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -417,18 +417,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post200(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
             scope.Start();
             try
             {
                 using var message = CreatePost200Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -440,7 +440,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateDelete200Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -458,18 +458,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete200Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
             scope.Start();
             try
             {
                 using var message = CreateDelete200Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -483,18 +483,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete200(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
             scope.Start();
             try
             {
                 using var message = CreateDelete200Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -506,7 +506,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut201Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -524,18 +524,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put201Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
             scope.Start();
             try
             {
                 using var message = CreatePut201Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -549,18 +549,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put201(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
             scope.Start();
             try
             {
                 using var message = CreatePut201Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -572,7 +572,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePost201Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -590,18 +590,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post201Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
             scope.Start();
             try
             {
                 using var message = CreatePost201Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 201:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -615,18 +615,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post201(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
             scope.Start();
             try
             {
                 using var message = CreatePost201Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 201:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -638,7 +638,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut202Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -656,18 +656,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put202Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
             scope.Start();
             try
             {
                 using var message = CreatePut202Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -681,18 +681,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put202(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
             scope.Start();
             try
             {
                 using var message = CreatePut202Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -704,7 +704,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePatch202Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -722,18 +722,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch202Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
             scope.Start();
             try
             {
                 using var message = CreatePatch202Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -747,18 +747,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch202(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
             scope.Start();
             try
             {
                 using var message = CreatePatch202Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -770,7 +770,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePost202Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -788,18 +788,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
             scope.Start();
             try
             {
                 using var message = CreatePost202Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -813,18 +813,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
             scope.Start();
             try
             {
                 using var message = CreatePost202Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -836,7 +836,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateDelete202Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -854,18 +854,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete202Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
             scope.Start();
             try
             {
                 using var message = CreateDelete202Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -879,18 +879,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete202(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
             scope.Start();
             try
             {
                 using var message = CreateDelete202Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 202:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -902,7 +902,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateHead204Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -916,18 +916,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head204Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
                 using var message = CreateHead204Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -941,18 +941,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head204(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
                 using var message = CreateHead204Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -964,7 +964,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePut204Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -982,18 +982,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put204Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
             scope.Start();
             try
             {
                 using var message = CreatePut204Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1007,18 +1007,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put204(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
             scope.Start();
             try
             {
                 using var message = CreatePut204Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1030,7 +1030,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePatch204Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1048,18 +1048,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Patch204Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
             scope.Start();
             try
             {
                 using var message = CreatePatch204Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1073,18 +1073,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Patch204(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
             scope.Start();
             try
             {
                 using var message = CreatePatch204Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1096,7 +1096,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreatePost204Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1114,18 +1114,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post204Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
             scope.Start();
             try
             {
                 using var message = CreatePost204Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1139,18 +1139,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post204(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
             scope.Start();
             try
             {
                 using var message = CreatePost204Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1162,7 +1162,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateDelete204Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1180,18 +1180,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete204Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
             scope.Start();
             try
             {
                 using var message = CreateDelete204Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1205,18 +1205,18 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete204(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
             scope.Start();
             try
             {
                 using var message = CreateDelete204Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -1228,7 +1228,7 @@ namespace httpInfrastructure
 
         internal HttpMessage CreateHead404Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1242,19 +1242,19 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head404Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
                 using var message = CreateHead404Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 204:
                     case 404:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -1268,19 +1268,19 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head404(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
                 using var message = CreateHead404Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 204:
                     case 404:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

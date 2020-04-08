@@ -15,8 +15,8 @@ namespace body_complex
 {
     public partial class PolymorphismClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PolymorphismRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PolymorphismClient for mocking. </summary>
         protected PolymorphismClient()
@@ -26,8 +26,8 @@ namespace body_complex
         internal PolymorphismClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new PolymorphismRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>

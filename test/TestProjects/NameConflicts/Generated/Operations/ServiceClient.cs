@@ -15,8 +15,8 @@ namespace NameConflicts
 {
     public partial class ServiceClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ServiceRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ServiceClient for mocking. </summary>
         protected ServiceClient()
@@ -26,30 +26,34 @@ namespace NameConflicts
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new ServiceRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <param name="request"> The String to use. </param>
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
         /// <param name="uri"> The String to use. </param>
+        /// <param name="pipeline"> The String to use. </param>
+        /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
-            return await RestClient.OperationAsync(request, message, scope, uri, @class, cancellationToken).ConfigureAwait(false);
+            return await RestClient.OperationAsync(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="request"> The String to use. </param>
         /// <param name="message"> The String to use. </param>
         /// <param name="scope"> The String to use. </param>
         /// <param name="uri"> The String to use. </param>
+        /// <param name="pipeline"> The String to use. </param>
+        /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Struct> Operation(string request, string message, string scope, string uri, Class @class, CancellationToken cancellationToken = default)
+        public virtual Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
-            return RestClient.Operation(request, message, scope, uri, @class, cancellationToken);
+            return RestClient.Operation(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken);
         }
     }
 }

@@ -19,8 +19,8 @@ namespace extensible_enums_swagger
     internal partial class PetRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of PetRestClient. </summary>
         public PetRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -31,13 +31,13 @@ namespace extensible_enums_swagger
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetByPetIdRequest(string petId)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -57,12 +57,12 @@ namespace extensible_enums_swagger
                 throw new ArgumentNullException(nameof(petId));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetClient.GetByPetId");
+            using var scope = _clientDiagnostics.CreateScope("PetClient.GetByPetId");
             scope.Start();
             try
             {
                 using var message = CreateGetByPetIdRequest(petId);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -80,7 +80,7 @@ namespace extensible_enums_swagger
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -99,12 +99,12 @@ namespace extensible_enums_swagger
                 throw new ArgumentNullException(nameof(petId));
             }
 
-            using var scope = clientDiagnostics.CreateScope("PetClient.GetByPetId");
+            using var scope = _clientDiagnostics.CreateScope("PetClient.GetByPetId");
             scope.Start();
             try
             {
                 using var message = CreateGetByPetIdRequest(petId);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -122,7 +122,7 @@ namespace extensible_enums_swagger
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace extensible_enums_swagger
 
         internal HttpMessage CreateAddPetRequest(Pet petParam)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -155,12 +155,12 @@ namespace extensible_enums_swagger
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Pet>> AddPetAsync(Pet petParam = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PetClient.AddPet");
+            using var scope = _clientDiagnostics.CreateScope("PetClient.AddPet");
             scope.Start();
             try
             {
                 using var message = CreateAddPetRequest(petParam);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -178,7 +178,7 @@ namespace extensible_enums_swagger
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -192,12 +192,12 @@ namespace extensible_enums_swagger
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet petParam = null, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("PetClient.AddPet");
+            using var scope = _clientDiagnostics.CreateScope("PetClient.AddPet");
             scope.Start();
             try
             {
                 using var message = CreateAddPetRequest(petParam);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -215,7 +215,7 @@ namespace extensible_enums_swagger
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

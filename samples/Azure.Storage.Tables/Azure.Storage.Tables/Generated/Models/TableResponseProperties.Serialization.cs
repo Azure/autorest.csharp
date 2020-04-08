@@ -15,9 +15,9 @@ namespace Azure.Storage.Tables.Models
         internal static TableResponseProperties DeserializeTableResponseProperties(JsonElement element)
         {
             string tableName = default;
-            string odatatype = default;
-            string odataid = default;
-            string odataeditLink = default;
+            string odataType = default;
+            string odataId = default;
+            string odataEditLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("TableName"))
@@ -35,7 +35,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.id"))
@@ -44,7 +44,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odataid = property.Value.GetString();
+                    odataId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.editLink"))
@@ -53,11 +53,11 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odataeditLink = property.Value.GetString();
+                    odataEditLink = property.Value.GetString();
                     continue;
                 }
             }
-            return new TableResponseProperties(tableName, odatatype, odataid, odataeditLink);
+            return new TableResponseProperties(tableName, odataType, odataId, odataEditLink);
         }
     }
 }

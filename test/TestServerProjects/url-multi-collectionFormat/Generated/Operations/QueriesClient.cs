@@ -15,8 +15,8 @@ namespace url_multi_collectionFormat
 {
     public partial class QueriesClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal QueriesRestClient RestClient { get; }
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
         protected QueriesClient()
@@ -26,8 +26,8 @@ namespace url_multi_collectionFormat
         internal QueriesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new QueriesRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Get a null array of string using the multi-array format. </summary>

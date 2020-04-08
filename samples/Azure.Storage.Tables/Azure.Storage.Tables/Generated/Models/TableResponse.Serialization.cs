@@ -14,11 +14,11 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableResponse DeserializeTableResponse(JsonElement element)
         {
-            string odatametadata = default;
+            string odataMetadata = default;
             string tableName = default;
-            string odatatype = default;
-            string odataid = default;
-            string odataeditLink = default;
+            string odataType = default;
+            string odataId = default;
+            string odataEditLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("odata.metadata"))
@@ -27,7 +27,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odatametadata = property.Value.GetString();
+                    odataMetadata = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("TableName"))
@@ -45,7 +45,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.id"))
@@ -54,7 +54,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odataid = property.Value.GetString();
+                    odataId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.editLink"))
@@ -63,11 +63,11 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odataeditLink = property.Value.GetString();
+                    odataEditLink = property.Value.GetString();
                     continue;
                 }
             }
-            return new TableResponse(tableName, odatatype, odataid, odataeditLink, odatametadata);
+            return new TableResponse(tableName, odataType, odataId, odataEditLink, odataMetadata);
         }
     }
 }

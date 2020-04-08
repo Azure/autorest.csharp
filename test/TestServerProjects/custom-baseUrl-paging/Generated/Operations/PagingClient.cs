@@ -17,8 +17,8 @@ namespace custom_baseUrl_paging
 {
     public partial class PagingClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PagingRestClient RestClient { get; }
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()
@@ -28,8 +28,8 @@ namespace custom_baseUrl_paging
         internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
             RestClient = new PagingRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>

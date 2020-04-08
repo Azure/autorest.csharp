@@ -18,8 +18,8 @@ namespace body_integer
     internal partial class IntRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of IntRestClient. </summary>
         public IntRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -30,13 +30,13 @@ namespace body_integer
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetNullRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -50,12 +50,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -66,7 +66,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -80,12 +80,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetNull");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetNull");
             scope.Start();
             try
             {
                 using var message = CreateGetNullRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -96,7 +96,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -108,7 +108,7 @@ namespace body_integer
 
         internal HttpMessage CreateGetInvalidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -122,12 +122,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -138,7 +138,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -152,12 +152,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetInvalid");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetInvalid");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -168,7 +168,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -180,7 +180,7 @@ namespace body_integer
 
         internal HttpMessage CreateGetOverflowInt32Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -194,12 +194,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetOverflowInt32");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetOverflowInt32");
             scope.Start();
             try
             {
                 using var message = CreateGetOverflowInt32Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -210,7 +210,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -224,12 +224,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetOverflowInt32(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetOverflowInt32");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetOverflowInt32");
             scope.Start();
             try
             {
                 using var message = CreateGetOverflowInt32Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -240,7 +240,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -252,7 +252,7 @@ namespace body_integer
 
         internal HttpMessage CreateGetUnderflowInt32Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -266,12 +266,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetUnderflowInt32");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnderflowInt32");
             scope.Start();
             try
             {
                 using var message = CreateGetUnderflowInt32Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -282,7 +282,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -296,12 +296,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<int> GetUnderflowInt32(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetUnderflowInt32");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnderflowInt32");
             scope.Start();
             try
             {
                 using var message = CreateGetUnderflowInt32Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -312,7 +312,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -324,7 +324,7 @@ namespace body_integer
 
         internal HttpMessage CreateGetOverflowInt64Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -338,12 +338,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetOverflowInt64");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetOverflowInt64");
             scope.Start();
             try
             {
                 using var message = CreateGetOverflowInt64Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -354,7 +354,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -368,12 +368,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> GetOverflowInt64(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetOverflowInt64");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetOverflowInt64");
             scope.Start();
             try
             {
                 using var message = CreateGetOverflowInt64Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -384,7 +384,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -396,7 +396,7 @@ namespace body_integer
 
         internal HttpMessage CreateGetUnderflowInt64Request()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -410,12 +410,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetUnderflowInt64");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnderflowInt64");
             scope.Start();
             try
             {
                 using var message = CreateGetUnderflowInt64Request();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -426,7 +426,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -440,12 +440,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<long> GetUnderflowInt64(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetUnderflowInt64");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnderflowInt64");
             scope.Start();
             try
             {
                 using var message = CreateGetUnderflowInt64Request();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -456,7 +456,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -468,7 +468,7 @@ namespace body_integer
 
         internal HttpMessage CreatePutMax32Request(int intBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -487,18 +487,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutMax32");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMax32");
             scope.Start();
             try
             {
                 using var message = CreatePutMax32Request(intBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -513,18 +513,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMax32(int intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutMax32");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMax32");
             scope.Start();
             try
             {
                 using var message = CreatePutMax32Request(intBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -536,7 +536,7 @@ namespace body_integer
 
         internal HttpMessage CreatePutMax64Request(long intBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -555,18 +555,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutMax64");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMax64");
             scope.Start();
             try
             {
                 using var message = CreatePutMax64Request(intBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -581,18 +581,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMax64(long intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutMax64");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMax64");
             scope.Start();
             try
             {
                 using var message = CreatePutMax64Request(intBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -604,7 +604,7 @@ namespace body_integer
 
         internal HttpMessage CreatePutMin32Request(int intBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -623,18 +623,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutMin32");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMin32");
             scope.Start();
             try
             {
                 using var message = CreatePutMin32Request(intBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -649,18 +649,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMin32(int intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutMin32");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMin32");
             scope.Start();
             try
             {
                 using var message = CreatePutMin32Request(intBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -672,7 +672,7 @@ namespace body_integer
 
         internal HttpMessage CreatePutMin64Request(long intBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -691,18 +691,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutMin64");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMin64");
             scope.Start();
             try
             {
                 using var message = CreatePutMin64Request(intBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -717,18 +717,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutMin64(long intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutMin64");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMin64");
             scope.Start();
             try
             {
                 using var message = CreatePutMin64Request(intBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -740,7 +740,7 @@ namespace body_integer
 
         internal HttpMessage CreateGetUnixTimeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -754,12 +754,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetUnixTime");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnixTime");
             scope.Start();
             try
             {
                 using var message = CreateGetUnixTimeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -770,7 +770,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -784,12 +784,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnixTime(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetUnixTime");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnixTime");
             scope.Start();
             try
             {
                 using var message = CreateGetUnixTimeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -800,7 +800,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -812,7 +812,7 @@ namespace body_integer
 
         internal HttpMessage CreatePutUnixTimeDateRequest(DateTimeOffset intBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -831,18 +831,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
             scope.Start();
             try
             {
                 using var message = CreatePutUnixTimeDateRequest(intBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -857,18 +857,18 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUnixTimeDate(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
             scope.Start();
             try
             {
                 using var message = CreatePutUnixTimeDateRequest(intBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -880,7 +880,7 @@ namespace body_integer
 
         internal HttpMessage CreateGetInvalidUnixTimeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -894,12 +894,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetInvalidUnixTime");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetInvalidUnixTime");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidUnixTimeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -910,7 +910,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -924,12 +924,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalidUnixTime(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetInvalidUnixTime");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetInvalidUnixTime");
             scope.Start();
             try
             {
                 using var message = CreateGetInvalidUnixTimeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -940,7 +940,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -952,7 +952,7 @@ namespace body_integer
 
         internal HttpMessage CreateGetNullUnixTimeRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -966,12 +966,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetNullUnixTime");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetNullUnixTime");
             scope.Start();
             try
             {
                 using var message = CreateGetNullUnixTimeRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -982,7 +982,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -996,12 +996,12 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNullUnixTime(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("IntClient.GetNullUnixTime");
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetNullUnixTime");
             scope.Start();
             try
             {
                 using var message = CreateGetNullUnixTimeRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1012,7 +1012,7 @@ namespace body_integer
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)

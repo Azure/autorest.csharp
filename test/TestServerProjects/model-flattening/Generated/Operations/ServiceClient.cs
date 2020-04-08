@@ -16,8 +16,8 @@ namespace model_flattening
 {
     public partial class ServiceClient
     {
-        private readonly ClientDiagnostics clientDiagnostics;
-        private readonly HttpPipeline pipeline;
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ServiceRestClient RestClient { get; }
         /// <summary> Initializes a new instance of ServiceClient for mocking. </summary>
         protected ServiceClient()
@@ -27,8 +27,8 @@ namespace model_flattening
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
             RestClient = new ServiceRestClient(clientDiagnostics, pipeline, host);
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Put External Resource as an Array. </summary>

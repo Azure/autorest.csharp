@@ -15,7 +15,7 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(JsonElement element)
         {
-            string odatametadata = default;
+            string odataMetadata = default;
             IReadOnlyList<IDictionary<string, object>> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -25,7 +25,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         continue;
                     }
-                    odatametadata = property.Value.GetString();
+                    odataMetadata = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
@@ -62,7 +62,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return new TableEntityQueryResponse(odatametadata, value);
+            return new TableEntityQueryResponse(odataMetadata, value);
         }
     }
 }

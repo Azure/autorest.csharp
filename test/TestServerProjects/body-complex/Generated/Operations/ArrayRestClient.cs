@@ -19,8 +19,8 @@ namespace body_complex
     internal partial class ArrayRestClient
     {
         private string host;
-        private ClientDiagnostics clientDiagnostics;
-        private HttpPipeline pipeline;
+        private ClientDiagnostics _clientDiagnostics;
+        private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ArrayRestClient. </summary>
         public ArrayRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
@@ -31,13 +31,13 @@ namespace body_complex
             }
 
             this.host = host;
-            this.clientDiagnostics = clientDiagnostics;
-            this.pipeline = pipeline;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetValidRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -51,12 +51,12 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetValid");
             scope.Start();
             try
             {
                 using var message = CreateGetValidRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -74,7 +74,7 @@ namespace body_complex
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -88,12 +88,12 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetValid(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetValid");
             scope.Start();
             try
             {
                 using var message = CreateGetValidRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -111,7 +111,7 @@ namespace body_complex
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -123,7 +123,7 @@ namespace body_complex
 
         internal HttpMessage CreatePutValidRequest(ArrayWrapper complexBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -147,18 +147,18 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutValid");
             scope.Start();
             try
             {
                 using var message = CreatePutValidRequest(complexBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -178,18 +178,18 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutValid");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutValid");
             scope.Start();
             try
             {
                 using var message = CreatePutValidRequest(complexBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -201,7 +201,7 @@ namespace body_complex
 
         internal HttpMessage CreateGetEmptyRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -215,12 +215,12 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -238,7 +238,7 @@ namespace body_complex
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -252,12 +252,12 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
             try
             {
                 using var message = CreateGetEmptyRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -275,7 +275,7 @@ namespace body_complex
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -287,7 +287,7 @@ namespace body_complex
 
         internal HttpMessage CreatePutEmptyRequest(ArrayWrapper complexBody)
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -311,18 +311,18 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
             try
             {
                 using var message = CreatePutEmptyRequest(complexBody);
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -342,18 +342,18 @@ namespace body_complex
                 throw new ArgumentNullException(nameof(complexBody));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
             try
             {
                 using var message = CreatePutEmptyRequest(complexBody);
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
                         return message.Response;
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
@@ -365,7 +365,7 @@ namespace body_complex
 
         internal HttpMessage CreateGetNotProvidedRequest()
         {
-            var message = pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -379,12 +379,12 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
             scope.Start();
             try
             {
                 using var message = CreateGetNotProvidedRequest();
-                await pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -402,7 +402,7 @@ namespace body_complex
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw await clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -416,12 +416,12 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ArrayWrapper> GetNotProvided(CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
+            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
             scope.Start();
             try
             {
                 using var message = CreateGetNotProvidedRequest();
-                pipeline.Send(message, cancellationToken);
+                _pipeline.Send(message, cancellationToken);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -439,7 +439,7 @@ namespace body_complex
                             return Response.FromValue(value, message.Response);
                         }
                     default:
-                        throw clientDiagnostics.CreateRequestFailedException(message.Response);
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
             }
             catch (Exception e)
