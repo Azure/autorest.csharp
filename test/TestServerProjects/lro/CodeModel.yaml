@@ -8325,6 +8325,8 @@ operationGroups:
       name: LROsCustomHeader
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
     name: Lro

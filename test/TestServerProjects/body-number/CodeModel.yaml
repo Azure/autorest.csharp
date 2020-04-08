@@ -1805,6 +1805,8 @@ operationGroups:
       name: Number
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
     name: BodyNumber

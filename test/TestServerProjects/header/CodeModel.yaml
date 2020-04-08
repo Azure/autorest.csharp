@@ -2207,6 +2207,8 @@ operationGroups:
       name: Header
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
     name: Header

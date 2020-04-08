@@ -20213,6 +20213,8 @@ operationGroups:
       name: EncryptionScopes
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: true
 language: !<!Languages> 
   default:
     name: AzureStorageManagement
