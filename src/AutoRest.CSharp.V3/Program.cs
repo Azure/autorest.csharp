@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.V3
             if (args.Contains("--standalone"))
             {
                 await StandaloneGeneratorRunner.RunAsync(args);
+                return 0;
             }
 
             if (args.Contains("--launch-debugger") && !Debugger.IsAttached)

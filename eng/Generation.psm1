@@ -30,7 +30,7 @@ function Invoke-Autorest($baseOutput, $projectName, $autoRestArguments, $sharedS
 
     if ($fast)
     {
-        $command = "dotnet run --project $script:AutorestPluginProject --no-build -- --plugin=csharpgen --standalone --output-folder=$outputPath"
+        $command = "dotnet run --project $script:AutorestPluginProject --no-build -- --standalone $outputPath"
     }
 
     if ($clean)

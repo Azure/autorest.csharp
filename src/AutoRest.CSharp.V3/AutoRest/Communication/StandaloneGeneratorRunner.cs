@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
     {
         public static async Task RunAsync(string[] args)
         {
-            var basePath = args.Single(a=> a.StartsWith("--"));
+            var basePath = args.Single(a=> !a.StartsWith("--"));
 
             var configuration = LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModel = CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml")));
@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
             {
                 if (string.IsNullOrEmpty(file.Text))
                 {
-                    return;
+                    continue;
                 }
                 var filename = Path.Combine(basePath, file.Name);
                 Console.WriteLine($"Writing {filename}");

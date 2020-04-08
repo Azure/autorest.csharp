@@ -69,15 +69,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteManagementClientCtors(CodeWriter writer, Client client, Configuration configuration)
         {
-            bool IsHostParameter(Parameter parameter) => string.Equals(parameter.Name, "host", StringComparison.InvariantCultureIgnoreCase);
-            bool IsApiVersionParameter(Parameter parameter) => string.Equals(parameter.Name, "apiVersion", StringComparison.InvariantCultureIgnoreCase);
-
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             writer.Append($"public {client.Type.Name:D}(");
             foreach (Parameter parameter in client.RestClient.Parameters)
             {
                 // Skip host and API Version parameters that would be set later
-                if (IsHostParameter(parameter) || IsApiVersionParameter(parameter))
+                if (ManagementClientWriterHelpers.IsHostParameter(parameter) ||
+                    ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
                 {
                     continue;
                 }
@@ -97,12 +95,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 foreach (Parameter parameter in client.RestClient.Parameters)
                 {
-                    if (IsHostParameter(parameter))
+                    if (ManagementClientWriterHelpers.IsHostParameter(parameter))
                     {
                         continue;
                     }
 
-                    if (IsApiVersionParameter(parameter))
+                    if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
                     {
                         writer.Append($"options.Version, ");
                         continue;
