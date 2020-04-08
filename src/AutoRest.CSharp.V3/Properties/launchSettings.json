@@ -16,10 +16,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer --namespace=Azure.AI.FormRecognizer --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
-    "Azure.Network.Management.Interface": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface --namespace=Azure.Network.Management.Interface --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
-    },
     "Azure.Storage.Management": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management --namespace=Azure.Storage.Management --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
