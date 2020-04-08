@@ -85,11 +85,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteParameter(parameter);
             }
 
-            writer.Append($"{typeof(TokenCredential)} tokenCredential, {configuration.Title}ManagementClientOptions options = null)");
+            writer.Append($"{typeof(TokenCredential)} tokenCredential, {configuration.LibraryName}ManagementClientOptions options = null)");
 
             using (writer.Scope())
             {
-                writer.Line($"options = new {configuration.Title}ManagementClientOptions();");
+                writer.Line($"options = new {configuration.LibraryName}ManagementClientOptions();");
                 writer.Line($"_clientDiagnostics = new {typeof(ClientDiagnostics)}(options);");
                 writer.Line($"_pipeline = {typeof(ManagementPipelineBuilder)}.Build(tokenCredential, options);");
 

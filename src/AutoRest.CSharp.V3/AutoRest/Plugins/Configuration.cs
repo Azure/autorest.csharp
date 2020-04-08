@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.V3.AutoRest.Communication;
@@ -11,11 +12,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string ns, string? title, string sharedSourceFolder, bool saveInputs, bool azureArm)
+        public Configuration(string outputFolder, string ns, string? name, string sharedSourceFolder, bool saveInputs, bool azureArm)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
-            Title = title;
+            var namespaceParts = ns.Split('.');
+            LibraryName = name ?? namespaceParts.Last();
             SharedSourceFolder = sharedSourceFolder;
             SaveInputs = saveInputs;
             AzureArm = azureArm;
@@ -23,7 +25,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
         public string OutputFolder { get; }
         public string Namespace { get; }
-        public string? Title { get; }
+        public string LibraryName { get; }
         public string SharedSourceFolder { get; }
         public bool SaveInputs { get; }
         public bool AzureArm { get; }

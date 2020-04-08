@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
     {
         public static void WriteClientOptions(CodeWriter writer, BuildContext context)
         {
-            var title = context.Configuration.Title;
+            var title = context.Configuration.LibraryName;
             var apiVersions = context.CodeModel.OperationGroups
                 .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
                 .Select(v => v.Version)

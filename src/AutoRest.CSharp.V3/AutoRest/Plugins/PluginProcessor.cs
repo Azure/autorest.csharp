@@ -27,24 +27,13 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         {
             try
             {
-                Configuration configuration = autoRest.Configuration;
-
-                var codeModelYaml = await autoRest.GetCodeModel();
                 IPlugin plugin = Plugins[autoRest.PluginName]();
-                CodeModel codeModel = new CodeModel();
-                if (plugin.DeserializeCodeModel)
+                // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
+                if (autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.attach").GetAwaiter().GetResult().IsObject())
                 {
-
-                    if (configuration.SaveInputs)
-                    {
-                        await autoRest.WriteFile("Configuration.json", HostCommunication.SaveConfiguration(configuration), "source-file-csharp");
-                        await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
-                    }
-
-                    codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+                    DebuggerAwaiter.AwaitAttach();
                 }
-
-                await plugin.Execute(autoRest, codeModel, configuration);
+                await plugin.Execute(autoRest);
                 return true;
             }
             catch (Exception e)
