@@ -34,6 +34,7 @@ $testNames =
     'body-integer',
     'body-number',
     'body-string',
+    'body-time',
     'custom-baseUrl',
     'custom-baseUrl-more-options',
     'custom-baseUrl-paging',
