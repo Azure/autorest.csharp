@@ -1595,6 +1595,15 @@ namespace AutoRest.CSharp.V3.Input
         public System.Collections.Generic.ICollection<Operation> Operations { get; set; } = new System.Collections.ObjectModel.Collection<Operation>();
     }
 
+    /// <summary>The security information for the API surface</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class Security
+    {
+        /// <summary>indicates that the API surface requires authentication</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "authenticationRequired")]
+        public bool? AuthenticationRequired { get; set; }
+    }
+
     /// <summary>example data [UNFINISHED]</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Example
@@ -2498,6 +2507,10 @@ namespace AutoRest.CSharp.V3.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "globalParameters")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<RequestParameter> GlobalParameters { get; set; } = new System.Collections.ObjectModel.Collection<RequestParameter>();
+
+        [YamlDotNet.Serialization.YamlMember(Alias = "security")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public Security Security { get; set; } = new Security();
 
         /// <summary>per-language information for this aspect</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]

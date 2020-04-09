@@ -982,6 +982,7 @@ globalParameters:
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -1009,6 +1010,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_40
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1137,6 +1139,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_40
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1265,6 +1268,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_40
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1393,6 +1397,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_40
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1521,6 +1526,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_40
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1602,6 +1608,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_40
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1759,6 +1766,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_40
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1842,6 +1850,8 @@ operationGroups:
       name: ''
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
     name: ModelFlattening

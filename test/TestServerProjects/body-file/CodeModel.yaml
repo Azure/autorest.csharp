@@ -68,6 +68,7 @@ globalParameters:
   schema: *ref_2
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -244,6 +245,8 @@ operationGroups:
       name: Files
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
     name: BodyFile

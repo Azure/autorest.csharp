@@ -8611,6 +8611,7 @@ globalParameters:
   schema: *ref_0
   clientDefaultValue: 'https://management.azure.com'
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -8625,6 +8626,7 @@ globalParameters:
 - !<!Parameter> &ref_330
   schema: *ref_326
   implementation: Client
+  origin: 'modelerfour:synthesized/api-version'
   required: true
   language: !<!Languages> 
     default:
@@ -8825,6 +8827,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -9335,6 +9338,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -9509,6 +9513,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -9884,6 +9889,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -10030,6 +10036,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -10196,6 +10203,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -10756,6 +10764,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -10921,6 +10930,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -11215,6 +11225,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -11764,6 +11775,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -11947,6 +11959,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -16469,6 +16482,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -16600,6 +16614,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -17113,6 +17128,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -17929,6 +17945,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -18080,6 +18097,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -18196,6 +18214,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -18396,6 +18415,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -18860,6 +18880,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -19262,6 +19283,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -19697,6 +19719,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -19868,6 +19891,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_336
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -20189,6 +20213,8 @@ operationGroups:
       name: EncryptionScopes
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: true
 language: !<!Languages> 
   default:
     name: AzureStorageManagement
