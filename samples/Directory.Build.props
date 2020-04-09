@@ -3,7 +3,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)/../src/assets/**/*.cs" />
   </ItemGroup>
   <PropertyGroup>
-    <IncludeStyleCopAnalyzers>false</IncludeStyleCopAnalyzers>
+    <IncludeStyleCopAnalyzers>true</IncludeStyleCopAnalyzers>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
   <Import Project="..\Directory.Build.props" />
 </Project>
