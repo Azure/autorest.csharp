@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: url-multi-collectionFormat
+  title: AutoRest Url Mutli Collection Format Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_0
@@ -327,7 +327,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: UrlMultiCollectionFormat
+    name: AutoRestUrlMutliCollectionFormatTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

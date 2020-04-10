@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest Swagger BAT
-  title: body-byte
+  title: AutoRest Swagger BAT Byte Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_1
@@ -442,7 +442,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyByte
+    name: AutoRestSwaggerBATByteService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

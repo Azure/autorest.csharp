@@ -8,6 +8,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Storage.Management.Models;
 
@@ -18,16 +19,13 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ManagementPoliciesRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of ManagementPoliciesClient for mocking. </summary>
-        protected ManagementPoliciesClient()
-        {
-        }
         /// <summary> Initializes a new instance of ManagementPoliciesClient. </summary>
-        internal ManagementPoliciesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
+        public ManagementPoliciesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            RestClient = new ManagementPoliciesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            options = new StorageManagementClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
+            RestClient = new ManagementPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
         }
 
         /// <summary> Gets the managementpolicy associated with the specified storage account. </summary>

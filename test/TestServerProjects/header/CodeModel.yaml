@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: header
+  title: AutoRest Swagger BAT Header Service
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_26
@@ -2211,7 +2211,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: Header
+    name: AutoRestSwaggerBATHeaderService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: custom-baseUrl
+  title: AutoRest Parameterized Host Test Client
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_0
@@ -174,7 +174,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: CustomBaseUrl
+    name: AutoRestParameterizedHostTestClient
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

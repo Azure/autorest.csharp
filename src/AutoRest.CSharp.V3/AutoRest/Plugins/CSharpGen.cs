@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Communication;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -15,6 +16,7 @@ using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using AutoRest.CSharp.V3.Output.Models.Responses;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
@@ -26,7 +28,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
-        public async Task<bool> Execute(IPluginCommunication autoRest, CodeModel codeModel, Configuration configuration)
+        public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel, Configuration configuration)
         {
             Directory.CreateDirectory(configuration.OutputFolder);
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
@@ -73,17 +75,62 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             foreach (var client in context.Library.Clients)
             {
                 var codeWriter = new CodeWriter();
-                clientWriter.WriteClient(codeWriter, client);
+                clientWriter.WriteClient(codeWriter, client, context.Configuration);
 
                 project.AddGeneratedFile($"Operations/{client.Type.Name}.cs", codeWriter.ToString());
             }
 
+            if (context.Configuration.AzureArm)
+            {
+                var codeWriter = new CodeWriter();
+                ManagementClientWriter.WriteClientOptions(codeWriter, context);
+                project.AddGeneratedFile($"Operations/{context.Configuration.LibraryName}ManagementClientOptions.cs", codeWriter.ToString());
+
+                var clientCodeWriter = new CodeWriter();
+                ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
+                project.AddGeneratedFile($"Operations/{context.Configuration.LibraryName}ManagementClient.cs", clientCodeWriter.ToString());
+
+            }
+
+            return project;
+        }
+
+        public async Task<bool> Execute(IPluginCommunication autoRest)
+        {
+            string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+            if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
+
+            var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+
+            CodeModel codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+
+            var configuration = new Configuration(
+                new Uri(GetRequiredOption(autoRest, "output-folder")).LocalPath,
+                GetRequiredOption(autoRest, "namespace"),
+                autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
+                new Uri(GetRequiredOption(autoRest, "shared-source-folder")).LocalPath,
+                autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
+                autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false
+            );
+
+            if (configuration.SaveInputs)
+            {
+                await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
+                await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
+            }
+
+            var project = await ExecuteAsync(codeModel, configuration);
             await foreach (var file in project.GetGeneratedFilesAsync())
             {
                 await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
             }
 
             return true;
+        }
+
+        private string GetRequiredOption(IPluginCommunication autoRest, string name)
+        {
+            return autoRest.GetValue<string?>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
         }
     }
 }

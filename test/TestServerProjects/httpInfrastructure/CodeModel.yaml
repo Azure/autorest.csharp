@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: httpInfrastructure
+  title: AutoRest Http Infrastructure Test Service
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_0
@@ -7709,7 +7709,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: HttpInfrastructure
+    name: AutoRestHttpInfrastructureTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

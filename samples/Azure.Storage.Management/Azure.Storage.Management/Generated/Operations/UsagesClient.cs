@@ -20,16 +20,13 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal UsagesRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of UsagesClient for mocking. </summary>
-        protected UsagesClient()
-        {
-        }
         /// <summary> Initializes a new instance of UsagesClient. </summary>
-        internal UsagesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
+        public UsagesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            RestClient = new UsagesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            options = new StorageManagementClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
+            RestClient = new UsagesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
         }
 
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
