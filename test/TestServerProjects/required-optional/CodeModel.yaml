@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: required-optional
+  title: AutoRest Required Optional Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_1
@@ -508,6 +508,7 @@ globalParameters:
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -713,6 +714,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -942,6 +944,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1019,6 +1022,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1096,6 +1100,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1173,6 +1178,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1369,6 +1375,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1446,6 +1453,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1523,6 +1531,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1600,6 +1609,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1796,6 +1806,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1873,6 +1884,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1950,6 +1962,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2027,6 +2040,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2104,6 +2118,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2181,6 +2196,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2258,6 +2274,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2335,6 +2352,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_20
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2526,9 +2544,11 @@ operationGroups:
       name: Explicit
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: RequiredOptional
+    name: AutoRestRequiredOptionalTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}
