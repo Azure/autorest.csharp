@@ -84,6 +84,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-string\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-string --namespace=body_string --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
+    "body-time": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-time\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-time --namespace=body_time --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+    },
     "CognitiveSearch": {
       "commandName": "Project",
       "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\CognitiveSearch\\CognitiveSearch\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\CognitiveSearch\\CognitiveSearch --namespace=CognitiveSearch --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
