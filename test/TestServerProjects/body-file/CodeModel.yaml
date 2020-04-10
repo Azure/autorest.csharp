@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest Swagger BAT
-  title: body-file
+  title: AutoRest Swagger BAT File Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_0
@@ -68,6 +68,7 @@ globalParameters:
   schema: *ref_2
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -244,9 +245,11 @@ operationGroups:
       name: Files
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyFile
+    name: AutoRestSwaggerBATFileService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

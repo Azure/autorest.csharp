@@ -9,6 +9,7 @@ using Azure.Core.Pipeline;
 using CognitiveSearch;
 using CognitiveSearch.Models;
 
+#pragma warning disable SA1402, SA1649
 namespace Azure.CognitiveSearch
 {
     public class CognitiveSearchCredential

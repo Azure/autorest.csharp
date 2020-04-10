@@ -7958,6 +7958,7 @@ globalParameters:
   schema: *ref_0
   clientDefaultValue: 'https://management.azure.com'
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -7972,6 +7973,7 @@ globalParameters:
 - !<!Parameter> &ref_335
   schema: *ref_333
   implementation: Client
+  origin: 'modelerfour:synthesized/api-version'
   required: true
   language: !<!Languages> 
     default:
@@ -8264,6 +8266,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_343
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -8461,6 +8464,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_343
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -9825,6 +9829,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_343
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -10055,6 +10060,8 @@ operationGroups:
       name: NetworkInterfaceTapConfigurations
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: true
 language: !<!Languages> 
   default:
     name: AzureNetworkManagementInterface

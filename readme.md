@@ -17,7 +17,7 @@
 # autorest-core version
 version: 3.0.6268
 shared-source-folder: $(this-folder)/src/assets
-save-code-model: true
+save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
 clear-output-folder: false
 

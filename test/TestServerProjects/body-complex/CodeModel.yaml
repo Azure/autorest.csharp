@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-complex
+  title: AutoRest Complex Test Service
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_11
@@ -1790,6 +1790,7 @@ globalParameters:
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -1804,6 +1805,7 @@ globalParameters:
 - !<!Parameter> &ref_72
   schema: *ref_68
   implementation: Client
+  origin: 'modelerfour:synthesized/api-version'
   required: true
   language: !<!Languages> 
     default:
@@ -1881,6 +1883,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2221,6 +2224,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2349,6 +2353,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2477,6 +2482,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2605,6 +2611,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2733,6 +2740,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2861,6 +2869,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -2989,6 +2998,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3117,6 +3127,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3245,6 +3256,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3373,6 +3385,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3501,6 +3514,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3637,6 +3651,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3765,6 +3780,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -3952,6 +3968,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -4080,6 +4097,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -4318,6 +4336,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -4454,6 +4473,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -4768,6 +4788,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -4845,6 +4866,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -4926,6 +4948,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -5088,6 +5111,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -5277,6 +5301,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_73
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -5392,9 +5417,11 @@ operationGroups:
       name: Flattencomplex
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyComplex
+    name: AutoRestComplexTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

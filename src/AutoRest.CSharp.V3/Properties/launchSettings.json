@@ -2,147 +2,151 @@
   "profiles": {
     "additionalProperties": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\additionalProperties\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\additionalProperties --namespace=additionalProperties --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\additionalProperties"
     },
     "AdditionalPropertiesEx": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx --namespace=AdditionalPropertiesEx --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx"
     },
     "AppConfiguration": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration --namespace=AppConfiguration --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration"
     },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer --namespace=Azure.AI.FormRecognizer --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer"
     },
     "Azure.Network.Management.Interface": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface --namespace=Azure.Network.Management.Interface --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface"
     },
     "Azure.Storage.Management": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management --namespace=Azure.Storage.Management --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables --namespace=Azure.Storage.Tables --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables"
     },
     "azure-parameter-grouping": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping --namespace=azure_parameter_grouping --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping"
     },
     "body-array": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-array\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-array --namespace=body_array --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-array"
     },
     "body-boolean": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-boolean\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-boolean --namespace=body_boolean --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-boolean"
     },
     "body-byte": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-byte\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-byte --namespace=body_byte --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-byte"
     },
     "body-complex": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-complex\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-complex --namespace=body_complex --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-complex"
     },
     "body-date": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-date\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-date --namespace=body_date --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-date"
     },
     "body-datetime": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-datetime\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-datetime --namespace=body_datetime --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-datetime"
     },
     "body-datetime-rfc1123": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123 --namespace=body_datetime_rfc1123 --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123"
     },
     "body-dictionary": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-dictionary\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-dictionary --namespace=body_dictionary --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-dictionary"
     },
     "body-duration": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-duration\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-duration --namespace=body_duration --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-duration"
     },
     "body-file": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-file\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-file --namespace=body_file --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-file"
     },
     "body-integer": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-integer\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-integer --namespace=body_integer --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-integer"
     },
     "body-number": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-number\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-number --namespace=body_number --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-number"
     },
     "body-string": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-string\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-string --namespace=body_string --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-string"
+    },
+    "body-time": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\body-time\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\body-time --namespace=body_time --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
     },
     "CognitiveSearch": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\CognitiveSearch\\CognitiveSearch\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\CognitiveSearch\\CognitiveSearch --namespace=CognitiveSearch --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\CognitiveSearch"
     },
     "CognitiveServices.TextAnalytics": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics --namespace=CognitiveServices.TextAnalytics --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics"
     },
     "custom-baseUrl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl --namespace=custom_baseUrl --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl"
     },
     "custom-baseUrl-more-options": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options --namespace=custom_baseUrl_more_options --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options"
     },
     "custom-baseUrl-paging": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging --namespace=custom_baseUrl_paging --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging"
     },
     "extensible-enums-swagger": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger --namespace=extensible_enums_swagger --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger"
     },
     "ExtensionClientName": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\ExtensionClientName --namespace=ExtensionClientName --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName"
     },
     "header": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\header\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\header --namespace=header --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\header"
     },
     "httpInfrastructure": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure --namespace=httpInfrastructure --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure"
     },
     "lro": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\lro\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\lro --namespace=lro --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro"
     },
     "media_types": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\media_types\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\media_types --namespace=media_types --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types"
     },
     "model-flattening": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\model-flattening\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\model-flattening --namespace=model_flattening --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening"
     },
     "NameConflicts": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\NameConflicts\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\NameConflicts --namespace=NameConflicts --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NameConflicts"
     },
     "non-string-enum": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\non-string-enum --namespace=non_string_enum --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum"
     },
     "paging": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\paging\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\paging --namespace=paging --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\paging"
     },
     "required-optional": {
       "commandName": "Project",
@@ -150,27 +154,27 @@
     },
     "SignalR": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\samples\\SignalR\\SignalR\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\samples\\SignalR\\SignalR --namespace=SignalR --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\SignalR\\SignalR"
     },
     "TypeSchemaMapping": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping --namespace=TypeSchemaMapping --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping"
     },
     "url": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\url\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\url --namespace=url --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url"
     },
     "url-multi-collectionFormat": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat --namespace=url_multi_collectionFormat --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat"
     },
     "validation": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\validation\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\validation --namespace=validation --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\validation"
     },
     "xml-service": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestServerProjects\\xml-service\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestServerProjects\\xml-service --namespace=xml_service --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xml-service"
     }
   }
 }

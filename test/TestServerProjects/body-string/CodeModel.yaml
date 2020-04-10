@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest Swagger BAT
-  title: body-string
+  title: AutoRest Swagger BAT Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_1
@@ -301,6 +301,7 @@ globalParameters:
   schema: *ref_0
   clientDefaultValue: 'http://localhost:3000'
   implementation: Client
+  origin: 'modelerfour:synthesized/host'
   required: true
   extensions:
     x-ms-skip-url-encoding: true
@@ -379,6 +380,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -507,6 +509,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -634,6 +637,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -761,6 +765,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -990,6 +995,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1177,6 +1183,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1305,6 +1312,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1433,6 +1441,7 @@ operationGroups:
       - !<!Parameter> 
         schema: *ref_8
         implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
         required: true
         language: !<!Languages> 
           default:
@@ -1503,9 +1512,11 @@ operationGroups:
       name: Enum
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyString
+    name: AutoRestSwaggerBATService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}
