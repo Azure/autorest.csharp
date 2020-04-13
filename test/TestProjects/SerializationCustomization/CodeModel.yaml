@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Serialization customization
-  title: SerializationCustomization
+  title: Serialization customization
 schemas: !<!Schemas> 
   strings:
   - !<!StringSchema> &ref_0
