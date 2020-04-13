@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-time
+  title: AutoRest Time Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_1
@@ -258,7 +258,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyTime
+    name: AutoRestTimeTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}
