@@ -27,7 +27,7 @@ namespace Azure.Core
         {
         }
 
-        public CodeGenMemberAttribute(string? originalName)
+        public CodeGenMemberAttribute(string originalName)
         {
             OriginalName = originalName;
         }
