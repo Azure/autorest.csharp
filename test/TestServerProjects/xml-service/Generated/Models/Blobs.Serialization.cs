@@ -24,9 +24,9 @@ namespace xml_service.Models
             }
             blobPrefix = array;
             var array0 = new List<Blob>();
-            foreach (var e0 in element.Elements("Blob"))
+            foreach (var e in element.Elements("Blob"))
             {
-                array0.Add(Models.Blob.DeserializeBlob(e0));
+                array0.Add(Models.Blob.DeserializeBlob(e));
             }
             blob = array0;
             return new Blobs(blobPrefix, blob);

@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-date
+  title: AutoRest Date Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_2
@@ -586,9 +586,11 @@ operationGroups:
       name: Date
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyDate
+    name: AutoRestDateTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

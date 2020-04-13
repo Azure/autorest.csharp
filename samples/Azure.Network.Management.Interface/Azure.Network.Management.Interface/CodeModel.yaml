@@ -10060,6 +10060,8 @@ operationGroups:
       name: NetworkInterfaceTapConfigurations
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: true
 language: !<!Languages> 
   default:
     name: AzureNetworkManagementInterface

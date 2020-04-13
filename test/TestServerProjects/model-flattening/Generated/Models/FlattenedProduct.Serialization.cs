@@ -80,7 +80,7 @@ namespace model_flattening.Models
             IDictionary<string, string> tags = default;
             string location = default;
             string name = default;
-            string pname = default;
+            string pName = default;
             string type0 = default;
             FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = default;
             string provisioningState = default;
@@ -153,7 +153,7 @@ namespace model_flattening.Models
                             {
                                 continue;
                             }
-                            pname = property0.Value.GetString();
+                            pName = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("type"))
@@ -187,7 +187,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new FlattenedProduct(id, type, tags, location, name, pname, type0, provisioningStateValues, provisioningState);
+            return new FlattenedProduct(id, type, tags, location, name, pName, type0, provisioningStateValues, provisioningState);
         }
     }
 }

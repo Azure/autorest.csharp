@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-number
+  title: AutoRest Number Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_1
@@ -1805,9 +1805,11 @@ operationGroups:
       name: Number
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyNumber
+    name: AutoRestNumberTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

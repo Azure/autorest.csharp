@@ -10,8 +10,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
     internal interface IPlugin
     {
-        Task<bool> Execute(IPluginCommunication autoRest, CodeModel codeModel, Configuration configuration);
-        bool DeserializeCodeModel => true;
+        Task<bool> Execute(IPluginCommunication autoRest);
     }
 
     [AttributeUsage(AttributeTargets.Class)]

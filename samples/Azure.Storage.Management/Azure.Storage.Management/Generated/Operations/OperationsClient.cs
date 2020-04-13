@@ -19,16 +19,13 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal OperationsRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of OperationsClient for mocking. </summary>
-        protected OperationsClient()
-        {
-        }
         /// <summary> Initializes a new instance of OperationsClient. </summary>
-        internal OperationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
+        public OperationsClient(TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            RestClient = new OperationsRestClient(clientDiagnostics, pipeline, host, apiVersion);
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            options = new StorageManagementClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
+            RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline, options.Version);
         }
 
         /// <summary> Lists all of the available Storage Rest API operations. </summary>

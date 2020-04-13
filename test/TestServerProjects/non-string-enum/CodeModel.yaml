@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Testing non-string enums.
-  title: non-string-enum
+  title: Non String Enums Client
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_0
@@ -384,9 +384,11 @@ operationGroups:
       name: Float
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: NonStringEnum
+    name: NonStringEnumsClient
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

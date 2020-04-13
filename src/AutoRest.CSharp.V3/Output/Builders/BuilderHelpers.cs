@@ -47,6 +47,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
             DateSchema _ => SerializationFormat.Date_ISO8601,
             DurationSchema _ => SerializationFormat.Duration_ISO8601,
+            TimeSchema _ => SerializationFormat.Time_ISO8601,
             _ => SerializationFormat.Default
         };
 

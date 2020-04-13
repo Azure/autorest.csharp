@@ -1,6 +1,6 @@
 !<!CodeModel> 
 info: !<!Info> 
-  title: SignalR
+  title: Azure SignalR Serverless WebSocket
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_31
@@ -1201,9 +1201,11 @@ operationGroups:
       name: ''
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: SignalR
+    name: AzureSignalRServerlessWebSocket
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

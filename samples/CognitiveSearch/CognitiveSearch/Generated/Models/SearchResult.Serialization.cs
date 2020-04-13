@@ -15,15 +15,15 @@ namespace CognitiveSearch.Models
     {
         internal static SearchResult DeserializeSearchResult(JsonElement element)
         {
-            double searchscore = default;
-            IReadOnlyDictionary<string, IList<string>> searchhighlights = default;
+            double searchScore = default;
+            IReadOnlyDictionary<string, IList<string>> searchHighlights = default;
             IReadOnlyDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@search.score"))
                 {
-                    searchscore = property.Value.GetDouble();
+                    searchScore = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("@search.highlights"))
@@ -56,7 +56,7 @@ namespace CognitiveSearch.Models
                             dictionary.Add(property0.Name, array);
                         }
                     }
-                    searchhighlights = dictionary;
+                    searchHighlights = dictionary;
                     continue;
                 }
                 if (property.Value.ValueKind == JsonValueKind.Null)
@@ -69,7 +69,7 @@ namespace CognitiveSearch.Models
                 }
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SearchResult(searchscore, searchhighlights, additionalProperties);
+            return new SearchResult(searchScore, searchHighlights, additionalProperties);
         }
     }
 }

@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest Swagger BAT
-  title: body-dictionary
+  title: AutoRest Swagger BAT dictionary Service
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_3
@@ -4634,9 +4634,11 @@ operationGroups:
       name: Dictionary
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyDictionary
+    name: AutoRestSwaggerBATDictionaryService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

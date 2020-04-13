@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-integer
+  title: AutoRest Integer Test Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_4
@@ -982,9 +982,11 @@ operationGroups:
       name: Int
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyInteger
+    name: AutoRestIntegerTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

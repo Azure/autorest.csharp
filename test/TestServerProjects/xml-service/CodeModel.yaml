@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest Swagger BAT
-  title: xml-service
+  title: AutoRest Swagger BAT XML Service
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_37
@@ -4395,9 +4395,11 @@ operationGroups:
       name: Xml
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: XmlService
+    name: AutoRestSwaggerBATXMLService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

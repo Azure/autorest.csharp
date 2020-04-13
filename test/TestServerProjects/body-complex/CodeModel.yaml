@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-complex
+  title: AutoRest Complex Test Service
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_11
@@ -5416,9 +5416,11 @@ operationGroups:
       name: Flattencomplex
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyComplex
+    name: AutoRestComplexTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

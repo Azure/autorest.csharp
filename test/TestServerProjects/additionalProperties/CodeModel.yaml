@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: additionalProperties
+  title: AdditionalPropertiesClient
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_6
@@ -1046,9 +1046,11 @@ operationGroups:
       name: Pets
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: AdditionalProperties
+    name: AdditionalPropertiesClient
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

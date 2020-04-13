@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Communication;
 using AutoRest.CSharp.V3.AutoRest.Communication.MessageHandling;
 using AutoRest.CSharp.V3.AutoRest.Communication.Serialization;
@@ -17,11 +18,12 @@ namespace AutoRest.CSharp.V3
         private static bool HasServerArgument(IEnumerable<string> args) => args?.Any(a => a.Equals("--server", StringComparison.InvariantCultureIgnoreCase)) ?? false;
         private static bool PluginStart(JsonRpcConnection connection, string pluginName, string sessionId) => PluginProcessor.Start(new JsonRpcCommunication(connection, pluginName, sessionId)).GetAwaiter().GetResult();
 
-        public static int Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
             if (args.Contains("--standalone"))
             {
-                return RunStandalone(args);
+                await StandaloneGeneratorRunner.RunAsync(args);
+                return 0;
             }
 
             if (args.Contains("--launch-debugger") && !Debugger.IsAttached)
@@ -48,9 +50,5 @@ namespace AutoRest.CSharp.V3
             return 0;
         }
 
-        private static int RunStandalone(string[] args)
-        {
-            return PluginProcessor.Start(new HostCommunication(args)).GetAwaiter().GetResult() ? 0 : 1;
-        }
     }
 }

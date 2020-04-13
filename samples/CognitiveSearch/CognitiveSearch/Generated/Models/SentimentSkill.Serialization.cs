@@ -47,9 +47,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             writer.WritePropertyName("outputs");
             writer.WriteStartArray();
-            foreach (var item0 in Outputs)
+            foreach (var item in Outputs)
             {
-                writer.WriteObjectValue(item0);
+                writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
         internal static SentimentSkill DeserializeSentimentSkill(JsonElement element)
         {
             SentimentSkillLanguage? defaultLanguageCode = default;
-            string odatatype = default;
+            string odataType = default;
             string name = default;
             string description = default;
             string context = default;
@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@odata.type"))
                 {
-                    odatatype = property.Value.GetString();
+                    odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -142,7 +142,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SentimentSkill(odatatype, name, description, context, inputs, outputs, defaultLanguageCode);
+            return new SentimentSkill(odataType, name, description, context, inputs, outputs, defaultLanguageCode);
         }
     }
 }

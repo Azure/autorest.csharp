@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: body-boolean
+  title: AutoRest Bool Test Service
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_0
@@ -528,9 +528,11 @@ operationGroups:
       name: Bool
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyBoolean
+    name: AutoRestBoolTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

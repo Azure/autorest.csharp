@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: The Azure Storage Management API.
-  title: Azure.Storage.Management
+  title: StorageManagementClient
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_49
@@ -20213,9 +20213,11 @@ operationGroups:
       name: EncryptionScopes
       description: ''
   protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: true
 language: !<!Languages> 
   default:
-    name: AzureStorageManagement
+    name: StorageManagementClient
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}
