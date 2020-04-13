@@ -150,7 +150,7 @@
     },
     "SerializationCustomization": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone --input-codemodel=$(SolutionDir)\\test\\TestProjects\\SerializationCustomization\\CodeModel.yaml --plugin=csharpgen --output-folder=$(SolutionDir)\\test\\TestProjects\\SerializationCustomization --namespace=SerializationCustomization --shared-source-folder=$(SolutionDir)\\src\\assets --save-code-model=true"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SerializationCustomization"
     },
     "SignalR": {
       "commandName": "Project",
