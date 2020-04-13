@@ -132,16 +132,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, fallback));
 
+                bool isDiscriminatorProperty = property == Discriminator?.Property;
+
+                ownsDiscriminatorProperty |= isDiscriminatorProperty;
+
                 // Only required properties that are not discriminators go into default ctor
-                if (property == Discriminator?.Property)
-                {
-                    ownsDiscriminatorProperty = true;
-                    continue;
-                }
                 // For structs all properties become required
-                if (!IsStruct && property.SchemaProperty?.Required != true)
+                if (isDiscriminatorProperty ||
+                    !IsStruct && property.SchemaProperty?.Required != true)
                 {
-                    // Initialize collection even if it's not required
+                    // Initialize properties even if they are not required
                     if (fallback != null)
                     {
                         defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, fallback.Value));
@@ -187,8 +187,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 // Add discriminator initializer to constructor at every level of hierarchy
                 if (!ownsDiscriminatorProperty &&
-                    baseSerializationCtor != null
-                    )
+                    baseSerializationCtor != null)
                 {
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
