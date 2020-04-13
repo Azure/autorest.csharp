@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -167,6 +168,17 @@ namespace AutoRest.CSharp.V3.Generation.Types
 
         public CSharpType CreateType(ITypeSymbol symbol)
         {
+            if (!TryCreateType(symbol, out var type))
+            {
+                throw new InvalidOperationException($"Unable to find a model or framework type that corresponds to {symbol}");
+            }
+
+            return type;
+        }
+
+        public bool TryCreateType(ITypeSymbol symbol, [NotNullWhen(true)] out CSharpType? type)
+        {
+            type = null;
             INamedTypeSymbol? namedTypeSymbol = symbol as INamedTypeSymbol;
             if (namedTypeSymbol == null)
             {
@@ -188,18 +200,20 @@ namespace AutoRest.CSharp.V3.Generation.Types
             if (existingType != null)
             {
                 var arguments = namedTypeSymbol.TypeArguments.Select(a => CreateType(a)).ToArray();
-                return new CSharpType(existingType, nullable, arguments);
+                type = new CSharpType(existingType, nullable, arguments);
+                return true;
             }
 
             foreach (var model in _library.Models)
             {
                 if (namedTypeSymbol.Name == model.Type.Name)
                 {
-                    return model.Type.WithNullable(nullable);
+                    type = model.Type.WithNullable(nullable);
+                    return true;
                 }
             }
 
-            throw new InvalidOperationException($"Unable to find a model or framework type that corresponds to {symbol}");
+            return false;
         }
 
         private string GetFullMetadataName(ISymbol namedTypeSymbol)
