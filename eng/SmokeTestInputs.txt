@@ -2,7 +2,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a34
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/adhybridhealthservice/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/advisor/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/analysisservices/resource-manager/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/apimanagement/control-plane/readme.md - https://github.com/Azure/autorest.csharp/issues/623
+https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/apimanagement/control-plane/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/apimanagement/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/appconfiguration/data-plane/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/appconfiguration/resource-manager/readme.md

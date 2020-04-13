@@ -463,7 +463,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             ObjectTypeProperty itemProperty = type.GetPropertyBySerializedName(itemName);
 
             ObjectTypeProperty? nextLinkProperty = null;
-            if (nextLinkName != null)
+            if (!string.IsNullOrWhiteSpace(nextLinkName))
             {
                 nextLinkProperty = type.GetPropertyBySerializedName(nextLinkName);
             }
