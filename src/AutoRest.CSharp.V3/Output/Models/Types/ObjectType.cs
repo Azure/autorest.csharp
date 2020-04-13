@@ -189,13 +189,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 
-            // In structs additional properties would become required and get initialized from parameter
-            if (AdditionalPropertiesProperty != null && !IsStruct)
-            {
-                var implType = new CSharpType(typeof(Dictionary<,>), AdditionalPropertiesProperty.Declaration.Type.Arguments);
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(implType)));
-            }
-
             yield return new ObjectTypeConstructor(
                 BuilderHelpers.CreateMemberDeclaration(
                     Type.Name,

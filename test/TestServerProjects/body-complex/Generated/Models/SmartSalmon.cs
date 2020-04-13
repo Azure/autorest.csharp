@@ -17,8 +17,8 @@ namespace body_complex.Models
         /// <param name="length"> . </param>
         public SmartSalmon(float length) : base(length)
         {
-            Fishtype = "smart_salmon";
             AdditionalProperties = new Dictionary<string, object>();
+            Fishtype = "smart_salmon";
         }
 
         /// <summary> Initializes a new instance of SmartSalmon. </summary>
@@ -33,7 +33,7 @@ namespace body_complex.Models
         internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree, IDictionary<string, object> additionalProperties) : base(fishtype, species, length, siblings, location, iswild)
         {
             CollegeDegree = collegeDegree;
-            AdditionalProperties = additionalProperties;
+            AdditionalProperties = additionalProperties ?? new Dictionary<string, object>();
             Fishtype = fishtype ?? "smart_salmon";
         }
 

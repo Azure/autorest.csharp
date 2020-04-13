@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
         /// <param name="description"> Description of the cognitive service resource attached to a skillset. </param>
         internal CognitiveServicesAccount(string odataType, string description)
         {
-            OdataType = odataType ?? null;
+            OdataType = odataType;
             Description = description;
         }
 
