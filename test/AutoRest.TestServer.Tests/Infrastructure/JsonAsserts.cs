@@ -10,7 +10,8 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     {
         public static void AssertSerialization(string expected, IUtf8JsonSerializable serializable)
         {
-            var memoryStream = new MemoryStream();
+            using var memoryStream = new MemoryStream();
+
             using (var writer = new Utf8JsonWriter(memoryStream))
             {
                 serializable.Write(writer);
