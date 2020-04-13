@@ -201,7 +201,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             .WriteReferenceOrConstant(initializer.Value)
                             .WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type);
 
-                        if (initializer.DefaultValue != null)
+                        if (initializer.DefaultValue != null &&
+                            !initializer.Value.Type.IsValueType)
                         {
                             writer.Append($"?? ").WriteReferenceOrConstant(initializer.DefaultValue.Value);
                         }
