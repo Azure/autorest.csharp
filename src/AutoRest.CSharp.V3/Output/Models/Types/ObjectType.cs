@@ -411,6 +411,24 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             foreach (var objectSchema in objectSchemas)
             {
+                bool skip = false;
+
+                // Filter transitive schemas
+                // https://github.com/Azure/autorest.modelerfour/issues/258
+                foreach (var otherSchema in objectSchemas)
+                {
+                    if (otherSchema.Parents!.All.Contains(objectSchema))
+                    {
+                        skip = true;
+                        break;
+                    }
+                }
+
+                if (skip)
+                {
+                    continue;
+                }
+
                 // Take first schema or the one with discriminator
                 selectedSchema ??= objectSchema;
 
@@ -427,7 +445,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 Debug.Assert(!type.IsFrameworkType);
                 return type;
             }
-
             return null;
         }
 
