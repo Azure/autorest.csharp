@@ -5,9 +5,12 @@
 
 #nullable disable
 
+using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using NameConflicts.Models;
 
@@ -54,6 +57,86 @@ namespace NameConflicts
         public virtual Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             return RestClient.Operation(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken);
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        internal Operation<Response> CreateAnalyzeBody(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.AnalyzeBody", OperationFinalStateVia.Location, createOriginalHttpMessage);
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="stringBody"> The binary to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async ValueTask<Operation<Response>> StartAnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        {
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
+            return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="stringBody"> The binary to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Operation<Response> StartAnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
+        {
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
+            return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        internal Operation<Response> CreateAnalyzeBody0(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.AnalyzeBody", OperationFinalStateVia.Location, createOriginalHttpMessage);
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="stringBody"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async ValueTask<Operation<Response>> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
+            return CreateAnalyzeBody0(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="stringBody"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Operation<Response> StartAnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
+            return CreateAnalyzeBody0(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
         }
     }
 }

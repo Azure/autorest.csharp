@@ -20,7 +20,7 @@ schemas: !<!Schemas>
         name: Boolean
         description: Use label file for training a model.
     protocol: !<!Protocols> {}
-  - !<!BooleanSchema> &ref_114
+  - !<!BooleanSchema> &ref_111
     type: boolean
     apiVersions:
     - !<!ApiVersion> 
@@ -31,7 +31,7 @@ schemas: !<!Schemas>
         name: Boolean
         description: ''
     protocol: !<!Protocols> {}
-  - !<!BooleanSchema> &ref_70
+  - !<!BooleanSchema> &ref_65
     type: boolean
     defaultValue: false
     language: !<!Languages> 
@@ -39,7 +39,7 @@ schemas: !<!Schemas>
         name: Boolean
         description: Is the current cell a header cell?
     protocol: !<!Protocols> {}
-  - !<!BooleanSchema> &ref_71
+  - !<!BooleanSchema> &ref_66
     type: boolean
     defaultValue: false
     language: !<!Languages> 
@@ -48,23 +48,7 @@ schemas: !<!Schemas>
         description: Is the current cell a footer cell?
     protocol: !<!Protocols> {}
   numbers:
-  - !<!NumberSchema> &ref_24
-    type: integer
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Integer
-        description: Current count of trained custom models.
-    protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_25
-    type: integer
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Integer
-        description: Max number of models that can be trained for this subscription.
-    protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_36
+  - !<!NumberSchema> &ref_30
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -72,7 +56,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Total number of pages trained.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_39
+  - !<!NumberSchema> &ref_33
     type: number
     precision: 32
     language: !<!Languages> 
@@ -80,7 +64,7 @@ schemas: !<!Schemas>
         name: Number
         description: Estimated extraction accuracy for this field.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_40
+  - !<!NumberSchema> &ref_34
     type: number
     precision: 32
     language: !<!Languages> 
@@ -88,7 +72,7 @@ schemas: !<!Schemas>
         name: Number
         description: Average accuracy.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_15
+  - !<!NumberSchema> &ref_14
     type: integer
     minimum: 1
     precision: 32
@@ -97,7 +81,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The 1-based page number in the input document.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_50
+  - !<!NumberSchema> &ref_45
     type: number
     exclusiveMinimum: true
     maximum: 180
@@ -108,7 +92,7 @@ schemas: !<!Schemas>
         name: Number
         description: 'The general orientation of the text in clockwise direction, measured in degrees between (-180, 180].'
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_51
+  - !<!NumberSchema> &ref_46
     type: number
     minimum: 0
     precision: 32
@@ -117,7 +101,7 @@ schemas: !<!Schemas>
         name: Number
         description: 'The width of the image/PDF in pixels/inches, respectively.'
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_52
+  - !<!NumberSchema> &ref_47
     type: number
     minimum: 0
     precision: 32
@@ -126,7 +110,7 @@ schemas: !<!Schemas>
         name: Number
         description: 'The height of the image/PDF in pixels/inches, respectively.'
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_12
+  - !<!NumberSchema> &ref_11
     type: number
     apiVersions:
     - !<!ApiVersion> 
@@ -137,7 +121,7 @@ schemas: !<!Schemas>
         name: BoundingBoxItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_13
+  - !<!NumberSchema> &ref_12
     type: number
     apiVersions:
     - !<!ApiVersion> 
@@ -150,7 +134,7 @@ schemas: !<!Schemas>
         name: Confidence
         description: Confidence value.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_58
+  - !<!NumberSchema> &ref_53
     type: integer
     minimum: 1
     precision: 32
@@ -159,7 +143,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Page number.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_59
+  - !<!NumberSchema> &ref_54
     type: integer
     minimum: 0
     precision: 32
@@ -168,7 +152,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Cluster identifier.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_63
+  - !<!NumberSchema> &ref_58
     type: integer
     minimum: 1
     precision: 32
@@ -177,7 +161,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Number of rows.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_64
+  - !<!NumberSchema> &ref_59
     type: integer
     minimum: 1
     precision: 32
@@ -186,7 +170,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Number of columns.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_65
+  - !<!NumberSchema> &ref_60
     type: integer
     minimum: 0
     precision: 32
@@ -195,7 +179,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Row index of the cell.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_66
+  - !<!NumberSchema> &ref_61
     type: integer
     minimum: 0
     precision: 32
@@ -204,7 +188,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Column index of the cell.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_67
+  - !<!NumberSchema> &ref_62
     type: integer
     defaultValue: 1
     minimum: 1
@@ -214,7 +198,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Number of rows spanned by this cell.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_68
+  - !<!NumberSchema> &ref_63
     type: integer
     defaultValue: 1
     minimum: 1
@@ -224,7 +208,7 @@ schemas: !<!Schemas>
         name: Integer
         description: Number of columns spanned by this cell.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_73
+  - !<!NumberSchema> &ref_68
     type: integer
     minimum: 1
     precision: 32
@@ -233,7 +217,7 @@ schemas: !<!Schemas>
         name: ArrayItemschema
         description: ''
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_7
+  - !<!NumberSchema> &ref_6
     type: number
     precision: 32
     language: !<!Languages> 
@@ -241,13 +225,29 @@ schemas: !<!Schemas>
         name: Number
         description: Floating point value.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_8
+  - !<!NumberSchema> &ref_7
     type: integer
     precision: 32
     language: !<!Languages> 
       default:
         name: Integer
         description: Integer value.
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_79
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: Current count of trained custom models.
+    protocol: !<!Protocols> {}
+  - !<!NumberSchema> &ref_80
+    type: integer
+    precision: 32
+    language: !<!Languages> 
+      default:
+        name: Integer
+        description: Max number of models that can be trained for this account.
     protocol: !<!Protocols> {}
   strings:
   - !<!StringSchema> &ref_0
@@ -310,16 +310,6 @@ schemas: !<!Schemas>
         name: ErrorInformationMessage
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_31
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 2.0-preview
-    language: !<!Languages> 
-      default:
-        name: ModelsNextLink
-        description: Link to the next page of custom models.
-    protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_1
     type: string
     apiVersions:
@@ -330,7 +320,7 @@ schemas: !<!Schemas>
         name: KeysResultClustersItemsItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_35
+  - !<!StringSchema> &ref_29
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -340,7 +330,7 @@ schemas: !<!Schemas>
         name: TrainingDocumentInfoDocumentName
         description: Training document name.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_38
+  - !<!StringSchema> &ref_32
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -350,7 +340,7 @@ schemas: !<!Schemas>
         name: FormFieldsReportFieldName
         description: Training field name.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_45
+  - !<!StringSchema> &ref_40
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -361,7 +351,7 @@ schemas: !<!Schemas>
         name: SourcePathSource
         description: File source path.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_127
+  - !<!StringSchema> &ref_124
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -372,7 +362,7 @@ schemas: !<!Schemas>
         description: ''
         header: Operation-Location
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_49
+  - !<!StringSchema> &ref_44
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -382,7 +372,7 @@ schemas: !<!Schemas>
         name: AnalyzeResultVersion
         description: Version of schema used for this result.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_55
+  - !<!StringSchema> &ref_50
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -392,7 +382,7 @@ schemas: !<!Schemas>
         name: TextLineText
         description: The text content of the line.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_57
+  - !<!StringSchema> &ref_52
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -402,7 +392,7 @@ schemas: !<!Schemas>
         name: TextWordText
         description: The text content of the word.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_60
+  - !<!StringSchema> &ref_55
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -412,7 +402,7 @@ schemas: !<!Schemas>
         name: KeyValuePairLabel
         description: A user defined label for the key/value pair entry.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_61
+  - !<!StringSchema> &ref_56
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -422,7 +412,7 @@ schemas: !<!Schemas>
         name: KeyValueElementText
         description: The text content of the key or value.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_14
+  - !<!StringSchema> &ref_13
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -432,7 +422,7 @@ schemas: !<!Schemas>
         name: ElementReference
         description: Reference to a line or word.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_69
+  - !<!StringSchema> &ref_64
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -442,7 +432,7 @@ schemas: !<!Schemas>
         name: DataTableCellText
         description: Text content of the cell.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_72
+  - !<!StringSchema> &ref_67
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -469,20 +459,10 @@ schemas: !<!Schemas>
       version: 2.0-preview
     language: !<!Languages> 
       default:
-        name: FieldValueDate
-        description: Date value.
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_5
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 2.0-preview
-    language: !<!Languages> 
-      default:
         name: FieldValueTime
         description: Time value.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_6
+  - !<!StringSchema> &ref_5
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -492,7 +472,7 @@ schemas: !<!Schemas>
         name: FieldValuePhoneNumber
         description: Phone number value.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_11
+  - !<!StringSchema> &ref_10
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -502,7 +482,7 @@ schemas: !<!Schemas>
         name: FieldValueText
         description: Text content of the extracted field.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_136
+  - !<!StringSchema> &ref_133
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -513,7 +493,7 @@ schemas: !<!Schemas>
         description: ''
         header: Operation-Location
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_142
+  - !<!StringSchema> &ref_139
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -523,6 +503,16 @@ schemas: !<!Schemas>
         name: String
         description: ''
         header: Operation-Location
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_82
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    language: !<!Languages> 
+      default:
+        name: ModelsNextLink
+        description: Link to the next page of custom models.
     protocol: !<!Protocols> {}
   - !<!StringSchema> 
     type: string
@@ -535,32 +525,7 @@ schemas: !<!Schemas>
         description: ''
     protocol: !<!Protocols> {}
   choices:
-  - !<!ChoiceSchema> &ref_110
-    choices:
-    - !<!ChoiceValue> 
-      value: full
-      language:
-        default:
-          name: Full
-          description: ''
-    - !<!ChoiceValue> 
-      value: summary
-      language:
-        default:
-          name: Summary
-          description: ''
-    type: choice
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 2.0-preview
-    choiceType: *ref_0
-    defaultValue: full
-    language: !<!Languages> 
-      default:
-        name: Enum0
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_54
+  - !<!ChoiceSchema> &ref_49
     choices:
     - !<!ChoiceValue> 
       value: en
@@ -585,7 +550,7 @@ schemas: !<!Schemas>
         description: Language code
     protocol: !<!Protocols> {}
   sealedChoices:
-  - !<!SealedChoiceSchema> &ref_28
+  - !<!SealedChoiceSchema> &ref_25
     choices:
     - !<!ChoiceValue> 
       value: creating
@@ -615,7 +580,7 @@ schemas: !<!Schemas>
         name: ModelStatus
         description: Status of the model.
     protocol: !<!Protocols> {}
-  - !<!SealedChoiceSchema> &ref_37
+  - !<!SealedChoiceSchema> &ref_31
     choices:
     - !<!ChoiceValue> 
       value: succeeded
@@ -645,7 +610,7 @@ schemas: !<!Schemas>
         name: TrainStatus
         description: Status of the training operation.
     protocol: !<!Protocols> {}
-  - !<!SealedChoiceSchema> &ref_119
+  - !<!SealedChoiceSchema> &ref_116
     choices:
     - !<!ChoiceValue> 
       value: application/pdf
@@ -678,7 +643,7 @@ schemas: !<!Schemas>
         name: ContentType
         description: Content type for upload
     protocol: !<!Protocols> {}
-  - !<!SealedChoiceSchema> &ref_46
+  - !<!SealedChoiceSchema> &ref_41
     choices:
     - !<!ChoiceValue> 
       value: notStarted
@@ -714,7 +679,7 @@ schemas: !<!Schemas>
         name: OperationStatus
         description: Status of the queued operation.
     protocol: !<!Protocols> {}
-  - !<!SealedChoiceSchema> &ref_53
+  - !<!SealedChoiceSchema> &ref_48
     choices:
     - !<!ChoiceValue> 
       value: pixel
@@ -809,10 +774,30 @@ schemas: !<!Schemas>
         name: ApplicationJson
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_141
+    type: constant
+    value: !<!ConstantValue> 
+      value: full
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant8
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_143
+    type: constant
+    value: !<!ConstantValue> 
+      value: summary
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: Constant9
+        description: ''
+    protocol: !<!Protocols> {}
   dictionaries:
-  - !<!DictionarySchema> &ref_34
+  - !<!DictionarySchema> &ref_28
     type: dictionary
-    elementType: !<!ArraySchema> &ref_85
+    elementType: !<!ArraySchema> &ref_84
       type: array
       apiVersions:
       - !<!ApiVersion> 
@@ -829,9 +814,9 @@ schemas: !<!Schemas>
         name: KeysResultClusters
         description: Object mapping clusterIds to a list of keys.
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_10
+  - !<!DictionarySchema> &ref_9
     type: dictionary
-    elementType: !<!ObjectSchema> &ref_9
+    elementType: !<!ObjectSchema> &ref_8
       type: object
       apiVersions:
       - !<!ApiVersion> 
@@ -856,7 +841,16 @@ schemas: !<!Schemas>
             description: String value.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_4
+        schema: !<!DateSchema> &ref_15
+          type: date
+          apiVersions:
+          - !<!ApiVersion> 
+            version: 2.0-preview
+          language: !<!Languages> 
+            default:
+              name: FieldValueDate
+              description: Date value.
+          protocol: !<!Protocols> {}
         required: false
         serializedName: valueDate
         language: !<!Languages> 
@@ -865,7 +859,7 @@ schemas: !<!Schemas>
             description: Date value.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_5
+        schema: *ref_4
         required: false
         serializedName: valueTime
         language: !<!Languages> 
@@ -874,7 +868,7 @@ schemas: !<!Schemas>
             description: Time value.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_6
+        schema: *ref_5
         required: false
         serializedName: valuePhoneNumber
         language: !<!Languages> 
@@ -883,7 +877,7 @@ schemas: !<!Schemas>
             description: Phone number value.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_7
+        schema: *ref_6
         nullable: false
         required: false
         serializedName: valueNumber
@@ -893,7 +887,7 @@ schemas: !<!Schemas>
             description: Floating point value.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_8
+        schema: *ref_7
         nullable: false
         required: false
         serializedName: valueInteger
@@ -903,12 +897,12 @@ schemas: !<!Schemas>
             description: Integer value.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: !<!ArraySchema> &ref_100
+        schema: !<!ArraySchema> &ref_99
           type: array
           apiVersions:
           - !<!ApiVersion> 
             version: 2.0-preview
-          elementType: *ref_9
+          elementType: *ref_8
           language: !<!Languages> 
             default:
               name: FieldValueArray
@@ -922,7 +916,7 @@ schemas: !<!Schemas>
             description: Array of field values.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_10
+        schema: *ref_9
         required: false
         serializedName: valueObject
         language: !<!Languages> 
@@ -931,7 +925,7 @@ schemas: !<!Schemas>
             description: Dictionary of named field values.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_11
+        schema: *ref_10
         required: false
         serializedName: text
         language: !<!Languages> 
@@ -940,12 +934,12 @@ schemas: !<!Schemas>
             description: Text content of the extracted field.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: !<!ArraySchema> &ref_56
+        schema: !<!ArraySchema> &ref_51
           type: array
           apiVersions:
           - !<!ApiVersion> 
             version: 2.0-preview
-          elementType: *ref_12
+          elementType: *ref_11
           maxItems: 8
           minItems: 8
           language: !<!Languages> 
@@ -963,7 +957,7 @@ schemas: !<!Schemas>
             description: 'Bounding box of the field value, if appropriate.'
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_13
+        schema: *ref_12
         required: false
         serializedName: confidence
         language: !<!Languages> 
@@ -972,12 +966,12 @@ schemas: !<!Schemas>
             description: Confidence score.
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: !<!ArraySchema> &ref_101
+        schema: !<!ArraySchema> &ref_100
           type: array
           apiVersions:
           - !<!ApiVersion> 
             version: 2.0-preview
-          elementType: *ref_14
+          elementType: *ref_13
           language: !<!Languages> 
             default:
               name: FieldValueElements
@@ -991,7 +985,7 @@ schemas: !<!Schemas>
             description: 'When includeTextDetails is set to true, a list of references to the text elements constituting this field.'
         protocol: !<!Protocols> {}
       - !<!Property> 
-        schema: *ref_15
+        schema: *ref_14
         nullable: false
         required: false
         serializedName: page
@@ -1015,16 +1009,16 @@ schemas: !<!Schemas>
         name: FieldValueObject
         description: Dictionary of named field values.
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_74
+  - !<!DictionarySchema> &ref_69
     type: dictionary
-    elementType: *ref_9
+    elementType: *ref_8
     language: !<!Languages> 
       default:
         name: DocumentResultFields
         description: Dictionary of named field values.
     protocol: !<!Protocols> {}
   binaries:
-  - !<!BinarySchema> &ref_120
+  - !<!BinarySchema> &ref_117
     type: binary
     apiVersions:
     - !<!ApiVersion> 
@@ -1034,7 +1028,7 @@ schemas: !<!Schemas>
         name: binary
         description: Uri or local path to source data.
     protocol: !<!Protocols> {}
-  - !<!BinarySchema> &ref_131
+  - !<!BinarySchema> &ref_128
     type: binary
     apiVersions:
     - !<!ApiVersion> 
@@ -1044,7 +1038,7 @@ schemas: !<!Schemas>
         name: binary
         description: Uri or local path to source data.
     protocol: !<!Protocols> {}
-  - !<!BinarySchema> &ref_138
+  - !<!BinarySchema> &ref_135
     type: binary
     apiVersions:
     - !<!ApiVersion> 
@@ -1063,21 +1057,10 @@ schemas: !<!Schemas>
       version: 2.0-preview
     language: !<!Languages> 
       default:
-        name: ModelsSummaryLastUpdatedDateTime
-        description: Date and time (UTC) when the summary was last updated.
-    protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_29
-    type: date-time
-    format: date-time
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 2.0-preview
-    language: !<!Languages> 
-      default:
         name: ModelInfoCreatedDateTime
         description: Date and time (UTC) when the model was created.
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_30
+  - !<!DateTimeSchema> &ref_27
     type: date-time
     format: date-time
     apiVersions:
@@ -1088,7 +1071,7 @@ schemas: !<!Schemas>
         name: ModelInfoLastUpdatedDateTime
         description: Date and time (UTC) when the status was last updated.
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_47
+  - !<!DateTimeSchema> &ref_42
     type: date-time
     format: date-time
     apiVersions:
@@ -1099,7 +1082,7 @@ schemas: !<!Schemas>
         name: AnalyzeOperationResultCreatedDateTime
         description: Date and time (UTC) when the analyze operation was submitted.
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_48
+  - !<!DateTimeSchema> &ref_43
     type: date-time
     format: date-time
     apiVersions:
@@ -1110,18 +1093,21 @@ schemas: !<!Schemas>
         name: AnalyzeOperationResultLastUpdatedDateTime
         description: Date and time (UTC) when the status was last updated.
     protocol: !<!Protocols> {}
-  uuids:
-  - !<!UuidSchema> &ref_27
-    type: uuid
+  - !<!DateTimeSchema> &ref_81
+    type: date-time
+    format: date-time
     apiVersions:
     - !<!ApiVersion> 
       version: 2.0-preview
     language: !<!Languages> 
       default:
-        name: ModelInfoModelId
-        description: Model identifier.
+        name: ModelsSummaryLastUpdatedDateTime
+        description: Date and time (UTC) when the summary was last updated.
     protocol: !<!Protocols> {}
-  - !<!UuidSchema> &ref_113
+  dates:
+  - *ref_15
+  uuids:
+  - !<!UuidSchema> &ref_110
     type: uuid
     apiVersions:
     - !<!ApiVersion> 
@@ -1130,6 +1116,16 @@ schemas: !<!Schemas>
       default:
         name: Uuid
         description: ''
+    protocol: !<!Protocols> {}
+  - !<!UuidSchema> &ref_24
+    type: uuid
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    language: !<!Languages> 
+      default:
+        name: ModelInfoModelId
+        description: Model identifier.
     protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_106
@@ -1267,14 +1263,14 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_23
-  - !<!ObjectSchema> &ref_112
+  - !<!ObjectSchema> &ref_114
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 2.0-preview
     properties:
     - !<!Property> 
-      schema: !<!ObjectSchema> &ref_32
+      schema: !<!ObjectSchema> &ref_35
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -1282,32 +1278,39 @@ schemas: !<!Schemas>
         properties:
         - !<!Property> 
           schema: *ref_24
-          nullable: false
           required: true
-          serializedName: count
+          serializedName: modelId
           language: !<!Languages> 
             default:
-              name: count
-              description: Current count of trained custom models.
+              name: modelId
+              description: Model identifier.
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: *ref_25
-          nullable: false
           required: true
-          serializedName: limit
+          serializedName: status
           language: !<!Languages> 
             default:
-              name: limit
-              description: Max number of models that can be trained for this subscription.
+              name: status
+              description: Status of the model.
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: *ref_26
+          required: true
+          serializedName: createdDateTime
+          language: !<!Languages> 
+            default:
+              name: createdDateTime
+              description: Date and time (UTC) when the model was created.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_27
           required: true
           serializedName: lastUpdatedDateTime
           language: !<!Languages> 
             default:
               name: lastUpdatedDateTime
-              description: Date and time (UTC) when the summary was last updated.
+              description: Date and time (UTC) when the status was last updated.
           protocol: !<!Protocols> {}
         serializationFormats:
         - json
@@ -1315,113 +1318,10 @@ schemas: !<!Schemas>
         - output
         language: !<!Languages> 
           default:
-            name: ModelsSummary
-            description: Summary of all trained custom models.
+            name: ModelInfo
+            description: Basic custom model information.
             namespace: ''
         protocol: !<!Protocols> {}
-      serializedName: summary
-      language: !<!Languages> 
-        default:
-          name: summary
-          description: Summary of all trained custom models.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: !<!ArraySchema> &ref_84
-        type: array
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 2.0-preview
-        elementType: !<!ObjectSchema> &ref_33
-          type: object
-          apiVersions:
-          - !<!ApiVersion> 
-            version: 2.0-preview
-          properties:
-          - !<!Property> 
-            schema: *ref_27
-            required: true
-            serializedName: modelId
-            language: !<!Languages> 
-              default:
-                name: modelId
-                description: Model identifier.
-            protocol: !<!Protocols> {}
-          - !<!Property> 
-            schema: *ref_28
-            required: true
-            serializedName: status
-            language: !<!Languages> 
-              default:
-                name: status
-                description: Status of the model.
-            protocol: !<!Protocols> {}
-          - !<!Property> 
-            schema: *ref_29
-            required: true
-            serializedName: createdDateTime
-            language: !<!Languages> 
-              default:
-                name: createdDateTime
-                description: Date and time (UTC) when the model was created.
-            protocol: !<!Protocols> {}
-          - !<!Property> 
-            schema: *ref_30
-            required: true
-            serializedName: lastUpdatedDateTime
-            language: !<!Languages> 
-              default:
-                name: lastUpdatedDateTime
-                description: Date and time (UTC) when the status was last updated.
-            protocol: !<!Protocols> {}
-          serializationFormats:
-          - json
-          usage:
-          - output
-          language: !<!Languages> 
-            default:
-              name: ModelInfo
-              description: Basic custom model information.
-              namespace: ''
-          protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: ModelsModelList
-            description: Collection of trained custom models.
-        protocol: !<!Protocols> {}
-      serializedName: modelList
-      language: !<!Languages> 
-        default:
-          name: modelList
-          description: Collection of trained custom models.
-      protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_31
-      serializedName: nextLink
-      language: !<!Languages> 
-        default:
-          name: nextLink
-          description: Link to the next page of custom models.
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    language: !<!Languages> 
-      default:
-        name: Models
-        description: Response to the list custom models operation.
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - *ref_32
-  - *ref_33
-  - !<!ObjectSchema> &ref_117
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 2.0-preview
-    properties:
-    - !<!Property> 
-      schema: *ref_33
       required: true
       serializedName: modelInfo
       language: !<!Languages> 
@@ -1430,14 +1330,14 @@ schemas: !<!Schemas>
           description: Basic custom model information.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ObjectSchema> &ref_41
+      schema: !<!ObjectSchema> &ref_36
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 2.0-preview
         properties:
         - !<!Property> 
-          schema: *ref_34
+          schema: *ref_28
           required: true
           serializedName: clusters
           language: !<!Languages> 
@@ -1463,26 +1363,26 @@ schemas: !<!Schemas>
           description: Keys extracted by the custom model.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ObjectSchema> &ref_42
+      schema: !<!ObjectSchema> &ref_37
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 2.0-preview
         properties:
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_87
+          schema: !<!ArraySchema> &ref_86
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: 2.0-preview
-            elementType: !<!ObjectSchema> &ref_43
+            elementType: !<!ObjectSchema> &ref_38
               type: object
               apiVersions:
               - !<!ApiVersion> 
                 version: 2.0-preview
               properties:
               - !<!Property> 
-                schema: *ref_35
+                schema: *ref_29
                 required: true
                 serializedName: documentName
                 language: !<!Languages> 
@@ -1491,7 +1391,7 @@ schemas: !<!Schemas>
                     description: Training document name.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_36
+                schema: *ref_30
                 nullable: false
                 required: true
                 serializedName: pages
@@ -1501,7 +1401,7 @@ schemas: !<!Schemas>
                     description: Total number of pages trained.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!ArraySchema> &ref_86
+                schema: !<!ArraySchema> &ref_85
                   type: array
                   apiVersions:
                   - !<!ApiVersion> 
@@ -1520,7 +1420,7 @@ schemas: !<!Schemas>
                     description: List of errors.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_37
+                schema: *ref_31
                 required: true
                 serializedName: status
                 language: !<!Languages> 
@@ -1551,19 +1451,19 @@ schemas: !<!Schemas>
               description: List of the documents used to train the model and any errors reported in each document.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_88
+          schema: !<!ArraySchema> &ref_87
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: 2.0-preview
-            elementType: !<!ObjectSchema> &ref_44
+            elementType: !<!ObjectSchema> &ref_39
               type: object
               apiVersions:
               - !<!ApiVersion> 
                 version: 2.0-preview
               properties:
               - !<!Property> 
-                schema: *ref_38
+                schema: *ref_32
                 required: true
                 serializedName: fieldName
                 language: !<!Languages> 
@@ -1572,7 +1472,7 @@ schemas: !<!Schemas>
                     description: Training field name.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_39
+                schema: *ref_33
                 nullable: false
                 required: true
                 serializedName: accuracy
@@ -1604,7 +1504,7 @@ schemas: !<!Schemas>
               description: List of fields used to train the model and the train operation error reported by each.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_40
+          schema: *ref_34
           nullable: false
           required: false
           serializedName: averageModelAccuracy
@@ -1614,7 +1514,7 @@ schemas: !<!Schemas>
               description: Average accuracy.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_89
+          schema: !<!ArraySchema> &ref_88
             type: array
             apiVersions:
             - !<!ApiVersion> 
@@ -1659,18 +1559,19 @@ schemas: !<!Schemas>
         description: Response to the get custom model operation.
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_41
-  - *ref_42
-  - *ref_43
-  - *ref_44
-  - !<!ObjectSchema> &ref_123
+  - *ref_35
+  - *ref_36
+  - *ref_37
+  - *ref_38
+  - *ref_39
+  - !<!ObjectSchema> &ref_120
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 2.0-preview
     properties:
     - !<!Property> 
-      schema: *ref_45
+      schema: *ref_40
       serializedName: source
       language: !<!Languages> 
         default:
@@ -1687,14 +1588,14 @@ schemas: !<!Schemas>
         description: Uri or local path to source data.
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_130
+  - !<!ObjectSchema> &ref_127
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: 2.0-preview
     properties:
     - !<!Property> 
-      schema: *ref_46
+      schema: *ref_41
       required: true
       serializedName: status
       language: !<!Languages> 
@@ -1703,7 +1604,7 @@ schemas: !<!Schemas>
           description: Operation status.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_47
+      schema: *ref_42
       required: true
       serializedName: createdDateTime
       language: !<!Languages> 
@@ -1712,7 +1613,7 @@ schemas: !<!Schemas>
           description: Date and time (UTC) when the analyze operation was submitted.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_48
+      schema: *ref_43
       required: true
       serializedName: lastUpdatedDateTime
       language: !<!Languages> 
@@ -1721,14 +1622,14 @@ schemas: !<!Schemas>
           description: Date and time (UTC) when the status was last updated.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: !<!ObjectSchema> &ref_75
+      schema: !<!ObjectSchema> &ref_70
         type: object
         apiVersions:
         - !<!ApiVersion> 
           version: 2.0-preview
         properties:
         - !<!Property> 
-          schema: *ref_49
+          schema: *ref_44
           required: true
           serializedName: version
           language: !<!Languages> 
@@ -1737,19 +1638,19 @@ schemas: !<!Schemas>
               description: Version of schema used for this result.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_92
+          schema: !<!ArraySchema> &ref_91
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: 2.0-preview
-            elementType: !<!ObjectSchema> &ref_76
+            elementType: !<!ObjectSchema> &ref_71
               type: object
               apiVersions:
               - !<!ApiVersion> 
                 version: 2.0-preview
               properties:
               - !<!Property> 
-                schema: *ref_15
+                schema: *ref_14
                 nullable: false
                 required: true
                 serializedName: page
@@ -1759,7 +1660,7 @@ schemas: !<!Schemas>
                     description: The 1-based page number in the input document.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_50
+                schema: *ref_45
                 nullable: false
                 required: true
                 serializedName: angle
@@ -1769,7 +1670,7 @@ schemas: !<!Schemas>
                     description: 'The general orientation of the text in clockwise direction, measured in degrees between (-180, 180].'
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_51
+                schema: *ref_46
                 nullable: false
                 required: true
                 serializedName: width
@@ -1779,7 +1680,7 @@ schemas: !<!Schemas>
                     description: 'The width of the image/PDF in pixels/inches, respectively.'
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_52
+                schema: *ref_47
                 nullable: false
                 required: true
                 serializedName: height
@@ -1789,7 +1690,7 @@ schemas: !<!Schemas>
                     description: 'The height of the image/PDF in pixels/inches, respectively.'
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_53
+                schema: *ref_48
                 required: true
                 serializedName: unit
                 language: !<!Languages> 
@@ -1798,7 +1699,7 @@ schemas: !<!Schemas>
                     description: 'The unit used by the width, height and boundingBox properties. For images, the unit is "pixel". For PDF, the unit is "inch".'
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_54
+                schema: *ref_49
                 required: false
                 serializedName: language
                 language: !<!Languages> 
@@ -1807,19 +1708,19 @@ schemas: !<!Schemas>
                     description: The detected language on the page overall.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!ArraySchema> &ref_91
+                schema: !<!ArraySchema> &ref_90
                   type: array
                   apiVersions:
                   - !<!ApiVersion> 
                     version: 2.0-preview
-                  elementType: !<!ObjectSchema> &ref_77
+                  elementType: !<!ObjectSchema> &ref_72
                     type: object
                     apiVersions:
                     - !<!ApiVersion> 
                       version: 2.0-preview
                     properties:
                     - !<!Property> 
-                      schema: *ref_55
+                      schema: *ref_50
                       required: true
                       serializedName: text
                       language: !<!Languages> 
@@ -1828,7 +1729,7 @@ schemas: !<!Schemas>
                           description: The text content of the line.
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: *ref_56
+                      schema: *ref_51
                       required: true
                       serializedName: boundingBox
                       language: !<!Languages> 
@@ -1837,7 +1738,7 @@ schemas: !<!Schemas>
                           description: Bounding box of an extracted line.
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: *ref_54
+                      schema: *ref_49
                       required: false
                       serializedName: language
                       language: !<!Languages> 
@@ -1846,19 +1747,19 @@ schemas: !<!Schemas>
                           description: 'The detected language of this line, if different from the overall page language.'
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: !<!ArraySchema> &ref_90
+                      schema: !<!ArraySchema> &ref_89
                         type: array
                         apiVersions:
                         - !<!ApiVersion> 
                           version: 2.0-preview
-                        elementType: !<!ObjectSchema> &ref_78
+                        elementType: !<!ObjectSchema> &ref_73
                           type: object
                           apiVersions:
                           - !<!ApiVersion> 
                             version: 2.0-preview
                           properties:
                           - !<!Property> 
-                            schema: *ref_57
+                            schema: *ref_52
                             required: true
                             serializedName: text
                             language: !<!Languages> 
@@ -1867,7 +1768,7 @@ schemas: !<!Schemas>
                                 description: The text content of the word.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_56
+                            schema: *ref_51
                             required: true
                             serializedName: boundingBox
                             language: !<!Languages> 
@@ -1876,7 +1777,7 @@ schemas: !<!Schemas>
                                 description: Bounding box of an extracted word.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_13
+                            schema: *ref_12
                             required: false
                             serializedName: confidence
                             language: !<!Languages> 
@@ -1956,19 +1857,19 @@ schemas: !<!Schemas>
               description: Text extracted from the input.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_98
+          schema: !<!ArraySchema> &ref_97
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: 2.0-preview
-            elementType: !<!ObjectSchema> &ref_79
+            elementType: !<!ObjectSchema> &ref_74
               type: object
               apiVersions:
               - !<!ApiVersion> 
                 version: 2.0-preview
               properties:
               - !<!Property> 
-                schema: *ref_58
+                schema: *ref_53
                 nullable: false
                 required: true
                 serializedName: page
@@ -1978,7 +1879,7 @@ schemas: !<!Schemas>
                     description: Page number.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_59
+                schema: *ref_54
                 nullable: false
                 required: false
                 serializedName: clusterId
@@ -1988,19 +1889,19 @@ schemas: !<!Schemas>
                     description: Cluster identifier.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!ArraySchema> &ref_94
+                schema: !<!ArraySchema> &ref_93
                   type: array
                   apiVersions:
                   - !<!ApiVersion> 
                     version: 2.0-preview
-                  elementType: !<!ObjectSchema> &ref_80
+                  elementType: !<!ObjectSchema> &ref_75
                     type: object
                     apiVersions:
                     - !<!ApiVersion> 
                       version: 2.0-preview
                     properties:
                     - !<!Property> 
-                      schema: *ref_60
+                      schema: *ref_55
                       required: false
                       serializedName: label
                       language: !<!Languages> 
@@ -2009,14 +1910,14 @@ schemas: !<!Schemas>
                           description: A user defined label for the key/value pair entry.
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: !<!ObjectSchema> &ref_62
+                      schema: !<!ObjectSchema> &ref_57
                         type: object
                         apiVersions:
                         - !<!ApiVersion> 
                           version: 2.0-preview
                         properties:
                         - !<!Property> 
-                          schema: *ref_61
+                          schema: *ref_56
                           required: true
                           serializedName: text
                           language: !<!Languages> 
@@ -2025,7 +1926,7 @@ schemas: !<!Schemas>
                               description: The text content of the key or value.
                           protocol: !<!Protocols> {}
                         - !<!Property> 
-                          schema: *ref_56
+                          schema: *ref_51
                           required: false
                           serializedName: boundingBox
                           language: !<!Languages> 
@@ -2034,12 +1935,12 @@ schemas: !<!Schemas>
                               description: Bounding box of the key or value.
                           protocol: !<!Protocols> {}
                         - !<!Property> 
-                          schema: !<!ArraySchema> &ref_93
+                          schema: !<!ArraySchema> &ref_92
                             type: array
                             apiVersions:
                             - !<!ApiVersion> 
                               version: 2.0-preview
-                            elementType: *ref_14
+                            elementType: *ref_13
                             language: !<!Languages> 
                               default:
                                 name: KeyValueElementElements
@@ -2070,7 +1971,7 @@ schemas: !<!Schemas>
                           description: Information about the extracted key in a key-value pair.
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: *ref_62
+                      schema: *ref_57
                       required: true
                       serializedName: value
                       language: !<!Languages> 
@@ -2079,7 +1980,7 @@ schemas: !<!Schemas>
                           description: Information about the extracted value in a key-value pair.
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: *ref_13
+                      schema: *ref_12
                       required: true
                       serializedName: confidence
                       language: !<!Languages> 
@@ -2110,19 +2011,19 @@ schemas: !<!Schemas>
                     description: List of key-value pairs extracted from the page.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!ArraySchema> &ref_97
+                schema: !<!ArraySchema> &ref_96
                   type: array
                   apiVersions:
                   - !<!ApiVersion> 
                     version: 2.0-preview
-                  elementType: !<!ObjectSchema> &ref_81
+                  elementType: !<!ObjectSchema> &ref_76
                     type: object
                     apiVersions:
                     - !<!ApiVersion> 
                       version: 2.0-preview
                     properties:
                     - !<!Property> 
-                      schema: *ref_63
+                      schema: *ref_58
                       nullable: false
                       required: true
                       serializedName: rows
@@ -2132,7 +2033,7 @@ schemas: !<!Schemas>
                           description: Number of rows.
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: *ref_64
+                      schema: *ref_59
                       nullable: false
                       required: true
                       serializedName: columns
@@ -2142,19 +2043,19 @@ schemas: !<!Schemas>
                           description: Number of columns.
                       protocol: !<!Protocols> {}
                     - !<!Property> 
-                      schema: !<!ArraySchema> &ref_96
+                      schema: !<!ArraySchema> &ref_95
                         type: array
                         apiVersions:
                         - !<!ApiVersion> 
                           version: 2.0-preview
-                        elementType: !<!ObjectSchema> &ref_82
+                        elementType: !<!ObjectSchema> &ref_77
                           type: object
                           apiVersions:
                           - !<!ApiVersion> 
                             version: 2.0-preview
                           properties:
                           - !<!Property> 
-                            schema: *ref_65
+                            schema: *ref_60
                             nullable: false
                             required: true
                             serializedName: rowIndex
@@ -2164,7 +2065,7 @@ schemas: !<!Schemas>
                                 description: Row index of the cell.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_66
+                            schema: *ref_61
                             nullable: false
                             required: true
                             serializedName: columnIndex
@@ -2174,7 +2075,7 @@ schemas: !<!Schemas>
                                 description: Column index of the cell.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_67
+                            schema: *ref_62
                             nullable: false
                             required: false
                             serializedName: rowSpan
@@ -2184,7 +2085,7 @@ schemas: !<!Schemas>
                                 description: Number of rows spanned by this cell.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_68
+                            schema: *ref_63
                             nullable: false
                             required: false
                             serializedName: columnSpan
@@ -2194,7 +2095,7 @@ schemas: !<!Schemas>
                                 description: Number of columns spanned by this cell.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_69
+                            schema: *ref_64
                             required: true
                             serializedName: text
                             language: !<!Languages> 
@@ -2203,7 +2104,7 @@ schemas: !<!Schemas>
                                 description: Text content of the cell.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_56
+                            schema: *ref_51
                             required: true
                             serializedName: boundingBox
                             language: !<!Languages> 
@@ -2212,7 +2113,7 @@ schemas: !<!Schemas>
                                 description: Bounding box of the cell.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_13
+                            schema: *ref_12
                             required: true
                             serializedName: confidence
                             language: !<!Languages> 
@@ -2221,12 +2122,12 @@ schemas: !<!Schemas>
                                 description: Confidence value.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_95
+                            schema: !<!ArraySchema> &ref_94
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
                                 version: 2.0-preview
-                              elementType: *ref_14
+                              elementType: *ref_13
                               language: !<!Languages> 
                                 default:
                                   name: DataTableCellElements
@@ -2240,7 +2141,7 @@ schemas: !<!Schemas>
                                 description: 'When includeTextDetails is set to true, a list of references to the text elements constituting this table cell.'
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_70
+                            schema: *ref_65
                             nullable: false
                             required: false
                             serializedName: isHeader
@@ -2250,7 +2151,7 @@ schemas: !<!Schemas>
                                 description: Is the current cell a header cell?
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_71
+                            schema: *ref_66
                             nullable: false
                             required: false
                             serializedName: isFooter
@@ -2326,19 +2227,19 @@ schemas: !<!Schemas>
               description: Page-level information extracted from the input.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_102
+          schema: !<!ArraySchema> &ref_101
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: 2.0-preview
-            elementType: !<!ObjectSchema> &ref_83
+            elementType: !<!ObjectSchema> &ref_78
               type: object
               apiVersions:
               - !<!ApiVersion> 
                 version: 2.0-preview
               properties:
               - !<!Property> 
-                schema: *ref_72
+                schema: *ref_67
                 required: true
                 serializedName: docType
                 language: !<!Languages> 
@@ -2347,9 +2248,9 @@ schemas: !<!Schemas>
                     description: Document type.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!ArraySchema> &ref_99
+                schema: !<!ArraySchema> &ref_98
                   type: array
-                  elementType: *ref_73
+                  elementType: *ref_68
                   maxItems: 2
                   minItems: 2
                   language: !<!Languages> 
@@ -2365,7 +2266,7 @@ schemas: !<!Schemas>
                     description: First and last page number where the document is found.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_74
+                schema: *ref_69
                 required: true
                 serializedName: fields
                 language: !<!Languages> 
@@ -2396,7 +2297,7 @@ schemas: !<!Schemas>
               description: Document-level information extracted from the input.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_103
+          schema: !<!ArraySchema> &ref_102
             type: array
             apiVersions:
             - !<!ApiVersion> 
@@ -2441,25 +2342,120 @@ schemas: !<!Schemas>
         description: Status and result of the queued analyze operation.
         namespace: ''
     protocol: !<!Protocols> {}
+  - *ref_70
+  - *ref_71
+  - *ref_72
+  - *ref_73
+  - *ref_74
   - *ref_75
+  - *ref_57
   - *ref_76
   - *ref_77
   - *ref_78
-  - *ref_79
-  - *ref_80
-  - *ref_62
-  - *ref_81
-  - *ref_82
+  - *ref_8
+  - !<!ObjectSchema> &ref_142
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    properties:
+    - !<!Property> 
+      schema: !<!ObjectSchema> &ref_83
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 2.0-preview
+        properties:
+        - !<!Property> 
+          schema: *ref_79
+          nullable: false
+          required: true
+          serializedName: count
+          language: !<!Languages> 
+            default:
+              name: count
+              description: Current count of trained custom models.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_80
+          nullable: false
+          required: true
+          serializedName: limit
+          language: !<!Languages> 
+            default:
+              name: limit
+              description: Max number of models that can be trained for this account.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_81
+          required: true
+          serializedName: lastUpdatedDateTime
+          language: !<!Languages> 
+            default:
+              name: lastUpdatedDateTime
+              description: Date and time (UTC) when the summary was last updated.
+          protocol: !<!Protocols> {}
+        serializationFormats:
+        - json
+        usage:
+        - output
+        language: !<!Languages> 
+          default:
+            name: ModelsSummary
+            description: Summary of all trained custom models.
+            namespace: ''
+        protocol: !<!Protocols> {}
+      serializedName: summary
+      language: !<!Languages> 
+        default:
+          name: summary
+          description: Summary of all trained custom models.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: !<!ArraySchema> &ref_103
+        type: array
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 2.0-preview
+        elementType: *ref_35
+        language: !<!Languages> 
+          default:
+            name: ModelsModelList
+            description: Collection of trained custom models.
+        protocol: !<!Protocols> {}
+      serializedName: modelList
+      language: !<!Languages> 
+        default:
+          name: modelList
+          description: Collection of trained custom models.
+      protocol: !<!Protocols> {}
+    - !<!Property> 
+      schema: *ref_82
+      serializedName: nextLink
+      language: !<!Languages> 
+        default:
+          name: nextLink
+          description: Link to the next page of custom models.
+      protocol: !<!Protocols> {}
+    serializationFormats:
+    - json
+    usage:
+    - output
+    language: !<!Languages> 
+      default:
+        name: Models
+        description: Response to the list custom models operation.
+        namespace: ''
+    protocol: !<!Protocols> {}
   - *ref_83
-  - *ref_9
   arrays:
   - *ref_84
   - *ref_85
   - *ref_86
   - *ref_87
   - *ref_88
+  - *ref_51
   - *ref_89
-  - *ref_56
   - *ref_90
   - *ref_91
   - *ref_92
@@ -2621,104 +2617,8 @@ operationGroups:
       version: 2.0-preview
     parameters:
     - *ref_104
-    - !<!Parameter> &ref_111
+    - !<!Parameter> &ref_112
       schema: *ref_110
-      implementation: Method
-      language: !<!Languages> 
-        default:
-          name: op
-          description: Specify whether to return summary or full list of models.
-          serializedName: op
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: query
-    requests:
-    - !<!Request> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /custom/models
-          method: get
-          uri: '{endpoint}/formrecognizer/v2.0-preview'
-    signatureParameters:
-    - *ref_111
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_112
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_109
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    extensions:
-      x-ms-examples:
-        List custom models:
-          parameters:
-            Content-Type: application/json
-            Ocp-Apim-Subscription-Key: '{API key}'
-            body: {}
-            endpoint: '{endpoint}'
-            op: full
-          responses:
-            '200':
-              body:
-                modelList:
-                - createdDateTime: '2019-05-01T10:53:21Z'
-                  lastUpdatedDateTime: '2019-05-01T10:53:23Z'
-                  modelId: f973e3c1-1148-43bb-bea8-49d0603ab3a8
-                  status: ready
-                - createdDateTime: '2019-05-01T10:53:21Z'
-                  lastUpdatedDateTime: '2019-05-01T10:53:23Z'
-                  modelId: f973e3c1-0001-43bb-bea8-49d0603ab3a8
-                  status: ready
-                nextLink: ''
-                summary:
-                  count: 5
-                  lastUpdatedDateTime: '2019-05-01T10:53:21Z'
-                  limit: 5000
-      x-ms-pageable:
-        itemName: modelList
-        nextLinkName: nextLink
-    language: !<!Languages> 
-      default:
-        name: GetCustomModels
-        description: Get information about all custom models
-        paging:
-          itemName: modelList
-          nextLinkName: nextLink
-        summary: List Custom Models
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 2.0-preview
-    parameters:
-    - *ref_104
-    - !<!Parameter> &ref_115
-      schema: *ref_113
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2729,8 +2629,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_116
-      schema: *ref_114
+    - !<!Parameter> &ref_113
+      schema: *ref_111
       implementation: Method
       language: !<!Languages> 
         default:
@@ -2752,11 +2652,11 @@ operationGroups:
           method: get
           uri: '{endpoint}/formrecognizer/v2.0-preview'
     signatureParameters:
-    - *ref_115
-    - *ref_116
+    - *ref_112
+    - *ref_113
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_117
+      schema: *ref_114
       language: !<!Languages> 
         default:
           name: ''
@@ -2824,8 +2724,8 @@ operationGroups:
       version: 2.0-preview
     parameters:
     - *ref_104
-    - !<!Parameter> &ref_118
-      schema: *ref_113
+    - !<!Parameter> &ref_115
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2848,7 +2748,7 @@ operationGroups:
           method: delete
           uri: '{endpoint}/formrecognizer/v2.0-preview'
     signatureParameters:
-    - *ref_118
+    - *ref_115
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2896,8 +2796,8 @@ operationGroups:
       version: 2.0-preview
     parameters:
     - *ref_104
-    - !<!Parameter> &ref_125
-      schema: *ref_113
+    - !<!Parameter> &ref_122
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2908,8 +2808,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_126
-      schema: *ref_114
+    - !<!Parameter> &ref_123
+      schema: *ref_111
       implementation: Method
       language: !<!Languages> 
         default:
@@ -2922,8 +2822,8 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_121
-        schema: *ref_119
+      - !<!Parameter> &ref_118
+        schema: *ref_116
         implementation: Method
         origin: 'modelerfour:synthesized/content-type'
         required: true
@@ -2935,8 +2835,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_122
-        schema: *ref_120
+      - !<!Parameter> &ref_119
+        schema: *ref_117
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -2948,8 +2848,8 @@ operationGroups:
             in: body
             style: binary
       signatureParameters:
-      - *ref_121
-      - *ref_122
+      - *ref_118
+      - *ref_119
       language: !<!Languages> 
         default:
           name: ''
@@ -2981,8 +2881,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_124
-        schema: *ref_123
+      - !<!Parameter> &ref_121
+        schema: *ref_120
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -2994,7 +2894,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_124
+      - *ref_121
       language: !<!Languages> 
         default:
           name: ''
@@ -3008,8 +2908,8 @@ operationGroups:
           - application/json
           uri: '{endpoint}/formrecognizer/v2.0-preview'
     signatureParameters:
-    - *ref_125
-    - *ref_126
+    - *ref_122
+    - *ref_123
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3020,7 +2920,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_127
+            schema: *ref_124
             header: Operation-Location
           statusCodes:
           - '202'
@@ -3051,6 +2951,7 @@ operationGroups:
             '202':
               headers:
                 Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/analyzeResults/{resultId}'
+      x-ms-long-running-operation: true
     language: !<!Languages> 
       default:
         name: AnalyzeWithCustomModel
@@ -3065,8 +2966,8 @@ operationGroups:
       version: 2.0-preview
     parameters:
     - *ref_104
-    - !<!Parameter> &ref_128
-      schema: *ref_113
+    - !<!Parameter> &ref_125
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3077,8 +2978,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_129
-      schema: *ref_113
+    - !<!Parameter> &ref_126
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3101,11 +3002,11 @@ operationGroups:
           method: get
           uri: '{endpoint}/formrecognizer/v2.0-preview'
     signatureParameters:
-    - *ref_128
-    - *ref_129
+    - *ref_125
+    - *ref_126
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_130
+      schema: *ref_127
       language: !<!Languages> 
         default:
           name: ''
@@ -3165,8 +3066,8 @@ operationGroups:
       version: 2.0-preview
     parameters:
     - *ref_104
-    - !<!Parameter> &ref_135
-      schema: *ref_114
+    - !<!Parameter> &ref_132
+      schema: *ref_111
       implementation: Method
       language: !<!Languages> 
         default:
@@ -3179,8 +3080,8 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_132
-        schema: *ref_119
+      - !<!Parameter> &ref_129
+        schema: *ref_116
         implementation: Method
         origin: 'modelerfour:synthesized/content-type'
         required: true
@@ -3192,8 +3093,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_133
-        schema: *ref_131
+      - !<!Parameter> &ref_130
+        schema: *ref_128
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3205,8 +3106,8 @@ operationGroups:
             in: body
             style: binary
       signatureParameters:
-      - *ref_132
-      - *ref_133
+      - *ref_129
+      - *ref_130
       language: !<!Languages> 
         default:
           name: ''
@@ -3238,8 +3139,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_134
-        schema: *ref_123
+      - !<!Parameter> &ref_131
+        schema: *ref_120
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -3251,7 +3152,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_134
+      - *ref_131
       language: !<!Languages> 
         default:
           name: ''
@@ -3265,7 +3166,7 @@ operationGroups:
           - application/json
           uri: '{endpoint}/formrecognizer/v2.0-preview'
     signatureParameters:
-    - *ref_135
+    - *ref_132
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3276,7 +3177,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_136
+            schema: *ref_133
             header: Operation-Location
           statusCodes:
           - '202'
@@ -3306,6 +3207,7 @@ operationGroups:
             '202':
               headers:
                 Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/prebuilt/receipt/analyzeResults/{resultId}'
+      x-ms-long-running-operation: true
     language: !<!Languages> 
       default:
         name: AnalyzeReceiptAsync
@@ -3320,8 +3222,8 @@ operationGroups:
       version: 2.0-preview
     parameters:
     - *ref_104
-    - !<!Parameter> &ref_137
-      schema: *ref_113
+    - !<!Parameter> &ref_134
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3344,10 +3246,10 @@ operationGroups:
           method: get
           uri: '{endpoint}/formrecognizer/v2.0-preview'
     signatureParameters:
-    - *ref_137
+    - *ref_134
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_130
+      schema: *ref_127
       language: !<!Languages> 
         default:
           name: ''
@@ -3410,8 +3312,8 @@ operationGroups:
     requests:
     - !<!Request> 
       parameters:
-      - !<!Parameter> &ref_139
-        schema: *ref_119
+      - !<!Parameter> &ref_136
+        schema: *ref_116
         implementation: Method
         origin: 'modelerfour:synthesized/content-type'
         required: true
@@ -3423,8 +3325,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_140
-        schema: *ref_138
+      - !<!Parameter> &ref_137
+        schema: *ref_135
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3436,8 +3338,8 @@ operationGroups:
             in: body
             style: binary
       signatureParameters:
-      - *ref_139
-      - *ref_140
+      - *ref_136
+      - *ref_137
       language: !<!Languages> 
         default:
           name: ''
@@ -3469,8 +3371,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_141
-        schema: *ref_123
+      - !<!Parameter> &ref_138
+        schema: *ref_120
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -3482,7 +3384,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_141
+      - *ref_138
       language: !<!Languages> 
         default:
           name: ''
@@ -3506,7 +3408,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_142
+            schema: *ref_139
             header: Operation-Location
           statusCodes:
           - '202'
@@ -3537,6 +3439,7 @@ operationGroups:
             '202':
               headers:
                 Operation-Location: '{endpoint}/formrecognizer/v2.0-preview/layout/analyzeResults/{resultId}'
+      x-ms-long-running-operation: true
     language: !<!Languages> 
       default:
         name: AnalyzeLayoutAsync
@@ -3551,8 +3454,8 @@ operationGroups:
       version: 2.0-preview
     parameters:
     - *ref_104
-    - !<!Parameter> &ref_143
-      schema: *ref_113
+    - !<!Parameter> &ref_140
+      schema: *ref_110
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3575,10 +3478,10 @@ operationGroups:
           method: get
           uri: '{endpoint}/formrecognizer/v2.0-preview'
     signatureParameters:
-    - *ref_143
+    - *ref_140
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_130
+      schema: *ref_127
       language: !<!Languages> 
         default:
           name: ''
@@ -3629,6 +3532,178 @@ operationGroups:
         name: GetAnalyzeLayoutResult
         description: Track the progress and obtain the result of the analyze layout operation
         summary: Get Analyze Layout Result
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    parameters:
+    - *ref_104
+    - !<!Parameter> 
+      schema: *ref_141
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: op
+          description: Specify whether to return summary or full list of models.
+          serializedName: op
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /custom/models
+          method: get
+          uri: '{endpoint}/formrecognizer/v2.0-preview'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_142
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_109
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-examples:
+        List custom models:
+          parameters:
+            Content-Type: application/json
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: {}
+            endpoint: '{endpoint}'
+            op: full
+          responses:
+            '200':
+              body:
+                modelList:
+                - createdDateTime: '2019-05-01T10:53:21Z'
+                  lastUpdatedDateTime: '2019-05-01T10:53:23Z'
+                  modelId: f973e3c1-1148-43bb-bea8-49d0603ab3a8
+                  status: ready
+                - createdDateTime: '2019-05-01T10:53:21Z'
+                  lastUpdatedDateTime: '2019-05-01T10:53:23Z'
+                  modelId: f973e3c1-0001-43bb-bea8-49d0603ab3a8
+                  status: ready
+                nextLink: ''
+      x-ms-pageable:
+        itemName: modelList
+        nextLinkName: nextLink
+    language: !<!Languages> 
+      default:
+        name: ListCustomModels
+        description: Get information about all custom models
+        paging:
+          itemName: modelList
+          nextLinkName: nextLink
+        summary: List Custom Models
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 2.0-preview
+    parameters:
+    - *ref_104
+    - !<!Parameter> 
+      schema: *ref_143
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: op
+          description: Specify whether to return summary or full list of models.
+          serializedName: op
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /custom/models
+          method: get
+          uri: '{endpoint}/formrecognizer/v2.0-preview'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_142
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_109
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    extensions:
+      x-ms-examples:
+        Get models summary:
+          parameters:
+            Content-Type: application/json
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body: {}
+            endpoint: '{endpoint}'
+            op: summary
+          responses:
+            '200':
+              body:
+                summary:
+                  count: 5
+                  lastUpdatedDateTime: '2019-05-01T10:53:21Z'
+                  limit: 5000
+    language: !<!Languages> 
+      default:
+        name: GetCustomModels
+        description: Get information about all custom models
+        summary: Get Custom Models
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:

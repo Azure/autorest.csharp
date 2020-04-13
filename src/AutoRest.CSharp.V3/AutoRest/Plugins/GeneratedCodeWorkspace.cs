@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             foreach (Document document in _project.Documents)
             {
                 // Skip writing shared files or originals
-                if (!document.Folders.Contains(GeneratedFolder))
+                if (!IsGeneratedDocument(document))
                 {
                     continue;
                 }
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
         }
 
-        private static async Task<Document> ProcessDocument(Document document)
+        private async Task<Document> ProcessDocument(Document document)
         {
             var compilation = await document.Project.GetCompilationAsync();
             Debug.Assert(compilation != null);
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var syntaxTree = await document.GetSyntaxTreeAsync();
             if (syntaxTree != null)
             {
-                var rewriter = new MemberRemoverRewriter(compilation.GetSemanticModel(syntaxTree));
+                var rewriter = new MemberRemoverRewriter(_project, compilation.GetSemanticModel(syntaxTree));
                 document = document.WithSyntaxRoot(rewriter.Visit(await syntaxTree.GetRootAsync()));
             }
 
@@ -128,5 +128,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             Debug.Assert(compilation != null);
             return compilation;
         }
+
+        public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
     }
 }

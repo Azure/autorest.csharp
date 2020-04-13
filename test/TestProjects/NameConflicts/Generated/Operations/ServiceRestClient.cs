@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -197,6 +198,153 @@ namespace NameConflicts
             catch (Exception e)
             {
                 scope0.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateAnalyzeBodyRequest(Stream stringBody)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/conflictingLROOverloads", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/pdf");
+            request.Content = RequestContent.Create(stringBody);
+            return message;
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="stringBody"> The binary to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> AnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        {
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeBodyRequest(stringBody);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="stringBody"> The binary to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response AnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
+        {
+            if (stringBody == null)
+            {
+                throw new ArgumentNullException(nameof(stringBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeBodyRequest(stringBody);
+                _pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        internal HttpMessage CreateAnalyzeBodyRequest(string stringBody)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/conflictingLROOverloads", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            if (stringBody != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(stringBody);
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="stringBody"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> AnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeBodyRequest(stringBody);
+                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <param name="stringBody"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response AnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                using var message = CreateAnalyzeBodyRequest(stringBody);
+                _pipeline.Send(message, cancellationToken);
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
                 throw;
             }
         }

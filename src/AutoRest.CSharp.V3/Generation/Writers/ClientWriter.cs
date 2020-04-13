@@ -59,9 +59,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var longRunningOperation in client.LongRunningOperationMethods)
                     {
-                        WriteCreateOperationOperation(writer, longRunningOperation);
-                        WriteStartOperationOperation(writer, longRunningOperation, true);
-                        WriteStartOperationOperation(writer, longRunningOperation, false);
+                        var createMethod = WriteCreateOperationOperation(writer, longRunningOperation);
+                        WriteStartOperationOperation(writer, longRunningOperation, createMethod, true);
+                        WriteStartOperationOperation(writer, longRunningOperation, createMethod, false);
                     }
                 }
             }
@@ -286,7 +286,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private void WriteCreateOperationOperation(CodeWriter writer, LongRunningOperation lroMethod)
+        private CodeWriterDeclaration WriteCreateOperationOperation(CodeWriter writer, LongRunningOperation lroMethod)
         {
             RestClientMethod originalMethod = lroMethod.OriginalMethod;
             CSharpType? responseBodyType = lroMethod.OriginalResponse.ResponseBody?.Type;
@@ -300,7 +300,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
-            writer.Append($"internal {responseType} {CreateCreateOperationName(lroMethod.Name)}(");
+            // Create operation methods can clash for LROs that take different set of parameters
+            // because the input parameters are not part of Create*** signature
+            // It's an internal method so generated name is fine
+            var declaration = new CodeWriterDeclaration(CreateCreateOperationName(lroMethod.Name));
+            writer.Append($"internal {responseType} {declaration:D}(");
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteParameter(parameter);
@@ -349,9 +353,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($");");
             }
             writer.Line();
+
+            return declaration;
         }
 
-        private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
+        private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, CodeWriterDeclaration createMethod, bool async)
         {
             RestClientMethod originalMethod = lroMethod.OriginalMethod;
             CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? typeof(Response));
@@ -387,7 +393,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
                 writer.Line($"cancellationToken){configureText};");
 
-                writer.Append($"return {CreateCreateOperationName(lroMethod.Name)}(originalResponse, () => RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
+                writer.Append($"return {createMethod}(originalResponse, () => RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
                 foreach (Parameter parameter in parameters)
                 {
                     writer.Append($"{parameter.Name}, ");
