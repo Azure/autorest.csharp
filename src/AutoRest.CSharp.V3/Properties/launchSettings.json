@@ -1,92 +1,632 @@
 {
   "profiles": {
+    "additionalProperties": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\additionalProperties"
+    },
+    "AdditionalPropertiesEx": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx"
+    },
+    "addons-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\addons-resource-manager\\addons-resource-manager"
+    },
+    "adhybridhealthservice-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\adhybridhealthservice-resource-manager\\adhybridhealthservice-resource-manager"
+    },
+    "advisor-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\advisor-resource-manager\\advisor-resource-manager"
+    },
+    "analysisservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\analysisservices-resource-manager\\analysisservices-resource-manager"
+    },
     "apimanagement-control-plane": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\apimanagement-control-plane\\apimanagement-control-plane"
     },
-    "azsadmin-resource-manager-fabric": {
+    "apimanagement-resource-manager": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-fabric\\azsadmin-resource-manager-fabric"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\apimanagement-resource-manager\\apimanagement-resource-manager"
     },
-    "azsadmin-resource-manager-network": {
+    "AppConfiguration": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-network\\azsadmin-resource-manager-network"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration"
     },
-    "azure-kusto-resource-manager": {
+    "appconfiguration-data-plane": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azure-kusto-resource-manager\\azure-kusto-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\appconfiguration-data-plane\\appconfiguration-data-plane"
     },
-    "azurestack-resource-manager": {
+    "appconfiguration-resource-manager": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azurestack-resource-manager\\azurestack-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\appconfiguration-resource-manager\\appconfiguration-resource-manager"
     },
-    "cognitiveservices-data-plane-LocalSearch": {
+    "applicationinsights-data-plane": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-LocalSearch\\cognitiveservices-data-plane-LocalSearch"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\applicationinsights-data-plane\\applicationinsights-data-plane"
     },
-    "consumption-resource-manager": {
+    "appplatform-resource-manager": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\consumption-resource-manager\\consumption-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\appplatform-resource-manager\\appplatform-resource-manager"
     },
-    "containerregistry-data-plane": {
+    "attestation-data-plane": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\containerregistry-data-plane\\containerregistry-data-plane"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\attestation-data-plane\\attestation-data-plane"
     },
-    "databoxedge-resource-manager": {
+    "attestation-resource-manager": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\databoxedge-resource-manager\\databoxedge-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\attestation-resource-manager\\attestation-resource-manager"
     },
-    "databox-resource-manager": {
+    "authorization-resource-manager": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\databox-resource-manager\\databox-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\authorization-resource-manager\\authorization-resource-manager"
     },
-    "datalake-store-data-plane": {
+    "azsadmin-resource-manager-backup": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\datalake-store-data-plane\\datalake-store-data-plane"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-backup\\azsadmin-resource-manager-backup"
     },
-    "intune-resource-manager": {
+    "azsadmin-resource-manager-commerce": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\intune-resource-manager\\intune-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-commerce\\azsadmin-resource-manager-commerce"
     },
-    "keyvault-resource-manager": {
+    "azsadmin-resource-manager-compute": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\keyvault-resource-manager\\keyvault-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-compute\\azsadmin-resource-manager-compute"
     },
-    "logic-resource-manager": {
+    "azsadmin-resource-manager-deployment": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\logic-resource-manager\\logic-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-deployment\\azsadmin-resource-manager-deployment"
     },
-    "managednetwork-resource-manager": {
+    "azsadmin-resource-manager-gallery": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\managednetwork-resource-manager\\managednetwork-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-gallery\\azsadmin-resource-manager-gallery"
     },
-    "network-resource-manager": {
+    "azsadmin-resource-manager-infrastructureinsights": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\network-resource-manager\\network-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-infrastructureinsights\\azsadmin-resource-manager-infrastructureinsights"
     },
-    "privatedns-resource-manager": {
+    "azsadmin-resource-manager-keyvault": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\privatedns-resource-manager\\privatedns-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-keyvault\\azsadmin-resource-manager-keyvault"
     },
-    "scheduler-resource-manager": {
+    "azsadmin-resource-manager-storage": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\scheduler-resource-manager\\scheduler-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-storage\\azsadmin-resource-manager-storage"
     },
-    "signalr-resource-manager": {
+    "azsadmin-resource-manager-subscriptions": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\signalr-resource-manager\\signalr-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-subscriptions\\azsadmin-resource-manager-subscriptions"
     },
-    "synapse-data-plane": {
+    "azsadmin-resource-manager-update": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\synapse-data-plane\\synapse-data-plane"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-update\\azsadmin-resource-manager-update"
     },
-    "synapse-resource-manager": {
+    "azsadmin-resource-manager-user-subscriptions": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\synapse-resource-manager\\synapse-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azsadmin-resource-manager-user-subscriptions\\azsadmin-resource-manager-user-subscriptions"
     },
-    "timeseriesinsights-resource-manager": {
+    "Azure.AI.FormRecognizer": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\timeseriesinsights-resource-manager\\timeseriesinsights-resource-manager"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer"
+    },
+    "Azure.Storage.Management": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management"
+    },
+    "Azure.Storage.Tables": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables"
+    },
+    "azureactivedirectory-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azureactivedirectory-resource-manager\\azureactivedirectory-resource-manager"
+    },
+    "azuredata-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\azuredata-resource-manager\\azuredata-resource-manager"
+    },
+    "azure-parameter-grouping": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping"
+    },
+    "batchai-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\batchai-resource-manager\\batchai-resource-manager"
+    },
+    "batch-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\batch-data-plane\\batch-data-plane"
+    },
+    "batch-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\batch-resource-manager\\batch-resource-manager"
+    },
+    "billing-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\billing-resource-manager\\billing-resource-manager"
+    },
+    "blockchain-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\blockchain-resource-manager\\blockchain-resource-manager"
+    },
+    "body-array": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-array"
+    },
+    "body-boolean": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-boolean"
+    },
+    "body-byte": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-byte"
+    },
+    "body-complex": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-complex"
+    },
+    "body-date": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-date"
+    },
+    "body-datetime": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-datetime"
+    },
+    "body-datetime-rfc1123": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123"
+    },
+    "body-dictionary": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-dictionary"
+    },
+    "body-duration": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-duration"
+    },
+    "body-file": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-file"
+    },
+    "body-integer": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-integer"
+    },
+    "body-number": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-number"
+    },
+    "body-string": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-string"
+    },
+    "body-time": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-time"
+    },
+    "botservice-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\botservice-resource-manager\\botservice-resource-manager"
+    },
+    "CognitiveSearch": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\CognitiveSearch"
+    },
+    "CognitiveServices.TextAnalytics": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics"
+    },
+    "cognitiveservices-data-plane-InkRecognizer": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-InkRecognizer\\cognitiveservices-data-plane-InkRecognizer"
+    },
+    "cognitiveservices-data-plane-LUIS-Runtime": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-LUIS-Runtime\\cognitiveservices-data-plane-LUIS-Runtime"
+    },
+    "cognitiveservices-data-plane-Personalizer": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-Personalizer\\cognitiveservices-data-plane-Personalizer"
+    },
+    "cognitiveservices-data-plane-QnAMaker": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-QnAMaker\\cognitiveservices-data-plane-QnAMaker"
+    },
+    "cognitiveservices-data-plane-TextAnalytics": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-TextAnalytics\\cognitiveservices-data-plane-TextAnalytics"
+    },
+    "cognitiveservices-data-plane-TranslatorText": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-data-plane-TranslatorText\\cognitiveservices-data-plane-TranslatorText"
+    },
+    "cognitiveservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\cognitiveservices-resource-manager\\cognitiveservices-resource-manager"
+    },
+    "custom-baseUrl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl"
+    },
+    "custom-baseUrl-more-options": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options"
+    },
+    "custom-baseUrl-paging": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging"
+    },
+    "customer-insights-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\customer-insights-resource-manager\\customer-insights-resource-manager"
+    },
+    "customproviders-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\customproviders-resource-manager\\customproviders-resource-manager"
+    },
+    "databricks-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\databricks-resource-manager\\databricks-resource-manager"
+    },
+    "datacatalog-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\datacatalog-resource-manager\\datacatalog-resource-manager"
+    },
+    "datalake-analytics-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\datalake-analytics-resource-manager\\datalake-analytics-resource-manager"
+    },
+    "datalake-store-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\datalake-store-resource-manager\\datalake-store-resource-manager"
+    },
+    "deviceprovisioningservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\deviceprovisioningservices-resource-manager\\deviceprovisioningservices-resource-manager"
+    },
+    "devops-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\devops-resource-manager\\devops-resource-manager"
+    },
+    "devspaces-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\devspaces-resource-manager\\devspaces-resource-manager"
+    },
+    "devtestlabs-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\devtestlabs-resource-manager\\devtestlabs-resource-manager"
+    },
+    "dns-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\dns-resource-manager\\dns-resource-manager"
+    },
+    "domainservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\domainservices-resource-manager\\domainservices-resource-manager"
+    },
+    "engagementfabric-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\engagementfabric-resource-manager\\engagementfabric-resource-manager"
+    },
+    "EnterpriseKnowledgeGraph-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\EnterpriseKnowledgeGraph-resource-manager\\EnterpriseKnowledgeGraph-resource-manager"
+    },
+    "eventgrid-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\eventgrid-data-plane\\eventgrid-data-plane"
+    },
+    "eventgrid-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\eventgrid-resource-manager\\eventgrid-resource-manager"
+    },
+    "eventhub-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\eventhub-resource-manager\\eventhub-resource-manager"
+    },
+    "extensible-enums-swagger": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger"
+    },
+    "ExtensionClientName": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName"
+    },
+    "graphrbac-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\graphrbac-data-plane\\graphrbac-data-plane"
+    },
+    "guestconfiguration-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\guestconfiguration-resource-manager\\guestconfiguration-resource-manager"
+    },
+    "hanaonazure-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\hanaonazure-resource-manager\\hanaonazure-resource-manager"
+    },
+    "hardwaresecuritymodules-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\hardwaresecuritymodules-resource-manager\\hardwaresecuritymodules-resource-manager"
+    },
+    "hdinsight-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\hdinsight-data-plane\\hdinsight-data-plane"
+    },
+    "header": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\header"
+    },
+    "healthcareapis-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\healthcareapis-resource-manager\\healthcareapis-resource-manager"
+    },
+    "httpInfrastructure": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure"
+    },
+    "hybriddatamanager-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\hybriddatamanager-resource-manager\\hybriddatamanager-resource-manager"
+    },
+    "imagebuilder-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\imagebuilder-resource-manager\\imagebuilder-resource-manager"
+    },
+    "imds-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\imds-data-plane\\imds-data-plane"
+    },
+    "Inheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Inheritance"
+    },
+    "iotcentral-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\iotcentral-resource-manager\\iotcentral-resource-manager"
+    },
+    "iothub-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\iothub-resource-manager\\iothub-resource-manager"
+    },
+    "iotspaces-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\iotspaces-resource-manager\\iotspaces-resource-manager"
+    },
+    "keyvault-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\keyvault-data-plane\\keyvault-data-plane"
+    },
+    "labservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\labservices-resource-manager\\labservices-resource-manager"
+    },
+    "lro": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro"
+    },
+    "machinelearningcompute-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\machinelearningcompute-resource-manager\\machinelearningcompute-resource-manager"
+    },
+    "machinelearningexperimentation-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\machinelearningexperimentation-resource-manager\\machinelearningexperimentation-resource-manager"
+    },
+    "machinelearningservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\machinelearningservices-resource-manager\\machinelearningservices-resource-manager"
+    },
+    "maintenance-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\maintenance-resource-manager\\maintenance-resource-manager"
+    },
+    "managedservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\managedservices-resource-manager\\managedservices-resource-manager"
+    },
+    "managementgroups-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\managementgroups-resource-manager\\managementgroups-resource-manager"
+    },
+    "managementpartner-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\managementpartner-resource-manager\\managementpartner-resource-manager"
+    },
+    "maps-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\maps-resource-manager\\maps-resource-manager"
+    },
+    "marketplaceordering-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\marketplaceordering-resource-manager\\marketplaceordering-resource-manager"
+    },
+    "media_types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types"
+    },
+    "migrateprojects-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\migrateprojects-resource-manager\\migrateprojects-resource-manager"
+    },
+    "migrate-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\migrate-resource-manager\\migrate-resource-manager"
+    },
+    "model-flattening": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening"
+    },
+    "monitor-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\monitor-data-plane\\monitor-data-plane"
+    },
+    "msi-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\msi-resource-manager\\msi-resource-manager"
+    },
+    "NameConflicts": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NameConflicts"
+    },
+    "netapp-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\netapp-resource-manager\\netapp-resource-manager"
+    },
+    "non-string-enum": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum"
+    },
+    "notificationhubs-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\notificationhubs-resource-manager\\notificationhubs-resource-manager"
+    },
+    "operationalinsights-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\operationalinsights-data-plane\\operationalinsights-data-plane"
+    },
+    "paging": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\paging"
+    },
+    "peering-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\peering-resource-manager\\peering-resource-manager"
+    },
+    "portal-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\portal-resource-manager\\portal-resource-manager"
+    },
+    "powerbidedicated-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\powerbidedicated-resource-manager\\powerbidedicated-resource-manager"
+    },
+    "powerbiembedded-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\powerbiembedded-resource-manager\\powerbiembedded-resource-manager"
+    },
+    "recoveryservices-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\recoveryservices-resource-manager\\recoveryservices-resource-manager"
+    },
+    "recoveryservicessiterecovery-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\recoveryservicessiterecovery-resource-manager\\recoveryservicessiterecovery-resource-manager"
+    },
+    "redhatopenshift-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\redhatopenshift-resource-manager\\redhatopenshift-resource-manager"
+    },
+    "redis-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\redis-resource-manager\\redis-resource-manager"
+    },
+    "relay-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\relay-resource-manager\\relay-resource-manager"
+    },
+    "resourcegraph-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\resourcegraph-resource-manager\\resourcegraph-resource-manager"
+    },
+    "resourcehealth-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\resourcehealth-resource-manager\\resourcehealth-resource-manager"
+    },
+    "search-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\search-resource-manager\\search-resource-manager"
+    },
+    "serialconsole-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\serialconsole-resource-manager\\serialconsole-resource-manager"
+    },
+    "SignalR": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\SignalR\\SignalR"
+    },
+    "softwareplan-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\softwareplan-resource-manager\\softwareplan-resource-manager"
+    },
+    "sqlvirtualmachine-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\sqlvirtualmachine-resource-manager\\sqlvirtualmachine-resource-manager"
+    },
+    "storagecache-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\storagecache-resource-manager\\storagecache-resource-manager"
+    },
+    "storageimportexport-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\storageimportexport-resource-manager\\storageimportexport-resource-manager"
+    },
+    "storagesync-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\storagesync-resource-manager\\storagesync-resource-manager"
+    },
+    "storSimple1200Series-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\storSimple1200Series-resource-manager\\storSimple1200Series-resource-manager"
+    },
+    "storsimple8000series-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\storsimple8000series-resource-manager\\storsimple8000series-resource-manager"
+    },
+    "support-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\support-resource-manager\\support-resource-manager"
+    },
+    "timeseriesinsights-data-plane": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\timeseriesinsights-data-plane\\timeseriesinsights-data-plane"
+    },
+    "trafficmanager-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\trafficmanager-resource-manager\\trafficmanager-resource-manager"
+    },
+    "TypeSchemaMapping": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping"
+    },
+    "url": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url"
+    },
+    "url-multi-collectionFormat": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat"
+    },
+    "validation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\validation"
+    },
+    "vmwarecloudsimple-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\vmwarecloudsimple-resource-manager\\vmwarecloudsimple-resource-manager"
+    },
+    "vmwarevirtustream-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\vmwarevirtustream-resource-manager\\vmwarevirtustream-resource-manager"
+    },
+    "windowsesu-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\windowsesu-resource-manager\\windowsesu-resource-manager"
+    },
+    "windowsiot-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\windowsiot-resource-manager\\windowsiot-resource-manager"
+    },
+    "workloadmonitor-resource-manager": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\smoketests\\workloadmonitor-resource-manager\\workloadmonitor-resource-manager"
+    },
+    "xml-service": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xml-service"
     }
   }
 }
