@@ -1,0 +1,265 @@
+!<!CodeModel> 
+info: !<!Info> 
+  description: Schema mapping
+  title: Schema mapping
+schemas: !<!Schemas> 
+  strings:
+  - !<!StringSchema> &ref_12
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: BaseClassProperty
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_9
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: BaseClassWithDiscriminatorProperty
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_6
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: SomePropertiesSomeProperty
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_7
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: SomePropertiesSomeOtherProperty
+        description: ''
+    protocol: !<!Protocols> {}
+  objects:
+  - !<!ObjectSchema> &ref_1
+    type: object
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    children: !<!Relations> 
+      all:
+      - !<!ObjectSchema> &ref_0
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        children: !<!Relations> 
+          all:
+          - !<!ObjectSchema> &ref_8
+            type: object
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminator
+            parents: !<!Relations> 
+              all:
+              - *ref_0
+              - *ref_1
+              immediate:
+              - *ref_0
+            language: !<!Languages> 
+              default:
+                name: ClassThatInheritsFromBaseClassWithDiscriminator
+                description: ''
+                namespace: ''
+            protocol: !<!Protocols> {}
+          - !<!ObjectSchema> &ref_3
+            type: object
+            apiVersions:
+            - !<!ApiVersion> 
+              version: 1.0.0
+            discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
+            parents: !<!Relations> 
+              all:
+              - *ref_0
+              - !<!ObjectSchema> &ref_2
+                type: object
+                apiVersions:
+                - !<!ApiVersion> 
+                  version: 1.0.0
+                children: !<!Relations> 
+                  all:
+                  - !<!ObjectSchema> &ref_4
+                    type: object
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: 1.0.0
+                    parents: !<!Relations> 
+                      all:
+                      - *ref_1
+                      - *ref_2
+                      - *ref_1
+                      - *ref_2
+                      immediate:
+                      - *ref_1
+                      - *ref_2
+                    language: !<!Languages> 
+                      default:
+                        name: ClassThatInheritsFromBaseClassAndSomeProperties
+                        description: ''
+                        namespace: ''
+                    protocol: !<!Protocols> {}
+                  - !<!ObjectSchema> &ref_5
+                    type: object
+                    apiVersions:
+                    - !<!ApiVersion> 
+                      version: 1.0.0
+                    parents: !<!Relations> 
+                      all:
+                      - *ref_1
+                      - *ref_2
+                      - *ref_1
+                      - *ref_2
+                      immediate:
+                      - *ref_1
+                      - *ref_2
+                    language: !<!Languages> 
+                      default:
+                        name: ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride
+                        description: ''
+                        namespace: ''
+                    protocol: !<!Protocols> {}
+                  - *ref_3
+                  immediate:
+                  - *ref_4
+                  - *ref_5
+                  - *ref_3
+                properties:
+                - !<!Property> 
+                  schema: *ref_6
+                  serializedName: SomeProperty
+                  language: !<!Languages> 
+                    default:
+                      name: someProperty
+                      description: ''
+                  protocol: !<!Protocols> {}
+                - !<!Property> 
+                  schema: *ref_7
+                  serializedName: SomeOtherProperty
+                  language: !<!Languages> 
+                    default:
+                      name: someOtherProperty
+                      description: ''
+                  protocol: !<!Protocols> {}
+                language: !<!Languages> 
+                  default:
+                    name: SomeProperties
+                    description: ''
+                    namespace: ''
+                protocol: !<!Protocols> {}
+              - *ref_1
+              - *ref_0
+              - *ref_2
+              immediate:
+              - *ref_0
+              - *ref_2
+            language: !<!Languages> 
+              default:
+                name: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
+                description: ''
+                namespace: ''
+            protocol: !<!Protocols> {}
+          immediate:
+          - *ref_8
+          - *ref_3
+        discriminator: !<!Discriminator> 
+          all:
+            ClassThatInheritsFromBaseClassWithDiscriminator: *ref_8
+            ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
+          immediate:
+            ClassThatInheritsFromBaseClassWithDiscriminator: *ref_8
+            ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
+          property: !<!Property> &ref_10
+            schema: *ref_9
+            isDiscriminator: true
+            required: true
+            serializedName: DiscriminatorProperty
+            language: !<!Languages> 
+              default:
+                name: discriminatorProperty
+                description: ''
+            protocol: !<!Protocols> {}
+        discriminatorValue: BaseClassWithDiscriminator
+        parents: !<!Relations> 
+          all:
+          - *ref_1
+          immediate:
+          - *ref_1
+        properties:
+        - *ref_10
+        language: !<!Languages> 
+          default:
+            name: BaseClassWithDiscriminator
+            description: ''
+            namespace: ''
+        protocol: !<!Protocols> {}
+      - *ref_4
+      - *ref_5
+      - !<!ObjectSchema> &ref_11
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        parents: !<!Relations> 
+          all:
+          - *ref_1
+          immediate:
+          - *ref_1
+        language: !<!Languages> 
+          default:
+            name: ClassThatInheritsFromBaseClass
+            description: ''
+            namespace: ''
+        protocol: !<!Protocols> {}
+      - *ref_8
+      - *ref_3
+      immediate:
+      - *ref_0
+      - *ref_4
+      - *ref_5
+      - *ref_11
+    properties:
+    - !<!Property> 
+      schema: *ref_12
+      serializedName: BaseClassProperty
+      language: !<!Languages> 
+        default:
+          name: baseClassProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: BaseClass
+        description: ''
+        namespace: ''
+    protocol: !<!Protocols> {}
+  - *ref_0
+  - *ref_2
+  - *ref_4
+  - *ref_5
+  - *ref_11
+  - *ref_8
+  - *ref_3
+operationGroups: []
+security: !<!Security> 
+  authenticationRequired: false
+language: !<!Languages> 
+  default:
+    name: SchemaMapping
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}
