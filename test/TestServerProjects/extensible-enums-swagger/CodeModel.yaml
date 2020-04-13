@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: PetStore
-  title: extensible-enums-swagger
+  title: PetStore Inc
 schemas: !<!Schemas> 
   strings:
   - !<!StringSchema> &ref_0
@@ -321,7 +321,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: ExtensibleEnumsSwagger
+    name: PetStoreInc
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

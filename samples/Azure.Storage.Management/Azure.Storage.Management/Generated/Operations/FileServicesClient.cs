@@ -8,6 +8,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Storage.Management.Models;
 
@@ -18,16 +19,13 @@ namespace Azure.Storage.Management
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FileServicesRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of FileServicesClient for mocking. </summary>
-        protected FileServicesClient()
-        {
-        }
         /// <summary> Initializes a new instance of FileServicesClient. </summary>
-        internal FileServicesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2019-06-01")
+        public FileServicesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            RestClient = new FileServicesRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            options = new StorageManagementClientOptions();
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
+            RestClient = new FileServicesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
         }
 
         /// <summary> List all file services in storage accounts. </summary>

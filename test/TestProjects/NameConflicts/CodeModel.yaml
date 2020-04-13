@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Resource Flattening for AutoRest
-  title: NameConflicts
+  title: AutoRest Parameter Flattening
 schemas: !<!Schemas> 
   strings:
   - !<!StringSchema> &ref_0
@@ -2230,7 +2230,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: NameConflicts
+    name: AutoRestParameterFlattening
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

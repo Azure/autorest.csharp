@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Play with produces/consumes and media-types in general.
-  title: media_types
+  title: Media Types Client
 schemas: !<!Schemas> 
   strings:
   - !<!StringSchema> &ref_0
@@ -257,7 +257,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: MediaTypes
+    name: MediaTypesClient
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: url
+  title: AutoRest Url Test Service
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_1
@@ -4652,7 +4652,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: Url
+    name: AutoRestUrlTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

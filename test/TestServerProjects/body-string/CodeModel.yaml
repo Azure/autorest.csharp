@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest Swagger BAT
-  title: body-string
+  title: AutoRest Swagger BAT Service
 schemas: !<!Schemas> 
   numbers:
   - !<!NumberSchema> &ref_1
@@ -1516,7 +1516,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: BodyString
+    name: AutoRestSwaggerBATService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

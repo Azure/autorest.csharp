@@ -3,7 +3,7 @@
     <Compile Include="../../../src/assets/**/*.cs" />
   </ItemGroup>
   <PropertyGroup>
-    <IncludeStyleCopAnalyzers>false</IncludeStyleCopAnalyzers>
+    <IncludeStyleCopAnalyzers>true</IncludeStyleCopAnalyzers>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>CS1591</NoWarn>
   </PropertyGroup>

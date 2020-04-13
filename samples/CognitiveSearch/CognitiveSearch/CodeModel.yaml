@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: 'Client that can be used to query an index and upload, merge, or delete documents.'
-  title: CognitiveSearch
+  title: CognitiveServices
 schemas: !<!Schemas> 
   booleans:
   - !<!BooleanSchema> &ref_9
@@ -22216,7 +22216,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: CognitiveSearch
+    name: CognitiveServices
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}
