@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Schema mapping
-  title: Inheritance
+  title: Schema mapping
 schemas: !<!Schemas> 
   strings:
   - !<!StringSchema> &ref_12
@@ -102,6 +102,8 @@ schemas: !<!Schemas>
                       all:
                       - *ref_1
                       - *ref_2
+                      - *ref_1
+                      - *ref_2
                       immediate:
                       - *ref_1
                       - *ref_2
@@ -118,6 +120,8 @@ schemas: !<!Schemas>
                       version: 1.0.0
                     parents: !<!Relations> 
                       all:
+                      - *ref_1
+                      - *ref_2
                       - *ref_1
                       - *ref_2
                       immediate:
@@ -158,6 +162,8 @@ schemas: !<!Schemas>
                     namespace: ''
                 protocol: !<!Protocols> {}
               - *ref_1
+              - *ref_0
+              - *ref_2
               immediate:
               - *ref_0
               - *ref_2
@@ -249,9 +255,11 @@ schemas: !<!Schemas>
   - *ref_8
   - *ref_3
 operationGroups: []
+security: !<!Security> 
+  authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: Inheritance
+    name: SchemaMapping
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}
