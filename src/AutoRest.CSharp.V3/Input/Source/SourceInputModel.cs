@@ -93,12 +93,12 @@ namespace AutoRest.CSharp.V3.Input.Source
             name = null;
 
             var attribute = symbol.GetAttributes().SingleOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, attributeType));
-            if (attribute == null)
+
+            if (attribute?.ConstructorArguments.Length > 0)
             {
-                return false;
+                name = attribute.ConstructorArguments[0].Value as string;
             }
 
-            name = attribute.ConstructorArguments[0].Value as string;
             return name != null;
         }
 

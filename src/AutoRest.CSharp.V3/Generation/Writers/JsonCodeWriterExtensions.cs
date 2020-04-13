@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Requests;
@@ -59,8 +60,33 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
-                        bool hasNullableType = property.Property != null && property.Property.Declaration.Type.IsNullable;
-                        using (hasNullableType ? writer.Scope($"if ({property.Property!.Declaration.Name} != null)") : default)
+                        bool hasNullableType = property.Property?.Declaration.Type.IsNullable == true;
+                        bool emptyAsUndefined = property.Property?.EmptyAsUndefined == true;
+
+                        CodeWriter.CodeWriterScope? scope = default;
+                        if (hasNullableType || emptyAsUndefined)
+                        {
+                            var propertyName = property.Property!.Declaration.Name;
+                            writer.Append($"if (");
+                            if (hasNullableType)
+                            {
+                                writer.Append($"{propertyName} != null");
+                            }
+
+                            if (emptyAsUndefined)
+                            {
+                                if (hasNullableType)
+                                {
+                                    writer.Append($" && ");
+                                }
+                                writer.UseNamespace(typeof(Enumerable).Namespace!);
+                                writer.Append($"{propertyName}.Any()");
+                            }
+                            writer.Append($")");
+                            scope = writer.Scope();
+                        }
+
+                        using (scope)
                         {
                             writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
                             writer.ToSerializeCall(

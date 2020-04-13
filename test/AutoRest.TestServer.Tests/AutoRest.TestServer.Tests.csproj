@@ -22,6 +22,14 @@
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
     <Compile Include="../TestProjects/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
+    <Compile Update="..\TestProjects\SerializationCustomization\ListInitializationClass.cs">
+      <LinkBase>TestProjects</LinkBase>
+      <Link>TestProjects\SerializationCustomization\InputClass.cs</Link>
+    </Compile>
+    <Compile Update="..\TestProjects\SerializationCustomization\EmptyAsUndefinedTestModel.cs">
+      <LinkBase>TestProjects</LinkBase>
+      <Link>TestProjects\SerializationCustomization\EmptyAsUndefinedTestModel.cs</Link>
+    </Compile>
   </ItemGroup>
 
 </Project>
