@@ -14,7 +14,6 @@ namespace Azure.Core
 
         /// <summary>
         /// For collection properties. When set to true empty collection would be treated as undefined and not serialized.
-        /// On deserialization the collection would always be initialized.
         /// </summary>
         public bool EmptyAsUndefined { get; set; }
 
