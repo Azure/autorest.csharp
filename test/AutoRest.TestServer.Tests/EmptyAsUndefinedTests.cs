@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Text.Json;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using SerializationCustomization.Models;
@@ -33,8 +34,17 @@ namespace AutoRest.TestServer.Tests
         {
             var emptyAsUndefinedModel = new EmptyAsUndefinedTestModel();
             emptyAsUndefinedModel.EmptyAsUndefinedList = new List<Item>() { new Item() };
+            emptyAsUndefinedModel.EmptyAsAlwaysInitializeList.Add(new Item());
 
-            JsonAsserts.AssertSerialization(@"{""EmptyAsUndefinedList"":[{}]}", emptyAsUndefinedModel);
+            JsonAsserts.AssertSerialization(@"{""EmptyAsUndefinedList"":[{}],""EmptyAsAlwaysInitializeList"":[{}]}", emptyAsUndefinedModel);
+        }
+
+        [Test]
+        public void EmptyAsUndefinedListDeserializedWithNull()
+        {
+            var model = EmptyAsUndefinedTestModel.DeserializeEmptyAsUndefinedTestModel(JsonDocument.Parse("{}").RootElement);
+            Assert.IsNull(model.EmptyAsUndefinedList);
+            Assert.IsNotNull(model.EmptyAsAlwaysInitializeList);
         }
     }
 }

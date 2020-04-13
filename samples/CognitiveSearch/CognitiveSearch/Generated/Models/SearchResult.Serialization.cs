@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             double searchScore = default;
             IReadOnlyDictionary<string, IList<string>> searchHighlights = default;
             IReadOnlyDictionary<string, object> additionalProperties = default;
-            Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
+            Dictionary<string, object> additionalPropertiesDictionary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@search.score"))

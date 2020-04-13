@@ -17,7 +17,7 @@ namespace AdditionalPropertiesEx.Models
         {
             int id = default;
             IReadOnlyDictionary<string, string> additionalProperties = default;
-            Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
+            Dictionary<string, string> additionalPropertiesDictionary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))

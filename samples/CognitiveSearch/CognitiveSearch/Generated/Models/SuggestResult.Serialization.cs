@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         {
             string searchText = default;
             IReadOnlyDictionary<string, object> additionalProperties = default;
-            Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
+            Dictionary<string, object> additionalPropertiesDictionary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@search.text"))

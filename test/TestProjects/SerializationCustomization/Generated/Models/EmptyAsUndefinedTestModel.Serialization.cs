@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using Azure.Core;
@@ -26,7 +27,69 @@ namespace SerializationCustomization.Models
                 }
                 writer.WriteEndArray();
             }
+            if (EmptyAsAlwaysInitializeList != null && EmptyAsAlwaysInitializeList.Any())
+            {
+                writer.WritePropertyName("EmptyAsAlwaysInitializeList");
+                writer.WriteStartArray();
+                foreach (var item in EmptyAsAlwaysInitializeList)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
+        }
+
+        internal static EmptyAsUndefinedTestModel DeserializeEmptyAsUndefinedTestModel(JsonElement element)
+        {
+            IList<Item> emptyAsUndefinedList = default;
+            IList<Item> emptyAsAlwaysInitializeList = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("EmptyAsUndefinedList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<Item> array = new List<Item>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Item.DeserializeItem(item));
+                        }
+                    }
+                    emptyAsUndefinedList = array;
+                    continue;
+                }
+                if (property.NameEquals("EmptyAsAlwaysInitializeList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<Item> array = new List<Item>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Item.DeserializeItem(item));
+                        }
+                    }
+                    emptyAsAlwaysInitializeList = array;
+                    continue;
+                }
+            }
+            return new EmptyAsUndefinedTestModel(emptyAsUndefinedList, emptyAsAlwaysInitializeList);
         }
     }
 }

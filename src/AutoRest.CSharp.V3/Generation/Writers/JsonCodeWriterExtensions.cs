@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var objAdditionalProperties = obj.AdditionalProperties;
                 if (objAdditionalProperties != null)
                 {
-                    writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = new {objAdditionalProperties.Type}();");
+                    writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = default;");
                 }
 
                 using (writer.Scope($"foreach (var {itemVariable:D} in {element}.EnumerateObject())"))

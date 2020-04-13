@@ -22,5 +22,23 @@ namespace SerializationCustomization.Models
             }
             writer.WriteEndObject();
         }
+
+        internal static Item DeserializeItem(JsonElement element)
+        {
+            string name = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    name = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Item(name);
+        }
     }
 }

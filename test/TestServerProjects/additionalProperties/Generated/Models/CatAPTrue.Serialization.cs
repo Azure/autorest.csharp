@@ -48,7 +48,7 @@ namespace additionalProperties.Models
             string name = default;
             bool? status = default;
             IDictionary<string, object> additionalProperties = default;
-            Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
+            Dictionary<string, object> additionalPropertiesDictionary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("friendly"))

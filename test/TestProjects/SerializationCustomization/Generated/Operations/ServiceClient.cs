@@ -32,28 +32,28 @@ namespace SerializationCustomization
 
         /// <param name="model"> The AlwaysInitializeTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Operation1Async(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AlwaysInitializeTestModel>> Operation1Async(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
         {
             return await RestClient.Operation1Async(model, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="model"> The AlwaysInitializeTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Operation1(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
+        public virtual Response<AlwaysInitializeTestModel> Operation1(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
         {
             return RestClient.Operation1(model, cancellationToken);
         }
 
         /// <param name="model"> The EmptyAsUndefinedTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Operation2Async(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EmptyAsUndefinedTestModel>> Operation2Async(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
         {
             return await RestClient.Operation2Async(model, cancellationToken).ConfigureAwait(false);
         }
 
         /// <param name="model"> The EmptyAsUndefinedTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Operation2(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
+        public virtual Response<EmptyAsUndefinedTestModel> Operation2(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
         {
             return RestClient.Operation2(model, cancellationToken);
         }

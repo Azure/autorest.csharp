@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using NUnit.Framework;
 using SerializationCustomization.Models;
 
@@ -31,6 +32,19 @@ namespace AutoRest.TestServer.Tests
         public void InitializeWithAddedToSerializationCtor()
         {
             var inputClass = new AlwaysInitializeTestModel(null, null, null, null, null, null, null);
+
+            Assert.IsInstanceOf<Item>(inputClass.AlwaysInitializeObject);
+            Assert.IsInstanceOf<List<Item>>(inputClass.AlwaysInitializeList);
+            Assert.IsInstanceOf<List<Item>>(inputClass.RequiredAlwaysInitializeList);
+            Assert.Null(inputClass.RequiredList);
+            Assert.Null(inputClass.DefaultList);
+            Assert.Null(inputClass.DefaultObject);
+        }
+
+        [Test]
+        public void InitializesMembersWhenDeserializing()
+        {
+            var inputClass = AlwaysInitializeTestModel.DeserializeAlwaysInitializeTestModel(JsonDocument.Parse("{}").RootElement);
 
             Assert.IsInstanceOf<Item>(inputClass.AlwaysInitializeObject);
             Assert.IsInstanceOf<List<Item>>(inputClass.AlwaysInitializeList);

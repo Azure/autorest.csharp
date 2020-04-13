@@ -15,13 +15,16 @@ namespace SerializationCustomization.Models
         /// <summary> Initializes a new instance of EmptyAsUndefinedTestModel. </summary>
         public EmptyAsUndefinedTestModel()
         {
+            EmptyAsAlwaysInitializeList = new List<Item>();
         }
 
         /// <summary> Initializes a new instance of EmptyAsUndefinedTestModel. </summary>
         /// <param name="emptyAsUndefinedList"> . </param>
-        internal EmptyAsUndefinedTestModel(IList<Item> emptyAsUndefinedList)
+        /// <param name="emptyAsAlwaysInitializeList"> . </param>
+        internal EmptyAsUndefinedTestModel(IList<Item> emptyAsUndefinedList, IList<Item> emptyAsAlwaysInitializeList)
         {
             EmptyAsUndefinedList = emptyAsUndefinedList;
+            EmptyAsAlwaysInitializeList = emptyAsAlwaysInitializeList ?? new List<Item>();
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -52,7 +53,7 @@ namespace SerializationCustomization
 
         /// <param name="model"> The AlwaysInitializeTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Operation1Async(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<AlwaysInitializeTestModel>> Operation1Async(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
         {
             if (model == null)
             {
@@ -68,7 +69,19 @@ namespace SerializationCustomization
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                        {
+                            AlwaysInitializeTestModel value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AlwaysInitializeTestModel.DeserializeAlwaysInitializeTestModel(document.RootElement);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
                     default:
                         throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -82,7 +95,7 @@ namespace SerializationCustomization
 
         /// <param name="model"> The AlwaysInitializeTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Operation1(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
+        public Response<AlwaysInitializeTestModel> Operation1(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
         {
             if (model == null)
             {
@@ -98,7 +111,19 @@ namespace SerializationCustomization
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                        {
+                            AlwaysInitializeTestModel value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = AlwaysInitializeTestModel.DeserializeAlwaysInitializeTestModel(document.RootElement);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
                     default:
                         throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -128,7 +153,7 @@ namespace SerializationCustomization
 
         /// <param name="model"> The EmptyAsUndefinedTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Operation2Async(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<EmptyAsUndefinedTestModel>> Operation2Async(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
         {
             if (model == null)
             {
@@ -144,7 +169,19 @@ namespace SerializationCustomization
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                        {
+                            EmptyAsUndefinedTestModel value = default;
+                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EmptyAsUndefinedTestModel.DeserializeEmptyAsUndefinedTestModel(document.RootElement);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
                     default:
                         throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -158,7 +195,7 @@ namespace SerializationCustomization
 
         /// <param name="model"> The EmptyAsUndefinedTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Operation2(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
+        public Response<EmptyAsUndefinedTestModel> Operation2(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
         {
             if (model == null)
             {
@@ -174,7 +211,19 @@ namespace SerializationCustomization
                 switch (message.Response.Status)
                 {
                     case 200:
-                        return message.Response;
+                        {
+                            EmptyAsUndefinedTestModel value = default;
+                            using var document = JsonDocument.Parse(message.Response.ContentStream);
+                            if (document.RootElement.ValueKind == JsonValueKind.Null)
+                            {
+                                value = null;
+                            }
+                            else
+                            {
+                                value = EmptyAsUndefinedTestModel.DeserializeEmptyAsUndefinedTestModel(document.RootElement);
+                            }
+                            return Response.FromValue(value, message.Response);
+                        }
                     default:
                         throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -68,6 +69,128 @@ namespace SerializationCustomization.Models
                 writer.WriteObjectValue(DefaultObject);
             }
             writer.WriteEndObject();
+        }
+
+        internal static AlwaysInitializeTestModel DeserializeAlwaysInitializeTestModel(JsonElement element)
+        {
+            IList<Item> alwaysInitializeList = default;
+            IList<Item> requiredList = default;
+            IList<Item> requiredAlwaysInitializeList = default;
+            IList<Item> defaultList = default;
+            Item requiredAlwaysInitializeObject = default;
+            Item alwaysInitializeObject = default;
+            Item defaultObject = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("AlwaysInitializeList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<Item> array = new List<Item>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Item.DeserializeItem(item));
+                        }
+                    }
+                    alwaysInitializeList = array;
+                    continue;
+                }
+                if (property.NameEquals("RequiredList"))
+                {
+                    List<Item> array = new List<Item>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Item.DeserializeItem(item));
+                        }
+                    }
+                    requiredList = array;
+                    continue;
+                }
+                if (property.NameEquals("RequiredAlwaysInitializeList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<Item> array = new List<Item>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Item.DeserializeItem(item));
+                        }
+                    }
+                    requiredAlwaysInitializeList = array;
+                    continue;
+                }
+                if (property.NameEquals("DefaultList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<Item> array = new List<Item>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(Item.DeserializeItem(item));
+                        }
+                    }
+                    defaultList = array;
+                    continue;
+                }
+                if (property.NameEquals("RequiredAlwaysInitializeObject"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    requiredAlwaysInitializeObject = Item.DeserializeItem(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("AlwaysInitializeObject"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    alwaysInitializeObject = Item.DeserializeItem(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("DefaultObject"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    defaultObject = Item.DeserializeItem(property.Value);
+                    continue;
+                }
+            }
+            return new AlwaysInitializeTestModel(alwaysInitializeList, requiredList, requiredAlwaysInitializeList, defaultList, requiredAlwaysInitializeObject, alwaysInitializeObject, defaultObject);
         }
     }
 }

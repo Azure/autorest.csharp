@@ -30,7 +30,12 @@
           }
         ],
         "responses": {
-          "200": { "description": "" }
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AlwaysInitializeTestModel"
+            }
+          }
         }
       }
     },
@@ -48,7 +53,12 @@
           }
         ],
         "responses": {
-          "200": { "description": "" }
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/EmptyAsUndefinedTestModel"
+            }
+          }
         }
       }
     }
@@ -89,6 +99,10 @@
       "type":  "object",
       "properties": {
         "EmptyAsUndefinedList": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Item" }
+        },
+        "EmptyAsAlwaysInitializeList": {
           "type": "array",
           "items": { "$ref": "#/definitions/Item" }
         }
