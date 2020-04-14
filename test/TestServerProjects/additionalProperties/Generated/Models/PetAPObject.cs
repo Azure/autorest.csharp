@@ -31,7 +31,7 @@ namespace additionalProperties.Models
             Id = id;
             Name = name;
             Status = status;
-            AdditionalProperties = additionalProperties;
+            AdditionalProperties = additionalProperties ?? new Dictionary<string, object>();
         }
 
         public int Id { get; }

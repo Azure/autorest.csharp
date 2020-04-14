@@ -57,7 +57,7 @@ namespace additionalProperties.Models
             string odataLocation = default;
             IDictionary<string, float> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;
-            Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
+            Dictionary<string, string> additionalPropertiesDictionary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -102,6 +102,7 @@ namespace additionalProperties.Models
                     additionalProperties = dictionary;
                     continue;
                 }
+                additionalPropertiesDictionary ??= new Dictionary<string, string>();
                 if (property.Value.ValueKind == JsonValueKind.Null)
                 {
                     additionalPropertiesDictionary.Add(property.Name, null);

@@ -27,7 +27,7 @@ namespace AdditionalPropertiesEx.Models
         internal InputAdditionalPropertiesModel(int id, IDictionary<string, object> additionalProperties)
         {
             Id = id;
-            AdditionalProperties = additionalProperties;
+            AdditionalProperties = additionalProperties ?? new Dictionary<string, object>();
         }
 
         public int Id { get; }

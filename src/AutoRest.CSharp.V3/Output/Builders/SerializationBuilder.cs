@@ -89,8 +89,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 case DictionarySchema dictionarySchema:
                     return new JsonDictionarySerialization(
                         TypeFactory.GetImplementationType(type),
-                        BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type))
-                        );
+                        BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type)));
                 default:
                     return new JsonValueSerialization(
                         type,

@@ -12,7 +12,6 @@ namespace AutoRest.CSharp.V3.Input.Source
 {
     public class ModelTypeMapping: TypeMapping
     {
-        public IMethodSymbol? DefaultConstructor { get; }
         public SourceMemberMapping[] PropertyMappings { get; }
 
         public ModelTypeMapping(INamedTypeSymbol memberAttribute, string originalName, INamedTypeSymbol existingType): base(originalName, existingType)
@@ -27,8 +26,6 @@ namespace AutoRest.CSharp.V3.Input.Source
             }
 
             PropertyMappings = memberMappings.ToArray();
-            // Find a parameterless ctor that's not auto-generated
-            DefaultConstructor = existingType.Constructors.SingleOrDefault(c => !c.IsStatic && c.Parameters.IsEmpty && c.DeclaringSyntaxReferences.Any());
         }
 
         public SourceMemberMapping? GetForMember(string name)

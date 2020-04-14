@@ -48,7 +48,7 @@ namespace additionalProperties.Models
             string name = default;
             bool? status = default;
             IDictionary<string, object> additionalProperties = default;
-            Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
+            Dictionary<string, object> additionalPropertiesDictionary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("friendly"))
@@ -83,6 +83,7 @@ namespace additionalProperties.Models
                     status = property.Value.GetBoolean();
                     continue;
                 }
+                additionalPropertiesDictionary ??= new Dictionary<string, object>();
                 if (property.Value.ValueKind == JsonValueKind.Null)
                 {
                     additionalPropertiesDictionary.Add(property.Name, null);

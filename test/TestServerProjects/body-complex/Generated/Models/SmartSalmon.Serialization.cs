@@ -68,7 +68,7 @@ namespace body_complex.Models
             float length = default;
             IList<Fish> siblings = default;
             IDictionary<string, object> additionalProperties = default;
-            Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
+            Dictionary<string, object> additionalPropertiesDictionary = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("college_degree"))
@@ -138,6 +138,7 @@ namespace body_complex.Models
                     siblings = array;
                     continue;
                 }
+                additionalPropertiesDictionary ??= new Dictionary<string, object>();
                 if (property.Value.ValueKind == JsonValueKind.Null)
                 {
                     additionalPropertiesDictionary.Add(property.Name, null);

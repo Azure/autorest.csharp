@@ -78,9 +78,23 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void DiscriminatorValueIsSetOnObjectSerializationConstruction()
+        {
+            var baseClassWithDiscriminator = new BaseClassWithDiscriminator(null, null);
+            Assert.AreEqual("BaseClassWithDiscriminator", baseClassWithDiscriminator.DiscriminatorProperty);
+        }
+
+        [Test]
         public void DiscriminatorValueIsSetOnSubClassConstruction()
         {
             var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties();
+            Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", baseClassWithDiscriminator.DiscriminatorProperty);
+        }
+
+        [Test]
+        public void DiscriminatorValueIsSetOnSubClassSerializationConstruction()
+        {
+            var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(null, null, null, null);
             Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", baseClassWithDiscriminator.DiscriminatorProperty);
         }
     }

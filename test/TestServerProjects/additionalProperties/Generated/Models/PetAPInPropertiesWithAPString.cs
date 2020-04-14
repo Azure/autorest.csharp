@@ -43,7 +43,7 @@ namespace additionalProperties.Models
             Status = status;
             OdataLocation = odataLocation;
             AdditionalProperties = additionalProperties;
-            MoreAdditionalProperties = moreAdditionalProperties;
+            MoreAdditionalProperties = moreAdditionalProperties ?? new Dictionary<string, string>();
         }
 
         public int Id { get; }

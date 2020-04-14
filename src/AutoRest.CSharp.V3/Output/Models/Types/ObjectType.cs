@@ -11,6 +11,7 @@ using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
+using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Utilities;
@@ -83,7 +84,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember, _typeFactory),
                     string.Empty,
                     true,
-                    null);
+                    null,
+                    TypeFactory.GetImplementationType(ImplementsDictionaryType),
+                    false
+                    );
 
                 return _additionalPropertiesProperty;
             }
@@ -120,19 +124,42 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     false
                 );
 
-                serializationConstructorParameters.Add(deserializationParameter);
-
-                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter));
-
-                // Only required properties that are not discriminators go into default ctor
+                bool isDiscriminatorProperty = false;
+                ReferenceOrConstant? fallbackValue = null;
                 if (property == Discriminator?.Property)
                 {
+                    isDiscriminatorProperty = true;
                     ownsDiscriminatorProperty = true;
+                    if (Discriminator.Value != null)
+                    {
+                        fallbackValue = BuilderHelpers.StringConstant(Discriminator.Value);
+                    }
+                }
+                else
+                {
+                    var initializeWithType = property.InitializeWithType;
+                    fallbackValue = initializeWithType != null ?
+                        Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+                }
+
+                serializationConstructorParameters.Add(deserializationParameter);
+
+                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, fallbackValue));
+
+                // Only required properties that are not discriminators go into default ctor
+                if (isDiscriminatorProperty)
+                {
                     continue;
                 }
+
                 // For structs all properties become required
                 if (!IsStruct && property.SchemaProperty?.Required != true)
                 {
+                    // Initialize properties even if they are not required
+                    if (fallbackValue != null)
+                    {
+                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, fallbackValue.Value));
+                    }
                     continue;
                 }
 
@@ -174,22 +201,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 // Add discriminator initializer to constructor at every level of hierarchy
                 if (!ownsDiscriminatorProperty &&
-                    baseSerializationCtor != null
-                    )
+                    baseSerializationCtor != null)
                 {
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
 
-                    initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter));
+                    initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, BuilderHelpers.StringConstant(Discriminator.Value)));
                 }
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
-            }
-
-            // In structs additional properties would become required and get initialized from parameter
-            if (AdditionalPropertiesProperty != null && !IsStruct)
-            {
-                var implType = new CSharpType(typeof(Dictionary<,>), AdditionalPropertiesProperty.Declaration.Type.Arguments);
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(implType)));
             }
 
             yield return new ObjectTypeConstructor(
@@ -198,7 +217,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     Type,
                     // inputs have public ctor by default
                     _objectSchema.IsInput ? "public" : "internal",
-                    _sourceTypeMapping?.DefaultConstructor,
+                    null,
                     _typeFactory),
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
@@ -344,7 +363,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 foreach (Property property in objectSchema.Properties!)
                 {
                     var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-                               SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+                    SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
                     bool isReadOnly =
                         IsStruct ||
                         property.IsDiscriminator != true &&
@@ -363,13 +382,16 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                     var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
+                    CSharpType? initializeWithType = memberMapping?.Initialize == true ? TypeFactory.GetImplementationType(type) : null;
+
                     yield return new ObjectTypeProperty(
                         BuilderHelpers.CreateMemberDeclaration(name, type, accessibility, memberMapping?.ExistingMember, _typeFactory),
                         BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                         isReadOnly,
-                        property);
+                        property,
+                        initializeWithType,
+                        memberMapping?.EmptyAsUndefined ?? false);
                 }
-
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
