@@ -1137,6 +1137,27 @@ schemas: !<!Schemas>
         name: ApplicationJson
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
+  - !<!ConstantSchema> &ref_122
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/pdf
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationPdf
+        description: Content Type 'application/pdf'
+    protocol: !<!Protocols> {}
+  binaries:
+  - !<!BinarySchema> &ref_123
+    type: binary
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: binary
+        description: ''
+    protocol: !<!Protocols> {}
   objects:
   - !<!ObjectSchema> &ref_1
     type: object
@@ -2220,6 +2241,114 @@ operationGroups:
       default:
         name: Operation
         description: ''
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_112
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_122
+        implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Upload file type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_124
+        schema: *ref_123
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: stringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: binary
+      signatureParameters:
+      - *ref_124
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpBinaryRequest> 
+          path: /conflictingLROOverloads
+          method: post
+          binary: true
+          knownMediaType: binary
+          mediaTypes:
+          - application/pdf
+          uri: '{$host}'
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_114
+        implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_125
+        schema: *ref_113
+        implementation: Method
+        required: false
+        language: !<!Languages> 
+          default:
+            name: stringBody
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_125
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /conflictingLROOverloads
+          method: post
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    extensions:
+      x-ms-long-running-operation: true
+    language: !<!Languages> 
+      default:
+        name: AnalyzeBody
+        description: 'Analyze body, that could be different media types.'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:

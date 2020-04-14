@@ -201,12 +201,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             .WriteReferenceOrConstant(initializer.Value)
                             .WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type);
 
-                        // Check if the parameter is for discriminator and apply a default
-                        if (initializer.Property == schema.Discriminator?.Property &&
-                            !initializer.Value.IsConstant &&
+                        if (initializer.DefaultValue != null &&
                             !initializer.Value.Type.IsValueType)
                         {
-                            writer.Append($"?? {schema.Discriminator.Value:L}");
+                            writer.Append($"?? ").WriteReferenceOrConstant(initializer.DefaultValue.Value);
                         }
 
                         writer.Line($";");

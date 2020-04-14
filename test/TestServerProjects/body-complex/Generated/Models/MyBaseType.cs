@@ -22,7 +22,7 @@ namespace body_complex.Models
         /// <param name="propBH1"> . </param>
         internal MyBaseType(string kind, string propB1, string propBH1)
         {
-            Kind = kind ?? null;
+            Kind = kind;
             PropB1 = propB1;
             PropBH1 = propBH1;
         }

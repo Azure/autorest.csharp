@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -10,6 +11,7 @@ using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
+using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Utilities;
@@ -82,7 +84,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember, _typeFactory),
                     string.Empty,
                     true,
-                    null);
+                    null,
+                    TypeFactory.GetImplementationType(ImplementsDictionaryType),
+                    false
+                    );
 
                 return _additionalPropertiesProperty;
             }
@@ -108,6 +113,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
             }
 
+            bool ownsDiscriminatorProperty = false;
             foreach (var property in Properties)
             {
                 var deserializationParameter = new Parameter(
@@ -118,14 +124,42 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     false
                 );
 
+                bool isDiscriminatorProperty = false;
+                ReferenceOrConstant? fallbackValue = null;
+                if (property == Discriminator?.Property)
+                {
+                    isDiscriminatorProperty = true;
+                    ownsDiscriminatorProperty = true;
+                    if (Discriminator.Value != null)
+                    {
+                        fallbackValue = BuilderHelpers.StringConstant(Discriminator.Value);
+                    }
+                }
+                else
+                {
+                    var initializeWithType = property.InitializeWithType;
+                    fallbackValue = initializeWithType != null ?
+                        Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+                }
+
                 serializationConstructorParameters.Add(deserializationParameter);
-                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter));
+
+                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, fallbackValue));
 
                 // Only required properties that are not discriminators go into default ctor
-                // For structs all properties become required
-                if ((!IsStruct && property.SchemaProperty?.Required != true) ||
-                    property == Discriminator?.Property)
+                if (isDiscriminatorProperty)
                 {
+                    continue;
+                }
+
+                // For structs all properties become required
+                if (!IsStruct && property.SchemaProperty?.Required != true)
+                {
+                    // Initialize properties even if they are not required
+                    if (fallbackValue != null)
+                    {
+                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, fallbackValue.Value));
+                    }
                     continue;
                 }
 
@@ -166,21 +200,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             if (Discriminator != null)
             {
                 // Add discriminator initializer to constructor at every level of hierarchy
-                if (baseSerializationCtor != null)
+                if (!ownsDiscriminatorProperty &&
+                    baseSerializationCtor != null)
                 {
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
 
-                    initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter));
+                    initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, BuilderHelpers.StringConstant(Discriminator.Value)));
                 }
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
-            }
-
-            // In structs additional properties would become required and get initialized from parameter
-            if (AdditionalPropertiesProperty != null && !IsStruct)
-            {
-                var implType = new CSharpType(typeof(Dictionary<,>), AdditionalPropertiesProperty.Declaration.Type.Arguments);
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(implType)));
             }
 
             yield return new ObjectTypeConstructor(
@@ -189,7 +217,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     Type,
                     // inputs have public ctor by default
                     _objectSchema.IsInput ? "public" : "internal",
-                    _sourceTypeMapping?.DefaultConstructor,
+                    null,
                     _typeFactory),
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
@@ -330,33 +358,40 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            foreach (Property property in _objectSchema.Properties!)
+            foreach (var objectSchema in GetCombinedSchemas())
             {
-                var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
-                bool isReadOnly =
-                    IsStruct ||
-                    property.IsDiscriminator != true &&
-                    (property.ReadOnly == true ||
-                     property.Required == true ||
-                     !_objectSchema.IsInput);
-
-                CSharpType type = _typeFactory.CreateType(
-                    property.Schema,
-                    property.IsNullable());
-
-                if (!_objectSchema.IsInput)
+                foreach (Property property in objectSchema.Properties!)
                 {
-                    type = TypeFactory.GetOutputType(type);
+                    var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
+                    SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+                    bool isReadOnly =
+                        IsStruct ||
+                        property.IsDiscriminator != true &&
+                        (property.ReadOnly == true ||
+                         property.Required == true ||
+                         !_objectSchema.IsInput);
+
+                    CSharpType type = _typeFactory.CreateType(
+                        property.Schema,
+                        property.IsNullable());
+
+                    if (!_objectSchema.IsInput)
+                    {
+                        type = TypeFactory.GetOutputType(type);
+                    }
+
+                    var accessibility = property.IsDiscriminator == true ? "internal" : "public";
+
+                    CSharpType? initializeWithType = memberMapping?.Initialize == true ? TypeFactory.GetImplementationType(type) : null;
+
+                    yield return new ObjectTypeProperty(
+                        BuilderHelpers.CreateMemberDeclaration(name, type, accessibility, memberMapping?.ExistingMember, _typeFactory),
+                        BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
+                        isReadOnly,
+                        property,
+                        initializeWithType,
+                        memberMapping?.EmptyAsUndefined ?? false);
                 }
-
-                var accessibility = property.IsDiscriminator == true ? "internal" : "public";
-
-                yield return new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration(name, type, accessibility, memberMapping?.ExistingMember, _typeFactory),
-                    BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
-                    isReadOnly,
-                    property);
             }
 
             if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
@@ -365,19 +400,75 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             }
         }
 
+        // Enumerates all schemas that were merged into this one, excludes the inherited schema
+        private IEnumerable<ObjectSchema> GetCombinedSchemas()
+        {
+            var inherited = EnumerateHierarchy().Select(type => type.Schema).ToHashSet();
+
+            yield return _objectSchema;
+
+            foreach (var parent in _objectSchema.Parents!.All)
+            {
+                if (parent is ObjectSchema objectParent && !inherited.Contains(objectParent))
+                {
+                    // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/257
+                    inherited.Add(parent);
+                    yield return objectParent;
+                }
+            }
+        }
 
         private CSharpType? CreateInheritedType()
         {
-            foreach (ComplexSchema complexSchema in _objectSchema.Parents!.Immediate)
+            var sourceBaseType = _sourceTypeMapping?.ExistingType?.BaseType;
+            if (sourceBaseType != null &&
+                sourceBaseType.SpecialType != SpecialType.System_ValueType &&
+                sourceBaseType.SpecialType != SpecialType.System_Object &&
+                _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
             {
-                if (complexSchema is ObjectSchema parentObjectSchema)
+                return baseType;
+            }
+
+            var objectSchemas = _objectSchema.Parents!.Immediate.OfType<ObjectSchema>().ToArray();
+
+            ObjectSchema? selectedSchema = null;
+
+            foreach (var objectSchema in objectSchemas)
+            {
+                bool skip = false;
+
+                // Filter transitive schemas
+                // https://github.com/Azure/autorest.modelerfour/issues/258
+                foreach (var otherSchema in objectSchemas)
                 {
-                    CSharpType type = _typeFactory.CreateType(parentObjectSchema, false);
-                    Debug.Assert(!type.IsFrameworkType);
-                    return type;
+                    if (otherSchema.Parents!.All.Contains(objectSchema))
+                    {
+                        skip = true;
+                        break;
+                    }
+                }
+
+                if (skip)
+                {
+                    continue;
+                }
+
+                // Take first schema or the one with discriminator
+                selectedSchema ??= objectSchema;
+
+                if (objectSchema.Discriminator != null)
+                {
+                    selectedSchema = objectSchema;
+                    break;
                 }
             }
 
+            if (selectedSchema != null)
+            {
+                CSharpType type = _typeFactory.CreateType(selectedSchema, false);
+                Debug.Assert(!type.IsFrameworkType);
+                return type;
+            }
             return null;
         }
 

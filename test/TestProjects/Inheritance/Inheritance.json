@@ -1,0 +1,96 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Schema mapping",
+    "description": "Schema mapping",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "BaseClass": {
+      "type": "object",
+      "properties": {
+        "BaseClassProperty": { "type": "string" }
+      }
+    },
+    "BaseClassWithDiscriminator": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClass"
+        }
+      ],
+      "properties": {
+        "DiscriminatorProperty": { "type": "string" }
+      },
+      "discriminator": "DiscriminatorProperty",
+      "required": ["DiscriminatorProperty"]
+    },
+    "SomeProperties": {
+      "type": "object",
+      "properties": {
+        "SomeProperty": { "type": "string" },
+        "SomeOtherProperty": { "type": "string" }
+      }
+    },
+    "ClassThatInheritsFromBaseClassAndSomeProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClass"
+        },
+        {
+          "$ref": "#/definitions/SomeProperties"
+        }
+      ]
+    },
+    "ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClass"
+        },
+        {
+          "$ref": "#/definitions/SomeProperties"
+        }
+      ]
+    },
+    "ClassThatInheritsFromBaseClass": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClass"
+        }
+      ]
+    },
+    "ClassThatInheritsFromBaseClassWithDiscriminator": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClassWithDiscriminator"
+        }
+      ]
+    },
+    "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClassWithDiscriminator"
+        },
+        {
+          "$ref": "#/definitions/SomeProperties"
+        }
+      ]
+    }
+  }
+}

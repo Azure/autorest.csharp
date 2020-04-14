@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,9 +58,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         WritePagingOperation(writer, pagingMethod, false);
                     }
 
+                    // We only need one CreateOperation method per overload group
+                    HashSet<string> createOperations = new HashSet<string>();
                     foreach (var longRunningOperation in client.LongRunningOperationMethods)
                     {
-                        WriteCreateOperationOperation(writer, longRunningOperation);
+                        if (createOperations.Add(longRunningOperation.Name))
+                        {
+                            WriteCreateOperationOperation(writer, longRunningOperation);
+                        }
+
                         WriteStartOperationOperation(writer, longRunningOperation, true);
                         WriteStartOperationOperation(writer, longRunningOperation, false);
                     }

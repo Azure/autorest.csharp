@@ -89,8 +89,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 case DictionarySchema dictionarySchema:
                     return new JsonDictionarySerialization(
                         TypeFactory.GetImplementationType(type),
-                        BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type))
-                        );
+                        BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type)));
                 default:
                     return new JsonValueSerialization(
                         type,
@@ -216,7 +215,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
         private static IEnumerable<ObjectSchema> EnumerateHierarchy(ObjectSchema schema)
         {
             yield return schema;
-            foreach (ComplexSchema parent in schema.Parents!.All)
+            // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/257
+            foreach (ComplexSchema parent in schema.Parents!.All.Distinct())
             {
                 if (parent is ObjectSchema objectSchema)
                 {

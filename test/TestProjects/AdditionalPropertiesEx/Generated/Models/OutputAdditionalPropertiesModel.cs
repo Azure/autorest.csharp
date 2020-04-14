@@ -27,7 +27,7 @@ namespace AdditionalPropertiesEx.Models
         internal OutputAdditionalPropertiesModel(int id, IReadOnlyDictionary<string, string> additionalProperties)
         {
             Id = id;
-            AdditionalProperties = additionalProperties;
+            AdditionalProperties = additionalProperties ?? new Dictionary<string, string>();
         }
 
         public int Id { get; }
