@@ -253,7 +253,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            headers.Add(new RequestHeader(serializedName, constantOrReference, serializationFormat));
+                            headers.Add(new RequestHeader(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), serializationFormat));
                             break;
                         case ParameterLocation.Query:
                             query.Add(new QueryParameter(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), !skipEncoding, serializationFormat));
@@ -558,21 +558,22 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 );
         }
 
-        private static QuerySerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
+        private static RequestParameterSerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
         {
-            Debug.Assert(httpParameter.In == ParameterLocation.Query);
+            Debug.Assert(httpParameter.In == ParameterLocation.Query || httpParameter.In == ParameterLocation.Header);
 
             switch (httpParameter.Style)
             {
                 case null:
                 case SerializationStyle.Form:
-                    return valueSchema is ArraySchema ? QuerySerializationStyle.CommaDelimited : QuerySerializationStyle.Simple;
+                case SerializationStyle.Simple:
+                    return valueSchema is ArraySchema ? RequestParameterSerializationStyle.CommaDelimited : RequestParameterSerializationStyle.Simple;
                 case SerializationStyle.PipeDelimited:
-                    return QuerySerializationStyle.PipeDelimited;
+                    return RequestParameterSerializationStyle.PipeDelimited;
                 case SerializationStyle.SpaceDelimited:
-                    return QuerySerializationStyle.SpaceDelimited;
+                    return RequestParameterSerializationStyle.SpaceDelimited;
                 case SerializationStyle.TabDelimited:
-                    return QuerySerializationStyle.TabDelimited;
+                    return RequestParameterSerializationStyle.TabDelimited;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

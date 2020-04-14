@@ -352,12 +352,30 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($", {segment.Escape:L});");
         }
 
+        private string? GetSerializationStyleDelimiter(RequestParameterSerializationStyle style) => style switch
+        {
+            RequestParameterSerializationStyle.PipeDelimited => "|",
+            RequestParameterSerializationStyle.TabDelimited => "\t",
+            RequestParameterSerializationStyle.SpaceDelimited => " ",
+            RequestParameterSerializationStyle.CommaDelimited => ",",
+            _ => null
+        };
+
         private void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header)
         {
+            string? delimiter = GetSerializationStyleDelimiter(header.SerializationStyle);
+            string method = delimiter != null
+                ? nameof(RequestHeaderExtensions.AddDelimited)
+                : nameof(RequestHeaderExtensions.Add);
+
             using (WriteValueNullCheck(writer, header.Value))
             {
-                writer.Append($"{request}.Headers.Add({header.Name:L}, ");
+                writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
                 WriteConstantOrParameter(writer, header.Value, enumAsString: true);
+                if (delimiter != null)
+                {
+                    writer.Append($", {delimiter:L}");
+                }
                 WriteSerializationFormat(writer, header.Format);
                 writer.Line($");");
             }
@@ -412,30 +430,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter)
         {
-            string method;
-            string? delimiter = null;
-            switch (queryParameter.SerializationStyle)
-            {
-                case QuerySerializationStyle.PipeDelimited:
-                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = "|";
-                    break;
-                case QuerySerializationStyle.TabDelimited:
-                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = "\t";
-                    break;
-                case QuerySerializationStyle.SpaceDelimited:
-                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = " ";
-                    break;
-                case QuerySerializationStyle.CommaDelimited:
-                    method = nameof(RequestUriBuilderExtensions.AppendQueryDelimited);
-                    delimiter = ",";
-                    break;
-                default:
-                    method = nameof(RequestUriBuilderExtensions.AppendQuery);
-                    break;
-            }
+            string? delimiter = GetSerializationStyleDelimiter(queryParameter.SerializationStyle);
+            string method = delimiter != null
+                ? nameof(RequestUriBuilderExtensions.AppendQueryDelimited)
+                : nameof(RequestUriBuilderExtensions.AppendQuery);
 
             ReferenceOrConstant value = queryParameter.Value;
             using (WriteValueNullCheck(writer, value))
