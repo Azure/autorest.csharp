@@ -124,27 +124,41 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     false
                 );
 
-                var initializeWithType = property.InitializeWithType;
-                var fallback = initializeWithType != null ?
-                    Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+                bool isDiscriminatorProperty = false;
+                ReferenceOrConstant? fallbackValue = null;
+                if (property == Discriminator?.Property)
+                {
+                    isDiscriminatorProperty = true;
+                    ownsDiscriminatorProperty = true;
+                    if (Discriminator.Value != null)
+                    {
+                        fallbackValue = BuilderHelpers.StringConstant(Discriminator.Value);
+                    }
+                }
+                else
+                {
+                    var initializeWithType = property.InitializeWithType;
+                    fallbackValue = initializeWithType != null ?
+                        Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+                }
 
                 serializationConstructorParameters.Add(deserializationParameter);
 
-                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, fallback));
-
-                bool isDiscriminatorProperty = property == Discriminator?.Property;
-
-                ownsDiscriminatorProperty |= isDiscriminatorProperty;
+                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, fallbackValue));
 
                 // Only required properties that are not discriminators go into default ctor
+                if (isDiscriminatorProperty)
+                {
+                    continue;
+                }
+
                 // For structs all properties become required
-                if (isDiscriminatorProperty ||
-                    !IsStruct && property.SchemaProperty?.Required != true)
+                if (!IsStruct && property.SchemaProperty?.Required != true)
                 {
                     // Initialize properties even if they are not required
-                    if (fallback != null)
+                    if (fallbackValue != null)
                     {
-                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, fallback.Value));
+                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, fallbackValue.Value));
                     }
                     continue;
                 }

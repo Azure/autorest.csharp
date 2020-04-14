@@ -21,7 +21,7 @@ namespace Inheritance.Models
         /// <param name="discriminatorProperty"> . </param>
         internal BaseClassWithDiscriminator(string baseClassProperty, string discriminatorProperty) : base(baseClassProperty)
         {
-            DiscriminatorProperty = discriminatorProperty;
+            DiscriminatorProperty = discriminatorProperty ?? "BaseClassWithDiscriminator";
         }
 
         internal string DiscriminatorProperty { get; set; }
