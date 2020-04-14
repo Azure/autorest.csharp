@@ -358,10 +358,24 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private IEnumerable<ObjectTypeProperty> BuildProperties()
         {
+            // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
+            var existingProperties = EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type._objectSchema.Properties)
+                .Select(p => p.Language.Default.Name)
+                .ToHashSet();
+
             foreach (var objectSchema in GetCombinedSchemas())
             {
                 foreach (Property property in objectSchema.Properties!)
                 {
+                    if (existingProperties.Contains(property.Language.Default.Name))
+                    {
+                        Console.WriteLine($"Skipping {property.Language.Default.Name}");
+                        // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
+                        continue;
+                    }
+
                     var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
                     SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
                     bool isReadOnly =

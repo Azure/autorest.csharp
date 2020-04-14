@@ -97,7 +97,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a34
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/monitor/data-plane/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/msi/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/netapp/resource-manager/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/network/resource-manager/readme.md
+https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/network/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/notificationhubs/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/operationalinsights/data-plane/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/peering/resource-manager/readme.md
