@@ -105,29 +105,12 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateAnalyzeBody0(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.AnalyzeBody", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Response>> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
-            return CreateAnalyzeBody0(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -136,7 +119,7 @@ namespace NameConflicts
         public virtual Operation<Response> StartAnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
-            return CreateAnalyzeBody0(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
         }
     }
 }
