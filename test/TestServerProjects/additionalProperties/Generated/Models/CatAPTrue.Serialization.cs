@@ -83,6 +83,7 @@ namespace additionalProperties.Models
                     status = property.Value.GetBoolean();
                     continue;
                 }
+                additionalPropertiesDictionary ??= new Dictionary<string, object>();
                 if (property.Value.ValueKind == JsonValueKind.Null)
                 {
                     additionalPropertiesDictionary.Add(property.Name, null);

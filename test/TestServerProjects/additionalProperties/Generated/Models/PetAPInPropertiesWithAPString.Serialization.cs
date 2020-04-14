@@ -102,6 +102,7 @@ namespace additionalProperties.Models
                     additionalProperties = dictionary;
                     continue;
                 }
+                additionalPropertiesDictionary ??= new Dictionary<string, string>();
                 if (property.Value.ValueKind == JsonValueKind.Null)
                 {
                     additionalPropertiesDictionary.Add(property.Name, null);

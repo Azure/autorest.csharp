@@ -29,6 +29,7 @@ namespace CognitiveSearch.Models
                     count = property.Value.GetInt64();
                     continue;
                 }
+                additionalPropertiesDictionary ??= new Dictionary<string, object>();
                 if (property.Value.ValueKind == JsonValueKind.Null)
                 {
                     additionalPropertiesDictionary.Add(property.Name, null);

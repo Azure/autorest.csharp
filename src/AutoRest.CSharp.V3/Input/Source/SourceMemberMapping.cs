@@ -18,15 +18,14 @@ namespace AutoRest.CSharp.V3.Input.Source
                 {
                     foreach (var namedArgument in attributeData.NamedArguments)
                     {
-                        if (namedArgument.Key == nameof(CodeGenMemberAttribute.InitializeWith))
+                        switch (namedArgument.Key)
                         {
-                            InitializeWithType = (ITypeSymbol?) namedArgument.Value.Value;
-                            continue;
-                        }
-
-                        if (namedArgument.Key == nameof(CodeGenMemberAttribute.EmptyAsUndefined))
-                        {
-                            EmptyAsUndefined = (bool) (namedArgument.Value.Value ?? false);
+                            case nameof(CodeGenMemberAttribute.Initialize):
+                                Initialize = (bool) (namedArgument.Value.Value ?? false);
+                                continue;
+                            case nameof(CodeGenMemberAttribute.EmptyAsUndefined):
+                                EmptyAsUndefined = (bool) (namedArgument.Value.Value ?? false);
+                                break;
                         }
                     }
                 }
@@ -38,7 +37,7 @@ namespace AutoRest.CSharp.V3.Input.Source
 
         public string OriginalName { get; }
         public ISymbol ExistingMember { get; }
-        public ITypeSymbol? InitializeWithType { get; }
+        public bool Initialize { get; }
         public bool EmptyAsUndefined { get; }
     }
 }

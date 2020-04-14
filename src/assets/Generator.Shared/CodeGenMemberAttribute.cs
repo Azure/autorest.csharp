@@ -21,7 +21,7 @@ namespace Azure.Core
         /// For collection and model properties. Whether the property would always be initialized on creation/deserialization.
         /// Requires a parameterless constructor for implementation type.
         /// </summary>
-        public Type? InitializeWith { get; set; }
+        public bool Initialize { get; set; }
 
         public CodeGenMemberAttribute()
         {

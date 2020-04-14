@@ -382,8 +382,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                     var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
-                    var initializeWithTypeSymbol = memberMapping?.InitializeWithType;
-                    CSharpType? initializeWithType = initializeWithTypeSymbol != null ? _typeFactory.CreateType(initializeWithTypeSymbol) : null;
+                    CSharpType? initializeWithType = memberMapping?.Initialize == true ? TypeFactory.GetImplementationType(type) : null;
 
                     yield return new ObjectTypeProperty(
                         BuilderHelpers.CreateMemberDeclaration(name, type, accessibility, memberMapping?.ExistingMember, _typeFactory),

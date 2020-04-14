@@ -8,16 +8,16 @@ namespace SerializationCustomization.Models
 {
     public partial class AlwaysInitializeTestModel
     {
-        [CodeGenMember(InitializeWith = typeof(List<Item>))]
+        [CodeGenMember(Initialize = true)]
         public IList<Item> AlwaysInitializeList { get; }
 
-        [CodeGenMember(InitializeWith = typeof(List<Item>))]
+        [CodeGenMember(Initialize = true)]
         public IList<Item> RequiredAlwaysInitializeList { get; }
 
-        [CodeGenMember(InitializeWith = typeof(Item))]
+        [CodeGenMember(Initialize = true)]
         public Item RequiredAlwaysInitializeObject { get; }
 
-        [CodeGenMember(InitializeWith = typeof(Item))]
+        [CodeGenMember(Initialize = true)]
         public Item AlwaysInitializeObject { get; }
     }
 }

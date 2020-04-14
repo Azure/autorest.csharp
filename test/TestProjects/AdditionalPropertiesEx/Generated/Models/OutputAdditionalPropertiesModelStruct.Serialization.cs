@@ -25,6 +25,7 @@ namespace AdditionalPropertiesEx.Models
                     id = property.Value.GetInt32();
                     continue;
                 }
+                additionalPropertiesDictionary ??= new Dictionary<string, string>();
                 if (property.Value.ValueKind == JsonValueKind.Null)
                 {
                     additionalPropertiesDictionary.Add(property.Name, null);

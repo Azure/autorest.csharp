@@ -25,6 +25,7 @@ namespace CognitiveSearch.Models
                     searchText = property.Value.GetString();
                     continue;
                 }
+                additionalPropertiesDictionary ??= new Dictionary<string, object>();
                 if (property.Value.ValueKind == JsonValueKind.Null)
                 {
                     additionalPropertiesDictionary.Add(property.Name, null);
