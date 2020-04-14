@@ -78,25 +78,53 @@ namespace AutoRest.TestServer.Tests
         public Task AzureRequestClientIdInError() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
 
         [Test]
-        public Task AzureSubscriptionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureSubscriptionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = "1234-5678-9012-3456";
+            return await new SubscriptionInCredentialsClient(ClientDiagnostics, pipeline, value, host).RestClient.PostMethodGlobalNotProvidedValidAsync();
+        });
 
         [Test]
-        public Task AzureSubscriptionMethodGlobalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureSubscriptionMethodGlobalValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = "1234-5678-9012-3456";
+            return await new SubscriptionInCredentialsClient(ClientDiagnostics, pipeline, value, host).RestClient.PostMethodGlobalValidAsync();
+        });
 
         [Test]
-        public Task AzureSubscriptionMethodLocalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureSubscriptionMethodLocalValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = "1234-5678-9012-3456";
+            return await new SubscriptionInMethodClient(ClientDiagnostics, pipeline, host).RestClient.PostMethodLocalValidAsync(value);
+        });
 
         [Test]
-        public Task AzureSubscriptionPathGlobalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureSubscriptionPathGlobalValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = "1234-5678-9012-3456";
+            return await new SubscriptionInCredentialsClient(ClientDiagnostics, pipeline, value, host).RestClient.PostPathGlobalValidAsync();
+        });
 
         [Test]
-        public Task AzureSubscriptionPathLocalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureSubscriptionPathLocalValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = "1234-5678-9012-3456";
+            return await new SubscriptionInMethodClient(ClientDiagnostics, pipeline, host).RestClient.PostPathLocalValidAsync(value);
+        });
 
         [Test]
-        public Task AzureSubscriptionSwaggerGlobalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureSubscriptionSwaggerGlobalValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = "1234-5678-9012-3456";
+            return await new SubscriptionInCredentialsClient(ClientDiagnostics, pipeline, value, host).RestClient.PostSwaggerGlobalValidAsync();
+        });
 
         [Test]
-        public Task AzureSubscriptionSwaggerLocalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureSubscriptionSwaggerLocalValid() => TestStatus(async (host, pipeline) =>
+        {
+            var value = "1234-5678-9012-3456";
+            return await new SubscriptionInMethodClient(ClientDiagnostics, pipeline, host).RestClient.PostSwaggerLocalValidAsync(value);
+        });
 
         [Test]
         public Task AzureSwaggerPathUrlEncoding() => TestStatus(async (host, pipeline) => await new SkipUrlEncodingClient(ClientDiagnostics, pipeline, host).RestClient.GetSwaggerPathValidAsync());
