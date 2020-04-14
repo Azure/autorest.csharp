@@ -14,12 +14,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 #pragma warning disable RS1024
     internal class MemberRemoverRewriter : CSharpSyntaxRewriter
     {
+        private readonly Project _project;
         private readonly SemanticModel _semanticModel;
         private readonly Dictionary<INamedTypeSymbol, List<Supression>> _suppressionCache;
         private readonly INamedTypeSymbol _suppressAttribute;
 
-        public MemberRemoverRewriter(SemanticModel semanticModel)
+        public MemberRemoverRewriter(Project project, SemanticModel semanticModel)
         {
+            _project = project;
             _semanticModel = semanticModel;
             _suppressionCache = new Dictionary<INamedTypeSymbol, List<Supression>>();
             _suppressAttribute = semanticModel.Compilation.GetTypeByMetadataName(typeof(CodeGenSuppressAttribute).FullName!)!;
@@ -103,7 +105,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     foreach (var member in members)
                     {
                         if (!member.Equals(symbol) &&
-                            member.DeclaringSyntaxReferences.Any())
+                            IsDeclaredInNonGeneratedCode(member))
                         {
                             if (methodSymbol != null &&
                                 member is IMethodSymbol memberMethodSymbol &&
@@ -128,6 +130,28 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
 
             return false;
+        }
+
+        private bool IsDeclaredInNonGeneratedCode(ISymbol member)
+        {
+            var references = member.DeclaringSyntaxReferences;
+
+            if (references.Length == 0)
+            {
+                return false;
+            }
+
+            foreach (var reference in references)
+            {
+                Document? document = _project.GetDocument(reference.SyntaxTree);
+
+                if (document != null && GeneratedCodeWorkspace.IsGeneratedDocument(document))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private readonly struct Supression

@@ -74,6 +74,31 @@
           }
         }
       }
+    },
+    "/conflictingLROOverloads": {
+      "post": {
+        "x-ms-long-running-operation": true,
+        "description": "Analyze body, that could be different media types.",
+        "operationId": "AnalyzeBody",
+        "consumes": [
+          "application/pdf",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "stringBody",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
     }
   },
   "definitions": {
