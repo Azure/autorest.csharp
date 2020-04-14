@@ -233,23 +233,6 @@ namespace Azure.AI.FormRecognizer
         }
 
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateAnalyzeWithCustomModel0(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.AnalyzeWithCustomModel", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
@@ -257,7 +240,7 @@ namespace Azure.AI.FormRecognizer
         public virtual async ValueTask<Operation<Response>> StartAnalyzeWithCustomModelAsync(Guid modelId, bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = await RestClient.AnalyzeWithCustomModelAsync(modelId, includeTextDetails, fileStream, cancellationToken).ConfigureAwait(false);
-            return CreateAnalyzeWithCustomModel0(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream));
+            return CreateAnalyzeWithCustomModel(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream));
         }
 
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
@@ -268,7 +251,7 @@ namespace Azure.AI.FormRecognizer
         public virtual Operation<Response> StartAnalyzeWithCustomModel(Guid modelId, bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = RestClient.AnalyzeWithCustomModel(modelId, includeTextDetails, fileStream, cancellationToken);
-            return CreateAnalyzeWithCustomModel0(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream));
+            return CreateAnalyzeWithCustomModel(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream));
         }
 
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
@@ -321,30 +304,13 @@ namespace Azure.AI.FormRecognizer
         }
 
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateAnalyzeReceiptAsync0(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.AnalyzeReceiptAsync", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Response>> StartAnalyzeReceiptAsyncAsync(bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = await RestClient.AnalyzeReceiptAsyncAsync(includeTextDetails, fileStream, cancellationToken).ConfigureAwait(false);
-            return CreateAnalyzeReceiptAsync0(originalResponse, () => RestClient.CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream));
+            return CreateAnalyzeReceiptAsync(originalResponse, () => RestClient.CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream));
         }
 
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
@@ -354,7 +320,7 @@ namespace Azure.AI.FormRecognizer
         public virtual Operation<Response> StartAnalyzeReceiptAsync(bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = RestClient.AnalyzeReceiptAsync(includeTextDetails, fileStream, cancellationToken);
-            return CreateAnalyzeReceiptAsync0(originalResponse, () => RestClient.CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream));
+            return CreateAnalyzeReceiptAsync(originalResponse, () => RestClient.CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream));
         }
 
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
@@ -405,29 +371,12 @@ namespace Azure.AI.FormRecognizer
         }
 
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateAnalyzeLayoutAsync0(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.AnalyzeLayoutAsync", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Response>> StartAnalyzeLayoutAsyncAsync(SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = await RestClient.AnalyzeLayoutAsyncAsync(fileStream, cancellationToken).ConfigureAwait(false);
-            return CreateAnalyzeLayoutAsync0(originalResponse, () => RestClient.CreateAnalyzeLayoutAsyncRequest(fileStream));
+            return CreateAnalyzeLayoutAsync(originalResponse, () => RestClient.CreateAnalyzeLayoutAsyncRequest(fileStream));
         }
 
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
@@ -436,7 +385,7 @@ namespace Azure.AI.FormRecognizer
         public virtual Operation<Response> StartAnalyzeLayoutAsync(SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             var originalResponse = RestClient.AnalyzeLayoutAsync(fileStream, cancellationToken);
-            return CreateAnalyzeLayoutAsync0(originalResponse, () => RestClient.CreateAnalyzeLayoutAsyncRequest(fileStream));
+            return CreateAnalyzeLayoutAsync(originalResponse, () => RestClient.CreateAnalyzeLayoutAsyncRequest(fileStream));
         }
     }
 }
