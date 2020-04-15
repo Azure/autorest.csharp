@@ -16,6 +16,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer"
     },
+    "Azure.Network.Management.Interface": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface"
+    },
     "Azure.Storage.Management": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management"

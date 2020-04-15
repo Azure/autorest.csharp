@@ -47,26 +47,19 @@ jobs:
           condition: succeeded()
           failOnStderr: false
           displayName: 'Publish to GitHub and coverage report'
-  - job: SmokeTest
-    variables:
-      DotNetCoreSDKVersion: 3.0.100
-    pool:
-      vmImage: ubuntu-16.04
-    steps:
-      - task: DotNetCoreInstaller@2
-        displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
-        inputs:
-          version: "$(DotNetCoreSDKVersion)"
-      - task: NodeTool@0
-        displayName: "Install Node 13.x"
-        inputs:
-          versionSpec: '13.x'
-      - script: |
-          npm ci
-        displayName: "Install packages"
-      - pwsh: .\eng\Generate.ps1 -Exclude TestServer,TestProjects,Samples -reset -noDebug
-        displayName: "Check if code is up-to-date"
-        env:
-          DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-          DOTNET_CLI_TELEMETRY_OPTOUT: 1
-          DOTNET_MULTILEVEL_LOOKUP: 0
+  - template: smoke-test.yml
+    parameters:
+      name: SmokeTest_A_C
+      filter: "^[a-b]"
+  - template: smoke-test.yml
+    parameters:
+      name: SmokeTest_C_I
+      filter: "^[c-i]"
+  - template: smoke-test.yml
+    parameters:
+      name: SmokeTest_J_R
+      filter: "^[j-r]"
+  - template: smoke-test.yml
+    parameters:
+      name: SmokeTest_S_Z
+      filter: "^[s-z]"
