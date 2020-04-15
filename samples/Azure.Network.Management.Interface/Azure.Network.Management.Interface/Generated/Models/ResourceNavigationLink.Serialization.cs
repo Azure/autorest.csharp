@@ -20,11 +20,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (ResourceNavigationLinkId != null)
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(ResourceNavigationLinkId);
-            }
             if (Etag != null)
             {
                 writer.WritePropertyName("etag");
@@ -64,10 +59,9 @@ namespace Azure.Network.Management.Interface.Models
         internal static ResourceNavigationLink DeserializeResourceNavigationLink(JsonElement element)
         {
             string name = default;
-            string id = default;
             string etag = default;
             string type = default;
-            string id0 = default;
+            string id = default;
             string linkedResourceType = default;
             string link = default;
             ProvisioningState? provisioningState = default;
@@ -80,15 +74,6 @@ namespace Azure.Network.Management.Interface.Models
                         continue;
                     }
                     name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("id"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
@@ -115,7 +100,7 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         continue;
                     }
-                    id0 = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -153,7 +138,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ResourceNavigationLink(id0, name, id, etag, type, linkedResourceType, link, provisioningState);
+            return new ResourceNavigationLink(id, name, etag, type, linkedResourceType, link, provisioningState);
         }
     }
 }

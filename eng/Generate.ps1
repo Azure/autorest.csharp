@@ -91,7 +91,7 @@ $projectNames =
     'CognitiveSearch',
     'Azure.AI.FormRecognizer',
     'Azure.Storage.Tables',
-    'Azure.Storage.Management'
+    'Azure.Storage.Management',
     'Azure.Network.Management.Interface'
 
 if (!($Exclude -contains "Samples"))
@@ -165,6 +165,7 @@ if (!$noBuild)
 $keys = $swaggerDefinitions.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($filter))
 { 
+    Write-Host "Using filter: $filter"
     if ($continue)
     {
         $keys = $keys.Where({$_ -match $filter},'SkipUntil') 

@@ -50,12 +50,12 @@ jobs:
   - template: smoke-test.yml
     parameters:
       name: SmokeTest_A_B
-      filter: "[A-B].*"
+      filter: "^[a-b]"
   - template: smoke-test.yml
     parameters:
       name: SmokeTest_C_I
-      filter: "[C-I].*"
+      filter: "^[c-i]"
   - template: smoke-test.yml
     parameters:
       name: SmokeTest_J_Z
-      filter: "[J-Z].*"
+      filter: "^[j-z]"
