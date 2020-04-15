@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         nextPageMethods.Add(nextPageMethod);
                     }
 
-                    if (!(method.Responses.Single().ResponseBody is ObjectResponseBody objectResponseBody))
+                    if (!(method.Responses.Single(r => r.ResponseBody != null).ResponseBody is ObjectResponseBody objectResponseBody))
                     {
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
