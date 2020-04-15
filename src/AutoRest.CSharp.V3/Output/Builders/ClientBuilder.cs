@@ -433,7 +433,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 true);
             List<Parameter> parameters = new List<Parameter>();
             parameters.Add(nextPageUrlParameter);
-            parameters.AddRange(method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name))d;
+            parameters.AddRange(method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name));
 
             var request = new Request(
                 method.Request.HttpMethod,
