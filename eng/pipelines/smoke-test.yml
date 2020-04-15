@@ -1,0 +1,22 @@
+parameters:
+- name: filter # name of the parameter; required
+  type: string # data type of the parameter; required
+
+steps:
+  - task: DotNetCoreInstaller@2
+    displayName: "Use .NET Core SDK"
+    inputs:
+      version: 3.0.100
+  - task: NodeTool@0
+    displayName: "Install Node 13.x"
+    inputs:
+      versionSpec: '13.x'
+  - script: |
+      npm ci
+    displayName: "Install packages"
+  - pwsh: .\eng\Generate.ps1 -Exclude TestServer,TestProjects,Samples -reset -noDebug
+    displayName: "Check if code is up-to-date"
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_MULTILEVEL_LOOKUP: 0
