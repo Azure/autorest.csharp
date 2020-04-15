@@ -19,7 +19,7 @@ $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' '
 $testNames =
     'additionalProperties',
     'azure-parameter-grouping',
-    #'azure-special-properties',
+    'azure-special-properties',
     'body-array',
     'body-boolean',
     'body-byte',
