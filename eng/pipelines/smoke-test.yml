@@ -1,7 +1,7 @@
 parameters:
-  - name: ''
-  - filter: ''
-  
+  name: ''
+  filter: ''
+
 jobs:
 - job: ${{ parameters.name }}
   pool: ubuntu-16.04
@@ -17,7 +17,7 @@ jobs:
     - script: |
         npm ci
       displayName: "Install packages"
-    - pwsh: .\eng\Generate.ps1 ${{ parameters.filter }} -Exclude TestServer,TestProjects,Samples -reset -noDebug
+    - pwsh: .\eng\Generate.ps1 -Filter "${{ parameters.filter }}" -Exclude TestServer,TestProjects,Samples -reset -noDebug
       displayName: "Check if code is up-to-date"
       env:
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
