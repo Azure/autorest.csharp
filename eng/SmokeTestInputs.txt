@@ -52,7 +52,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a34
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/databricks/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/datacatalog/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/datalake-analytics/resource-manager/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/datalake-store/data-plane/readme.md - https://github.com/Azure/autorest.csharp/issues/661
+https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/datalake-store/data-plane/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/datalake-store/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/deviceprovisioningservices/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/devops/resource-manager/readme.md
