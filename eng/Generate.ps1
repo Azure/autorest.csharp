@@ -141,7 +141,6 @@ if ($updateLaunchSettings)
         $definition = $swaggerDefinitions[$key];
         $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, '$(SolutionDir)')
         $codeModel = Join-Path $outputPath 'CodeModel.yaml'
-        $filterspace = $definition.projectName.Replace('-', '_')
 
         $settings.profiles[$key] = [ordered]@{
             'commandName'='Project';
