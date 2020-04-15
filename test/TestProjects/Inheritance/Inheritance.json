@@ -91,6 +91,17 @@
           "$ref": "#/definitions/SomeProperties"
         }
       ]
+    },
+    "ClassThatInheritsFromBaseClassAndRedefinesAProperty": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClass"
+        }
+      ],
+      "properties": {
+        "BaseClassProperty": { "type": "string" }
+      }
     }
   }
 }

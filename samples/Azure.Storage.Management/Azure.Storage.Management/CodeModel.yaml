@@ -3417,8 +3417,8 @@ schemas: !<!Schemas>
                                 serializationFormats:
                                 - json
                                 usage:
-                                - input
                                 - output
+                                - input
                                 language: !<!Languages> 
                                   default:
                                     name: UpdateHistoryProperty
@@ -3476,8 +3476,8 @@ schemas: !<!Schemas>
                           serializationFormats:
                           - json
                           usage:
-                          - input
                           - output
+                          - input
                           language: !<!Languages> 
                             default:
                               name: ImmutabilityPolicyProperties
@@ -3572,8 +3572,8 @@ schemas: !<!Schemas>
                                 serializationFormats:
                                 - json
                                 usage:
-                                - input
                                 - output
+                                - input
                                 language: !<!Languages> 
                                   default:
                                     name: TagProperty
@@ -3594,8 +3594,8 @@ schemas: !<!Schemas>
                           serializationFormats:
                           - json
                           usage:
-                          - input
                           - output
+                          - input
                           language: !<!Languages> 
                             default:
                               name: LegalHoldProperties
@@ -3643,8 +3643,8 @@ schemas: !<!Schemas>
                       serializationFormats:
                       - json
                       usage:
-                      - input
                       - output
+                      - input
                       language: !<!Languages> 
                         default:
                           name: ListContainerItem
@@ -3926,8 +3926,8 @@ schemas: !<!Schemas>
                       serializationFormats:
                       - json
                       usage:
-                      - input
                       - output
+                      - input
                       language: !<!Languages> 
                         default:
                           name: FileShareItem
@@ -4015,8 +4015,8 @@ schemas: !<!Schemas>
                   serializationFormats:
                   - json
                   usage:
-                  - input
                   - output
+                  - input
                   language: !<!Languages> 
                     default:
                       name: AzureEntityResource
@@ -4066,8 +4066,8 @@ schemas: !<!Schemas>
                       serializationFormats:
                       - json
                       usage:
-                      - input
                       - output
+                      - input
                       language: !<!Languages> 
                         default:
                           name: Sku
@@ -4188,8 +4188,8 @@ schemas: !<!Schemas>
                             serializationFormats:
                             - json
                             usage:
-                            - input
                             - output
+                            - input
                             language: !<!Languages> 
                               default:
                                 name: CorsRule
@@ -4210,8 +4210,8 @@ schemas: !<!Schemas>
                       serializationFormats:
                       - json
                       usage:
-                      - input
                       - output
+                      - input
                       language: !<!Languages> 
                         default:
                           name: CorsRules
@@ -4255,8 +4255,8 @@ schemas: !<!Schemas>
                       serializationFormats:
                       - json
                       usage:
-                      - input
                       - output
+                      - input
                       language: !<!Languages> 
                         default:
                           name: DeleteRetentionPolicy
@@ -5621,8 +5621,8 @@ schemas: !<!Schemas>
                                     serializationFormats:
                                     - json
                                     usage:
-                                    - input
                                     - output
+                                    - input
                                     language: !<!Languages> 
                                       default:
                                         name: BlobRestoreRange
@@ -5720,8 +5720,8 @@ schemas: !<!Schemas>
                   serializationFormats:
                   - json
                   usage:
-                  - input
                   - output
+                  - input
                   language: !<!Languages> 
                     default:
                       name: TrackedResource
@@ -6165,8 +6165,8 @@ schemas: !<!Schemas>
                   serializationFormats:
                   - json
                   usage:
-                  - input
                   - output
+                  - input
                   language: !<!Languages> 
                     default:
                       name: PrivateLinkResource
@@ -6248,8 +6248,8 @@ schemas: !<!Schemas>
                       serializationFormats:
                       - json
                       usage:
-                      - input
                       - output
+                      - input
                       language: !<!Languages> 
                         default:
                           name: EncryptionScopeKeyVaultProperties
@@ -6316,8 +6316,8 @@ schemas: !<!Schemas>
               serializationFormats:
               - json
               usage:
-              - input
               - output
+              - input
               extensions:
                 x-ms-azure-resource: true
               language: !<!Languages> 
@@ -6413,8 +6413,8 @@ schemas: !<!Schemas>
               serializationFormats:
               - json
               usage:
-              - input
               - output
+              - input
               language: !<!Languages> 
                 default:
                   name: ChangeFeed
@@ -6468,8 +6468,8 @@ schemas: !<!Schemas>
               serializationFormats:
               - json
               usage:
-              - input
               - output
+              - input
               language: !<!Languages> 
                 default:
                   name: RestorePolicyProperties
@@ -6967,6 +6967,9 @@ schemas: !<!Schemas>
               - json
               usage:
               - output
+              extensions:
+                x-autorest-anonymous-schema:
+                  anonymous: true
               language: !<!Languages> 
                 default:
                   name: OperationDisplay

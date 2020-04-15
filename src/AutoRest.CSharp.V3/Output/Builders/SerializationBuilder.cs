@@ -102,14 +102,18 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
             List<XmlObjectAttributeSerialization> attributes = new List<XmlObjectAttributeSerialization>();
             List<XmlObjectArraySerialization> embeddedArrays = new List<XmlObjectArraySerialization>();
-            foreach (var schema in EnumerateHierarchy(objectSchema))
+            foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
-                foreach (Property property in schema.Properties!)
+                foreach (ObjectTypeProperty objectProperty in objectTypeLevel.Properties)
                 {
+                    var property = objectProperty.SchemaProperty;
+                    if (property == null)
+                    {
+                        continue;
+                    }
+
                     var name = property.SerializedName;
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
-
-                    ObjectTypeProperty objectProperty = objectType.GetPropertyForSchemaProperty(property, includeParents: true);
 
                     if (isAttribute)
                     {
@@ -172,7 +176,18 @@ namespace AutoRest.CSharp.V3.Output.Builders
         private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
         {
             PropertyBag propertyBag = new PropertyBag();
-            propertyBag.Properties.AddRange(EnumerateHierarchy(objectSchema).SelectMany(s => s.Properties!));
+            foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
+            {
+                foreach (var objectTypeProperty in objectTypeLevel.Properties)
+                {
+                    var schemaProperty = objectTypeProperty.SchemaProperty;
+                    if (schemaProperty != null)
+                    {
+                        propertyBag.Properties.Add(schemaProperty);
+                    }
+                }
+            }
+
             PopulatePropertyBag(propertyBag, 0);
             return new JsonObjectSerialization(
                 objectType.Type,
@@ -209,19 +224,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
             foreach (PropertyBag innerBag in propertyBag.Bag.Values)
             {
                 PopulatePropertyBag(innerBag, depthIndex + 1);
-            }
-        }
-
-        private static IEnumerable<ObjectSchema> EnumerateHierarchy(ObjectSchema schema)
-        {
-            yield return schema;
-            // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/257
-            foreach (ComplexSchema parent in schema.Parents!.All.Distinct())
-            {
-                if (parent is ObjectSchema objectSchema)
-                {
-                    yield return objectSchema;
-                }
             }
         }
 
