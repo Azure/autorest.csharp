@@ -371,7 +371,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 {
                     if (existingProperties.Contains(property.Language.Default.Name))
                     {
-                        Console.WriteLine($"Skipping {property.Language.Default.Name}");
                         // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
                         continue;
                     }

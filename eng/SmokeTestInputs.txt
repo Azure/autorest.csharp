@@ -79,7 +79,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a34
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/iothub/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/iotspaces/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/keyvault/data-plane/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/keyvault/resource-manager/readme.md
+https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/keyvault/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/labservices/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/logic/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/machinelearningcompute/resource-manager/readme.md

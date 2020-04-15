@@ -97,5 +97,11 @@ namespace AutoRest.TestServer.Tests
             var baseClassWithDiscriminator = new ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(null, null, null, null);
             Assert.AreEqual("ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties", baseClassWithDiscriminator.DiscriminatorProperty);
         }
+
+        [Test]
+        public void RedefinedPropertyIgnored()
+        {
+            Assert.AreEqual(1, typeof(ClassThatInheritsFromBaseClassAndRedefinesAProperty).GetProperties().Length);
+        }
     }
 }
