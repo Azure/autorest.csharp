@@ -9,6 +9,7 @@ using xms_error_responses;
 
 namespace AutoRest.TestServer.Tests
 {
+    [IgnoreOnTestServer(TestServerVersion.V2, "Requests not matched")]
     public class XMsErrorResponsesTest : TestServerTestBase
     {
         public XMsErrorResponsesTest(TestServerVersion version) : base(version, "errorStatusCodes") { }
