@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     ITypeProvider implementation = objectResponseBody.Type.Implementation;
                     if (!(implementation is ObjectType objectType))
                     {
-                        throw new InvalidOperationException($"The return type of {method.Name} has to be and object schema to be used in paging");
+                        throw new InvalidOperationException($"The return type of {method.Name} has to be an object schema to be used in paging");
                     }
 
                     PagingInfo pagingInfo = GetPagingInfo(method, nextPageMethod, paging, objectType);
@@ -433,7 +433,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 true);
             List<Parameter> parameters = new List<Parameter>();
             parameters.Add(nextPageUrlParameter);
-            parameters.AddRange(method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name));
+            parameters.AddRange(method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name))d;
 
             var request = new Request(
                 method.Request.HttpMethod,
