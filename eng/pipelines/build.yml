@@ -47,24 +47,15 @@ jobs:
           condition: succeeded()
           failOnStderr: false
           displayName: 'Publish to GitHub and coverage report'
-  - job: SmokeTest_A_B
-    pool:
-      vmImage: ubuntu-16.04
-    steps:
-      - template: smoke-test.yml
-        parameters:
-          filter: "[A-B].*"
-  - job: SmokeTest_C_I
-    pool:
-      vmImage: ubuntu-16.04
-    steps:
-      - template: smoke-test.yml
-        parameters:
-          filter: "[C-I].*"
-  - job: SmokeTest_I_Z
-    pool:
-      vmImage: ubuntu-16.04
-    steps:
-      - template: smoke-test.yml
-        parameters:
-          filter: "[I-Z].*"
+  - template: smoke-test.yml
+    parameters:
+      name: SmokeTest_A_B
+      filter: "[A-B].*"
+  - template: smoke-test.yml
+    parameters:
+      name: SmokeTest_C_I
+      filter: "[C-I].*"
+  - template: smoke-test.yml
+    parameters:
+      name: SmokeTest_J_Z
+      filter: "[J-Z].*"
