@@ -49,7 +49,7 @@ jobs:
           displayName: 'Publish to GitHub and coverage report'
   - template: smoke-test.yml
     parameters:
-      name: SmokeTest_A_B
+      name: SmokeTest_A_C
       filter: "^[a-b]"
   - template: smoke-test.yml
     parameters:
@@ -57,5 +57,9 @@ jobs:
       filter: "^[c-i]"
   - template: smoke-test.yml
     parameters:
-      name: SmokeTest_J_Z
-      filter: "^[j-z]"
+      name: SmokeTest_J_R
+      filter: "^[j-r]"
+  - template: smoke-test.yml
+    parameters:
+      name: SmokeTest_S_Z
+      filter: "^[s-z]"
