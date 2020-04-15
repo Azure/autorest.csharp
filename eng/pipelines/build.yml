@@ -47,12 +47,24 @@ jobs:
           condition: succeeded()
           failOnStderr: false
           displayName: 'Publish to GitHub and coverage report'
-  - job: SmokeTest
-    variables:
-      DotNetCoreSDKVersion: 3.0.100
+  - job: SmokeTest - A - B
     pool:
       vmImage: ubuntu-16.04
     steps:
       - template: smoke-test.yml
         parameters:
-          filter: "none"
+          filter: "[A-B].*"
+  - job: SmokeTest - C - I
+    pool:
+      vmImage: ubuntu-16.04
+    steps:
+      - template: smoke-test.yml
+        parameters:
+          filter: "[C-I].*"
+  - job: SmokeTest - I - Z
+    pool:
+      vmImage: ubuntu-16.04
+    steps:
+      - template: smoke-test.yml
+        parameters:
+          filter: "[I-Z].*"

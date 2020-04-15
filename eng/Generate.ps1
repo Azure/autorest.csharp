@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($name, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($filter, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
@@ -141,7 +141,7 @@ if ($updateLaunchSettings)
         $definition = $swaggerDefinitions[$key];
         $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, '$(SolutionDir)')
         $codeModel = Join-Path $outputPath 'CodeModel.yaml'
-        $namespace = $definition.projectName.Replace('-', '_')
+        $filterspace = $definition.projectName.Replace('-', '_')
 
         $settings.profiles[$key] = [ordered]@{
             'commandName'='Project';
@@ -163,16 +163,16 @@ if (!$noBuild)
 }
 
 $keys = $swaggerDefinitions.Keys | Sort-Object;
-if (![string]::IsNullOrWhiteSpace($name))
+if (![string]::IsNullOrWhiteSpace($filter))
 { 
     if ($continue)
     {
-        $keys = $keys.Where({$_ -eq $name},'SkipUntil') 
+        $keys = $keys.Where({$_ -match $filter},'SkipUntil') 
         Write-Host "Continuing with $keys"
     }
     else
     {
-        $keys = $name
+        $keys = $keys.Where({$_ -match $filter}) 
     }
 }
 

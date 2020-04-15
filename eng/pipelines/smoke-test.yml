@@ -14,7 +14,7 @@ steps:
   - script: |
       npm ci
     displayName: "Install packages"
-  - pwsh: .\eng\Generate.ps1 -Exclude TestServer,TestProjects,Samples -reset -noDebug
+  - pwsh: .\eng\Generate.ps1 $(filter) -Exclude TestServer,TestProjects,Samples -reset -noDebug
     displayName: "Check if code is up-to-date"
     env:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
