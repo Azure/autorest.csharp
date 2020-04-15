@@ -50,7 +50,7 @@ $testNames =
     'url',
     'validation',
     'xml-service',
-    #'xms-error-responses',
+    'xms-error-responses',
     'url-multi-collectionFormat';
 
 if (!($Exclude -contains "TestServer"))
