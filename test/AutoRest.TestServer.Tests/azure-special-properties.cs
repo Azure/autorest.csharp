@@ -18,28 +18,31 @@ namespace AutoRest.TestServer.Tests
         public AzureSpecialPropertiesTest(TestServerVersion version) : base(version, "azureSpecials") { }
 
         [Test]
-        public Task AzureApiVersionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureApiVersionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodGlobalNotProvidedValidAsync());
 
         [Test]
-        public Task AzureApiVersionMethodGlobalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureApiVersionMethodGlobalValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodGlobalValidAsync());
 
         [Test]
-        public Task AzureApiVersionMethodLocalNull() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureApiVersionMethodLocalNull() => TestStatus(async (host, pipeline) => await new ApiVersionLocalClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodLocalNullAsync());
+
+        // Issue with test logic: https://github.com/Azure/autorest.testserver/issues/167
+        [Test]
+        public Task AzureApiVersionMethodLocalValid() => TestStatus(async (host, pipeline) => await new ApiVersionLocalClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodLocalValidAsync());
 
         [Test]
-        public Task AzureApiVersionMethodLocalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureApiVersionPathGlobalValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetPathGlobalValidAsync());
+
+        // Issue with test logic: https://github.com/Azure/autorest.testserver/issues/167
+        [Test]
+        public Task AzureApiVersionPathLocalValid() => TestStatus(async (host, pipeline) => await new ApiVersionLocalClient(ClientDiagnostics, pipeline, host).RestClient.GetPathLocalValidAsync());
 
         [Test]
-        public Task AzureApiVersionPathGlobalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureApiVersionSwaggerGlobalValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetSwaggerGlobalValidAsync());
 
+        // Issue with test logic: https://github.com/Azure/autorest.testserver/issues/167
         [Test]
-        public Task AzureApiVersionPathLocalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
-
-        [Test]
-        public Task AzureApiVersionSwaggerGlobalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
-
-        [Test]
-        public Task AzureApiVersionSwaggerLocalValid() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task AzureApiVersionSwaggerLocalValid() => TestStatus(async (host, pipeline) => await new ApiVersionLocalClient(ClientDiagnostics, pipeline, host).RestClient.GetSwaggerLocalValidAsync());
 
         [Test]
         public Task AzureMethodPathUrlEncoding() => TestStatus(async (host, pipeline) =>
@@ -82,6 +85,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Doesn't fail (as expected) on V2")]
         public Task AzureRequestClientIdInError() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<RequestFailedException>(async () => await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync());
