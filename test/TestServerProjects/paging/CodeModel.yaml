@@ -577,6 +577,9 @@ schemas: !<!Schemas>
               - json
               usage:
               - output
+              extensions:
+                x-autorest-anonymous-schema:
+                  anonymous: true
               language: !<!Languages> 
                 default:
                   name: ProductProperties

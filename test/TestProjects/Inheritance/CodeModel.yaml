@@ -4,7 +4,7 @@ info: !<!Info>
   title: Schema mapping
 schemas: !<!Schemas> 
   strings:
-  - !<!StringSchema> &ref_12
+  - !<!StringSchema> &ref_14
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -42,6 +42,16 @@ schemas: !<!Schemas>
     language: !<!Languages> 
       default:
         name: SomePropertiesSomeOtherProperty
+        description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_11
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    language: !<!Languages> 
+      default:
+        name: ClassThatInheritsFromBaseClassAndRedefinesAPropertyBaseClassProperty
         description: ''
     protocol: !<!Protocols> {}
   objects:
@@ -209,7 +219,7 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> {}
       - *ref_4
       - *ref_5
-      - !<!ObjectSchema> &ref_11
+      - !<!ObjectSchema> &ref_12
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -227,14 +237,40 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> {}
       - *ref_8
       - *ref_3
+      - !<!ObjectSchema> &ref_13
+        type: object
+        apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+        parents: !<!Relations> 
+          all:
+          - *ref_1
+          immediate:
+          - *ref_1
+        properties:
+        - !<!Property> 
+          schema: *ref_11
+          serializedName: BaseClassProperty
+          language: !<!Languages> 
+            default:
+              name: baseClassProperty
+              description: ''
+          protocol: !<!Protocols> {}
+        language: !<!Languages> 
+          default:
+            name: ClassThatInheritsFromBaseClassAndRedefinesAProperty
+            description: ''
+            namespace: ''
+        protocol: !<!Protocols> {}
       immediate:
       - *ref_0
       - *ref_4
       - *ref_5
-      - *ref_11
+      - *ref_12
+      - *ref_13
     properties:
     - !<!Property> 
-      schema: *ref_12
+      schema: *ref_14
       serializedName: BaseClassProperty
       language: !<!Languages> 
         default:
@@ -251,9 +287,10 @@ schemas: !<!Schemas>
   - *ref_2
   - *ref_4
   - *ref_5
-  - *ref_11
+  - *ref_12
   - *ref_8
   - *ref_3
+  - *ref_13
 operationGroups: []
 security: !<!Security> 
   authenticationRequired: false
