@@ -4,7 +4,8 @@ parameters:
 
 jobs:
 - job: ${{ parameters.name }}
-  pool: ubuntu-16.04
+  pool:
+    vmImage: ubuntu-16.04
   steps:
     - task: DotNetCoreInstaller@2
       displayName: "Use .NET Core SDK"
