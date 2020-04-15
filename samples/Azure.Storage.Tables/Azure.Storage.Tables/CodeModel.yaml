@@ -3946,7 +3946,7 @@ operationGroups:
       description: ''
   protocol: !<!Protocols> {}
 security: !<!Security> 
-  authenticationRequired: false
+  authenticationRequired: true
 language: !<!Languages> 
   default:
     name: AzureStorageTables
