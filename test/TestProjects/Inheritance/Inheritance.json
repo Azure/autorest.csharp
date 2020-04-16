@@ -102,6 +102,35 @@
       "properties": {
         "BaseClassProperty": { "type": "string" }
       }
+    },
+    "ClassThatAlsoDefinesBaseClassProperty":
+    {
+      "type": "object",
+      "properties": {
+        "BaseClassProperty": { "type": "string" }
+      }
+    },
+    "ClassThatInheritsFromSomePropertiesAndBaseClass": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SomeProperties"
+        },
+        {
+          "$ref": "#/definitions/BaseClass"
+        }
+      ]
+    },
+    "ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClassThatInheritsFromSomePropertiesAndBaseClass"
+        }
+      ],
+      "properties": {
+        "BaseClassProperty": { "type": "string" }
+      }
     }
   }
 }
