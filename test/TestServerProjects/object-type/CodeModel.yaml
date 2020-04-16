@@ -1,0 +1,195 @@
+!<!CodeModel> 
+info: !<!Info> 
+  description: 'Service client for testing basic type: object swaggers'
+  title: Object Type Client
+schemas: !<!Schemas> 
+  strings:
+  - !<!StringSchema> &ref_0
+    type: string
+    language: !<!Languages> 
+      default:
+        name: String
+        description: simple string
+    protocol: !<!Protocols> {}
+  constants:
+  - !<!ConstantSchema> &ref_3
+    type: constant
+    value: !<!ConstantValue> 
+      value: application/json
+    valueType: *ref_0
+    language: !<!Languages> 
+      default:
+        name: ApplicationJson
+        description: Content Type 'application/json'
+    protocol: !<!Protocols> {}
+  any:
+  - !<!AnySchema> &ref_2
+    type: any
+    language: !<!Languages> 
+      default:
+        name: any
+        description: Any object
+    protocol: !<!Protocols> {}
+globalParameters:
+- !<!Parameter> &ref_1
+  schema: *ref_0
+  clientDefaultValue: 'http://localhost:3000'
+  implementation: Client
+  origin: 'modelerfour:synthesized/host'
+  required: true
+  extensions:
+    x-ms-skip-url-encoding: true
+  language: !<!Languages> 
+    default:
+      name: $host
+      description: server parameter
+      serializedName: $host
+  protocol: !<!Protocols> 
+    http: !<!HttpParameter> 
+      in: uri
+operationGroups:
+- !<!OperationGroup> 
+  $key: ''
+  operations:
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_1
+    requests:
+    - !<!Request> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: /objectType/get
+          method: get
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: Get
+        description: Basic get that returns an object
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: 1.0.0
+    parameters:
+    - *ref_1
+    requests:
+    - !<!Request> 
+      parameters:
+      - !<!Parameter> 
+        schema: *ref_3
+        implementation: Method
+        origin: 'modelerfour:synthesized/content-type'
+        required: true
+        language: !<!Languages> 
+          default:
+            name: contentType
+            description: Body Parameter content-type
+            serializedName: Content-Type
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: header
+      - !<!Parameter> &ref_4
+        schema: *ref_2
+        implementation: Method
+        required: true
+        language: !<!Languages> 
+          default:
+            name: putObject
+            description: ''
+        protocol: !<!Protocols> 
+          http: !<!HttpParameter> 
+            in: body
+            style: json
+      signatureParameters:
+      - *ref_4
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpWithBodyRequest> 
+          path: /objectType/put
+          method: put
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          uri: '{$host}'
+    signatureParameters: []
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          statusCodes:
+          - '200'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_2
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          knownMediaType: json
+          mediaTypes:
+          - application/json
+          statusCodes:
+          - default
+    language: !<!Languages> 
+      default:
+        name: Put
+        description: Basic put that puts an object
+    protocol: !<!Protocols> {}
+  language: !<!Languages> 
+    default:
+      name: ''
+      description: ''
+  protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
+language: !<!Languages> 
+  default:
+    name: ObjectTypeClient
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}
