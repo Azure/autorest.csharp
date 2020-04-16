@@ -361,8 +361,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
             var existingProperties = EnumerateHierarchy()
                 .Skip(1)
-                .SelectMany(type => type._objectSchema.Properties)
-                .Select(p => p.Language.Default.Name)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.SchemaProperty?.Language.Default.Name)
                 .ToHashSet();
 
             foreach (var objectSchema in GetCombinedSchemas())

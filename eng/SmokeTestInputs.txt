@@ -43,7 +43,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a34
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/cognitiveservices/data-plane/TextAnalytics/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/cognitiveservices/data-plane/TranslatorText/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/cognitiveservices/resource-manager/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/consumption/resource-manager/readme.md - https://github.com/Azure/autorest.csharp/issues/621
+https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/consumption/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/containerregistry/data-plane/readme.md - https://github.com/Azure/autorest.csharp/issues/662
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/customer-insights/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/49fc16354df7211f8392c56884a3437138317d1f/specification/customproviders/resource-manager/readme.md

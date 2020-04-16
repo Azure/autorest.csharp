@@ -103,5 +103,12 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.AreEqual(1, typeof(ClassThatInheritsFromBaseClassAndRedefinesAProperty).GetProperties().Length);
         }
+
+        [Test]
+        public void RedefinedPropertyFromComposedBaseClassIgnored()
+        {
+            // We expect BaseClassProperty on ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty to be ignored
+            Assert.AreEqual(3, typeof(ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty).GetProperties().Length);
+        }
     }
 }
