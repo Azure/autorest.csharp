@@ -76,6 +76,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteManagementClientCtors(CodeWriter writer, Client client, Configuration configuration)
         {
+
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
+            using (writer.Scope($"protected {client.Type.Name:D}()"))
+            {
+            }
+
+            writer.Line();
+
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             writer.Append($"public {client.Type.Name:D}(");
             foreach (Parameter parameter in client.RestClient.Parameters)
