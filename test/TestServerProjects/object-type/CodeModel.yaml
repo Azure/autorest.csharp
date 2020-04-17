@@ -100,7 +100,7 @@ operationGroups:
     language: !<!Languages> 
       default:
         name: Get
-        description: Basic get that returns an object
+        description: 'Basic get that returns an object. Returns object { ''message'': ''An object was successfully returned'' }'
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -131,7 +131,7 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: putObject
-            description: ''
+            description: 'Pass in {''foo'': ''bar''} for a 200, anything else for an object error'
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: body
@@ -178,7 +178,7 @@ operationGroups:
     language: !<!Languages> 
       default:
         name: Put
-        description: Basic put that puts an object
+        description: 'Basic put that puts an object. Pass in {''foo'': ''bar''} to get a 200 and anything else to get an object error.'
     protocol: !<!Protocols> {}
   language: !<!Languages> 
     default:
