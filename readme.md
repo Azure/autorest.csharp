@@ -314,6 +314,82 @@ namespace Azure.Service.Models
 
 Use the [Replace any generated member](#replace-any-generated-member) approach to replace Serialize/Deserialize method with a custom implementation.
 
+
+**Generated code before (Generated/Models/Cat.Serialization.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+  public partial class Cat
+  {
+      internal static Cat DeserializeCat(JsonElement element)
+      {
+          string color = default;
+          string name = default;
+          foreach (var property in element.EnumerateObject())
+          {
+              if (property.NameEquals("color"))
+              {
+                  if (property.Value.ValueKind == JsonValueKind.Null)
+                  {
+                      continue;
+                  }
+                  color = property.Value.GetString();
+                  continue;
+              }
+              if (property.NameEquals("name"))
+              {
+                  if (property.Value.ValueKind == JsonValueKind.Null)
+                  {
+                      continue;
+                  }
+                  name = property.Value.GetString();
+                  continue;
+              }
+          }
+          return new Cat(id, name);
+      }
+  }
+}
+```
+
+**Add customized model (Cat.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+  public partial class Cat
+  {
+      internal static Cat DeserializeCat(JsonElement element)
+      {
+          string color = default;
+          string name = default;
+          foreach (var property in element.EnumerateObject())
+          {
+              if (property.NameEquals("name"))
+              {
+                  if (property.Value.ValueKind == JsonValueKind.Null)
+                  {
+                      continue;
+                  }
+                  name = property.Value.GetString();
+                  continue;
+              }
+          }
+          // WORKAROUND: server never sends color, default to black
+          colod = "black";
+          return new Cat(name, color);
+      }
+  }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+Generated code won't contain the DeserializeCat method and the custom one would be used for deserialization.
+
+</details>
+
 ### Renaming an enum
 
 Redefine an enum with a new name and all the members mark it with `[CodeGenModel("OriginEnumName")]`.
