@@ -177,7 +177,7 @@ namespace Azure.Service.Models
 ```
 </details>
 
-### Change property type
+### Change a model property type
 
 :warning:
 
@@ -192,7 +192,7 @@ Won't work:
 1. String <-> Bool (different json type)
 2. Changing model kinds
 
-If you think you have a valid re-mapping scenario file an issue.
+If you think you have a valid re-mapping scenario that's not supported file an issue.
 
 :warning:
 
@@ -281,6 +281,112 @@ namespace Azure.Service.Models
 -        public string Property { get; }  
     }
 }
+```
+</details>
+
+### Renaming an enum
+
+Redefine an enum with a new name and all the members mark it with `[CodeGenModel("OriginEnumName")]`.
+
+**NOTE: because enums can't be partial all values have to be copied**
+
+<details>
+
+**Generated code before (Generated/Models/Colors.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public enum Colors
+    {
+        Red,
+        Green,
+        Blue
+    }
+}
+```
+
+**Add customized model (WallColors.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    [CodeGenModel("Colors")]
+    public enum WallColors
+    {
+        Red,
+        Green,
+        Blue
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` diff
+-namespace Azure.Service.Models
+-{
+-    public enum Colors
+-    {
+-        Red,
+-        Green,
+-        Blue
+-    }
+-}
++// Serialization code uses the new WallColors type name
+```
+</details>
+
+### Renaming an enum member
+
+Redefine an enum with the same name and all the members, mark renamed member with `[CodeGenMember("OriginEnumMemberName")]`.
+
+**NOTE: because enums can't be partial all values have to be copied but only the ones being renamed should be marked with an attributes**
+
+<details>
+
+**Generated code before (Generated/Models/Colors.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public enum Colors
+    {
+        Red,
+        Green,
+        Blue
+    }
+}
+```
+
+**Add customized model (Colors.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public enum Colors
+    {
+        Red,
+        Green,
+        [CodeGenMember("Blue")]
+        SkyBlue
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` diff
+-namespace Azure.Service.Models
+-{
+-    public enum Colors
+-    {
+-        Red,
+-        Green,
+-        Blue
+-    }
+-}
++// Serialization code uses the new SkyBlue member name
 ```
 </details>
 
