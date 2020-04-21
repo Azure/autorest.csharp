@@ -14,6 +14,7 @@ using Azure.Storage.Management.Models;
 
 namespace Azure.Storage.Management
 {
+    /// <summary> The FileServices service client. </summary>
     public partial class FileServicesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

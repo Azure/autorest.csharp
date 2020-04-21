@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace url
 {
+    /// <summary> The PathItems service client. </summary>
     public partial class PathItemsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

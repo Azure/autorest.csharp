@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_datetime_rfc1123
 {
+    /// <summary> The Datetimerfc1123 service client. </summary>
     public partial class Datetimerfc1123Client
     {
         private readonly ClientDiagnostics _clientDiagnostics;

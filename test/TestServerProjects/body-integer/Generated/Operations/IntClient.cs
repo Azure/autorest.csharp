@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_integer
 {
+    /// <summary> The Int service client. </summary>
     public partial class IntClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure
 {
+    /// <summary> The HttpRetry service client. </summary>
     public partial class HttpRetryClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

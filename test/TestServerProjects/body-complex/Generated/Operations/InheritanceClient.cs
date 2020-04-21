@@ -13,6 +13,7 @@ using body_complex.Models;
 
 namespace body_complex
 {
+    /// <summary> The Inheritance service client. </summary>
     public partial class InheritanceClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

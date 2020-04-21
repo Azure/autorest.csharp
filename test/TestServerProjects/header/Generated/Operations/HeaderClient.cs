@@ -14,6 +14,7 @@ using header.Models;
 
 namespace header
 {
+    /// <summary> The Header service client. </summary>
     public partial class HeaderClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

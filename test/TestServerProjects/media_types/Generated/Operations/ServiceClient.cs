@@ -14,6 +14,7 @@ using media_types.Models;
 
 namespace media_types
 {
+    /// <summary> The Service service client. </summary>
     public partial class ServiceClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

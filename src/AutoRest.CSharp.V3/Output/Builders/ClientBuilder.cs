@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             var existingClient = _context.SourceInputModel.FindForClient(_context.DefaultNamespace, clientName);
             var client = new Client(
                 BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "public", existingClient?.ExistingType),
-                BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description),
+                BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, clientPrefix)),
                 restClient,
                 clientMethods.ToArray(),
                 pagingMethods.ToArray(),
@@ -612,6 +612,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             return null;
+        }
+
+        private static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
+        {
+            return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
+                $"The {clientPrefix} service client." :
+                BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
         private static string CreateDescription(RequestParameter requestParameter)

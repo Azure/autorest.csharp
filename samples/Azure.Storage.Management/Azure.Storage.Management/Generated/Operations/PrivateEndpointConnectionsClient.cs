@@ -14,6 +14,7 @@ using Azure.Storage.Management.Models;
 
 namespace Azure.Storage.Management
 {
+    /// <summary> The PrivateEndpointConnections service client. </summary>
     public partial class PrivateEndpointConnectionsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

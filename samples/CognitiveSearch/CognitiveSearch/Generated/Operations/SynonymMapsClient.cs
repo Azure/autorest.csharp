@@ -13,6 +13,7 @@ using CognitiveSearch.Models;
 
 namespace CognitiveSearch
 {
+    /// <summary> The SynonymMaps service client. </summary>
     public partial class SynonymMapsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

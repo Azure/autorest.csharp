@@ -13,6 +13,7 @@ using body_complex.Models;
 
 namespace body_complex
 {
+    /// <summary> The Dictionary service client. </summary>
     public partial class DictionaryClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

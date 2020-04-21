@@ -16,6 +16,7 @@ using Azure.Network.Management.Interface.Models;
 
 namespace Azure.Network.Management.Interface
 {
+    /// <summary> The NetworkInterfaces service client. </summary>
     public partial class NetworkInterfacesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

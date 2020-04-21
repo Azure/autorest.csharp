@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure
 {
+    /// <summary> The HttpRedirects service client. </summary>
     public partial class HttpRedirectsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace azure_special_properties
 {
+    /// <summary> The ApiVersionDefault service client. </summary>
     public partial class ApiVersionDefaultClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

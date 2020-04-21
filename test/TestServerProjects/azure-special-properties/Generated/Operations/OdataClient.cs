@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace azure_special_properties
 {
+    /// <summary> The Odata service client. </summary>
     public partial class OdataClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

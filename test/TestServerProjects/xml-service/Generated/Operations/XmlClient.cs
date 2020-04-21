@@ -14,6 +14,7 @@ using xml_service.Models;
 
 namespace xml_service
 {
+    /// <summary> The Xml service client. </summary>
     public partial class XmlClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

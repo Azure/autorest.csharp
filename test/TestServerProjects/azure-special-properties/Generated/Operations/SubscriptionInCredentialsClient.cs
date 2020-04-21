@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace azure_special_properties
 {
+    /// <summary> The SubscriptionInCredentials service client. </summary>
     public partial class SubscriptionInCredentialsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

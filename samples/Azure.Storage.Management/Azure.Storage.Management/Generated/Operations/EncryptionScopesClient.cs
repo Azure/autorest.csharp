@@ -15,6 +15,7 @@ using Azure.Storage.Management.Models;
 
 namespace Azure.Storage.Management
 {
+    /// <summary> The EncryptionScopes service client. </summary>
     public partial class EncryptionScopesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

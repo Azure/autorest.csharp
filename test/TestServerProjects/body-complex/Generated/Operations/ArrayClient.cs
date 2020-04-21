@@ -13,6 +13,7 @@ using body_complex.Models;
 
 namespace body_complex
 {
+    /// <summary> The Array service client. </summary>
     public partial class ArrayClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

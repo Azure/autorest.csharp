@@ -13,6 +13,7 @@ using extensible_enums_swagger.Models;
 
 namespace extensible_enums_swagger
 {
+    /// <summary> The Pet service client. </summary>
     public partial class PetClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -14,6 +14,7 @@ using Azure.Storage.Management.Models;
 
 namespace Azure.Storage.Management
 {
+    /// <summary> The Operations service client. </summary>
     public partial class OperationsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
