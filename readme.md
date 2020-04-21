@@ -79,16 +79,103 @@ namespace Azure.Service.Models
 
 **Generated code after (Generated/Models/NewModelClassName.cs):**
 
-``` C#
+``` diff
 namespace Azure.Service.Models
 {
-    public partial class NewModelClassName { }
+-    public partial class Model { }
++    public partial class NewModelClassName { }
 }
 ```
 </details>
 
 ### Make model property internal
 
+Define a class with a property matching a generated property name but with desired accessibility.
+
+<details>
+
+**Generated code before (Generated/Models/Model.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+        public string Property { get; }
+    }
+}
+```
+
+**Add customized model (Model.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+        internal string Property { get; } 
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+-        public string Property { get; }
+    }
+}
+```
+</details>
+
+
+### Rename a model property
+
+Define a partial class with a new property name and mark it with `[CodeGenMember("OriginalName")]` attribute.
+
+<details>
+
+**Generated code before (Generated/Models/Model.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+        public string Property { get; }
+    }
+}
+```
+
+**Add customized model (Model.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+        [CodeGenMember("Property")]
+        public string RenamedProperty { get; } 
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+-        public string Property { get; }
++        // All original Property usages would reference a new property name
+    }
+}
+```
+</details>
 
 
 ### Make a client internal
