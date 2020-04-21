@@ -1,5 +1,27 @@
-# AutoRest.CSharp.V3
-> see https://aka.ms/autorest
+# C# code generator for AutoRest V3
+
+<!-- TOC -->
+
+- [C# code generator for AutoRest V3](#c-code-generator-for-autorest-v3)
+    - [Setup](#setup)
+    - [Build](#build)
+    - [Test](#test)
+    - [Customizing the generated code](#customizing-the-generated-code)
+        - [Make a model internal](#make-a-model-internal)
+        - [Rename a model class](#rename-a-model-class)
+        - [Make model property internal](#make-model-property-internal)
+        - [Rename a model property](#rename-a-model-property)
+        - [Change a model property type](#change-a-model-property-type)
+        - [Changing member doc comment](#changing-member-doc-comment)
+        - [Renaming an enum](#renaming-an-enum)
+        - [Renaming an enum member](#renaming-an-enum-member)
+        - [Make a client internal](#make-a-client-internal)
+        - [Rename a client](#rename-a-client)
+        - [Replace any generated member](#replace-any-generated-member)
+        - [Remove any generated member](#remove-any-generated-member)
+    - [Configuration](#configuration)
+
+<!-- /TOC -->
 
 ## Setup
 - [NodeJS](https://nodejs.org/en/) (13.x.x)
@@ -50,6 +72,7 @@ namespace Azure.Service.Models
 +    internal partial class Model { }
 }
 ```
+
 </details>
 
 ### Rename a model class
@@ -86,6 +109,7 @@ namespace Azure.Service.Models
 +    public partial class NewModelClassName { }
 }
 ```
+
 </details>
 
 ### Make model property internal
@@ -129,8 +153,8 @@ namespace Azure.Service.Models
     }
 }
 ```
-</details>
 
+</details>
 
 ### Rename a model property
 
@@ -175,6 +199,7 @@ namespace Azure.Service.Models
     }
 }
 ```
+
 </details>
 
 ### Change a model property type
@@ -184,11 +209,13 @@ namespace Azure.Service.Models
 **NOTE: This is supported for a narrow set of cases where the underlying serialized type doesn't change**
 
 Scenarios that would work:
+
 1. String <-> TimeSpan (both represented as string in JSON)
 1. Float <-> Int (both are numbers)
 1. String <-> Enums (both strings) 
 
 Won't work:
+
 1. String <-> Bool (different json type)
 2. Changing model kinds
 
@@ -219,7 +246,7 @@ namespace Azure.Service.Models
 {
     public partial class Model
     {
-        public DateTime Property { get; } 
+        public DateTime Property { get; }
     }
 }
 ```
@@ -236,6 +263,7 @@ namespace Azure.Service.Models
     }
 }
 ```
+
 </details>
 
 ### Changing member doc comment
@@ -265,7 +293,7 @@ namespace Azure.Service.Models
     public partial class Model
     {
         /// Great doc comment
-        public string Property { get; } 
+        public string Property { get; }
     }
 }
 ```
@@ -282,6 +310,7 @@ namespace Azure.Service.Models
     }
 }
 ```
+
 </details>
 
 ### Renaming an enum
@@ -335,6 +364,7 @@ namespace Azure.Service.Models
 -}
 +// Serialization code uses the new WallColors type name
 ```
+
 </details>
 
 ### Renaming an enum member
@@ -388,6 +418,7 @@ namespace Azure.Service.Models
 -}
 +// Serialization code uses the new SkyBlue member name
 ```
+
 </details>
 
 ### Make a client internal
@@ -423,6 +454,7 @@ namespace Azure.Service.Operations
 +    internal partial class ServiceClient { }
 }
 ```
+
 </details>
 
 
@@ -460,6 +492,7 @@ namespace Azure.Service.Operations
 +    public partial class TableClient { }
 }
 ```
+
 </details>
 
 
@@ -517,6 +550,7 @@ namespace Azure.Service.Models
     }
 }
 ```
+
 </details>
 
 ### Remove any generated member
@@ -538,7 +572,7 @@ namespace Azure.Service.Models
         {  
             Property = "a";
         }
-        
+
         public Model(string property)
         {  
             Property = property;
@@ -575,6 +609,7 @@ namespace Azure.Service.Models
     }
 }
 ```
+
 </details>
 
 ## Configuration
