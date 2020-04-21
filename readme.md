@@ -12,6 +12,118 @@
 - `dotnet build` (at root)
 - `./eng/Generate.ps1` (at root in PowerShell Core)
 
+## Test
+- `dotnet test` (at root)
+
+## Customizing the generated code
+
+### Make a model internal
+
+Define a class with the same namespace and name as generated model and use the desired accessibility.
+
+<details>
+
+**Generated code before (Generated/Models/Model.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model { }
+}
+```
+
+**Add customized model (Model.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    internal partial class Model { }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    internal partial class Model { }
+}
+```
+</details>
+
+### Rename a model class
+
+Define a class with a desired name and mark it with `[CodeGenModel("OriginalName")]`
+
+<details>
+
+**Generated code before (Generated/Models/Model.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model { }
+}
+```
+
+**Add customized model (NewModelClassName.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    [CodeGenModel("Model")]
+    public partial class NewModelClassName { }
+}
+```
+
+**Generated code after (Generated/Models/NewModelClassName.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class NewModelClassName { }
+}
+```
+</details>
+
+### Make model property internal
+
+
+
+### Make a client internal
+
+Define a class with the same namespace and name as generated client and use the desired accessibility.
+
+<details>
+
+**Generated code before (Generated/Operations/ServiceClient.cs):**
+
+``` C#
+namespace Azure.Service.Operations
+{
+    public partial class ServiceClient { }
+}
+```
+
+**Add customized model (Model.cs)**
+
+``` C#
+namespace Azure.Service.Operations
+{
+    internal partial class ServiceClient { }
+}
+```
+
+**Generated code after (Generated/Operations/ServiceClient.cs):**
+
+``` C#
+namespace Azure.Service.Operations
+{
+    internal partial class ServiceClient { }
+}
+```
+</details>
+
 ## Configuration
 ```yaml
 # autorest-core version
