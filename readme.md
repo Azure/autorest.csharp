@@ -154,6 +154,8 @@ namespace Azure.Service.Models
 
 Define a partial class with a new property name and mark it with `[CodeGenMember("OriginalName")]` attribute.
 
+**NOTE:** you can also change a property to a field using this mapping.
+
 <details>
 
 **Generated code before (Generated/Models/Model.cs):**
