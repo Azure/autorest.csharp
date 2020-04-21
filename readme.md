@@ -43,10 +43,11 @@ namespace Azure.Service.Models
 
 **Generated code after (Generated/Models/Model.cs):**
 
-``` C#
+``` diff
 namespace Azure.Service.Models
 {
-    internal partial class Model { }
+-    public partial class Model { }
++    internal partial class Model { }
 }
 ```
 </details>
