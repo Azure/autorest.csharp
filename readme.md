@@ -1,28 +1,5 @@
 # C# code generator for AutoRest V3
 
-<!-- TOC -->
-
-- [C# code generator for AutoRest V3](#c-code-generator-for-autorest-v3)
-    - [Setup](#setup)
-    - [Build](#build)
-    - [Test](#test)
-    - [Customizing the generated code](#customizing-the-generated-code)
-        - [Make a model internal](#make-a-model-internal)
-        - [Rename a model class](#rename-a-model-class)
-        - [Make model property internal](#make-model-property-internal)
-        - [Rename a model property](#rename-a-model-property)
-        - [Change a model property type](#change-a-model-property-type)
-        - [Changing member doc comment](#changing-member-doc-comment)
-        - [Renaming an enum](#renaming-an-enum)
-        - [Renaming an enum member](#renaming-an-enum-member)
-        - [Make a client internal](#make-a-client-internal)
-        - [Rename a client](#rename-a-client)
-        - [Replace any generated member](#replace-any-generated-member)
-        - [Remove any generated member](#remove-any-generated-member)
-    - [Configuration](#configuration)
-
-<!-- /TOC -->
-
 ## Setup
 - [NodeJS](https://nodejs.org/en/) (13.x.x)
 - `npm install` (at root)
@@ -38,6 +15,23 @@
 - `dotnet test` (at root)
 
 ## Customizing the generated code
+
+<!-- TOC -->
+
+- [Make a model internal](#make-a-model-internal)
+- [Rename a model class](#rename-a-model-class)
+- [Make model property internal](#make-model-property-internal)
+- [Rename a model property](#rename-a-model-property)
+- [Change a model property type](#change-a-model-property-type)
+- [Changing member doc comment](#changing-member-doc-comment)
+- [Renaming an enum](#renaming-an-enum)
+- [Renaming an enum member](#renaming-an-enum-member)
+- [Make a client internal](#make-a-client-internal)
+- [Rename a client](#rename-a-client)
+- [Replace any generated member](#replace-any-generated-member)
+- [Remove any generated member](#remove-any-generated-member)
+
+<!-- /TOC -->
 
 ### Make a model internal
 
