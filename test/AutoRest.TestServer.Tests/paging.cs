@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         public PagingTests(TestServerVersion version) : base(version, "paging") { }
 
         [Test]
-        [Ignore("Partial nextLink support: https://github.com/Azure/autorest.csharp/issues/403")]
+        //[Ignore("Partial nextLink support: https://github.com/Azure/autorest.csharp/issues/403")]
         public Task PagingCustomUrlPartialNextLink() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -29,6 +29,7 @@ namespace AutoRest.TestServer.Tests
             host = host.Replace("http://", String.Empty);
             var linkPart = "/paging/customurl/partialnextlink/page/";
             var result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagesPartialUrlAsync(string.Empty);
+            // /paging/customurl/partialnextlink/page/2
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {
@@ -137,7 +138,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        [Ignore("Change path appending strategy: https://github.com/Azure/autorest.csharp/issues/411")]
+        //[Ignore("Change path appending strategy: https://github.com/Azure/autorest.csharp/issues/411")]
         public Task PagingFragment() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -145,6 +146,7 @@ namespace AutoRest.TestServer.Tests
             var tenant = "test_user";
             var linkPart = "next?page=";
             var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesFragmentNextLinkAsync("1.6", tenant);
+            // next?page=2
             var resultPage = Page.FromValues(result.Value.Values, result.Value.OdataNextLink, result.GetRawResponse());
             while (resultPage.ContinuationToken != null)
             {

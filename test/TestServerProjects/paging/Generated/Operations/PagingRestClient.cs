@@ -1338,7 +1338,7 @@ namespace paging
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
-            uri.AppendPath(nextLink, false);
+            uri.AppendRawNextLink(nextLink);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             return message;

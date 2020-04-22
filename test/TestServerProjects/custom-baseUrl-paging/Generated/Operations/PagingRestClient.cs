@@ -348,13 +348,42 @@ namespace custom_baseUrl_paging
 
         internal HttpMessage CreateGetPagesPartialUrlNextPageRequest(string nextLink, string accountName)
         {
+            //var message = _pipeline.CreateMessage();
+            //var request = message.Request;
+            //request.Method = RequestMethod.Get;
+            //var uri = new RawRequestUriBuilder();
+            //uri.AppendRaw(nextLink, false);
+            //request.Uri = uri;
+            //return message;
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLink, false);
+            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
+            {
+                uri.AppendRaw(nextLink, false);
+            }
+            else
+            {
+                uri.AppendRaw("http://", false);
+                uri.AppendRaw(accountName, false);
+                uri.AppendRaw(host, false);
+                uri.AppendPath(nextLink, false);
+            }
             request.Uri = uri;
             return message;
+
+            //var message = _pipeline.CreateMessage();
+            //var request = message.Request;
+            //request.Method = RequestMethod.Get;
+            //var uri = new RawRequestUriBuilder();
+            //uri.AppendRaw("http://", false);
+            //uri.AppendRaw(accountName, false);
+            //uri.AppendRaw(host, false);
+            //uri.AppendPath("/paging/customurl/partialnextlink", false);
+            //request.Uri = uri;
+            //return message;
         }
 
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>

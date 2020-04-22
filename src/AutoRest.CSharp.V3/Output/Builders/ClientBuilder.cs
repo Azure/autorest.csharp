@@ -265,16 +265,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             bodyParameter = (requestParameter, constantOrReference);
                             break;
                         case ParameterLocation.Uri:
-                            if (defaultName == "$host")
-                            {
-                                skipEncoding = true;
-                            }
                             uriParameters[serializedName] = new PathSegment(constantOrReference, !skipEncoding, serializationFormat);
                             break;
                     }
                 }
             }
-
 
             if (bodyParameter is var (bodyRequestParameter, bodyParameterValue))
             {
