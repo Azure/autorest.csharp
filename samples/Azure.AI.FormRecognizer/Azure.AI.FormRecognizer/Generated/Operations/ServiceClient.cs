@@ -16,6 +16,7 @@ using Azure.Core.Pipeline;
 
 namespace Azure.AI.FormRecognizer
 {
+    /// <summary> The Service service client. </summary>
     public partial class ServiceClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

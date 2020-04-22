@@ -16,6 +16,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
+    /// <summary> The FileShares service client. </summary>
     public partial class FileSharesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

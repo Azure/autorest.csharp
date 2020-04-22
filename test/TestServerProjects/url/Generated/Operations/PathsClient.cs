@@ -15,6 +15,7 @@ using url.Models;
 
 namespace url
 {
+    /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

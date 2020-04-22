@@ -13,6 +13,7 @@ using CognitiveSearch.Models;
 
 namespace CognitiveSearch
 {
+    /// <summary> The Skillsets service client. </summary>
     public partial class SkillsetsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

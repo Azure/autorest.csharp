@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure
 {
+    /// <summary> The HttpSuccess service client. </summary>
     public partial class HttpSuccessClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

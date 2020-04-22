@@ -14,6 +14,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
+    /// <summary> The Skus service client. </summary>
     public partial class SkusClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

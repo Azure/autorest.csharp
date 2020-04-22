@@ -15,6 +15,7 @@ using url.Models;
 
 namespace url
 {
+    /// <summary> The Queries service client. </summary>
     public partial class QueriesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

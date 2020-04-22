@@ -16,6 +16,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
+    /// <summary> The BlobContainers service client. </summary>
     public partial class BlobContainersClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

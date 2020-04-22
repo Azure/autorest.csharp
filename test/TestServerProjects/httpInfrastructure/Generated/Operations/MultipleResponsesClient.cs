@@ -13,6 +13,7 @@ using httpInfrastructure.Models;
 
 namespace httpInfrastructure
 {
+    /// <summary> The MultipleResponses service client. </summary>
     public partial class MultipleResponsesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

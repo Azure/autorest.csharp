@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_file
 {
+    /// <summary> The Files service client. </summary>
     public partial class FilesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

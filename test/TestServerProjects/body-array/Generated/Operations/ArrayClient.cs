@@ -15,6 +15,7 @@ using body_array.Models;
 
 namespace body_array
 {
+    /// <summary> The Array service client. </summary>
     public partial class ArrayClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

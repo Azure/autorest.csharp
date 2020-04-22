@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace body_boolean
 {
+    /// <summary> The Bool service client. </summary>
     public partial class BoolClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

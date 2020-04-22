@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace additionalProperties
 {
+    /// <summary> The Pets service client. </summary>
     public partial class PetsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

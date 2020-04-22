@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_time
 {
+    /// <summary> The Time service client. </summary>
     public partial class TimeClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

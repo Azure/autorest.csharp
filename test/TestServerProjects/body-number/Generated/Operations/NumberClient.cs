@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace body_number
 {
+    /// <summary> The Number service client. </summary>
     public partial class NumberClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace azure_special_properties
 {
+    /// <summary> The SkipUrlEncoding service client. </summary>
     public partial class SkipUrlEncodingClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
