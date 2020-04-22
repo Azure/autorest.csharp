@@ -13,6 +13,7 @@ using subscriptionId_apiVersion.Models;
 
 namespace subscriptionId_apiVersion
 {
+    /// <summary> The Group service client. </summary>
     public partial class GroupClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
