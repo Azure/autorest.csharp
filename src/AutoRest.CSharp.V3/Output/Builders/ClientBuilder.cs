@@ -424,16 +424,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 "nextLink",
                 "The URL to the next page of results.",
                 typeof(string),
-                null,
-                true);
-            List<Parameter> parameters = new List<Parameter>();
-            parameters.Add(nextPageUrlParameter);
+                defaultValue: null,
+                isRequired: true,
+                isArtificial: true);
+            List<Parameter> parameters = new List<Parameter> { nextPageUrlParameter };
             parameters.AddRange(method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name));
 
             var request = new Request(
                 method.Request.HttpMethod,
-                new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default),  },
-                Array.Empty<PathSegment>(),
+                method.Request.HostSegments,
+                new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default) },
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
                 null

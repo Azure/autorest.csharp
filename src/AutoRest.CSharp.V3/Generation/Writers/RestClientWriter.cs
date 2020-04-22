@@ -92,13 +92,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private string CreateRequestMethodName(string name) => $"Create{name}Request";
 
-        private void WriteRequestCreation(CodeWriter writer, RestClientMethod operation)
+        private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod)
         {
             using var methodScope = writer.AmbientScope();
 
-            var methodName = CreateRequestMethodName(operation.Name);
+            var methodName = CreateRequestMethodName(clientMethod.Name);
             writer.Append($"internal {typeof(HttpMessage)} {methodName}(");
-            var parameters = operation.Parameters;
+            var parameters = clientMethod.Parameters;
             foreach (Parameter clientParameter in parameters)
             {
                 writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
@@ -113,39 +113,58 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 writer.Line($"var {message:D} = _pipeline.CreateMessage();");
                 writer.Line($"var {request:D} = {message}.Request;");
-                var method = operation.Request.HttpMethod;
+                var method = clientMethod.Request.HttpMethod;
                 writer.Line($"{request}.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                //TODO: Add logic to escape the strings when specified, using Uri.EscapeDataString(value);
-                //TODO: Need proper logic to convert the values to strings. Right now, everything is just using default ToString().
-                //TODO: Need logic to trim duplicate slashes (/) so when combined, you don't end  up with multiple // together
-
                 writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
-                foreach (var segment in operation.Request.HostSegments)
+                Parameter? nextLinkParameter = parameters.FirstOrDefault(p => p.Name == "nextLink");
+                bool hasArtificialNextLink = nextLinkParameter?.IsArtificial == true;
+                PathSegment? nextLinkSegment = clientMethod.Request.PathSegments.FirstOrDefault(s => !s.Value.IsConstant && s.Value.Reference.Name == "nextLink");
+                // Artificial nextLink needs additional logic for relative versus absolute links
+                if (hasArtificialNextLink)
                 {
-                    WriteUriFragment(writer, uri, segment);
+                    using (writer.Scope($"if ({nextLinkParameter!.Name:D}.StartsWith({typeof(Uri)}.UriSchemeHttp, {typeof(StringComparison)}.InvariantCultureIgnoreCase))"))
+                    {
+                        WriteUriFragment(writer, uri, nextLinkSegment!);
+                    }
                 }
-                writer.RemoveTrailingComma();
 
-                foreach (var segment in operation.Request.PathSegments)
+                using (hasArtificialNextLink ? writer.Scope($"else") : default)
                 {
-                    WritePathSegment(writer, uri, segment);
+                    foreach (var segment in clientMethod.Request.HostSegments)
+                    {
+                        WriteUriFragment(writer, uri, segment);
+                    }
+                    writer.RemoveTrailingComma();
+
+                    foreach (var segment in clientMethod.Request.PathSegments)
+                    {
+                        // Natural nextLink parameters need to use a different method to parse path and query elements
+                        if (nextLinkSegment != null && segment == nextLinkSegment && !hasArtificialNextLink)
+                        {
+                            WriteUriFragment(writer, uri, segment, "AppendRawNextLink");
+                        }
+                        else
+                        {
+                            WritePathSegment(writer, uri, segment);
+                        }
+                    }
                 }
 
                 //TODO: Duplicate code between query and header parameter processing logic
-                foreach (var queryParameter in operation.Request.Query)
+                foreach (var queryParameter in clientMethod.Request.Query)
                 {
                     WriteQueryParameter(writer, uri, queryParameter);
                 }
 
                 writer.Line($"{request}.Uri = {uri};");
 
-                foreach (var header in operation.Request.Headers)
+                foreach (var header in clientMethod.Request.Headers)
                 {
                     WriteHeader(writer, request, header);
                 }
 
-                switch (operation.Request.Body)
+                switch (clientMethod.Request.Body)
                 {
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))
@@ -189,7 +208,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     case null:
                         break;
                     default:
-                        throw new NotImplementedException(operation.Request.Body?.GetType().FullName);
+                        throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
                 }
 
                 writer.Line($"return {message};");
@@ -230,9 +249,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WriteUriFragment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment)
+        private void WriteUriFragment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment, string methodName = "AppendRaw")
         {
-            writer.Append($"{uri}.AppendRaw(");
+            writer.Append($"{uri}.{methodName}(");
             WriteConstantOrParameter(writer, segment.Value);
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");

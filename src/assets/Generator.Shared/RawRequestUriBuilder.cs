@@ -91,11 +91,11 @@ namespace Azure.Core
             Rest
         }
 
-        public void AppendRawNextLink(string nextLink)
+        public void AppendRawNextLink(string nextLink, bool escape)
         {
             (string Name, string Value) GetQueryParts(string queryUnparsed)
             {
-                int separatorIndex = nextLink.IndexOf(QueryValueSeparator, StringComparison.InvariantCultureIgnoreCase);
+                int separatorIndex = nextLink.IndexOf(QueryValueSeparator);
                 return (queryUnparsed.Substring(0, separatorIndex), queryUnparsed.Substring(separatorIndex + 1));
             }
 
@@ -104,32 +104,32 @@ namespace Azure.Core
             {
                 if (position == RawNextLinkWritingPosition.Path)
                 {
-                    int separatorIndex = nextLink.IndexOf(QueryBeginSeparator, StringComparison.InvariantCultureIgnoreCase);
+                    int separatorIndex = nextLink.IndexOf(QueryBeginSeparator);
                     if (separatorIndex == -1)
                     {
-                        AppendPath(nextLink);
+                        AppendPath(nextLink, escape);
                         nextLink = string.Empty;
                     }
                     else
                     {
-                        AppendPath(nextLink.Substring(0, separatorIndex));
+                        AppendPath(nextLink.Substring(0, separatorIndex), escape);
                         nextLink = nextLink.Substring(separatorIndex + 1);
                         position = RawNextLinkWritingPosition.Query;
                     }
                 }
                 else if (position == RawNextLinkWritingPosition.Query)
                 {
-                    int separatorIndex = nextLink.IndexOf(QueryContinueSeparator, StringComparison.InvariantCultureIgnoreCase);
+                    int separatorIndex = nextLink.IndexOf(QueryContinueSeparator);
                     if (separatorIndex == -1)
                     {
                         (string name, string value) = GetQueryParts(nextLink);
-                        AppendQuery(name, value);
+                        AppendQuery(name, value, escape);
                         nextLink = string.Empty;
                     }
                     else
                     {
                         (string name, string value) = GetQueryParts(nextLink.Substring(0, separatorIndex));
-                        AppendQuery(name, value);
+                        AppendQuery(name, value, escape);
                         nextLink = nextLink.Substring(separatorIndex + 1);
                     }
                 }
