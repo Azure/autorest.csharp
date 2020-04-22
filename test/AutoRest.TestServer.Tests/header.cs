@@ -273,7 +273,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/339")]
         public Task HeaderParameterEnumValid() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamEnumAsync( scenario: "valid", GreyscaleColors.Grey));
 
         [Test]
