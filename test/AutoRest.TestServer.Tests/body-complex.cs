@@ -66,9 +66,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public void GetComplexBasicInvalid() => Test((host, pipeline) =>
+        public Task GetComplexBasicInvalid() => Test((host, pipeline) =>
         {
-            Assert.Throws(Is.InstanceOf<Exception>(), async () => await new BasicClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
+            Assert.ThrowsAsync(typeof(InvalidOperationException), async () => await new BasicClient(ClientDiagnostics, pipeline, host).GetInvalidAsync());
         });
 
         [Test]
