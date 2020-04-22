@@ -16,6 +16,7 @@ using lro.Models;
 
 namespace lro
 {
+    /// <summary> The LRORetrys service client. </summary>
     public partial class LRORetrysClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

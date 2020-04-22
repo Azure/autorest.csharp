@@ -15,6 +15,7 @@ using Azure.Network.Management.Interface.Models;
 
 namespace Azure.Network.Management.Interface
 {
+    /// <summary> The NetworkInterfaceLoadBalancers service client. </summary>
     public partial class NetworkInterfaceLoadBalancersClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

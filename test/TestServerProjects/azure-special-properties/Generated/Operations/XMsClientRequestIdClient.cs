@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace azure_special_properties
 {
+    /// <summary> The XMsClientRequestId service client. </summary>
     public partial class XMsClientRequestIdClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

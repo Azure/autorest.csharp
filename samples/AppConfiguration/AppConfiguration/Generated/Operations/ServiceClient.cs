@@ -15,6 +15,7 @@ using Azure.Core.Pipeline;
 
 namespace AppConfiguration
 {
+    /// <summary> The Service service client. </summary>
     public partial class ServiceClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

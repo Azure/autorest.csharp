@@ -13,6 +13,7 @@ using Azure.Storage.Tables.Models;
 
 namespace Azure.Storage.Tables
 {
+    /// <summary> The Service service client. </summary>
     public partial class ServiceClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

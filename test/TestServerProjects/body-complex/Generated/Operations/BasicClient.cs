@@ -13,6 +13,7 @@ using body_complex.Models;
 
 namespace body_complex
 {
+    /// <summary> The Basic service client. </summary>
     public partial class BasicClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

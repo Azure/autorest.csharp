@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure
 {
+    /// <summary> The HttpServerFailure service client. </summary>
     public partial class HttpServerFailureClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

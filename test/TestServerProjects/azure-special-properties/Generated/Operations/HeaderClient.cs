@@ -13,6 +13,7 @@ using azure_special_properties.Models;
 
 namespace azure_special_properties
 {
+    /// <summary> The Header service client. </summary>
     public partial class HeaderClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

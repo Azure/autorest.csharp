@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_string
 {
+    /// <summary> The String service client. </summary>
     public partial class StringClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

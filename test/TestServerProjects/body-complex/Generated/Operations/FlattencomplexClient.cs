@@ -13,6 +13,7 @@ using body_complex.Models;
 
 namespace body_complex
 {
+    /// <summary> The Flattencomplex service client. </summary>
     public partial class FlattencomplexClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

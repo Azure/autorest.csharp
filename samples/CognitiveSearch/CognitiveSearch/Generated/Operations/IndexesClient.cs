@@ -13,6 +13,7 @@ using CognitiveSearch.Models;
 
 namespace CognitiveSearch
 {
+    /// <summary> The Indexes service client. </summary>
     public partial class IndexesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -14,6 +14,7 @@ using Azure.Storage.Tables.Models;
 
 namespace Azure.Storage.Tables
 {
+    /// <summary> The Table service client. </summary>
     internal partial class TableInternalClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

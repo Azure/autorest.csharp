@@ -14,6 +14,7 @@ using required_optional.Models;
 
 namespace required_optional
 {
+    /// <summary> The Explicit service client. </summary>
     public partial class ExplicitClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

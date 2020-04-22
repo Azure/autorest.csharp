@@ -14,6 +14,7 @@ using CognitiveSearch.Models;
 
 namespace CognitiveSearch
 {
+    /// <summary> The Documents service client. </summary>
     public partial class DocumentsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

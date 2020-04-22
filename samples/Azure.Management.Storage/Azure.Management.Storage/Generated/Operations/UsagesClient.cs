@@ -15,6 +15,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
+    /// <summary> The Usages service client. </summary>
     public partial class UsagesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

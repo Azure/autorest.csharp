@@ -13,6 +13,7 @@ using body_complex.Models;
 
 namespace body_complex
 {
+    /// <summary> The Readonlyproperty service client. </summary>
     public partial class ReadonlypropertyClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

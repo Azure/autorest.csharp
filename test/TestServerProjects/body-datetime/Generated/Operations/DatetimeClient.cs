@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_datetime
 {
+    /// <summary> The Datetime service client. </summary>
     public partial class DatetimeClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

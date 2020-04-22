@@ -14,6 +14,7 @@ using model_flattening.Models;
 
 namespace model_flattening
 {
+    /// <summary> The Service service client. </summary>
     public partial class ServiceClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -16,6 +16,7 @@ using lro.Models;
 
 namespace lro
 {
+    /// <summary> The LrosaDs service client. </summary>
     public partial class LrosaDsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

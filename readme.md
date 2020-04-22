@@ -16,7 +16,7 @@
 
 ## Customizing the generated code
 
-<!-- TOC -->
+<!-- TOC depthfrom:3 -->
 
 - [Make a model internal](#make-a-model-internal)
 - [Rename a model class](#rename-a-model-class)
@@ -24,6 +24,7 @@
 - [Rename a model property](#rename-a-model-property)
 - [Change a model property type](#change-a-model-property-type)
 - [Changing member doc comment](#changing-member-doc-comment)
+- [Customize serialization/deserialization methods](#customize-serializationdeserialization-methods)
 - [Renaming an enum](#renaming-an-enum)
 - [Renaming an enum member](#renaming-an-enum-member)
 - [Make a client internal](#make-a-client-internal)
@@ -306,6 +307,87 @@ namespace Azure.Service.Models
     }
 }
 ```
+
+</details>
+
+### Customize serialization/deserialization methods
+
+Use the [Replace any generated member](#replace-any-generated-member) approach to replace Serialize/Deserialize method with a custom implementation.
+
+<details>
+
+**Generated code before (Generated/Models/Cat.Serialization.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+  public partial class Cat
+  {
+      internal static Cat DeserializeCat(JsonElement element)
+      {
+          string color = default;
+          string name = default;
+          foreach (var property in element.EnumerateObject())
+          {
+              if (property.NameEquals("color"))
+              {
+                  if (property.Value.ValueKind == JsonValueKind.Null)
+                  {
+                      continue;
+                  }
+                  color = property.Value.GetString();
+                  continue;
+              }
+              if (property.NameEquals("name"))
+              {
+                  if (property.Value.ValueKind == JsonValueKind.Null)
+                  {
+                      continue;
+                  }
+                  name = property.Value.GetString();
+                  continue;
+              }
+          }
+          return new Cat(id, name);
+      }
+  }
+}
+```
+
+**Add customized model (Cat.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+  public partial class Cat
+  {
+      internal static Cat DeserializeCat(JsonElement element)
+      {
+          string color = default;
+          string name = default;
+          foreach (var property in element.EnumerateObject())
+          {
+              if (property.NameEquals("name"))
+              {
+                  if (property.Value.ValueKind == JsonValueKind.Null)
+                  {
+                      continue;
+                  }
+                  name = property.Value.GetString();
+                  continue;
+              }
+          }
+          // WORKAROUND: server never sends color, default to black
+          color = "black";
+          return new Cat(name, color);
+      }
+  }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+Generated code won't contain the DeserializeCat method and the custom one would be used for deserialization.
 
 </details>
 

@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_duration
 {
+    /// <summary> The Duration service client. </summary>
     public partial class DurationClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

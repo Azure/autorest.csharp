@@ -13,6 +13,7 @@ using non_string_enum.Models;
 
 namespace non_string_enum
 {
+    /// <summary> The Int service client. </summary>
     public partial class IntClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

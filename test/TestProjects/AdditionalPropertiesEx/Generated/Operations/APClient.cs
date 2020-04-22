@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace AdditionalPropertiesEx
 {
+    /// <summary> The AP service client. </summary>
     public partial class APClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
