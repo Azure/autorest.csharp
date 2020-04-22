@@ -49,19 +49,15 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/346")]
-        public Task GetDateTimeRfc1123Overflow() => Test(async (host, pipeline) =>
+        public Task GetDateTimeRfc1123Overflow() => Test((host, pipeline) =>
         {
-            var result = await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetOverflowAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("Sat, 1 Jan 10000 00:00:00 GMT"), result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetOverflowAsync());
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/346")]
-        public Task GetDateTimeRfc1123Underflow() => Test(async (host, pipeline) =>
+        public Task GetDateTimeRfc1123Underflow() => Test((host, pipeline) =>
         {
-            var result = await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetUnderflowAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("Tue, 00 Jan 0000 00:00:00 GMT"), result.Value);
+            Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await new Datetimerfc1123Client(ClientDiagnostics, pipeline, host).GetUnderflowAsync());
         });
 
         [Test]
