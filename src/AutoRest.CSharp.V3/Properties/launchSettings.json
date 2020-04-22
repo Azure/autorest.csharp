@@ -16,13 +16,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer"
     },
+    "Azure.Management.Storage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Management.Storage\\Azure.Management.Storage"
+    },
     "Azure.Network.Management.Interface": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface"
-    },
-    "Azure.Storage.Management": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Management\\Azure.Storage.Management"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",
@@ -144,6 +144,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening"
     },
+    "multiple-inheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\multiple-inheritance"
+    },
     "NameConflicts": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NameConflicts"
@@ -151,6 +155,10 @@
     "non-string-enum": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum"
+    },
+    "object-type": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type"
     },
     "paging": {
       "commandName": "Project",

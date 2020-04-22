@@ -40,6 +40,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                         writer.Line($"private readonly {parameter.Type} _{parameter.Name};");
                     }
 
+                    writer.Line();
+
+                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {title}ManagementClient for mocking.");
+                    using (writer.Scope($"protected {title}ManagementClient()"))
+                    {
+                    }
+                    writer.Line();
+
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {title}ManagementClient");
                     writer.Append($"public {title}ManagementClient(");
                     foreach (Parameter parameter in allParameters.Values)

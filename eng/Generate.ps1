@@ -44,14 +44,16 @@ $testNames =
     'lro',
     'media_types',
     'model-flattening',
+    'multiple-inheritance',
     'non-string-enum',
+    'object-type',
     'paging',
     'required-optional',
     'url',
+    'url-multi-collectionFormat',
     'validation',
     'xml-service',
-    'xms-error-responses',
-    'url-multi-collectionFormat';
+    'xms-error-responses';
 
 if (!($Exclude -contains "TestServer"))
 {
@@ -91,7 +93,7 @@ $projectNames =
     'CognitiveSearch',
     'Azure.AI.FormRecognizer',
     'Azure.Storage.Tables',
-    'Azure.Storage.Management',
+    'Azure.Management.Storage',
     'Azure.Network.Management.Interface'
 
 if (!($Exclude -contains "Samples"))
