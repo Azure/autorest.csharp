@@ -377,7 +377,7 @@ namespace Azure.Service.Models
               }
           }
           // WORKAROUND: server never sends color, default to black
-          colod = "black";
+          color = "black";
           return new Cat(name, color);
       }
   }
