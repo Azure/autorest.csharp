@@ -13,6 +13,7 @@ using body_complex.Models;
 
 namespace body_complex
 {
+    /// <summary> The Polymorphicrecursive service client. </summary>
     public partial class PolymorphicrecursiveClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

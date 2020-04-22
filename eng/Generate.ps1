@@ -49,6 +49,7 @@ $testNames =
     'object-type',
     'paging',
     'required-optional',
+    'subscriptionId-apiVersion',
     'url',
     'url-multi-collectionFormat',
     'validation',

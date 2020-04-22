@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace url_multi_collectionFormat
 {
+    /// <summary> The Queries service client. </summary>
     public partial class QueriesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

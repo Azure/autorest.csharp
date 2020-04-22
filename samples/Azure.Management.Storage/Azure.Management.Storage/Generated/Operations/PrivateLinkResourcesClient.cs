@@ -14,6 +14,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
+    /// <summary> The PrivateLinkResources service client. </summary>
     public partial class PrivateLinkResourcesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

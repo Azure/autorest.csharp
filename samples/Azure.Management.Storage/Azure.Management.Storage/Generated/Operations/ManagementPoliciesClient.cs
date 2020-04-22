@@ -14,6 +14,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
+    /// <summary> The ManagementPolicies service client. </summary>
     public partial class ManagementPoliciesClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

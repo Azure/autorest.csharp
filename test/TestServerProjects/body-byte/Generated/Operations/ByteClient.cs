@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_byte
 {
+    /// <summary> The Byte service client. </summary>
     public partial class ByteClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -16,6 +16,7 @@ using lro.Models;
 
 namespace lro
 {
+    /// <summary> The LROsCustomHeader service client. </summary>
     public partial class LROsCustomHeaderClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -15,6 +15,7 @@ using body_dictionary.Models;
 
 namespace body_dictionary
 {
+    /// <summary> The Dictionary service client. </summary>
     public partial class DictionaryClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -13,6 +13,7 @@ using non_string_enum.Models;
 
 namespace non_string_enum
 {
+    /// <summary> The Float service client. </summary>
     public partial class FloatClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

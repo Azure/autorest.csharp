@@ -13,6 +13,7 @@ using body_string.Models;
 
 namespace body_string
 {
+    /// <summary> The Enum service client. </summary>
     public partial class EnumClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

@@ -13,6 +13,7 @@ using CognitiveServices.TextAnalytics.Models;
 
 namespace CognitiveServices.TextAnalytics
 {
+    /// <summary> The Service service client. </summary>
     public partial class ServiceClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

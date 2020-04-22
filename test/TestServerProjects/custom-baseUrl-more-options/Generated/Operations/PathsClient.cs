@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace custom_baseUrl_more_options
 {
+    /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

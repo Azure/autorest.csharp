@@ -15,6 +15,7 @@ using custom_baseUrl_paging.Models;
 
 namespace custom_baseUrl_paging
 {
+    /// <summary> The Paging service client. </summary>
     public partial class PagingClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

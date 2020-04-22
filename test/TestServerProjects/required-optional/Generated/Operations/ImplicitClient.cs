@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace required_optional
 {
+    /// <summary> The Implicit service client. </summary>
     public partial class ImplicitClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

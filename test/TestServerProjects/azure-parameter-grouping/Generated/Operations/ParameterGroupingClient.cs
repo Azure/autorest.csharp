@@ -13,6 +13,7 @@ using azure_parameter_grouping.Models;
 
 namespace azure_parameter_grouping
 {
+    /// <summary> The ParameterGrouping service client. </summary>
     public partial class ParameterGroupingClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

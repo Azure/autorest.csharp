@@ -13,6 +13,7 @@ using multiple_inheritance.Models;
 
 namespace multiple_inheritance
 {
+    /// <summary> The Service service client. </summary>
     public partial class ServiceClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

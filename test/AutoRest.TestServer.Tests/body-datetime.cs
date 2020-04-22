@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -128,5 +129,66 @@ namespace AutoRest.TestServer.Tests
             var value = DateTimeOffset.Parse("0001-01-01T00:00:00Z");
             return await new DatetimeClient(ClientDiagnostics, pipeline, host).PutUtcMinDateTimeAsync( value);
         });
+
+        [Test]
+        public Task GetDateTimeMaxLocalNegativeOffsetLowercase() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalNegativeOffsetLowercaseMaxDateTimeAsync());
+        });
+
+        [Test]
+        public Task GetDateTimeMaxLocalNegativeOffsetUppercase() => Test((host, pipeline) =>
+        {
+            Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalNegativeOffsetUppercaseMaxDateTimeAsync());
+        });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
+        public Task GetDateTimeMaxLocalPositiveOffsetLowercase() => Test(async (host, pipeline) =>
+        {
+            var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalPositiveOffsetLowercaseMaxDateTimeAsync();
+            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31T23:59:59.999+14:00"), response.Value);
+        });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
+        public Task GetDateTimeMaxLocalPositiveOffsetUppercase() => Test(async (host, pipeline) =>
+        {
+            var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalPositiveOffsetUppercaseMaxDateTimeAsync();
+            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31T23:59:59.999+14:00"), response.Value);
+        });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
+        public Task GetDateTimeMaxUtcLowercase() => Test(async (host, pipeline) =>
+        {
+            var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUtcLowercaseMaxDateTimeAsync();
+            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31 23:59:59.999+00:00"), response.Value);
+        });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
+        public Task GetDateTimeMaxUtcUppercase() => Test(async (host, pipeline) =>
+        {
+            var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUtcUppercaseMaxDateTimeAsync();
+            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31 23:59:59.999+00:00"), response.Value);
+        });
+
+        public override IEnumerable<string> AdditionalKnownScenarios { get; } = new[]
+        {
+            "getDateTimeNull",
+            "getDateTimeInvalid",
+            "getDateTimeOverflow",
+            "getDateTimeUnderflow",
+            "getDateTimeMaxUtcLowercase",
+            "getDateTimeMaxUtcUppercase",
+            "getDateTimeMaxLocalPositiveOffsetLowercase",
+            "getDateTimeMaxLocalPositiveOffsetUppercase",
+            "getDateTimeMaxLocalNegativeOffsetLowercase",
+            "getDateTimeMaxLocalNegativeOffsetUppercase",
+            "getDateTimeMinUtc",
+            "getDateTimeMinLocalPositiveOffset",
+            "getDateTimeMinLocalNegativeOffset"
+        };
     }
 }

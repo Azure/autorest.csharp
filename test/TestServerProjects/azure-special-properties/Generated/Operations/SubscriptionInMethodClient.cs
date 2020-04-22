@@ -12,6 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace azure_special_properties
 {
+    /// <summary> The SubscriptionInMethod service client. </summary>
     public partial class SubscriptionInMethodClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
