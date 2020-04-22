@@ -30,11 +30,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/346")]
-        public Task GetDateTimeMinLocalPositiveOffset() => Test(async (host, pipeline) =>
+        public Task GetDateTimeMinLocalPositiveOffset() => Test((host, pipeline) =>
         {
-            var result = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalPositiveOffsetMinDateTimeAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01T00:00:00+14:00"), result.Value);
+            Assert.ThrowsAsync<FormatException>(async () => await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalPositiveOffsetMinDateTimeAsync());
         });
 
         [Test]
@@ -51,19 +49,15 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/346")]
-        public Task GetDateTimeOverflow() => Test(async (host, pipeline) =>
+        public Task GetDateTimeOverflow() => Test((host, pipeline) =>
         {
-            var result = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetOverflowAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31T23:59:59.9999999-14:00"), result.Value);
+            Assert.ThrowsAsync<FormatException>(async () => await new DatetimeClient(ClientDiagnostics, pipeline, host).GetOverflowAsync());
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/346")]
-        public Task GetDateTimeUnderflow() => Test(async (host, pipeline) =>
+        public Task GetDateTimeUnderflow() => Test((host, pipeline) =>
         {
-            var result = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUnderflowAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("0000-00-00T00:00:00.0000000+00:00"), result.Value);
+            Assert.ThrowsAsync<FormatException>(async () => await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUnderflowAsync());
         });
 
         [Test]
@@ -83,7 +77,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/346")]
+        [Ignore("Optional, required value is out of range of supported")]
         public Task PutDateTimeMaxLocalNegativeOffset() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("9999-12-31T23:59:59.9999999-14:00");
