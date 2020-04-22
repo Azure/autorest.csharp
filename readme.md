@@ -314,6 +314,7 @@ namespace Azure.Service.Models
 
 Use the [Replace any generated member](#replace-any-generated-member) approach to replace Serialize/Deserialize method with a custom implementation.
 
+<details>
 
 **Generated code before (Generated/Models/Cat.Serialization.cs):**
 
