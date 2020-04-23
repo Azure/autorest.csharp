@@ -352,15 +352,15 @@ namespace custom_baseUrl_paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
             if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
             {
-                uri.AppendRaw(nextLink, false);
+                uri.Reset(new Uri(nextLink));
             }
             else
             {
-                uri.AppendRaw("http://", false);
-                uri.AppendRaw(accountName, false);
-                uri.AppendRaw(host, false);
                 uri.AppendPath(nextLink, false);
             }
             request.Uri = uri;

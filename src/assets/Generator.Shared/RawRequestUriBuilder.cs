@@ -13,12 +13,22 @@ namespace Azure.Core
         private const string SchemeSeparator = "://";
         private const char HostSeparator = '/';
         private const char PortSeparator = ':';
-        private static readonly char[] HostOrPort = new[] {HostSeparator, PortSeparator};
+        private static readonly char[] HostOrPort = { HostSeparator, PortSeparator };
         private const char QueryBeginSeparator = '?';
         private const char QueryContinueSeparator = '&';
         private const char QueryValueSeparator = '=';
 
         private RawWritingPosition _position = RawWritingPosition.Scheme;
+
+        private static (string Name, string Value) GetQueryParts(string queryUnparsed)
+        {
+            int separatorIndex = queryUnparsed.IndexOf(QueryValueSeparator);
+            if (separatorIndex == -1)
+            {
+                return (queryUnparsed, string.Empty);
+            }
+            return (queryUnparsed.Substring(0, separatorIndex), queryUnparsed.Substring(separatorIndex + 1));
+        }
 
         public void AppendRaw(string value, bool escape)
         {
@@ -55,7 +65,7 @@ namespace Azure.Core
                     {
                         Host += value.Substring(0, separator);
 
-                        _position = value[separator] == HostSeparator ? RawWritingPosition.Rest : RawWritingPosition.Port;
+                        _position = value[separator] == HostSeparator ? RawWritingPosition.Path : RawWritingPosition.Port;
 
                         value = value.Substring(separator + 1);
                     }
@@ -72,13 +82,43 @@ namespace Azure.Core
                     {
                         Port = int.Parse(value.Substring(0, separator), CultureInfo.InvariantCulture);
                         value = value.Substring(separator + 1);
-                        _position = RawWritingPosition.Rest;
+                        _position = RawWritingPosition.Path;
                     }
                 }
-                else
+                else if (_position == RawWritingPosition.Path)
                 {
-                    AppendPath(value, escape);
-                    value = string.Empty;
+                    int separatorIndex = value.IndexOf(QueryBeginSeparator);
+                    if (separatorIndex == -1)
+                    {
+                        AppendPath(value, escape);
+                        value = string.Empty;
+                    }
+                    else
+                    {
+                        AppendPath(value.Substring(0, separatorIndex), escape);
+                        value = value.Substring(separatorIndex + 1);
+                        _position = RawWritingPosition.Query;
+                    }
+                }
+                else if (_position == RawWritingPosition.Query)
+                {
+                    int separatorIndex = value.IndexOf(QueryContinueSeparator);
+                    if (separatorIndex == 0)
+                    {
+                        value = value.Substring(1);
+                    }
+                    else if (separatorIndex == -1)
+                    {
+                        (string queryName, string queryValue) = GetQueryParts(value);
+                        AppendQuery(queryName, queryValue, escape);
+                        value = string.Empty;
+                    }
+                    else
+                    {
+                        (string queryName, string queryValue) = GetQueryParts(value.Substring(0, separatorIndex));
+                        AppendQuery(queryName, queryValue, escape);
+                        value = value.Substring(separatorIndex + 1);
+                    }
                 }
             }
         }
@@ -88,7 +128,8 @@ namespace Azure.Core
             Scheme,
             Host,
             Port,
-            Rest
+            Path,
+            Query
         }
 
         public void AppendRawNextLink(string nextLink, bool escape)
