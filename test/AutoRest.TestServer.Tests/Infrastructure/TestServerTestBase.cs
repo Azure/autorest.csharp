@@ -99,13 +99,16 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             try
             {
+                var testClientOptions = new TestClientOptions
+                {
+                    Transport = new HttpClientTransport(server.Server.Client),
+                    Retry = { Delay = TimeSpan.FromMilliseconds(50) },
+                };
+                testClientOptions.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
+
                 var pipeline = useSimplePipeline
                     ? new HttpPipeline(new HttpClientTransport(server.Server.Client))
-                    : HttpPipelineBuilder.Build(new TestClientOptions
-                    {
-                        Transport = new HttpClientTransport(server.Server.Client),
-                        Retry = { Delay = TimeSpan.FromMilliseconds(50) }
-                    });
+                    : HttpPipelineBuilder.Build(testClientOptions);
 
                 await test(server.Host, pipeline);
             }
