@@ -20,45 +20,47 @@ namespace AutoRest.TestServer.Tests
         public LroTest(TestServerVersion version) : base(version, "lros") { }
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/683")]
         public Task CustomHeaderPostAsyncSucceded() => TestStatus(async (host, pipeline) =>
         {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var value = new Product();
             var operation = await new LROsCustomHeaderClient(ClientDiagnostics, pipeline, host).StartPostAsyncRetrySucceededAsync(value);
             return await operation.WaitForCompletionAsync().ConfigureAwait(false);
         });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/683")]
         public Task CustomHeaderPostAsyncSucceded_Sync() => TestStatus((host, pipeline) =>
         {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var value = new Product();
             var operation = new LROsCustomHeaderClient(ClientDiagnostics, pipeline, host).StartPostAsyncRetrySucceeded(value);
             return WaitForCompletion(operation);
         });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
         public Task CustomHeaderPostSucceeded() => TestStatus(async (host, pipeline) =>
         {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var value = new Product();
             var operation = await new LROsCustomHeaderClient(ClientDiagnostics, pipeline, host).StartPost202Retry200Async(value);
             return await operation.WaitForCompletionAsync().ConfigureAwait(false);
         });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
         public Task CustomHeaderPostSucceeded_Sync() => TestStatus((host, pipeline) =>
         {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var value = new Product();
             var operation = new LROsCustomHeaderClient(ClientDiagnostics, pipeline, host).StartPost202Retry200(value);
             return WaitForCompletion(operation);
         });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
         public Task CustomHeaderPutAsyncSucceded() => Test(async (host, pipeline) =>
         {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var value = new Product();
             var operation = await new LROsCustomHeaderClient(ClientDiagnostics, pipeline, host).StartPutAsyncRetrySucceededAsync(value);
             var result =  await operation.WaitForCompletionAsync().ConfigureAwait(false);
@@ -68,9 +70,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
         public Task CustomHeaderPutAsyncSucceded_Sync() => Test((host, pipeline) =>
         {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var value = new Product();
             var operation = new LROsCustomHeaderClient(ClientDiagnostics, pipeline, host).StartPutAsyncRetrySucceeded(value);
             var result = WaitForCompletion(operation);
@@ -80,9 +82,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
         public Task CustomHeaderPutSucceeded() => Test(async (host, pipeline) =>
         {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var value = new Product();
             var operation = await new LROsCustomHeaderClient(ClientDiagnostics, pipeline, host).StartPut201CreatingSucceeded200Async(value);
             var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
@@ -92,9 +94,9 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
         public Task CustomHeaderPutSucceeded_Sync() => Test((host, pipeline) =>
         {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var value = new Product();
             var operation = new LROsCustomHeaderClient(ClientDiagnostics, pipeline, host).StartPut201CreatingSucceeded200(value);
             var result = WaitForCompletion(operation);
