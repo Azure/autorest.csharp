@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         public PagingTests(TestServerVersion version) : base(version, "paging") { }
 
         [Test]
-        [Ignore("Partial nextLink support: https://github.com/Azure/autorest.csharp/issues/403")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingCustomUrlPartialNextLink() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -137,7 +137,7 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        [Ignore("Change path appending strategy: https://github.com/Azure/autorest.csharp/issues/411")]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingFragment() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -309,10 +309,10 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
             Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
             Assert.AreEqual("*&*#&$", resultPage.ContinuationToken);
-            Assert.ThrowsAsync<UriFormatException>(async () => await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesFailureNextPageAsync(resultPage.ContinuationToken));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetMultiplePagesFailureNextPageAsync(resultPage.ContinuationToken));
 
             var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureUriAsync();
-            Assert.ThrowsAsync<UriFormatException>(async () =>
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
                 await foreach (var page in pageableAsync.AsPages())
                 {
@@ -326,7 +326,7 @@ namespace AutoRest.TestServer.Tests
 
             id = 1;
             var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetMultiplePagesFailureUri();
-            Assert.Throws<UriFormatException>(() =>
+            Assert.Throws<RequestFailedException>(() =>
             {
                 foreach (var page in pageable.AsPages())
                 {

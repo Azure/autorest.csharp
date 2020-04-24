@@ -877,7 +877,8 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLink, false);
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -974,7 +975,8 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLink, false);
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }

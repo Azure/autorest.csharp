@@ -245,7 +245,7 @@ namespace custom_baseUrl_paging
             uri.AppendRaw(accountName, false);
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/customurl/", false);
-            uri.AppendPath(nextLink, false);
+            uri.AppendRaw(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -352,7 +352,10 @@ namespace custom_baseUrl_paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLink, false);
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -459,7 +462,10 @@ namespace custom_baseUrl_paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(nextLink, false);
+            uri.AppendRaw("http://", false);
+            uri.AppendRaw(accountName, false);
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
