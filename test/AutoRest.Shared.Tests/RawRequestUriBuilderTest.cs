@@ -36,6 +36,7 @@ namespace Azure.Core.Tests
         [TestCase("http://|localhost|:12345|/more|?one=1|&two=2|&three=3", null, null, "http://localhost:12345/more?one=1&two=2&three=3")]
         [TestCase("http://localhost|/more?one=&two=&three=", null, null, "http://localhost/more?one=&two=&three=")]
         [TestCase("http://localhost|/more?one&two&three", null, null, "http://localhost/more?one=&two=&three=")]
+        [TestCase("http://localhost|/more?one&&&&&&&three", null, null, "http://localhost/more?one=&three=")]
         public void AppendRawWorks(string rawPart, string host, string pathPart, string expected)
         {
             var builder = new RawRequestUriBuilder();
@@ -52,6 +53,71 @@ namespace Azure.Core.Tests
             if (pathPart != null)
             {
                 builder.AppendPath(pathPart, false);
+            }
+
+            Assert.AreEqual(expected, builder.ToUri().ToString());
+        }
+
+        [Theory]
+        [TestCase("http://localhost:12345", "/more/", "andMore", "http://localhost:12345/more/andMore")]
+        [TestCase("http://localhost", "/more/", "andMore", "http://localhost/more/andMore")]
+        [TestCase("http://localhost", "/more/", "andMore?one=1", "http://localhost/more/andMore?one=1")]
+        [TestCase("http://localhost", "/more/", "andMore|?one=1", "http://localhost/more/andMore?one=1")]
+        [TestCase("http://localhost", "/more/", "andMore|?one=1&two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost", "/more/", "andMore|?one=1|&two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost", "/more/", "andMore?one=1|&two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost/", "more/|andMore", "?one=1", "http://localhost/more/andMore?one=1")]
+        [TestCase("http://local|host/", "more/|andMore", "?one=1", "http://localhost/more/andMore?one=1")]
+        [TestCase("http://localhost|/", "more/|andMore", "?one=1", "http://localhost/more/andMore?one=1")]
+        [TestCase("http://localhost", "more|/|andMore|/", "evenMore?one=1", "http://localhost/more/andMore/evenMore?one=1")]
+        [TestCase("http://localhost/|more|/", "andMore|/", "evenMore|/|most", "http://localhost/more/andMore/evenMore/most")]
+        public void AppendRawThenPathThenRaw(string rawPartBefore, string pathPart, string rawPartAfter, string expected)
+        {
+            var builder = new RawRequestUriBuilder();
+            foreach (var c in rawPartBefore.Split('|'))
+            {
+                builder.AppendRaw(c, false);
+            }
+
+            foreach (var c in pathPart.Split('|'))
+            {
+                builder.AppendPath(c, false);
+            }
+
+            foreach (var c in rawPartAfter.Split('|'))
+            {
+                builder.AppendRaw(c, false);
+            }
+
+            Assert.AreEqual(expected, builder.ToUri().ToString());
+        }
+
+        [Theory]
+        [TestCase("http://localhost/", "one", "1", "more?two=2", "http://localhost/more?one=1&two=2")]
+        [TestCase("http://localhost:12345/", "one", "1", "more?two=2", "http://localhost:12345/more?one=1&two=2")]
+        [TestCase("http://localhost/more/", "one", "1", "andMore?two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost/more", "one", "1", "/andMore?two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost", "one", "1", "/more?two=2", "http://localhost/more?one=1&two=2")]
+        [TestCase("http://localhost:12345", "one", "1", "/more?two=2", "http://localhost:12345/more?one=1&two=2")]
+        [TestCase("http://localhost", "one", "1", "/more|/andMore?two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost|/more", "one", "1", "/andMore?two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost|/|more", "one", "1", "/|andMore?two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost|/", "one", "1", "more|/|andMore?two=2", "http://localhost/more/andMore?one=1&two=2")]
+        [TestCase("http://localhost/", "one", "1", "more/|andMore?two=2|&three=3", "http://localhost/more/andMore?one=1&two=2&three=3")]
+        [TestCase("http://localhost:12345/", "one", "1", "more/|andMore?two=2|&three=3", "http://localhost:12345/more/andMore?one=1&two=2&three=3")]
+        public void AppendRawThenQueryThenRaw(string rawPartBefore, string queryName, string queryValue, string rawPartAfter, string expected)
+        {
+            var builder = new RawRequestUriBuilder();
+            foreach (var c in rawPartBefore.Split('|'))
+            {
+                builder.AppendRaw(c, false);
+            }
+
+            builder.AppendQuery(queryName, queryValue);
+
+            foreach (var c in rawPartAfter.Split('|'))
+            {
+                builder.AppendRaw(c, false);
             }
 
             Assert.AreEqual(expected, builder.ToUri().ToString());

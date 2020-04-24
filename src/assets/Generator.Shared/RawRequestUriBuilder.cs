@@ -45,10 +45,8 @@ namespace Azure.Core
                     else
                     {
                         Scheme += value.Substring(0, separator);
-
                         // TODO: Find a better way to map schemes to default ports
                         Port = string.Equals(Scheme, "https", StringComparison.OrdinalIgnoreCase) ? 443 : 80;
-
                         value = value.Substring(separator + SchemeSeparator.Length);
                         _position = RawWritingPosition.Host;
                     }
@@ -58,8 +56,17 @@ namespace Azure.Core
                     int separator = value.IndexOfAny(HostOrPort);
                     if (separator == -1)
                     {
-                        Host += value;
-                        value = string.Empty;
+                        if (string.IsNullOrEmpty(Path))
+                        {
+                            Host += value;
+                            value = string.Empty;
+                        }
+                        else
+                        {
+                            // All Host information must be written before Path information
+                            // If Path already has information, we transition to writing Path
+                            _position = RawWritingPosition.Path;
+                        }
                     }
                     else
                     {
@@ -81,6 +88,7 @@ namespace Azure.Core
                         Port = int.Parse(value.Substring(0, separator), CultureInfo.InvariantCulture);
                         value = value.Substring(separator + 1);
                     }
+                    // Port cannot be split (like Host), so always transition to Path when Port is parsed
                     _position = RawWritingPosition.Path;
                 }
                 else if (_position == RawWritingPosition.Path)
