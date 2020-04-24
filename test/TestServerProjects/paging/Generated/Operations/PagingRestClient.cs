@@ -1338,7 +1338,7 @@ namespace paging
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
-            uri.AppendRawNextLink(nextLink, false);
+            uri.AppendRaw(nextLink, false);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             return message;
@@ -1460,7 +1460,7 @@ namespace paging
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(customParameterGroup.Tenant, true);
             uri.AppendPath("/", false);
-            uri.AppendRawNextLink(nextLink, false);
+            uri.AppendRaw(nextLink, false);
             uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
             request.Uri = uri;
             return message;
@@ -1568,15 +1568,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -1673,15 +1666,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -1778,15 +1764,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -1883,15 +1862,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -2004,15 +1976,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -2125,15 +2090,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
             {
@@ -2254,15 +2212,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -2359,15 +2310,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -2464,15 +2408,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -2569,15 +2506,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -2674,15 +2604,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -2779,15 +2702,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
@@ -2904,15 +2820,8 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }

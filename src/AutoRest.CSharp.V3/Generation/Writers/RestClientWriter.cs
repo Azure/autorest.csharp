@@ -117,37 +117,24 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"{request}.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
                 writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
-                Parameter? nextLinkParameter = parameters.FirstOrDefault(p => p.Name == "nextLink");
-                bool hasArtificialNextLink = nextLinkParameter?.IsArtificial == true;
-                PathSegment? nextLinkSegment = clientMethod.Request.PathSegments.FirstOrDefault(s => !s.Value.IsConstant && s.Value.Reference.Name == "nextLink");
-                // Artificial nextLink needs additional logic for relative versus absolute links
-                if (hasArtificialNextLink)
+                foreach (var segment in clientMethod.Request.PathSegments)
                 {
-                    using (writer.Scope($"if ({nextLinkParameter!.Name:D}.StartsWith({typeof(Uri)}.UriSchemeHttp, {typeof(StringComparison)}.InvariantCultureIgnoreCase))"))
+                    if (!segment.Value.IsConstant && segment.Value.Reference.Name == "nextLink")
                     {
-                        WriteUriFragment(writer, uri, nextLinkSegment!);
-                    }
-                }
-
-                using (hasArtificialNextLink ? writer.Scope($"else") : default)
-                {
-                    foreach (var segment in clientMethod.Request.HostSegments)
-                    {
-                        WriteUriFragment(writer, uri, segment);
-                    }
-                    writer.RemoveTrailingComma();
-
-                    foreach (var segment in clientMethod.Request.PathSegments)
-                    {
-                        // Natural nextLink parameters need to use a different method to parse path and query elements
-                        if (nextLinkSegment != null && segment == nextLinkSegment && !hasArtificialNextLink)
+                        if (segment.IsRaw)
                         {
-                            WriteUriFragment(writer, uri, segment, "AppendRawNextLink");
+                            // Artificial nextLink needs additional logic for relative versus absolute links
+                            WritePathSegment(writer, uri, segment, "AppendRawNextLink");
                         }
                         else
                         {
-                            WritePathSegment(writer, uri, segment);
+                            // Natural nextLink parameters need to use a different method to parse path and query elements
+                            WritePathSegment(writer, uri, segment, "AppendRaw");
                         }
+                    }
+                    else
+                    {
+                        WritePathSegment(writer, uri, segment);
                     }
                 }
 
@@ -247,14 +234,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 default:
                     throw new NotImplementedException(bodySerialization.ToString());
             }
-        }
-
-        private void WriteUriFragment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment, string methodName = "AppendRaw")
-        {
-            writer.Append($"{uri}.{methodName}(");
-            WriteConstantOrParameter(writer, segment.Value);
-            WriteSerializationFormat(writer, segment.Format);
-            writer.Line($", {segment.Escape:L});");
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)
@@ -363,10 +342,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WritePathSegment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment)
+        private void WritePathSegment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment, string? methodName = null)
         {
-            writer.Append($"{uri}.AppendPath(");
-            WriteConstantOrParameter(writer, segment.Value, enumAsString: true);
+            methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
+            writer.Append($"{uri}.{methodName}(");
+            WriteConstantOrParameter(writer, segment.Value, enumAsString: !segment.IsRaw);
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");
         }

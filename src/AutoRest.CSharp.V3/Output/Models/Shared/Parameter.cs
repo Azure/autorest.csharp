@@ -8,14 +8,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
 {
     internal class Parameter
     {
-        public Parameter(string name, string? description, CSharpType type, Constant? defaultValue, bool isRequired, bool isArtificial = false)
+        public Parameter(string name, string? description, CSharpType type, Constant? defaultValue, bool isRequired)
         {
             Name = name;
             Description = description;
             Type = type;
             DefaultValue = defaultValue;
             IsRequired = isRequired;
-            IsArtificial = isArtificial;
         }
 
         public CSharpType Type { get; }
@@ -23,7 +22,5 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
         public string? Description { get; }
         public Constant? DefaultValue { get; }
         public bool IsRequired { get; }
-        // Indicates the parameter was created by the generator, not defined in the swagger
-        public bool IsArtificial { get; }
     }
 }

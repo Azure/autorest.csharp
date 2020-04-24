@@ -64,9 +64,7 @@ namespace Azure.Core
                     else
                     {
                         Host += value.Substring(0, separator);
-
                         _position = value[separator] == HostSeparator ? RawWritingPosition.Path : RawWritingPosition.Port;
-
                         value = value.Substring(separator + 1);
                     }
                 }
@@ -82,32 +80,32 @@ namespace Azure.Core
                     {
                         Port = int.Parse(value.Substring(0, separator), CultureInfo.InvariantCulture);
                         value = value.Substring(separator + 1);
-                        _position = RawWritingPosition.Path;
                     }
+                    _position = RawWritingPosition.Path;
                 }
                 else if (_position == RawWritingPosition.Path)
                 {
-                    int separatorIndex = value.IndexOf(QueryBeginSeparator);
-                    if (separatorIndex == -1)
+                    int separator = value.IndexOf(QueryBeginSeparator);
+                    if (separator == -1)
                     {
                         AppendPath(value, escape);
                         value = string.Empty;
                     }
                     else
                     {
-                        AppendPath(value.Substring(0, separatorIndex), escape);
-                        value = value.Substring(separatorIndex + 1);
+                        AppendPath(value.Substring(0, separator), escape);
+                        value = value.Substring(separator + 1);
                         _position = RawWritingPosition.Query;
                     }
                 }
                 else if (_position == RawWritingPosition.Query)
                 {
-                    int separatorIndex = value.IndexOf(QueryContinueSeparator);
-                    if (separatorIndex == 0)
+                    int separator = value.IndexOf(QueryContinueSeparator);
+                    if (separator == 0)
                     {
                         value = value.Substring(1);
                     }
-                    else if (separatorIndex == -1)
+                    else if (separator == -1)
                     {
                         (string queryName, string queryValue) = GetQueryParts(value);
                         AppendQuery(queryName, queryValue, escape);
@@ -115,9 +113,9 @@ namespace Azure.Core
                     }
                     else
                     {
-                        (string queryName, string queryValue) = GetQueryParts(value.Substring(0, separatorIndex));
+                        (string queryName, string queryValue) = GetQueryParts(value.Substring(0, separator));
                         AppendQuery(queryName, queryValue, escape);
-                        value = value.Substring(separatorIndex + 1);
+                        value = value.Substring(separator + 1);
                     }
                 }
             }
@@ -134,53 +132,14 @@ namespace Azure.Core
 
         public void AppendRawNextLink(string nextLink, bool escape)
         {
-            (string Name, string Value) GetQueryParts(string queryUnparsed)
+            // If it is an absolute link, we use the nextLink as the entire url
+            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
             {
-                int separatorIndex = nextLink.IndexOf(QueryValueSeparator);
-                return (queryUnparsed.Substring(0, separatorIndex), queryUnparsed.Substring(separatorIndex + 1));
+                Reset(new Uri(nextLink));
+                return;
             }
 
-            RawNextLinkWritingPosition position = RawNextLinkWritingPosition.Path;
-            while (!string.IsNullOrWhiteSpace(nextLink))
-            {
-                if (position == RawNextLinkWritingPosition.Path)
-                {
-                    int separatorIndex = nextLink.IndexOf(QueryBeginSeparator);
-                    if (separatorIndex == -1)
-                    {
-                        AppendPath(nextLink, escape);
-                        nextLink = string.Empty;
-                    }
-                    else
-                    {
-                        AppendPath(nextLink.Substring(0, separatorIndex), escape);
-                        nextLink = nextLink.Substring(separatorIndex + 1);
-                        position = RawNextLinkWritingPosition.Query;
-                    }
-                }
-                else if (position == RawNextLinkWritingPosition.Query)
-                {
-                    int separatorIndex = nextLink.IndexOf(QueryContinueSeparator);
-                    if (separatorIndex == -1)
-                    {
-                        (string name, string value) = GetQueryParts(nextLink);
-                        AppendQuery(name, value, escape);
-                        nextLink = string.Empty;
-                    }
-                    else
-                    {
-                        (string name, string value) = GetQueryParts(nextLink.Substring(0, separatorIndex));
-                        AppendQuery(name, value, escape);
-                        nextLink = nextLink.Substring(separatorIndex + 1);
-                    }
-                }
-            }
-        }
-
-        private enum RawNextLinkWritingPosition
-        {
-            Path,
-            Query
+            AppendPath(nextLink, escape);
         }
     }
 }

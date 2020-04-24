@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         continue;
                     }
 
-                    RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters, responseHeaderModel);
+                    RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters.ToArray(), responseHeaderModel);
                     operationMethods.Add(new OperationMethod(operation, method));
                 }
             }
@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
+        private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, RequestParameter[] requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
             Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
@@ -208,7 +208,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 if (requestParameter.Implementation == ImplementationLocation.Method)
                 {
                     Parameter? parameter = null;
-                    // TODO: always generate virtual paramters
+                    // TODO: always generate virtual parameters
                     if (!(requestParameter is VirtualParameter) &&
                         requestParameter.Schema is ConstantSchema constant)
                     {
@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                             bodyParameter = (requestParameter, constantOrReference);
                             break;
                         case ParameterLocation.Uri:
-                            uriParameters[serializedName] = new PathSegment(constantOrReference, !skipEncoding, serializationFormat);
+                            uriParameters.Add(serializedName, new PathSegment(constantOrReference, !skipEncoding, serializationFormat, isRaw: true));
                             break;
                     }
                 }
@@ -305,7 +305,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                                 actualParameter));
                         }
 
-
                         body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
                     }
                     else
@@ -315,10 +314,12 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 }
             }
 
+            PathSegment[] pathSegments = GetPathSegments(httpRequest.Uri, uriParameters, isRaw: true)
+                .Concat(GetPathSegments(httpRequest.Path, pathParameters))
+                .ToArray();
             Request request = new Request(
                 httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
-                ToPathParts(httpRequest.Uri, uriParameters),
-                ToPathParts(httpRequest.Path, pathParameters),
+                pathSegments,
                 query.ToArray(),
                 headers.ToArray(),
                 body
@@ -425,26 +426,30 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 "The URL to the next page of results.",
                 typeof(string),
                 defaultValue: null,
-                isRequired: true,
-                isArtificial: true);
-            List<Parameter> parameters = new List<Parameter> { nextPageUrlParameter };
-            parameters.AddRange(method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name));
+                isRequired: true);
 
+            PathSegment[] pathSegments = method.Request.PathSegments
+                .Where(ps => ps.IsRaw)
+                .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
+                .ToArray();
             var request = new Request(
                 method.Request.HttpMethod,
-                method.Request.HostSegments,
-                new[] { new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default) },
+                pathSegments,
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
                 null
             );
+
+            Parameter[] parameters = method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name)
+                .Prepend(nextPageUrlParameter)
+                .ToArray();
 
             return new RestClientMethod(
                 $"{method.Name}NextPage",
                 method.Description,
                 method.ReturnType,
                 request,
-                parameters.ToArray(),
+                parameters,
                 method.Responses,
                 method.HeaderModel,
                 method.Diagnostics);
@@ -574,20 +579,17 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
         }
 
-        private static PathSegment[] ToPathParts(string httpRequestUri, Dictionary<string, PathSegment> parameters)
+        private static IEnumerable<PathSegment> GetPathSegments(string httpRequestUri, Dictionary<string, PathSegment> parameters, bool isRaw = false)
         {
             PathSegment TextSegment(string text)
             {
-                return new PathSegment(BuilderHelpers.StringConstant(text), false, SerializationFormat.Default);
+                return new PathSegment(BuilderHelpers.StringConstant(text), false, SerializationFormat.Default, isRaw);
             }
 
-            List<PathSegment> host = new List<PathSegment>();
             foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
-                host.Add(isLiteral ? TextSegment(text) : parameters[text]);
+                yield return isLiteral ? TextSegment(text) : parameters[text];
             }
-
-            return host.ToArray();
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>
