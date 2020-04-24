@@ -1220,16 +1220,9 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(endpoint, false);
-                uri.AppendRaw("/formrecognizer/v2.0-preview", false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw("/formrecognizer/v2.0-preview", false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }

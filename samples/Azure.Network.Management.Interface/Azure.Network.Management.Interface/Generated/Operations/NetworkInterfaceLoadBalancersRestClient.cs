@@ -168,15 +168,8 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            if (nextLink.StartsWith(Uri.UriSchemeHttp, StringComparison.InvariantCultureIgnoreCase))
-            {
-                uri.AppendRaw(nextLink, false);
-            }
-            else
-            {
-                uri.AppendRaw(host, false);
-                uri.AppendPath(nextLink, false);
-            }
+            uri.AppendRaw(host, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
         }
