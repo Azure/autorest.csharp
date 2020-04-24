@@ -163,15 +163,20 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
-        public Task AzureXmsRequestClientIdNull() => TestStatus(async (host, pipeline) => await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync());
+        public Task AzureXmsRequestClientIdNull() => TestStatus(async (host, pipeline) =>
+        {
+            using var _ = ClientRequestIdScope.Start("");
+            return await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync();
+        });
 
         [Test]
-        [Ignore("Needs to send x-ms-client-request-id: https://github.com/Azure/autorest.csharp/issues/446")]
-        public Task AzureXmsRequestClientOverwrite() => TestStatus(async (host, pipeline) => await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync());
+        public Task AzureXmsRequestClientOverwrite() => TestStatus(async (host, pipeline) =>
+        {
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+            return await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync();
+        });
 
         [Test]
-        [Ignore("x-ms-client-request-id injected via policy, not using request headers: https://github.com/Azure/autorest.csharp/issues/446")]
         public Task AzureXmsRequestClientOverwriteViaParameter() => TestStatus(async (host, pipeline) =>
         {
             var value = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
