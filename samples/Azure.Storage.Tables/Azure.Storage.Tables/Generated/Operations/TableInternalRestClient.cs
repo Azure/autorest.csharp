@@ -17,15 +17,15 @@ using Azure.Storage.Tables.Models;
 
 namespace Azure.Storage.Tables
 {
-    internal partial class TableRestClient
+    internal partial class TableInternalRestClient
     {
         private string url;
         private string version;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of TableRestClient. </summary>
-        public TableRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
+        /// <summary> Initializes a new instance of TableInternalRestClient. </summary>
+        public TableInternalRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
         {
             if (url == null)
             {
@@ -80,15 +80,15 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableQueryResponse, TableQueryHeaders>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableQueryResponse, TableInternalQueryHeaders>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TableClient.Query");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Query");
             scope.Start();
             try
             {
                 using var message = CreateQueryRequest(requestId, queryOptions);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableQueryHeaders(message.Response);
+                var headers = new TableInternalQueryHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -120,15 +120,15 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableQueryResponse, TableQueryHeaders> Query(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableQueryResponse, TableInternalQueryHeaders> Query(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TableClient.Query");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Query");
             scope.Start();
             try
             {
                 using var message = CreateQueryRequest(requestId, queryOptions);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableQueryHeaders(message.Response);
+                var headers = new TableInternalQueryHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -187,20 +187,20 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableResponse, TableCreateHeaders>> CreateAsync(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableResponse, TableInternalCreateHeaders>> CreateAsync(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
                 throw new ArgumentNullException(nameof(tableProperties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableCreateHeaders(message.Response);
+                var headers = new TableInternalCreateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -218,7 +218,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
-                        return ResponseWithHeaders.FromValue<TableResponse, TableCreateHeaders>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<TableResponse, TableInternalCreateHeaders>(null, headers, message.Response);
                     default:
                         throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                 }
@@ -235,20 +235,20 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableResponse, TableCreateHeaders> Create(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableResponse, TableInternalCreateHeaders> Create(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
                 throw new ArgumentNullException(nameof(tableProperties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Create");
             scope.Start();
             try
             {
                 using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableCreateHeaders(message.Response);
+                var headers = new TableInternalCreateHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -266,7 +266,7 @@ namespace Azure.Storage.Tables
                             return ResponseWithHeaders.FromValue(value, headers, message.Response);
                         }
                     case 204:
-                        return ResponseWithHeaders.FromValue<TableResponse, TableCreateHeaders>(null, headers, message.Response);
+                        return ResponseWithHeaders.FromValue<TableResponse, TableInternalCreateHeaders>(null, headers, message.Response);
                     default:
                         throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                 }
@@ -301,20 +301,20 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableDeleteHeaders>> DeleteAsync(string table, string requestId = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableInternalDeleteHeaders>> DeleteAsync(string table, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(table, requestId);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableDeleteHeaders(message.Response);
+                var headers = new TableInternalDeleteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -334,20 +334,20 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableDeleteHeaders> Delete(string table, string requestId = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableInternalDeleteHeaders> Delete(string table, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Delete");
             scope.Start();
             try
             {
                 using var message = CreateDeleteRequest(table, requestId);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableDeleteHeaders(message.Response);
+                var headers = new TableInternalDeleteHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -409,20 +409,20 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, TableQueryEntitiesHeaders>> QueryEntitiesAsync(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesHeaders>> QueryEntitiesAsync(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.QueryEntities");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntities");
             scope.Start();
             try
             {
                 using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableQueryEntitiesHeaders(message.Response);
+                var headers = new TableInternalQueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -456,20 +456,20 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableEntityQueryResponse, TableQueryEntitiesHeaders> QueryEntities(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesHeaders> QueryEntities(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.QueryEntities");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntities");
             scope.Start();
             try
             {
                 using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableQueryEntitiesHeaders(message.Response);
+                var headers = new TableInternalQueryEntitiesHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -545,7 +545,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, TableQueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -560,13 +560,13 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.QueryEntitiesWithPartitionAndRowKey");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntitiesWithPartitionAndRowKey");
             scope.Start();
             try
             {
                 using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
+                var headers = new TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -602,7 +602,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableEntityQueryResponse, TableQueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -617,13 +617,13 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.QueryEntitiesWithPartitionAndRowKey");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntitiesWithPartitionAndRowKey");
             scope.Start();
             try
             {
                 using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
+                var headers = new TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -705,7 +705,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableUpdateEntityHeaders>> UpdateEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableInternalUpdateEntityHeaders>> UpdateEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -720,13 +720,13 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.UpdateEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.UpdateEntity");
             scope.Start();
             try
             {
                 using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableUpdateEntityHeaders(message.Response);
+                var headers = new TableInternalUpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -751,7 +751,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableUpdateEntityHeaders> UpdateEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableInternalUpdateEntityHeaders> UpdateEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -766,13 +766,13 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.UpdateEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.UpdateEntity");
             scope.Start();
             try
             {
                 using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableUpdateEntityHeaders(message.Response);
+                var headers = new TableInternalUpdateEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -828,7 +828,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableDeleteEntityHeaders>> DeleteEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableInternalDeleteEntityHeaders>> DeleteEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -843,13 +843,13 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.DeleteEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.DeleteEntity");
             scope.Start();
             try
             {
                 using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableDeleteEntityHeaders(message.Response);
+                var headers = new TableInternalDeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -873,7 +873,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableDeleteEntityHeaders> DeleteEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableInternalDeleteEntityHeaders> DeleteEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -888,13 +888,13 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.DeleteEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.DeleteEntity");
             scope.Start();
             try
             {
                 using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableDeleteEntityHeaders(message.Response);
+                var headers = new TableInternalDeleteEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -957,20 +957,20 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInsertEntityHeaders>> InsertEntityAsync(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInternalInsertEntityHeaders>> InsertEntityAsync(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.InsertEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.InsertEntity");
             scope.Start();
             try
             {
                 using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInsertEntityHeaders(message.Response);
+                var headers = new TableInternalInsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -1017,20 +1017,20 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInsertEntityHeaders> InsertEntity(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInternalInsertEntityHeaders> InsertEntity(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.InsertEntity");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.InsertEntity");
             scope.Start();
             try
             {
                 using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableInsertEntityHeaders(message.Response);
+                var headers = new TableInternalInsertEntityHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 201:
@@ -1098,20 +1098,20 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, TableGetAccessPolicyHeaders>> GetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, TableInternalGetAccessPolicyHeaders>> GetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.GetAccessPolicy");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.GetAccessPolicy");
             scope.Start();
             try
             {
                 using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableGetAccessPolicyHeaders(message.Response);
+                var headers = new TableInternalGetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1145,20 +1145,20 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, TableGetAccessPolicyHeaders> GetAccessPolicy(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, TableInternalGetAccessPolicyHeaders> GetAccessPolicy(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.GetAccessPolicy");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.GetAccessPolicy");
             scope.Start();
             try
             {
                 using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableGetAccessPolicyHeaders(message.Response);
+                var headers = new TableInternalGetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 200:
@@ -1228,20 +1228,20 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableSetAccessPolicyHeaders>> SetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
+        public async ValueTask<ResponseWithHeaders<TableInternalSetAccessPolicyHeaders>> SetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.SetAccessPolicy");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.SetAccessPolicy");
             scope.Start();
             try
             {
                 using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
                 await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableSetAccessPolicyHeaders(message.Response);
+                var headers = new TableInternalSetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:
@@ -1263,20 +1263,20 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableSetAccessPolicyHeaders> SetAccessPolicy(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableInternalSetAccessPolicyHeaders> SetAccessPolicy(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableClient.SetAccessPolicy");
+            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.SetAccessPolicy");
             scope.Start();
             try
             {
                 using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
                 _pipeline.Send(message, cancellationToken);
-                var headers = new TableSetAccessPolicyHeaders(message.Response);
+                var headers = new TableInternalSetAccessPolicyHeaders(message.Response);
                 switch (message.Response.Status)
                 {
                     case 204:

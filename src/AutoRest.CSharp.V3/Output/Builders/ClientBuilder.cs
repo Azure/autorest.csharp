@@ -44,8 +44,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         public (Client Client, RestClient RestClient) BuildClient(OperationGroup operationGroup)
         {
-            var clientPrefix = GetClientName(operationGroup);
+            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
             var clientName = clientPrefix + "Client";
+            var existingClient = _context.SourceInputModel.FindForClient(_context.DefaultNamespace, clientName);
+
+            // Update the client name and prefix based on the existing type is available
+            clientName = existingClient?.ExistingType.Name ?? clientName;
+            clientPrefix = GetClientPrefix(clientName);
 
             var clientParameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
@@ -139,7 +144,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 OrderParameters(clientParameters.Values),
                 methods);
 
-            var existingClient = _context.SourceInputModel.FindForClient(_context.DefaultNamespace, clientName);
             var client = new Client(
                 BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "public", existingClient?.ExistingType),
                 BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, clientPrefix)),
@@ -151,15 +155,20 @@ namespace AutoRest.CSharp.V3.Output.Builders
             return (client, restClient);
         }
 
-        private string GetClientName(OperationGroup operationGroup)
+        private string GetClientPrefix(string name)
         {
-            var name = operationGroup.Language.Default.Name;
             name = string.IsNullOrEmpty(name) ? "Service" : name.ToCleanName();
 
             var operationsSuffix = "Operations";
             if (name.EndsWith(operationsSuffix) && name.Length > operationsSuffix.Length)
             {
                 name = name.Substring(0, name.Length - operationsSuffix.Length);
+            }
+
+            var clientSuffix = "Client";
+            if (name.EndsWith(clientSuffix) && name.Length > clientSuffix.Length)
+            {
+                name = name.Substring(0, name.Length - clientSuffix.Length);
             }
 
             return name;

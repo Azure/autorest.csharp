@@ -10,10 +10,10 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables
 {
-    internal class TableQueryEntitiesHeaders
+    internal class TableInternalQueryEntitiesHeaders
     {
         private readonly Response _response;
-        public TableQueryEntitiesHeaders(Response response)
+        public TableInternalQueryEntitiesHeaders(Response response)
         {
             _response = response;
         }

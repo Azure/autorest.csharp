@@ -6,6 +6,7 @@ using System.Reflection;
 using NamespaceForEnums;
 using CustomNamespace;
 using NUnit.Framework;
+using TypeSchemaMapping;
 using TypeSchemaMapping.Models;
 
 namespace AutoRest.TestServer.Tests
@@ -78,6 +79,13 @@ namespace AutoRest.TestServer.Tests
             var modelType = typeof(CustomizedModel);
 
             Assert.That(modelType.GetConstructors().Where(c => c.GetParameters().Length == 2), Is.Empty);
+        }
+
+        [Test]
+        public void ClientsAreMappedToTypes()
+        {
+            Assert.AreEqual("MainClient", typeof(MainClient).Name);
+            Assert.AreEqual("MainRestClient", typeof(MainRestClient).Name);
         }
     }
 }
