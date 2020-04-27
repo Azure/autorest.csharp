@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 {
     internal class ClientBuilder
     {
+        private const string _clientSuffix = "Client";
         private static string[] _knownResponseHeaders = new[]
         {
             "Date",
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public (Client Client, RestClient RestClient) BuildClient(OperationGroup operationGroup)
         {
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
-            var clientName = clientPrefix + "Client";
+            var clientName = clientPrefix + _clientSuffix;
             var existingClient = _context.SourceInputModel.FindForClient(_context.DefaultNamespace, clientName);
 
             // Update the client name and prefix based on the existing type is available
@@ -165,7 +166,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 name = name.Substring(0, name.Length - operationsSuffix.Length);
             }
 
-            var clientSuffix = "Client";
+            var clientSuffix = _clientSuffix;
             if (name.EndsWith(clientSuffix) && name.Length > clientSuffix.Length)
             {
                 name = name.Substring(0, name.Length - clientSuffix.Length);
