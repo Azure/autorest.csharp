@@ -28,10 +28,10 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of SkusClient. </summary>
         public SkusClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new SkusRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
+            RestClient = new SkusRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, apiVersion: options.Version);
         }
 
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
