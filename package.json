@@ -3,7 +3,7 @@
   "private": true,
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp.V3/package.json",
   "devDependencies": {
-    "@autorest/autorest": "https://github.com/Azure/autorest/releases/download/autorest-3.0.6221/autorest-autorest-3.0.6221.tgz",
+    "@autorest/autorest": "https://github.com/Azure/autorest/releases/download/autorest-3.0.6222/autorest-autorest-3.0.6222.tgz",
     "@microsoft.azure/autorest.testserver": "^2.10.29"
   },
   "dependencies": {}

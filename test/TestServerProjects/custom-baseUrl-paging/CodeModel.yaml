@@ -118,7 +118,7 @@ schemas: !<!Schemas>
               usage:
               - output
               extensions:
-                x-autorest-anonymous-schema:
+                x-internal-autorest-anonymous-schema:
                   anonymous: true
               language: !<!Languages> 
                 default:

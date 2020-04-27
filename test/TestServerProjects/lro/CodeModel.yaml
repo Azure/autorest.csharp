@@ -2143,7 +2143,7 @@ schemas: !<!Schemas>
               description: The detailed arror message
           protocol: !<!Protocols> {}
         extensions:
-          x-autorest-anonymous-schema:
+          x-internal-autorest-anonymous-schema:
             anonymous: true
         language: !<!Languages> 
           default:
