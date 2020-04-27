@@ -1,5 +1,4 @@
 #Requires -Version 6.0
-param($name, [switch]$noDebug, [switch]$reset)
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version 1
