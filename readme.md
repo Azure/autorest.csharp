@@ -693,7 +693,7 @@ namespace Azure.Service.Models
 ## Configuration
 ```yaml
 # autorest-core version
-version: 3.0.6277
+version: 3.0.6282
 shared-source-folder: $(this-folder)/src/assets
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
