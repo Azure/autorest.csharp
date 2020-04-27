@@ -28,10 +28,10 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of FileServicesClient. </summary>
         public FileServicesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new FileServicesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
+            RestClient = new FileServicesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, apiVersion: options.Version);
         }
 
         /// <summary> List all file services in storage accounts. </summary>

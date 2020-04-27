@@ -28,10 +28,10 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of ManagementPoliciesClient. </summary>
         public ManagementPoliciesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new ManagementPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
+            RestClient = new ManagementPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, apiVersion: options.Version);
         }
 
         /// <summary> Gets the managementpolicy associated with the specified storage account. </summary>

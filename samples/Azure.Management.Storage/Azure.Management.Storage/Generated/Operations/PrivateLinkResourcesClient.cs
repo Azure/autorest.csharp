@@ -28,10 +28,10 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of PrivateLinkResourcesClient. </summary>
         public PrivateLinkResourcesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new PrivateLinkResourcesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
+            RestClient = new PrivateLinkResourcesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, apiVersion: options.Version);
         }
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>

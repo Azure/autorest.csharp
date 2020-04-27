@@ -29,10 +29,10 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of BlobServicesClient. </summary>
         public BlobServicesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new BlobServicesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
+            RestClient = new BlobServicesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, apiVersion: options.Version);
         }
 
         /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
