@@ -35,6 +35,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The name of the high water mark column. </summary>
-        public string HighWaterMarkColumnName { get; }
+        public string HighWaterMarkColumnName { get; set; }
     }
 }

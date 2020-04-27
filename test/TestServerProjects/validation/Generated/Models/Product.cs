@@ -61,13 +61,13 @@ namespace validation.Models
         /// <summary> Image URL representing the product. </summary>
         public string Image { get; set; }
         /// <summary> The product documentation. </summary>
-        public ChildProduct Child { get; }
+        public ChildProduct Child { get; set; }
         /// <summary> The product documentation. </summary>
-        public ConstantProduct ConstChild { get; }
+        public ConstantProduct ConstChild { get; set; }
         /// <summary> Constant int. </summary>
-        public int ConstInt { get; }
+        public int ConstInt { get; set; }
         /// <summary> Constant string. </summary>
-        public string ConstString { get; }
+        public string ConstString { get; set; }
         /// <summary> Constant string as Enum. </summary>
         public string ConstStringAsEnum { get; set; }
     }

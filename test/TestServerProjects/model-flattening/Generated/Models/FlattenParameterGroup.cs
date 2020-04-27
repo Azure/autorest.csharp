@@ -50,11 +50,11 @@ namespace model_flattening.Models
         }
 
         /// <summary> Product name with value &apos;groupproduct&apos;. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary> Simple body product to put. </summary>
         public SimpleProduct SimpleBodyProduct { get; set; }
         /// <summary> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </summary>
-        public string ProductId { get; }
+        public string ProductId { get; set; }
         /// <summary> Description of product. </summary>
         public string Description { get; set; }
         /// <summary> Display name of product. </summary>

@@ -8,7 +8,7 @@
 namespace lro.Models
 {
     /// <summary> The OperationResultError. </summary>
-    public partial class OperationResultError
+    internal partial class OperationResultError
     {
         /// <summary> Initializes a new instance of OperationResultError. </summary>
         internal OperationResultError()
@@ -25,8 +25,8 @@ namespace lro.Models
         }
 
         /// <summary> The error code for an operation failure. </summary>
-        public int? Code { get; }
+        public int? Code { get; set; }
         /// <summary> The detailed arror message. </summary>
-        public string Message { get; }
+        public string Message { get; set; }
     }
 }

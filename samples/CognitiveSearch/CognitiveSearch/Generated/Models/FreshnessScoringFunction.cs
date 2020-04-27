@@ -44,6 +44,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Parameter values for the freshness scoring function. </summary>
-        public FreshnessScoringParameters Parameters { get; }
+        public FreshnessScoringParameters Parameters { get; set; }
     }
 }

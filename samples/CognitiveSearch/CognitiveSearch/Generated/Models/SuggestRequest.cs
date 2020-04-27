@@ -70,13 +70,13 @@ namespace CognitiveSearch.Models
         /// <summary> The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. </summary>
         public string OrderBy { get; set; }
         /// <summary> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </summary>
-        public string SearchText { get; }
+        public string SearchText { get; set; }
         /// <summary> The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester. </summary>
         public string SearchFields { get; set; }
         /// <summary> The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. </summary>
         public string Select { get; set; }
         /// <summary> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </summary>
-        public string SuggesterName { get; }
+        public string SuggesterName { get; set; }
         /// <summary> The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5. </summary>
         public int? Top { get; set; }
     }

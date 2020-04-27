@@ -43,11 +43,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             Schema = objectSchema;
             var name = objectSchema.CSharpName();
             var ns = $"{context.DefaultNamespace}.Models";
+            var hasUsage = objectSchema.Usage.Any();
             _sourceTypeMapping = context.SourceInputModel.FindForModel(ns, name);
             Declaration = BuilderHelpers.CreateTypeAttributes(
                 name,
                 ns,
-                "public",
+                hasUsage ? "public" : "internal",
                 _sourceTypeMapping?.ExistingType);
 
             Description = BuilderHelpers.CreateDescription(objectSchema);
@@ -377,12 +378,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                     var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
                     SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
-                    bool isReadOnly =
-                        IsStruct ||
-                        property.IsDiscriminator != true &&
-                        (property.ReadOnly == true ||
-                         property.Required == true ||
-                         !_objectSchema.IsInput);
+                    bool isReadOnly = IsStruct ||
+                                      objectSchema.IsOutputOnly ||
+                                      property.ReadOnly == true;
+
+                    if (property.IsDiscriminator == true)
+                    {
+                        // Discriminator properties should be writeable
+                        isReadOnly = false;
+                    }
 
                     CSharpType type = _typeFactory.CreateType(
                         property.Schema,

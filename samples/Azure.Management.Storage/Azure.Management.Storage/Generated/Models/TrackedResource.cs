@@ -40,6 +40,6 @@ namespace Azure.Management.Storage.Models
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; set; }
         /// <summary> The geo-location where the resource lives. </summary>
-        public string Location { get; }
+        public string Location { get; set; }
     }
 }

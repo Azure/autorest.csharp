@@ -8,7 +8,7 @@
 namespace azure_special_properties.Models
 {
     /// <summary> The OdataFilter. </summary>
-    public partial class OdataFilter
+    internal partial class OdataFilter
     {
         /// <summary> Initializes a new instance of OdataFilter. </summary>
         internal OdataFilter()
@@ -24,7 +24,7 @@ namespace azure_special_properties.Models
             Name = name;
         }
 
-        public int? Id { get; }
-        public string Name { get; }
+        public int? Id { get; set; }
+        public string Name { get; set; }
     }
 }

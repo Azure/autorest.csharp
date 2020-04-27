@@ -35,7 +35,7 @@ namespace body_complex.Models
 
         internal string Fishtype { get; set; }
         public string Species { get; set; }
-        public float Length { get; }
+        public float Length { get; set; }
         public IList<Fish> Siblings { get; set; }
     }
 }

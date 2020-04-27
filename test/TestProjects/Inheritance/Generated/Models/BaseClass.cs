@@ -8,7 +8,7 @@
 namespace Inheritance.Models
 {
     /// <summary> The BaseClass. </summary>
-    public partial class BaseClass
+    internal partial class BaseClass
     {
         /// <summary> Initializes a new instance of BaseClass. </summary>
         internal BaseClass()
@@ -22,6 +22,6 @@ namespace Inheritance.Models
             BaseClassProperty = baseClassProperty;
         }
 
-        public string BaseClassProperty { get; }
+        public string BaseClassProperty { get; set; }
     }
 }

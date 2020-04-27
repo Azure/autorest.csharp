@@ -58,7 +58,7 @@ namespace SerializationCustomization.Models
             AlwaysInitializeObject = alwaysInitializeObject ?? new Item();
             DefaultObject = defaultObject;
         }
-        public IList<Item> RequiredList { get; }
+        public IList<Item> RequiredList { get; set; }
         public IList<Item> DefaultList { get; set; }
         public Item DefaultObject { get; set; }
     }
