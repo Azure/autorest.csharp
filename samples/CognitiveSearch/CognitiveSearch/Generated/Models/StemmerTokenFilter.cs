@@ -37,6 +37,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The language to use. </summary>
-        public StemmerTokenFilterLanguage Language { get; }
+        public StemmerTokenFilterLanguage Language { get; set; }
     }
 }

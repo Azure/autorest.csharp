@@ -43,7 +43,7 @@ namespace azure_parameter_grouping.Models
         /// <summary> Query parameter with default. </summary>
         public int? Query { get; set; }
         /// <summary> Path parameter. </summary>
-        public string Path { get; }
-        public int Body { get; }
+        public string Path { get; set; }
+        public int Body { get; set; }
     }
 }

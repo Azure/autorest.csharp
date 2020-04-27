@@ -31,7 +31,7 @@ namespace Azure.Management.Storage.Models
         /// <summary> List of services which support encryption. </summary>
         public EncryptionServices Services { get; set; }
         /// <summary> The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault. </summary>
-        public KeySource KeySource { get; }
+        public KeySource KeySource { get; set; }
         /// <summary> Properties provided by key vault. </summary>
         public KeyVaultProperties KeyVaultProperties { get; set; }
     }

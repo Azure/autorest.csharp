@@ -25,6 +25,6 @@ namespace azure_special_properties.Models
         }
 
         /// <summary> The fooRequestId. </summary>
-        public string FooClientRequestId { get; }
+        public string FooClientRequestId { get; set; }
     }
 }

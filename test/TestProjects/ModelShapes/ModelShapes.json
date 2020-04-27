@@ -1,0 +1,128 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Schema mapping",
+    "description": "Schema mapping",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/op": {
+      "get": {
+        "operationId": "input",
+        "description": "",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InputModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "operationId": "mixed",
+        "description": "",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MixedModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MixedModel"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "output",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/OutputModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "InputModel": {
+      "type": "object",
+      "properties": {
+        "RequiredString": { "type": "string" },
+        "RequiredInt": { "type": "integer" },
+        "RequiredStringList": { "type": "array", "items": { "type": "string" } },
+        "RequiredIntList": { "type": "array", "items": { "type": "integer" } },
+
+        "NonRequiredString": { "type": "string" },
+        "NonRequiredInt": { "type": "integer" },
+        "NonRequiredStringList": { "type": "array", "items": { "type": "string" } },
+        "NonRequiredIntList": { "type": "array", "items": { "type": "integer" } }
+      },
+      "required": ["RequiredString", "RequiredInt", "RequiredStringList", "RequiredIntList"]
+    },
+    "MixedModel": {
+      "type": "object",
+      "properties": {
+        "RequiredString": { "type": "string" },
+        "RequiredInt": { "type": "integer" },
+        "RequiredStringList": { "type": "array", "items": { "type": "string" } },
+        "RequiredIntList": { "type": "array", "items": { "type": "integer" } },
+
+        "NonRequiredString": { "type": "string" },
+        "NonRequiredInt": { "type": "integer" },
+        "NonRequiredStringList": { "type": "array", "items": { "type": "string" } },
+        "NonRequiredIntList": { "type": "array", "items": { "type": "integer" } }
+      },
+      "required": ["RequiredString", "RequiredInt", "RequiredStringList", "RequiredIntList"]
+    },
+    "OutputModel": {
+      "type": "object",
+      "properties": {
+        "RequiredString": { "type": "string" },
+        "RequiredInt": { "type": "integer" },
+        "RequiredStringList": { "type": "array", "items": { "type": "string" } },
+        "RequiredIntList": { "type": "array", "items": { "type": "integer" } },
+
+        "NonRequiredString": { "type": "string" },
+        "NonRequiredInt": { "type": "integer" },
+        "NonRequiredStringList": { "type": "array", "items": { "type": "string" } },
+        "NonRequiredIntList": { "type": "array", "items": { "type": "integer" } }
+      },
+      "required": ["RequiredString", "RequiredInt", "RequiredStringList", "RequiredIntList"]
+    },
+    "UnusedModel": {
+      "type": "object",
+      "properties": {
+        "UnusedString": { "type": "string" }
+      }
+    }
+  }
+}

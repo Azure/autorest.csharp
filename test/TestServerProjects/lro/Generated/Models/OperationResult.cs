@@ -8,7 +8,7 @@
 namespace lro.Models
 {
     /// <summary> The OperationResult. </summary>
-    public partial class OperationResult
+    internal partial class OperationResult
     {
         /// <summary> Initializes a new instance of OperationResult. </summary>
         internal OperationResult()
@@ -25,7 +25,7 @@ namespace lro.Models
         }
 
         /// <summary> The status of the request. </summary>
-        public OperationResultStatus? Status { get; }
-        public OperationResultError Error { get; }
+        public OperationResultStatus? Status { get; set; }
+        public OperationResultError Error { get; set; }
     }
 }

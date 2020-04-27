@@ -62,14 +62,14 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or &quot;*&quot; to allow all domains. </summary>
-        public IList<string> AllowedOrigins { get; }
+        public IList<string> AllowedOrigins { get; set; }
         /// <summary> Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin. </summary>
-        public IList<CorsRuleAllowedMethodsItem> AllowedMethods { get; }
+        public IList<CorsRuleAllowedMethodsItem> AllowedMethods { get; set; }
         /// <summary> Required if CorsRule element is present. The number of seconds that the client/browser should cache a preflight response. </summary>
-        public int MaxAgeInSeconds { get; }
+        public int MaxAgeInSeconds { get; set; }
         /// <summary> Required if CorsRule element is present. A list of response headers to expose to CORS clients. </summary>
-        public IList<string> ExposedHeaders { get; }
+        public IList<string> ExposedHeaders { get; set; }
         /// <summary> Required if CorsRule element is present. A list of headers allowed to be part of the cross-origin request. </summary>
-        public IList<string> AllowedHeaders { get; }
+        public IList<string> AllowedHeaders { get; set; }
     }
 }

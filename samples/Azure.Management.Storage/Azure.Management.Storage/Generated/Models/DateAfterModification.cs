@@ -18,6 +18,6 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Value indicating the age in days after last modification. </summary>
-        public float DaysAfterModificationGreaterThan { get; }
+        public float DaysAfterModificationGreaterThan { get; set; }
     }
 }

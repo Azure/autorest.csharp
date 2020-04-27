@@ -8,7 +8,7 @@
 namespace Inheritance.Models
 {
     /// <summary> The ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
-    public partial class ClassThatInheritsFromBaseClassAndSomeProperties : BaseClass
+    internal partial class ClassThatInheritsFromBaseClassAndSomeProperties : BaseClass
     {
         /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
         internal ClassThatInheritsFromBaseClassAndSomeProperties()
@@ -25,7 +25,7 @@ namespace Inheritance.Models
             SomeOtherProperty = someOtherProperty;
         }
 
-        public string SomeProperty { get; }
-        public string SomeOtherProperty { get; }
+        public string SomeProperty { get; set; }
+        public string SomeOtherProperty { get; set; }
     }
 }

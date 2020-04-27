@@ -24,6 +24,6 @@ namespace multiple_inheritance.Models
             Name = name;
         }
 
-        public string Name { get; }
+        public string Name { get; set; }
     }
 }

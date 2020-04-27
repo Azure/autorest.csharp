@@ -34,6 +34,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The actions in the batch. </summary>
-        public IList<IndexAction> Actions { get; }
+        public IList<IndexAction> Actions { get; set; }
     }
 }

@@ -42,8 +42,8 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>
-        public string Id { get; }
-        public string Text { get; }
+        public string Id { get; set; }
+        public string Text { get; set; }
         public string CountryHint { get; set; }
     }
 }

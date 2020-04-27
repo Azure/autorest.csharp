@@ -24,6 +24,6 @@ namespace required_optional.Models
             Value = value;
         }
 
-        public Product Value { get; }
+        public Product Value { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace additionalProperties.Models
             AdditionalProperties = additionalProperties;
         }
 
-        public int Id { get; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; }
         /// <summary> Dictionary of &lt;number&gt;. </summary>

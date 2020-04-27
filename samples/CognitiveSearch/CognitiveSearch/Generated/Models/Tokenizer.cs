@@ -37,6 +37,6 @@ namespace CognitiveSearch.Models
         /// <summary> Identifies the concrete type of the tokenizer. </summary>
         internal string OdataType { get; set; }
         /// <summary> The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
     }
 }

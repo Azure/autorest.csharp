@@ -34,6 +34,6 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </summary>
-        public IList<ManagementPolicyRule> Rules { get; }
+        public IList<ManagementPolicyRule> Rules { get; set; }
     }
 }

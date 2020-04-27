@@ -8,7 +8,7 @@
 namespace paging.Models
 {
     /// <summary> The OperationResult. </summary>
-    public partial class OperationResult
+    internal partial class OperationResult
     {
         /// <summary> Initializes a new instance of OperationResult. </summary>
         internal OperationResult()
@@ -23,6 +23,6 @@ namespace paging.Models
         }
 
         /// <summary> The status of the request. </summary>
-        public OperationResultStatus? Status { get; }
+        public OperationResultStatus? Status { get; set; }
     }
 }

@@ -56,7 +56,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The search text on which to base autocomplete results. </summary>
-        public string SearchText { get; }
+        public string SearchText { get; set; }
         /// <summary> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </summary>
         public AutocompleteMode? AutocompleteMode { get; set; }
         /// <summary> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </summary>
@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
         /// <summary> The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. </summary>
         public string SearchFields { get; set; }
         /// <summary> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </summary>
-        public string SuggesterName { get; }
+        public string SuggesterName { get; set; }
         /// <summary> The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5. </summary>
         public int? Top { get; set; }
     }

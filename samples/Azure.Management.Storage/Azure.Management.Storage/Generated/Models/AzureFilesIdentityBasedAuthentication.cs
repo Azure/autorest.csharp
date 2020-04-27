@@ -27,7 +27,7 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Indicates the directory service used. </summary>
-        public DirectoryServiceOptions DirectoryServiceOptions { get; }
+        public DirectoryServiceOptions DirectoryServiceOptions { get; set; }
         /// <summary> Required if choose AD. </summary>
         public ActiveDirectoryProperties ActiveDirectoryProperties { get; set; }
     }

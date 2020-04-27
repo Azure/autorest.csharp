@@ -31,6 +31,6 @@ namespace extensible_enums_swagger.Models
         public string Name { get; set; }
         /// <summary> Type of Pet. </summary>
         public DaysOfWeekExtensibleEnum? DaysOfWeek { get; set; }
-        public IntEnum IntEnum { get; }
+        public IntEnum IntEnum { get; set; }
     }
 }

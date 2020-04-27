@@ -62,9 +62,9 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The name of the index. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary> The fields of the index. </summary>
-        public IList<Field> Fields { get; }
+        public IList<Field> Fields { get; set; }
         /// <summary> The scoring profiles for the index. </summary>
         public IList<ScoringProfile> ScoringProfiles { get; set; }
         /// <summary> The name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used. </summary>
