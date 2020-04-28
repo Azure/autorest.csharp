@@ -1,6 +1,6 @@
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-$autorestBinary = Join-Path $repoRoot 'node_modules' '.bin' 'autorest-beta'
-$AutorestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
+$autoRestBinary = Join-Path $repoRoot 'node_modules' '.bin' 'autorest-beta'
+$AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
 
 function Invoke($command)
 {
@@ -22,15 +22,15 @@ function Invoke($command)
     }
 }
 
-function Invoke-Autorest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $clean)
+function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $clean)
 {
     $outputPath = Join-Path $baseOutput $projectName
     $namespace = $projectName.Replace('-', '_')
-    $command = "$script:autorestBinary $autoRestArguments --namespace=$namespace --output-folder=$outputPath"
+    $command = "$script:autoRestBinary $autoRestArguments --namespace=$namespace --output-folder=$outputPath"
 
     if ($fast)
     {
-        $command = "dotnet run --project $script:AutorestPluginProject --no-build -- --standalone $outputPath"
+        $command = "dotnet run --project $script:AutoRestPluginProject --no-build -- --standalone $outputPath"
     }
 
     if ($clean)
@@ -46,17 +46,17 @@ function Invoke-Autorest($baseOutput, $projectName, $autoRestArguments, $sharedS
     Invoke "dotnet build $outputPath --verbosity quiet /nologo"
 }
 
-function Autorest-Reset()
+function AutoRest-Reset()
 {
-    Invoke "$script:autorestBinary --reset"
+    Invoke "$script:autoRestBinary --reset"
 }
 
-function Get-AutorestProject()
+function Get-AutoRestProject()
 {
-    $AutorestPluginProject;
+    $AutoRestPluginProject;
 }
 
 Export-ModuleMember -Function "Invoke"
-Export-ModuleMember -Function "Invoke-Autorest"
-Export-ModuleMember -Function "Autorest-Reset"
-Export-ModuleMember -Function "Get-AutorestProject"
+Export-ModuleMember -Function "Invoke-AutoRest"
+Export-ModuleMember -Function "AutoRest-Reset"
+Export-ModuleMember -Function "Get-AutoRestProject"
