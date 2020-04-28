@@ -174,6 +174,76 @@ namespace paging
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> GetWithQueryParamsAsync(int requiredQueryParameter, CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = await RestClient.GetWithQueryParamsAsync(requiredQueryParameter, cancellationToken).ConfigureAwait(false);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                var response = await RestClient.NextOperationWithQueryParamsAsync(cancellationToken).ConfigureAwait(false);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> GetWithQueryParams(int requiredQueryParameter, CancellationToken cancellationToken = default)
+        {
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = RestClient.GetWithQueryParams(requiredQueryParameter, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                var response = RestClient.NextOperationWithQueryParams(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> NextOperationWithQueryParamsAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = await RestClient.NextOperationWithQueryParamsAsync(cancellationToken).ConfigureAwait(false);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                var response = await RestClient.NextOperationWithQueryParamsNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> NextOperationWithQueryParams(CancellationToken cancellationToken = default)
+        {
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                var response = RestClient.NextOperationWithQueryParams(cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                var response = RestClient.NextOperationWithQueryParamsNextPage(nextLink, cancellationToken);
+                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
