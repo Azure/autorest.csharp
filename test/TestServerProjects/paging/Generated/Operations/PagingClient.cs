@@ -77,12 +77,7 @@ namespace paging
                 var response = await RestClient.GetNullNextLinkNamePagesAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
-            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await RestClient.GetNullNextLinkNamePagesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
@@ -94,12 +89,7 @@ namespace paging
                 var response = RestClient.GetNullNextLinkNamePages(cancellationToken);
                 return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
-            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = RestClient.GetNullNextLinkNamePagesNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>

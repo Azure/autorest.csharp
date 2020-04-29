@@ -75,7 +75,7 @@ namespace AutoRest.TestServer.Tests
                 }
             }
             Assert.AreEqual(2, id);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
@@ -134,7 +134,7 @@ namespace AutoRest.TestServer.Tests
                 }
             }
             Assert.AreEqual(2, id);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
@@ -193,7 +193,7 @@ namespace AutoRest.TestServer.Tests
                 product = "product";
             }
             Assert.AreEqual(10, id);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
@@ -254,7 +254,7 @@ namespace AutoRest.TestServer.Tests
                 product = "product";
             }
             Assert.AreEqual(10, id);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
@@ -313,7 +313,7 @@ namespace AutoRest.TestServer.Tests
                 }
             }
             Assert.AreEqual(2, id);
-        }, true);
+        });
 
         [Test]
         public Task PagingMultipleFailure() => Test(async (host, pipeline) =>
@@ -355,7 +355,7 @@ namespace AutoRest.TestServer.Tests
                 }
             });
             Assert.AreEqual(2, id);
-        }, ignoreScenario: true, useSimplePipeline: true);
+        }, useSimplePipeline: true);
 
         [Test]
         public Task PagingMultipleFailureUri() => Test(async (host, pipeline) =>
@@ -396,7 +396,7 @@ namespace AutoRest.TestServer.Tests
                 }
             });
             Assert.AreEqual(2, id);
-        }, true);
+        });
 
         [Test]
         [Ignore("Needs LRO for paging: https://github.com/Azure/autorest.csharp/issues/450")]
@@ -483,7 +483,7 @@ namespace AutoRest.TestServer.Tests
                 id++;
             }
             Assert.AreEqual(10, pageNumber);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Retry times out.")]
@@ -544,7 +544,7 @@ namespace AutoRest.TestServer.Tests
                 product = "product";
             }
             Assert.AreEqual(10, id);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Retry times out.")]
@@ -611,7 +611,7 @@ namespace AutoRest.TestServer.Tests
                 product = "product";
             }
             Assert.AreEqual(10, id);
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
@@ -623,7 +623,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Product", resultPage.Values.First().Properties.Name);
             Assert.IsNull(resultPage.ContinuationToken);
 
-            var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetNoItemNamePagesAsync();
+            var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetNullNextLinkNamePagesAsync();
             await foreach (var page in pageableAsync.AsPages())
             {
                 Assert.AreEqual(1, page.Values.First().Properties.Id);
@@ -631,14 +631,14 @@ namespace AutoRest.TestServer.Tests
                 Assert.IsNull(page.ContinuationToken);
             }
 
-            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetNoItemNamePages();
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetNullNextLinkNamePages();
             foreach (var page in pageable.AsPages())
             {
                 Assert.AreEqual(1, page.Values.First().Properties.Id);
                 Assert.AreEqual("Product", page.Values.First().Properties.Name);
                 Assert.IsNull(page.ContinuationToken);
             }
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
@@ -665,7 +665,7 @@ namespace AutoRest.TestServer.Tests
                 Assert.AreEqual("Product", page.Values.First().Properties.Name);
                 Assert.IsNull(page.ContinuationToken);
             }
-        }, true);
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
@@ -726,7 +726,7 @@ namespace AutoRest.TestServer.Tests
                 product = "product";
             }
             Assert.AreEqual(10, id);
-        }, true);
+        });
 
         [Test]
         public Task PagingSingle() => Test(async (host, pipeline) =>
@@ -752,7 +752,7 @@ namespace AutoRest.TestServer.Tests
                 Assert.AreEqual("Product", page.Values.First().Properties.Name);
                 Assert.IsNull(page.ContinuationToken);
             }
-        }, true);
+        });
 
         [Test]
         public Task PagingSingleFailure() => Test((host, pipeline) =>
@@ -764,7 +764,6 @@ namespace AutoRest.TestServer.Tests
 
             var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePagesFailure();
             Assert.Throws<RequestFailedException>(() => { foreach (var page in pageable.AsPages()) { } });
-        }, true);
-
+        });
     }
 }
