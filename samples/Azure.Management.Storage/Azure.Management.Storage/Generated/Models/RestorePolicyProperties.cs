@@ -31,7 +31,7 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Blob restore is enabled if set to true. </summary>
-        public bool Enabled { get; }
+        public bool Enabled { get; set; }
         /// <summary> how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days. </summary>
         public int? Days { get; set; }
         /// <summary> Returns the date and time the restore policy was last enabled. </summary>

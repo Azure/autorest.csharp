@@ -37,6 +37,6 @@ namespace body_complex.Models
         }
 
         public int? Age { get; set; }
-        public DateTimeOffset Birthday { get; }
+        public DateTimeOffset Birthday { get; set; }
     }
 }

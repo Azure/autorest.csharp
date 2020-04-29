@@ -14,12 +14,12 @@ using TypeSchemaMapping.Models;
 
 namespace CustomNamespace
 {
-    /// <summary> The Service service client. </summary>
+    /// <summary> The Main service client. </summary>
     internal partial class MainClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal ServiceRestClient RestClient { get; }
+        internal MainRestClient RestClient { get; }
         /// <summary> Initializes a new instance of MainClient for mocking. </summary>
         protected MainClient()
         {
@@ -27,7 +27,7 @@ namespace CustomNamespace
         /// <summary> Initializes a new instance of MainClient. </summary>
         internal MainClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
         {
-            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new MainRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

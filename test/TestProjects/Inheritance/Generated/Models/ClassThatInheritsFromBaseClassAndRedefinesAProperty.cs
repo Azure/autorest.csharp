@@ -8,7 +8,7 @@
 namespace Inheritance.Models
 {
     /// <summary> The ClassThatInheritsFromBaseClassAndRedefinesAProperty. </summary>
-    public partial class ClassThatInheritsFromBaseClassAndRedefinesAProperty : BaseClass
+    internal partial class ClassThatInheritsFromBaseClassAndRedefinesAProperty : BaseClass
     {
         /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndRedefinesAProperty. </summary>
         internal ClassThatInheritsFromBaseClassAndRedefinesAProperty()

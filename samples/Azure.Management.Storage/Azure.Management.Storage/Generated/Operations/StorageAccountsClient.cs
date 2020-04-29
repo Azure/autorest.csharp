@@ -31,10 +31,10 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of StorageAccountsClient. </summary>
         public StorageAccountsClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new StorageAccountsRestClient(_clientDiagnostics, _pipeline, subscriptionId);
+            RestClient = new StorageAccountsRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId);
         }
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>

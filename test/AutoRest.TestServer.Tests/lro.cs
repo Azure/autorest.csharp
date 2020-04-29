@@ -20,7 +20,6 @@ namespace AutoRest.TestServer.Tests
         public LroTest(TestServerVersion version) : base(version, "lros") { }
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/683")]
         public Task CustomHeaderPostAsyncSucceded() => TestStatus(async (host, pipeline) =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
@@ -30,7 +29,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/683")]
         public Task CustomHeaderPostAsyncSucceded_Sync() => TestStatus((host, pipeline) =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");

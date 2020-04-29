@@ -14,12 +14,12 @@ using Azure.Storage.Tables.Models;
 
 namespace Azure.Storage.Tables
 {
-    /// <summary> The Table service client. </summary>
+    /// <summary> The TableInternal service client. </summary>
     internal partial class TableInternalClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal TableRestClient RestClient { get; }
+        internal TableInternalRestClient RestClient { get; }
         /// <summary> Initializes a new instance of TableInternalClient for mocking. </summary>
         protected TableInternalClient()
         {
@@ -27,7 +27,7 @@ namespace Azure.Storage.Tables
         /// <summary> Initializes a new instance of TableInternalClient. </summary>
         internal TableInternalClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
         {
-            RestClient = new TableRestClient(clientDiagnostics, pipeline, url, version);
+            RestClient = new TableInternalRestClient(clientDiagnostics, pipeline, url, version);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

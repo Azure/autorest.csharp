@@ -39,6 +39,6 @@ namespace Azure.Management.Storage.Models
         /// <summary> Sets the IP ACL rules. </summary>
         public IList<IPRule> IpRules { get; set; }
         /// <summary> Specifies the default action of allow or deny when no other rules match. </summary>
-        public DefaultAction DefaultAction { get; }
+        public DefaultAction DefaultAction { get; set; }
     }
 }

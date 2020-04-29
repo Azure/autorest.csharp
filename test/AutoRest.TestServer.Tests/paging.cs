@@ -257,6 +257,65 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
+        public Task PagingMultipleWithQueryParameters() => Test(async (host, pipeline) =>
+        {
+            var value = 100;
+            var id = 1;
+            var product = "Product";
+            var linkPart = "/paging/multiple/nextOperationWithQueryParams";
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetWithQueryParamsAsync(value);
+            var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+            while (resultPage.ContinuationToken != null)
+            {
+                Assert.AreEqual(id++, resultPage.Values.First().Properties.Id);
+                Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
+                StringAssert.EndsWith(linkPart, resultPage.ContinuationToken);
+                result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.NextOperationWithQueryParamsAsync();
+                resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
+            }
+            Assert.AreEqual(2, id);
+            Assert.AreEqual(id, resultPage.Values.First().Properties.Id);
+            Assert.AreEqual(product, resultPage.Values.First().Properties.Name);
+
+            id = 1;
+            var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetWithQueryParamsAsync(value);
+            await foreach (var page in pageableAsync.AsPages())
+            {
+                Assert.AreEqual(id, page.Values.First().Properties.Id);
+                Assert.AreEqual(product, page.Values.First().Properties.Name);
+                if (id == 2)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    StringAssert.EndsWith(linkPart, page.ContinuationToken);
+                    id++;
+                }
+            }
+            Assert.AreEqual(2, id);
+
+            id = 1;
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetWithQueryParams(value);
+            foreach (var page in pageable.AsPages())
+            {
+                Assert.AreEqual(id, page.Values.First().Properties.Id);
+                Assert.AreEqual(product, page.Values.First().Properties.Name);
+                if (id == 2)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    StringAssert.EndsWith(linkPart, page.ContinuationToken);
+                    id++;
+                }
+            }
+            Assert.AreEqual(2, id);
+        }, true);
+
+        [Test]
         public Task PagingMultipleFailure() => Test(async (host, pipeline) =>
         {
             var id = 1;

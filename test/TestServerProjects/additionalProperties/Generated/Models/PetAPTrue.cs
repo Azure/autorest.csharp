@@ -34,7 +34,7 @@ namespace additionalProperties.Models
             AdditionalProperties = additionalProperties ?? new Dictionary<string, object>();
         }
 
-        public int Id { get; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; }
         internal IDictionary<string, object> AdditionalProperties { get; }

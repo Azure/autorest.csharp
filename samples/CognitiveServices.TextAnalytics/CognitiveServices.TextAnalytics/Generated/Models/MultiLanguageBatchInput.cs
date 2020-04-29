@@ -34,6 +34,6 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> The set of documents to process as part of this batch. </summary>
-        public IList<MultiLanguageInput> Documents { get; }
+        public IList<MultiLanguageInput> Documents { get; set; }
     }
 }

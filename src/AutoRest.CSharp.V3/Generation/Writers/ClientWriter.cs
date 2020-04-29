@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Line($"options = new {configuration.LibraryName}ManagementClientOptions();");
+                writer.Line($"options ??= new {configuration.LibraryName}ManagementClientOptions();");
                 writer.Line($"_clientDiagnostics = new {typeof(ClientDiagnostics)}(options);");
                 writer.Line($"_pipeline = {typeof(ManagementPipelineBuilder)}.Build(tokenCredential, options);");
 
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         continue;
                     }
 
-                    writer.Append($"{parameter.Name:I}, ");
+                    writer.Append($"{parameter.Name}: {parameter.Name:I}, ");
                 }
                 writer.RemoveTrailingComma();
                 writer.Line($");");

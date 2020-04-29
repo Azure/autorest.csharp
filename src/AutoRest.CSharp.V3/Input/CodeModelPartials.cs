@@ -93,6 +93,8 @@ namespace AutoRest.CSharp.V3.Input
 
         public bool IsInput => Usage.Contains(SchemaContext.Input);
         public bool IsOutput => Usage.Contains(SchemaContext.Output);
+        public bool IsInputOnly => IsInput && !IsOutput;
+        public bool IsOutputOnly => IsOutput && !IsInput;
     }
 
     // redefined manually to inherit from ObjectSchema

@@ -47,10 +47,10 @@ namespace Azure.Management.Storage.Models
         /// <summary> Rule is enabled if set to true. </summary>
         public bool? Enabled { get; set; }
         /// <summary> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary> The valid value is Lifecycle. </summary>
-        public string Type { get; }
+        public string Type { get; set; }
         /// <summary> An object that defines the Lifecycle rule. </summary>
-        public ManagementPolicyDefinition Definition { get; }
+        public ManagementPolicyDefinition Definition { get; set; }
     }
 }

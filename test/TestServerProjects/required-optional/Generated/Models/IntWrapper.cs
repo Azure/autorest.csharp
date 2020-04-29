@@ -17,6 +17,6 @@ namespace required_optional.Models
             Value = value;
         }
 
-        public int Value { get; }
+        public int Value { get; set; }
     }
 }

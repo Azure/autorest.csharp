@@ -46,10 +46,10 @@ namespace additionalProperties.Models
             MoreAdditionalProperties = moreAdditionalProperties ?? new Dictionary<string, string>();
         }
 
-        public int Id { get; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; }
-        public string OdataLocation { get; }
+        public string OdataLocation { get; set; }
         /// <summary> Dictionary of &lt;number&gt;. </summary>
         public IDictionary<string, float> AdditionalProperties { get; set; }
         /// <inheritdoc />

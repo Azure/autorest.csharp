@@ -8,7 +8,7 @@
 namespace Inheritance.Models
 {
     /// <summary> The ClassThatAlsoDefinesBaseClassProperty. </summary>
-    public partial class ClassThatAlsoDefinesBaseClassProperty
+    internal partial class ClassThatAlsoDefinesBaseClassProperty
     {
         /// <summary> Initializes a new instance of ClassThatAlsoDefinesBaseClassProperty. </summary>
         internal ClassThatAlsoDefinesBaseClassProperty()
@@ -22,6 +22,6 @@ namespace Inheritance.Models
             BaseClassProperty = baseClassProperty;
         }
 
-        public string BaseClassProperty { get; }
+        public string BaseClassProperty { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> An object that defines the action set. </summary>
-        public ManagementPolicyAction Actions { get; }
+        public ManagementPolicyAction Actions { get; set; }
         /// <summary> An object that defines the filter set. </summary>
         public ManagementPolicyFilter Filters { get; set; }
     }

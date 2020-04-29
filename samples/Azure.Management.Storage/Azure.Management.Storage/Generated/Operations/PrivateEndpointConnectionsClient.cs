@@ -28,10 +28,10 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient. </summary>
         public PrivateEndpointConnectionsClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new PrivateEndpointConnectionsRestClient(_clientDiagnostics, _pipeline, subscriptionId);
+            RestClient = new PrivateEndpointConnectionsRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId);
         }
 
         /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>

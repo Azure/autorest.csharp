@@ -28,7 +28,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of OperationsClient. </summary>
         public OperationsClient(TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
             RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline);

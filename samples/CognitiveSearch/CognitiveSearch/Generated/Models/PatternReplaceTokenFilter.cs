@@ -49,8 +49,8 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> A regular expression pattern. </summary>
-        public string Pattern { get; }
+        public string Pattern { get; set; }
         /// <summary> The replacement text. </summary>
-        public string Replacement { get; }
+        public string Replacement { get; set; }
     }
 }

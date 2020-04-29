@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($filter, [switch]$continue, [switch]$noDebug, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
@@ -11,7 +11,7 @@ $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $swaggerDefinitions = @{};
 
 # Test server test configuration
-$autorestPluginProject = (Get-AutorestProject)
+$autoRestPluginProject = (Get-AutoRestProject)
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
@@ -133,7 +133,7 @@ if (!($Exclude -contains "SmokeTests"))
 
 if ($updateLaunchSettings)
 {
-    $launchSettings = Join-Path $autorestPluginProject 'Properties' 'launchSettings.json'
+    $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
     $settings = @{
         'profiles' = [ordered]@{}
     };
@@ -156,12 +156,12 @@ if ($updateLaunchSettings)
 
 if ($reset -or $env:TF_BUILD)
 {
-    Autorest-Reset;
+    AutoRest-Reset;
 }
 
 if (!$noBuild)
 {
-    Invoke "dotnet build $autorestPluginProject"
+    Invoke "dotnet build $autoRestPluginProject"
 }
 
 $keys = $swaggerDefinitions.Keys | Sort-Object;
@@ -181,6 +181,6 @@ if (![string]::IsNullOrWhiteSpace($filter))
 
 $keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-    Invoke-Autorest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:clean;
+    Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:clean;
 } -ThrottleLimit $parallel
 

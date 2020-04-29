@@ -30,10 +30,10 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of BlobContainersClient. </summary>
         public BlobContainersClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
-            options = new StorageManagementClientOptions();
+            options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new BlobContainersRestClient(_clientDiagnostics, _pipeline, subscriptionId);
+            RestClient = new BlobContainersRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId);
         }
 
         /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>

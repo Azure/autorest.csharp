@@ -32,6 +32,6 @@ namespace Azure.Management.Storage.Models
         /// <summary> The tenant ID of resource. </summary>
         public string TenantId { get; }
         /// <summary> The identity type. </summary>
-        public string Type { get; }
+        public string Type { get; set; }
     }
 }
