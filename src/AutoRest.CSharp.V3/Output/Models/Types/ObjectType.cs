@@ -98,9 +98,18 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            yield return BuildInitializationConstructor();
-            yield return BuildSerializationConstructor();
+            var initializationCtor = BuildInitializationConstructor();
+            var serializationCtor = BuildSerializationConstructor();
 
+            yield return initializationCtor;
+
+            // Skip serialization ctor if they are the same
+            if (!initializationCtor.Parameters
+                .Select(p => p.Type)
+                .SequenceEqual(serializationCtor.Parameters.Select(p => p.Type)))
+            {
+                yield return serializationCtor;
+            }
         }
 
         private ObjectTypeConstructor BuildSerializationConstructor()
