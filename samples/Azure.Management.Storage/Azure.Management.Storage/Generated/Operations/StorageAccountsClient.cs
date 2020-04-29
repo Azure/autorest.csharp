@@ -258,12 +258,7 @@ namespace Azure.Management.Storage
                 var response = await RestClient.ListByResourceGroupAsync(resourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            async Task<Page<StorageAccount>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await RestClient.ListByResourceGroupNextPageAsync(nextLink, resourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
@@ -281,12 +276,7 @@ namespace Azure.Management.Storage
                 var response = RestClient.ListByResourceGroup(resourceGroupName, cancellationToken);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            Page<StorageAccount> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = RestClient.ListByResourceGroupNextPage(nextLink, resourceGroupName, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. </summary>
