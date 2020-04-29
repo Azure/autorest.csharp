@@ -110,14 +110,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 foreach (Parameter parameter in client.RestClient.Parameters)
                 {
-                    if (ManagementClientWriterHelpers.IsHostParameter(parameter))
+                    // Skip host and API Version parameters that would be set later
+                    if (ManagementClientWriterHelpers.IsHostParameter(parameter) ||
+                        ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
                     {
-                        continue;
-                    }
-
-                    if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
-                    {
-                        writer.Append($"{parameter.Name}: options.Version, ");
                         continue;
                     }
 
@@ -244,7 +240,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var pageType = pagingMethod.ItemType;
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
             var parameters = pagingMethod.Method.Parameters;
-            var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
 
             writer.WriteXmlDocumentationSummary(pagingMethod.Method.Description);
 
@@ -286,17 +281,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
 
-                using (writer.Scope($"{asyncText} {funcType} NextPageFunc({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
+                var nextPageFunctionName = "null";
+                if (pagingMethod.NextPageMethod != null)
                 {
-                    writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
-                    foreach (Parameter parameter in nextPageParameters)
+                    nextPageFunctionName = "NextPageFunc";
+                    var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
+                    using (writer.Scope($"{asyncText} {funcType} {nextPageFunctionName}({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
                     {
-                        writer.Append($"{parameter.Name}, ");
+                        writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                        foreach (Parameter parameter in nextPageParameters)
+                        {
+                            writer.Append($"{parameter.Name}, ");
+                        }
+                        writer.Line($"cancellationToken){configureAwaitText};");
+                        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                     }
-                    writer.Line($"cancellationToken){configureAwaitText};");
-                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
                 }
-                writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, NextPageFunc);");
+                writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
             }
             writer.Line();
         }

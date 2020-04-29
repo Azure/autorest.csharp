@@ -106,10 +106,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         next = nextOperationMethod.Method;
                     }
                     // If there is no operationName or we didn't find an existing operation, we use the original method to construct the nextPageMethod.
-                    RestClientMethod nextPageMethod = next ?? BuildNextPageMethod(method);
-                    // Only add the method if it didn't previously exist
-                    if (next == null)
+                    RestClientMethod? nextPageMethod = next;
+                    // Only create and add a method if it didn't previously exist and we have a NextLinkName
+                    if (next == null && paging.NextLinkName != null)
                     {
+                        nextPageMethod = BuildNextPageMethod(method);
                         nextPageMethods.Add(nextPageMethod);
                     }
 
@@ -465,7 +466,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 method.Diagnostics);
         }
 
-        private PagingInfo GetPagingInfo(RestClientMethod method, RestClientMethod nextPageMethod, Paging paging, ObjectType type)
+        private PagingInfo GetPagingInfo(RestClientMethod method, RestClientMethod? nextPageMethod, Paging paging, ObjectType type)
         {
             string? nextLinkName = paging.NextLinkName;
             string itemName = paging.ItemName ?? "value";

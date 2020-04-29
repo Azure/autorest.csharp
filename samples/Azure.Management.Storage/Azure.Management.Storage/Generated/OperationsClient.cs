@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline, apiVersion: options.Version);
+            RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline);
         }
 
         /// <summary> Lists all of the available Storage Rest API operations. </summary>
@@ -43,12 +43,7 @@ namespace Azure.Management.Storage
                 var response = await RestClient.ListAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            async Task<Page<Operation>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await RestClient.ListNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Lists all of the available Storage Rest API operations. </summary>
@@ -60,12 +55,7 @@ namespace Azure.Management.Storage
                 var response = RestClient.List(cancellationToken);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            Page<Operation> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = RestClient.ListNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
     }
 }

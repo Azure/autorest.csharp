@@ -33,6 +33,6 @@ namespace CognitiveServices.TextAnalytics.Models
             Documents = documents;
         }
 
-        public IList<LanguageInput> Documents { get; set; }
+        public IList<LanguageInput> Documents { get; }
     }
 }

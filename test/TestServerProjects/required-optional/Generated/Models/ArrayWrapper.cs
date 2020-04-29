@@ -33,6 +33,6 @@ namespace required_optional.Models
             Value = value;
         }
 
-        public IList<string> Value { get; set; }
+        public IList<string> Value { get; }
     }
 }
