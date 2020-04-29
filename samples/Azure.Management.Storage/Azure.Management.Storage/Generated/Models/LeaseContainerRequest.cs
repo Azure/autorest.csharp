@@ -33,7 +33,7 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Specifies the lease action. Can be one of the available actions. </summary>
-        public LeaseContainerRequestAction Action { get; set; }
+        public LeaseContainerRequestAction Action { get; }
         /// <summary> Identifies the lease. Can be specified in any valid GUID string format. </summary>
         public string LeaseId { get; set; }
         /// <summary> Optional. For a break action, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. </summary>

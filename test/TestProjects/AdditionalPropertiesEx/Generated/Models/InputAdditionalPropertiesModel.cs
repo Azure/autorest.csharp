@@ -30,7 +30,7 @@ namespace AdditionalPropertiesEx.Models
             AdditionalProperties = additionalProperties ?? new Dictionary<string, object>();
         }
 
-        public int Id { get; set; }
+        public int Id { get; }
         internal IDictionary<string, object> AdditionalProperties { get; }
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();
