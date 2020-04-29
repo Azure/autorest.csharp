@@ -31,8 +31,8 @@ namespace paging.Models
         }
 
         /// <summary> Sets the api version to use. </summary>
-        public string ApiVersion { get; set; }
+        public string ApiVersion { get; }
         /// <summary> Sets the tenant to use. </summary>
-        public string Tenant { get; set; }
+        public string Tenant { get; }
     }
 }

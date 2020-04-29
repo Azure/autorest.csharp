@@ -31,7 +31,7 @@ namespace paging.Models
         /// <summary> Sets the maximum number of items to return in the response. </summary>
         public int? Maxresults { get; set; }
         /// <summary> Offset of return value. </summary>
-        public int Offset { get; set; }
+        public int Offset { get; }
         /// <summary> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </summary>
         public int? Timeout { get; set; }
     }

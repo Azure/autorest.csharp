@@ -380,7 +380,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
                     bool isReadOnly = IsStruct ||
                                       objectSchema.IsOutputOnly ||
-                                      property.ReadOnly == true;
+                                      property.ReadOnly == true ||
+                                      // Required properties of input objects should be readonly
+                                      (property.Required == true && objectSchema.IsInputOnly);
 
                     if (property.IsDiscriminator == true)
                     {

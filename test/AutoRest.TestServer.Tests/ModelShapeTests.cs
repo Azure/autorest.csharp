@@ -19,10 +19,20 @@ namespace AutoRest.TestServer.Tests
         public void RequiredPropertiesAreSetableInMixedModels()
         {
             var requiredInt = TypeAsserts.HasProperty(typeof(MixedModel), "RequiredInt", BindingFlags.Public | BindingFlags.Instance);
-            var requiredString = TypeAsserts.HasProperty(typeof(MixedModel), "RequiredInt", BindingFlags.Public | BindingFlags.Instance);
+            var requiredString = TypeAsserts.HasProperty(typeof(MixedModel), "RequiredString", BindingFlags.Public | BindingFlags.Instance);
 
             Assert.NotNull(requiredInt.SetMethod);
             Assert.NotNull(requiredString.SetMethod);
+        }
+
+        [Test]
+        public void RequiredPropertiesAreNotSetableInMixedModels()
+        {
+            var requiredInt = TypeAsserts.HasProperty(typeof(MixedModel), "RequiredInt", BindingFlags.Public | BindingFlags.Instance);
+            var requiredString = TypeAsserts.HasProperty(typeof(MixedModel), "RequiredString", BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.Null(requiredInt.SetMethod);
+            Assert.Null(requiredString.SetMethod);
         }
     }
 }
