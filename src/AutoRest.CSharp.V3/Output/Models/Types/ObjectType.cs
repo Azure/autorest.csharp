@@ -136,27 +136,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     false
                 );
 
-                ReferenceOrConstant? fallbackValue = null;
                 ownsDiscriminatorProperty |= property == Discriminator?.Property;
-
-                if (property == Discriminator?.Property)
-                {
-                    ownsDiscriminatorProperty = true;
-                    if (Discriminator.Value != null)
-                    {
-                        fallbackValue = BuilderHelpers.StringConstant(Discriminator.Value);
-                    }
-                }
-                else
-                {
-                    var initializeWithType = property.InitializeWithType;
-                    fallbackValue = initializeWithType != null ?
-                        Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
-                }
 
                 serializationConstructorParameters.Add(deserializationParameter);
 
-                serializationInitializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, fallbackValue));
+                serializationInitializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, GetPropertyDefaultValue(property)));
             }
 
             if (Discriminator != null)
@@ -180,6 +164,24 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             );
         }
 
+        private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
+        {
+            if (property == Discriminator?.Property)
+            {
+                if (Discriminator.Value != null)
+                {
+                    return BuilderHelpers.StringConstant(Discriminator.Value);
+                }
+            }
+            else
+            {
+                var initializeWithType = property.InitializeWithType;
+                return initializeWithType != null ? Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+            }
+
+            return null;
+        }
+
         private ObjectTypeConstructor BuildInitializationConstructor()
         {
             List<Parameter> defaultCtorParameters = new List<Parameter>();
@@ -194,71 +196,50 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             foreach (var property in Properties)
             {
-                bool isDiscriminatorProperty = false;
-                ReferenceOrConstant? fallbackValue = null;
+                // Only required properties that are not discriminators go into default ctor
                 if (property == Discriminator?.Property)
                 {
-                    isDiscriminatorProperty = true;
-                    if (Discriminator.Value != null)
+                    continue;
+                }
+
+                ReferenceOrConstant? initializationValue;
+
+                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
+                {
+                    // Turn constants into initializers
+                    initializationValue = constantSchema.Value.Value != null ?
+                        BuilderHelpers.ParseConstant(constantSchema.Value.Value, property.Declaration.Type) :
+                        Constant.NewInstanceOf(property.Declaration.Type);
+                }
+                else if (IsStruct || property.SchemaProperty?.Required == true)
+                {
+                    // For structs all properties become required
+                    Constant? defaultParameterValue = null;
+                    if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
                     {
-                        fallbackValue = BuilderHelpers.StringConstant(Discriminator.Value);
+                        defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, property.Declaration.Type);
                     }
+
+                    var defaultCtorParameter = new Parameter(
+                        property.Declaration.Name.ToVariableName(),
+                        property.Description,
+                        TypeFactory.GetInputType(property.Declaration.Type),
+                        defaultParameterValue,
+                        true
+                    );
+
+                    defaultCtorParameters.Add(defaultCtorParameter);
+                    initializationValue = defaultCtorParameter;
                 }
                 else
                 {
-                    var initializeWithType = property.InitializeWithType;
-                    fallbackValue = initializeWithType != null ?
-                        Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+                    initializationValue = GetPropertyDefaultValue(property);
                 }
 
-                // Only required properties that are not discriminators go into default ctor
-                if (isDiscriminatorProperty)
+                if (initializationValue != null)
                 {
-                    continue;
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value));
                 }
-
-                // For structs all properties become required
-                if (!IsStruct && property.SchemaProperty?.Required != true)
-                {
-                    // Initialize properties even if they are not required
-                    if (fallbackValue != null)
-                    {
-                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, fallbackValue.Value));
-                    }
-                    continue;
-                }
-
-                // Turn constants into initializers
-                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
-                {
-                    var constantValue = constantSchema.Value.Value != null ?
-                        BuilderHelpers.ParseConstant(constantSchema.Value.Value, property.Declaration.Type) :
-                        Constant.NewInstanceOf(property.Declaration.Type);
-
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(
-                        property,
-                        constantValue));
-
-                    continue;
-                }
-
-                Constant? defaultValue = null;
-
-                if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
-                {
-                    defaultValue = BuilderHelpers.ParseConstant(defaultValueObject, property.Declaration.Type);
-                }
-
-                var defaultCtorParameter = new Parameter(
-                    property.Declaration.Name.ToVariableName(),
-                    property.Description,
-                    TypeFactory.GetInputType(property.Declaration.Type),
-                    defaultValue,
-                    true
-                );
-
-                defaultCtorParameters.Add(defaultCtorParameter);
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, defaultCtorParameter));
             }
 
             if (Discriminator != null)

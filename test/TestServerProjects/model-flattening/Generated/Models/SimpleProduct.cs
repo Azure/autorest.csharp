@@ -20,6 +20,8 @@ namespace model_flattening.Models
             {
                 throw new ArgumentNullException(nameof(productId));
             }
+
+            Capacity = "Large";
         }
 
         /// <summary> Initializes a new instance of SimpleProduct. </summary>

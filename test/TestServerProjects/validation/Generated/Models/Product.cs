@@ -31,6 +31,7 @@ namespace validation.Models
             ConstChild = constChild;
             ConstInt = 0;
             ConstString = "constant";
+            ConstStringAsEnum = "constant_string_as_enum";
         }
 
         /// <summary> Initializes a new instance of Product. </summary>
