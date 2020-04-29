@@ -98,23 +98,25 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            List<Parameter> serializationConstructorParameters = new List<Parameter>();
-            List<Parameter> defaultCtorParameters = new List<Parameter>();
-            List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
-            List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
+            yield return BuildInitializationConstructor();
+            yield return BuildSerializationConstructor();
 
-            ObjectTypeConstructor? baseCtor = null;
+        }
+
+        private ObjectTypeConstructor BuildSerializationConstructor()
+        {
+            bool ownsDiscriminatorProperty = false;
+
+            List<Parameter> serializationConstructorParameters = new List<Parameter>();
+            List<ObjectPropertyInitializer> serializationInitializers = new List<ObjectPropertyInitializer>();
             ObjectTypeConstructor? baseSerializationCtor = null;
+
             if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
             {
-                baseCtor = objectType.Constructors.First();
                 baseSerializationCtor = objectType.Constructors.Last();
-
-                defaultCtorParameters.AddRange(baseCtor.Parameters);
                 serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
             }
 
-            bool ownsDiscriminatorProperty = false;
             foreach (var property in Properties)
             {
                 var deserializationParameter = new Parameter(
@@ -125,11 +127,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     false
                 );
 
-                bool isDiscriminatorProperty = false;
                 ReferenceOrConstant? fallbackValue = null;
+                ownsDiscriminatorProperty |= property == Discriminator?.Property;
+
                 if (property == Discriminator?.Property)
                 {
-                    isDiscriminatorProperty = true;
                     ownsDiscriminatorProperty = true;
                     if (Discriminator.Value != null)
                     {
@@ -145,7 +147,60 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 serializationConstructorParameters.Add(deserializationParameter);
 
-                initializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, fallbackValue));
+                serializationInitializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, fallbackValue));
+            }
+
+            if (Discriminator != null)
+            {
+                // Add discriminator initializer to constructor at every level of hierarchy
+                if (!ownsDiscriminatorProperty &&
+                    baseSerializationCtor != null)
+                {
+                    var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
+                    Debug.Assert(discriminatorParameter != null);
+
+                    serializationInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, BuilderHelpers.StringConstant(Discriminator.Value)));
+                }
+            }
+
+            return new ObjectTypeConstructor(
+                BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null, _typeFactory),
+                serializationConstructorParameters.ToArray(),
+                serializationInitializers.ToArray(),
+                baseSerializationCtor
+            );
+        }
+
+        private ObjectTypeConstructor BuildInitializationConstructor()
+        {
+            List<Parameter> defaultCtorParameters = new List<Parameter>();
+            List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
+
+            ObjectTypeConstructor? baseCtor = null;
+            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
+            {
+                baseCtor = objectType.Constructors.First();
+                defaultCtorParameters.AddRange(baseCtor.Parameters);
+            }
+
+            foreach (var property in Properties)
+            {
+                bool isDiscriminatorProperty = false;
+                ReferenceOrConstant? fallbackValue = null;
+                if (property == Discriminator?.Property)
+                {
+                    isDiscriminatorProperty = true;
+                    if (Discriminator.Value != null)
+                    {
+                        fallbackValue = BuilderHelpers.StringConstant(Discriminator.Value);
+                    }
+                }
+                else
+                {
+                    var initializeWithType = property.InitializeWithType;
+                    fallbackValue = initializeWithType != null ?
+                        Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+                }
 
                 // Only required properties that are not discriminators go into default ctor
                 if (isDiscriminatorProperty)
@@ -197,22 +252,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, defaultCtorParameter));
             }
 
-
             if (Discriminator != null)
             {
-                // Add discriminator initializer to constructor at every level of hierarchy
-                if (!ownsDiscriminatorProperty &&
-                    baseSerializationCtor != null)
-                {
-                    var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
-                    Debug.Assert(discriminatorParameter != null);
-
-                    initializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, BuilderHelpers.StringConstant(Discriminator.Value)));
-                }
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
             }
 
-            yield return new ObjectTypeConstructor(
+            return new ObjectTypeConstructor(
                 BuilderHelpers.CreateMemberDeclaration(
                     Type.Name,
                     Type,
@@ -223,19 +268,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
                 baseCtor);
-
-            // Skip serialization ctor if they are the same
-            if (!defaultCtorParameters
-                    .Select(p => p.Type)
-                    .SequenceEqual(serializationConstructorParameters.Select(p => p.Type)))
-            {
-                yield return new ObjectTypeConstructor(
-                    BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null, _typeFactory),
-                    serializationConstructorParameters.ToArray(),
-                    initializers.ToArray(),
-                    baseSerializationCtor
-                );
-            }
         }
 
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();

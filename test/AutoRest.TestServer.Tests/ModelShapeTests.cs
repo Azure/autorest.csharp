@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Linq;
 using System.Reflection;
 using ModelShapes.Models;
 using NUnit.Framework;
@@ -33,6 +34,14 @@ namespace AutoRest.TestServer.Tests
 
             Assert.Null(requiredInt.SetMethod);
             Assert.Null(requiredString.SetMethod);
+        }
+
+        [Test]
+        public void RequiredInputCollectionsAreNotIncludedInConstructor()
+        {
+            var publicCtor = typeof(InputModel).GetConstructors().Single(c => c.IsPublic);
+
+            Assert.IsEmpty(publicCtor.GetParameters().Where(p => p.ParameterType.IsConstructedGenericType));
         }
     }
 }
