@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
             options = new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new UsagesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
+            RestClient = new UsagesRestClient(_clientDiagnostics, _pipeline, subscriptionId);
         }
 
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>

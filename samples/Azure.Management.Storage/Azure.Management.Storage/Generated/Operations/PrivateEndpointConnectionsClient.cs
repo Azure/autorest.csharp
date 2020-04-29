@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
             options = new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new PrivateEndpointConnectionsRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
+            RestClient = new PrivateEndpointConnectionsRestClient(_clientDiagnostics, _pipeline, subscriptionId);
         }
 
         /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>

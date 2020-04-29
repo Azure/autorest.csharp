@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
             options = new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new ManagementPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId, options.Version);
+            RestClient = new ManagementPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId);
         }
 
         /// <summary> Gets the managementpolicy associated with the specified storage account. </summary>
