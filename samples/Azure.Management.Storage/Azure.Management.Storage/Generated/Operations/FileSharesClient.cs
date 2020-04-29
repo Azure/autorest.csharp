@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new FileSharesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, apiVersion: options.Version);
+            RestClient = new FileSharesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId);
         }
 
         /// <summary> Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. </summary>

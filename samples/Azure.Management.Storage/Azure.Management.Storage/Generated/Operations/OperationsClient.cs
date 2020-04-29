@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline, apiVersion: options.Version);
+            RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline);
         }
 
         /// <summary> Lists all of the available Storage Rest API operations. </summary>

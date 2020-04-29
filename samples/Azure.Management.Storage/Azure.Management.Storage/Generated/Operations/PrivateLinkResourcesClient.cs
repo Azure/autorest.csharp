@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new PrivateLinkResourcesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, apiVersion: options.Version);
+            RestClient = new PrivateLinkResourcesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId);
         }
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>

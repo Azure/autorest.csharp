@@ -110,14 +110,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 foreach (Parameter parameter in client.RestClient.Parameters)
                 {
-                    if (ManagementClientWriterHelpers.IsHostParameter(parameter))
+                    // Skip host and API Version parameters that would be set later
+                    if (ManagementClientWriterHelpers.IsHostParameter(parameter) ||
+                        ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
                     {
-                        continue;
-                    }
-
-                    if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
-                    {
-                        writer.Append($"{parameter.Name}: options.Version, ");
                         continue;
                     }
 
