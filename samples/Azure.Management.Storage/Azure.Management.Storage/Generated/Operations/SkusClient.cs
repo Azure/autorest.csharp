@@ -43,12 +43,7 @@ namespace Azure.Management.Storage
                 var response = await RestClient.ListAsync(cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            async Task<Page<SkuInformation>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await RestClient.ListNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
@@ -60,12 +55,7 @@ namespace Azure.Management.Storage
                 var response = RestClient.List(cancellationToken);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            Page<SkuInformation> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = RestClient.ListNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
     }
 }

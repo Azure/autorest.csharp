@@ -93,12 +93,7 @@ namespace Azure.Management.Storage
                 var response = await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            async Task<Page<BlobServiceProperties>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
@@ -121,12 +116,7 @@ namespace Azure.Management.Storage
                 var response = RestClient.List(resourceGroupName, accountName, cancellationToken);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            Page<BlobServiceProperties> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = RestClient.ListNextPage(nextLink, resourceGroupName, accountName, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
     }
 }

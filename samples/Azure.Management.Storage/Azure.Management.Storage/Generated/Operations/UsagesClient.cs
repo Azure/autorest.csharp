@@ -50,12 +50,7 @@ namespace Azure.Management.Storage
                 var response = await RestClient.ListByLocationAsync(location, cancellationToken).ConfigureAwait(false);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await RestClient.ListByLocationNextPageAsync(nextLink, location, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
@@ -73,12 +68,7 @@ namespace Azure.Management.Storage
                 var response = RestClient.ListByLocation(location, cancellationToken);
                 return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
             }
-            Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = RestClient.ListByLocationNextPage(nextLink, location, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
     }
 }
