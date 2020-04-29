@@ -207,14 +207,9 @@ namespace paging
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
                 var response = await RestClient.NextOperationWithQueryParamsAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
-            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = await RestClient.NextOperationWithQueryParamsNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
@@ -224,14 +219,9 @@ namespace paging
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
                 var response = RestClient.NextOperationWithQueryParams(cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
             }
-            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                var response = RestClient.NextOperationWithQueryParamsNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>

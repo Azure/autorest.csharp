@@ -1151,14 +1151,14 @@ operationGroups:
             extensions:
               x-ms-pageable:
                 itemName: values
-                nextLinkName: nextLink
+                nextLinkName: null
             language: !<!Languages> 
               default:
                 name: NextOperationWithQueryParams
                 description: Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
                 paging:
                   itemName: values
-                  nextLinkName: nextLink
+                  nextLinkName: null
             protocol: !<!Protocols> {}
     protocol: !<!Protocols> {}
   - *ref_35
