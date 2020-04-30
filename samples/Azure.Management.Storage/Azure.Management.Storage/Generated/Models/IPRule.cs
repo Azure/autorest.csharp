@@ -22,6 +22,7 @@ namespace Azure.Management.Storage.Models
             }
 
             IPAddressOrRange = iPAddressOrRange;
+            Action = "Allow";
         }
 
         /// <summary> Initializes a new instance of IPRule. </summary>

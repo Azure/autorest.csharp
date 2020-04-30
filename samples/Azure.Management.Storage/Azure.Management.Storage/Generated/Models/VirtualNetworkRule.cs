@@ -22,6 +22,7 @@ namespace Azure.Management.Storage.Models
             }
 
             VirtualNetworkResourceId = virtualNetworkResourceId;
+            Action = "Allow";
         }
 
         /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
