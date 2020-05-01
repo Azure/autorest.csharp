@@ -102,6 +102,38 @@ namespace Azure.AI.FormRecognizer
             return RestClient.GetAnalyzeFormResult(modelId, resultId, cancellationToken);
         }
 
+        /// <summary> Obtain current status and the result of a custom model copy operation. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="resultId"> Copy operation result identifier. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<CopyOperationResult>> GetCustomModelCopyResultAsync(Guid modelId, Guid resultId, CancellationToken cancellationToken = default)
+        {
+            return await RestClient.GetCustomModelCopyResultAsync(modelId, resultId, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> Obtain current status and the result of a custom model copy operation. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="resultId"> Copy operation result identifier. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<CopyOperationResult> GetCustomModelCopyResult(Guid modelId, Guid resultId, CancellationToken cancellationToken = default)
+        {
+            return RestClient.GetCustomModelCopyResult(modelId, resultId, cancellationToken);
+        }
+
+        /// <summary> Generate authorization to copy a model into the target Form Recognizer resource. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<CopyAuthorizationResult>> GenerateModelCopyAuthorizationAsync(CancellationToken cancellationToken = default)
+        {
+            return await RestClient.GenerateModelCopyAuthorizationAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> Generate authorization to copy a model into the target Form Recognizer resource. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<CopyAuthorizationResult> GenerateModelCopyAuthorization(CancellationToken cancellationToken = default)
+        {
+            return RestClient.GenerateModelCopyAuthorization(cancellationToken);
+        }
+
         /// <summary> Track the progress and obtain the result of the analyze receipt operation. </summary>
         /// <param name="resultId"> Analyze operation result identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -253,6 +285,53 @@ namespace Azure.AI.FormRecognizer
         {
             var originalResponse = RestClient.AnalyzeWithCustomModel(modelId, includeTextDetails, fileStream, cancellationToken);
             return CreateAnalyzeWithCustomModel(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream));
+        }
+
+        /// <summary> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        internal Operation<Response> CreateCopyCustomModel(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.CopyCustomModel", OperationFinalStateVia.Location, createOriginalHttpMessage);
+        }
+
+        /// <summary> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="copyRequest"> Copy request parameters. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async ValueTask<Operation<Response>> StartCopyCustomModelAsync(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
+        {
+            if (copyRequest == null)
+            {
+                throw new ArgumentNullException(nameof(copyRequest));
+            }
+
+            var originalResponse = await RestClient.CopyCustomModelAsync(modelId, copyRequest, cancellationToken).ConfigureAwait(false);
+            return CreateCopyCustomModel(originalResponse, () => RestClient.CreateCopyCustomModelRequest(modelId, copyRequest));
+        }
+
+        /// <summary> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="copyRequest"> Copy request parameters. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Operation<Response> StartCopyCustomModel(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
+        {
+            if (copyRequest == null)
+            {
+                throw new ArgumentNullException(nameof(copyRequest));
+            }
+
+            var originalResponse = RestClient.CopyCustomModel(modelId, copyRequest, cancellationToken);
+            return CreateCopyCustomModel(originalResponse, () => RestClient.CreateCopyCustomModelRequest(modelId, copyRequest));
         }
 
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>

@@ -18,25 +18,25 @@ namespace AppConfiguration
 {
     internal partial class ServiceRestClient
     {
-        private string host;
+        private string endpoint;
         private string syncToken;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "", string syncToken = null, string apiVersion = "1.0")
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string syncToken = null, string apiVersion = "1.0")
         {
-            if (host == null)
+            if (endpoint == null)
             {
-                throw new ArgumentNullException(nameof(host));
+                throw new ArgumentNullException(nameof(endpoint));
             }
             if (apiVersion == null)
             {
                 throw new ArgumentNullException(nameof(apiVersion));
             }
 
-            this.host = host;
+            this.endpoint = endpoint;
             this.syncToken = syncToken;
             this.apiVersion = apiVersion;
             _clientDiagnostics = clientDiagnostics;
@@ -49,7 +49,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/keys", false);
             if (name != null)
             {
@@ -160,7 +160,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/keys", false);
             if (name != null)
             {
@@ -247,7 +247,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/kv", false);
             if (key != null)
             {
@@ -370,7 +370,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/kv", false);
             if (key != null)
             {
@@ -469,7 +469,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/kv/", false);
             uri.AppendPath(key, true);
             if (label != null)
@@ -605,7 +605,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/kv/", false);
             uri.AppendPath(key, true);
             if (label != null)
@@ -738,7 +738,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/kv/", false);
             uri.AppendPath(key, true);
             if (label != null)
@@ -860,7 +860,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/kv/", false);
             uri.AppendPath(key, true);
             if (label != null)
@@ -972,7 +972,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/labels", false);
             if (name != null)
             {
@@ -1089,7 +1089,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/labels", false);
             if (name != null)
             {
@@ -1182,7 +1182,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/locks/", false);
             uri.AppendPath(key, true);
             if (label != null)
@@ -1306,7 +1306,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/locks/", false);
             uri.AppendPath(key, true);
             if (label != null)
@@ -1430,7 +1430,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/revisions", false);
             if (key != null)
             {
@@ -1553,7 +1553,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendPath("/revisions", false);
             if (key != null)
             {
@@ -1652,7 +1652,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (syncToken != null)
@@ -1766,7 +1766,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (syncToken != null)
@@ -1884,7 +1884,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (syncToken != null)
@@ -2000,7 +2000,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (syncToken != null)

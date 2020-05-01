@@ -18,6 +18,7 @@ namespace Azure.Storage.Tables
             _response = response;
         }
         public string XMsVersion => _response.Headers.TryGetValue("x-ms-version", out string value) ? value : null;
-        public string XMsContinuationNextTableName => _response.Headers.TryGetValue("x-ms-continuation-NextTableName", out string value) ? value : null;
+        public string XMsContinuationNextPartitionKey => _response.Headers.TryGetValue("x-ms-continuation-NextPartitionKey", out string value) ? value : null;
+        public string XMsContinuationNextRowKey => _response.Headers.TryGetValue("x-ms-continuation-NextRowKey", out string value) ? value : null;
     }
 }

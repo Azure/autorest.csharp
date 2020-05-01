@@ -49,7 +49,7 @@ namespace Azure.Storage.Tables
                 var response = await _tableOperations.RestClient.QueryEntitiesAsync(_table,
                     queryOptions: new QueryOptions() { Format = _format, Top = limit, Filter = filter, Select = @select},
                     cancellationToken: cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Headers.XMsContinuationNextTableName, response.GetRawResponse());
+                return Page.FromValues(response.Value.Value, response.Headers.XMsContinuationNextPartitionKey, response.GetRawResponse());
             },(_, __) => throw new NotImplementedException());
         }
     }
