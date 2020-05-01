@@ -204,7 +204,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(fileShare));
             }
 
-            using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
+            using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, fileShare);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -253,7 +253,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(fileShare));
             }
 
-            using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
+            using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, fileShare);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -326,7 +326,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(fileShare));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
+            using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, fileShare);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -374,7 +374,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(fileShare));
             }
 
-            using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
+            using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, fileShare);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -644,24 +644,14 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(deletedShareVersion));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Restore");
-            scope.Start();
-            try
+            using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -695,24 +685,14 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(deletedShareVersion));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Restore");
-            scope.Start();
-            try
+            using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 

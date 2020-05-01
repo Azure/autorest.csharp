@@ -625,7 +625,7 @@ namespace Azure.Storage.Tables
             var headers = new TableInternalUpdateEntityHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
+                case 204:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -661,7 +661,7 @@ namespace Azure.Storage.Tables
             var headers = new TableInternalUpdateEntityHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
+                case 204:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

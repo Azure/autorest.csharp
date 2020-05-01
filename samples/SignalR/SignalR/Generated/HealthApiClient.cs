@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,14 +35,34 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> HeadIndexAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.HeadIndexAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("HealthApiClient.HeadIndex");
+            scope.Start();
+            try
+            {
+                return await RestClient.HeadIndexAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get service health status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response HeadIndex(CancellationToken cancellationToken = default)
         {
-            return RestClient.HeadIndex(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("HealthApiClient.HeadIndex");
+            scope.Start();
+            try
+            {
+                return RestClient.HeadIndex(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

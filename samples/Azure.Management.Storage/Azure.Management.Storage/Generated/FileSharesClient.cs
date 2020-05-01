@@ -47,7 +47,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return await RestClient.CreateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateAsync(resourceGroupName, accountName, shareName, fileShare, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -68,7 +68,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return RestClient.Create(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken);
+                return RestClient.Create(resourceGroupName, accountName, shareName, fileShare, cancellationToken);
             }
             catch (Exception e)
             {
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return await RestClient.UpdateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken).ConfigureAwait(false);
+                return await RestClient.UpdateAsync(resourceGroupName, accountName, shareName, fileShare, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return RestClient.Update(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken);
+                return RestClient.Update(resourceGroupName, accountName, shareName, fileShare, cancellationToken);
             }
             catch (Exception e)
             {
@@ -208,7 +208,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> RestoreAsync(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion, CancellationToken cancellationToken = default)
         {
-            return await RestClient.RestoreAsync(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Restore");
+            scope.Start();
+            try
+            {
+                return await RestClient.RestoreAsync(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Restore a file share within a valid retention days if share soft delete is enabled. </summary>
@@ -220,7 +230,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Restore(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion, CancellationToken cancellationToken = default)
         {
-            return RestClient.Restore(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Restore");
+            scope.Start();
+            try
+            {
+                return RestClient.Restore(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all shares. </summary>

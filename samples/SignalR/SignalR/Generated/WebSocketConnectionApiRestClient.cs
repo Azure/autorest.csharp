@@ -64,25 +64,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostDefaultHubBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostDefaultHubBroadcastRequest(data, excluded);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostDefaultHubBroadcastRequest(data, excluded);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -97,25 +87,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostDefaultHubBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostDefaultHubBroadcastRequest(data, excluded);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostDefaultHubBroadcastRequest(data, excluded);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -148,25 +128,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostDefaultHubBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostDefaultHubBroadcastRequest(data, excluded);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostDefaultHubBroadcastRequest(data, excluded);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -181,25 +151,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostDefaultHubBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostDefaultHubBroadcastRequest(data, excluded);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostDefaultHubBroadcastRequest(data, excluded);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -238,25 +198,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostBroadcastRequest(hub, data, excluded);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostBroadcastRequest(hub, data, excluded);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -276,25 +226,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostBroadcastRequest(hub, data, excluded);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostBroadcastRequest(hub, data, excluded);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -333,25 +273,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostBroadcastRequest(hub, data, excluded);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostBroadcastRequest(hub, data, excluded);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -371,25 +301,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostBroadcastRequest(hub, data, excluded);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostBroadcastRequest(hub, data, excluded);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -423,25 +343,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToDefaultHubUser");
-            scope.Start();
-            try
+            using var message = CreatePostSendToDefaultHubUserRequest(id, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToDefaultHubUserRequest(id, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -460,25 +370,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToDefaultHubUser");
-            scope.Start();
-            try
+            using var message = CreatePostSendToDefaultHubUserRequest(id, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToDefaultHubUserRequest(id, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -512,25 +412,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToDefaultHubUser");
-            scope.Start();
-            try
+            using var message = CreatePostSendToDefaultHubUserRequest(id, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToDefaultHubUserRequest(id, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -549,25 +439,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToDefaultHubUser");
-            scope.Start();
-            try
+            using var message = CreatePostSendToDefaultHubUserRequest(id, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToDefaultHubUserRequest(id, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -608,25 +488,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToUser");
-            scope.Start();
-            try
+            using var message = CreatePostSendToUserRequest(hub, id, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToUserRequest(hub, id, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -650,25 +520,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToUser");
-            scope.Start();
-            try
+            using var message = CreatePostSendToUserRequest(hub, id, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToUserRequest(hub, id, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -709,25 +569,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToUser");
-            scope.Start();
-            try
+            using var message = CreatePostSendToUserRequest(hub, id, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToUserRequest(hub, id, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -751,25 +601,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToUser");
-            scope.Start();
-            try
+            using var message = CreatePostSendToUserRequest(hub, id, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToUserRequest(hub, id, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -803,25 +643,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToDefaultHubConnection");
-            scope.Start();
-            try
+            using var message = CreatePostSendToDefaultHubConnectionRequest(connectionId, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToDefaultHubConnectionRequest(connectionId, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -840,25 +670,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToDefaultHubConnection");
-            scope.Start();
-            try
+            using var message = CreatePostSendToDefaultHubConnectionRequest(connectionId, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToDefaultHubConnectionRequest(connectionId, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -892,25 +712,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToDefaultHubConnection");
-            scope.Start();
-            try
+            using var message = CreatePostSendToDefaultHubConnectionRequest(connectionId, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToDefaultHubConnectionRequest(connectionId, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -929,25 +739,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToDefaultHubConnection");
-            scope.Start();
-            try
+            using var message = CreatePostSendToDefaultHubConnectionRequest(connectionId, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToDefaultHubConnectionRequest(connectionId, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -974,26 +774,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckDefaultHubConnectionExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckDefaultHubConnectionExistenceRequest(connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckDefaultHubConnectionExistenceRequest(connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1007,26 +797,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckDefaultHubConnectionExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckDefaultHubConnectionExistenceRequest(connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckDefaultHubConnectionExistenceRequest(connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1053,26 +833,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubConnectionExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckDefaultHubConnectionExistenceRequest(connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckDefaultHubConnectionExistenceRequest(connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1086,26 +856,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubConnectionExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckDefaultHubConnectionExistenceRequest(connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckDefaultHubConnectionExistenceRequest(connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1137,25 +897,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteCloseDefaultHubClientConnection");
-            scope.Start();
-            try
+            using var message = CreateDeleteCloseDefaultHubClientConnectionRequest(connectionId, reason);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteCloseDefaultHubClientConnectionRequest(connectionId, reason);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1170,25 +920,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteCloseDefaultHubClientConnection");
-            scope.Start();
-            try
+            using var message = CreateDeleteCloseDefaultHubClientConnectionRequest(connectionId, reason);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteCloseDefaultHubClientConnectionRequest(connectionId, reason);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1229,25 +969,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToConnection");
-            scope.Start();
-            try
+            using var message = CreatePostSendToConnectionRequest(hub, connectionId, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToConnectionRequest(hub, connectionId, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1271,25 +1001,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToConnection");
-            scope.Start();
-            try
+            using var message = CreatePostSendToConnectionRequest(hub, connectionId, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToConnectionRequest(hub, connectionId, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1330,25 +1050,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToConnection");
-            scope.Start();
-            try
+            using var message = CreatePostSendToConnectionRequest(hub, connectionId, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToConnectionRequest(hub, connectionId, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1372,25 +1082,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostSendToConnection");
-            scope.Start();
-            try
+            using var message = CreatePostSendToConnectionRequest(hub, connectionId, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSendToConnectionRequest(hub, connectionId, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1424,26 +1124,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckConnectionExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckConnectionExistenceRequest(hub, connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckConnectionExistenceRequest(hub, connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1462,26 +1152,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckConnectionExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckConnectionExistenceRequest(hub, connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckConnectionExistenceRequest(hub, connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1515,26 +1195,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckConnectionExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckConnectionExistenceRequest(hub, connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckConnectionExistenceRequest(hub, connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1553,26 +1223,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckConnectionExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckConnectionExistenceRequest(hub, connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckConnectionExistenceRequest(hub, connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1611,25 +1271,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteCloseClientConnection");
-            scope.Start();
-            try
+            using var message = CreateDeleteCloseClientConnectionRequest(hub, connectionId, reason);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteCloseClientConnectionRequest(hub, connectionId, reason);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1649,25 +1299,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteCloseClientConnection");
-            scope.Start();
-            try
+            using var message = CreateDeleteCloseClientConnectionRequest(hub, connectionId, reason);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteCloseClientConnectionRequest(hub, connectionId, reason);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1706,25 +1346,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostDefaultHubGroupBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostDefaultHubGroupBroadcastRequest(group, data, excluded);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostDefaultHubGroupBroadcastRequest(group, data, excluded);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1744,25 +1374,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostDefaultHubGroupBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostDefaultHubGroupBroadcastRequest(group, data, excluded);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostDefaultHubGroupBroadcastRequest(group, data, excluded);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1801,25 +1421,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostDefaultHubGroupBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostDefaultHubGroupBroadcastRequest(group, data, excluded);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostDefaultHubGroupBroadcastRequest(group, data, excluded);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1839,25 +1449,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostDefaultHubGroupBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostDefaultHubGroupBroadcastRequest(group, data, excluded);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostDefaultHubGroupBroadcastRequest(group, data, excluded);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1884,26 +1484,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(group));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckDefaultHubGroupExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckDefaultHubGroupExistenceRequest(group);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckDefaultHubGroupExistenceRequest(group);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1917,26 +1507,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(group));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckDefaultHubGroupExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckDefaultHubGroupExistenceRequest(group);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckDefaultHubGroupExistenceRequest(group);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1963,26 +1543,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(group));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubGroupExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckDefaultHubGroupExistenceRequest(group);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckDefaultHubGroupExistenceRequest(group);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1996,26 +1566,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(group));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubGroupExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckDefaultHubGroupExistenceRequest(group);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckDefaultHubGroupExistenceRequest(group);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2061,25 +1621,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostGroupBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostGroupBroadcastRequest(hub, group, data, excluded);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostGroupBroadcastRequest(hub, group, data, excluded);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2104,25 +1654,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostGroupBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostGroupBroadcastRequest(hub, group, data, excluded);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostGroupBroadcastRequest(hub, group, data, excluded);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2168,25 +1708,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostGroupBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostGroupBroadcastRequest(hub, group, data, excluded);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostGroupBroadcastRequest(hub, group, data, excluded);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2211,25 +1741,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PostGroupBroadcast");
-            scope.Start();
-            try
+            using var message = CreatePostGroupBroadcastRequest(hub, group, data, excluded);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostGroupBroadcastRequest(hub, group, data, excluded);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2263,26 +1783,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(group));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckGroupExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckGroupExistenceRequest(hub, group);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckGroupExistenceRequest(hub, group);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2301,26 +1811,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(group));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckGroupExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckGroupExistenceRequest(hub, group);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckGroupExistenceRequest(hub, group);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2354,26 +1854,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(group));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckGroupExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckGroupExistenceRequest(hub, group);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckGroupExistenceRequest(hub, group);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2392,26 +1882,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(group));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckGroupExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckGroupExistenceRequest(hub, group);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckGroupExistenceRequest(hub, group);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2438,26 +1918,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckDefaultHubUserExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckDefaultHubUserExistenceRequest(user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckDefaultHubUserExistenceRequest(user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2471,26 +1941,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckDefaultHubUserExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckDefaultHubUserExistenceRequest(user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckDefaultHubUserExistenceRequest(user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2517,26 +1977,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubUserExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckDefaultHubUserExistenceRequest(user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckDefaultHubUserExistenceRequest(user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2550,26 +2000,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubUserExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckDefaultHubUserExistenceRequest(user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckDefaultHubUserExistenceRequest(user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2603,26 +2043,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PutAddConnectionToDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreatePutAddConnectionToDefaultHubGroupRequest(group, connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAddConnectionToDefaultHubGroupRequest(group, connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2641,26 +2071,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PutAddConnectionToDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreatePutAddConnectionToDefaultHubGroupRequest(group, connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAddConnectionToDefaultHubGroupRequest(group, connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2694,26 +2114,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveConnectionFromDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveConnectionFromDefaultHubGroupRequest(group, connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveConnectionFromDefaultHubGroupRequest(group, connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2732,26 +2142,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveConnectionFromDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveConnectionFromDefaultHubGroupRequest(group, connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveConnectionFromDefaultHubGroupRequest(group, connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2785,26 +2185,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckUserExistenceInDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreateGetCheckUserExistenceInDefaultHubGroupRequest(group, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckUserExistenceInDefaultHubGroupRequest(group, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2823,26 +2213,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckUserExistenceInDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreateGetCheckUserExistenceInDefaultHubGroupRequest(group, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckUserExistenceInDefaultHubGroupRequest(group, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2876,26 +2256,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistenceInDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckUserExistenceInDefaultHubGroupRequest(group, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckUserExistenceInDefaultHubGroupRequest(group, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2914,26 +2284,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistenceInDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckUserExistenceInDefaultHubGroupRequest(group, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckUserExistenceInDefaultHubGroupRequest(group, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2972,25 +2332,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PutAddUserToDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreatePutAddUserToDefaultHubGroupRequest(group, user, ttl);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAddUserToDefaultHubGroupRequest(group, user, ttl);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3010,25 +2360,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PutAddUserToDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreatePutAddUserToDefaultHubGroupRequest(group, user, ttl);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAddUserToDefaultHubGroupRequest(group, user, ttl);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3062,25 +2402,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveUserFromDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveUserFromDefaultHubGroupRequest(group, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveUserFromDefaultHubGroupRequest(group, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3099,25 +2429,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveUserFromDefaultHubGroup");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveUserFromDefaultHubGroupRequest(group, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveUserFromDefaultHubGroupRequest(group, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3145,26 +2465,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveUserFromAllDefaultHubGroups");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveUserFromAllDefaultHubGroupsRequest(user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveUserFromAllDefaultHubGroupsRequest(user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3178,26 +2488,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveUserFromAllDefaultHubGroups");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveUserFromAllDefaultHubGroupsRequest(user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveUserFromAllDefaultHubGroupsRequest(user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3231,26 +2531,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckUserExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckUserExistenceRequest(hub, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckUserExistenceRequest(hub, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3269,26 +2559,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckUserExistence");
-            scope.Start();
-            try
+            using var message = CreateGetCheckUserExistenceRequest(hub, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckUserExistenceRequest(hub, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3322,26 +2602,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckUserExistenceRequest(hub, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckUserExistenceRequest(hub, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3360,26 +2630,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistence");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckUserExistenceRequest(hub, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckUserExistenceRequest(hub, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3420,26 +2680,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PutAddConnectionToGroup");
-            scope.Start();
-            try
+            using var message = CreatePutAddConnectionToGroupRequest(hub, group, connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAddConnectionToGroupRequest(hub, group, connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3463,26 +2713,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PutAddConnectionToGroup");
-            scope.Start();
-            try
+            using var message = CreatePutAddConnectionToGroupRequest(hub, group, connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAddConnectionToGroupRequest(hub, group, connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3523,26 +2763,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveConnectionFromGroup");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveConnectionFromGroupRequest(hub, group, connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveConnectionFromGroupRequest(hub, group, connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3566,26 +2796,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveConnectionFromGroup");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveConnectionFromGroupRequest(hub, group, connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveConnectionFromGroupRequest(hub, group, connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3626,26 +2846,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckUserExistenceInGroup");
-            scope.Start();
-            try
+            using var message = CreateGetCheckUserExistenceInGroupRequest(hub, group, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckUserExistenceInGroupRequest(hub, group, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3669,26 +2879,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.GetCheckUserExistenceInGroup");
-            scope.Start();
-            try
+            using var message = CreateGetCheckUserExistenceInGroupRequest(hub, group, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetCheckUserExistenceInGroupRequest(hub, group, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3729,26 +2929,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistenceInGroup");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckUserExistenceInGroupRequest(hub, group, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckUserExistenceInGroupRequest(hub, group, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3772,26 +2962,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistenceInGroup");
-            scope.Start();
-            try
+            using var message = CreateHeadCheckUserExistenceInGroupRequest(hub, group, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHeadCheckUserExistenceInGroupRequest(hub, group, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 400:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3837,25 +3017,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PutAddUserToGroup");
-            scope.Start();
-            try
+            using var message = CreatePutAddUserToGroupRequest(hub, group, user, ttl);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAddUserToGroupRequest(hub, group, user, ttl);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3880,25 +3050,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.PutAddUserToGroup");
-            scope.Start();
-            try
+            using var message = CreatePutAddUserToGroupRequest(hub, group, user, ttl);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAddUserToGroupRequest(hub, group, user, ttl);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3939,25 +3099,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveUserFromGroup");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveUserFromGroupRequest(hub, group, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveUserFromGroupRequest(hub, group, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3981,25 +3131,15 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveUserFromGroup");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveUserFromGroupRequest(hub, group, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveUserFromGroupRequest(hub, group, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4034,26 +3174,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveUserFromAllGroups");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveUserFromAllGroupsRequest(hub, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveUserFromAllGroupsRequest(hub, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4072,26 +3202,16 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.DeleteRemoveUserFromAllGroups");
-            scope.Start();
-            try
+            using var message = CreateDeleteRemoveUserFromAllGroupsRequest(hub, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRemoveUserFromAllGroupsRequest(hub, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 202:
-                    case 400:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 202:
+                case 400:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

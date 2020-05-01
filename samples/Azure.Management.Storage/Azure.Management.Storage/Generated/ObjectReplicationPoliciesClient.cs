@@ -42,7 +42,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ObjectReplicationPolicy>> GetAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(resourceGroupName, accountName, objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPoliciesClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(resourceGroupName, accountName, objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get the object replication policy of the storage account by policy ID. </summary>
@@ -52,7 +62,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ObjectReplicationPolicy> Get(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(resourceGroupName, accountName, objectReplicationPolicyId, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPoliciesClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(resourceGroupName, accountName, objectReplicationPolicyId, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create or update the object replication policy of the storage account. </summary>
@@ -63,7 +83,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ObjectReplicationPolicy>> CreateOrUpdateAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicy properties, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateOrUpdateAsync(resourceGroupName, accountName, objectReplicationPolicyId, properties, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPoliciesClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateOrUpdateAsync(resourceGroupName, accountName, objectReplicationPolicyId, properties, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create or update the object replication policy of the storage account. </summary>
@@ -74,7 +104,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ObjectReplicationPolicy> CreateOrUpdate(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicy properties, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateOrUpdate(resourceGroupName, accountName, objectReplicationPolicyId, properties, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPoliciesClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateOrUpdate(resourceGroupName, accountName, objectReplicationPolicyId, properties, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
@@ -84,7 +124,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(resourceGroupName, accountName, objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPoliciesClient.Delete");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteAsync(resourceGroupName, accountName, objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
@@ -94,7 +144,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(resourceGroupName, accountName, objectReplicationPolicyId, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPoliciesClient.Delete");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete(resourceGroupName, accountName, objectReplicationPolicyId, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> List the object replication policies associated with the storage account. </summary>
@@ -114,8 +174,18 @@ namespace Azure.Management.Storage
 
             async Task<Page<ObjectReplicationPolicy>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPoliciesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
@@ -137,8 +207,18 @@ namespace Azure.Management.Storage
 
             Page<ObjectReplicationPolicy> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.List(resourceGroupName, accountName, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPoliciesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.List(resourceGroupName, accountName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
