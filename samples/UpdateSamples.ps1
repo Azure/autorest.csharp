@@ -1,11 +1,32 @@
-$filePath = Join-Path $PSScriptRoot 'SmokeTestInputs.txt'
-$fileContent = Get-Content $filePath
-$firstLineSplit = ($fileContent | Select-Object -First 1) -Split '/'
-$oldHashIndex = $firstLineSplit.IndexOf('blob') + 1
-$oldHash = $firstLineSplit[$oldHashIndex]
-$latestHash = (git ls-remote https://github.com/Azure/azure-rest-api-specs.git | Select-Object -First 1) -Split '\s+' | Select-Object -First 1
-$smokeTestLines = foreach($line in $fileContent)
+$gitHubUrl = 'https://github.com'
+$files = Get-ChildItem -Directory $PSScriptRoot | Get-ChildItem -File -Filter 'readme.md'
+foreach($file in $files)
 {
-    $line -Replace $oldHash, $latestHash
+    $fileContent = Get-Content $file
+    $branch = ($fileContent | Where-Object { $_ -like '*branch:*' } | Select-Object -First 1) -Split ':' | Select-Object -Last 1
+    $updatedLines = foreach($line in $fileContent)
+    {
+        if($line -like "*$gitHubUrl*")
+        {
+            $lineSplit = $line -Split '/'
+            $blobIndex = $lineSplit.IndexOf('blob')
+            $oldHash = $lineSplit[($blobIndex + 1)]
+
+            $org = $lineSplit[($blobIndex - 2)]
+            $repo = $lineSplit[($blobIndex - 1)]
+            $gitLink = "$gitHubUrl/$org/$repo.git"
+            $branchList = (git ls-remote $gitLink)
+            if($branch)
+            {
+                $branchList = $branchList | Where-Object { $_ -like "*$branch*" }
+            }
+            $latestHash = ($branchList | Select-Object -First 1) -Split '\s+' | Select-Object -First 1
+            $line -Replace $oldHash, $latestHash
+        }
+        else
+        {
+            $line
+        }
+    }
+    $updatedLines | Out-File -FilePath $file.FullName
 }
-$smokeTestLines | Out-File -FilePath $filePath
