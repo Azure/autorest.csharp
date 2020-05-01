@@ -44,7 +44,17 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
-            return await RestClient.OperationAsync(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken).ConfigureAwait(false);
+            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.Operation");
+            scope0.Start();
+            try
+            {
+                return await RestClient.OperationAsync(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope0.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="request"> The String to use. </param>
@@ -57,7 +67,17 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
-            return RestClient.Operation(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken);
+            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.Operation");
+            scope0.Start();
+            try
+            {
+                return RestClient.Operation(request, message, scope, uri, pipeline, clientDiagnostics, @class, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope0.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -74,7 +94,7 @@ namespace NameConflicts
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.AnalyzeBody", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.StartAnalyzeBody", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -87,8 +107,18 @@ namespace NameConflicts
                 throw new ArgumentNullException(nameof(stringBody));
             }
 
-            var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
-            return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeBody");
+            scope0.Start();
+            try
+            {
+                var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
+                return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            }
+            catch (Exception e)
+            {
+                scope0.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -101,8 +131,18 @@ namespace NameConflicts
                 throw new ArgumentNullException(nameof(stringBody));
             }
 
-            var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
-            return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeBody");
+            scope0.Start();
+            try
+            {
+                var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
+                return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            }
+            catch (Exception e)
+            {
+                scope0.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -110,8 +150,18 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<Response>> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
-            var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
-            return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeBody");
+            scope0.Start();
+            try
+            {
+                var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
+                return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            }
+            catch (Exception e)
+            {
+                scope0.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -119,8 +169,18 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<Response> StartAnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
         {
-            var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
-            return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeBody");
+            scope0.Start();
+            try
+            {
+                var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
+                return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+            }
+            catch (Exception e)
+            {
+                scope0.Failed(e);
+                throw;
+            }
         }
     }
 }

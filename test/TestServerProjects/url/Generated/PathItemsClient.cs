@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -38,7 +39,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAllWithValuesAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAllWithValuesAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -49,7 +60,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetAllWithValues(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
+            scope.Start();
+            try
+            {
+                return RestClient.GetAllWithValues(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -60,7 +81,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetGlobalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetGlobalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -71,7 +102,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetGlobalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetGlobalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
@@ -82,7 +123,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetGlobalAndLocalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetGlobalAndLocalQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
@@ -93,7 +144,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetGlobalAndLocalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetGlobalAndLocalQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
@@ -104,7 +165,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetLocalPathItemQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetLocalPathItemQueryNullAsync(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
@@ -115,7 +186,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetLocalPathItemQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetLocalPathItemQueryNull(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

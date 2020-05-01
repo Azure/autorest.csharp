@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -38,7 +39,17 @@ namespace custom_baseUrl_more_options
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyAsync(vault, secret, keyName, keyVersion, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyAsync(vault, secret, keyName, keyVersion, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
@@ -49,7 +60,17 @@ namespace custom_baseUrl_more_options
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmpty(vault, secret, keyName, keyVersion, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmpty(vault, secret, keyName, keyVersion, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

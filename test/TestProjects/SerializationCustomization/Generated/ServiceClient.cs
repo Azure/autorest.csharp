@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,28 +36,68 @@ namespace SerializationCustomization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AlwaysInitializeTestModel>> Operation1Async(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
         {
-            return await RestClient.Operation1Async(model, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation1");
+            scope.Start();
+            try
+            {
+                return await RestClient.Operation1Async(model, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="model"> The AlwaysInitializeTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AlwaysInitializeTestModel> Operation1(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
         {
-            return RestClient.Operation1(model, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation1");
+            scope.Start();
+            try
+            {
+                return RestClient.Operation1(model, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="model"> The EmptyAsUndefinedTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<EmptyAsUndefinedTestModel>> Operation2Async(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
         {
-            return await RestClient.Operation2Async(model, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation2");
+            scope.Start();
+            try
+            {
+                return await RestClient.Operation2Async(model, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="model"> The EmptyAsUndefinedTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<EmptyAsUndefinedTestModel> Operation2(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
         {
-            return RestClient.Operation2(model, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation2");
+            scope.Start();
+            try
+            {
+                return RestClient.Operation2(model, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

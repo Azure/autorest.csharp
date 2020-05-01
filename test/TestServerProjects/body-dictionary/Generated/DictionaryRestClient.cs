@@ -52,41 +52,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
-            scope.Start();
-            try
+            using var message = CreateGetNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -94,41 +84,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
-            scope.Start();
-            try
+            using var message = CreateGetNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -148,41 +128,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -190,41 +160,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -260,24 +220,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -291,24 +241,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -328,48 +268,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullValue");
-            scope.Start();
-            try
+            using var message = CreateGetNullValueRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullValueRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -377,48 +307,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetNullValue(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullValue");
-            scope.Start();
-            try
+            using var message = CreateGetNullValueRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullValueRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -438,48 +358,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullKey");
-            scope.Start();
-            try
+            using var message = CreateGetNullKeyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullKeyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -487,48 +397,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetNullKey(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullKey");
-            scope.Start();
-            try
+            using var message = CreateGetNullKeyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullKeyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -548,48 +448,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmptyStringKey");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyStringKeyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyStringKeyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -597,48 +487,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetEmptyStringKey(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmptyStringKey");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyStringKeyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyStringKeyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -658,48 +538,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetInvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetInvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -707,48 +577,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetInvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetInvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -768,41 +628,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanTfft");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanTfftRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanTfftRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, bool> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, bool> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetBoolean());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -810,41 +660,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanTfft");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanTfftRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanTfftRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, bool> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, bool> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetBoolean());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -880,24 +720,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
-            scope.Start();
-            try
+            using var message = CreatePutBooleanTfftRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutBooleanTfftRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -911,24 +741,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
-            scope.Start();
-            try
+            using var message = CreatePutBooleanTfftRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutBooleanTfftRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -948,41 +768,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, bool> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, bool> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetBoolean());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -990,41 +800,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, bool> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, bool> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetBoolean());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1044,41 +844,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, bool> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, bool> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetBoolean());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1086,41 +876,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, bool> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, bool> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetBoolean());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetBoolean());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1140,41 +920,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntegerValid");
-            scope.Start();
-            try
+            using var message = CreateGetIntegerValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntegerValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1182,41 +952,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntegerValid");
-            scope.Start();
-            try
+            using var message = CreateGetIntegerValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntegerValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1252,24 +1012,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
-            scope.Start();
-            try
+            using var message = CreatePutIntegerValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutIntegerValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1283,24 +1033,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
-            scope.Start();
-            try
+            using var message = CreatePutIntegerValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutIntegerValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1320,41 +1060,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetIntInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1362,41 +1092,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetIntInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1416,41 +1136,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetIntInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1458,41 +1168,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetIntInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, int> dictionary = new Dictionary<string, int>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt32());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt32());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1512,41 +1212,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongValid");
-            scope.Start();
-            try
+            using var message = CreateGetLongValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, long> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, long> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt64());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt64());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1554,41 +1244,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongValid");
-            scope.Start();
-            try
+            using var message = CreateGetLongValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, long> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, long> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt64());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt64());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1624,24 +1304,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
-            scope.Start();
-            try
+            using var message = CreatePutLongValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLongValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1655,24 +1325,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
-            scope.Start();
-            try
+            using var message = CreatePutLongValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLongValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1692,41 +1352,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetLongInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, long> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, long> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt64());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt64());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1734,41 +1384,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetLongInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, long> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, long> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt64());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt64());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1788,41 +1428,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetLongInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, long> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, long> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt64());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt64());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1830,41 +1460,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetLongInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, long> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, long> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, long> dictionary = new Dictionary<string, long>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetInt64());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, long> dictionary = new Dictionary<string, long>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetInt64());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1884,41 +1504,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatValid");
-            scope.Start();
-            try
+            using var message = CreateGetFloatValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, float> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, float> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetSingle());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetSingle());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1926,41 +1536,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatValid");
-            scope.Start();
-            try
+            using var message = CreateGetFloatValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, float> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, float> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetSingle());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetSingle());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1996,24 +1596,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
-            scope.Start();
-            try
+            using var message = CreatePutFloatValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutFloatValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2027,24 +1617,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
-            scope.Start();
-            try
+            using var message = CreatePutFloatValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutFloatValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2064,41 +1644,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetFloatInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, float> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, float> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetSingle());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetSingle());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2106,41 +1676,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetFloatInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, float> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, float> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetSingle());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetSingle());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2160,41 +1720,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetFloatInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, float> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, float> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetSingle());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetSingle());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2202,41 +1752,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetFloatInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, float> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, float> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, float> dictionary = new Dictionary<string, float>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetSingle());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, float> dictionary = new Dictionary<string, float>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetSingle());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2256,41 +1796,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleValid");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, double> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, double> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDouble());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDouble());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2298,41 +1828,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleValid");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, double> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, double> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDouble());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDouble());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2368,24 +1888,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
-            scope.Start();
-            try
+            using var message = CreatePutDoubleValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDoubleValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2399,24 +1909,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
-            scope.Start();
-            try
+            using var message = CreatePutDoubleValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDoubleValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2436,41 +1936,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, double> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, double> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDouble());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDouble());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2478,41 +1968,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, double> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, double> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDouble());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDouble());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2532,41 +2012,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, double> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, double> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDouble());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDouble());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2574,41 +2044,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, double> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, double> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, double> dictionary = new Dictionary<string, double>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDouble());
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, double> dictionary = new Dictionary<string, double>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDouble());
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2628,48 +2088,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringValid");
-            scope.Start();
-            try
+            using var message = CreateGetStringValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2677,48 +2127,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringValid");
-            scope.Start();
-            try
+            using var message = CreateGetStringValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2754,24 +2194,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
-            scope.Start();
-            try
+            using var message = CreatePutStringValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutStringValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2785,24 +2215,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
-            scope.Start();
-            try
+            using var message = CreatePutStringValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutStringValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2822,48 +2242,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithNull");
-            scope.Start();
-            try
+            using var message = CreateGetStringWithNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringWithNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2871,48 +2281,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithNull");
-            scope.Start();
-            try
+            using var message = CreateGetStringWithNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringWithNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2932,48 +2332,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetStringWithInvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringWithInvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2981,48 +2371,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetStringWithInvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringWithInvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetString());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3042,41 +2422,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateValid");
-            scope.Start();
-            try
+            using var message = CreateGetDateValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3084,41 +2454,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateValid");
-            scope.Start();
-            try
+            using var message = CreateGetDateValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3154,24 +2514,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
-            scope.Start();
-            try
+            using var message = CreatePutDateValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3185,24 +2535,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
-            scope.Start();
-            try
+            using var message = CreatePutDateValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3222,41 +2562,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDateInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3264,41 +2594,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDateInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3318,41 +2638,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetDateInvalidCharsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateInvalidCharsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3360,41 +2670,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetDateInvalidCharsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateInvalidCharsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("D"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3414,41 +2714,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeValid");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3456,41 +2746,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeValid");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3526,24 +2806,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
-            scope.Start();
-            try
+            using var message = CreatePutDateTimeValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateTimeValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3557,24 +2827,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
-            scope.Start();
-            try
+            using var message = CreatePutDateTimeValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateTimeValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3594,41 +2854,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3636,41 +2886,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3690,41 +2930,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeInvalidCharsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeInvalidCharsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3732,41 +2962,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeInvalidCharsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeInvalidCharsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3786,41 +3006,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeRfc1123Valid");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeRfc1123ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeRfc1123ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3828,41 +3038,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeRfc1123Valid");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeRfc1123ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeRfc1123ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("R"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3898,24 +3098,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
-            scope.Start();
-            try
+            using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3929,24 +3119,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
-            scope.Start();
-            try
+            using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3966,41 +3146,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDurationValid");
-            scope.Start();
-            try
+            using var message = CreateGetDurationValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDurationValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, TimeSpan> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, TimeSpan> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4008,41 +3178,31 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDurationValid");
-            scope.Start();
-            try
+            using var message = CreateGetDurationValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDurationValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, TimeSpan> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, TimeSpan> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, TimeSpan> dictionary = new Dictionary<string, TimeSpan>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, property.Value.GetTimeSpan("P"));
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4078,24 +3238,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
-            scope.Start();
-            try
+            using var message = CreatePutDurationValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDurationValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4109,24 +3259,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
-            scope.Start();
-            try
+            using var message = CreatePutDurationValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDurationValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4146,48 +3286,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteValid");
-            scope.Start();
-            try
+            using var message = CreateGetByteValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetByteValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, byte[]> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, byte[]> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4195,48 +3325,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteValid");
-            scope.Start();
-            try
+            using var message = CreateGetByteValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetByteValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, byte[]> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, byte[]> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4272,24 +3392,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
-            scope.Start();
-            try
+            using var message = CreatePutByteValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutByteValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4303,24 +3413,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
-            scope.Start();
-            try
+            using var message = CreatePutByteValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutByteValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4340,48 +3440,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetByteInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetByteInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, byte[]> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, byte[]> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4389,48 +3479,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetByteInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetByteInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, byte[]> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, byte[]> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4450,48 +3530,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBase64Url");
-            scope.Start();
-            try
+            using var message = CreateGetBase64UrlRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBase64UrlRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, byte[]> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, byte[]> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4499,48 +3569,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBase64Url");
-            scope.Start();
-            try
+            using var message = CreateGetBase64UrlRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBase64UrlRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, byte[]> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, byte[]> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetBytesFromBase64("U"));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4560,48 +3620,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexNull");
-            scope.Start();
-            try
+            using var message = CreateGetComplexNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4609,48 +3659,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexNull");
-            scope.Start();
-            try
+            using var message = CreateGetComplexNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4670,48 +3710,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetComplexEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4719,48 +3749,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetComplexEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4780,48 +3800,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetComplexItemNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexItemNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4829,48 +3839,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetComplexItemNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexItemNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4890,48 +3890,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetComplexItemEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexItemEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4939,48 +3929,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetComplexItemEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexItemEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5000,48 +3980,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexValid");
-            scope.Start();
-            try
+            using var message = CreateGetComplexValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5049,48 +4019,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, Widget>> GetComplexValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexValid");
-            scope.Start();
-            try
+            using var message = CreateGetComplexValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, Widget> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, Widget> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5126,24 +4086,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
-            scope.Start();
-            try
+            using var message = CreatePutComplexValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutComplexValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5157,24 +4107,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
-            scope.Start();
-            try
+            using var message = CreatePutComplexValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutComplexValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5194,60 +4134,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
-            scope.Start();
-            try
+            using var message = CreateGetArrayNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5255,60 +4185,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
-            scope.Start();
-            try
+            using var message = CreateGetArrayNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5328,60 +4248,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetArrayEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5389,60 +4299,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetArrayEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5462,60 +4362,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetArrayItemNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayItemNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5523,60 +4413,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetArrayItemNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayItemNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5596,60 +4476,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetArrayItemEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayItemEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5657,60 +4527,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetArrayItemEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayItemEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5730,60 +4590,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
-            scope.Start();
-            try
+            using var message = CreateGetArrayValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5791,60 +4641,50 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
-            scope.Start();
-            try
+            using var message = CreateGetArrayValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array = new List<string>();
-                                        foreach (var item in property.Value.EnumerateArray())
-                                        {
-                                            if (item.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array.Add(item.GetString());
-                                            }
-                                        }
-                                        dictionary.Add(property.Name, array);
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    List<string> array = new List<string>();
+                                    foreach (var item in property.Value.EnumerateArray())
+                                    {
+                                        if (item.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array.Add(item.GetString());
+                                        }
+                                    }
+                                    dictionary.Add(property.Name, array);
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5885,24 +4725,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
-            scope.Start();
-            try
+            using var message = CreatePutArrayValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutArrayValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5916,24 +4746,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
-            scope.Start();
-            try
+            using var message = CreatePutArrayValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutArrayValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5953,48 +4773,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6002,48 +4812,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6063,48 +4863,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6112,48 +4902,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6173,48 +4953,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryItemNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryItemNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6222,48 +4992,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryItemNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryItemNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6283,48 +5043,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryItemEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryItemEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6332,48 +5082,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryItemEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryItemEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6393,48 +5133,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6442,48 +5172,38 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyDictionary<string, object>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6519,24 +5239,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
-            scope.Start();
-            try
+            using var message = CreatePutDictionaryValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDictionaryValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6550,24 +5260,14 @@ namespace body_dictionary
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
-            scope.Start();
-            try
+            using var message = CreatePutDictionaryValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDictionaryValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

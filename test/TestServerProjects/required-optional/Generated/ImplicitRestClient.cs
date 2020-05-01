@@ -70,24 +70,14 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(pathParameter));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredPath");
-            scope.Start();
-            try
+            using var message = CreateGetRequiredPathRequest(pathParameter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequiredPathRequest(pathParameter);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -101,24 +91,14 @@ namespace required_optional
                 throw new ArgumentNullException(nameof(pathParameter));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredPath");
-            scope.Start();
-            try
+            using var message = CreateGetRequiredPathRequest(pathParameter);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequiredPathRequest(pathParameter);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -143,24 +123,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutOptionalQueryAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalQuery");
-            scope.Start();
-            try
+            using var message = CreatePutOptionalQueryRequest(queryParameter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutOptionalQueryRequest(queryParameter);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -169,24 +139,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutOptionalQuery(string queryParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalQuery");
-            scope.Start();
-            try
+            using var message = CreatePutOptionalQueryRequest(queryParameter);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutOptionalQueryRequest(queryParameter);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -211,24 +171,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutOptionalHeaderAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalHeader");
-            scope.Start();
-            try
+            using var message = CreatePutOptionalHeaderRequest(queryParameter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutOptionalHeaderRequest(queryParameter);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -237,24 +187,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutOptionalHeader(string queryParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalHeader");
-            scope.Start();
-            try
+            using var message = CreatePutOptionalHeaderRequest(queryParameter);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutOptionalHeaderRequest(queryParameter);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -282,24 +222,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutOptionalBodyAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalBody");
-            scope.Start();
-            try
+            using var message = CreatePutOptionalBodyRequest(bodyParameter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutOptionalBodyRequest(bodyParameter);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -308,24 +238,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutOptionalBody(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalBody");
-            scope.Start();
-            try
+            using var message = CreatePutOptionalBodyRequest(bodyParameter);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutOptionalBodyRequest(bodyParameter);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -346,24 +266,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetRequiredGlobalPathAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredGlobalPath");
-            scope.Start();
-            try
+            using var message = CreateGetRequiredGlobalPathRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequiredGlobalPathRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -371,24 +281,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetRequiredGlobalPath(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredGlobalPath");
-            scope.Start();
-            try
+            using var message = CreateGetRequiredGlobalPathRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequiredGlobalPathRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -409,24 +309,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetRequiredGlobalQueryAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredGlobalQuery");
-            scope.Start();
-            try
+            using var message = CreateGetRequiredGlobalQueryRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequiredGlobalQueryRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -434,24 +324,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetRequiredGlobalQuery(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredGlobalQuery");
-            scope.Start();
-            try
+            using var message = CreateGetRequiredGlobalQueryRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequiredGlobalQueryRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -475,24 +355,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetOptionalGlobalQueryAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetOptionalGlobalQuery");
-            scope.Start();
-            try
+            using var message = CreateGetOptionalGlobalQueryRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetOptionalGlobalQueryRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -500,24 +370,14 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetOptionalGlobalQuery(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetOptionalGlobalQuery");
-            scope.Start();
-            try
+            using var message = CreateGetOptionalGlobalQueryRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetOptionalGlobalQueryRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

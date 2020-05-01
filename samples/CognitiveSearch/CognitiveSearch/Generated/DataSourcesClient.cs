@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -39,7 +40,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateOrUpdateAsync(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateOrUpdateAsync(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new datasource or updates a datasource if it already exists. </summary>
@@ -50,7 +61,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateOrUpdate(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateOrUpdate(dataSourceName, dataSource, requestOptions, accessCondition, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a datasource. </summary>
@@ -60,7 +81,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(dataSourceName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Delete");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteAsync(dataSourceName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a datasource. </summary>
@@ -70,7 +101,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(dataSourceName, requestOptions, accessCondition, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Delete");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete(dataSourceName, requestOptions, accessCondition, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Retrieves a datasource definition. </summary>
@@ -79,7 +120,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(dataSourceName, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(dataSourceName, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Retrieves a datasource definition. </summary>
@@ -88,7 +139,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(dataSourceName, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(dataSourceName, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all datasources available for a search service. </summary>
@@ -97,7 +158,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ListDataSourcesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.List");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all datasources available for a search service. </summary>
@@ -106,7 +177,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListDataSourcesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.List(select, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.List");
+            scope.Start();
+            try
+            {
+                return RestClient.List(select, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new datasource. </summary>
@@ -115,7 +196,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAsync(dataSource, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Create");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAsync(dataSource, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new datasource. </summary>
@@ -124,7 +215,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Create(dataSource, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Create");
+            scope.Start();
+            try
+            {
+                return RestClient.Create(dataSource, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

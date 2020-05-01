@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -40,8 +41,18 @@ namespace Azure.Management.Storage
         {
             async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("SkusClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
@@ -52,8 +63,18 @@ namespace Azure.Management.Storage
         {
             Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.List(cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("SkusClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.List(cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }

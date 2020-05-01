@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,70 +35,170 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostMethodGlobalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostMethodGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostMethodGlobalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostMethodGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostMethodGlobalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.PostMethodGlobalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostMethodGlobalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PostMethodGlobalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostMethodGlobalNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostMethodGlobalNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostMethodGlobalNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostMethodGlobalNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostMethodGlobalNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.PostMethodGlobalNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostMethodGlobalNull");
+            scope.Start();
+            try
+            {
+                return RestClient.PostMethodGlobalNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostMethodGlobalNotProvidedValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostMethodGlobalNotProvidedValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostMethodGlobalNotProvidedValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostMethodGlobalNotProvidedValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostMethodGlobalNotProvidedValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.PostMethodGlobalNotProvidedValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostMethodGlobalNotProvidedValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PostMethodGlobalNotProvidedValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostPathGlobalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostPathGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostPathGlobalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostPathGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostPathGlobalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.PostPathGlobalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostPathGlobalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PostPathGlobalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostSwaggerGlobalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostSwaggerGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostSwaggerGlobalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostSwaggerGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostSwaggerGlobalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.PostSwaggerGlobalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionInCredentialsClient.PostSwaggerGlobalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PostSwaggerGlobalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

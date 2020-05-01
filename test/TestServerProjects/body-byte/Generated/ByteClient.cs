@@ -35,42 +35,102 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<byte[]>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.GetNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null byte value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<byte[]> GetNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.GetNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty byte value &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<byte[]>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty byte value &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<byte[]> GetEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<byte[]>> GetNonAsciiAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNonAsciiAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.GetNonAscii");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNonAsciiAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<byte[]> GetNonAscii(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNonAscii(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.GetNonAscii");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNonAscii(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
@@ -78,7 +138,17 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutNonAsciiAsync(byte[] byteBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutNonAsciiAsync(byteBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.PutNonAscii");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutNonAsciiAsync(byteBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
@@ -86,21 +156,51 @@ namespace body_byte
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutNonAscii(byte[] byteBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutNonAscii(byteBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.PutNonAscii");
+            scope.Start();
+            try
+            {
+                return RestClient.PutNonAscii(byteBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<byte[]>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid byte value &apos;:::SWAGGER::::&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<byte[]> GetInvalid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInvalid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ByteClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInvalid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

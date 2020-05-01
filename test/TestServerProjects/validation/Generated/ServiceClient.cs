@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -37,7 +38,17 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Product>> ValidationOfMethodParametersAsync(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ValidationOfMethodParametersAsync(resourceGroupName, id, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.ValidationOfMethodParameters");
+            scope.Start();
+            try
+            {
+                return await RestClient.ValidationOfMethodParametersAsync(resourceGroupName, id, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Validates input parameters on the method. See swagger for details. </summary>
@@ -46,7 +57,17 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Product> ValidationOfMethodParameters(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
-            return RestClient.ValidationOfMethodParameters(resourceGroupName, id, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.ValidationOfMethodParameters");
+            scope.Start();
+            try
+            {
+                return RestClient.ValidationOfMethodParameters(resourceGroupName, id, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Validates body parameters on the method. See swagger for details. </summary>
@@ -56,7 +77,17 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ValidationOfBodyAsync(resourceGroupName, id, body, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.ValidationOfBody");
+            scope.Start();
+            try
+            {
+                return await RestClient.ValidationOfBodyAsync(resourceGroupName, id, body, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Validates body parameters on the method. See swagger for details. </summary>
@@ -66,33 +97,83 @@ namespace validation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Product> ValidationOfBody(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ValidationOfBody(resourceGroupName, id, body, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.ValidationOfBody");
+            scope.Start();
+            try
+            {
+                return RestClient.ValidationOfBody(resourceGroupName, id, body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetWithConstantInPathAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetWithConstantInPath");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetWithConstantInPathAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetWithConstantInPath(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetWithConstantInPath(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetWithConstantInPath");
+            scope.Start();
+            try
+            {
+                return RestClient.GetWithConstantInPath(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Product>> PostWithConstantInBodyAsync(Product body = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostWithConstantInBodyAsync(body, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PostWithConstantInBody");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostWithConstantInBodyAsync(body, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Product> PostWithConstantInBody(Product body = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PostWithConstantInBody(body, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PostWithConstantInBody");
+            scope.Start();
+            try
+            {
+                return RestClient.PostWithConstantInBody(body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

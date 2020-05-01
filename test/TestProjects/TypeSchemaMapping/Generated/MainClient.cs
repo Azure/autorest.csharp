@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -36,42 +37,102 @@ namespace CustomNamespace
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CustomizedModel>> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.OperationAsync(body, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("MainClient.Operation");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationAsync(body, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomizedModel> Operation(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Operation(body, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("MainClient.Operation");
+            scope.Start();
+            try
+            {
+                return RestClient.Operation(body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="body"> The ModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.OperationStructAsync(body, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationStruct");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationStructAsync(body, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="body"> The ModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RenamedModelStruct> OperationStruct(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.OperationStruct(body, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationStruct");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationStruct(body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="body"> The SecondModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.OperationSecondModelAsync(body, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationSecondModel");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationSecondModelAsync(body, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="body"> The SecondModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SecondModel> OperationSecondModel(SecondModel body = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.OperationSecondModel(body, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationSecondModel");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationSecondModel(body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

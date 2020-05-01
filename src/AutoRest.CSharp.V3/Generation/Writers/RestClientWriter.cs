@@ -274,47 +274,28 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.WriteParameterNullChecks(parameters);
 
-                var scopeVariable = new CodeWriterDeclaration("scope");
-                writer.Line($"using var {scopeVariable:D} = _clientDiagnostics.CreateScope({operation.Diagnostics.ScopeName:L});");
-                foreach (DiagnosticAttribute diagnosticScopeAttributes in operation.Diagnostics.Attributes)
+                var messageVariable = new CodeWriterDeclaration("message");
+                var requestMethodName = CreateRequestMethodName(operation.Name);
+                writer.Append($"using var {messageVariable:D} = {requestMethodName}(");
+
+                foreach (Parameter parameter in parameters)
                 {
-                    writer.Append($"{scopeVariable}.AddAttribute({diagnosticScopeAttributes.Name:L},");
-                    WriteConstantOrParameter(writer, diagnosticScopeAttributes.Value);
-                    writer.Line($");");
-                }
-                writer.Line($"{scopeVariable}.Start();");
-
-                using (writer.Scope($"try"))
-                {
-                    var messageVariable = new CodeWriterDeclaration("message");
-                    var requestMethodName = CreateRequestMethodName(operation.Name);
-                    writer.Append($"using var {messageVariable:D} = {requestMethodName}(");
-
-                    foreach (Parameter parameter in parameters)
-                    {
-                        writer.Append($"{parameter.Name:I}, ");
-                    }
-
-                    writer.RemoveTrailingComma();
-                    writer.Line($");");
-
-                    if (async)
-                    {
-                        writer.Line($"await _pipeline.SendAsync({messageVariable}, cancellationToken).ConfigureAwait(false);");
-                    }
-                    else
-                    {
-                        writer.Line($"_pipeline.Send({messageVariable}, cancellationToken);");
-                    }
-
-                    WriteStatusCodeSwitch(writer, messageVariable, operation, async);
+                    writer.Append($"{parameter.Name:I}, ");
                 }
 
-                using (writer.Scope($"catch ({typeof(Exception)} e)"))
+                writer.RemoveTrailingComma();
+                writer.Line($");");
+
+                if (async)
                 {
-                    writer.Line($"{scopeVariable}.Failed(e);");
-                    writer.Line($"throw;");
+                    writer.Line($"await _pipeline.SendAsync({messageVariable}, cancellationToken).ConfigureAwait(false);");
                 }
+                else
+                {
+                    writer.Line($"_pipeline.Send({messageVariable}, cancellationToken);");
+                }
+
+                WriteStatusCodeSwitch(writer, messageVariable, operation, async);
             }
             writer.Line();
         }

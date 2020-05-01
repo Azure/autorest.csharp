@@ -40,7 +40,17 @@ namespace Azure.Network.Management.Interface
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<NetworkInterfaceIPConfiguration>> GetAsync(string resourceGroupName, string networkInterfaceName, string ipConfigurationName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, ipConfigurationName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, ipConfigurationName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the specified network interface ip configuration. </summary>
@@ -50,7 +60,17 @@ namespace Azure.Network.Management.Interface
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NetworkInterfaceIPConfiguration> Get(string resourceGroupName, string networkInterfaceName, string ipConfigurationName, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(resourceGroupName, networkInterfaceName, ipConfigurationName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(resourceGroupName, networkInterfaceName, ipConfigurationName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get all ip configurations in a network interface. </summary>
@@ -70,13 +90,33 @@ namespace Azure.Network.Management.Interface
 
             async Task<Page<NetworkInterfaceIPConfiguration>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<NetworkInterfaceIPConfiguration>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -98,13 +138,33 @@ namespace Azure.Network.Management.Interface
 
             Page<NetworkInterfaceIPConfiguration> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.List(resourceGroupName, networkInterfaceName, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.List(resourceGroupName, networkInterfaceName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<NetworkInterfaceIPConfiguration> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.ListNextPage(nextLink, resourceGroupName, networkInterfaceName, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ListNextPage(nextLink, resourceGroupName, networkInterfaceName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }

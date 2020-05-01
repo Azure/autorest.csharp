@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -37,7 +38,17 @@ namespace ExtensionClientName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RenamedSchema>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
-            return await RestClient.RenamedOperationAsync(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RenamedOperation");
+            scope.Start();
+            try
+            {
+                return await RestClient.RenamedOperationAsync(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="renamedPathParameter"> The String to use. </param>
@@ -46,7 +57,17 @@ namespace ExtensionClientName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RenamedSchema> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
-            return RestClient.RenamedOperation(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RenamedOperation");
+            scope.Start();
+            try
+            {
+                return RestClient.RenamedOperation(renamedPathParameter, renamedQueryParameter, renamedBodyParameter, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

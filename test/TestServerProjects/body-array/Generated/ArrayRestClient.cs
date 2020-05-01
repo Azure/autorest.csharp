@@ -52,41 +52,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
-            scope.Start();
-            try
+            using var message = CreateGetNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -94,41 +84,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNull");
-            scope.Start();
-            try
+            using var message = CreateGetNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -148,41 +128,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetInvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetInvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -190,41 +160,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetInvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetInvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -244,41 +204,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -286,41 +236,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -355,24 +295,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -386,24 +316,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -423,41 +343,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanTfftRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanTfftRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<bool> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<bool> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<bool> array = new List<bool>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetBoolean());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<bool> array = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetBoolean());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -465,41 +375,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanTfftRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanTfftRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<bool> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<bool> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<bool> array = new List<bool>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetBoolean());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<bool> array = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetBoolean());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -534,24 +434,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
-            scope.Start();
-            try
+            using var message = CreatePutBooleanTfftRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutBooleanTfftRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -565,24 +455,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
-            scope.Start();
-            try
+            using var message = CreatePutBooleanTfftRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutBooleanTfftRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -602,41 +482,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<bool> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<bool> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<bool> array = new List<bool>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetBoolean());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<bool> array = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetBoolean());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -644,41 +514,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<bool> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<bool> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<bool> array = new List<bool>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetBoolean());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<bool> array = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetBoolean());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -698,41 +558,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<bool> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<bool> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<bool> array = new List<bool>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetBoolean());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<bool> array = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetBoolean());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -740,41 +590,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetBooleanInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBooleanInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<bool> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<bool> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<bool> array = new List<bool>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetBoolean());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<bool> array = new List<bool>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetBoolean());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -794,41 +634,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
-            scope.Start();
-            try
+            using var message = CreateGetIntegerValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntegerValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -836,41 +666,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
-            scope.Start();
-            try
+            using var message = CreateGetIntegerValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntegerValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -905,24 +725,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
-            scope.Start();
-            try
+            using var message = CreatePutIntegerValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutIntegerValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -936,24 +746,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
-            scope.Start();
-            try
+            using var message = CreatePutIntegerValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutIntegerValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -973,41 +773,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetIntInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1015,41 +805,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetIntInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1069,41 +849,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetIntInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1111,41 +881,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetIntInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetIntInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<int> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<int> array = new List<int>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt32());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<int> array = new List<int>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt32());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1165,41 +925,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
-            scope.Start();
-            try
+            using var message = CreateGetLongValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<long> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<long> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<long> array = new List<long>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt64());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<long> array = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt64());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1207,41 +957,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<long>> GetLongValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongValid");
-            scope.Start();
-            try
+            using var message = CreateGetLongValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<long> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<long> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<long> array = new List<long>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt64());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<long> array = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt64());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1276,24 +1016,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
-            scope.Start();
-            try
+            using var message = CreatePutLongValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLongValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1307,24 +1037,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
-            scope.Start();
-            try
+            using var message = CreatePutLongValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLongValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1344,41 +1064,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetLongInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<long> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<long> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<long> array = new List<long>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt64());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<long> array = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt64());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1386,41 +1096,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetLongInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<long> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<long> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<long> array = new List<long>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt64());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<long> array = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt64());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1440,41 +1140,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetLongInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<long> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<long> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<long> array = new List<long>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt64());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<long> array = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt64());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1482,41 +1172,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetLongInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLongInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<long> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<long> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<long> array = new List<long>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetInt64());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<long> array = new List<long>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetInt64());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1536,41 +1216,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
-            scope.Start();
-            try
+            using var message = CreateGetFloatValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<float> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<float> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<float> array = new List<float>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetSingle());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<float> array = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetSingle());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1578,41 +1248,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
-            scope.Start();
-            try
+            using var message = CreateGetFloatValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<float> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<float> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<float> array = new List<float>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetSingle());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<float> array = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetSingle());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1647,24 +1307,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
-            scope.Start();
-            try
+            using var message = CreatePutFloatValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutFloatValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1678,24 +1328,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
-            scope.Start();
-            try
+            using var message = CreatePutFloatValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutFloatValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1715,41 +1355,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetFloatInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<float> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<float> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<float> array = new List<float>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetSingle());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<float> array = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetSingle());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1757,41 +1387,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetFloatInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<float> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<float> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<float> array = new List<float>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetSingle());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<float> array = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetSingle());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1811,41 +1431,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetFloatInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<float> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<float> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<float> array = new List<float>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetSingle());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<float> array = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetSingle());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1853,41 +1463,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetFloatInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFloatInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<float> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<float> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<float> array = new List<float>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetSingle());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<float> array = new List<float>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetSingle());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1907,41 +1507,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<double> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<double> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<double> array = new List<double>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDouble());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<double> array = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDouble());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1949,41 +1539,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<double> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<double> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<double> array = new List<double>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDouble());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<double> array = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDouble());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2018,24 +1598,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
-            scope.Start();
-            try
+            using var message = CreatePutDoubleValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDoubleValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2049,24 +1619,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
-            scope.Start();
-            try
+            using var message = CreatePutDoubleValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDoubleValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2086,41 +1646,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<double> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<double> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<double> array = new List<double>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDouble());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<double> array = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDouble());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2128,41 +1678,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<double> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<double> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<double> array = new List<double>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDouble());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<double> array = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDouble());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2182,41 +1722,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleInvalidStringRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleInvalidStringRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<double> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<double> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<double> array = new List<double>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDouble());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<double> array = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDouble());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2224,41 +1754,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
-            scope.Start();
-            try
+            using var message = CreateGetDoubleInvalidStringRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDoubleInvalidStringRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<double> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<double> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<double> array = new List<double>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDouble());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<double> array = new List<double>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDouble());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2278,48 +1798,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
-            scope.Start();
-            try
+            using var message = CreateGetStringValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2327,48 +1837,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<string>> GetStringValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringValid");
-            scope.Start();
-            try
+            using var message = CreateGetStringValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2403,24 +1903,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
-            scope.Start();
-            try
+            using var message = CreatePutStringValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutStringValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2434,24 +1924,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
-            scope.Start();
-            try
+            using var message = CreatePutStringValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutStringValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2471,41 +1951,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
-            scope.Start();
-            try
+            using var message = CreateGetEnumValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEnumValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<FooEnum> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<FooEnum> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<FooEnum> array = new List<FooEnum>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetString().ToFooEnum());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<FooEnum> array = new List<FooEnum>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetString().ToFooEnum());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2513,41 +1983,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<FooEnum>> GetEnumValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
-            scope.Start();
-            try
+            using var message = CreateGetEnumValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEnumValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<FooEnum> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<FooEnum> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<FooEnum> array = new List<FooEnum>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetString().ToFooEnum());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<FooEnum> array = new List<FooEnum>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetString().ToFooEnum());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2582,24 +2042,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
-            scope.Start();
-            try
+            using var message = CreatePutEnumValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEnumValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2613,24 +2063,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
-            scope.Start();
-            try
+            using var message = CreatePutEnumValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEnumValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2650,41 +2090,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
-            scope.Start();
-            try
+            using var message = CreateGetStringEnumValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringEnumValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Enum0> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Enum0> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Enum0> array = new List<Enum0>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(new Enum0(item.GetString()));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Enum0> array = new List<Enum0>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(new Enum0(item.GetString()));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2692,41 +2122,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Enum0>> GetStringEnumValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
-            scope.Start();
-            try
+            using var message = CreateGetStringEnumValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringEnumValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Enum0> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Enum0> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Enum0> array = new List<Enum0>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(new Enum0(item.GetString()));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Enum0> array = new List<Enum0>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(new Enum0(item.GetString()));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2761,24 +2181,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
-            scope.Start();
-            try
+            using var message = CreatePutStringEnumValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutStringEnumValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2792,24 +2202,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
-            scope.Start();
-            try
+            using var message = CreatePutStringEnumValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutStringEnumValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2829,48 +2229,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
-            scope.Start();
-            try
+            using var message = CreateGetStringWithNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringWithNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2878,48 +2268,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
-            scope.Start();
-            try
+            using var message = CreateGetStringWithNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringWithNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2939,48 +2319,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetStringWithInvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringWithInvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2988,48 +2358,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetStringWithInvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetStringWithInvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3049,41 +2409,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
-            scope.Start();
-            try
+            using var message = CreateGetUuidValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUuidValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Guid> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Guid> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Guid> array = new List<Guid>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetGuid());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Guid> array = new List<Guid>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetGuid());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3091,41 +2441,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Guid>> GetUuidValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
-            scope.Start();
-            try
+            using var message = CreateGetUuidValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUuidValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Guid> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Guid> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Guid> array = new List<Guid>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetGuid());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Guid> array = new List<Guid>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetGuid());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3160,24 +2500,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
-            scope.Start();
-            try
+            using var message = CreatePutUuidValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutUuidValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3191,24 +2521,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
-            scope.Start();
-            try
+            using var message = CreatePutUuidValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutUuidValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3228,41 +2548,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetUuidInvalidCharsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUuidInvalidCharsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Guid> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Guid> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Guid> array = new List<Guid>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetGuid());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Guid> array = new List<Guid>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetGuid());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3270,41 +2580,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Guid>> GetUuidInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetUuidInvalidCharsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUuidInvalidCharsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Guid> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Guid> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Guid> array = new List<Guid>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetGuid());
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Guid> array = new List<Guid>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetGuid());
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3324,41 +2624,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
-            scope.Start();
-            try
+            using var message = CreateGetDateValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("D"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("D"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3366,41 +2656,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateValid");
-            scope.Start();
-            try
+            using var message = CreateGetDateValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("D"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("D"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3435,24 +2715,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
-            scope.Start();
-            try
+            using var message = CreatePutDateValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3466,24 +2736,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
-            scope.Start();
-            try
+            using var message = CreatePutDateValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3503,41 +2763,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDateInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("D"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("D"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3545,41 +2795,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDateInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("D"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("D"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3599,41 +2839,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetDateInvalidCharsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateInvalidCharsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("D"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("D"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3641,41 +2871,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetDateInvalidCharsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateInvalidCharsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("D"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("D"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3695,41 +2915,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("S"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("S"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3737,41 +2947,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("S"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("S"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3806,24 +3006,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
-            scope.Start();
-            try
+            using var message = CreatePutDateTimeValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateTimeValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3837,24 +3027,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
-            scope.Start();
-            try
+            using var message = CreatePutDateTimeValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateTimeValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3874,41 +3054,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("S"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("S"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -3916,41 +3086,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("S"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("S"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -3970,41 +3130,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeInvalidCharsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeInvalidCharsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("S"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("S"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4012,41 +3162,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeInvalidCharsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeInvalidCharsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("S"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("S"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4066,41 +3206,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeRfc1123ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeRfc1123ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("R"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("R"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4108,41 +3238,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
-            scope.Start();
-            try
+            using var message = CreateGetDateTimeRfc1123ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDateTimeRfc1123ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<DateTimeOffset> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<DateTimeOffset> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetDateTimeOffset("R"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<DateTimeOffset> array = new List<DateTimeOffset>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetDateTimeOffset("R"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4177,24 +3297,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
-            scope.Start();
-            try
+            using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4208,24 +3318,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
-            scope.Start();
-            try
+            using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDateTimeRfc1123ValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4245,41 +3345,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
-            scope.Start();
-            try
+            using var message = CreateGetDurationValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDurationValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<TimeSpan> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<TimeSpan> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<TimeSpan> array = new List<TimeSpan>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetTimeSpan("P"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<TimeSpan> array = new List<TimeSpan>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetTimeSpan("P"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4287,41 +3377,31 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
-            scope.Start();
-            try
+            using var message = CreateGetDurationValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDurationValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<TimeSpan> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<TimeSpan> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<TimeSpan> array = new List<TimeSpan>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    array.Add(item.GetTimeSpan("P"));
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<TimeSpan> array = new List<TimeSpan>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                array.Add(item.GetTimeSpan("P"));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4356,24 +3436,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
-            scope.Start();
-            try
+            using var message = CreatePutDurationValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDurationValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4387,24 +3457,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
-            scope.Start();
-            try
+            using var message = CreatePutDurationValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDurationValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4424,48 +3484,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
-            scope.Start();
-            try
+            using var message = CreateGetByteValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetByteValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<byte[]> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<byte[]> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<byte[]> array = new List<byte[]>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetBytesFromBase64());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<byte[]> array = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetBytesFromBase64());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4473,48 +3523,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteValid");
-            scope.Start();
-            try
+            using var message = CreateGetByteValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetByteValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<byte[]> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<byte[]> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<byte[]> array = new List<byte[]>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetBytesFromBase64());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<byte[]> array = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetBytesFromBase64());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4549,24 +3589,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
-            scope.Start();
-            try
+            using var message = CreatePutByteValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutByteValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4580,24 +3610,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
-            scope.Start();
-            try
+            using var message = CreatePutByteValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutByteValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4617,48 +3637,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetByteInvalidNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetByteInvalidNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<byte[]> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<byte[]> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<byte[]> array = new List<byte[]>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetBytesFromBase64());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<byte[]> array = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetBytesFromBase64());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4666,48 +3676,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
-            scope.Start();
-            try
+            using var message = CreateGetByteInvalidNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetByteInvalidNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<byte[]> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<byte[]> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<byte[]> array = new List<byte[]>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetBytesFromBase64());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<byte[]> array = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetBytesFromBase64());
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4727,48 +3727,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
-            scope.Start();
-            try
+            using var message = CreateGetBase64UrlRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBase64UrlRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<byte[]> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<byte[]> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<byte[]> array = new List<byte[]>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetBytesFromBase64("U"));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<byte[]> array = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetBytesFromBase64("U"));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4776,48 +3766,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
-            scope.Start();
-            try
+            using var message = CreateGetBase64UrlRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetBase64UrlRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<byte[]> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<byte[]> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<byte[]> array = new List<byte[]>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetBytesFromBase64("U"));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<byte[]> array = new List<byte[]>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetBytesFromBase64("U"));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4837,48 +3817,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
-            scope.Start();
-            try
+            using var message = CreateGetComplexNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4886,48 +3856,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
-            scope.Start();
-            try
+            using var message = CreateGetComplexNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -4947,48 +3907,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetComplexEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -4996,48 +3946,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetComplexEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5057,48 +3997,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetComplexItemNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexItemNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5106,48 +4036,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetComplexItemNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexItemNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5167,48 +4087,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetComplexItemEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexItemEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5216,48 +4126,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetComplexItemEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexItemEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5277,48 +4177,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
-            scope.Start();
-            try
+            using var message = CreateGetComplexValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5326,48 +4216,38 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Product>> GetComplexValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
-            scope.Start();
-            try
+            using var message = CreateGetComplexValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Product> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<Product> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<Product> array = new List<Product>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(Product.DeserializeProduct(item));
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<Product> array = new List<Product>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(Product.DeserializeProduct(item));
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5402,24 +4282,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
-            scope.Start();
-            try
+            using var message = CreatePutComplexValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutComplexValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5433,24 +4303,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
-            scope.Start();
-            try
+            using var message = CreatePutComplexValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutComplexValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5470,60 +4330,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
-            scope.Start();
-            try
+            using var message = CreateGetArrayNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5531,60 +4381,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
-            scope.Start();
-            try
+            using var message = CreateGetArrayNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5604,60 +4444,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetArrayEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5665,60 +4495,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetArrayEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5738,60 +4558,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetArrayItemNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayItemNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5799,60 +4609,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetArrayItemNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayItemNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -5872,60 +4672,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetArrayItemEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayItemEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -5933,60 +4723,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetArrayItemEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayItemEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6006,60 +4786,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
-            scope.Start();
-            try
+            using var message = CreateGetArrayValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6067,60 +4837,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
-            scope.Start();
-            try
+            using var message = CreateGetArrayValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetArrayValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IList<string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IList<string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IList<string>> array = new List<IList<string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        List<string> array0 = new List<string>();
-                                        foreach (var item0 in item.EnumerateArray())
-                                        {
-                                            if (item0.ValueKind == JsonValueKind.Null)
-                                            {
-                                                array0.Add(null);
-                                            }
-                                            else
-                                            {
-                                                array0.Add(item0.GetString());
-                                            }
-                                        }
-                                        array.Add(array0);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IList<string>> array = new List<IList<string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    List<string> array0 = new List<string>();
+                                    foreach (var item0 in item.EnumerateArray())
+                                    {
+                                        if (item0.ValueKind == JsonValueKind.Null)
+                                        {
+                                            array0.Add(null);
+                                        }
+                                        else
+                                        {
+                                            array0.Add(item0.GetString());
+                                        }
+                                    }
+                                    array.Add(array0);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6160,24 +4920,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
-            scope.Start();
-            try
+            using var message = CreatePutArrayValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutArrayValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6191,24 +4941,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
-            scope.Start();
-            try
+            using var message = CreatePutArrayValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutArrayValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6228,60 +4968,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6289,60 +5019,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6362,60 +5082,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6423,60 +5133,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6496,60 +5196,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryItemNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryItemNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6557,60 +5247,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryItemNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryItemNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6630,60 +5310,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryItemEmptyRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryItemEmptyRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6691,60 +5361,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryItemEmptyRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryItemEmptyRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6764,60 +5424,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6825,60 +5475,50 @@ namespace body_array
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
-            scope.Start();
-            try
+            using var message = CreateGetDictionaryValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDictionaryValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<IDictionary<string, string>> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<IDictionary<string, string>> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                        foreach (var property in item.EnumerateObject())
-                                        {
-                                            if (property.Value.ValueKind == JsonValueKind.Null)
-                                            {
-                                                dictionary.Add(property.Name, null);
-                                            }
-                                            else
-                                            {
-                                                dictionary.Add(property.Name, property.Value.GetString());
-                                            }
-                                        }
-                                        array.Add(dictionary);
-                                    }
-                                }
-                                value = array;
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                    foreach (var property in item.EnumerateObject())
+                                    {
+                                        if (property.Value.ValueKind == JsonValueKind.Null)
+                                        {
+                                            dictionary.Add(property.Name, null);
+                                        }
+                                        else
+                                        {
+                                            dictionary.Add(property.Name, property.Value.GetString());
+                                        }
+                                    }
+                                    array.Add(dictionary);
+                                }
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -6919,24 +5559,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
-            scope.Start();
-            try
+            using var message = CreatePutDictionaryValidRequest(arrayBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDictionaryValidRequest(arrayBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -6950,24 +5580,14 @@ namespace body_array
                 throw new ArgumentNullException(nameof(arrayBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
-            scope.Start();
-            try
+            using var message = CreatePutDictionaryValidRequest(arrayBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutDictionaryValidRequest(arrayBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

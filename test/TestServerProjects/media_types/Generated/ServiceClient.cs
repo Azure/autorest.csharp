@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,7 +39,17 @@ namespace media_types
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AnalyzeBodyAsync(contentType, input, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                return await RestClient.AnalyzeBodyAsync(contentType, input, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -47,7 +58,17 @@ namespace media_types
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> AnalyzeBody(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
         {
-            return RestClient.AnalyzeBody(contentType, input, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                return RestClient.AnalyzeBody(contentType, input, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -55,7 +76,17 @@ namespace media_types
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> AnalyzeBodyAsync(SourcePath input = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AnalyzeBodyAsync(input, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                return await RestClient.AnalyzeBodyAsync(input, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
@@ -63,7 +94,17 @@ namespace media_types
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> AnalyzeBody(SourcePath input = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.AnalyzeBody(input, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                return RestClient.AnalyzeBody(input, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

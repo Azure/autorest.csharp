@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,14 +36,34 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetServiceHealthAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetServiceHealthAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetServiceHealth");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetServiceHealthAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Check the health of the service. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetServiceHealth(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetServiceHealth(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetServiceHealth");
+            scope.Start();
+            try
+            {
+                return RestClient.GetServiceHealth(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Broadcast content inside request body to all the connected connection in the same hub. </summary>
@@ -51,7 +72,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SendToHubAsync(string hub, Stream data, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SendToHubAsync(hub, data, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToHub");
+            scope.Start();
+            try
+            {
+                return await RestClient.SendToHubAsync(hub, data, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Broadcast content inside request body to all the connected connection in the same hub. </summary>
@@ -60,7 +91,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SendToHub(string hub, Stream data, CancellationToken cancellationToken = default)
         {
-            return RestClient.SendToHub(hub, data, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToHub");
+            scope.Start();
+            try
+            {
+                return RestClient.SendToHub(hub, data, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Broadcast content inside request body to all the connected connection in the same hub. </summary>
@@ -69,7 +110,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SendToHubAsync(string hub, string data, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SendToHubAsync(hub, data, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToHub");
+            scope.Start();
+            try
+            {
+                return await RestClient.SendToHubAsync(hub, data, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Broadcast content inside request body to all the connected connection in the same hub. </summary>
@@ -78,7 +129,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SendToHub(string hub, string data, CancellationToken cancellationToken = default)
         {
-            return RestClient.SendToHub(hub, data, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToHub");
+            scope.Start();
+            try
+            {
+                return RestClient.SendToHub(hub, data, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to the specific user. </summary>
@@ -88,7 +149,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SendToUserAsync(string hub, string id, Stream data, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SendToUserAsync(hub, id, data, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToUser");
+            scope.Start();
+            try
+            {
+                return await RestClient.SendToUserAsync(hub, id, data, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to the specific user. </summary>
@@ -98,7 +169,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SendToUser(string hub, string id, Stream data, CancellationToken cancellationToken = default)
         {
-            return RestClient.SendToUser(hub, id, data, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToUser");
+            scope.Start();
+            try
+            {
+                return RestClient.SendToUser(hub, id, data, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to the specific user. </summary>
@@ -108,7 +189,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SendToUserAsync(string hub, string id, string data, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SendToUserAsync(hub, id, data, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToUser");
+            scope.Start();
+            try
+            {
+                return await RestClient.SendToUserAsync(hub, id, data, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to the specific user. </summary>
@@ -118,7 +209,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SendToUser(string hub, string id, string data, CancellationToken cancellationToken = default)
         {
-            return RestClient.SendToUser(hub, id, data, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToUser");
+            scope.Start();
+            try
+            {
+                return RestClient.SendToUser(hub, id, data, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to the specific connection. </summary>
@@ -128,7 +229,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SendToConnectionAsync(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SendToConnectionAsync(hub, connectionId, data, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToConnection");
+            scope.Start();
+            try
+            {
+                return await RestClient.SendToConnectionAsync(hub, connectionId, data, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to the specific connection. </summary>
@@ -138,7 +249,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SendToConnection(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
-            return RestClient.SendToConnection(hub, connectionId, data, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToConnection");
+            scope.Start();
+            try
+            {
+                return RestClient.SendToConnection(hub, connectionId, data, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to the specific connection. </summary>
@@ -148,7 +269,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SendToConnectionAsync(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SendToConnectionAsync(hub, connectionId, data, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToConnection");
+            scope.Start();
+            try
+            {
+                return await RestClient.SendToConnectionAsync(hub, connectionId, data, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to the specific connection. </summary>
@@ -158,7 +289,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SendToConnection(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
         {
-            return RestClient.SendToConnection(hub, connectionId, data, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToConnection");
+            scope.Start();
+            try
+            {
+                return RestClient.SendToConnection(hub, connectionId, data, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Close the client connection. </summary>
@@ -168,7 +309,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> CloseConnectionAsync(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CloseConnectionAsync(hub, connectionId, reason, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CloseConnection");
+            scope.Start();
+            try
+            {
+                return await RestClient.CloseConnectionAsync(hub, connectionId, reason, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Close the client connection. </summary>
@@ -178,7 +329,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CloseConnection(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CloseConnection(hub, connectionId, reason, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CloseConnection");
+            scope.Start();
+            try
+            {
+                return RestClient.CloseConnection(hub, connectionId, reason, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to a group of connections. </summary>
@@ -188,7 +349,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SendToGroupAsync(string hub, string group, Stream data, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SendToGroupAsync(hub, group, data, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToGroup");
+            scope.Start();
+            try
+            {
+                return await RestClient.SendToGroupAsync(hub, group, data, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to a group of connections. </summary>
@@ -198,7 +369,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SendToGroup(string hub, string group, Stream data, CancellationToken cancellationToken = default)
         {
-            return RestClient.SendToGroup(hub, group, data, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToGroup");
+            scope.Start();
+            try
+            {
+                return RestClient.SendToGroup(hub, group, data, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to a group of connections. </summary>
@@ -208,7 +389,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> SendToGroupAsync(string hub, string group, string data, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SendToGroupAsync(hub, group, data, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToGroup");
+            scope.Start();
+            try
+            {
+                return await RestClient.SendToGroupAsync(hub, group, data, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Send content inside request body to a group of connections. </summary>
@@ -218,7 +409,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response SendToGroup(string hub, string group, string data, CancellationToken cancellationToken = default)
         {
-            return RestClient.SendToGroup(hub, group, data, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToGroup");
+            scope.Start();
+            try
+            {
+                return RestClient.SendToGroup(hub, group, data, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Check if the user is in the specified group. </summary>
@@ -228,7 +429,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetUserInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUserInGroupAsync(hub, group, user, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetUserInGroup");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUserInGroupAsync(hub, group, user, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Check if the user is in the specified group. </summary>
@@ -238,7 +449,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetUserInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUserInGroup(hub, group, user, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetUserInGroup");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUserInGroup(hub, group, user, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Add the user to the specified group. </summary>
@@ -249,7 +470,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> AddUserToGroupAsync(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AddUserToGroupAsync(hub, group, user, ttl, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddUserToGroup");
+            scope.Start();
+            try
+            {
+                return await RestClient.AddUserToGroupAsync(hub, group, user, ttl, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Add the user to the specified group. </summary>
@@ -260,7 +491,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response AddUserToGroup(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.AddUserToGroup(hub, group, user, ttl, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddUserToGroup");
+            scope.Start();
+            try
+            {
+                return RestClient.AddUserToGroup(hub, group, user, ttl, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Remove all the connections belong to the specified user from the group. </summary>
@@ -270,7 +511,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> RemoveUserFromGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
-            return await RestClient.RemoveUserFromGroupAsync(hub, group, user, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveUserFromGroup");
+            scope.Start();
+            try
+            {
+                return await RestClient.RemoveUserFromGroupAsync(hub, group, user, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Remove all the connections belong to the specified user from the group. </summary>
@@ -280,7 +531,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response RemoveUserFromGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
-            return RestClient.RemoveUserFromGroup(hub, group, user, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveUserFromGroup");
+            scope.Start();
+            try
+            {
+                return RestClient.RemoveUserFromGroup(hub, group, user, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Add the connection to the group. </summary>
@@ -290,7 +551,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> AddConnectionToGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AddConnectionToGroupAsync(hub, group, connectionId, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddConnectionToGroup");
+            scope.Start();
+            try
+            {
+                return await RestClient.AddConnectionToGroupAsync(hub, group, connectionId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Add the connection to the group. </summary>
@@ -300,7 +571,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response AddConnectionToGroup(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
-            return RestClient.AddConnectionToGroup(hub, group, connectionId, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddConnectionToGroup");
+            scope.Start();
+            try
+            {
+                return RestClient.AddConnectionToGroup(hub, group, connectionId, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Remove the connection from the group. </summary>
@@ -310,7 +591,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> RemoveConnectionToGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.RemoveConnectionToGroupAsync(hub, group, connectionId, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveConnectionToGroup");
+            scope.Start();
+            try
+            {
+                return await RestClient.RemoveConnectionToGroupAsync(hub, group, connectionId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Remove the connection from the group. </summary>
@@ -320,7 +611,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response RemoveConnectionToGroup(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
-            return RestClient.RemoveConnectionToGroup(hub, group, connectionId, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveConnectionToGroup");
+            scope.Start();
+            try
+            {
+                return RestClient.RemoveConnectionToGroup(hub, group, connectionId, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Remove the user from all groups. </summary>
@@ -329,7 +630,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> RemoveAllUserGroupsAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
-            return await RestClient.RemoveAllUserGroupsAsync(hub, user, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveAllUserGroups");
+            scope.Start();
+            try
+            {
+                return await RestClient.RemoveAllUserGroupsAsync(hub, user, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Remove the user from all groups. </summary>
@@ -338,7 +649,17 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response RemoveAllUserGroups(string hub, string user, CancellationToken cancellationToken = default)
         {
-            return RestClient.RemoveAllUserGroups(hub, user, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveAllUserGroups");
+            scope.Start();
+            try
+            {
+                return RestClient.RemoveAllUserGroups(hub, user, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

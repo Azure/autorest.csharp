@@ -20,6 +20,7 @@ using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Microsoft.CodeAnalysis.Operations;
 using Response = Azure.Response;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
@@ -157,32 +158,35 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Append($"return (");
-                if (async)
+                WriteDiagnosticScope(writer, clientMethod.Diagnostics, writer =>
                 {
-                    writer.Append($"await ");
-                }
+                    writer.Append($"return (");
+                    if (async)
+                    {
+                        writer.Append($"await ");
+                    }
 
-                writer.Append($"RestClient.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
-                foreach (var parameter in clientMethod.RestClientMethod.Parameters)
-                {
-                    writer.Append($"{parameter.Name:I}, ");
-                }
-                writer.Append($"cancellationToken)");
+                    writer.Append($"RestClient.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
+                    foreach (var parameter in clientMethod.RestClientMethod.Parameters)
+                    {
+                        writer.Append($"{parameter.Name:I}, ");
+                    }
+                    writer.Append($"cancellationToken)");
 
-                if (async)
-                {
-                    writer.Append($".ConfigureAwait(false)");
-                }
+                    if (async)
+                    {
+                        writer.Append($".ConfigureAwait(false)");
+                    }
 
-                writer.Append($")");
+                    writer.Append($")");
 
-                if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
-                {
-                    writer.Append($".GetRawResponse()");
-                }
+                    if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
+                    {
+                        writer.Append($".GetRawResponse()");
+                    }
 
-                writer.Line($";");
+                    writer.Line($";");
+                });
             }
 
             writer.Line();
@@ -235,7 +239,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private void WritePagingOperation(CodeWriter writer, PagingInfo pagingMethod, bool async)
+        private void WritePagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async)
         {
             var pageType = pagingMethod.ItemType;
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
@@ -272,13 +276,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
                 using (writer.Scope($"{asyncText} {funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
                 {
-                    writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                    foreach (Parameter parameter in parameters)
+                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, writer =>
                     {
-                        writer.Append($"{parameter.Name}, ");
-                    }
-                    writer.Line($"cancellationToken){configureAwaitText};");
-                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+                        writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                        foreach (Parameter parameter in parameters)
+                        {
+                            writer.Append($"{parameter.Name}, ");
+                        }
+
+                        writer.Line($"cancellationToken){configureAwaitText};");
+                        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+                    });
                 }
 
                 var nextPageFunctionName = "null";
@@ -288,13 +296,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                     using (writer.Scope($"{asyncText} {funcType} {nextPageFunctionName}({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
                     {
-                        writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
-                        foreach (Parameter parameter in nextPageParameters)
+                        WriteDiagnosticScope(writer, pagingMethod.Diagnostics, writer =>
                         {
-                            writer.Append($"{parameter.Name}, ");
-                        }
-                        writer.Line($"cancellationToken){configureAwaitText};");
-                        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+                            writer.Append($"var response = {awaitText} RestClient.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
+                            foreach (Parameter parameter in nextPageParameters)
+                            {
+                                writer.Append($"{parameter.Name}, ");
+                            }
+                            writer.Line($"cancellationToken){configureAwaitText};");
+                            writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+                        });
                     }
                 }
                 writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
@@ -329,7 +340,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteParameterNullChecks(parameters);
 
                 writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
-                writer.Append($"_pipeline, _clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {originalMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage");
+                writer.Append($"_pipeline, _clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {lroMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage");
 
                 if (responseBodyType != null)
                 {
@@ -367,6 +378,32 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
+        private void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, CodeWriterDelegate inner)
+        {
+            var scopeVariable = new CodeWriterDeclaration("scope");
+
+            writer.Line($"using var {scopeVariable:D} = _clientDiagnostics.CreateScope({diagnostic.ScopeName:L});");
+            foreach (DiagnosticAttribute diagnosticScopeAttributes in diagnostic.Attributes)
+            {
+                writer.Append($"{scopeVariable}.AddAttribute({diagnosticScopeAttributes.Name:L},");
+                writer.WriteReferenceOrConstant(diagnosticScopeAttributes.Value);
+                writer.Line($");");
+            }
+
+            writer.Line($"{scopeVariable}.Start();");
+
+            using (writer.Scope($"try"))
+            {
+                inner(writer);
+            }
+
+            using (writer.Scope($"catch ({typeof(Exception)} e)"))
+            {
+                writer.Line($"{scopeVariable}.Failed(e);");
+                writer.Line($"throw;");
+            }
+        }
+
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
         {
             RestClientMethod originalMethod = lroMethod.OriginalMethod;
@@ -394,22 +431,27 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.WriteParameterNullChecks(parameters);
 
-                string awaitText = async ? "await" : string.Empty;
-                string configureText = async ? ".ConfigureAwait(false)" : string.Empty;
-                writer.Append($"var originalResponse = {awaitText} RestClient.{CreateMethodName(originalMethod.Name, async)}(");
-                foreach (Parameter parameter in parameters)
+                WriteDiagnosticScope(writer, lroMethod.Diagnostics, writer =>
                 {
-                    writer.Append($"{parameter.Name}, ");
-                }
-                writer.Line($"cancellationToken){configureText};");
+                    string awaitText = async ? "await" : string.Empty;
+                    string configureText = async ? ".ConfigureAwait(false)" : string.Empty;
+                    writer.Append($"var originalResponse = {awaitText} RestClient.{CreateMethodName(originalMethod.Name, async)}(");
+                    foreach (Parameter parameter in parameters)
+                    {
+                        writer.Append($"{parameter.Name}, ");
+                    }
 
-                writer.Append($"return {CreateCreateOperationName(lroMethod.Name)}(originalResponse, () => RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
-                foreach (Parameter parameter in parameters)
-                {
-                    writer.Append($"{parameter.Name}, ");
-                }
-                writer.RemoveTrailingComma();
-                writer.Line($"));");
+                    writer.Line($"cancellationToken){configureText};");
+
+                    writer.Append($"return {CreateCreateOperationName(lroMethod.Name)}(originalResponse, () => RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
+                    foreach (Parameter parameter in parameters)
+                    {
+                        writer.Append($"{parameter.Name}, ");
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Line($"));");
+                });
+
             }
             writer.Line();
         }

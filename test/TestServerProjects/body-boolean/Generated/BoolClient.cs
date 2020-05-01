@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,84 +35,204 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetTrueAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetTrue");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetTrueAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get true Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> GetTrue(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetTrue(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetTrue");
+            scope.Start();
+            try
+            {
+                return RestClient.GetTrue(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set Boolean value true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutTrueAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutTrue");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutTrueAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set Boolean value true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutTrue(CancellationToken cancellationToken = default)
         {
-            return RestClient.PutTrue(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutTrue");
+            scope.Start();
+            try
+            {
+                return RestClient.PutTrue(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get false Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetFalseAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetFalse");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetFalseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get false Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> GetFalse(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetFalse(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetFalse");
+            scope.Start();
+            try
+            {
+                return RestClient.GetFalse(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set Boolean value false. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutFalseAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutFalse");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutFalseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set Boolean value false. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutFalse(CancellationToken cancellationToken = default)
         {
-            return RestClient.PutFalse(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutFalse");
+            scope.Start();
+            try
+            {
+                return RestClient.PutFalse(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> GetNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid Boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> GetInvalid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInvalid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInvalid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

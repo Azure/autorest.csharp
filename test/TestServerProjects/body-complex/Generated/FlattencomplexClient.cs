@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,13 +35,33 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<MyBaseType> GetValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

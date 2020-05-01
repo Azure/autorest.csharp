@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,7 +36,17 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetRequiredPathAsync(pathParameter, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredPath");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetRequiredPathAsync(pathParameter, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly required path parameter. </summary>
@@ -43,7 +54,17 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetRequiredPath(string pathParameter, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetRequiredPath(pathParameter, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredPath");
+            scope.Start();
+            try
+            {
+                return RestClient.GetRequiredPath(pathParameter, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly optional query parameter. </summary>
@@ -51,7 +72,17 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalQueryAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutOptionalQueryAsync(queryParameter, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalQuery");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutOptionalQueryAsync(queryParameter, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly optional query parameter. </summary>
@@ -59,7 +90,17 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalQuery(string queryParameter = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutOptionalQuery(queryParameter, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalQuery");
+            scope.Start();
+            try
+            {
+                return RestClient.PutOptionalQuery(queryParameter, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly optional header parameter. </summary>
@@ -67,7 +108,17 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalHeaderAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutOptionalHeaderAsync(queryParameter, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalHeader");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutOptionalHeaderAsync(queryParameter, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly optional header parameter. </summary>
@@ -75,7 +126,17 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalHeader(string queryParameter = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutOptionalHeader(queryParameter, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalHeader");
+            scope.Start();
+            try
+            {
+                return RestClient.PutOptionalHeader(queryParameter, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
@@ -83,7 +144,17 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalBodyAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutOptionalBodyAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalBody");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutOptionalBodyAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
@@ -91,49 +162,119 @@ namespace required_optional
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalBody(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutOptionalBody(bodyParameter, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalBody");
+            scope.Start();
+            try
+            {
+                return RestClient.PutOptionalBody(bodyParameter, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetRequiredGlobalPathAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetRequiredGlobalPathAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredGlobalPath");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetRequiredGlobalPathAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetRequiredGlobalPath(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetRequiredGlobalPath(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredGlobalPath");
+            scope.Start();
+            try
+            {
+                return RestClient.GetRequiredGlobalPath(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly required query parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetRequiredGlobalQueryAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetRequiredGlobalQueryAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredGlobalQuery");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetRequiredGlobalQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly required query parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetRequiredGlobalQuery(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetRequiredGlobalQuery(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetRequiredGlobalQuery");
+            scope.Start();
+            try
+            {
+                return RestClient.GetRequiredGlobalQuery(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly optional query parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetOptionalGlobalQueryAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetOptionalGlobalQueryAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetOptionalGlobalQuery");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetOptionalGlobalQueryAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Test implicitly optional query parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetOptionalGlobalQuery(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetOptionalGlobalQuery(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.GetOptionalGlobalQuery");
+            scope.Start();
+            try
+            {
+                return RestClient.GetOptionalGlobalQuery(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

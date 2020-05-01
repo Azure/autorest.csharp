@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using additionalProperties.Models;
@@ -36,7 +37,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAPTrueAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPTrue");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAPTrueAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -44,7 +55,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPTrue> CreateAPTrue(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateAPTrue(createParameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPTrue");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateAPTrue(createParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
@@ -52,7 +73,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateCatAPTrueAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateCatAPTrue");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateCatAPTrueAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
@@ -60,7 +91,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CatAPTrue> CreateCatAPTrue(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateCatAPTrue(createParameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateCatAPTrue");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateCatAPTrue(createParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -68,7 +109,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAPObjectAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPObject");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAPObjectAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -76,7 +127,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPObject> CreateAPObject(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateAPObject(createParameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPObject");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateAPObject(createParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -84,7 +145,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAPStringAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPString");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAPStringAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -92,7 +163,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPString> CreateAPString(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateAPString(createParameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPString");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateAPString(createParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -100,7 +181,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAPInPropertiesAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPInProperties");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAPInPropertiesAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -108,7 +199,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPInProperties> CreateAPInProperties(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateAPInProperties(createParameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPInProperties");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateAPInProperties(createParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -116,7 +217,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAPInPropertiesWithAPStringAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPInPropertiesWithAPString");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAPInPropertiesWithAPStringAsync(createParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
@@ -124,7 +235,17 @@ namespace additionalProperties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPInPropertiesWithAPString> CreateAPInPropertiesWithAPString(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateAPInPropertiesWithAPString(createParameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetsClient.CreateAPInPropertiesWithAPString");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateAPInPropertiesWithAPString(createParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

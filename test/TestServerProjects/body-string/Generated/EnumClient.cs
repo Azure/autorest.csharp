@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,14 +36,34 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Colors>> GetNotExpandableAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNotExpandableAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNotExpandableAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Colors> GetNotExpandable(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNotExpandable(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNotExpandable(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
@@ -50,7 +71,17 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutNotExpandableAsync(Colors stringBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutNotExpandableAsync(stringBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutNotExpandableAsync(stringBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
@@ -58,21 +89,51 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutNotExpandable(Colors stringBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutNotExpandable(stringBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
+            scope.Start();
+            try
+            {
+                return RestClient.PutNotExpandable(stringBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Colors>> GetReferencedAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetReferencedAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetReferencedAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Colors> GetReferenced(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetReferenced(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
+            scope.Start();
+            try
+            {
+                return RestClient.GetReferenced(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
@@ -80,7 +141,17 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutReferencedAsync(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutReferencedAsync(enumStringBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutReferencedAsync(enumStringBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
@@ -88,21 +159,51 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutReferenced(Colors enumStringBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutReferenced(enumStringBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
+            scope.Start();
+            try
+            {
+                return RestClient.PutReferenced(enumStringBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RefColorConstant>> GetReferencedConstantAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetReferencedConstantAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetReferencedConstantAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RefColorConstant> GetReferencedConstant(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetReferencedConstant(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
+            scope.Start();
+            try
+            {
+                return RestClient.GetReferencedConstant(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
@@ -110,7 +211,17 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutReferencedConstantAsync(enumStringBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutReferencedConstantAsync(enumStringBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
@@ -118,7 +229,17 @@ namespace body_string
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutReferencedConstant(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutReferencedConstant(enumStringBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
+            scope.Start();
+            try
+            {
+                return RestClient.PutReferencedConstant(enumStringBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

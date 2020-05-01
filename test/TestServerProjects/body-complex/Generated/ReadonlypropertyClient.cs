@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,14 +36,34 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ReadonlyObj>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.GetValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types that have readonly properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ReadonlyObj> GetValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.GetValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that have readonly properties. </summary>
@@ -50,7 +71,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.PutValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that have readonly properties. </summary>
@@ -58,7 +89,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutValid(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.PutValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutValid(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

@@ -56,25 +56,15 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(fooClientRequestId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomNamedRequestId");
-            scope.Start();
-            try
+            using var message = CreateCustomNamedRequestIdRequest(fooClientRequestId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HeaderCustomNamedRequestIdHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCustomNamedRequestIdRequest(fooClientRequestId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HeaderCustomNamedRequestIdHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -88,25 +78,15 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(fooClientRequestId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomNamedRequestId");
-            scope.Start();
-            try
+            using var message = CreateCustomNamedRequestIdRequest(fooClientRequestId);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HeaderCustomNamedRequestIdHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCustomNamedRequestIdRequest(fooClientRequestId);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HeaderCustomNamedRequestIdHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -133,25 +113,15 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(headerCustomNamedRequestIdParamGroupingParameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomNamedRequestIdParamGrouping");
-            scope.Start();
-            try
+            using var message = CreateCustomNamedRequestIdParamGroupingRequest(headerCustomNamedRequestIdParamGroupingParameters);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HeaderCustomNamedRequestIdParamGroupingHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCustomNamedRequestIdParamGroupingRequest(headerCustomNamedRequestIdParamGroupingParameters);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HeaderCustomNamedRequestIdParamGroupingHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -165,25 +135,15 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(headerCustomNamedRequestIdParamGroupingParameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomNamedRequestIdParamGrouping");
-            scope.Start();
-            try
+            using var message = CreateCustomNamedRequestIdParamGroupingRequest(headerCustomNamedRequestIdParamGroupingParameters);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HeaderCustomNamedRequestIdParamGroupingHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCustomNamedRequestIdParamGroupingRequest(headerCustomNamedRequestIdParamGroupingParameters);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HeaderCustomNamedRequestIdParamGroupingHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -210,26 +170,16 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(fooClientRequestId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomNamedRequestIdHead");
-            scope.Start();
-            try
+            using var message = CreateCustomNamedRequestIdHeadRequest(fooClientRequestId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HeaderCustomNamedRequestIdHeadHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCustomNamedRequestIdHeadRequest(fooClientRequestId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HeaderCustomNamedRequestIdHeadHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 404:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 404:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -243,26 +193,16 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(fooClientRequestId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomNamedRequestIdHead");
-            scope.Start();
-            try
+            using var message = CreateCustomNamedRequestIdHeadRequest(fooClientRequestId);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HeaderCustomNamedRequestIdHeadHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCustomNamedRequestIdHeadRequest(fooClientRequestId);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HeaderCustomNamedRequestIdHeadHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 404:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 404:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

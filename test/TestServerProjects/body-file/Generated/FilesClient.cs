@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,42 +36,102 @@ namespace body_file
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetFileAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetFileAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Stream> GetFile(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetFile(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
+            scope.Start();
+            try
+            {
+                return RestClient.GetFile(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetFileLargeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetFileLargeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Stream> GetFileLarge(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetFileLarge(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
+            scope.Start();
+            try
+            {
+                return RestClient.GetFileLarge(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyFileAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyFileAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Stream> GetEmptyFile(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmptyFile(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmptyFile(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

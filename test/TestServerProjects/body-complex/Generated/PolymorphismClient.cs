@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,14 +36,34 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Fish> GetValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that are polymorphic. </summary>
@@ -84,7 +105,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that are polymorphic. </summary>
@@ -126,63 +157,153 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(Fish complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutValid(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutValid(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DotFish>> GetDotSyntaxAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDotSyntaxAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDotSyntaxAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DotFish> GetDotSyntax(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDotSyntax(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDotSyntax(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetComposedWithDiscriminatorAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetComposedWithDiscriminatorAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DotFishMarket> GetComposedWithDiscriminator(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetComposedWithDiscriminator(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
+            scope.Start();
+            try
+            {
+                return RestClient.GetComposedWithDiscriminator(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetComposedWithoutDiscriminatorAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetComposedWithoutDiscriminatorAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DotFishMarket> GetComposedWithoutDiscriminator(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetComposedWithoutDiscriminator(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
+            scope.Start();
+            try
+            {
+                return RestClient.GetComposedWithoutDiscriminator(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Salmon>> GetComplicatedAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetComplicatedAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetComplicatedAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Salmon> GetComplicated(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetComplicated(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
+            scope.Start();
+            try
+            {
+                return RestClient.GetComplicated(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
@@ -190,7 +311,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutComplicatedAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutComplicatedAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
@@ -198,7 +329,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutComplicated(Salmon complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutComplicated(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
+            scope.Start();
+            try
+            {
+                return RestClient.PutComplicated(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
@@ -206,7 +347,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutMissingDiscriminatorAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutMissingDiscriminatorAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
@@ -214,7 +365,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Salmon> PutMissingDiscriminator(Salmon complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutMissingDiscriminator(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
+            scope.Start();
+            try
+            {
+                return RestClient.PutMissingDiscriminator(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
@@ -249,7 +410,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidMissingRequiredAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutValidMissingRequiredAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutValidMissingRequiredAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
@@ -284,7 +455,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValidMissingRequired(Fish complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutValidMissingRequired(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
+            scope.Start();
+            try
+            {
+                return RestClient.PutValidMissingRequired(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

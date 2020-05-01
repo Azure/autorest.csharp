@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,14 +36,34 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DictionaryWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DictionaryWrapper> GetValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with dictionary property. </summary>
@@ -50,7 +71,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with dictionary property. </summary>
@@ -58,21 +89,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutValid(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutValid(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DictionaryWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DictionaryWrapper> GetEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with dictionary property which is empty. </summary>
@@ -80,7 +141,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutEmptyAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutEmptyAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutEmptyAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with dictionary property which is empty. </summary>
@@ -88,35 +159,85 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutEmpty(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutEmpty(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.PutEmpty(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DictionaryWrapper>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DictionaryWrapper> GetNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DictionaryWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNotProvidedAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNotProvided");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNotProvidedAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DictionaryWrapper> GetNotProvided(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNotProvided(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNotProvided");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNotProvided(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }
