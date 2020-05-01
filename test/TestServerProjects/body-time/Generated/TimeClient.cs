@@ -35,14 +35,34 @@ namespace body_time
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<TimeSpan>> GetAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("TimeClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get time value &quot;11:34:56&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TimeSpan> Get(CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("TimeClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put time value &quot;08:07:56&quot;. </summary>
@@ -50,7 +70,17 @@ namespace body_time
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> PutAsync(TimeSpan timeBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutAsync(timeBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("TimeClient.Put");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutAsync(timeBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put time value &quot;08:07:56&quot;. </summary>
@@ -58,7 +88,17 @@ namespace body_time
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> Put(TimeSpan timeBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.Put(timeBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("TimeClient.Put");
+            scope.Start();
+            try
+            {
+                return RestClient.Put(timeBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

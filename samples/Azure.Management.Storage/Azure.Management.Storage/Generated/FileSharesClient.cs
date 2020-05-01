@@ -45,7 +45,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Create");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. </summary>
@@ -57,7 +67,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Create(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Create");
+            scope.Start();
+            try
+            {
+                return RestClient.Create(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. </summary>
@@ -69,7 +89,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.UpdateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Update");
+            scope.Start();
+            try
+            {
+                return await RestClient.UpdateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. </summary>
@@ -81,7 +111,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Update(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Update");
+            scope.Start();
+            try
+            {
+                return RestClient.Update(resourceGroupName, accountName, shareName, metadata, shareQuota, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets properties of a specified share. </summary>
@@ -91,7 +131,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileShare>> GetAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(resourceGroupName, accountName, shareName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(resourceGroupName, accountName, shareName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets properties of a specified share. </summary>
@@ -101,7 +151,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileShare> Get(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(resourceGroupName, accountName, shareName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(resourceGroupName, accountName, shareName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes specified share under its account. </summary>
@@ -111,7 +171,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(resourceGroupName, accountName, shareName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Delete");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteAsync(resourceGroupName, accountName, shareName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes specified share under its account. </summary>
@@ -121,7 +191,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(resourceGroupName, accountName, shareName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Delete");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete(resourceGroupName, accountName, shareName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all shares. </summary>
@@ -143,13 +223,33 @@ namespace Azure.Management.Storage
 
             async Task<Page<FileShareItem>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAsync(resourceGroupName, accountName, maxpagesize, filter, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAsync(resourceGroupName, accountName, maxpagesize, filter, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<FileShareItem>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, accountName, maxpagesize, filter, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, accountName, maxpagesize, filter, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -173,13 +273,33 @@ namespace Azure.Management.Storage
 
             Page<FileShareItem> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.List(resourceGroupName, accountName, maxpagesize, filter, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.List(resourceGroupName, accountName, maxpagesize, filter, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<FileShareItem> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.ListNextPage(nextLink, resourceGroupName, accountName, maxpagesize, filter, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ListNextPage(nextLink, resourceGroupName, accountName, maxpagesize, filter, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }

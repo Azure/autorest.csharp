@@ -57,24 +57,14 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetServiceHealthAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetServiceHealth");
-            scope.Start();
-            try
+            using var message = CreateGetServiceHealthRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetServiceHealthRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -82,24 +72,14 @@ namespace SignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetServiceHealth(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetServiceHealth");
-            scope.Start();
-            try
+            using var message = CreateGetServiceHealthRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetServiceHealthRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -133,24 +113,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToHub");
-            scope.Start();
-            try
+            using var message = CreateSendToHubRequest(hub, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToHubRequest(hub, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -169,24 +139,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToHub");
-            scope.Start();
-            try
+            using var message = CreateSendToHubRequest(hub, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToHubRequest(hub, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -220,24 +180,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToHub");
-            scope.Start();
-            try
+            using var message = CreateSendToHubRequest(hub, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToHubRequest(hub, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -256,24 +206,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToHub");
-            scope.Start();
-            try
+            using var message = CreateSendToHubRequest(hub, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToHubRequest(hub, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -314,24 +254,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToUser");
-            scope.Start();
-            try
+            using var message = CreateSendToUserRequest(hub, id, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToUserRequest(hub, id, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -355,24 +285,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToUser");
-            scope.Start();
-            try
+            using var message = CreateSendToUserRequest(hub, id, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToUserRequest(hub, id, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -413,24 +333,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToUser");
-            scope.Start();
-            try
+            using var message = CreateSendToUserRequest(hub, id, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToUserRequest(hub, id, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -454,24 +364,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToUser");
-            scope.Start();
-            try
+            using var message = CreateSendToUserRequest(hub, id, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToUserRequest(hub, id, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -512,24 +412,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToConnection");
-            scope.Start();
-            try
+            using var message = CreateSendToConnectionRequest(hub, connectionId, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToConnectionRequest(hub, connectionId, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -553,24 +443,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToConnection");
-            scope.Start();
-            try
+            using var message = CreateSendToConnectionRequest(hub, connectionId, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToConnectionRequest(hub, connectionId, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -611,24 +491,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToConnection");
-            scope.Start();
-            try
+            using var message = CreateSendToConnectionRequest(hub, connectionId, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToConnectionRequest(hub, connectionId, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -652,24 +522,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToConnection");
-            scope.Start();
-            try
+            using var message = CreateSendToConnectionRequest(hub, connectionId, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToConnectionRequest(hub, connectionId, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -708,24 +568,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CloseConnection");
-            scope.Start();
-            try
+            using var message = CreateCloseConnectionRequest(hub, connectionId, reason);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateCloseConnectionRequest(hub, connectionId, reason);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -745,24 +595,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CloseConnection");
-            scope.Start();
-            try
+            using var message = CreateCloseConnectionRequest(hub, connectionId, reason);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateCloseConnectionRequest(hub, connectionId, reason);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -803,24 +643,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToGroup");
-            scope.Start();
-            try
+            using var message = CreateSendToGroupRequest(hub, group, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToGroupRequest(hub, group, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -844,24 +674,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToGroup");
-            scope.Start();
-            try
+            using var message = CreateSendToGroupRequest(hub, group, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToGroupRequest(hub, group, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -902,24 +722,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToGroup");
-            scope.Start();
-            try
+            using var message = CreateSendToGroupRequest(hub, group, data);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToGroupRequest(hub, group, data);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -943,24 +753,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.SendToGroup");
-            scope.Start();
-            try
+            using var message = CreateSendToGroupRequest(hub, group, data);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSendToGroupRequest(hub, group, data);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1001,24 +801,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetUserInGroup");
-            scope.Start();
-            try
+            using var message = CreateGetUserInGroupRequest(hub, group, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUserInGroupRequest(hub, group, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1042,24 +832,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetUserInGroup");
-            scope.Start();
-            try
+            using var message = CreateGetUserInGroupRequest(hub, group, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUserInGroupRequest(hub, group, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1105,24 +885,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddUserToGroup");
-            scope.Start();
-            try
+            using var message = CreateAddUserToGroupRequest(hub, group, user, ttl);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateAddUserToGroupRequest(hub, group, user, ttl);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1147,24 +917,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddUserToGroup");
-            scope.Start();
-            try
+            using var message = CreateAddUserToGroupRequest(hub, group, user, ttl);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateAddUserToGroupRequest(hub, group, user, ttl);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1205,24 +965,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveUserFromGroup");
-            scope.Start();
-            try
+            using var message = CreateRemoveUserFromGroupRequest(hub, group, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateRemoveUserFromGroupRequest(hub, group, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1246,24 +996,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveUserFromGroup");
-            scope.Start();
-            try
+            using var message = CreateRemoveUserFromGroupRequest(hub, group, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateRemoveUserFromGroupRequest(hub, group, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1304,24 +1044,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddConnectionToGroup");
-            scope.Start();
-            try
+            using var message = CreateAddConnectionToGroupRequest(hub, group, connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateAddConnectionToGroupRequest(hub, group, connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1345,24 +1075,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddConnectionToGroup");
-            scope.Start();
-            try
+            using var message = CreateAddConnectionToGroupRequest(hub, group, connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateAddConnectionToGroupRequest(hub, group, connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1403,24 +1123,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveConnectionToGroup");
-            scope.Start();
-            try
+            using var message = CreateRemoveConnectionToGroupRequest(hub, group, connectionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateRemoveConnectionToGroupRequest(hub, group, connectionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1444,24 +1154,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(connectionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveConnectionToGroup");
-            scope.Start();
-            try
+            using var message = CreateRemoveConnectionToGroupRequest(hub, group, connectionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateRemoveConnectionToGroupRequest(hub, group, connectionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1496,24 +1196,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveAllUserGroups");
-            scope.Start();
-            try
+            using var message = CreateRemoveAllUserGroupsRequest(hub, user);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateRemoveAllUserGroupsRequest(hub, user);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1532,24 +1222,14 @@ namespace SignalR
                 throw new ArgumentNullException(nameof(user));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.RemoveAllUserGroups");
-            scope.Start();
-            try
+            using var message = CreateRemoveAllUserGroupsRequest(hub, user);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateRemoveAllUserGroupsRequest(hub, user);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

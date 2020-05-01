@@ -90,37 +90,27 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
-            scope.Start();
-            try
+            using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
+                case 200:
+                case 201:
+                    {
+                        SynonymMap value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            SynonymMap value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -141,37 +131,27 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
-            scope.Start();
-            try
+            using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateOrUpdateRequest(synonymMapName, synonymMap, requestOptions, accessCondition);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
+                case 200:
+                case 201:
+                    {
+                        SynonymMap value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            SynonymMap value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -214,25 +194,15 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMapName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
-            scope.Start();
-            try
+            using var message = CreateDeleteRequest(synonymMapName, requestOptions, accessCondition);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRequest(synonymMapName, requestOptions, accessCondition);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 204:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -248,25 +218,15 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMapName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
-            scope.Start();
-            try
+            using var message = CreateDeleteRequest(synonymMapName, requestOptions, accessCondition);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRequest(synonymMapName, requestOptions, accessCondition);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                    case 404:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 204:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -300,36 +260,26 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMapName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Get");
-            scope.Start();
-            try
+            using var message = CreateGetRequest(synonymMapName, requestOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequest(synonymMapName, requestOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        SynonymMap value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            SynonymMap value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -344,36 +294,26 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMapName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Get");
-            scope.Start();
-            try
+            using var message = CreateGetRequest(synonymMapName, requestOptions);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequest(synonymMapName, requestOptions);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        SynonymMap value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            SynonymMap value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -404,36 +344,26 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListSynonymMapsResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.List");
-            scope.Start();
-            try
+            using var message = CreateListRequest(select, requestOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateListRequest(select, requestOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListSynonymMapsResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ListSynonymMapsResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -443,36 +373,26 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListSynonymMapsResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.List");
-            scope.Start();
-            try
+            using var message = CreateListRequest(select, requestOptions);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateListRequest(select, requestOptions);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListSynonymMapsResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ListSynonymMapsResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ListSynonymMapsResult.DeserializeListSynonymMapsResult(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -508,36 +428,26 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Create");
-            scope.Start();
-            try
+            using var message = CreateCreateRequest(synonymMap, requestOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateRequest(synonymMap, requestOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
+                case 201:
+                    {
+                        SynonymMap value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            SynonymMap value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -552,36 +462,26 @@ namespace CognitiveSearch
                 throw new ArgumentNullException(nameof(synonymMap));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Create");
-            scope.Start();
-            try
+            using var message = CreateCreateRequest(synonymMap, requestOptions);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateRequest(synonymMap, requestOptions);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
+                case 201:
+                    {
+                        SynonymMap value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            SynonymMap value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = SynonymMap.DeserializeSynonymMap(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = SynonymMap.DeserializeSynonymMap(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

@@ -60,36 +60,26 @@ namespace SerializationCustomization
                 throw new ArgumentNullException(nameof(model));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation1");
-            scope.Start();
-            try
+            using var message = CreateOperation1Request(model);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateOperation1Request(model);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        AlwaysInitializeTestModel value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            AlwaysInitializeTestModel value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = AlwaysInitializeTestModel.DeserializeAlwaysInitializeTestModel(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = AlwaysInitializeTestModel.DeserializeAlwaysInitializeTestModel(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -102,36 +92,26 @@ namespace SerializationCustomization
                 throw new ArgumentNullException(nameof(model));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation1");
-            scope.Start();
-            try
+            using var message = CreateOperation1Request(model);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateOperation1Request(model);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        AlwaysInitializeTestModel value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            AlwaysInitializeTestModel value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = AlwaysInitializeTestModel.DeserializeAlwaysInitializeTestModel(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = AlwaysInitializeTestModel.DeserializeAlwaysInitializeTestModel(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -160,36 +140,26 @@ namespace SerializationCustomization
                 throw new ArgumentNullException(nameof(model));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation2");
-            scope.Start();
-            try
+            using var message = CreateOperation2Request(model);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateOperation2Request(model);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        EmptyAsUndefinedTestModel value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            EmptyAsUndefinedTestModel value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = EmptyAsUndefinedTestModel.DeserializeEmptyAsUndefinedTestModel(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = EmptyAsUndefinedTestModel.DeserializeEmptyAsUndefinedTestModel(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -202,36 +172,26 @@ namespace SerializationCustomization
                 throw new ArgumentNullException(nameof(model));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Operation2");
-            scope.Start();
-            try
+            using var message = CreateOperation2Request(model);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateOperation2Request(model);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        EmptyAsUndefinedTestModel value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            EmptyAsUndefinedTestModel value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = EmptyAsUndefinedTestModel.DeserializeEmptyAsUndefinedTestModel(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = EmptyAsUndefinedTestModel.DeserializeEmptyAsUndefinedTestModel(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

@@ -51,38 +51,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError200ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError200ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -90,38 +80,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200Model204NoModelDefaultError200Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError200ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError200ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -141,38 +121,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError204ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError204ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError204ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -180,38 +150,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200Model204NoModelDefaultError204Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError204ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError204ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -231,38 +191,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError201InvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -270,38 +220,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200Model204NoModelDefaultError201Invalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -321,38 +261,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError202NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError202NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError202NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -360,38 +290,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200Model204NoModelDefaultError202None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError202NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError202NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -411,38 +331,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError400ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError400ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -450,38 +360,28 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200Model204NoModelDefaultError400Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model204NoModelDefaultError400ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model204NoModelDefaultError400ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return Response.FromValue<MyException>(null, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 204:
+                    return Response.FromValue<MyException>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -501,50 +401,40 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<object>> Get200Model201ModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model201ModelDefaultError200ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model201ModelDefaultError200ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            B value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = B.DeserializeB(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        B value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = B.DeserializeB(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -552,50 +442,40 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get200Model201ModelDefaultError200Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model201ModelDefaultError200ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model201ModelDefaultError200ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            B value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = B.DeserializeB(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        B value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = B.DeserializeB(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -615,50 +495,40 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<object>> Get200Model201ModelDefaultError201ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model201ModelDefaultError201ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model201ModelDefaultError201ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            B value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = B.DeserializeB(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        B value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = B.DeserializeB(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -666,50 +536,40 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get200Model201ModelDefaultError201Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model201ModelDefaultError201ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model201ModelDefaultError201ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            B value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = B.DeserializeB(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        B value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = B.DeserializeB(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -729,50 +589,40 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<object>> Get200Model201ModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model201ModelDefaultError400ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model201ModelDefaultError400ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            B value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = B.DeserializeB(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        B value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = B.DeserializeB(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -780,50 +630,40 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get200Model201ModelDefaultError400Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200Model201ModelDefaultError400ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200Model201ModelDefaultError400ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            B value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = B.DeserializeB(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        B value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = B.DeserializeB(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -843,64 +683,54 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            C value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = C.DeserializeC(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    case 404:
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        C value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            D value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = D.DeserializeD(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = C.DeserializeC(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 404:
+                    {
+                        D value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = D.DeserializeD(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -908,64 +738,54 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get200ModelA201ModelC404ModelDDefaultError200Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            C value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = C.DeserializeC(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    case 404:
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        C value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            D value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = D.DeserializeD(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = C.DeserializeC(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 404:
+                    {
+                        D value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = D.DeserializeD(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -985,64 +805,54 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            C value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = C.DeserializeC(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    case 404:
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        C value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            D value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = D.DeserializeD(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = C.DeserializeC(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 404:
+                    {
+                        D value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = D.DeserializeD(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1050,64 +860,54 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get200ModelA201ModelC404ModelDDefaultError201Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            C value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = C.DeserializeC(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    case 404:
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        C value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            D value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = D.DeserializeD(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = C.DeserializeC(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 404:
+                    {
+                        D value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = D.DeserializeD(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1127,64 +927,54 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            C value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = C.DeserializeC(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    case 404:
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        C value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            D value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = D.DeserializeD(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = C.DeserializeC(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 404:
+                    {
+                        D value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = D.DeserializeD(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1192,64 +982,54 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get200ModelA201ModelC404ModelDDefaultError404Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            C value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = C.DeserializeC(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    case 404:
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        C value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            D value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = D.DeserializeD(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = C.DeserializeC(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 404:
+                    {
+                        D value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = D.DeserializeD(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1269,64 +1049,54 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            C value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = C.DeserializeC(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    case 404:
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        C value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            D value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = D.DeserializeD(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = C.DeserializeC(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 404:
+                    {
+                        D value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = D.DeserializeD(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1334,64 +1104,54 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<object> Get200ModelA201ModelC404ModelDDefaultError400Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    case 201:
+                        else
                         {
-                            C value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = C.DeserializeC(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = MyException.DeserializeMyException(document.RootElement);
                         }
-                    case 404:
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 201:
+                    {
+                        C value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            D value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = D.DeserializeD(document.RootElement);
-                            }
-                            return Response.FromValue<object>(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = C.DeserializeC(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 404:
+                    {
+                        D value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = D.DeserializeD(document.RootElement);
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1411,25 +1171,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get202None204NoneDefaultError202NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultError202NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultError202NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1437,25 +1187,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get202None204NoneDefaultError202None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultError202NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultError202NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1475,25 +1215,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get202None204NoneDefaultError204NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultError204NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultError204NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1501,25 +1231,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get202None204NoneDefaultError204None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultError204NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultError204NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1539,25 +1259,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get202None204NoneDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultError400ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultError400ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1565,25 +1275,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get202None204NoneDefaultError400Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultError400ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultError400ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1603,25 +1303,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get202None204NoneDefaultNone202InvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultNone202InvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultNone202InvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1629,25 +1319,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get202None204NoneDefaultNone202Invalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultNone202InvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultNone202InvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1667,25 +1347,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get202None204NoneDefaultNone204NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultNone204NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultNone204NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1693,25 +1363,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get202None204NoneDefaultNone204None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultNone204NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultNone204NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1731,25 +1391,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get202None204NoneDefaultNone400NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultNone400NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultNone400NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1757,25 +1407,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get202None204NoneDefaultNone400None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultNone400NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultNone400NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1795,25 +1435,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get202None204NoneDefaultNone400InvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultNone400InvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultNone400InvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1821,25 +1451,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get202None204NoneDefaultNone400Invalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet202None204NoneDefaultNone400InvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet202None204NoneDefaultNone400InvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1859,36 +1479,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> GetDefaultModelA200ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultModelA200ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultModelA200ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1896,36 +1506,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> GetDefaultModelA200Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultModelA200ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultModelA200ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1945,36 +1545,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> GetDefaultModelA200NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultModelA200NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultModelA200NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1982,36 +1572,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> GetDefaultModelA200None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultModelA200NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultModelA200NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2031,24 +1611,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetDefaultModelA400ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultModelA400ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultModelA400ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2056,24 +1626,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetDefaultModelA400Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultModelA400ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultModelA400ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2093,24 +1653,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetDefaultModelA400NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultModelA400NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultModelA400NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2118,24 +1668,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetDefaultModelA400None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultModelA400NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultModelA400NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2155,24 +1695,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetDefaultNone200InvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultNone200InvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultNone200InvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2180,24 +1710,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetDefaultNone200Invalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultNone200InvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultNone200InvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2217,24 +1737,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetDefaultNone200NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultNone200NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultNone200NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2242,24 +1752,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetDefaultNone200None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultNone200NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultNone200NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2279,24 +1779,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetDefaultNone400InvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultNone400InvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultNone400InvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2304,24 +1794,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetDefaultNone400Invalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultNone400InvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultNone400InvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2341,24 +1821,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetDefaultNone400NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultNone400NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultNone400NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2366,24 +1836,14 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetDefaultNone400None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
-            scope.Start();
-            try
+            using var message = CreateGetDefaultNone400NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetDefaultNone400NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2403,36 +1863,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200ModelA200NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA200NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA200NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2440,36 +1890,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200ModelA200None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA200NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA200NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2489,36 +1929,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200ModelA200ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA200ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA200ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2526,36 +1956,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200ModelA200Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA200ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA200ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2575,36 +1995,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200ModelA200InvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA200InvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA200InvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2612,36 +2022,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200ModelA200Invalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA200InvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA200InvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2661,36 +2061,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200ModelA400NoneAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA400NoneRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA400NoneRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2698,36 +2088,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200ModelA400None(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA400NoneRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA400NoneRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2747,36 +2127,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200ModelA400ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA400ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA400ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2784,36 +2154,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200ModelA400Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA400ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA400ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2833,36 +2193,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200ModelA400InvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA400InvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA400InvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2870,36 +2220,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200ModelA400Invalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA400InvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA400InvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2919,36 +2259,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<MyException>> Get200ModelA202ValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA202ValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA202ValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2956,36 +2286,26 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<MyException> Get200ModelA202Valid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
-            scope.Start();
-            try
+            using var message = CreateGet200ModelA202ValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet200ModelA202ValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        MyException value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            MyException value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = MyException.DeserializeMyException(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = MyException.DeserializeMyException(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

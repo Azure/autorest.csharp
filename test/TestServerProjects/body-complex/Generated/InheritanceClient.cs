@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,14 +36,34 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("InheritanceClient.GetValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types that extend others. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Siamese> GetValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("InheritanceClient.GetValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that extend others. </summary>
@@ -50,7 +71,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(Siamese complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("InheritanceClient.PutValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that extend others. </summary>
@@ -58,7 +89,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(Siamese complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutValid(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("InheritanceClient.PutValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutValid(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

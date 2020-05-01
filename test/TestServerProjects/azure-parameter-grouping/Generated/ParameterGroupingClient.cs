@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -36,7 +37,17 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostRequiredAsync(parameterGroupingPostRequiredParameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostRequired");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostRequiredAsync(parameterGroupingPostRequiredParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Post a bunch of required parameters grouped. </summary>
@@ -44,7 +55,17 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.PostRequired(parameterGroupingPostRequiredParameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostRequired");
+            scope.Start();
+            try
+            {
+                return RestClient.PostRequired(parameterGroupingPostRequiredParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Post a bunch of optional parameters grouped. </summary>
@@ -52,7 +73,17 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostOptionalAsync(parameterGroupingPostOptionalParameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostOptional");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostOptionalAsync(parameterGroupingPostOptionalParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Post a bunch of optional parameters grouped. </summary>
@@ -60,7 +91,17 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PostOptional(parameterGroupingPostOptionalParameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostOptional");
+            scope.Start();
+            try
+            {
+                return RestClient.PostOptional(parameterGroupingPostOptionalParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Post parameters from multiple different parameter groups. </summary>
@@ -69,7 +110,17 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup = null, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostMultiParamGroups");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Post parameters from multiple different parameter groups. </summary>
@@ -78,7 +129,17 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostMultiParamGroups(FirstParameterGroup firstParameterGroup = null, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PostMultiParamGroups(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostMultiParamGroups");
+            scope.Start();
+            try
+            {
+                return RestClient.PostMultiParamGroups(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Post parameters with a shared parameter group object. </summary>
@@ -86,7 +147,17 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PostSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostSharedParameterGroupObjectAsync(firstParameterGroup, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostSharedParameterGroupObject");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostSharedParameterGroupObjectAsync(firstParameterGroup, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Post parameters with a shared parameter group object. </summary>
@@ -94,7 +165,17 @@ namespace azure_parameter_grouping
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PostSharedParameterGroupObject(FirstParameterGroup firstParameterGroup = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PostSharedParameterGroupObject(firstParameterGroup, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostSharedParameterGroupObject");
+            scope.Start();
+            try
+            {
+                return RestClient.PostSharedParameterGroupObject(firstParameterGroup, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,7 +38,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutArrayAsync(IEnumerable<Resource> resourceArray = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutArrayAsync(resourceArray, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutArray");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutArrayAsync(resourceArray, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put External Resource as an Array. </summary>
@@ -45,21 +56,51 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutArray(IEnumerable<Resource> resourceArray = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutArray(resourceArray, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutArray");
+            scope.Start();
+            try
+            {
+                return RestClient.PutArray(resourceArray, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<FlattenedProduct>>> GetArrayAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetArrayAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetArray");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetArrayAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get External Resource as an Array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<FlattenedProduct>> GetArray(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetArray(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetArray");
+            scope.Start();
+            try
+            {
+                return RestClient.GetArray(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
@@ -67,7 +108,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutWrappedArrayAsync(IEnumerable<WrappedProduct> resourceArray = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutWrappedArrayAsync(resourceArray, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutWrappedArray");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutWrappedArrayAsync(resourceArray, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
@@ -75,21 +126,51 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutWrappedArray(IEnumerable<WrappedProduct> resourceArray = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutWrappedArray(resourceArray, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutWrappedArray");
+            scope.Start();
+            try
+            {
+                return RestClient.PutWrappedArray(resourceArray, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<ProductWrapper>>> GetWrappedArrayAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetWrappedArrayAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetWrappedArray");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetWrappedArrayAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it&apos;s referenced in an array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyList<ProductWrapper>> GetWrappedArray(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetWrappedArray(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetWrappedArray");
+            scope.Start();
+            try
+            {
+                return RestClient.GetWrappedArray(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put External Resource as a Dictionary. </summary>
@@ -97,7 +178,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDictionaryAsync(IDictionary<string, FlattenedProduct> resourceDictionary = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDictionaryAsync(resourceDictionary, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutDictionary");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDictionaryAsync(resourceDictionary, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put External Resource as a Dictionary. </summary>
@@ -105,21 +196,51 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDictionary(IDictionary<string, FlattenedProduct> resourceDictionary = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDictionary(resourceDictionary, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutDictionary");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDictionary(resourceDictionary, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, FlattenedProduct>>> GetDictionaryAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDictionaryAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetDictionary");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDictionaryAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get External Resource as a Dictionary. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, FlattenedProduct>> GetDictionary(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDictionary(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetDictionary");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDictionary(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put External Resource as a ResourceCollection. </summary>
@@ -127,7 +248,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutResourceCollectionAsync(ResourceCollection resourceComplexObject = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutResourceCollectionAsync(resourceComplexObject, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutResourceCollection");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutResourceCollectionAsync(resourceComplexObject, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put External Resource as a ResourceCollection. </summary>
@@ -135,21 +266,51 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutResourceCollection(ResourceCollection resourceComplexObject = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutResourceCollection(resourceComplexObject, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutResourceCollection");
+            scope.Start();
+            try
+            {
+                return RestClient.PutResourceCollection(resourceComplexObject, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get External Resource as a ResourceCollection. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ResourceCollection>> GetResourceCollectionAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetResourceCollectionAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetResourceCollection");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetResourceCollectionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get External Resource as a ResourceCollection. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceCollection> GetResourceCollection(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetResourceCollection(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetResourceCollection");
+            scope.Start();
+            try
+            {
+                return RestClient.GetResourceCollection(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
@@ -157,7 +318,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SimpleProduct>> PutSimpleProductAsync(SimpleProduct simpleBodyProduct = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutSimpleProductAsync(simpleBodyProduct, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutSimpleProduct");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutSimpleProductAsync(simpleBodyProduct, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
@@ -165,7 +336,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SimpleProduct> PutSimpleProduct(SimpleProduct simpleBodyProduct = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutSimpleProduct(simpleBodyProduct, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutSimpleProduct");
+            scope.Start();
+            try
+            {
+                return RestClient.PutSimpleProduct(simpleBodyProduct, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
@@ -178,7 +359,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, string capacity = "Large", string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put Flattened Simple Product with client flattening true on the parameter. </summary>
@@ -191,7 +382,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, string capacity = "Large", string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
+            scope.Start();
+            try
+            {
+                return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
@@ -200,7 +401,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutSimpleProductWithGroupingAsync(flattenParameterGroup, capacity, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutSimpleProductWithGrouping");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutSimpleProductWithGroupingAsync(flattenParameterGroup, capacity, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
@@ -209,7 +420,17 @@ namespace model_flattening
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup, string capacity = "Large", CancellationToken cancellationToken = default)
         {
-            return RestClient.PutSimpleProductWithGrouping(flattenParameterGroup, capacity, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutSimpleProductWithGrouping");
+            scope.Start();
+            try
+            {
+                return RestClient.PutSimpleProductWithGrouping(flattenParameterGroup, capacity, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

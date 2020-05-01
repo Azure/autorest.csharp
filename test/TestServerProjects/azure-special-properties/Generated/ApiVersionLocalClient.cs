@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,14 +35,34 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetMethodLocalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMethodLocalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetMethodLocalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMethodLocalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetMethodLocalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMethodLocalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetMethodLocalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMethodLocalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = null to succeed. </summary>
@@ -49,7 +70,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetMethodLocalNullAsync(string apiVersion = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMethodLocalNullAsync(apiVersion, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetMethodLocalNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMethodLocalNullAsync(apiVersion, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = null to succeed. </summary>
@@ -57,35 +88,85 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetMethodLocalNull(string apiVersion = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMethodLocalNull(apiVersion, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetMethodLocalNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMethodLocalNull(apiVersion, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetPathLocalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetPathLocalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetPathLocalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetPathLocalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetPathLocalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetPathLocalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetPathLocalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetPathLocalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetSwaggerLocalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetSwaggerLocalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetSwaggerLocalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetSwaggerLocalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetSwaggerLocalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetSwaggerLocalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetSwaggerLocalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetSwaggerLocalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

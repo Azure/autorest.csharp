@@ -93,36 +93,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
-            scope.Start();
-            try
+            using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListContainerItems value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ListContainerItems value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -143,36 +133,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
-            scope.Start();
-            try
+            using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateListRequest(resourceGroupName, accountName, maxpagesize, filter);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListContainerItems value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ListContainerItems value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -225,37 +205,27 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Create");
-            scope.Start();
-            try
+            using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, blobContainer);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, blobContainer);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
+                case 200:
+                case 201:
+                    {
+                        BlobContainer value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            BlobContainer value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -284,37 +254,27 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Create");
-            scope.Start();
-            try
+            using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, blobContainer);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateRequest(resourceGroupName, accountName, containerName, blobContainer);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 201:
+                case 200:
+                case 201:
+                    {
+                        BlobContainer value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            BlobContainer value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -367,36 +327,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Update");
-            scope.Start();
-            try
+            using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, blobContainer);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, blobContainer);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        BlobContainer value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            BlobContainer value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -425,36 +375,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Update");
-            scope.Start();
-            try
+            using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, blobContainer);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateUpdateRequest(resourceGroupName, accountName, containerName, blobContainer);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        BlobContainer value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            BlobContainer value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -498,36 +438,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Get");
-            scope.Start();
-            try
+            using var message = CreateGetRequest(resourceGroupName, accountName, containerName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequest(resourceGroupName, accountName, containerName);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        BlobContainer value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            BlobContainer value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -551,36 +481,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Get");
-            scope.Start();
-            try
+            using var message = CreateGetRequest(resourceGroupName, accountName, containerName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRequest(resourceGroupName, accountName, containerName);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        BlobContainer value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            BlobContainer value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -624,25 +544,15 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Delete");
-            scope.Start();
-            try
+            using var message = CreateDeleteRequest(resourceGroupName, accountName, containerName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRequest(resourceGroupName, accountName, containerName);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -666,25 +576,15 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Delete");
-            scope.Start();
-            try
+            using var message = CreateDeleteRequest(resourceGroupName, accountName, containerName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRequest(resourceGroupName, accountName, containerName);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 204:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -739,36 +639,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
-            scope.Start();
-            try
+            using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LegalHold value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LegalHold value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LegalHold.DeserializeLegalHold(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LegalHold.DeserializeLegalHold(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -797,36 +687,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
-            scope.Start();
-            try
+            using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LegalHold value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LegalHold value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LegalHold.DeserializeLegalHold(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LegalHold.DeserializeLegalHold(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -881,36 +761,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
-            scope.Start();
-            try
+            using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LegalHold value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LegalHold value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LegalHold.DeserializeLegalHold(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LegalHold.DeserializeLegalHold(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -939,36 +809,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
-            scope.Start();
-            try
+            using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LegalHold value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LegalHold value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LegalHold.DeserializeLegalHold(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LegalHold.DeserializeLegalHold(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1030,36 +890,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1086,36 +936,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1166,36 +1006,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateGetImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1220,36 +1050,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateGetImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1301,36 +1121,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateDeleteImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1359,36 +1169,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateDeleteImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1439,36 +1239,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateLockImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateLockImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1497,36 +1287,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateLockImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateLockImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1588,36 +1368,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1648,36 +1418,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
-            scope.Start();
-            try
+            using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ImmutabilityPolicy value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ImmutabilityPolicy value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1730,36 +1490,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Lease");
-            scope.Start();
-            try
+            using var message = CreateLeaseRequest(resourceGroupName, accountName, containerName, parameters);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateLeaseRequest(resourceGroupName, accountName, containerName, parameters);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LeaseContainerResponse value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LeaseContainerResponse value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1784,36 +1534,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Lease");
-            scope.Start();
-            try
+            using var message = CreateLeaseRequest(resourceGroupName, accountName, containerName, parameters);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateLeaseRequest(resourceGroupName, accountName, containerName, parameters);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LeaseContainerResponse value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LeaseContainerResponse value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1851,36 +1591,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
-            scope.Start();
-            try
+            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListContainerItems value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ListContainerItems value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1906,36 +1636,26 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
-            scope.Start();
-            try
+            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName, maxpagesize, filter);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListContainerItems value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            ListContainerItems value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

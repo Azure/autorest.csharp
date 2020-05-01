@@ -59,38 +59,28 @@ namespace xms_error_responses
                 throw new ArgumentNullException(nameof(petId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PetClient.GetPetById");
-            scope.Start();
-            try
+            using var message = CreateGetPetByIdRequest(petId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetPetByIdRequest(petId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Pet value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            Pet value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = Pet.DeserializePet(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 202:
-                        return Response.FromValue<Pet>(null, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = Pet.DeserializePet(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 202:
+                    return Response.FromValue<Pet>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -104,38 +94,28 @@ namespace xms_error_responses
                 throw new ArgumentNullException(nameof(petId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PetClient.GetPetById");
-            scope.Start();
-            try
+            using var message = CreateGetPetByIdRequest(petId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetPetByIdRequest(petId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Pet value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            Pet value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = Pet.DeserializePet(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    case 202:
-                        return Response.FromValue<Pet>(null, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = Pet.DeserializePet(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 202:
+                    return Response.FromValue<Pet>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -162,36 +142,26 @@ namespace xms_error_responses
                 throw new ArgumentNullException(nameof(whatAction));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PetClient.DoSomething");
-            scope.Start();
-            try
+            using var message = CreateDoSomethingRequest(whatAction);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDoSomethingRequest(whatAction);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        PetAction value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            PetAction value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = PetAction.DeserializePetAction(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = PetAction.DeserializePetAction(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -205,36 +175,26 @@ namespace xms_error_responses
                 throw new ArgumentNullException(nameof(whatAction));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PetClient.DoSomething");
-            scope.Start();
-            try
+            using var message = CreateDoSomethingRequest(whatAction);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDoSomethingRequest(whatAction);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        PetAction value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            PetAction value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = PetAction.DeserializePetAction(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = PetAction.DeserializePetAction(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

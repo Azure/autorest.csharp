@@ -41,7 +41,17 @@ namespace Azure.Network.Management.Interface
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<NetworkInterface>> GetAsync(string resourceGroupName, string networkInterfaceName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, expand, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(resourceGroupName, networkInterfaceName, expand, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets information about the specified network interface. </summary>
@@ -51,7 +61,17 @@ namespace Azure.Network.Management.Interface
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NetworkInterface> Get(string resourceGroupName, string networkInterfaceName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(resourceGroupName, networkInterfaceName, expand, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(resourceGroupName, networkInterfaceName, expand, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Updates a network interface tags. </summary>
@@ -61,7 +81,17 @@ namespace Azure.Network.Management.Interface
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<NetworkInterface>> UpdateTagsAsync(string resourceGroupName, string networkInterfaceName, TagsObject parameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.UpdateTagsAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.UpdateTags");
+            scope.Start();
+            try
+            {
+                return await RestClient.UpdateTagsAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Updates a network interface tags. </summary>
@@ -71,7 +101,17 @@ namespace Azure.Network.Management.Interface
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NetworkInterface> UpdateTags(string resourceGroupName, string networkInterfaceName, TagsObject parameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.UpdateTags(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.UpdateTags");
+            scope.Start();
+            try
+            {
+                return RestClient.UpdateTags(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets all network interfaces in a subscription. </summary>
@@ -80,13 +120,33 @@ namespace Azure.Network.Management.Interface
         {
             async Task<Page<NetworkInterface>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAllAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.ListAll");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAllAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<NetworkInterface>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.ListAllNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.ListAll");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAllNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -97,13 +157,33 @@ namespace Azure.Network.Management.Interface
         {
             Page<NetworkInterface> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.ListAll(cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.ListAll");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ListAll(cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<NetworkInterface> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.ListAllNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.ListAll");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ListAllNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -120,13 +200,33 @@ namespace Azure.Network.Management.Interface
 
             async Task<Page<NetworkInterface>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAsync(resourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAsync(resourceGroupName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<NetworkInterface>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -143,13 +243,33 @@ namespace Azure.Network.Management.Interface
 
             Page<NetworkInterface> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.List(resourceGroupName, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.List(resourceGroupName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<NetworkInterface> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.ListNextPage(nextLink, resourceGroupName, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ListNextPage(nextLink, resourceGroupName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -168,7 +288,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfacesClient.Delete", OperationFinalStateVia.Location, createOriginalHttpMessage);
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Delete, "NetworkInterfacesClient.StartDelete", OperationFinalStateVia.Location, createOriginalHttpMessage);
         }
 
         /// <summary> Deletes the specified network interface. </summary>
@@ -186,8 +306,18 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = await RestClient.DeleteAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.StartDelete");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.DeleteAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
+                return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes the specified network interface. </summary>
@@ -205,8 +335,18 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = RestClient.Delete(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.StartDelete");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.Delete(resourceGroupName, networkInterfaceName, cancellationToken);
+                return CreateDelete(originalResponse, () => RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates or updates a network interface. </summary>
@@ -223,7 +363,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "NetworkInterfacesClient.CreateOrUpdate", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Put, "NetworkInterfacesClient.StartCreateOrUpdate", OperationFinalStateVia.AzureAsyncOperation, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -270,8 +410,18 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            var originalResponse = await RestClient.CreateOrUpdateAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
-            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.CreateOrUpdateAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
+                return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates or updates a network interface. </summary>
@@ -294,8 +444,18 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            var originalResponse = RestClient.CreateOrUpdate(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
-            return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.CreateOrUpdate(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
+                return CreateCreateOrUpdate(originalResponse, () => RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets all route tables applied to a network interface. </summary>
@@ -312,7 +472,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "NetworkInterfacesClient.GetEffectiveRouteTable", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "NetworkInterfacesClient.StartGetEffectiveRouteTable", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -354,8 +514,18 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = await RestClient.GetEffectiveRouteTableAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.StartGetEffectiveRouteTable");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.GetEffectiveRouteTableAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
+                return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets all route tables applied to a network interface. </summary>
@@ -373,8 +543,18 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = RestClient.GetEffectiveRouteTable(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.StartGetEffectiveRouteTable");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.GetEffectiveRouteTable(resourceGroupName, networkInterfaceName, cancellationToken);
+                return CreateGetEffectiveRouteTable(originalResponse, () => RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets all network security groups applied to a network interface. </summary>
@@ -391,7 +571,7 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "NetworkInterfacesClient.ListEffectiveNetworkSecurityGroups", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "NetworkInterfacesClient.StartListEffectiveNetworkSecurityGroups", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -433,8 +613,18 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = await RestClient.ListEffectiveNetworkSecurityGroupsAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-            return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.StartListEffectiveNetworkSecurityGroups");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.ListEffectiveNetworkSecurityGroupsAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
+                return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets all network security groups applied to a network interface. </summary>
@@ -452,8 +642,18 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(networkInterfaceName));
             }
 
-            var originalResponse = RestClient.ListEffectiveNetworkSecurityGroups(resourceGroupName, networkInterfaceName, cancellationToken);
-            return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
+            using var scope = _clientDiagnostics.CreateScope("NetworkInterfacesClient.StartListEffectiveNetworkSecurityGroups");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.ListEffectiveNetworkSecurityGroups(resourceGroupName, networkInterfaceName, cancellationToken);
+                return CreateListEffectiveNetworkSecurityGroups(originalResponse, () => RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

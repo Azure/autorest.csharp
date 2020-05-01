@@ -50,24 +50,14 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetMethodLocalValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetMethodLocalValid");
-            scope.Start();
-            try
+            using var message = CreateGetMethodLocalValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetMethodLocalValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -75,24 +65,14 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetMethodLocalValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetMethodLocalValid");
-            scope.Start();
-            try
+            using var message = CreateGetMethodLocalValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetMethodLocalValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -117,24 +97,14 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetMethodLocalNullAsync(string apiVersion = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetMethodLocalNull");
-            scope.Start();
-            try
+            using var message = CreateGetMethodLocalNullRequest(apiVersion);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetMethodLocalNullRequest(apiVersion);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -143,24 +113,14 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetMethodLocalNull(string apiVersion = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetMethodLocalNull");
-            scope.Start();
-            try
+            using var message = CreateGetMethodLocalNullRequest(apiVersion);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetMethodLocalNullRequest(apiVersion);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -181,24 +141,14 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetPathLocalValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetPathLocalValid");
-            scope.Start();
-            try
+            using var message = CreateGetPathLocalValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetPathLocalValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -206,24 +156,14 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetPathLocalValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetPathLocalValid");
-            scope.Start();
-            try
+            using var message = CreateGetPathLocalValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetPathLocalValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -244,24 +184,14 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> GetSwaggerLocalValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetSwaggerLocalValid");
-            scope.Start();
-            try
+            using var message = CreateGetSwaggerLocalValidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetSwaggerLocalValidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -269,24 +199,14 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response GetSwaggerLocalValid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiVersionLocalClient.GetSwaggerLocalValid");
-            scope.Start();
-            try
+            using var message = CreateGetSwaggerLocalValidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetSwaggerLocalValidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

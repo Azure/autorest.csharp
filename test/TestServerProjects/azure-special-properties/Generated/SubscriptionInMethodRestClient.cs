@@ -56,24 +56,14 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostMethodLocalValid");
-            scope.Start();
-            try
+            using var message = CreatePostMethodLocalValidRequest(subscriptionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostMethodLocalValidRequest(subscriptionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -87,24 +77,14 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostMethodLocalValid");
-            scope.Start();
-            try
+            using var message = CreatePostMethodLocalValidRequest(subscriptionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostMethodLocalValidRequest(subscriptionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -131,24 +111,14 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostMethodLocalNull");
-            scope.Start();
-            try
+            using var message = CreatePostMethodLocalNullRequest(subscriptionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostMethodLocalNullRequest(subscriptionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -162,24 +132,14 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostMethodLocalNull");
-            scope.Start();
-            try
+            using var message = CreatePostMethodLocalNullRequest(subscriptionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostMethodLocalNullRequest(subscriptionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -206,24 +166,14 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostPathLocalValid");
-            scope.Start();
-            try
+            using var message = CreatePostPathLocalValidRequest(subscriptionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostPathLocalValidRequest(subscriptionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -237,24 +187,14 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostPathLocalValid");
-            scope.Start();
-            try
+            using var message = CreatePostPathLocalValidRequest(subscriptionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostPathLocalValidRequest(subscriptionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -281,24 +221,14 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostSwaggerLocalValid");
-            scope.Start();
-            try
+            using var message = CreatePostSwaggerLocalValidRequest(subscriptionId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSwaggerLocalValidRequest(subscriptionId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -312,24 +242,14 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionInMethodClient.PostSwaggerLocalValid");
-            scope.Start();
-            try
+            using var message = CreatePostSwaggerLocalValidRequest(subscriptionId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostSwaggerLocalValidRequest(subscriptionId);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

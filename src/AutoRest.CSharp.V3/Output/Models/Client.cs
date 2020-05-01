@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class Client: ITypeProvider
     {
-        public Client(TypeDeclarationOptions declaredType, string description, RestClient restClient, ClientMethod[] methods, PagingInfo[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
+        public Client(TypeDeclarationOptions declaredType, string description, RestClient restClient, ClientMethod[] methods, PagingMethod[] pagingMethods, LongRunningOperation[] longRunningOperationMethods)
         {
             DeclaredType = declaredType;
             Description = description;
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.V3.Output.Models
         public string Description { get; }
         public RestClient RestClient { get; }
         public ClientMethod[] Methods { get; }
-        public PagingInfo[] PagingMethods { get; }
+        public PagingMethod[] PagingMethods { get; }
         public LongRunningOperation[] LongRunningOperationMethods { get; }
         public CSharpType Type => new CSharpType(this, DeclaredType.Namespace, DeclaredType.Name);
     }

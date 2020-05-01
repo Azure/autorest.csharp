@@ -44,7 +44,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobContainer>> CreateAsync(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAsync(resourceGroupName, accountName, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Create");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAsync(resourceGroupName, accountName, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
@@ -55,7 +65,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobContainer> Create(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
-            return RestClient.Create(resourceGroupName, accountName, containerName, blobContainer, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Create");
+            scope.Start();
+            try
+            {
+                return RestClient.Create(resourceGroupName, accountName, containerName, blobContainer, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn&apos;t already exist. </summary>
@@ -66,7 +86,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobContainer>> UpdateAsync(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
-            return await RestClient.UpdateAsync(resourceGroupName, accountName, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Update");
+            scope.Start();
+            try
+            {
+                return await RestClient.UpdateAsync(resourceGroupName, accountName, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn&apos;t already exist. </summary>
@@ -77,7 +107,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobContainer> Update(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
-            return RestClient.Update(resourceGroupName, accountName, containerName, blobContainer, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Update");
+            scope.Start();
+            try
+            {
+                return RestClient.Update(resourceGroupName, accountName, containerName, blobContainer, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets properties of a specified container. </summary>
@@ -87,7 +127,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobContainer>> GetAsync(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(resourceGroupName, accountName, containerName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(resourceGroupName, accountName, containerName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets properties of a specified container. </summary>
@@ -97,7 +147,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobContainer> Get(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(resourceGroupName, accountName, containerName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(resourceGroupName, accountName, containerName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes specified container under its account. </summary>
@@ -107,7 +167,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(resourceGroupName, accountName, containerName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Delete");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteAsync(resourceGroupName, accountName, containerName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes specified container under its account. </summary>
@@ -117,7 +187,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(resourceGroupName, accountName, containerName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Delete");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete(resourceGroupName, accountName, containerName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request. </summary>
@@ -128,7 +208,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<LegalHold>> SetLegalHoldAsync(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SetLegalHoldAsync(resourceGroupName, accountName, containerName, tags, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
+            scope.Start();
+            try
+            {
+                return await RestClient.SetLegalHoldAsync(resourceGroupName, accountName, containerName, tags, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sets legal hold tags. Setting the same tag results in an idempotent operation. SetLegalHold follows an append pattern and does not clear out the existing tags that are not specified in the request. </summary>
@@ -139,7 +229,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<LegalHold> SetLegalHold(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            return RestClient.SetLegalHold(resourceGroupName, accountName, containerName, tags, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
+            scope.Start();
+            try
+            {
+                return RestClient.SetLegalHold(resourceGroupName, accountName, containerName, tags, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request. </summary>
@@ -150,7 +250,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<LegalHold>> ClearLegalHoldAsync(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ClearLegalHoldAsync(resourceGroupName, accountName, containerName, tags, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
+            scope.Start();
+            try
+            {
+                return await RestClient.ClearLegalHoldAsync(resourceGroupName, accountName, containerName, tags, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Clears legal hold tags. Clearing the same or non-existent tag results in an idempotent operation. ClearLegalHold clears out only the specified tags in the request. </summary>
@@ -161,7 +271,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<LegalHold> ClearLegalHold(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            return RestClient.ClearLegalHold(resourceGroupName, accountName, containerName, tags, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
+            scope.Start();
+            try
+            {
+                return RestClient.ClearLegalHold(resourceGroupName, accountName, containerName, tags, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation. </summary>
@@ -174,7 +294,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> CreateOrUpdateImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch = null, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateOrUpdateImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateOrUpdateImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation. </summary>
@@ -187,7 +317,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> CreateOrUpdateImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch = null, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateOrUpdateImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateOrUpdateImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the existing immutability policy along with the corresponding ETag in response headers and body. </summary>
@@ -198,7 +338,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> GetImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the existing immutability policy along with the corresponding ETag in response headers and body. </summary>
@@ -209,7 +359,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> GetImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return RestClient.GetImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
@@ -220,7 +380,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> DeleteImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
@@ -231,7 +401,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> DeleteImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            return RestClient.DeleteImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return RestClient.DeleteImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation. </summary>
@@ -242,7 +422,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> LockImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            return await RestClient.LockImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return await RestClient.LockImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation. </summary>
@@ -253,7 +443,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> LockImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            return RestClient.LockImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return RestClient.LockImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation. </summary>
@@ -266,7 +466,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> ExtendImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ExtendImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return await RestClient.ExtendImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation. </summary>
@@ -279,7 +489,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> ExtendImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ExtendImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
+            scope.Start();
+            try
+            {
+                return RestClient.ExtendImmutabilityPolicy(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. </summary>
@@ -290,7 +510,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(string resourceGroupName, string accountName, string containerName, LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.LeaseAsync(resourceGroupName, accountName, containerName, parameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Lease");
+            scope.Start();
+            try
+            {
+                return await RestClient.LeaseAsync(resourceGroupName, accountName, containerName, parameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. </summary>
@@ -301,7 +531,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<LeaseContainerResponse> Lease(string resourceGroupName, string accountName, string containerName, LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Lease(resourceGroupName, accountName, containerName, parameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Lease");
+            scope.Start();
+            try
+            {
+                return RestClient.Lease(resourceGroupName, accountName, containerName, parameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token. </summary>
@@ -323,13 +563,33 @@ namespace Azure.Management.Storage
 
             async Task<Page<ListContainerItem>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAsync(resourceGroupName, accountName, maxpagesize, filter, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAsync(resourceGroupName, accountName, maxpagesize, filter, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<ListContainerItem>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, accountName, maxpagesize, filter, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, accountName, maxpagesize, filter, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -353,13 +613,33 @@ namespace Azure.Management.Storage
 
             Page<ListContainerItem> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.List(resourceGroupName, accountName, maxpagesize, filter, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.List(resourceGroupName, accountName, maxpagesize, filter, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<ListContainerItem> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.ListNextPage(nextLink, resourceGroupName, accountName, maxpagesize, filter, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ListNextPage(nextLink, resourceGroupName, accountName, maxpagesize, filter, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }

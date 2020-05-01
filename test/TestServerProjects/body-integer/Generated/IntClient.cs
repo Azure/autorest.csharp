@@ -35,84 +35,204 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<int> GetNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<int> GetInvalid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInvalid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInvalid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get overflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetOverflowInt32Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetOverflowInt32");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetOverflowInt32Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get overflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<int> GetOverflowInt32(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetOverflowInt32(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetOverflowInt32");
+            scope.Start();
+            try
+            {
+                return RestClient.GetOverflowInt32(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get underflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUnderflowInt32Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnderflowInt32");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUnderflowInt32Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get underflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<int> GetUnderflowInt32(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUnderflowInt32(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnderflowInt32");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUnderflowInt32(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get overflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetOverflowInt64Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetOverflowInt64");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetOverflowInt64Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get overflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<long> GetOverflowInt64(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetOverflowInt64(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetOverflowInt64");
+            scope.Start();
+            try
+            {
+                return RestClient.GetOverflowInt64(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get underflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUnderflowInt64Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnderflowInt64");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUnderflowInt64Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get underflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<long> GetUnderflowInt64(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUnderflowInt64(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnderflowInt64");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUnderflowInt64(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put max int32 value. </summary>
@@ -120,7 +240,17 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutMax32Async(intBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMax32");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutMax32Async(intBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put max int32 value. </summary>
@@ -128,7 +258,17 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMax32(int intBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutMax32(intBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMax32");
+            scope.Start();
+            try
+            {
+                return RestClient.PutMax32(intBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put max int64 value. </summary>
@@ -136,7 +276,17 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutMax64Async(intBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMax64");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutMax64Async(intBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put max int64 value. </summary>
@@ -144,7 +294,17 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMax64(long intBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutMax64(intBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMax64");
+            scope.Start();
+            try
+            {
+                return RestClient.PutMax64(intBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put min int32 value. </summary>
@@ -152,7 +312,17 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutMin32Async(intBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMin32");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutMin32Async(intBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put min int32 value. </summary>
@@ -160,7 +330,17 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMin32(int intBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutMin32(intBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMin32");
+            scope.Start();
+            try
+            {
+                return RestClient.PutMin32(intBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put min int64 value. </summary>
@@ -168,7 +348,17 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutMin64Async(intBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMin64");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutMin64Async(intBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put min int64 value. </summary>
@@ -176,21 +366,51 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMin64(long intBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutMin64(intBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutMin64");
+            scope.Start();
+            try
+            {
+                return RestClient.PutMin64(intBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get datetime encoded as Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUnixTimeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnixTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUnixTimeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get datetime encoded as Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUnixTime(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUnixTime(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetUnixTime");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUnixTime(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put datetime encoded as Unix time. </summary>
@@ -198,7 +418,17 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutUnixTimeDateAsync(intBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutUnixTimeDateAsync(intBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put datetime encoded as Unix time. </summary>
@@ -206,35 +436,85 @@ namespace body_integer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutUnixTimeDate(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutUnixTimeDate(intBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.PutUnixTimeDate");
+            scope.Start();
+            try
+            {
+                return RestClient.PutUnixTimeDate(intBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetInvalidUnixTimeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetInvalidUnixTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetInvalidUnixTimeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetInvalidUnixTime(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInvalidUnixTime(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetInvalidUnixTime");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInvalidUnixTime(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullUnixTimeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetNullUnixTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullUnixTimeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetNullUnixTime(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNullUnixTime(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IntClient.GetNullUnixTime");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNullUnixTime(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

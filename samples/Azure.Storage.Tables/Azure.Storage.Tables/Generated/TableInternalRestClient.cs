@@ -82,37 +82,27 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<TableQueryResponse, TableInternalQueryHeaders>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Query");
-            scope.Start();
-            try
+            using var message = CreateQueryRequest(requestId, queryOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalQueryHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateQueryRequest(requestId, queryOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalQueryHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        TableQueryResponse value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            TableQueryResponse value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -122,37 +112,27 @@ namespace Azure.Storage.Tables
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<TableQueryResponse, TableInternalQueryHeaders> Query(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Query");
-            scope.Start();
-            try
+            using var message = CreateQueryRequest(requestId, queryOptions);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalQueryHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateQueryRequest(requestId, queryOptions);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalQueryHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        TableQueryResponse value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            TableQueryResponse value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -194,39 +174,29 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(tableProperties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Create");
-            scope.Start();
-            try
+            using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalCreateHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalCreateHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 201:
+                case 201:
+                    {
+                        TableResponse value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            TableResponse value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = TableResponse.DeserializeTableResponse(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return ResponseWithHeaders.FromValue<TableResponse, TableInternalCreateHeaders>(null, headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = TableResponse.DeserializeTableResponse(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                case 204:
+                    return ResponseWithHeaders.FromValue<TableResponse, TableInternalCreateHeaders>(null, headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -242,39 +212,29 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(tableProperties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Create");
-            scope.Start();
-            try
+            using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalCreateHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCreateRequest(tableProperties, requestId, queryOptions);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalCreateHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 201:
+                case 201:
+                    {
+                        TableResponse value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            TableResponse value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = TableResponse.DeserializeTableResponse(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return ResponseWithHeaders.FromValue<TableResponse, TableInternalCreateHeaders>(null, headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = TableResponse.DeserializeTableResponse(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                case 204:
+                    return ResponseWithHeaders.FromValue<TableResponse, TableInternalCreateHeaders>(null, headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -308,25 +268,15 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Delete");
-            scope.Start();
-            try
+            using var message = CreateDeleteRequest(table, requestId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalDeleteHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRequest(table, requestId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalDeleteHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 204:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -341,25 +291,15 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Delete");
-            scope.Start();
-            try
+            using var message = CreateDeleteRequest(table, requestId);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalDeleteHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteRequest(table, requestId);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalDeleteHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 204:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -416,37 +356,27 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntities");
-            scope.Start();
-            try
+            using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalQueryEntitiesHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalQueryEntitiesHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        TableEntityQueryResponse value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            TableEntityQueryResponse value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -463,37 +393,27 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntities");
-            scope.Start();
-            try
+            using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalQueryEntitiesHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateQueryEntitiesRequest(table, timeout, requestId, queryOptions);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalQueryEntitiesHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        TableEntityQueryResponse value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            TableEntityQueryResponse value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -560,37 +480,27 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntitiesWithPartitionAndRowKey");
-            scope.Start();
-            try
+            using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        TableEntityQueryResponse value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            TableEntityQueryResponse value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -617,37 +527,27 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntitiesWithPartitionAndRowKey");
-            scope.Start();
-            try
+            using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateQueryEntitiesWithPartitionAndRowKeyRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        TableEntityQueryResponse value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            TableEntityQueryResponse value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -720,25 +620,15 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.UpdateEntity");
-            scope.Start();
-            try
+            using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalUpdateEntityHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalUpdateEntityHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -766,25 +656,15 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.UpdateEntity");
-            scope.Start();
-            try
+            using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalUpdateEntityHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateUpdateEntityRequest(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalUpdateEntityHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -843,25 +723,15 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.DeleteEntity");
-            scope.Start();
-            try
+            using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalDeleteEntityHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalDeleteEntityHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 204:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -888,25 +758,15 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(rowKey));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.DeleteEntity");
-            scope.Start();
-            try
+            using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalDeleteEntityHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteEntityRequest(table, partitionKey, rowKey, timeout, requestId, queryOptions);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalDeleteEntityHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 204:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -964,49 +824,39 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.InsertEntity");
-            scope.Start();
-            try
+            using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalInsertEntityHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalInsertEntityHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 201:
+                case 201:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1024,49 +874,39 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.InsertEntity");
-            scope.Start();
-            try
+            using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalInsertEntityHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateInsertEntityRequest(table, timeout, requestId, tableEntityProperties, queryOptions);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalInsertEntityHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 201:
+                case 201:
+                    {
+                        IReadOnlyDictionary<string, object> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyDictionary<string, object> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                                foreach (var property in document.RootElement.EnumerateObject())
-                                {
-                                    if (property.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        dictionary.Add(property.Name, null);
-                                    }
-                                    else
-                                    {
-                                        dictionary.Add(property.Name, property.Value.GetObject());
-                                    }
-                                }
-                                value = dictionary;
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                if (property.Value.ValueKind == JsonValueKind.Null)
+                                {
+                                    dictionary.Add(property.Name, null);
+                                }
+                                else
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetObject());
+                                }
+                            }
+                            value = dictionary;
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1105,38 +945,28 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.GetAccessPolicy");
-            scope.Start();
-            try
+            using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalGetAccessPolicyHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalGetAccessPolicyHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<SignedIdentifier> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                         {
-                            IReadOnlyList<SignedIdentifier> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
+                            var array = new List<SignedIdentifier>();
+                            foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                             {
-                                var array = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
-                                {
-                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
-                                }
-                                value = array;
+                                array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                             }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1152,38 +982,28 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.GetAccessPolicy");
-            scope.Start();
-            try
+            using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalGetAccessPolicyHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetAccessPolicyRequest(table, timeout, requestId);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalGetAccessPolicyHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<SignedIdentifier> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                         {
-                            IReadOnlyList<SignedIdentifier> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
+                            var array = new List<SignedIdentifier>();
+                            foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                             {
-                                var array = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
-                                {
-                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
-                                }
-                                value = array;
+                                array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                             }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1235,25 +1055,15 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.SetAccessPolicy");
-            scope.Start();
-            try
+            using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new TableInternalSetAccessPolicyHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new TableInternalSetAccessPolicyHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 204:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1270,25 +1080,15 @@ namespace Azure.Storage.Tables
                 throw new ArgumentNullException(nameof(table));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TableInternalClient.SetAccessPolicy");
-            scope.Start();
-            try
+            using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new TableInternalSetAccessPolicyHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateSetAccessPolicyRequest(table, timeout, requestId, tableAcl);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new TableInternalSetAccessPolicyHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 204:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 204:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

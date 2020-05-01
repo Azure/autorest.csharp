@@ -45,13 +45,33 @@ namespace custom_baseUrl_paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetPagesPartialUrlAsync(accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetPagesPartialUrlAsync(accountName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetPagesPartialUrlNextPageAsync(nextLink, accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetPagesPartialUrlNextPageAsync(nextLink, accountName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -68,13 +88,33 @@ namespace custom_baseUrl_paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetPagesPartialUrl(accountName, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetPagesPartialUrl(accountName, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetPagesPartialUrlNextPage(nextLink, accountName, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrl");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetPagesPartialUrlNextPage(nextLink, accountName, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -91,13 +131,33 @@ namespace custom_baseUrl_paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetPagesPartialUrlOperationAsync(accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperation");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetPagesPartialUrlOperationAsync(accountName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperation");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -114,13 +174,33 @@ namespace custom_baseUrl_paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetPagesPartialUrlOperation(accountName, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperation");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetPagesPartialUrlOperation(accountName, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperation");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -142,13 +222,33 @@ namespace custom_baseUrl_paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetPagesPartialUrlOperationNextNextPageAsync(nextLink, accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetPagesPartialUrlOperationNextNextPageAsync(nextLink, accountName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -170,13 +270,33 @@ namespace custom_baseUrl_paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetPagesPartialUrlOperationNextNextPage(nextLink, accountName, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagesPartialUrlOperationNext");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetPagesPartialUrlOperationNextNextPage(nextLink, accountName, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }

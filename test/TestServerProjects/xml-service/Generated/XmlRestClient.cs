@@ -53,32 +53,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RootWithRefAndNoMeta>> GetComplexTypeRefNoMetaAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetComplexTypeRefNoMeta");
-            scope.Start();
-            try
+            using var message = CreateGetComplexTypeRefNoMetaRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexTypeRefNoMetaRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        RootWithRefAndNoMeta value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("RootWithRefAndNoMeta") is XElement rootWithRefAndNoMetaElement)
                         {
-                            RootWithRefAndNoMeta value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("RootWithRefAndNoMeta") is XElement rootWithRefAndNoMetaElement)
-                            {
-                                value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMetaElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMetaElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -86,32 +76,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RootWithRefAndNoMeta> GetComplexTypeRefNoMeta(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetComplexTypeRefNoMeta");
-            scope.Start();
-            try
+            using var message = CreateGetComplexTypeRefNoMetaRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexTypeRefNoMetaRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        RootWithRefAndNoMeta value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("RootWithRefAndNoMeta") is XElement rootWithRefAndNoMetaElement)
                         {
-                            RootWithRefAndNoMeta value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("RootWithRefAndNoMeta") is XElement rootWithRefAndNoMetaElement)
-                            {
-                                value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMetaElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = RootWithRefAndNoMeta.DeserializeRootWithRefAndNoMeta(rootWithRefAndNoMetaElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -141,24 +121,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(model));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutComplexTypeRefNoMeta");
-            scope.Start();
-            try
+            using var message = CreatePutComplexTypeRefNoMetaRequest(model);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutComplexTypeRefNoMetaRequest(model);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -172,24 +142,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(model));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutComplexTypeRefNoMeta");
-            scope.Start();
-            try
+            using var message = CreatePutComplexTypeRefNoMetaRequest(model);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutComplexTypeRefNoMetaRequest(model);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -209,32 +169,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<RootWithRefAndMeta>> GetComplexTypeRefWithMetaAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetComplexTypeRefWithMeta");
-            scope.Start();
-            try
+            using var message = CreateGetComplexTypeRefWithMetaRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexTypeRefWithMetaRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        RootWithRefAndMeta value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("RootWithRefAndMeta") is XElement rootWithRefAndMetaElement)
                         {
-                            RootWithRefAndMeta value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("RootWithRefAndMeta") is XElement rootWithRefAndMetaElement)
-                            {
-                                value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMetaElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMetaElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -242,32 +192,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<RootWithRefAndMeta> GetComplexTypeRefWithMeta(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetComplexTypeRefWithMeta");
-            scope.Start();
-            try
+            using var message = CreateGetComplexTypeRefWithMetaRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetComplexTypeRefWithMetaRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        RootWithRefAndMeta value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("RootWithRefAndMeta") is XElement rootWithRefAndMetaElement)
                         {
-                            RootWithRefAndMeta value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("RootWithRefAndMeta") is XElement rootWithRefAndMetaElement)
-                            {
-                                value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMetaElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = RootWithRefAndMeta.DeserializeRootWithRefAndMeta(rootWithRefAndMetaElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -297,24 +237,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(model));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutComplexTypeRefWithMeta");
-            scope.Start();
-            try
+            using var message = CreatePutComplexTypeRefWithMetaRequest(model);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutComplexTypeRefWithMetaRequest(model);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -328,24 +258,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(model));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutComplexTypeRefWithMeta");
-            scope.Start();
-            try
+            using var message = CreatePutComplexTypeRefWithMetaRequest(model);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutComplexTypeRefWithMetaRequest(model);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -365,32 +285,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Slideshow>> GetSimpleAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetSimple");
-            scope.Start();
-            try
+            using var message = CreateGetSimpleRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetSimpleRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Slideshow value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("slideshow") is XElement slideshowElement)
                         {
-                            Slideshow value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("slideshow") is XElement slideshowElement)
-                            {
-                                value = Slideshow.DeserializeSlideshow(slideshowElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = Slideshow.DeserializeSlideshow(slideshowElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -398,32 +308,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Slideshow> GetSimple(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetSimple");
-            scope.Start();
-            try
+            using var message = CreateGetSimpleRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetSimpleRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Slideshow value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("slideshow") is XElement slideshowElement)
                         {
-                            Slideshow value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("slideshow") is XElement slideshowElement)
-                            {
-                                value = Slideshow.DeserializeSlideshow(slideshowElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = Slideshow.DeserializeSlideshow(slideshowElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -453,24 +353,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(slideshow));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutSimple");
-            scope.Start();
-            try
+            using var message = CreatePutSimpleRequest(slideshow);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutSimpleRequest(slideshow);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -484,24 +374,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(slideshow));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutSimple");
-            scope.Start();
-            try
+            using var message = CreatePutSimpleRequest(slideshow);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutSimpleRequest(slideshow);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -521,32 +401,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AppleBarrel>> GetWrappedListsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetWrappedLists");
-            scope.Start();
-            try
+            using var message = CreateGetWrappedListsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetWrappedListsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        AppleBarrel value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("AppleBarrel") is XElement appleBarrelElement)
                         {
-                            AppleBarrel value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("AppleBarrel") is XElement appleBarrelElement)
-                            {
-                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -554,32 +424,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AppleBarrel> GetWrappedLists(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetWrappedLists");
-            scope.Start();
-            try
+            using var message = CreateGetWrappedListsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetWrappedListsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        AppleBarrel value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("AppleBarrel") is XElement appleBarrelElement)
                         {
-                            AppleBarrel value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("AppleBarrel") is XElement appleBarrelElement)
-                            {
-                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -609,24 +469,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(wrappedLists));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutWrappedLists");
-            scope.Start();
-            try
+            using var message = CreatePutWrappedListsRequest(wrappedLists);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutWrappedListsRequest(wrappedLists);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -640,24 +490,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(wrappedLists));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutWrappedLists");
-            scope.Start();
-            try
+            using var message = CreatePutWrappedListsRequest(wrappedLists);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutWrappedListsRequest(wrappedLists);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -677,25 +517,15 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<XmlGetHeadersHeaders>> GetHeadersAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetHeaders");
-            scope.Start();
-            try
+            using var message = CreateGetHeadersRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new XmlGetHeadersHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetHeadersRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new XmlGetHeadersHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -703,25 +533,15 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<XmlGetHeadersHeaders> GetHeaders(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetHeaders");
-            scope.Start();
-            try
+            using var message = CreateGetHeadersRequest();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new XmlGetHeadersHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetHeadersRequest();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new XmlGetHeadersHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -741,32 +561,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Slideshow>> GetEmptyListAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetEmptyList");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyListRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyListRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Slideshow value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("slideshow") is XElement slideshowElement)
                         {
-                            Slideshow value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("slideshow") is XElement slideshowElement)
-                            {
-                                value = Slideshow.DeserializeSlideshow(slideshowElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = Slideshow.DeserializeSlideshow(slideshowElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -774,32 +584,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Slideshow> GetEmptyList(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetEmptyList");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyListRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyListRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Slideshow value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("slideshow") is XElement slideshowElement)
                         {
-                            Slideshow value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("slideshow") is XElement slideshowElement)
-                            {
-                                value = Slideshow.DeserializeSlideshow(slideshowElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = Slideshow.DeserializeSlideshow(slideshowElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -829,24 +629,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(slideshow));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyList");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyListRequest(slideshow);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyListRequest(slideshow);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -860,24 +650,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(slideshow));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyList");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyListRequest(slideshow);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyListRequest(slideshow);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -897,32 +677,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<AppleBarrel>> GetEmptyWrappedListsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetEmptyWrappedLists");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyWrappedListsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyWrappedListsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        AppleBarrel value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("AppleBarrel") is XElement appleBarrelElement)
                         {
-                            AppleBarrel value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("AppleBarrel") is XElement appleBarrelElement)
-                            {
-                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -930,32 +700,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<AppleBarrel> GetEmptyWrappedLists(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetEmptyWrappedLists");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyWrappedListsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyWrappedListsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        AppleBarrel value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("AppleBarrel") is XElement appleBarrelElement)
                         {
-                            AppleBarrel value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("AppleBarrel") is XElement appleBarrelElement)
-                            {
-                                value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = AppleBarrel.DeserializeAppleBarrel(appleBarrelElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -985,24 +745,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(appleBarrel));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyWrappedLists");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyWrappedListsRequest(appleBarrel);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyWrappedListsRequest(appleBarrel);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1016,24 +766,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(appleBarrel));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyWrappedLists");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyWrappedListsRequest(appleBarrel);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyWrappedListsRequest(appleBarrel);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1053,37 +793,27 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Banana>>> GetRootListAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetRootList");
-            scope.Start();
-            try
+            using var message = CreateGetRootListRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRootListRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Banana> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("bananas") is XElement bananasElement)
                         {
-                            IReadOnlyList<Banana> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("bananas") is XElement bananasElement)
+                            var array = new List<Banana>();
+                            foreach (var e in bananasElement.Elements("banana"))
                             {
-                                var array = new List<Banana>();
-                                foreach (var e in bananasElement.Elements("banana"))
-                                {
-                                    array.Add(Banana.DeserializeBanana(e));
-                                }
-                                value = array;
+                                array.Add(Banana.DeserializeBanana(e));
                             }
-                            return Response.FromValue(value, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1091,37 +821,27 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Banana>> GetRootList(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetRootList");
-            scope.Start();
-            try
+            using var message = CreateGetRootListRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRootListRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Banana> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("bananas") is XElement bananasElement)
                         {
-                            IReadOnlyList<Banana> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("bananas") is XElement bananasElement)
+                            var array = new List<Banana>();
+                            foreach (var e in bananasElement.Elements("banana"))
                             {
-                                var array = new List<Banana>();
-                                foreach (var e in bananasElement.Elements("banana"))
-                                {
-                                    array.Add(Banana.DeserializeBanana(e));
-                                }
-                                value = array;
+                                array.Add(Banana.DeserializeBanana(e));
                             }
-                            return Response.FromValue(value, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1156,24 +876,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(bananas));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutRootList");
-            scope.Start();
-            try
+            using var message = CreatePutRootListRequest(bananas);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutRootListRequest(bananas);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1187,24 +897,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(bananas));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutRootList");
-            scope.Start();
-            try
+            using var message = CreatePutRootListRequest(bananas);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutRootListRequest(bananas);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1224,37 +924,27 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Banana>>> GetRootListSingleItemAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
-            scope.Start();
-            try
+            using var message = CreateGetRootListSingleItemRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRootListSingleItemRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Banana> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("bananas") is XElement bananasElement)
                         {
-                            IReadOnlyList<Banana> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("bananas") is XElement bananasElement)
+                            var array = new List<Banana>();
+                            foreach (var e in bananasElement.Elements("banana"))
                             {
-                                var array = new List<Banana>();
-                                foreach (var e in bananasElement.Elements("banana"))
-                                {
-                                    array.Add(Banana.DeserializeBanana(e));
-                                }
-                                value = array;
+                                array.Add(Banana.DeserializeBanana(e));
                             }
-                            return Response.FromValue(value, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1262,37 +952,27 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Banana>> GetRootListSingleItem(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetRootListSingleItem");
-            scope.Start();
-            try
+            using var message = CreateGetRootListSingleItemRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRootListSingleItemRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Banana> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("bananas") is XElement bananasElement)
                         {
-                            IReadOnlyList<Banana> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("bananas") is XElement bananasElement)
+                            var array = new List<Banana>();
+                            foreach (var e in bananasElement.Elements("banana"))
                             {
-                                var array = new List<Banana>();
-                                foreach (var e in bananasElement.Elements("banana"))
-                                {
-                                    array.Add(Banana.DeserializeBanana(e));
-                                }
-                                value = array;
+                                array.Add(Banana.DeserializeBanana(e));
                             }
-                            return Response.FromValue(value, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1327,24 +1007,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(bananas));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutRootListSingleItem");
-            scope.Start();
-            try
+            using var message = CreatePutRootListSingleItemRequest(bananas);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutRootListSingleItemRequest(bananas);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1358,24 +1028,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(bananas));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutRootListSingleItem");
-            scope.Start();
-            try
+            using var message = CreatePutRootListSingleItemRequest(bananas);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutRootListSingleItemRequest(bananas);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1395,37 +1055,27 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<Banana>>> GetEmptyRootListAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyRootListRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyRootListRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Banana> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("bananas") is XElement bananasElement)
                         {
-                            IReadOnlyList<Banana> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("bananas") is XElement bananasElement)
+                            var array = new List<Banana>();
+                            foreach (var e in bananasElement.Elements("banana"))
                             {
-                                var array = new List<Banana>();
-                                foreach (var e in bananasElement.Elements("banana"))
-                                {
-                                    array.Add(Banana.DeserializeBanana(e));
-                                }
-                                value = array;
+                                array.Add(Banana.DeserializeBanana(e));
                             }
-                            return Response.FromValue(value, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1433,37 +1083,27 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<Banana>> GetEmptyRootList(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetEmptyRootList");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyRootListRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyRootListRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<Banana> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("bananas") is XElement bananasElement)
                         {
-                            IReadOnlyList<Banana> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("bananas") is XElement bananasElement)
+                            var array = new List<Banana>();
+                            foreach (var e in bananasElement.Elements("banana"))
                             {
-                                var array = new List<Banana>();
-                                foreach (var e in bananasElement.Elements("banana"))
-                                {
-                                    array.Add(Banana.DeserializeBanana(e));
-                                }
-                                value = array;
+                                array.Add(Banana.DeserializeBanana(e));
                             }
-                            return Response.FromValue(value, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1498,24 +1138,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(bananas));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyRootList");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyRootListRequest(bananas);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyRootListRequest(bananas);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1529,24 +1159,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(bananas));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyRootList");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyRootListRequest(bananas);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyRootListRequest(bananas);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1566,32 +1186,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<Banana>> GetEmptyChildElementAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetEmptyChildElement");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyChildElementRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyChildElementRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Banana value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("banana") is XElement bananaElement)
                         {
-                            Banana value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("banana") is XElement bananaElement)
-                            {
-                                value = Banana.DeserializeBanana(bananaElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = Banana.DeserializeBanana(bananaElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1599,32 +1209,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Banana> GetEmptyChildElement(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetEmptyChildElement");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyChildElementRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyChildElementRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Banana value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("banana") is XElement bananaElement)
                         {
-                            Banana value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("banana") is XElement bananaElement)
-                            {
-                                value = Banana.DeserializeBanana(bananaElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = Banana.DeserializeBanana(bananaElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1654,24 +1254,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(banana));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyChildElement");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyChildElementRequest(banana);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyChildElementRequest(banana);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1685,24 +1275,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(banana));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyChildElement");
-            scope.Start();
-            try
+            using var message = CreatePutEmptyChildElementRequest(banana);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutEmptyChildElementRequest(banana);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1723,32 +1303,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListContainersResponse>> ListContainersAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.ListContainers");
-            scope.Start();
-            try
+            using var message = CreateListContainersRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateListContainersRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListContainersResponse value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
                         {
-                            ListContainersResponse value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
-                            {
-                                value = ListContainersResponse.DeserializeListContainersResponse(enumerationResultsElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = ListContainersResponse.DeserializeListContainersResponse(enumerationResultsElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1756,32 +1326,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListContainersResponse> ListContainers(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.ListContainers");
-            scope.Start();
-            try
+            using var message = CreateListContainersRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateListContainersRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListContainersResponse value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
                         {
-                            ListContainersResponse value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
-                            {
-                                value = ListContainersResponse.DeserializeListContainersResponse(enumerationResultsElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = ListContainersResponse.DeserializeListContainersResponse(enumerationResultsElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1803,32 +1363,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<StorageServiceProperties>> GetServicePropertiesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetServiceProperties");
-            scope.Start();
-            try
+            using var message = CreateGetServicePropertiesRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetServicePropertiesRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        StorageServiceProperties value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
                         {
-                            StorageServiceProperties value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
-                            {
-                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1836,32 +1386,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<StorageServiceProperties> GetServiceProperties(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetServiceProperties");
-            scope.Start();
-            try
+            using var message = CreateGetServicePropertiesRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetServicePropertiesRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        StorageServiceProperties value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
                         {
-                            StorageServiceProperties value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("StorageServiceProperties") is XElement storageServicePropertiesElement)
-                            {
-                                value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = StorageServiceProperties.DeserializeStorageServiceProperties(storageServicePropertiesElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1893,24 +1433,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutServiceProperties");
-            scope.Start();
-            try
+            using var message = CreatePutServicePropertiesRequest(properties);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutServicePropertiesRequest(properties);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1924,24 +1454,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutServiceProperties");
-            scope.Start();
-            try
+            using var message = CreatePutServicePropertiesRequest(properties);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutServicePropertiesRequest(properties);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1963,37 +1483,27 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<IReadOnlyList<SignedIdentifier>>> GetAclsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetAcls");
-            scope.Start();
-            try
+            using var message = CreateGetAclsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetAclsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<SignedIdentifier> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                         {
-                            IReadOnlyList<SignedIdentifier> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
+                            var array = new List<SignedIdentifier>();
+                            foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                             {
-                                var array = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
-                                {
-                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
-                                }
-                                value = array;
+                                array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                             }
-                            return Response.FromValue(value, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2001,37 +1511,27 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<IReadOnlyList<SignedIdentifier>> GetAcls(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetAcls");
-            scope.Start();
-            try
+            using var message = CreateGetAclsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetAclsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        IReadOnlyList<SignedIdentifier> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
                         {
-                            IReadOnlyList<SignedIdentifier> value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("SignedIdentifiers") is XElement signedIdentifiersElement)
+                            var array = new List<SignedIdentifier>();
+                            foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
                             {
-                                var array = new List<SignedIdentifier>();
-                                foreach (var e in signedIdentifiersElement.Elements("SignedIdentifier"))
-                                {
-                                    array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
-                                }
-                                value = array;
+                                array.Add(SignedIdentifier.DeserializeSignedIdentifier(e));
                             }
-                            return Response.FromValue(value, message.Response);
+                            value = array;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2068,24 +1568,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutAcls");
-            scope.Start();
-            try
+            using var message = CreatePutAclsRequest(properties);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAclsRequest(properties);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2099,24 +1589,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutAcls");
-            scope.Start();
-            try
+            using var message = CreatePutAclsRequest(properties);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAclsRequest(properties);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2138,32 +1618,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<ListBlobsResponse>> ListBlobsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.ListBlobs");
-            scope.Start();
-            try
+            using var message = CreateListBlobsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateListBlobsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListBlobsResponse value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
                         {
-                            ListBlobsResponse value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
-                            {
-                                value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResultsElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResultsElement);
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2171,32 +1641,22 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ListBlobsResponse> ListBlobs(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.ListBlobs");
-            scope.Start();
-            try
+            using var message = CreateListBlobsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateListBlobsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        ListBlobsResponse value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
                         {
-                            ListBlobsResponse value = default;
-                            var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
-                            if (document.Element("EnumerationResults") is XElement enumerationResultsElement)
-                            {
-                                value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResultsElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = ListBlobsResponse.DeserializeListBlobsResponse(enumerationResultsElement);
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2226,24 +1686,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.JsonInput");
-            scope.Start();
-            try
+            using var message = CreateJsonInputRequest(properties);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateJsonInputRequest(properties);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2257,24 +1707,14 @@ namespace xml_service
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.JsonInput");
-            scope.Start();
-            try
+            using var message = CreateJsonInputRequest(properties);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateJsonInputRequest(properties);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2294,36 +1734,26 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<JsonOutput>> JsonOutputAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.JsonOutput");
-            scope.Start();
-            try
+            using var message = CreateJsonOutputRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateJsonOutputRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        JsonOutput value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            JsonOutput value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2331,36 +1761,26 @@ namespace xml_service
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<JsonOutput> JsonOutput(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("XmlClient.JsonOutput");
-            scope.Start();
-            try
+            using var message = CreateJsonOutputRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateJsonOutputRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        JsonOutput value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            JsonOutput value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
-                            }
-                            return Response.FromValue(value, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = Models.JsonOutput.DeserializeJsonOutput(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

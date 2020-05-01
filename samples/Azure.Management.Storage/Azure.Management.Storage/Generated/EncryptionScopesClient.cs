@@ -43,7 +43,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<EncryptionScope>> PutAsync(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutAsync(resourceGroupName, accountName, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.Put");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutAsync(resourceGroupName, accountName, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request. </summary>
@@ -54,7 +64,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<EncryptionScope> Put(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope, CancellationToken cancellationToken = default)
         {
-            return RestClient.Put(resourceGroupName, accountName, encryptionScopeName, encryptionScope, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.Put");
+            scope.Start();
+            try
+            {
+                return RestClient.Put(resourceGroupName, accountName, encryptionScopeName, encryptionScope, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist. </summary>
@@ -65,7 +85,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<EncryptionScope>> PatchAsync(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PatchAsync(resourceGroupName, accountName, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.Patch");
+            scope.Start();
+            try
+            {
+                return await RestClient.PatchAsync(resourceGroupName, accountName, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist. </summary>
@@ -76,7 +106,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<EncryptionScope> Patch(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope, CancellationToken cancellationToken = default)
         {
-            return RestClient.Patch(resourceGroupName, accountName, encryptionScopeName, encryptionScope, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.Patch");
+            scope.Start();
+            try
+            {
+                return RestClient.Patch(resourceGroupName, accountName, encryptionScopeName, encryptionScope, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Returns the properties for the specified encryption scope. </summary>
@@ -86,7 +126,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<EncryptionScope>> GetAsync(string resourceGroupName, string accountName, string encryptionScopeName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(resourceGroupName, accountName, encryptionScopeName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(resourceGroupName, accountName, encryptionScopeName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Returns the properties for the specified encryption scope. </summary>
@@ -96,7 +146,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<EncryptionScope> Get(string resourceGroupName, string accountName, string encryptionScopeName, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(resourceGroupName, accountName, encryptionScopeName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(resourceGroupName, accountName, encryptionScopeName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all the encryption scopes available under the specified storage account. </summary>
@@ -116,13 +176,33 @@ namespace Azure.Management.Storage
 
             async Task<Page<EncryptionScope>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<EncryptionScope>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListNextPageAsync(nextLink, resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -144,13 +224,33 @@ namespace Azure.Management.Storage
 
             Page<EncryptionScope> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.List(resourceGroupName, accountName, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.List(resourceGroupName, accountName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<EncryptionScope> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.ListNextPage(nextLink, resourceGroupName, accountName, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ListNextPage(nextLink, resourceGroupName, accountName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }

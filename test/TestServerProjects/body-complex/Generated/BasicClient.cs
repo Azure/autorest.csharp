@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,14 +36,34 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Basic> GetValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
@@ -50,7 +71,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(Basic complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutValidAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
@@ -58,63 +89,153 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(Basic complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutValid(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutValid(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Basic> GetInvalid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInvalid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInvalid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Basic> GetEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Basic> GetNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNotProvidedAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNotProvidedAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Basic> GetNotProvided(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNotProvided(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNotProvided(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

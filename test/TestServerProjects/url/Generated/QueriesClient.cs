@@ -37,28 +37,68 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetBooleanTrueAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBooleanTrueAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetBooleanTrue(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetBooleanTrue(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBooleanTrue(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetBooleanFalseAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBooleanFalseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetBooleanFalse(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetBooleanFalse(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBooleanFalse(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
@@ -66,7 +106,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetBooleanNullAsync(bool? boolQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetBooleanNullAsync(boolQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBooleanNullAsync(boolQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
@@ -74,35 +124,85 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetBooleanNull(bool? boolQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetBooleanNull(boolQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBooleanNull(boolQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetIntOneMillionAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetIntOneMillionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetIntOneMillion(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetIntOneMillion(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            scope.Start();
+            try
+            {
+                return RestClient.GetIntOneMillion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetIntNegativeOneMillionAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetIntNegativeOneMillionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetIntNegativeOneMillion(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            scope.Start();
+            try
+            {
+                return RestClient.GetIntNegativeOneMillion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null integer value (no query parameter). </summary>
@@ -110,7 +210,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetIntNullAsync(int? intQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetIntNullAsync(intQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetIntNullAsync(intQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null integer value (no query parameter). </summary>
@@ -118,35 +228,85 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetIntNull(int? intQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetIntNull(intQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetIntNull(intQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetTenBillionAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetTenBillionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetTenBillion(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetTenBillion(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            scope.Start();
+            try
+            {
+                return RestClient.GetTenBillion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNegativeTenBillionAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNegativeTenBillionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNegativeTenBillion(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNegativeTenBillion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
@@ -154,7 +314,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetLongNullAsync(long? longQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetLongNullAsync(longQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetLongNullAsync(longQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
@@ -162,35 +332,85 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetLongNull(long? longQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetLongNull(longQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetLongNull(longQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.FloatScientificPositiveAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            scope.Start();
+            try
+            {
+                return await RestClient.FloatScientificPositiveAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response FloatScientificPositive(CancellationToken cancellationToken = default)
         {
-            return RestClient.FloatScientificPositive(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            scope.Start();
+            try
+            {
+                return RestClient.FloatScientificPositive(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.FloatScientificNegativeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            scope.Start();
+            try
+            {
+                return await RestClient.FloatScientificNegativeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response FloatScientificNegative(CancellationToken cancellationToken = default)
         {
-            return RestClient.FloatScientificNegative(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            scope.Start();
+            try
+            {
+                return RestClient.FloatScientificNegative(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null numeric value (no query parameter). </summary>
@@ -198,7 +418,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> FloatNullAsync(float? floatQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.FloatNullAsync(floatQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.FloatNullAsync(floatQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null numeric value (no query parameter). </summary>
@@ -206,35 +436,85 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response FloatNull(float? floatQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.FloatNull(floatQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            scope.Start();
+            try
+            {
+                return RestClient.FloatNull(floatQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.DoubleDecimalPositiveAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            scope.Start();
+            try
+            {
+                return await RestClient.DoubleDecimalPositiveAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
         {
-            return RestClient.DoubleDecimalPositive(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            scope.Start();
+            try
+            {
+                return RestClient.DoubleDecimalPositive(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.DoubleDecimalNegativeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            scope.Start();
+            try
+            {
+                return await RestClient.DoubleDecimalNegativeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
         {
-            return RestClient.DoubleDecimalNegative(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            scope.Start();
+            try
+            {
+                return RestClient.DoubleDecimalNegative(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null numeric value (no query parameter). </summary>
@@ -242,7 +522,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DoubleNullAsync(double? doubleQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DoubleNullAsync(doubleQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.DoubleNullAsync(doubleQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null numeric value (no query parameter). </summary>
@@ -250,49 +540,119 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DoubleNull(double? doubleQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.DoubleNull(doubleQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            scope.Start();
+            try
+            {
+                return RestClient.DoubleNull(doubleQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.StringUnicodeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            scope.Start();
+            try
+            {
+                return await RestClient.StringUnicodeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StringUnicode(CancellationToken cancellationToken = default)
         {
-            return RestClient.StringUnicode(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            scope.Start();
+            try
+            {
+                return RestClient.StringUnicode(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.StringUrlEncodedAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            scope.Start();
+            try
+            {
+                return await RestClient.StringUrlEncodedAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StringUrlEncoded(CancellationToken cancellationToken = default)
         {
-            return RestClient.StringUrlEncoded(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            scope.Start();
+            try
+            {
+                return RestClient.StringUrlEncoded(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.StringEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.StringEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StringEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.StringEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.StringEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null (no query parameter in url). </summary>
@@ -300,7 +660,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StringNullAsync(string stringQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.StringNullAsync(stringQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.StringNullAsync(stringQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null (no query parameter in url). </summary>
@@ -308,7 +678,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StringNull(string stringQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.StringNull(stringQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
+            scope.Start();
+            try
+            {
+                return RestClient.StringNull(stringQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
@@ -316,7 +696,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> EnumValidAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.EnumValidAsync(enumQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.EnumValidAsync(enumQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
@@ -324,7 +714,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response EnumValid(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.EnumValid(enumQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            scope.Start();
+            try
+            {
+                return RestClient.EnumValid(enumQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null (no query parameter in url). </summary>
@@ -332,7 +732,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> EnumNullAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.EnumNullAsync(enumQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.EnumNullAsync(enumQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null (no query parameter in url). </summary>
@@ -340,7 +750,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response EnumNull(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.EnumNull(enumQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            scope.Start();
+            try
+            {
+                return RestClient.EnumNull(enumQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
@@ -348,7 +768,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ByteMultiByteAsync(byteQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            scope.Start();
+            try
+            {
+                return await RestClient.ByteMultiByteAsync(byteQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
@@ -356,21 +786,51 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ByteMultiByte(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ByteMultiByte(byteQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            scope.Start();
+            try
+            {
+                return RestClient.ByteMultiByte(byteQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.ByteEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.ByteEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ByteEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.ByteEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.ByteEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
@@ -378,7 +838,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ByteNullAsync(byteQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.ByteNullAsync(byteQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
@@ -386,21 +856,51 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ByteNull(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ByteNull(byteQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            scope.Start();
+            try
+            {
+                return RestClient.ByteNull(byteQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.DateValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.DateValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DateValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.DateValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
+            scope.Start();
+            try
+            {
+                return RestClient.DateValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
@@ -408,7 +908,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DateNullAsync(dateQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.DateNullAsync(dateQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
@@ -416,21 +926,51 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DateNull(DateTimeOffset? dateQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.DateNull(dateQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
+            scope.Start();
+            try
+            {
+                return RestClient.DateNull(dateQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.DateTimeValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.DateTimeValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DateTimeValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.DateTimeValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            scope.Start();
+            try
+            {
+                return RestClient.DateTimeValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
@@ -438,7 +978,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DateTimeNullAsync(dateTimeQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.DateTimeNullAsync(dateTimeQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
@@ -446,7 +996,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.DateTimeNull(dateTimeQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            scope.Start();
+            try
+            {
+                return RestClient.DateTimeNull(dateTimeQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
@@ -454,7 +1014,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ArrayStringCsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.ArrayStringCsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
@@ -462,7 +1032,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ArrayStringCsvValid(arrayQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            scope.Start();
+            try
+            {
+                return RestClient.ArrayStringCsvValid(arrayQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a null array of string using the csv-array format. </summary>
@@ -470,7 +1050,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ArrayStringCsvNullAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.ArrayStringCsvNullAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a null array of string using the csv-array format. </summary>
@@ -478,7 +1068,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ArrayStringCsvNull(arrayQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            scope.Start();
+            try
+            {
+                return RestClient.ArrayStringCsvNull(arrayQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
@@ -486,7 +1086,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ArrayStringCsvEmptyAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.ArrayStringCsvEmptyAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
@@ -494,7 +1104,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ArrayStringCsvEmpty(arrayQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.ArrayStringCsvEmpty(arrayQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
@@ -502,7 +1122,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ArrayStringSsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.ArrayStringSsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
@@ -510,7 +1140,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ArrayStringSsvValid(arrayQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            scope.Start();
+            try
+            {
+                return RestClient.ArrayStringSsvValid(arrayQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
@@ -518,7 +1158,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ArrayStringTsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.ArrayStringTsvValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
@@ -526,7 +1176,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ArrayStringTsvValid(arrayQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            scope.Start();
+            try
+            {
+                return RestClient.ArrayStringTsvValid(arrayQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
@@ -534,7 +1194,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ArrayStringPipesValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.ArrayStringPipesValidAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
@@ -542,7 +1212,17 @@ namespace url
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.ArrayStringPipesValid(arrayQuery, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            scope.Start();
+            try
+            {
+                return RestClient.ArrayStringPipesValid(arrayQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

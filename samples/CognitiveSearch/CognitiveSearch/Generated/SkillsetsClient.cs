@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -39,7 +40,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Skillset skillset, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateOrUpdateAsync(skillsetName, skillset, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateOrUpdateAsync(skillsetName, skillset, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new skillset in a search service or updates the skillset if it already exists. </summary>
@@ -50,7 +61,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Skillset> CreateOrUpdate(string skillsetName, Skillset skillset, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateOrUpdate(skillsetName, skillset, requestOptions, accessCondition, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateOrUpdate(skillsetName, skillset, requestOptions, accessCondition, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a skillset in a search service. </summary>
@@ -60,7 +81,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string skillsetName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(skillsetName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Delete");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteAsync(skillsetName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a skillset in a search service. </summary>
@@ -70,7 +101,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string skillsetName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(skillsetName, requestOptions, accessCondition, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Delete");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete(skillsetName, requestOptions, accessCondition, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Retrieves a skillset in a search service. </summary>
@@ -79,7 +120,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Skillset>> GetAsync(string skillsetName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(skillsetName, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(skillsetName, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Retrieves a skillset in a search service. </summary>
@@ -88,7 +139,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Skillset> Get(string skillsetName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(skillsetName, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(skillsetName, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> List all skillsets in a search service. </summary>
@@ -97,7 +158,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ListSkillsetsResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.List");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> List all skillsets in a search service. </summary>
@@ -106,7 +177,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListSkillsetsResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.List(select, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.List");
+            scope.Start();
+            try
+            {
+                return RestClient.List(select, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new skillset in a search service. </summary>
@@ -115,7 +196,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Skillset>> CreateAsync(Skillset skillset, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAsync(skillset, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Create");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAsync(skillset, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new skillset in a search service. </summary>
@@ -124,7 +215,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Skillset> Create(Skillset skillset, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Create(skillset, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Create");
+            scope.Start();
+            try
+            {
+                return RestClient.Create(skillset, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

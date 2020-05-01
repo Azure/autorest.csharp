@@ -50,29 +50,19 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetTrueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetTrue");
-            scope.Start();
-            try
+            using var message = CreateGetTrueRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetTrueRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            bool value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetBoolean();
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        bool value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetBoolean();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -80,29 +70,19 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetTrue(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetTrue");
-            scope.Start();
-            try
+            using var message = CreateGetTrueRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetTrueRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            bool value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetBoolean();
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        bool value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetBoolean();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -126,24 +106,14 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutTrueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutTrue");
-            scope.Start();
-            try
+            using var message = CreatePutTrueRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutTrueRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -151,24 +121,14 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutTrue(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutTrue");
-            scope.Start();
-            try
+            using var message = CreatePutTrueRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutTrueRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -188,29 +148,19 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetFalseAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetFalse");
-            scope.Start();
-            try
+            using var message = CreateGetFalseRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFalseRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            bool value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetBoolean();
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        bool value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetBoolean();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -218,29 +168,19 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetFalse(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetFalse");
-            scope.Start();
-            try
+            using var message = CreateGetFalseRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetFalseRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            bool value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetBoolean();
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        bool value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetBoolean();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -264,24 +204,14 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutFalseAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutFalse");
-            scope.Start();
-            try
+            using var message = CreatePutFalseRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutFalseRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -289,24 +219,14 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutFalse(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.PutFalse");
-            scope.Start();
-            try
+            using var message = CreatePutFalseRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutFalseRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -326,29 +246,19 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetNull");
-            scope.Start();
-            try
+            using var message = CreateGetNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            bool value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetBoolean();
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        bool value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetBoolean();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -356,29 +266,19 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetNull");
-            scope.Start();
-            try
+            using var message = CreateGetNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            bool value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetBoolean();
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        bool value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetBoolean();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -398,29 +298,19 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<bool>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetInvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetInvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            bool value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetBoolean();
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        bool value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetBoolean();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -428,29 +318,19 @@ namespace body_boolean
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<bool> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BoolClient.GetInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetInvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetInvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            bool value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetBoolean();
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        bool value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetBoolean();
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

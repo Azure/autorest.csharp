@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -37,7 +38,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetWithFilterAsync(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetWithFilterAsync(filter, top, orderby, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("OdataClient.GetWithFilter");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetWithFilterAsync(filter, top, orderby, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Specify filter parameter with value &apos;$filter=id gt 5 and name eq &apos;foo&apos;&amp;$orderby=id&amp;$top=10&apos;. </summary>
@@ -47,7 +58,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetWithFilter(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetWithFilter(filter, top, orderby, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("OdataClient.GetWithFilter");
+            scope.Start();
+            try
+            {
+                return RestClient.GetWithFilter(filter, top, orderby, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

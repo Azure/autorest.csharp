@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,18 +36,38 @@ namespace CognitiveSearch
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Index>> CreateAsync(Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> CreateAsync(Models.Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAsync(index, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.Create");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAsync(index, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new search index. </summary>
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Index> Create(Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<Models.Index> Create(Models.Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Create(index, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.Create");
+            scope.Start();
+            try
+            {
+                return RestClient.Create(index, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all indexes available for a search service. </summary>
@@ -55,7 +76,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ListIndexesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.List");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all indexes available for a search service. </summary>
@@ -64,7 +95,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListIndexesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.List(select, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.List");
+            scope.Start();
+            try
+            {
+                return RestClient.List(select, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
@@ -74,9 +115,19 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Index>> CreateOrUpdateAsync(string indexName, Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Models.Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateOrUpdateAsync(indexName, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateOrUpdateAsync(indexName, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new search index or updates an index if it already exists. </summary>
@@ -86,9 +137,19 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Index> CreateOrUpdate(string indexName, Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<Models.Index> CreateOrUpdate(string indexName, Models.Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateOrUpdate(indexName, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateOrUpdate(indexName, index, allowIndexDowntime, requestOptions, accessCondition, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a search index and all the documents it contains. </summary>
@@ -98,7 +159,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(indexName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.Delete");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteAsync(indexName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a search index and all the documents it contains. </summary>
@@ -108,25 +179,55 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(indexName, requestOptions, accessCondition, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.Delete");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete(indexName, requestOptions, accessCondition, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Retrieves an index definition. </summary>
         /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Index>> GetAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.Index>> GetAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(indexName, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(indexName, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Retrieves an index definition. </summary>
         /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Index> Get(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<Models.Index> Get(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(indexName, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(indexName, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
@@ -135,7 +236,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetStatisticsAsync(indexName, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.GetStatistics");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetStatisticsAsync(indexName, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Returns statistics for the given index, including a document count and storage usage. </summary>
@@ -144,7 +255,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<GetIndexStatisticsResult> GetStatistics(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetStatistics(indexName, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.GetStatistics");
+            scope.Start();
+            try
+            {
+                return RestClient.GetStatistics(indexName, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
@@ -154,7 +275,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AnalyzeAsync(indexName, request, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.Analyze");
+            scope.Start();
+            try
+            {
+                return await RestClient.AnalyzeAsync(indexName, request, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Shows how an analyzer breaks text into tokens. </summary>
@@ -164,7 +295,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<AnalyzeResult> Analyze(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Analyze(indexName, request, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("IndexesClient.Analyze");
+            scope.Start();
+            try
+            {
+                return RestClient.Analyze(indexName, request, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

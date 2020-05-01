@@ -49,22 +49,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Head501Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
-            scope.Start();
-            try
+            using var message = CreateHead501Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead501Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -72,22 +62,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Head501(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
-            scope.Start();
-            try
+            using var message = CreateHead501Request();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead501Request();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -107,22 +87,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Get501Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
-            scope.Start();
-            try
+            using var message = CreateGet501Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet501Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -130,22 +100,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Get501(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
-            scope.Start();
-            try
+            using var message = CreateGet501Request();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet501Request();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -169,22 +129,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post505Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
-            scope.Start();
-            try
+            using var message = CreatePost505Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePost505Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -192,22 +142,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post505(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
-            scope.Start();
-            try
+            using var message = CreatePost505Request();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePost505Request();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -231,22 +171,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Delete505Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
-            scope.Start();
-            try
+            using var message = CreateDelete505Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateDelete505Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -254,22 +184,12 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete505(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
-            scope.Start();
-            try
+            using var message = CreateDelete505Request();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateDelete505Request();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

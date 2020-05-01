@@ -37,28 +37,68 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null dictionary value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, int>> GetNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty dictionary value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty dictionary value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, int>> GetEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {}. </summary>
@@ -66,7 +106,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutEmptyAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutEmptyAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {}. </summary>
@@ -74,77 +124,187 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutEmpty(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutEmpty(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.PutEmpty(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get Dictionary with null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, string>>> GetNullValueAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullValueAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullValue");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullValueAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get Dictionary with null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, string>> GetNullValue(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNullValue(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullValue");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNullValue(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get Dictionary with null key. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, string>>> GetNullKeyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullKeyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullKey");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullKeyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get Dictionary with null key. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, string>> GetNullKey(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNullKey(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNullKey");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNullKey(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get Dictionary with key as empty string. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, string>>> GetEmptyStringKeyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyStringKeyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmptyStringKey");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyStringKeyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get Dictionary with key as empty string. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, string>> GetEmptyStringKey(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmptyStringKey(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmptyStringKey");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmptyStringKey(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid Dictionary value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, string>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid Dictionary value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, string>> GetInvalid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInvalid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInvalid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetBooleanTfftAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanTfft");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBooleanTfftAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, bool>> GetBooleanTfft(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetBooleanTfft(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanTfft");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBooleanTfft(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
@@ -152,7 +312,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutBooleanTfftAsync(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutBooleanTfftAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutBooleanTfftAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {&quot;0&quot;: true, &quot;1&quot;: false, &quot;2&quot;: false, &quot;3&quot;: true }. </summary>
@@ -160,49 +330,119 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutBooleanTfft(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutBooleanTfft(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutBooleanTfft");
+            scope.Start();
+            try
+            {
+                return RestClient.PutBooleanTfft(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: null, &quot;2&quot;: false }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetBooleanInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBooleanInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value {&quot;0&quot;: true, &quot;1&quot;: null, &quot;2&quot;: false }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, bool>> GetBooleanInvalidNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetBooleanInvalidNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBooleanInvalidNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value &apos;{&quot;0&quot;: true, &quot;1&quot;: &quot;boolean&quot;, &quot;2&quot;: false}&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetBooleanInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidString");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBooleanInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value &apos;{&quot;0&quot;: true, &quot;1&quot;: &quot;boolean&quot;, &quot;2&quot;: false}&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, bool>> GetBooleanInvalidString(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetBooleanInvalidString(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBooleanInvalidString");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBooleanInvalidString(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetIntegerValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntegerValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetIntegerValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, int>> GetIntegerValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetIntegerValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntegerValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetIntegerValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
@@ -210,7 +450,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutIntegerValidAsync(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutIntegerValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutIntegerValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
@@ -218,49 +468,119 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutIntegerValid(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutIntegerValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutIntegerValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutIntegerValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetIntInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetIntInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, int>> GetIntInvalidNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetIntInvalidNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetIntInvalidNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetIntInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidString");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetIntInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, int>> GetIntInvalidString(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetIntInvalidString(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetIntInvalidString");
+            scope.Start();
+            try
+            {
+                return RestClient.GetIntInvalidString(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetLongValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetLongValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, long>> GetLongValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetLongValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetLongValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
@@ -268,7 +588,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutLongValidAsync(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutLongValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutLongValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {&quot;0&quot;: 1, &quot;1&quot;: -1, &quot;2&quot;: 3, &quot;3&quot;: 300}. </summary>
@@ -276,49 +606,119 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutLongValid(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutLongValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutLongValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutLongValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetLongInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetLongInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: null, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, long>> GetLongInvalidNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetLongInvalidNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetLongInvalidNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetLongInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidString");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetLongInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get long dictionary value {&quot;0&quot;: 1, &quot;1&quot;: &quot;integer&quot;, &quot;2&quot;: 0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, long>> GetLongInvalidString(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetLongInvalidString(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetLongInvalidString");
+            scope.Start();
+            try
+            {
+                return RestClient.GetLongInvalidString(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetFloatValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetFloatValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, float>> GetFloatValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetFloatValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetFloatValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
@@ -326,7 +726,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutFloatValidAsync(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutFloatValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutFloatValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
@@ -334,49 +744,119 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutFloatValid(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutFloatValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutFloatValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutFloatValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetFloatInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetFloatInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, float>> GetFloatInvalidNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetFloatInvalidNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetFloatInvalidNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetFloatInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidString");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetFloatInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, float>> GetFloatInvalidString(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetFloatInvalidString(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetFloatInvalidString");
+            scope.Start();
+            try
+            {
+                return RestClient.GetFloatInvalidString(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDoubleValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDoubleValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get float dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, double>> GetDoubleValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDoubleValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDoubleValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
@@ -384,7 +864,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDoubleValidAsync(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDoubleValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDoubleValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value {&quot;0&quot;: 0, &quot;1&quot;: -0.01, &quot;2&quot;: 1.2e20}. </summary>
@@ -392,49 +882,119 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDoubleValid(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDoubleValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDoubleValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDoubleValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDoubleInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDoubleInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get float dictionary value {&quot;0&quot;: 0.0, &quot;1&quot;: null, &quot;2&quot;: 1.2e20}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, double>> GetDoubleInvalidNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDoubleInvalidNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDoubleInvalidNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDoubleInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidString");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDoubleInvalidStringAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get boolean dictionary value {&quot;0&quot;: 1.0, &quot;1&quot;: &quot;number&quot;, &quot;2&quot;: 0.0}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, double>> GetDoubleInvalidString(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDoubleInvalidString(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDoubleInvalidString");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDoubleInvalidString(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetStringValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetStringValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, string>> GetStringValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetStringValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetStringValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
@@ -442,7 +1002,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutStringValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutStringValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value {&quot;0&quot;: &quot;foo1&quot;, &quot;1&quot;: &quot;foo2&quot;, &quot;2&quot;: &quot;foo3&quot;}. </summary>
@@ -450,49 +1020,119 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutStringValid(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutStringValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutStringValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutStringValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;foo2&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetStringWithNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetStringWithNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;foo2&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, string>> GetStringWithNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetStringWithNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetStringWithNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: 123, &quot;2&quot;: &quot;foo2&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetStringWithInvalidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithInvalid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetStringWithInvalidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get string dictionary value {&quot;0&quot;: &quot;foo&quot;, &quot;1&quot;: 123, &quot;2&quot;: &quot;foo2&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, string>> GetStringWithInvalid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetStringWithInvalid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetStringWithInvalid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetStringWithInvalid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get integer dictionary value {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
@@ -500,7 +1140,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDateValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDateValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01&quot;, &quot;1&quot;: &quot;1980-01-02&quot;, &quot;2&quot;: &quot;1492-10-12&quot;}. </summary>
@@ -508,49 +1158,119 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDateValid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDateValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDateValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2012-01-01&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;1776-07-04&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2012-01-01&quot;, &quot;1&quot;: null, &quot;2&quot;: &quot;1776-07-04&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateInvalidNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateInvalidNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateInvalidNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2011-03-22&quot;, &quot;1&quot;: &quot;date&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateInvalidCharsAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidChars");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateInvalidCharsAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2011-03-22&quot;, &quot;1&quot;: &quot;date&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateInvalidChars(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateInvalidChars(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateInvalidChars");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateInvalidChars(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date-time dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateTimeValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateTimeValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date-time dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateTimeValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateTimeValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
@@ -558,7 +1278,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateTimeValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDateTimeValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDateTimeValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;1980-01-02T00:11:35+01:00&quot;, &quot;2&quot;: &quot;1492-10-12T10:15:01-08:00&quot;}. </summary>
@@ -566,49 +1296,119 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDateTimeValid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDateTimeValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDateTimeValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: null}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateTimeInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateTimeInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: null}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeInvalidNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateTimeInvalidNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateTimeInvalidNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;date-time&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateTimeInvalidCharsAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidChars");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateTimeInvalidCharsAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date dictionary value {&quot;0&quot;: &quot;2000-12-01t00:00:01z&quot;, &quot;1&quot;: &quot;date-time&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeInvalidChars(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateTimeInvalidChars(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeInvalidChars");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateTimeInvalidChars(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date-time-rfc1123 dictionary value {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateTimeRfc1123ValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateTimeRfc1123ValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get date-time-rfc1123 dictionary value {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, DateTimeOffset>> GetDateTimeRfc1123Valid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateTimeRfc1123Valid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateTimeRfc1123Valid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
@@ -616,7 +1416,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDateTimeRfc1123ValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDateTimeRfc1123ValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value empty {&quot;0&quot;: &quot;Fri, 01 Dec 2000 00:00:01 GMT&quot;, &quot;1&quot;: &quot;Wed, 02 Jan 1980 00:11:35 GMT&quot;, &quot;2&quot;: &quot;Wed, 12 Oct 1492 10:15:01 GMT&quot;}. </summary>
@@ -624,21 +1434,51 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDateTimeRfc1123Valid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDateTimeRfc1123Valid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDateTimeRfc1123Valid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get duration dictionary value {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDurationValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDurationValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDurationValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get duration dictionary value {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, TimeSpan>> GetDurationValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDurationValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDurationValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDurationValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
@@ -646,7 +1486,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDurationValidAsync(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDurationValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDurationValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Set dictionary value  {&quot;0&quot;: &quot;P123DT22H14M12.011S&quot;, &quot;1&quot;: &quot;P5DT1H0M0S&quot;}. </summary>
@@ -654,21 +1504,51 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDurationValid(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDurationValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDurationValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDurationValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetByteValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetByteValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, byte[]>> GetByteValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetByteValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetByteValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put the dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each elementencoded in base 64. </summary>
@@ -676,7 +1556,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutByteValidAsync(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutByteValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutByteValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put the dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: hex(01 02 03), &quot;2&quot;: hex (25, 29, 43)} with each elementencoded in base 64. </summary>
@@ -684,105 +1574,255 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutByteValid(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutByteValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutByteValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutByteValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: null} with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetByteInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteInvalidNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetByteInvalidNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get byte dictionary value {&quot;0&quot;: hex(FF FF FF FA), &quot;1&quot;: null} with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, byte[]>> GetByteInvalidNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetByteInvalidNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetByteInvalidNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetByteInvalidNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get base64url dictionary value {&quot;0&quot;: &quot;a string that gets encoded with base64url&quot;, &quot;1&quot;: &quot;test string&quot;, &quot;2&quot;: &quot;Lorem ipsum&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetBase64UrlAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBase64Url");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBase64UrlAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get base64url dictionary value {&quot;0&quot;: &quot;a string that gets encoded with base64url&quot;, &quot;1&quot;: &quot;test string&quot;, &quot;2&quot;: &quot;Lorem ipsum&quot;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, byte[]>> GetBase64Url(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetBase64Url(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetBase64Url");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBase64Url(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get dictionary of complex type null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, Widget>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetComplexNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetComplexNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get dictionary of complex type null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, Widget>> GetComplexNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetComplexNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetComplexNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty dictionary of complex type {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, Widget>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetComplexEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetComplexEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty dictionary of complex type {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, Widget>> GetComplexEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetComplexEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetComplexEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get dictionary of complex type with null item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, Widget>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetComplexItemNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetComplexItemNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get dictionary of complex type with null item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, Widget>> GetComplexItemNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetComplexItemNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetComplexItemNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get dictionary of complex type with empty item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1:&quot; {}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, Widget>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetComplexItemEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetComplexItemEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get dictionary of complex type with empty item {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1:&quot; {}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, Widget>> GetComplexItemEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetComplexItemEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexItemEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetComplexItemEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get dictionary of complex type with {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, Widget>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetComplexValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetComplexValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get dictionary of complex type with {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, Widget>> GetComplexValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetComplexValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetComplexValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetComplexValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put an dictionary of complex type with values {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
@@ -790,7 +1830,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutComplexValidAsync(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutComplexValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutComplexValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put an dictionary of complex type with values {&quot;0&quot;: {&quot;integer&quot;: 1, &quot;string&quot;: &quot;2&quot;}, &quot;1&quot;: {&quot;integer&quot;: 3, &quot;string&quot;: &quot;4&quot;}, &quot;2&quot;: {&quot;integer&quot;: 5, &quot;string&quot;: &quot;6&quot;}}. </summary>
@@ -798,77 +1848,187 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutComplexValid(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutComplexValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutComplexValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutComplexValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetArrayNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetArrayNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetArrayNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetArrayNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an empty dictionary {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetArrayEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetArrayEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an empty dictionary {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetArrayEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetArrayEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetArrayItemNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetArrayItemNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionary of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: null, &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetArrayItemNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetArrayItemNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetArrayItemEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetArrayItemEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of array of strings [{&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayItemEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetArrayItemEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayItemEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetArrayItemEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetArrayValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetArrayValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, IList<string>>> GetArrayValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetArrayValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetArrayValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetArrayValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
@@ -876,7 +2036,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutArrayValidAsync(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutArrayValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutArrayValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put An array of array of strings {&quot;0&quot;: [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;], &quot;1&quot;: [&quot;4&quot;, &quot;5&quot;, &quot;6&quot;], &quot;2&quot;: [&quot;7&quot;, &quot;8&quot;, &quot;9&quot;]}. </summary>
@@ -884,77 +2054,187 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutArrayValid(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutArrayValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutArrayValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutArrayValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDictionaryNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDictionaryNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDictionaryNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDictionaryNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDictionaryEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDictionaryEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDictionaryEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDictionaryEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDictionaryItemNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDictionaryItemNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDictionaryItemNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDictionaryItemNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDictionaryItemEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDictionaryItemEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDictionaryItemEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDictionaryItemEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDictionaryValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDictionaryValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDictionaryValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDictionaryValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
@@ -962,7 +2242,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDictionaryValidAsync(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDictionaryValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDictionaryValidAsync(arrayBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
@@ -970,7 +2260,17 @@ namespace body_dictionary
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDictionaryValid(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDictionaryValid(arrayBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDictionaryValid(arrayBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

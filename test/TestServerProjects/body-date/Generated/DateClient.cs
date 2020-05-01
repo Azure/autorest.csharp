@@ -35,56 +35,136 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetInvalidDateAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetInvalidDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetInvalidDateAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetInvalidDate(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInvalidDate(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetInvalidDate");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInvalidDate(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get overflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetOverflowDateAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetOverflowDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetOverflowDateAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get overflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetOverflowDate(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetOverflowDate(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetOverflowDate");
+            scope.Start();
+            try
+            {
+                return RestClient.GetOverflowDate(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get underflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUnderflowDateAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetUnderflowDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUnderflowDateAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get underflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUnderflowDate(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUnderflowDate(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetUnderflowDate");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUnderflowDate(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put max date value 9999-12-31. </summary>
@@ -92,7 +172,17 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutMaxDateAsync(dateBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.PutMaxDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutMaxDateAsync(dateBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put max date value 9999-12-31. </summary>
@@ -100,21 +190,51 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMaxDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutMaxDate(dateBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.PutMaxDate");
+            scope.Start();
+            try
+            {
+                return RestClient.PutMaxDate(dateBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get max date value 9999-12-31. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMaxDateAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetMaxDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMaxDateAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get max date value 9999-12-31. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetMaxDate(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMaxDate(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetMaxDate");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMaxDate(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put min date value 0000-01-01. </summary>
@@ -122,7 +242,17 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutMinDateAsync(dateBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.PutMinDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutMinDateAsync(dateBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put min date value 0000-01-01. </summary>
@@ -130,21 +260,51 @@ namespace body_date
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMinDate(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutMinDate(dateBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.PutMinDate");
+            scope.Start();
+            try
+            {
+                return RestClient.PutMinDate(dateBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get min date value 0000-01-01. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMinDateAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetMinDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMinDateAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get min date value 0000-01-01. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetMinDate(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMinDate(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DateClient.GetMinDate");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMinDate(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,42 +35,102 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> GetEmptyErrorAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyErrorAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyErrorAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> GetEmptyError(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmptyError(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmptyError(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> GetNoModelErrorAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNoModelErrorAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNoModelErrorAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> GetNoModelError(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNoModelError(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNoModelError(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty response from server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> GetNoModelEmptyAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNoModelEmptyAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNoModelEmptyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get empty response from server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> GetNoModelEmpty(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNoModelEmpty(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNoModelEmpty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

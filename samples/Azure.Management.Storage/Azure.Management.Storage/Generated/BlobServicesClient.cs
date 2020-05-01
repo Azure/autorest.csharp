@@ -42,7 +42,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, BlobServiceProperties parameters, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SetServicePropertiesAsync(resourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobServicesClient.SetServiceProperties");
+            scope.Start();
+            try
+            {
+                return await RestClient.SetServicePropertiesAsync(resourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
@@ -52,7 +62,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobServiceProperties> SetServiceProperties(string resourceGroupName, string accountName, BlobServiceProperties parameters, CancellationToken cancellationToken = default)
         {
-            return RestClient.SetServiceProperties(resourceGroupName, accountName, parameters, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobServicesClient.SetServiceProperties");
+            scope.Start();
+            try
+            {
+                return RestClient.SetServiceProperties(resourceGroupName, accountName, parameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
@@ -61,7 +81,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobServiceProperties>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetServicePropertiesAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("BlobServicesClient.GetServiceProperties");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetServicePropertiesAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
@@ -70,7 +100,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobServiceProperties> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetServiceProperties(resourceGroupName, accountName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("BlobServicesClient.GetServiceProperties");
+            scope.Start();
+            try
+            {
+                return RestClient.GetServiceProperties(resourceGroupName, accountName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
@@ -90,8 +130,18 @@ namespace Azure.Management.Storage
 
             async Task<Page<BlobServiceProperties>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BlobServicesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
@@ -113,8 +163,18 @@ namespace Azure.Management.Storage
 
             Page<BlobServiceProperties> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.List(resourceGroupName, accountName, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("BlobServicesClient.List");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.List(resourceGroupName, accountName, cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }

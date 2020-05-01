@@ -40,13 +40,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetNoItemNamePagesAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetNoItemNamePagesAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetNoItemNamePagesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetNoItemNamePagesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -57,13 +77,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetNoItemNamePages(cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetNoItemNamePages(cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetNoItemNamePagesNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNoItemNamePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetNoItemNamePagesNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -74,8 +114,18 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetNullNextLinkNamePagesAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetNullNextLinkNamePagesAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
@@ -86,8 +136,18 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetNullNextLinkNamePages(cancellationToken);
-                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetNullNextLinkNamePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetNullNextLinkNamePages(cancellationToken);
+                    return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
@@ -98,13 +158,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetSinglePagesAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetSinglePagesAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetSinglePagesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetSinglePagesNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -115,13 +195,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetSinglePages(cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetSinglePages(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetSinglePagesNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetSinglePagesNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -134,13 +234,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesAsync(clientRequestId, pagingGetMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesNextPageAsync(nextLink, clientRequestId, pagingGetMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesNextPageAsync(nextLink, clientRequestId, pagingGetMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -153,13 +273,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePages(clientRequestId, pagingGetMultiplePagesOptions, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePages(clientRequestId, pagingGetMultiplePagesOptions, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesNextPage(nextLink, clientRequestId, pagingGetMultiplePagesOptions, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesNextPage(nextLink, clientRequestId, pagingGetMultiplePagesOptions, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -171,13 +311,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetWithQueryParamsAsync(requiredQueryParameter, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetWithQueryParams");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetWithQueryParamsAsync(requiredQueryParameter, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.NextOperationWithQueryParamsAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetWithQueryParams");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.NextOperationWithQueryParamsAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -189,13 +349,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetWithQueryParams(requiredQueryParameter, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetWithQueryParams");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetWithQueryParams(requiredQueryParameter, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.NextOperationWithQueryParams(cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetWithQueryParams");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.NextOperationWithQueryParams(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -206,8 +386,18 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.NextOperationWithQueryParamsAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextOperationWithQueryParams");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.NextOperationWithQueryParamsAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
@@ -218,8 +408,18 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.NextOperationWithQueryParams(cancellationToken);
-                return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextOperationWithQueryParams");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.NextOperationWithQueryParams(cancellationToken);
+                    return Page.FromValues(response.Value.Values, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
@@ -232,13 +432,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetOdataMultiplePagesAsync(clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetOdataMultiplePagesNextPageAsync(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetOdataMultiplePagesNextPageAsync(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -251,13 +471,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetOdataMultiplePages(clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetOdataMultiplePages(clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetOdataMultiplePagesNextPage(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetOdataMultiplePages");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetOdataMultiplePagesNextPage(nextLink, clientRequestId, pagingGetOdataMultiplePagesOptions, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -275,13 +515,33 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesWithOffsetNextPageAsync(nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesWithOffsetNextPageAsync(nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -299,13 +559,33 @@ namespace paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesWithOffsetNextPage(nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesWithOffset");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesWithOffsetNextPage(nextLink, pagingGetMultiplePagesWithOffsetOptions, clientRequestId, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -316,13 +596,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesRetryFirstAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesRetryFirstAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesRetryFirstNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesRetryFirstNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -333,13 +633,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesRetryFirst(cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesRetryFirst(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesRetryFirstNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetryFirst");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesRetryFirstNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -350,13 +670,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesRetrySecondAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesRetrySecondAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesRetrySecondNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesRetrySecondNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -367,13 +707,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesRetrySecond(cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesRetrySecond(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesRetrySecondNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesRetrySecond");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesRetrySecondNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -384,13 +744,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetSinglePagesFailureAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetSinglePagesFailureAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetSinglePagesFailureNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetSinglePagesFailureNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -401,13 +781,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetSinglePagesFailure(cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetSinglePagesFailure(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetSinglePagesFailureNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetSinglePagesFailure");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetSinglePagesFailureNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -418,13 +818,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesFailureAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesFailureAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesFailureNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesFailureNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -435,13 +855,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesFailure(cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesFailure(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesFailureNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailure");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesFailureNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -452,13 +892,33 @@ namespace paging
         {
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesFailureUriAsync(cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesFailureUriAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesFailureUriNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesFailureUriNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -469,13 +929,33 @@ namespace paging
         {
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesFailureUri(cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesFailureUri(cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesFailureUriNextPage(nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFailureUri");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesFailureUriNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -497,13 +977,33 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesFragmentNextLinkAsync(apiVersion, tenant, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -525,13 +1025,33 @@ namespace paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesFragmentNextLink(apiVersion, tenant, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesFragmentNextLink(apiVersion, tenant, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.NextFragment(apiVersion, tenant, nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentNextLink");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.NextFragment(apiVersion, tenant, nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -548,13 +1068,33 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetMultiplePagesFragmentWithGroupingNextLinkAsync(customParameterGroup, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetMultiplePagesFragmentWithGroupingNextLinkAsync(customParameterGroup, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentWithGroupingAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.NextFragmentWithGroupingAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -571,13 +1111,33 @@ namespace paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.NextFragmentWithGrouping(nextLink, customParameterGroup, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.NextFragmentWithGrouping(nextLink, customParameterGroup, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -604,13 +1164,33 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentNextPageAsync(nextLink, apiVersion, tenant, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.NextFragmentNextPageAsync(nextLink, apiVersion, tenant, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -637,13 +1217,33 @@ namespace paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.NextFragment(apiVersion, tenant, nextLink, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.NextFragment(apiVersion, tenant, nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.NextFragmentNextPage(nextLink, apiVersion, tenant, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragment");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.NextFragmentNextPage(nextLink, apiVersion, tenant, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -665,13 +1265,33 @@ namespace paging
 
             async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentWithGroupingAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.NextFragmentWithGroupingAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.NextFragmentWithGroupingNextPageAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.NextFragmentWithGroupingNextPageAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -693,13 +1313,33 @@ namespace paging
 
             Page<Product> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.NextFragmentWithGrouping(nextLink, customParameterGroup, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.NextFragmentWithGrouping(nextLink, customParameterGroup, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.NextFragmentWithGroupingNextPage(nextLink, customParameterGroup, cancellationToken);
-                return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.NextFragmentWithGrouping");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.NextFragmentWithGroupingNextPage(nextLink, customParameterGroup, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -718,7 +1358,7 @@ namespace paging
                 throw new ArgumentNullException(nameof(createOriginalHttpMessage));
             }
 
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, createOriginalHttpMessage,
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "PagingClient.StartGetMultiplePagesLRO", OperationFinalStateVia.Location, createOriginalHttpMessage,
             (response, cancellationToken) =>
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
@@ -751,8 +1391,18 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
-            var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken).ConfigureAwait(false);
-            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.StartGetMultiplePagesLRO");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken).ConfigureAwait(false);
+                return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
@@ -761,8 +1411,18 @@ namespace paging
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
-            var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken);
-            return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
+            using var scope = _clientDiagnostics.CreateScope("PagingClient.StartGetMultiplePagesLRO");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken);
+                return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

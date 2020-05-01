@@ -58,24 +58,14 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
-            scope.Start();
-            try
+            using var message = CreatePutAsyncRetrySucceededRequest(product);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAsyncRetrySucceededRequest(product);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -84,24 +74,14 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutAsyncRetrySucceeded(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
-            scope.Start();
-            try
+            using var message = CreatePutAsyncRetrySucceededRequest(product);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutAsyncRetrySucceededRequest(product);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -129,25 +109,15 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Put201CreatingSucceeded200Async(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
-            scope.Start();
-            try
+            using var message = CreatePut201CreatingSucceeded200Request(product);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePut201CreatingSucceeded200Request(product);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -156,25 +126,15 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Put201CreatingSucceeded200(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
-            scope.Start();
-            try
+            using var message = CreatePut201CreatingSucceeded200Request(product);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePut201CreatingSucceeded200Request(product);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 201:
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 201:
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -202,24 +162,14 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> Post202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
-            scope.Start();
-            try
+            using var message = CreatePost202Retry200Request(product);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePost202Retry200Request(product);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -228,24 +178,14 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Post202Retry200(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
-            scope.Start();
-            try
+            using var message = CreatePost202Retry200Request(product);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePost202Retry200Request(product);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -273,24 +213,14 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PostAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
-            scope.Start();
-            try
+            using var message = CreatePostAsyncRetrySucceededRequest(product);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostAsyncRetrySucceededRequest(product);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -299,24 +229,14 @@ namespace lro
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostAsyncRetrySucceeded(Product product = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
-            scope.Start();
-            try
+            using var message = CreatePostAsyncRetrySucceededRequest(product);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePostAsyncRetrySucceededRequest(product);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 202:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

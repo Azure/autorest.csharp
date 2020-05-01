@@ -57,24 +57,14 @@ namespace custom_baseUrl
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyRequest(accountName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyRequest(accountName);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -88,24 +78,14 @@ namespace custom_baseUrl
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
-            scope.Start();
-            try
+            using var message = CreateGetEmptyRequest(accountName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetEmptyRequest(accountName);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

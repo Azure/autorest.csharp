@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,7 +36,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetMethodPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMethodPathValidAsync(unencodedPathParam, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetMethodPathValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMethodPathValidAsync(unencodedPathParam, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
@@ -43,7 +54,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetMethodPathValid(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMethodPathValid(unencodedPathParam, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetMethodPathValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMethodPathValid(unencodedPathParam, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
@@ -51,7 +72,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetPathValidAsync(unencodedPathParam, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetPathValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetPathValidAsync(unencodedPathParam, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
@@ -59,21 +90,51 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetPathValid(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetPathValid(unencodedPathParam, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetPathValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetPathValid(unencodedPathParam, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetSwaggerPathValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetSwaggerPathValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetSwaggerPathValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetSwaggerPathValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetSwaggerPathValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetSwaggerPathValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetSwaggerPathValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetSwaggerPathValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
@@ -81,7 +142,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetMethodQueryValidAsync(string q1, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMethodQueryValidAsync(q1, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetMethodQueryValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMethodQueryValidAsync(q1, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
@@ -89,7 +160,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetMethodQueryValid(string q1, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMethodQueryValid(q1, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetMethodQueryValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMethodQueryValid(q1, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded query parameter with value null. </summary>
@@ -97,7 +178,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetMethodQueryNullAsync(string q1 = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMethodQueryNullAsync(q1, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetMethodQueryNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMethodQueryNullAsync(q1, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded query parameter with value null. </summary>
@@ -105,7 +196,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetMethodQueryNull(string q1 = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMethodQueryNull(q1, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetMethodQueryNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMethodQueryNull(q1, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
@@ -113,7 +214,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetPathQueryValidAsync(string q1, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetPathQueryValidAsync(q1, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetPathQueryValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetPathQueryValidAsync(q1, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
@@ -121,21 +232,51 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetPathQueryValid(string q1, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetPathQueryValid(q1, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetPathQueryValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetPathQueryValid(q1, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetSwaggerQueryValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetSwaggerQueryValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetSwaggerQueryValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetSwaggerQueryValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetSwaggerQueryValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetSwaggerQueryValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SkipUrlEncodingClient.GetSwaggerQueryValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetSwaggerQueryValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

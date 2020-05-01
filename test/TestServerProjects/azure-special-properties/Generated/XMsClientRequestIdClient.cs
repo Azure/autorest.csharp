@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,14 +35,34 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("XMsClientRequestIdClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Get(CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("XMsClientRequestIdClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
@@ -49,7 +70,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> ParamGetAsync(string xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ParamGetAsync(xMsClientRequestId, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("XMsClientRequestIdClient.ParamGet");
+            scope.Start();
+            try
+            {
+                return await RestClient.ParamGetAsync(xMsClientRequestId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
@@ -57,7 +88,17 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response ParamGet(string xMsClientRequestId, CancellationToken cancellationToken = default)
         {
-            return RestClient.ParamGet(xMsClientRequestId, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("XMsClientRequestIdClient.ParamGet");
+            scope.Start();
+            try
+            {
+                return RestClient.ParamGet(xMsClientRequestId, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

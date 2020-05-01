@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,56 +35,136 @@ namespace azure_special_properties
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetMethodGlobalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMethodGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionDefaultClient.GetMethodGlobalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMethodGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetMethodGlobalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMethodGlobalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionDefaultClient.GetMethodGlobalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMethodGlobalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetMethodGlobalNotProvidedValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetMethodGlobalNotProvidedValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionDefaultClient.GetMethodGlobalNotProvidedValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetMethodGlobalNotProvidedValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetMethodGlobalNotProvidedValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetMethodGlobalNotProvidedValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionDefaultClient.GetMethodGlobalNotProvidedValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetMethodGlobalNotProvidedValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetPathGlobalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetPathGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionDefaultClient.GetPathGlobalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetPathGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetPathGlobalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetPathGlobalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionDefaultClient.GetPathGlobalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetPathGlobalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetSwaggerGlobalValidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetSwaggerGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionDefaultClient.GetSwaggerGlobalValid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetSwaggerGlobalValidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetSwaggerGlobalValid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetSwaggerGlobalValid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ApiVersionDefaultClient.GetSwaggerGlobalValid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetSwaggerGlobalValid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

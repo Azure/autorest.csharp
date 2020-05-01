@@ -50,29 +50,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetNull");
-            scope.Start();
-            try
+            using var message = CreateGetNullRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -80,29 +70,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetNull");
-            scope.Start();
-            try
+            using var message = CreateGetNullRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetNullRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -122,29 +102,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetInvalidRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetInvalidRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -152,29 +122,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetInvalid");
-            scope.Start();
-            try
+            using var message = CreateGetInvalidRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetInvalidRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -194,29 +154,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetOverflow");
-            scope.Start();
-            try
+            using var message = CreateGetOverflowRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetOverflowRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -224,29 +174,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetOverflow");
-            scope.Start();
-            try
+            using var message = CreateGetOverflowRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetOverflowRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -266,29 +206,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUnderflow");
-            scope.Start();
-            try
+            using var message = CreateGetUnderflowRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUnderflowRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -296,29 +226,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUnderflow");
-            scope.Start();
-            try
+            using var message = CreateGetUnderflowRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUnderflowRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -343,24 +263,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -369,24 +279,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -411,24 +311,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime7Digits");
-            scope.Start();
-            try
+            using var message = CreatePutUtcMaxDateTime7DigitsRequest(datetimeBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutUtcMaxDateTime7DigitsRequest(datetimeBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -437,24 +327,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime7Digits(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMaxDateTime7Digits");
-            scope.Start();
-            try
+            using var message = CreatePutUtcMaxDateTime7DigitsRequest(datetimeBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutUtcMaxDateTime7DigitsRequest(datetimeBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -474,29 +354,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUtcLowercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -504,29 +374,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUtcLowercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -546,29 +406,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUtcUppercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -576,29 +426,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUtcUppercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -618,29 +458,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTime7DigitsAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUtcUppercaseMaxDateTime7Digits");
-            scope.Start();
-            try
+            using var message = CreateGetUtcUppercaseMaxDateTime7DigitsRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUtcUppercaseMaxDateTime7DigitsRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -648,29 +478,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime7Digits(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUtcUppercaseMaxDateTime7Digits");
-            scope.Start();
-            try
+            using var message = CreateGetUtcUppercaseMaxDateTime7DigitsRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUtcUppercaseMaxDateTime7DigitsRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -695,24 +515,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutLocalPositiveOffsetMaxDateTimeRequest(datetimeBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLocalPositiveOffsetMaxDateTimeRequest(datetimeBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -721,24 +531,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalPositiveOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutLocalPositiveOffsetMaxDateTimeRequest(datetimeBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLocalPositiveOffsetMaxDateTimeRequest(datetimeBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -758,29 +558,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalPositiveOffsetLowercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalPositiveOffsetLowercaseMaxDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalPositiveOffsetLowercaseMaxDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -788,29 +578,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalPositiveOffsetLowercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalPositiveOffsetLowercaseMaxDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalPositiveOffsetLowercaseMaxDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -830,29 +610,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalPositiveOffsetUppercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -860,29 +630,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalPositiveOffsetUppercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalPositiveOffsetUppercaseMaxDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -907,24 +667,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutLocalNegativeOffsetMaxDateTimeRequest(datetimeBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLocalNegativeOffsetMaxDateTimeRequest(datetimeBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -933,24 +683,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalNegativeOffsetMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutLocalNegativeOffsetMaxDateTimeRequest(datetimeBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLocalNegativeOffsetMaxDateTimeRequest(datetimeBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -970,29 +710,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalNegativeOffsetUppercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1000,29 +730,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalNegativeOffsetUppercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalNegativeOffsetUppercaseMaxDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1042,29 +762,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalNegativeOffsetLowercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalNegativeOffsetLowercaseMaxDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalNegativeOffsetLowercaseMaxDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1072,29 +782,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalNegativeOffsetLowercaseMaxDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalNegativeOffsetLowercaseMaxDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalNegativeOffsetLowercaseMaxDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1119,24 +819,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMinDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1145,24 +835,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutUtcMinDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1182,29 +862,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUtcMinDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetUtcMinDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUtcMinDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1212,29 +882,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetUtcMinDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetUtcMinDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetUtcMinDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1259,24 +919,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalPositiveOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMinDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutLocalPositiveOffsetMinDateTimeRequest(datetimeBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLocalPositiveOffsetMinDateTimeRequest(datetimeBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1285,24 +935,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalPositiveOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalPositiveOffsetMinDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutLocalPositiveOffsetMinDateTimeRequest(datetimeBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLocalPositiveOffsetMinDateTimeRequest(datetimeBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1322,29 +962,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalPositiveOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalPositiveOffsetMinDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalPositiveOffsetMinDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalPositiveOffsetMinDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1352,29 +982,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalPositiveOffsetMinDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalPositiveOffsetMinDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalPositiveOffsetMinDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalPositiveOffsetMinDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1399,24 +1019,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> PutLocalNegativeOffsetMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMinDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutLocalNegativeOffsetMinDateTimeRequest(datetimeBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLocalNegativeOffsetMinDateTimeRequest(datetimeBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1425,24 +1035,14 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutLocalNegativeOffsetMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.PutLocalNegativeOffsetMinDateTime");
-            scope.Start();
-            try
+            using var message = CreatePutLocalNegativeOffsetMinDateTimeRequest(datetimeBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLocalNegativeOffsetMinDateTimeRequest(datetimeBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1462,29 +1062,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response<DateTimeOffset>> GetLocalNegativeOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalNegativeOffsetMinDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalNegativeOffsetMinDateTimeRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalNegativeOffsetMinDateTimeRequest();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1492,29 +1082,19 @@ namespace body_datetime
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetLocalNegativeOffsetMinDateTime(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalNegativeOffsetMinDateTime");
-            scope.Start();
-            try
+            using var message = CreateGetLocalNegativeOffsetMinDateTimeRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLocalNegativeOffsetMinDateTimeRequest();
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        {
-                            DateTimeOffset value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            value = document.RootElement.GetDateTimeOffset("S");
-                            return Response.FromValue(value, message.Response);
-                        }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    {
+                        DateTimeOffset value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetDateTimeOffset("S");
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

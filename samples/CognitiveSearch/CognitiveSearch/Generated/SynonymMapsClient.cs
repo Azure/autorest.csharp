@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -39,7 +40,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SynonymMap>> CreateOrUpdateAsync(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateOrUpdateAsync(synonymMapName, synonymMap, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateOrUpdateAsync(synonymMapName, synonymMap, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new synonym map or updates a synonym map if it already exists. </summary>
@@ -50,7 +61,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SynonymMap> CreateOrUpdate(string synonymMapName, SynonymMap synonymMap, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CreateOrUpdate(synonymMapName, synonymMap, requestOptions, accessCondition, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return RestClient.CreateOrUpdate(synonymMapName, synonymMap, requestOptions, accessCondition, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a synonym map. </summary>
@@ -60,7 +81,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string synonymMapName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(synonymMapName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteAsync(synonymMapName, requestOptions, accessCondition, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a synonym map. </summary>
@@ -70,7 +101,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string synonymMapName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(synonymMapName, requestOptions, accessCondition, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Delete");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete(synonymMapName, requestOptions, accessCondition, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Retrieves a synonym map definition. </summary>
@@ -79,7 +120,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SynonymMap>> GetAsync(string synonymMapName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(synonymMapName, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(synonymMapName, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Retrieves a synonym map definition. </summary>
@@ -88,7 +139,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SynonymMap> Get(string synonymMapName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(synonymMapName, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(synonymMapName, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all synonym maps available for a search service. </summary>
@@ -97,7 +158,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ListSynonymMapsResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.List");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListAsync(select, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Lists all synonym maps available for a search service. </summary>
@@ -106,7 +177,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListSynonymMapsResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.List(select, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.List");
+            scope.Start();
+            try
+            {
+                return RestClient.List(select, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new synonym map. </summary>
@@ -115,7 +196,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SynonymMap>> CreateAsync(SynonymMap synonymMap, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.CreateAsync(synonymMap, requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Create");
+            scope.Start();
+            try
+            {
+                return await RestClient.CreateAsync(synonymMap, requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a new synonym map. </summary>
@@ -124,7 +215,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SynonymMap> Create(SynonymMap synonymMap, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Create(synonymMap, requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SynonymMapsClient.Create");
+            scope.Start();
+            try
+            {
+                return RestClient.Create(synonymMap, requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }
