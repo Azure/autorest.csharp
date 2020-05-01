@@ -9,13 +9,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class LongRunningOperation
     {
-        public LongRunningOperation(RestClientMethod originalMethod, Response originalResponse, string name, Parameter[] createParameters, OperationFinalStateVia finalStateVia)
+        public LongRunningOperation(RestClientMethod originalMethod, Response originalResponse, string name, Parameter[] createParameters, OperationFinalStateVia finalStateVia, Diagnostic diagnostics)
         {
             OriginalMethod = originalMethod;
             OriginalResponse = originalResponse;
             Name = name;
             CreateParameters = createParameters;
             FinalStateVia = finalStateVia;
+            Diagnostics = diagnostics;
         }
 
         public string Name { get; }
@@ -23,5 +24,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         public Response OriginalResponse { get; }
         public Parameter[] CreateParameters { get; }
         public OperationFinalStateVia FinalStateVia { get; }
+        public Diagnostic Diagnostics { get; set; }
     }
 }

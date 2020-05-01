@@ -35,56 +35,136 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetNullAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetNull(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetNull");
+            scope.Start();
+            try
+            {
+                return RestClient.GetNull(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetInvalid");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetInvalidAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetInvalid(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInvalid(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetInvalid");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInvalid(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetOverflowAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetOverflow");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetOverflowAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetOverflow(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetOverflow(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetOverflow");
+            scope.Start();
+            try
+            {
+                return RestClient.GetOverflow(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUnderflowAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUnderflow");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUnderflowAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUnderflow(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUnderflow(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUnderflow");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUnderflow(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
@@ -92,7 +172,17 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutUtcMaxDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutUtcMaxDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
@@ -100,35 +190,85 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutUtcMaxDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutUtcMaxDateTime(datetimeBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMaxDateTime");
+            scope.Start();
+            try
+            {
+                return RestClient.PutUtcMaxDateTime(datetimeBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUtcLowercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcLowercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUtcLowercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUtcLowercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUtcLowercaseMaxDateTime(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcLowercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUtcLowercaseMaxDateTime(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUtcUppercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcUppercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUtcUppercaseMaxDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUtcUppercaseMaxDateTime(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUtcUppercaseMaxDateTime(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcUppercaseMaxDateTime");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUtcUppercaseMaxDateTime(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
@@ -136,7 +276,17 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutUtcMinDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutUtcMinDateTimeAsync(datetimeBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
@@ -144,21 +294,51 @@ namespace body_datetime_rfc1123
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutUtcMinDateTime(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutUtcMinDateTime(datetimeBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.PutUtcMinDateTime");
+            scope.Start();
+            try
+            {
+                return RestClient.PutUtcMinDateTime(datetimeBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetUtcMinDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcMinDateTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUtcMinDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateTimeOffset> GetUtcMinDateTime(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetUtcMinDateTime(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("Datetimerfc1123Client.GetUtcMinDateTime");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUtcMinDateTime(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

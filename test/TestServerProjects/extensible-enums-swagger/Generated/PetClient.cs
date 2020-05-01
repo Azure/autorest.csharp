@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,28 +36,68 @@ namespace extensible_enums_swagger
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetByPetIdAsync(petId, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetClient.GetByPetId");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetByPetIdAsync(petId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Pet> GetByPetId(string petId, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetByPetId(petId, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetClient.GetByPetId");
+            scope.Start();
+            try
+            {
+                return RestClient.GetByPetId(petId, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Pet>> AddPetAsync(Pet petParam = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.AddPetAsync(petParam, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetClient.AddPet");
+            scope.Start();
+            try
+            {
+                return await RestClient.AddPetAsync(petParam, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Pet> AddPet(Pet petParam = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.AddPet(petParam, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetClient.AddPet");
+            scope.Start();
+            try
+            {
+                return RestClient.AddPet(petParam, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

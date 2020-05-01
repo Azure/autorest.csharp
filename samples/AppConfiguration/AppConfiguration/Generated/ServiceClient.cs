@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,7 +41,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            return (await RestClient.CheckKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
+            scope.Start();
+            try
+            {
+                return (await RestClient.CheckKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -50,7 +61,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CheckKeys(name, after, acceptDatetime, cancellationToken).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
+            scope.Start();
+            try
+            {
+                return RestClient.CheckKeys(name, after, acceptDatetime, cancellationToken).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -62,7 +83,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            return (await RestClient.CheckKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
+            scope.Start();
+            try
+            {
+                return (await RestClient.CheckKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -74,7 +105,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CheckKeyValues(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
+            scope.Start();
+            try
+            {
+                return RestClient.CheckKeyValues(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets a single key-value. </summary>
@@ -87,7 +128,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<KeyValue>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets a single key-value. </summary>
@@ -100,7 +151,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<KeyValue> GetKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
+            scope.Start();
+            try
+            {
+                return RestClient.GetKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a key-value. </summary>
@@ -112,7 +173,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutKeyValueAsync(key, label, ifMatch, ifNoneMatch, entity, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutKeyValueAsync(key, label, ifMatch, ifNoneMatch, entity, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Creates a key-value. </summary>
@@ -124,7 +195,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<KeyValue> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutKeyValue(key, label, ifMatch, ifNoneMatch, entity, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
+            scope.Start();
+            try
+            {
+                return RestClient.PutKeyValue(key, label, ifMatch, ifNoneMatch, entity, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a key-value. </summary>
@@ -134,7 +215,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<KeyValue>> DeleteKeyValueAsync(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteKeyValueAsync(key, label, ifMatch, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteKeyValueAsync(key, label, ifMatch, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes a key-value. </summary>
@@ -144,7 +235,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<KeyValue> DeleteKeyValue(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.DeleteKeyValue(key, label, ifMatch, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
+            scope.Start();
+            try
+            {
+                return RestClient.DeleteKeyValue(key, label, ifMatch, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -157,7 +258,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            return (await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
+            scope.Start();
+            try
+            {
+                return (await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -170,7 +281,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
+            scope.Start();
+            try
+            {
+                return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -181,7 +302,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            return (await RestClient.CheckLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
+            scope.Start();
+            try
+            {
+                return (await RestClient.CheckLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -192,7 +323,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CheckLabels(name, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
+            scope.Start();
+            try
+            {
+                return RestClient.CheckLabels(name, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Locks a key-value. </summary>
@@ -203,7 +344,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<KeyValue>> PutLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutLock");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Locks a key-value. </summary>
@@ -214,7 +365,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<KeyValue> PutLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutLock");
+            scope.Start();
+            try
+            {
+                return RestClient.PutLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Unlocks a key-value. </summary>
@@ -225,7 +386,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<KeyValue>> DeleteLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Unlocks a key-value. </summary>
@@ -236,7 +407,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<KeyValue> DeleteLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.DeleteLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
+            scope.Start();
+            try
+            {
+                return RestClient.DeleteLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -248,7 +429,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
-            return (await RestClient.CheckRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
+            scope.Start();
+            try
+            {
+                return (await RestClient.CheckRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Requests the headers and status of the given resource. </summary>
@@ -260,7 +451,17 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.CheckRevisions(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
+            scope.Start();
+            try
+            {
+                return RestClient.CheckRevisions(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets a list of keys. </summary>
@@ -272,13 +473,33 @@ namespace AppConfiguration
         {
             async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Key>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetKeysNextPageAsync(nextLink, name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetKeysNextPageAsync(nextLink, name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -292,13 +513,33 @@ namespace AppConfiguration
         {
             Page<Key> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetKeys(name, after, acceptDatetime, cancellationToken);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetKeys(name, after, acceptDatetime, cancellationToken);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Key> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetKeysNextPage(nextLink, name, after, acceptDatetime, cancellationToken);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetKeysNextPage(nextLink, name, after, acceptDatetime, cancellationToken);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -314,13 +555,33 @@ namespace AppConfiguration
         {
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<KeyValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetKeyValuesNextPageAsync(nextLink, key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetKeyValuesNextPageAsync(nextLink, key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -336,13 +597,33 @@ namespace AppConfiguration
         {
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<KeyValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetKeyValuesNextPage(nextLink, key, label, after, acceptDatetime, select, cancellationToken);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetKeyValuesNextPage(nextLink, key, label, after, acceptDatetime, select, cancellationToken);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -357,13 +638,33 @@ namespace AppConfiguration
         {
             async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<Label>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetLabelsNextPageAsync(nextLink, name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetLabelsNextPageAsync(nextLink, name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -378,13 +679,33 @@ namespace AppConfiguration
         {
             Page<Label> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetLabels(name, after, acceptDatetime, select, cancellationToken);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetLabels(name, after, acceptDatetime, select, cancellationToken);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<Label> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetLabelsNextPage(nextLink, name, after, acceptDatetime, select, cancellationToken);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetLabelsNextPage(nextLink, name, after, acceptDatetime, select, cancellationToken);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -400,13 +721,33 @@ namespace AppConfiguration
         {
             async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             async Task<Page<KeyValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await RestClient.GetRevisionsNextPageAsync(nextLink, key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetRevisionsNextPageAsync(nextLink, key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
@@ -422,13 +763,33 @@ namespace AppConfiguration
         {
             Page<KeyValue> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.GetRevisions(key, label, after, acceptDatetime, select, cancellationToken);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetRevisions(key, label, after, acceptDatetime, select, cancellationToken);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             Page<KeyValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = RestClient.GetRevisionsNextPage(nextLink, key, label, after, acceptDatetime, select, cancellationToken);
-                return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetRevisionsNextPage(nextLink, key, label, after, acceptDatetime, select, cancellationToken);
+                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -36,7 +37,17 @@ namespace subscriptionId_apiVersion
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<SampleResourceGroup>> GetSampleResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetSampleResourceGroupAsync(resourceGroupName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("GroupClient.GetSampleResourceGroup");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetSampleResourceGroupAsync(resourceGroupName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Provides a resouce group with name &apos;testgroup101&apos; and location &apos;West US&apos;. </summary>
@@ -44,7 +55,17 @@ namespace subscriptionId_apiVersion
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SampleResourceGroup> GetSampleResourceGroup(string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetSampleResourceGroup(resourceGroupName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("GroupClient.GetSampleResourceGroup");
+            scope.Start();
+            try
+            {
+                return RestClient.GetSampleResourceGroup(resourceGroupName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

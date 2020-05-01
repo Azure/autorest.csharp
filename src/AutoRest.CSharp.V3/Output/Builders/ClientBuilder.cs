@@ -79,14 +79,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
             }
 
             List<RestClientMethod> nextPageMethods = new List<RestClientMethod>();
-            List<PagingInfo> pagingMethods = new List<PagingInfo>();
+            List<PagingMethod> pagingMethods = new List<PagingMethod>();
             List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
             List<ClientMethod> clientMethods = new List<ClientMethod>();
             foreach ((Operation operation, RestClientMethod method) in operationMethods)
             {
                 if (operation.IsLongRunning)
                 {
-                    longRunningOperationMethods.Add(BuildLongRunningOperation(operation, method));
+                    longRunningOperationMethods.Add(BuildLongRunningOperation(clientName, operation, method));
                     continue;
                 }
 
@@ -125,17 +125,18 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         throw new InvalidOperationException($"The return type of {method.Name} has to be an object schema to be used in paging");
                     }
 
-                    PagingInfo pagingInfo = GetPagingInfo(method, nextPageMethod, paging, objectType);
-                    pagingMethods.Add(pagingInfo);
+                    PagingMethod pagingMethod = GetPagingMethod(clientName, method, nextPageMethod, paging, objectType);
+                    pagingMethods.Add(pagingMethod);
 
                     continue;
                 }
 
+                var operationName = operation.CSharpName();
                 clientMethods.Add(new ClientMethod(
-                    operation.CSharpName(),
+                    operationName,
                     method,
-                    BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description)
-                ));
+                    BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                    new Diagnostic($"{clientName}.{operationName}", Array.Empty<DiagnosticAttribute>())));
             }
 
             RestClientMethod[] methods = operationMethods.Select(om => om.Method).Concat(nextPageMethods).ToArray();
@@ -377,8 +378,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 request,
                 OrderParameters(methodParameters.Values),
                 clientResponse.ToArray(),
-                responseHeaderModel,
-                new Diagnostic($"{clientName}.{operationName}", Array.Empty<DiagnosticAttribute>())
+                responseHeaderModel
             );
         }
 
@@ -462,11 +462,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 request,
                 parameters,
                 method.Responses,
-                method.HeaderModel,
-                method.Diagnostics);
+                method.HeaderModel);
         }
 
-        private PagingInfo GetPagingInfo(RestClientMethod method, RestClientMethod? nextPageMethod, Paging paging, ObjectType type)
+        private PagingMethod GetPagingMethod(string clientName, RestClientMethod method, RestClientMethod? nextPageMethod, Paging paging, ObjectType type)
         {
             string? nextLinkName = paging.NextLinkName;
             string itemName = paging.ItemName ?? "value";
@@ -482,13 +481,20 @@ namespace AutoRest.CSharp.V3.Output.Builders
             if (itemProperty.SchemaProperty?.Schema is ArraySchema arraySchema)
             {
                 CSharpType itemType = _typeFactory.CreateType(arraySchema.ElementType, false);
-                return new PagingInfo(method, nextPageMethod, method.Name, nextLinkProperty?.Declaration.Name, itemProperty.Declaration.Name, itemType);
+                return new PagingMethod(
+                    method,
+                    nextPageMethod,
+                    method.Name,
+                    nextLinkProperty?.Declaration.Name,
+                    itemProperty.Declaration.Name,
+                    itemType,
+                    new Diagnostic($"{clientName}.{method.Name}"));
             }
 
             throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
         }
 
-        private LongRunningOperation BuildLongRunningOperation(Operation operation, RestClientMethod startMethod)
+        private LongRunningOperation BuildLongRunningOperation(string clientName, Operation operation, RestClientMethod startMethod)
         {
             var originalResponseParameter = new Parameter(
                 "originalResponse",
@@ -522,7 +528,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     finalResponse.HttpResponse.IntStatusCodes),
                 name,
                 new[] { originalResponseParameter, httpMessageParameter },
-                finalStateVia);
+                finalStateVia,
+                new Diagnostic($"{clientName}.Start{name}"));
         }
 
         private Parameter BuildParameter(RequestParameter requestParameter)

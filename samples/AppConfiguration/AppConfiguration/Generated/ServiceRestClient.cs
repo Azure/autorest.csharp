@@ -79,37 +79,27 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders>> GetKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
-            scope.Start();
-            try
+            using var message = CreateGetKeysRequest(name, after, acceptDatetime);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetKeysHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeysRequest(name, after, acceptDatetime);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetKeysHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyListResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -120,37 +110,27 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders> GetKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
-            scope.Start();
-            try
+            using var message = CreateGetKeysRequest(name, after, acceptDatetime);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetKeysHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeysRequest(name, after, acceptDatetime);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetKeysHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyListResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -190,25 +170,15 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ServiceCheckKeysHeaders>> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
-            scope.Start();
-            try
+            using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceCheckKeysHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceCheckKeysHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -219,25 +189,15 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ServiceCheckKeysHeaders> CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
-            scope.Start();
-            try
+            using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceCheckKeysHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceCheckKeysHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -287,37 +247,27 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders>> GetKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
-            scope.Start();
-            try
+            using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetKeyValuesHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetKeyValuesHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValueListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValueListResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -330,37 +280,27 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders> GetKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
-            scope.Start();
-            try
+            using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetKeyValuesHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetKeyValuesHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValueListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValueListResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -410,25 +350,15 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ServiceCheckKeyValuesHeaders>> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
-            scope.Start();
-            try
+            using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceCheckKeyValuesHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceCheckKeyValuesHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -441,25 +371,15 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ServiceCheckKeyValuesHeaders> CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
-            scope.Start();
-            try
+            using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceCheckKeyValuesHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceCheckKeyValuesHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -516,37 +436,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
-            scope.Start();
-            try
+            using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetKeyValueHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetKeyValueHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -565,37 +475,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
-            scope.Start();
-            try
+            using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetKeyValueHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetKeyValueHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -650,37 +550,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
-            scope.Start();
-            try
+            using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServicePutKeyValueHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServicePutKeyValueHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -698,37 +588,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
-            scope.Start();
-            try
+            using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServicePutKeyValueHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServicePutKeyValueHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -770,39 +650,29 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
-            scope.Start();
-            try
+            using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceDeleteKeyValueHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceDeleteKeyValueHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                case 204:
+                    return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -818,39 +688,29 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
-            scope.Start();
-            try
+            using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceDeleteKeyValueHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceDeleteKeyValueHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    case 204:
-                        return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                case 204:
+                    return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -907,25 +767,15 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
-            scope.Start();
-            try
+            using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceCheckKeyValueHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceCheckKeyValueHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -944,25 +794,15 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
-            scope.Start();
-            try
+            using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceCheckKeyValueHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceCheckKeyValueHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1007,37 +847,27 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders>> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
-            scope.Start();
-            try
+            using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetLabelsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetLabelsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LabelListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LabelListResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1049,37 +879,27 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
-            scope.Start();
-            try
+            using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetLabelsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetLabelsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LabelListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LabelListResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1124,25 +944,15 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ServiceCheckLabelsHeaders>> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
-            scope.Start();
-            try
+            using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceCheckLabelsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceCheckLabelsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1154,25 +964,15 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ServiceCheckLabelsHeaders> CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
-            scope.Start();
-            try
+            using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceCheckLabelsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceCheckLabelsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1219,37 +1019,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutLock");
-            scope.Start();
-            try
+            using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServicePutLockHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServicePutLockHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1266,37 +1056,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutLock");
-            scope.Start();
-            try
+            using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServicePutLockHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServicePutLockHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1343,37 +1123,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
-            scope.Start();
-            try
+            using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceDeleteLockHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceDeleteLockHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1390,37 +1160,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
-            scope.Start();
-            try
+            using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceDeleteLockHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceDeleteLockHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValue value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValue value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValue.DeserializeKeyValue(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValue.DeserializeKeyValue(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1470,37 +1230,27 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders>> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
-            scope.Start();
-            try
+            using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetRevisionsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetRevisionsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValueListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValueListResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1513,37 +1263,27 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
-            scope.Start();
-            try
+            using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetRevisionsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetRevisionsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValueListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValueListResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1593,25 +1333,15 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<ServiceCheckRevisionsHeaders>> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
-            scope.Start();
-            try
+            using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceCheckRevisionsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceCheckRevisionsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1624,25 +1354,15 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<ServiceCheckRevisionsHeaders> CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
-            scope.Start();
-            try
+            using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceCheckRevisionsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceCheckRevisionsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1679,37 +1399,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
-            scope.Start();
-            try
+            using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetKeysHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetKeysHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyListResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1726,37 +1436,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
-            scope.Start();
-            try
+            using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetKeysHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetKeysHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyListResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1795,37 +1495,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
-            scope.Start();
-            try
+            using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetKeyValuesHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetKeyValuesHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValueListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValueListResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1844,37 +1534,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
-            scope.Start();
-            try
+            using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetKeyValuesHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetKeyValuesHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValueListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValueListResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1912,37 +1592,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
-            scope.Start();
-            try
+            using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetLabelsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetLabelsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LabelListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LabelListResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1960,37 +1630,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
-            scope.Start();
-            try
+            using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetLabelsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetLabelsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        LabelListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            LabelListResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2029,37 +1689,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
-            scope.Start();
-            try
+            using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceGetRevisionsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new ServiceGetRevisionsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValueListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValueListResult value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2078,37 +1728,27 @@ namespace AppConfiguration
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
-            scope.Start();
-            try
+            using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceGetRevisionsHeaders(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-                _pipeline.Send(message, cancellationToken);
-                var headers = new ServiceGetRevisionsHeaders(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        KeyValueListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            KeyValueListResult value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

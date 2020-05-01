@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -36,7 +37,17 @@ namespace non_string_enum
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> PutAsync(FloatEnum? input = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutAsync(input, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FloatClient.Put");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutAsync(input, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put a float enum. </summary>
@@ -44,21 +55,51 @@ namespace non_string_enum
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> Put(FloatEnum? input = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Put(input, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FloatClient.Put");
+            scope.Start();
+            try
+            {
+                return RestClient.Put(input, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a float enum. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FloatEnum>> GetAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FloatClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a float enum. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FloatEnum> Get(CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FloatClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

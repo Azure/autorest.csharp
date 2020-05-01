@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -40,7 +41,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileServiceItems>> ListAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.List");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> List all file services in storage accounts. </summary>
@@ -49,7 +60,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileServiceItems> List(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            return RestClient.List(resourceGroupName, accountName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.List");
+            scope.Start();
+            try
+            {
+                return RestClient.List(resourceGroupName, accountName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
@@ -60,7 +81,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.SetServicePropertiesAsync(resourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.SetServiceProperties");
+            scope.Start();
+            try
+            {
+                return await RestClient.SetServicePropertiesAsync(resourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
@@ -71,7 +102,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileServiceProperties> SetServiceProperties(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.SetServiceProperties(resourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.SetServiceProperties");
+            scope.Start();
+            try
+            {
+                return RestClient.SetServiceProperties(resourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
@@ -80,7 +121,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileServiceProperties>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetServicePropertiesAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.GetServiceProperties");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetServicePropertiesAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
@@ -89,7 +140,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileServiceProperties> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetServiceProperties(resourceGroupName, accountName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.GetServiceProperties");
+            scope.Start();
+            try
+            {
+                return RestClient.GetServiceProperties(resourceGroupName, accountName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

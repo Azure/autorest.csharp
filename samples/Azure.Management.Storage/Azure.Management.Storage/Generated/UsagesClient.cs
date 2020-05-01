@@ -47,8 +47,18 @@ namespace Azure.Management.Storage
 
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await RestClient.ListByLocationAsync(location, cancellationToken).ConfigureAwait(false);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("UsagesClient.ListByLocation");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.ListByLocationAsync(location, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
@@ -65,8 +75,18 @@ namespace Azure.Management.Storage
 
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
-                var response = RestClient.ListByLocation(location, cancellationToken);
-                return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                using var scope = _clientDiagnostics.CreateScope("UsagesClient.ListByLocation");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.ListByLocation(location, cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }

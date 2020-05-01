@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,7 +36,17 @@ namespace custom_baseUrl
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetEmptyAsync(accountName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetEmptyAsync(accountName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
@@ -43,7 +54,17 @@ namespace custom_baseUrl
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetEmpty(string accountName, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetEmpty(accountName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.GetEmpty(accountName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

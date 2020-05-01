@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -41,7 +42,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PrivateEndpointConnection>> GetAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetAsync(resourceGroupName, accountName, privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Get");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetAsync(resourceGroupName, accountName, privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>
@@ -51,7 +62,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PrivateEndpointConnection> Get(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return RestClient.Get(resourceGroupName, accountName, privateEndpointConnectionName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Get");
+            scope.Start();
+            try
+            {
+                return RestClient.Get(resourceGroupName, accountName, privateEndpointConnectionName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
@@ -63,7 +84,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PrivateEndpointConnection>> PutAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutAsync(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Put");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutAsync(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
@@ -75,7 +106,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PrivateEndpointConnection> Put(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.Put(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Put");
+            scope.Start();
+            try
+            {
+                return RestClient.Put(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
@@ -85,7 +126,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DeleteAsync(resourceGroupName, accountName, privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Delete");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteAsync(resourceGroupName, accountName, privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
@@ -95,7 +146,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete(resourceGroupName, accountName, privateEndpointConnectionName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Delete");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete(resourceGroupName, accountName, privateEndpointConnectionName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

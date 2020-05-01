@@ -97,36 +97,26 @@ namespace NameConflicts
                 throw new ArgumentNullException(nameof(@class));
             }
 
-            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.Operation");
-            scope0.Start();
-            try
+            using var message0 = CreateOperationRequest(request, message, scope, uri, pipeline, clientDiagnostics, @class);
+            await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
+            switch (message0.Response.Status)
             {
-                using var message0 = CreateOperationRequest(request, message, scope, uri, pipeline, clientDiagnostics, @class);
-                await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
-                switch (message0.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Struct value = default;
+                        using var document = await JsonDocument.ParseAsync(message0.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            Struct value = default;
-                            using var document = await JsonDocument.ParseAsync(message0.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = Struct.DeserializeStruct(document.RootElement);
-                            }
-                            return Response.FromValue(value, message0.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope0.Failed(e);
-                throw;
+                        else
+                        {
+                            value = Struct.DeserializeStruct(document.RootElement);
+                        }
+                        return Response.FromValue(value, message0.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
             }
         }
 
@@ -169,36 +159,26 @@ namespace NameConflicts
                 throw new ArgumentNullException(nameof(@class));
             }
 
-            using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.Operation");
-            scope0.Start();
-            try
+            using var message0 = CreateOperationRequest(request, message, scope, uri, pipeline, clientDiagnostics, @class);
+            _pipeline.Send(message0, cancellationToken);
+            switch (message0.Response.Status)
             {
-                using var message0 = CreateOperationRequest(request, message, scope, uri, pipeline, clientDiagnostics, @class);
-                _pipeline.Send(message0, cancellationToken);
-                switch (message0.Response.Status)
-                {
-                    case 200:
+                case 200:
+                    {
+                        Struct value = default;
+                        using var document = JsonDocument.Parse(message0.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            Struct value = default;
-                            using var document = JsonDocument.Parse(message0.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                value = Struct.DeserializeStruct(document.RootElement);
-                            }
-                            return Response.FromValue(value, message0.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message0.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope0.Failed(e);
-                throw;
+                        else
+                        {
+                            value = Struct.DeserializeStruct(document.RootElement);
+                        }
+                        return Response.FromValue(value, message0.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message0.Response);
             }
         }
 
@@ -226,24 +206,14 @@ namespace NameConflicts
                 throw new ArgumentNullException(nameof(stringBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
-            scope.Start();
-            try
+            using var message = CreateAnalyzeBodyRequest(stringBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateAnalyzeBodyRequest(stringBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -257,24 +227,14 @@ namespace NameConflicts
                 throw new ArgumentNullException(nameof(stringBody));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
-            scope.Start();
-            try
+            using var message = CreateAnalyzeBodyRequest(stringBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateAnalyzeBodyRequest(stringBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -302,24 +262,14 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<Response> AnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
-            scope.Start();
-            try
+            using var message = CreateAnalyzeBodyRequest(stringBody);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
             {
-                using var message = CreateAnalyzeBodyRequest(stringBody);
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -328,24 +278,14 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response AnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AnalyzeBody");
-            scope.Start();
-            try
+            using var message = CreateAnalyzeBodyRequest(stringBody);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
             {
-                using var message = CreateAnalyzeBodyRequest(stringBody);
-                _pipeline.Send(message, cancellationToken);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -36,7 +37,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetServiceStatisticsAsync(requestOptions, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetServiceStatistics");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetServiceStatisticsAsync(requestOptions, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets service level statistics for a search service. </summary>
@@ -44,7 +55,17 @@ namespace CognitiveSearch
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ServiceStatistics> GetServiceStatistics(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetServiceStatistics(requestOptions, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetServiceStatistics");
+            scope.Start();
+            try
+            {
+                return RestClient.GetServiceStatistics(requestOptions, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

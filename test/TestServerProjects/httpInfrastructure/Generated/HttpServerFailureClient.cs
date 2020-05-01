@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,56 +35,136 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> Head501Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.Head501Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
+            scope.Start();
+            try
+            {
+                return await RestClient.Head501Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Head501(CancellationToken cancellationToken = default)
         {
-            return RestClient.Head501(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
+            scope.Start();
+            try
+            {
+                return RestClient.Head501(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> Get501Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.Get501Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
+            scope.Start();
+            try
+            {
+                return await RestClient.Get501Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Get501(CancellationToken cancellationToken = default)
         {
-            return RestClient.Get501(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
+            scope.Start();
+            try
+            {
+                return RestClient.Get501(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> Post505Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.Post505Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
+            scope.Start();
+            try
+            {
+                return await RestClient.Post505Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Post505(CancellationToken cancellationToken = default)
         {
-            return RestClient.Post505(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
+            scope.Start();
+            try
+            {
+                return RestClient.Post505(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> Delete505Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.Delete505Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
+            scope.Start();
+            try
+            {
+                return await RestClient.Delete505Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete505(CancellationToken cancellationToken = default)
         {
-            return RestClient.Delete505(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
+            scope.Start();
+            try
+            {
+                return RestClient.Delete505(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

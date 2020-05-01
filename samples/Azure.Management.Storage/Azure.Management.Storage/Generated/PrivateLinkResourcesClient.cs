@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -40,7 +41,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PrivateLinkResourceListResult>> ListByStorageAccountAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            return await RestClient.ListByStorageAccountAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrivateLinkResourcesClient.ListByStorageAccount");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListByStorageAccountAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
@@ -49,7 +60,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PrivateLinkResourceListResult> ListByStorageAccount(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            return RestClient.ListByStorageAccount(resourceGroupName, accountName, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrivateLinkResourcesClient.ListByStorageAccount");
+            scope.Start();
+            try
+            {
+                return RestClient.ListByStorageAccount(resourceGroupName, accountName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

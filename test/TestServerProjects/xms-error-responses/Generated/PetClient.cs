@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -36,7 +37,17 @@ namespace xms_error_responses
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Pet>> GetPetByIdAsync(string petId, CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetPetByIdAsync(petId, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetClient.GetPetById");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetPetByIdAsync(petId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets pets by id. </summary>
@@ -44,7 +55,17 @@ namespace xms_error_responses
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Pet> GetPetById(string petId, CancellationToken cancellationToken = default)
         {
-            return RestClient.GetPetById(petId, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetClient.GetPetById");
+            scope.Start();
+            try
+            {
+                return RestClient.GetPetById(petId, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Asks pet to do something. </summary>
@@ -52,7 +73,17 @@ namespace xms_error_responses
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAction>> DoSomethingAsync(string whatAction, CancellationToken cancellationToken = default)
         {
-            return await RestClient.DoSomethingAsync(whatAction, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PetClient.DoSomething");
+            scope.Start();
+            try
+            {
+                return await RestClient.DoSomethingAsync(whatAction, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Asks pet to do something. </summary>
@@ -60,7 +91,17 @@ namespace xms_error_responses
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAction> DoSomething(string whatAction, CancellationToken cancellationToken = default)
         {
-            return RestClient.DoSomething(whatAction, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PetClient.DoSomething");
+            scope.Start();
+            try
+            {
+                return RestClient.DoSomething(whatAction, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

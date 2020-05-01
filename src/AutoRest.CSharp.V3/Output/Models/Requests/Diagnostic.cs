@@ -1,14 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+
 namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class Diagnostic
     {
-        public Diagnostic(string scopeName, DiagnosticAttribute[] attributes)
+        public Diagnostic(string scopeName, DiagnosticAttribute[]? attributes = null)
         {
             ScopeName = scopeName;
-            Attributes = attributes;
+            Attributes = attributes ?? Array.Empty<DiagnosticAttribute>();
         }
 
         public string ScopeName { get; }

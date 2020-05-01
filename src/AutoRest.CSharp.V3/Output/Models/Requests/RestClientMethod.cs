@@ -9,14 +9,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class RestClientMethod
     {
-        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responseType, ResponseHeaderGroupType? headerModel, Diagnostic diagnostics)
+        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responseType, ResponseHeaderGroupType? headerModel)
         {
             Name = name;
             Request = request;
             Parameters = parameters;
             Responses = responseType;
             Description = description;
-            Diagnostics = diagnostics;
             ReturnType = returnType;
             HeaderModel = headerModel;
         }
@@ -27,7 +26,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         public Parameter[] Parameters { get; }
         public Response[] Responses { get; }
         public ResponseHeaderGroupType? HeaderModel { get; }
-        public Diagnostic Diagnostics { get; }
         public CSharpType? ReturnType { get; }
     }
 }

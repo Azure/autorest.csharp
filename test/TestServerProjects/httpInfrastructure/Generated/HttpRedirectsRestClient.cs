@@ -50,26 +50,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsHead300Headers>> Head300Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
-            scope.Start();
-            try
+            using var message = CreateHead300Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsHead300Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead300Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsHead300Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 300:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 300:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -77,26 +67,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsHead300Headers> Head300(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
-            scope.Start();
-            try
+            using var message = CreateHead300Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsHead300Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead300Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsHead300Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 300:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 300:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -116,51 +96,41 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<IReadOnlyList<string>, HttpRedirectsGet300Headers>> Get300Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
-            scope.Start();
-            try
+            using var message = CreateGet300Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsGet300Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet300Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsGet300Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue<IReadOnlyList<string>, HttpRedirectsGet300Headers>(null, headers, message.Response);
-                    case 300:
+                case 200:
+                    return ResponseWithHeaders.FromValue<IReadOnlyList<string>, HttpRedirectsGet300Headers>(null, headers, message.Response);
+                case 300:
+                    {
+                        IReadOnlyList<string> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<string> value = default;
-                            using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
+                            }
+                            value = array;
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -168,51 +138,41 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<IReadOnlyList<string>, HttpRedirectsGet300Headers> Get300(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
-            scope.Start();
-            try
+            using var message = CreateGet300Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsGet300Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet300Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsGet300Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                        return ResponseWithHeaders.FromValue<IReadOnlyList<string>, HttpRedirectsGet300Headers>(null, headers, message.Response);
-                    case 300:
+                case 200:
+                    return ResponseWithHeaders.FromValue<IReadOnlyList<string>, HttpRedirectsGet300Headers>(null, headers, message.Response);
+                case 300:
+                    {
+                        IReadOnlyList<string> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            IReadOnlyList<string> value = default;
-                            using var document = JsonDocument.Parse(message.Response.ContentStream);
-                            if (document.RootElement.ValueKind == JsonValueKind.Null)
-                            {
-                                value = null;
-                            }
-                            else
-                            {
-                                List<string> array = new List<string>();
-                                foreach (var item in document.RootElement.EnumerateArray())
-                                {
-                                    if (item.ValueKind == JsonValueKind.Null)
-                                    {
-                                        array.Add(null);
-                                    }
-                                    else
-                                    {
-                                        array.Add(item.GetString());
-                                    }
-                                }
-                                value = array;
-                            }
-                            return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                            value = null;
                         }
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in document.RootElement.EnumerateArray())
+                            {
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(item.GetString());
+                                }
+                            }
+                            value = array;
+                        }
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -232,26 +192,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsHead301Headers>> Head301Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
-            scope.Start();
-            try
+            using var message = CreateHead301Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsHead301Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead301Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsHead301Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 301:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 301:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -259,26 +209,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsHead301Headers> Head301(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
-            scope.Start();
-            try
+            using var message = CreateHead301Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsHead301Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead301Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsHead301Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 301:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 301:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -298,26 +238,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsGet301Headers>> Get301Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
-            scope.Start();
-            try
+            using var message = CreateGet301Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsGet301Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet301Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsGet301Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 301:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 301:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -325,26 +255,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsGet301Headers> Get301(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
-            scope.Start();
-            try
+            using var message = CreateGet301Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsGet301Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet301Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsGet301Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 301:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 301:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -368,25 +288,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsPut301Headers>> Put301Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
-            scope.Start();
-            try
+            using var message = CreatePut301Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsPut301Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePut301Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsPut301Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 301:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 301:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -394,25 +304,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsPut301Headers> Put301(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
-            scope.Start();
-            try
+            using var message = CreatePut301Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsPut301Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePut301Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsPut301Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 301:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 301:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -432,26 +332,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsHead302Headers>> Head302Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
-            scope.Start();
-            try
+            using var message = CreateHead302Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsHead302Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead302Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsHead302Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 302:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 302:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -459,26 +349,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsHead302Headers> Head302(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
-            scope.Start();
-            try
+            using var message = CreateHead302Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsHead302Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead302Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsHead302Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 302:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 302:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -498,26 +378,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsGet302Headers>> Get302Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
-            scope.Start();
-            try
+            using var message = CreateGet302Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsGet302Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet302Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsGet302Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 302:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 302:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -525,26 +395,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsGet302Headers> Get302(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
-            scope.Start();
-            try
+            using var message = CreateGet302Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsGet302Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet302Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsGet302Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 302:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 302:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -568,25 +428,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsPatch302Headers>> Patch302Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
-            scope.Start();
-            try
+            using var message = CreatePatch302Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsPatch302Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePatch302Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsPatch302Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 302:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 302:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -594,25 +444,15 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsPatch302Headers> Patch302(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
-            scope.Start();
-            try
+            using var message = CreatePatch302Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsPatch302Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePatch302Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsPatch302Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 302:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 302:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -636,26 +476,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsPost303Headers>> Post303Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
-            scope.Start();
-            try
+            using var message = CreatePost303Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsPost303Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePost303Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsPost303Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 303:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 303:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -663,26 +493,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsPost303Headers> Post303(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
-            scope.Start();
-            try
+            using var message = CreatePost303Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsPost303Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePost303Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsPost303Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 303:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 303:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -702,26 +522,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsHead307Headers>> Head307Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
-            scope.Start();
-            try
+            using var message = CreateHead307Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsHead307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead307Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsHead307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -729,26 +539,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsHead307Headers> Head307(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
-            scope.Start();
-            try
+            using var message = CreateHead307Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsHead307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateHead307Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsHead307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -768,26 +568,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsGet307Headers>> Get307Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
-            scope.Start();
-            try
+            using var message = CreateGet307Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsGet307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet307Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsGet307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -795,26 +585,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsGet307Headers> Get307(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
-            scope.Start();
-            try
+            using var message = CreateGet307Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsGet307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateGet307Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsGet307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -834,26 +614,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsOptions307Headers>> Options307Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
-            scope.Start();
-            try
+            using var message = CreateOptions307Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsOptions307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateOptions307Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsOptions307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -861,26 +631,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsOptions307Headers> Options307(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
-            scope.Start();
-            try
+            using var message = CreateOptions307Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsOptions307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateOptions307Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsOptions307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -904,26 +664,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsPut307Headers>> Put307Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
-            scope.Start();
-            try
+            using var message = CreatePut307Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsPut307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePut307Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsPut307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -931,26 +681,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsPut307Headers> Put307(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
-            scope.Start();
-            try
+            using var message = CreatePut307Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsPut307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePut307Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsPut307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -974,26 +714,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsPatch307Headers>> Patch307Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
-            scope.Start();
-            try
+            using var message = CreatePatch307Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsPatch307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePatch307Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsPatch307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1001,26 +731,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsPatch307Headers> Patch307(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
-            scope.Start();
-            try
+            using var message = CreatePatch307Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsPatch307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePatch307Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsPatch307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1044,26 +764,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsPost307Headers>> Post307Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
-            scope.Start();
-            try
+            using var message = CreatePost307Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsPost307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePost307Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsPost307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1071,26 +781,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsPost307Headers> Post307(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
-            scope.Start();
-            try
+            using var message = CreatePost307Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsPost307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreatePost307Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsPost307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1114,26 +814,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async ValueTask<ResponseWithHeaders<HttpRedirectsDelete307Headers>> Delete307Async(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
-            scope.Start();
-            try
+            using var message = CreateDelete307Request();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new HttpRedirectsDelete307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDelete307Request();
-                await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-                var headers = new HttpRedirectsDelete307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1141,26 +831,16 @@ namespace httpInfrastructure
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<HttpRedirectsDelete307Headers> Delete307(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
-            scope.Start();
-            try
+            using var message = CreateDelete307Request();
+            _pipeline.Send(message, cancellationToken);
+            var headers = new HttpRedirectsDelete307Headers(message.Response);
+            switch (message.Response.Status)
             {
-                using var message = CreateDelete307Request();
-                _pipeline.Send(message, cancellationToken);
-                var headers = new HttpRedirectsDelete307Headers(message.Response);
-                switch (message.Response.Status)
-                {
-                    case 200:
-                    case 307:
-                        return ResponseWithHeaders.FromValue(headers, message.Response);
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                }
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
+                case 200:
+                case 307:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

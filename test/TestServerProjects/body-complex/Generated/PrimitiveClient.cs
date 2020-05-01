@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,14 +36,34 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetIntAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetInt");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetIntAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<IntWrapper> GetInt(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetInt(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetInt");
+            scope.Start();
+            try
+            {
+                return RestClient.GetInt(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with integer properties. </summary>
@@ -50,7 +71,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutIntAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutInt");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutIntAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with integer properties. </summary>
@@ -58,21 +89,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutInt(IntWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutInt(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutInt");
+            scope.Start();
+            try
+            {
+                return RestClient.PutInt(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetLongAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetLong");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetLongAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<LongWrapper> GetLong(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetLong(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetLong");
+            scope.Start();
+            try
+            {
+                return RestClient.GetLong(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with long properties. </summary>
@@ -80,7 +141,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutLongAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutLong");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutLongAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with long properties. </summary>
@@ -88,21 +159,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutLong(LongWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutLong(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutLong");
+            scope.Start();
+            try
+            {
+                return RestClient.PutLong(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetFloatAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetFloatAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FloatWrapper> GetFloat(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetFloat(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
+            scope.Start();
+            try
+            {
+                return RestClient.GetFloat(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with float properties. </summary>
@@ -110,7 +211,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutFloatAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutFloatAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with float properties. </summary>
@@ -118,21 +229,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutFloat(FloatWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutFloat(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
+            scope.Start();
+            try
+            {
+                return RestClient.PutFloat(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDoubleAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDoubleAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DoubleWrapper> GetDouble(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDouble(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDouble(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with double properties. </summary>
@@ -140,7 +281,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDoubleAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDoubleAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with double properties. </summary>
@@ -148,21 +299,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDouble(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDouble(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDouble(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetBoolAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetBool");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBoolAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BooleanWrapper> GetBool(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetBool(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetBool");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBool(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with bool properties. </summary>
@@ -170,7 +351,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutBoolAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutBool");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutBoolAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with bool properties. </summary>
@@ -178,21 +369,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutBool(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutBool(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutBool");
+            scope.Start();
+            try
+            {
+                return RestClient.PutBool(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetStringAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetString");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetStringAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StringWrapper> GetString(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetString(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetString");
+            scope.Start();
+            try
+            {
+                return RestClient.GetString(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with string properties. </summary>
@@ -200,7 +421,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutStringAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutString");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutStringAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with string properties. </summary>
@@ -208,21 +439,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutString(StringWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutString(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutString");
+            scope.Start();
+            try
+            {
+                return RestClient.PutString(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DateWrapper> GetDate(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDate(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDate");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDate(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with date properties. </summary>
@@ -230,7 +491,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDateAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDate");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDateAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with date properties. </summary>
@@ -238,21 +509,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDate(DateWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDate(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDate");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDate(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DatetimeWrapper> GetDateTime(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateTime(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateTime(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with datetime properties. </summary>
@@ -260,7 +561,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDateTimeAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDateTimeAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with datetime properties. </summary>
@@ -268,21 +579,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDateTime(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDateTime(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDateTime(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDateTimeRfc1123Async(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDateTimeRfc1123Async(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Datetimerfc1123Wrapper> GetDateTimeRfc1123(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDateTimeRfc1123(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDateTimeRfc1123(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
@@ -290,7 +631,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDateTimeRfc1123Async(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDateTimeRfc1123Async(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
@@ -298,21 +649,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDateTimeRfc1123(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDateTimeRfc1123(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDateTimeRfc1123(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetDurationAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetDurationAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DurationWrapper> GetDuration(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetDuration(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
+            scope.Start();
+            try
+            {
+                return RestClient.GetDuration(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with duration properties. </summary>
@@ -320,7 +701,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutDurationAsync(DurationWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutDurationAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutDurationAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with duration properties. </summary>
@@ -328,21 +719,51 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutDuration(DurationWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutDuration(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
+            scope.Start();
+            try
+            {
+                return RestClient.PutDuration(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
         {
-            return await RestClient.GetByteAsync(cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetByte");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetByteAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ByteWrapper> GetByte(CancellationToken cancellationToken = default)
         {
-            return RestClient.GetByte(cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetByte");
+            scope.Start();
+            try
+            {
+                return RestClient.GetByte(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with byte properties. </summary>
@@ -350,7 +771,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutByteAsync(ByteWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return await RestClient.PutByteAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutByte");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutByteAsync(complexBody, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with byte properties. </summary>
@@ -358,7 +789,17 @@ namespace body_complex
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutByte(ByteWrapper complexBody, CancellationToken cancellationToken = default)
         {
-            return RestClient.PutByte(complexBody, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutByte");
+            scope.Start();
+            try
+            {
+                return RestClient.PutByte(complexBody, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }
