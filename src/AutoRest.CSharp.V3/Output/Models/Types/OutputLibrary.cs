@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Builders;
+using AutoRest.CSharp.V3.Output.Models.Requests;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
@@ -16,6 +18,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private Dictionary<Schema, ISchemaType>? _models;
         private Client[]? _clients;
         private RestClient[]? _restClients;
+        private LongRunningOperation[]? _operations;
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -40,6 +43,28 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 EnsureClients();
                 return _clients!;
+            }
+        }
+
+        public LongRunningOperation[] LongRunningOperations
+        {
+            get
+            {
+                return _operations ??= BuildLongRunningOperations().ToArray();
+            }
+        }
+
+        private IEnumerable<LongRunningOperation> BuildLongRunningOperations()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (operation.IsLongRunning)
+                    {
+                        yield return new LongRunningOperation(operation, _context);
+                    }
+                }
             }
         }
 
@@ -77,5 +102,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
+
+        public LongRunningOperation FindLongRunningOperation(Operation operation)
+        {
+            Debug.Assert(operation.IsLongRunning);
+
+            return LongRunningOperations.Single(lro => lro.Operation == operation);
+        }
     }
 }

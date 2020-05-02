@@ -73,14 +73,14 @@ namespace AutoRest.CSharp.V3.Output.Builders
                         continue;
                     }
 
-                    RestClientMethod method = BuildMethod(operation, clientName, clientParameters, httpRequest, serviceRequest.Parameters.ToArray(), responseHeaderModel);
+                    RestClientMethod method = BuildMethod(operation, clientParameters, httpRequest, serviceRequest.Parameters.ToArray(), responseHeaderModel);
                     operationMethods.Add(new OperationMethod(operation, method));
                 }
             }
 
             List<RestClientMethod> nextPageMethods = new List<RestClientMethod>();
             List<PagingMethod> pagingMethods = new List<PagingMethod>();
-            List<LongRunningOperation> longRunningOperationMethods = new List<LongRunningOperation>();
+            List<LongRunningOperationMethod> longRunningOperationMethods = new List<LongRunningOperationMethod>();
             List<ClientMethod> clientMethods = new List<ClientMethod>();
             foreach ((Operation operation, RestClientMethod method) in operationMethods)
             {
@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private RestClientMethod BuildMethod(Operation operation, string clientName, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, RequestParameter[] requestParameters, ResponseHeaderGroupType? responseHeaderModel)
+        private RestClientMethod BuildMethod(Operation operation, IReadOnlyDictionary<string, Parameter> clientParameters, HttpRequest httpRequest, RequestParameter[] requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
             Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
@@ -494,42 +494,16 @@ namespace AutoRest.CSharp.V3.Output.Builders
             throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
         }
 
-        private LongRunningOperation BuildLongRunningOperation(string clientName, Operation operation, RestClientMethod startMethod)
+        private LongRunningOperationMethod BuildLongRunningOperation(string clientName, Operation operation, RestClientMethod startMethod, BuildContext context)
         {
-            var originalResponseParameter = new Parameter(
-                "originalResponse",
-                "The original response from starting the operation.",
-                typeof(AzureResponse),
-                null,
-                true);
-            var httpMessageParameter = new Parameter(
-                "createOriginalHttpMessage",
-                "Creates the HTTP message used for the original request.",
-                typeof(Func<HttpMessage>),
-                null,
-                true);
-
             string name = operation.CSharpName();
 
-            var finalStateVia = operation.LongRunningFinalStateVia switch
-            {
-                "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
-                "location" => OperationFinalStateVia.Location,
-                "original-uri" => OperationFinalStateVia.OriginalUri,
-                null => OperationFinalStateVia.Location,
-                _ => throw new ArgumentException($"Unknown final-state-via value: {operation.LongRunningFinalStateVia}")
-            };
-
-            ServiceResponse finalResponse = operation.LongRunningFinalResponse;
-
-            return new LongRunningOperation(
-                startMethod,
-                new Response(BuildResponseBody(finalResponse),
-                    finalResponse.HttpResponse.IntStatusCodes),
+            return new LongRunningOperationMethod(
                 name,
-                new[] { originalResponseParameter, httpMessageParameter },
-                finalStateVia,
-                new Diagnostic($"{clientName}.Start{name}"));
+                context.Library.FindLongRunningOperation(operation),
+                startMethod,
+                new Diagnostic($"{clientName}.Start{name}")
+            );
         }
 
         private Parameter BuildParameter(RequestParameter requestParameter)
