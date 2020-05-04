@@ -18,7 +18,6 @@ namespace Azure.Core
         public static string ToString(DateTimeOffset value, string format) => format switch
         {
             "D" => value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
-            "S" when value.Offset == TimeSpan.Zero => value.ToString("yyyy-MM-ddTHH:mm:ss.fffZ", CultureInfo.InvariantCulture),
             "S" => value.ToString("O", CultureInfo.InvariantCulture),
             "R" => value.ToString("R", CultureInfo.InvariantCulture),
             "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
