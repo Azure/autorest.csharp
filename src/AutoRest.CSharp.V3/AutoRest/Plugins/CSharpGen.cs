@@ -61,15 +61,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 restClientWriter.WriteClient(restCodeWriter, client);
 
                 project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
+            }
 
-                var headerModels = client.Methods.Select(m => m.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
-                foreach (ResponseHeaderGroupType responseHeaderModel in headerModels)
-                {
-                    var headerModelCodeWriter = new CodeWriter();
-                    headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
+            foreach (ResponseHeaderGroupType responseHeaderModel in context.Library.HeaderModels)
+            {
+                var headerModelCodeWriter = new CodeWriter();
+                headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
 
-                    project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
-                }
+                project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
             foreach (var client in context.Library.Clients)

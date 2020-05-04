@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -1345,58 +1344,17 @@ namespace paging
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<ProductResult> CreateGetMultiplePagesLRO(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "PagingClient.StartGetMultiplePagesLRO", OperationFinalStateVia.Location, createOriginalHttpMessage,
-            (response, cancellationToken) =>
-            {
-                using var document = JsonDocument.Parse(response.ContentStream);
-                if (document.RootElement.ValueKind == JsonValueKind.Null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return ProductResult.DeserializeProductResult(document.RootElement);
-                }
-            },
-            async (response, cancellationToken) =>
-            {
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                if (document.RootElement.ValueKind == JsonValueKind.Null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return ProductResult.DeserializeProductResult(document.RootElement);
-                }
-            });
-        }
-
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<ProductResult>> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<GetMultiplePagesLROOperation> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PagingClient.StartGetMultiplePagesLRO");
             scope.Start();
             try
             {
                 var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken).ConfigureAwait(false);
-                return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
+                return new GetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1409,14 +1367,14 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<ProductResult> StartGetMultiplePagesLRO(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
+        public virtual GetMultiplePagesLROOperation StartGetMultiplePagesLRO(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PagingClient.StartGetMultiplePagesLRO");
             scope.Start();
             try
             {
                 var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken);
-                return CreateGetMultiplePagesLRO(originalResponse, () => RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions));
+                return new GetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse);
             }
             catch (Exception e)
             {

@@ -10,7 +10,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using NameConflicts.Models;
 
@@ -81,26 +80,9 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateAnalyzeBody(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.StartAnalyzeBody", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartAnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<AnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -112,7 +94,7 @@ namespace NameConflicts
             try
             {
                 var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
-                return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+                return new AnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -124,7 +106,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartAnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
+        public virtual AnalyzeBodyOperation StartAnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -136,7 +118,7 @@ namespace NameConflicts
             try
             {
                 var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
-                return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+                return new AnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -148,14 +130,14 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<AnalyzeBodyOperation> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeBody");
             scope0.Start();
             try
             {
                 var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
-                return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+                return new AnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -167,14 +149,14 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartAnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
+        public virtual AnalyzeBodyOperation StartAnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeBody");
             scope0.Start();
             try
             {
                 var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
-                return CreateAnalyzeBody(originalResponse, () => RestClient.CreateAnalyzeBodyRequest(stringBody));
+                return new AnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody).Request, originalResponse);
             }
             catch (Exception e)
             {
