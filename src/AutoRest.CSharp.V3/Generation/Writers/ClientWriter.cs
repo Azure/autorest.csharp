@@ -3,24 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using AutoRest.CSharp.V3.AutoRest.Plugins;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models;
 using AutoRest.CSharp.V3.Output.Models.Requests;
-using AutoRest.CSharp.V3.Output.Models.Responses;
-using AutoRest.CSharp.V3.Output.Models.Serialization;
-using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
-using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
-using AutoRest.CSharp.V3.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Microsoft.CodeAnalysis.Operations;
 using Response = Azure.Response;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
@@ -34,7 +26,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(client.Description);
-                using (writer.Scope($"{client.DeclaredType.Accessibility} partial class {cs.Name}"))
+                using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client);
 
@@ -59,15 +51,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         WritePagingOperation(writer, pagingMethod, false);
                     }
 
-                    // We only need one CreateOperation method per overload group
-                    HashSet<string> createOperations = new HashSet<string>();
                     foreach (var longRunningOperation in client.LongRunningOperationMethods)
                     {
-                        if (createOperations.Add(longRunningOperation.Name))
-                        {
-                            WriteCreateOperationOperation(writer, longRunningOperation);
-                        }
-
                         WriteStartOperationOperation(writer, longRunningOperation, true);
                         WriteStartOperationOperation(writer, longRunningOperation, false);
                     }
@@ -194,8 +179,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private string CreateRequestMethodName(string name) => $"Create{name}Request";
 
-        private string CreateCreateOperationName(string name) => $"Create{name}";
-
         private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
@@ -313,71 +296,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private void WriteCreateOperationOperation(CodeWriter writer, LongRunningOperation lroMethod)
-        {
-            RestClientMethod originalMethod = lroMethod.OriginalMethod;
-            CSharpType? responseBodyType = lroMethod.OriginalResponse.ResponseBody?.Type;
-            CSharpType responseType = new CSharpType(typeof(Operation<>), responseBodyType ?? new CSharpType(typeof(Response)));
-            Parameter[] parameters = lroMethod.CreateParameters;
-
-            writer.WriteXmlDocumentationSummary(originalMethod.Description);
-
-            foreach (Parameter parameter in parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-            }
-
-            writer.Append($"internal {responseType} {CreateCreateOperationName(lroMethod.Name)}(");
-            foreach (Parameter parameter in parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.RemoveTrailingComma();
-            writer.Line($")");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(parameters);
-
-                writer.Append($"return {typeof(ArmOperationHelpers)}.Create(");
-                writer.Append($"_pipeline, _clientDiagnostics, originalResponse, {typeof(RequestMethod)}.{originalMethod.Request.HttpMethod.ToRequestMethodName()}, {lroMethod.Diagnostics.ScopeName:L}, {typeof(OperationFinalStateVia)}.{lroMethod.FinalStateVia}, createOriginalHttpMessage");
-
-                if (responseBodyType != null)
-                {
-                    writer.Line($", ");
-                    string responseVariable = "response";
-                    if (lroMethod.OriginalResponse.ResponseBody is ObjectResponseBody objectResponseBody)
-                    {
-                        using (writer.Scope($"({responseVariable:D}, cancellationToken) =>", "{", "},"))
-                        {
-                            writer.WriteDeserializationForMethods(
-                                objectResponseBody.Serialization,
-                                async: false,
-                                (w, v) => w.Line($"return {v};")
-                                , responseVariable);
-                        }
-
-                        using (writer.Scope($"async ({responseVariable:D}, cancellationToken) =>", newLine: false))
-                        {
-                            writer.WriteDeserializationForMethods(
-                                objectResponseBody.Serialization,
-                                async: true,
-                                (w, v) => w.Line($"return {v};")
-                                , responseVariable);
-                        }
-                    }
-                    else if (lroMethod.OriginalResponse.ResponseBody is StreamResponseBody)
-                    {
-                        //TODO: https://github.com/Azure/autorest.csharp/issues/523
-                        throw new NotSupportedException("Binary is not supported as message (not response) is required for ExtractResponseContent() call.");
-                    }
-                }
-
-                writer.Line($");");
-            }
-            writer.Line();
-        }
-
         private void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, CodeWriterDelegate inner)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
@@ -404,11 +322,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperation lroMethod, bool async)
+        private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)
         {
-            RestClientMethod originalMethod = lroMethod.OriginalMethod;
-            CSharpType responseType = new CSharpType(typeof(Operation<>), lroMethod.OriginalResponse.ResponseBody?.Type ?? typeof(Response));
-            responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
+            RestClientMethod originalMethod = lroMethod.StartMethod;
+            CSharpType returnType = async ? new CSharpType(typeof(ValueTask<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
             Parameter[] parameters = originalMethod.Parameters;
 
             writer.WriteXmlDocumentationSummary(originalMethod.Description);
@@ -420,7 +337,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
 
             string asyncText = async ? "async " : string.Empty;
-            writer.Append($"public virtual {asyncText}{responseType} {CreateStartOperationName(lroMethod.Name, async)}(");
+            writer.Append($"public virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteParameter(parameter);
@@ -443,13 +360,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     writer.Line($"cancellationToken){configureText};");
 
-                    writer.Append($"return {CreateCreateOperationName(lroMethod.Name)}(originalResponse, () => RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
+                    writer.Append($"return new {lroMethod.Operation.Type}(_clientDiagnostics, _pipeline, RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
                     foreach (Parameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");
                     }
                     writer.RemoveTrailingComma();
-                    writer.Line($"));");
+                    writer.Line($").Request, originalResponse);");
                 });
 
             }

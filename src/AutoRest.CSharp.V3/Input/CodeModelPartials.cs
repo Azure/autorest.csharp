@@ -66,6 +66,7 @@ namespace AutoRest.CSharp.V3.Input
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
+        public Schema? ResponseSchema => (this as SchemaResponse)?.Schema;
     }
 
     internal partial class HttpResponse

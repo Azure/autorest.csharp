@@ -435,29 +435,12 @@ namespace Azure.AI.FormRecognizer
         }
 
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateAnalyzeWithCustomModel(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.StartAnalyzeWithCustomModel", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartAnalyzeWithCustomModelAsync(Guid modelId, ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<ServiceAnalyzeWithCustomModelOperation> StartAnalyzeWithCustomModelAsync(Guid modelId, ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
         {
             if (fileStream == null)
             {
@@ -469,7 +452,7 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 var originalResponse = await RestClient.AnalyzeWithCustomModelAsync(modelId, contentType, fileStream, includeTextDetails, cancellationToken).ConfigureAwait(false);
-                return CreateAnalyzeWithCustomModel(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, contentType, fileStream, includeTextDetails));
+                return new ServiceAnalyzeWithCustomModelOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeWithCustomModelRequest(modelId, contentType, fileStream, includeTextDetails).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -484,7 +467,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartAnalyzeWithCustomModel(Guid modelId, ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
+        public virtual ServiceAnalyzeWithCustomModelOperation StartAnalyzeWithCustomModel(Guid modelId, ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
         {
             if (fileStream == null)
             {
@@ -496,7 +479,7 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 var originalResponse = RestClient.AnalyzeWithCustomModel(modelId, contentType, fileStream, includeTextDetails, cancellationToken);
-                return CreateAnalyzeWithCustomModel(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, contentType, fileStream, includeTextDetails));
+                return new ServiceAnalyzeWithCustomModelOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeWithCustomModelRequest(modelId, contentType, fileStream, includeTextDetails).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -510,14 +493,14 @@ namespace Azure.AI.FormRecognizer
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartAnalyzeWithCustomModelAsync(Guid modelId, bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<ServiceAnalyzeWithCustomModelOperation> StartAnalyzeWithCustomModelAsync(Guid modelId, bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeWithCustomModel");
             scope.Start();
             try
             {
                 var originalResponse = await RestClient.AnalyzeWithCustomModelAsync(modelId, includeTextDetails, fileStream, cancellationToken).ConfigureAwait(false);
-                return CreateAnalyzeWithCustomModel(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream));
+                return new ServiceAnalyzeWithCustomModelOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -531,14 +514,14 @@ namespace Azure.AI.FormRecognizer
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartAnalyzeWithCustomModel(Guid modelId, bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
+        public virtual ServiceAnalyzeWithCustomModelOperation StartAnalyzeWithCustomModel(Guid modelId, bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeWithCustomModel");
             scope.Start();
             try
             {
                 var originalResponse = RestClient.AnalyzeWithCustomModel(modelId, includeTextDetails, fileStream, cancellationToken);
-                return CreateAnalyzeWithCustomModel(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream));
+                return new ServiceAnalyzeWithCustomModelOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -615,28 +598,11 @@ namespace Azure.AI.FormRecognizer
         }
 
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateAnalyzeReceiptAsync(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.StartAnalyzeReceiptAsync", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartAnalyzeReceiptAsyncAsync(ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<ServiceAnalyzeReceiptAsyncOperation> StartAnalyzeReceiptAsyncAsync(ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
         {
             if (fileStream == null)
             {
@@ -648,7 +614,7 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 var originalResponse = await RestClient.AnalyzeReceiptAsyncAsync(contentType, fileStream, includeTextDetails, cancellationToken).ConfigureAwait(false);
-                return CreateAnalyzeReceiptAsync(originalResponse, () => RestClient.CreateAnalyzeReceiptAsyncRequest(contentType, fileStream, includeTextDetails));
+                return new ServiceAnalyzeReceiptAsyncOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeReceiptAsyncRequest(contentType, fileStream, includeTextDetails).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -662,7 +628,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartAnalyzeReceiptAsync(ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
+        public virtual ServiceAnalyzeReceiptAsyncOperation StartAnalyzeReceiptAsync(ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
         {
             if (fileStream == null)
             {
@@ -674,7 +640,7 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 var originalResponse = RestClient.AnalyzeReceiptAsync(contentType, fileStream, includeTextDetails, cancellationToken);
-                return CreateAnalyzeReceiptAsync(originalResponse, () => RestClient.CreateAnalyzeReceiptAsyncRequest(contentType, fileStream, includeTextDetails));
+                return new ServiceAnalyzeReceiptAsyncOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeReceiptAsyncRequest(contentType, fileStream, includeTextDetails).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -687,14 +653,14 @@ namespace Azure.AI.FormRecognizer
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartAnalyzeReceiptAsyncAsync(bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<ServiceAnalyzeReceiptAsyncOperation> StartAnalyzeReceiptAsyncAsync(bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeReceiptAsync");
             scope.Start();
             try
             {
                 var originalResponse = await RestClient.AnalyzeReceiptAsyncAsync(includeTextDetails, fileStream, cancellationToken).ConfigureAwait(false);
-                return CreateAnalyzeReceiptAsync(originalResponse, () => RestClient.CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream));
+                return new ServiceAnalyzeReceiptAsyncOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -707,14 +673,14 @@ namespace Azure.AI.FormRecognizer
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartAnalyzeReceiptAsync(bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
+        public virtual ServiceAnalyzeReceiptAsyncOperation StartAnalyzeReceiptAsync(bool? includeTextDetails = null, SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeReceiptAsync");
             scope.Start();
             try
             {
                 var originalResponse = RestClient.AnalyzeReceiptAsync(includeTextDetails, fileStream, cancellationToken);
-                return CreateAnalyzeReceiptAsync(originalResponse, () => RestClient.CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream));
+                return new ServiceAnalyzeReceiptAsyncOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeReceiptAsyncRequest(includeTextDetails, fileStream).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -724,27 +690,10 @@ namespace Azure.AI.FormRecognizer
         }
 
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateAnalyzeLayoutAsync(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.StartAnalyzeLayoutAsync", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartAnalyzeLayoutAsyncAsync(ContentType contentType, Stream fileStream, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<ServiceAnalyzeLayoutAsyncOperation> StartAnalyzeLayoutAsyncAsync(ContentType contentType, Stream fileStream, CancellationToken cancellationToken = default)
         {
             if (fileStream == null)
             {
@@ -756,7 +705,7 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 var originalResponse = await RestClient.AnalyzeLayoutAsyncAsync(contentType, fileStream, cancellationToken).ConfigureAwait(false);
-                return CreateAnalyzeLayoutAsync(originalResponse, () => RestClient.CreateAnalyzeLayoutAsyncRequest(contentType, fileStream));
+                return new ServiceAnalyzeLayoutAsyncOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeLayoutAsyncRequest(contentType, fileStream).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -769,7 +718,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartAnalyzeLayoutAsync(ContentType contentType, Stream fileStream, CancellationToken cancellationToken = default)
+        public virtual ServiceAnalyzeLayoutAsyncOperation StartAnalyzeLayoutAsync(ContentType contentType, Stream fileStream, CancellationToken cancellationToken = default)
         {
             if (fileStream == null)
             {
@@ -781,7 +730,7 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 var originalResponse = RestClient.AnalyzeLayoutAsync(contentType, fileStream, cancellationToken);
-                return CreateAnalyzeLayoutAsync(originalResponse, () => RestClient.CreateAnalyzeLayoutAsyncRequest(contentType, fileStream));
+                return new ServiceAnalyzeLayoutAsyncOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeLayoutAsyncRequest(contentType, fileStream).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -793,14 +742,14 @@ namespace Azure.AI.FormRecognizer
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartAnalyzeLayoutAsyncAsync(SourcePath fileStream = null, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<ServiceAnalyzeLayoutAsyncOperation> StartAnalyzeLayoutAsyncAsync(SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeLayoutAsync");
             scope.Start();
             try
             {
                 var originalResponse = await RestClient.AnalyzeLayoutAsyncAsync(fileStream, cancellationToken).ConfigureAwait(false);
-                return CreateAnalyzeLayoutAsync(originalResponse, () => RestClient.CreateAnalyzeLayoutAsyncRequest(fileStream));
+                return new ServiceAnalyzeLayoutAsyncOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeLayoutAsyncRequest(fileStream).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -812,14 +761,14 @@ namespace Azure.AI.FormRecognizer
         /// <summary> Extract text and layout information from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartAnalyzeLayoutAsync(SourcePath fileStream = null, CancellationToken cancellationToken = default)
+        public virtual ServiceAnalyzeLayoutAsyncOperation StartAnalyzeLayoutAsync(SourcePath fileStream = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeLayoutAsync");
             scope.Start();
             try
             {
                 var originalResponse = RestClient.AnalyzeLayoutAsync(fileStream, cancellationToken);
-                return CreateAnalyzeLayoutAsync(originalResponse, () => RestClient.CreateAnalyzeLayoutAsyncRequest(fileStream));
+                return new ServiceAnalyzeLayoutAsyncOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeLayoutAsyncRequest(fileStream).Request, originalResponse);
             }
             catch (Exception e)
             {

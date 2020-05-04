@@ -61,15 +61,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 restClientWriter.WriteClient(restCodeWriter, client);
 
                 project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
+            }
 
-                var headerModels = client.Methods.Select(m => m.HeaderModel).OfType<ResponseHeaderGroupType>().Distinct();
-                foreach (ResponseHeaderGroupType responseHeaderModel in headerModels)
-                {
-                    var headerModelCodeWriter = new CodeWriter();
-                    headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
+            foreach (ResponseHeaderGroupType responseHeaderModel in context.Library.HeaderModels)
+            {
+                var headerModelCodeWriter = new CodeWriter();
+                headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
 
-                    project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
-                }
+                project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
             foreach (var client in context.Library.Clients)
@@ -78,6 +77,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 clientWriter.WriteClient(codeWriter, client, context.Configuration);
 
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+            }
+
+            foreach (var operation in context.Library.LongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                LongRunningOperationWriter.Write(codeWriter, operation);
+
+                project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
             if (context.Configuration.AzureArm)
