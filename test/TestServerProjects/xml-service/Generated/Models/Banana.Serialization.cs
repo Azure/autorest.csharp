@@ -32,7 +32,7 @@ namespace xml_service.Models
             if (Expiration != null)
             {
                 writer.WriteStartElement("expiration");
-                writer.WriteValue(Expiration.Value, "S");
+                writer.WriteValue(Expiration.Value, "O");
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
@@ -53,7 +53,7 @@ namespace xml_service.Models
             }
             if (element.Element("expiration") is XElement expirationElement)
             {
-                expiration = expirationElement.GetDateTimeOffsetValue("S");
+                expiration = expirationElement.GetDateTimeOffsetValue("O");
             }
             return new Banana(name, flavor, expiration);
         }

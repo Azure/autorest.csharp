@@ -39,7 +39,7 @@ namespace Azure.Management.Storage.Models
             if (LastKeyRotationTimestamp != null)
             {
                 writer.WritePropertyName("lastKeyRotationTimestamp");
-                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "S");
+                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
             }
             writer.WriteEndObject();
         }
@@ -95,7 +95,7 @@ namespace Azure.Management.Storage.Models
                     {
                         continue;
                     }
-                    lastKeyRotationTimestamp = property.Value.GetDateTimeOffset("S");
+                    lastKeyRotationTimestamp = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
             }

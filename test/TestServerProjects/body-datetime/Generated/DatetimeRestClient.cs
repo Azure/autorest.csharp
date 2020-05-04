@@ -58,7 +58,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -78,7 +78,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -110,7 +110,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -130,7 +130,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -162,7 +162,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -182,7 +182,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -214,7 +214,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -234,7 +234,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -253,7 +253,7 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "S");
+            content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
             return message;
         }
@@ -301,7 +301,7 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "S");
+            content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
             return message;
         }
@@ -362,7 +362,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -382,7 +382,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -414,7 +414,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -434,7 +434,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -466,7 +466,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -486,7 +486,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -505,7 +505,7 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "S");
+            content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
             return message;
         }
@@ -566,7 +566,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -586,7 +586,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -618,7 +618,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -638,7 +638,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -657,7 +657,7 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "S");
+            content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
             return message;
         }
@@ -718,7 +718,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -738,7 +738,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -770,7 +770,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -790,7 +790,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -809,7 +809,7 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "S");
+            content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
             return message;
         }
@@ -870,7 +870,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -890,7 +890,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -909,7 +909,7 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "S");
+            content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
             return message;
         }
@@ -970,7 +970,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -990,7 +990,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1009,7 +1009,7 @@ namespace body_datetime
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(datetimeBody, "S");
+            content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
             return message;
         }
@@ -1070,7 +1070,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1090,7 +1090,7 @@ namespace body_datetime
                     {
                         DateTimeOffset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("S");
+                        value = document.RootElement.GetDateTimeOffset("O");
                         return Response.FromValue(value, message.Response);
                     }
                 default:

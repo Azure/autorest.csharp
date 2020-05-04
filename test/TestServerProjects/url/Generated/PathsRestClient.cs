@@ -1031,7 +1031,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
-            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "S", true);
+            uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
             request.Uri = uri;
             return message;
         }
@@ -1074,7 +1074,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/paths/datetime/null/", false);
-            uri.AppendPath(dateTimePath, "S", true);
+            uri.AppendPath(dateTimePath, "O", true);
             request.Uri = uri;
             return message;
         }

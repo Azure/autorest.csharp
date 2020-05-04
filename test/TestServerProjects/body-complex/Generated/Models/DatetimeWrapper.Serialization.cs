@@ -19,12 +19,12 @@ namespace body_complex.Models
             if (Field != null)
             {
                 writer.WritePropertyName("field");
-                writer.WriteStringValue(Field.Value, "S");
+                writer.WriteStringValue(Field.Value, "O");
             }
             if (Now != null)
             {
                 writer.WritePropertyName("now");
-                writer.WriteStringValue(Now.Value, "S");
+                writer.WriteStringValue(Now.Value, "O");
             }
             writer.WriteEndObject();
         }
@@ -41,7 +41,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    field = property.Value.GetDateTimeOffset("S");
+                    field = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("now"))
@@ -50,7 +50,7 @@ namespace body_complex.Models
                     {
                         continue;
                     }
-                    now = property.Value.GetDateTimeOffset("S");
+                    now = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
             }

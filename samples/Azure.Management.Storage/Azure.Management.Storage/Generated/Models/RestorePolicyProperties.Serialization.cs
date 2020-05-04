@@ -26,7 +26,7 @@ namespace Azure.Management.Storage.Models
             if (LastEnabledTime != null)
             {
                 writer.WritePropertyName("lastEnabledTime");
-                writer.WriteStringValue(LastEnabledTime.Value, "S");
+                writer.WriteStringValue(LastEnabledTime.Value, "O");
             }
             writer.WriteEndObject();
         }
@@ -58,7 +58,7 @@ namespace Azure.Management.Storage.Models
                     {
                         continue;
                     }
-                    lastEnabledTime = property.Value.GetDateTimeOffset("S");
+                    lastEnabledTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
             }

@@ -507,7 +507,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public static string? ToFormatSpecifier(this SerializationFormat format) => format switch
         {
             SerializationFormat.DateTime_RFC1123 => "R",
-            SerializationFormat.DateTime_ISO8601 => "S",
+            SerializationFormat.DateTime_ISO8601 => "O",
             SerializationFormat.Date_ISO8601 => "D",
             SerializationFormat.DateTime_Unix => "U",
             SerializationFormat.Bytes_Base64Url => "U",

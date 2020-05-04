@@ -2932,7 +2932,7 @@ namespace body_array
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                array.Add(item.GetDateTimeOffset("S"));
+                                array.Add(item.GetDateTimeOffset("O"));
                             }
                             value = array;
                         }
@@ -2964,7 +2964,7 @@ namespace body_array
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                array.Add(item.GetDateTimeOffset("S"));
+                                array.Add(item.GetDateTimeOffset("O"));
                             }
                             value = array;
                         }
@@ -2989,7 +2989,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteStringValue(item, "S");
+                content.JsonWriter.WriteStringValue(item, "O");
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;
@@ -3071,7 +3071,7 @@ namespace body_array
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                array.Add(item.GetDateTimeOffset("S"));
+                                array.Add(item.GetDateTimeOffset("O"));
                             }
                             value = array;
                         }
@@ -3103,7 +3103,7 @@ namespace body_array
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                array.Add(item.GetDateTimeOffset("S"));
+                                array.Add(item.GetDateTimeOffset("O"));
                             }
                             value = array;
                         }
@@ -3147,7 +3147,7 @@ namespace body_array
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                array.Add(item.GetDateTimeOffset("S"));
+                                array.Add(item.GetDateTimeOffset("O"));
                             }
                             value = array;
                         }
@@ -3179,7 +3179,7 @@ namespace body_array
                             List<DateTimeOffset> array = new List<DateTimeOffset>();
                             foreach (var item in document.RootElement.EnumerateArray())
                             {
-                                array.Add(item.GetDateTimeOffset("S"));
+                                array.Add(item.GetDateTimeOffset("O"));
                             }
                             value = array;
                         }

@@ -42,7 +42,7 @@ namespace Azure.Management.Storage.Models
             if (LastModifiedTime != null)
             {
                 writer.WritePropertyName("lastModifiedTime");
-                writer.WriteStringValue(LastModifiedTime.Value, "S");
+                writer.WriteStringValue(LastModifiedTime.Value, "O");
             }
             if (Metadata != null)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage.Models
                             {
                                 continue;
                             }
-                            lastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            lastModifiedTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                         if (property0.NameEquals("metadata"))

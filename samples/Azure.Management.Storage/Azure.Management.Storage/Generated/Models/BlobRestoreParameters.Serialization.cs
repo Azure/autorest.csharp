@@ -18,7 +18,7 @@ namespace Azure.Management.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("timeToRestore");
-            writer.WriteStringValue(TimeToRestore, "S");
+            writer.WriteStringValue(TimeToRestore, "O");
             writer.WritePropertyName("blobRanges");
             writer.WriteStartArray();
             foreach (var item in BlobRanges)
@@ -37,7 +37,7 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("timeToRestore"))
                 {
-                    timeToRestore = property.Value.GetDateTimeOffset("S");
+                    timeToRestore = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("blobRanges"))

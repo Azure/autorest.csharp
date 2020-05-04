@@ -46,12 +46,12 @@ namespace Azure.Management.Storage.Models
             if (CreationTime != null)
             {
                 writer.WritePropertyName("creationTime");
-                writer.WriteStringValue(CreationTime.Value, "S");
+                writer.WriteStringValue(CreationTime.Value, "O");
             }
             if (LastModifiedTime != null)
             {
                 writer.WritePropertyName("lastModifiedTime");
-                writer.WriteStringValue(LastModifiedTime.Value, "S");
+                writer.WriteStringValue(LastModifiedTime.Value, "O");
             }
             if (KeyVaultProperties != null)
             {
@@ -129,7 +129,7 @@ namespace Azure.Management.Storage.Models
                             {
                                 continue;
                             }
-                            creationTime = property0.Value.GetDateTimeOffset("S");
+                            creationTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                         if (property0.NameEquals("lastModifiedTime"))
@@ -138,7 +138,7 @@ namespace Azure.Management.Storage.Models
                             {
                                 continue;
                             }
-                            lastModifiedTime = property0.Value.GetDateTimeOffset("S");
+                            lastModifiedTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                         if (property0.NameEquals("keyVaultProperties"))
