@@ -523,7 +523,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<CreateOperation> StartCreateAsync(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<StorageAccountsCreateOperation> StartCreateAsync(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -543,7 +543,7 @@ namespace Azure.Management.Storage
             try
             {
                 var originalResponse = await RestClient.CreateAsync(resourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
-                return new CreateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateRequest(resourceGroupName, accountName, parameters).Request, originalResponse);
+                return new StorageAccountsCreateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateRequest(resourceGroupName, accountName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -557,7 +557,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual CreateOperation StartCreate(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public virtual StorageAccountsCreateOperation StartCreate(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -577,7 +577,7 @@ namespace Azure.Management.Storage
             try
             {
                 var originalResponse = RestClient.Create(resourceGroupName, accountName, parameters, cancellationToken);
-                return new CreateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateRequest(resourceGroupName, accountName, parameters).Request, originalResponse);
+                return new StorageAccountsCreateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateRequest(resourceGroupName, accountName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -590,7 +590,7 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<FailoverOperation> StartFailoverAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<StorageAccountsFailoverOperation> StartFailoverAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -606,7 +606,7 @@ namespace Azure.Management.Storage
             try
             {
                 var originalResponse = await RestClient.FailoverAsync(resourceGroupName, accountName, cancellationToken).ConfigureAwait(false);
-                return new FailoverOperation(_clientDiagnostics, _pipeline, RestClient.CreateFailoverRequest(resourceGroupName, accountName).Request, originalResponse);
+                return new StorageAccountsFailoverOperation(_clientDiagnostics, _pipeline, RestClient.CreateFailoverRequest(resourceGroupName, accountName).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -619,7 +619,7 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FailoverOperation StartFailover(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public virtual StorageAccountsFailoverOperation StartFailover(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -635,7 +635,7 @@ namespace Azure.Management.Storage
             try
             {
                 var originalResponse = RestClient.Failover(resourceGroupName, accountName, cancellationToken);
-                return new FailoverOperation(_clientDiagnostics, _pipeline, RestClient.CreateFailoverRequest(resourceGroupName, accountName).Request, originalResponse);
+                return new StorageAccountsFailoverOperation(_clientDiagnostics, _pipeline, RestClient.CreateFailoverRequest(resourceGroupName, accountName).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -650,7 +650,7 @@ namespace Azure.Management.Storage
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<RestoreBlobRangesOperation> StartRestoreBlobRangesAsync(string resourceGroupName, string accountName, DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<StorageAccountsRestoreBlobRangesOperation> StartRestoreBlobRangesAsync(string resourceGroupName, string accountName, DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -670,7 +670,7 @@ namespace Azure.Management.Storage
             try
             {
                 var originalResponse = await RestClient.RestoreBlobRangesAsync(resourceGroupName, accountName, timeToRestore, blobRanges, cancellationToken).ConfigureAwait(false);
-                return new RestoreBlobRangesOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestoreBlobRangesRequest(resourceGroupName, accountName, timeToRestore, blobRanges).Request, originalResponse);
+                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestoreBlobRangesRequest(resourceGroupName, accountName, timeToRestore, blobRanges).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -685,7 +685,7 @@ namespace Azure.Management.Storage
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual RestoreBlobRangesOperation StartRestoreBlobRanges(string resourceGroupName, string accountName, DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges, CancellationToken cancellationToken = default)
+        public virtual StorageAccountsRestoreBlobRangesOperation StartRestoreBlobRanges(string resourceGroupName, string accountName, DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -705,7 +705,7 @@ namespace Azure.Management.Storage
             try
             {
                 var originalResponse = RestClient.RestoreBlobRanges(resourceGroupName, accountName, timeToRestore, blobRanges, cancellationToken);
-                return new RestoreBlobRangesOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestoreBlobRangesRequest(resourceGroupName, accountName, timeToRestore, blobRanges).Request, originalResponse);
+                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestoreBlobRangesRequest(resourceGroupName, accountName, timeToRestore, blobRanges).Request, originalResponse);
             }
             catch (Exception e)
             {

@@ -22,7 +22,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
             Debug.Assert(operation.IsLongRunning);
             _context = context;
 
-            Name = operation.CSharpName() + "Operation";
+            var clientClass = _context.Library.FindClient(operationGroup);
+
+            Name = clientClass.RestClient.ClientPrefix + operation.CSharpName() + "Operation";
             Diagnostics = new Diagnostic(Name);
             FinalStateVia = operation.LongRunningFinalStateVia switch
             {
@@ -48,7 +50,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
 
-            var clientClass = _context.Library.FindClient(operationGroup);
             // Inherit accessibility from the client
             DeclaredType = BuilderHelpers.CreateTypeAttributes(Name, _context.DefaultNamespace, clientClass.Declaration.Accessibility);
         }

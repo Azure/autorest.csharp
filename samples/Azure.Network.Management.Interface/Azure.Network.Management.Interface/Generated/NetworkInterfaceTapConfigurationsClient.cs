@@ -174,7 +174,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<DeleteOperation> StartDeleteAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<NetworkInterfaceTapConfigurationsDeleteOperation> StartDeleteAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -194,7 +194,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = await RestClient.DeleteAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken).ConfigureAwait(false);
-                return new DeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName).Request, originalResponse);
+                return new NetworkInterfaceTapConfigurationsDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -208,7 +208,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual DeleteOperation StartDelete(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
+        public virtual NetworkInterfaceTapConfigurationsDeleteOperation StartDelete(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -228,7 +228,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = RestClient.Delete(resourceGroupName, networkInterfaceName, tapConfigurationName, cancellationToken);
-                return new DeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName).Request, originalResponse);
+                return new NetworkInterfaceTapConfigurationsDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName, tapConfigurationName).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -243,7 +243,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="tapConfigurationParameters"> Parameters supplied to the create or update tap configuration operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<CreateOrUpdateOperation> StartCreateOrUpdateAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<NetworkInterfaceTapConfigurationsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -267,7 +267,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = await RestClient.CreateOrUpdateAsync(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters, cancellationToken).ConfigureAwait(false);
-                return new CreateOrUpdateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters).Request, originalResponse);
+                return new NetworkInterfaceTapConfigurationsCreateOrUpdateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -282,7 +282,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="tapConfigurationParameters"> Parameters supplied to the create or update tap configuration operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual CreateOrUpdateOperation StartCreateOrUpdate(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
+        public virtual NetworkInterfaceTapConfigurationsCreateOrUpdateOperation StartCreateOrUpdate(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -306,7 +306,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = RestClient.CreateOrUpdate(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters, cancellationToken);
-                return new CreateOrUpdateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters).Request, originalResponse);
+                return new NetworkInterfaceTapConfigurationsCreateOrUpdateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, tapConfigurationName, tapConfigurationParameters).Request, originalResponse);
             }
             catch (Exception e)
             {

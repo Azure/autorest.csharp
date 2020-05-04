@@ -1347,14 +1347,14 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<GetMultiplePagesLROOperation> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<PagingGetMultiplePagesLROOperation> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PagingClient.StartGetMultiplePagesLRO");
             scope.Start();
             try
             {
                 var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken).ConfigureAwait(false);
-                return new GetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse);
+                return new PagingGetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1367,14 +1367,14 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual GetMultiplePagesLROOperation StartGetMultiplePagesLRO(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
+        public virtual PagingGetMultiplePagesLROOperation StartGetMultiplePagesLRO(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PagingClient.StartGetMultiplePagesLRO");
             scope.Start();
             try
             {
                 var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken);
-                return new GetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse);
+                return new PagingGetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse);
             }
             catch (Exception e)
             {
