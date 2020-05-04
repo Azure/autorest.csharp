@@ -4,6 +4,6 @@
 
 ``` yaml
 require: $(this-folder)/../../readme.md
-input-file: https://gist.githubusercontent.com/bterlson/459b56c039f1d750d0d53a35d64d93fe/raw/b9dc50a7ea0789f4a86e2f377bc4c19aa1bee2ac/swagga.json
+input-file: https://github.com/Azure/azure-signalr-vnext-features/blob/560450a34e56f48ef43ffa3959d04642677965ff/serverless-websocket/specs/ws.swagger.json
 namespace: Azure.SignalR
 ```

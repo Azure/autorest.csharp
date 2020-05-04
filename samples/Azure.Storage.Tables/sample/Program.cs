@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure.Storage;
@@ -6,9 +9,9 @@ using Azure.Storage.Tables;
 
 namespace sample
 {
-    class Program
+    public class Program
     {
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var serviceClient = new TableServiceClient(
                 new Uri("https://pakrym0test0storage.table.core.windows.net"),

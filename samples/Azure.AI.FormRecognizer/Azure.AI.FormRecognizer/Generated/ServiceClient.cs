@@ -182,6 +182,78 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
+        /// <summary> Obtain current status and the result of a custom model copy operation. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="resultId"> Copy operation result identifier. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<CopyOperationResult>> GetCustomModelCopyResultAsync(Guid modelId, Guid resultId, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetCustomModelCopyResult");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetCustomModelCopyResultAsync(modelId, resultId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Obtain current status and the result of a custom model copy operation. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="resultId"> Copy operation result identifier. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<CopyOperationResult> GetCustomModelCopyResult(Guid modelId, Guid resultId, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetCustomModelCopyResult");
+            scope.Start();
+            try
+            {
+                return RestClient.GetCustomModelCopyResult(modelId, resultId, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Generate authorization to copy a model into the target Form Recognizer resource. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<CopyAuthorizationResult>> GenerateModelCopyAuthorizationAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GenerateModelCopyAuthorization");
+            scope.Start();
+            try
+            {
+                return await RestClient.GenerateModelCopyAuthorizationAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Generate authorization to copy a model into the target Form Recognizer resource. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<CopyAuthorizationResult> GenerateModelCopyAuthorization(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GenerateModelCopyAuthorization");
+            scope.Start();
+            try
+            {
+                return RestClient.GenerateModelCopyAuthorization(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Track the progress and obtain the result of the analyze receipt operation. </summary>
         /// <param name="resultId"> Analyze operation result identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -467,6 +539,73 @@ namespace Azure.AI.FormRecognizer
             {
                 var originalResponse = RestClient.AnalyzeWithCustomModel(modelId, includeTextDetails, fileStream, cancellationToken);
                 return CreateAnalyzeWithCustomModel(originalResponse, () => RestClient.CreateAnalyzeWithCustomModelRequest(modelId, includeTextDetails, fileStream));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </summary>
+        /// <param name="originalResponse"> The original response from starting the operation. </param>
+        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
+        internal Operation<Response> CreateCopyCustomModel(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
+        {
+            if (originalResponse == null)
+            {
+                throw new ArgumentNullException(nameof(originalResponse));
+            }
+            if (createOriginalHttpMessage == null)
+            {
+                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
+            }
+
+            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.StartCopyCustomModel", OperationFinalStateVia.Location, createOriginalHttpMessage);
+        }
+
+        /// <summary> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="copyRequest"> Copy request parameters. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async ValueTask<Operation<Response>> StartCopyCustomModelAsync(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
+        {
+            if (copyRequest == null)
+            {
+                throw new ArgumentNullException(nameof(copyRequest));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.StartCopyCustomModel");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.CopyCustomModelAsync(modelId, copyRequest, cancellationToken).ConfigureAwait(false);
+                return CreateCopyCustomModel(originalResponse, () => RestClient.CreateCopyCustomModelRequest(modelId, copyRequest));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="copyRequest"> Copy request parameters. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Operation<Response> StartCopyCustomModel(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
+        {
+            if (copyRequest == null)
+            {
+                throw new ArgumentNullException(nameof(copyRequest));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.StartCopyCustomModel");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.CopyCustomModel(modelId, copyRequest, cancellationToken);
+                return CreateCopyCustomModel(originalResponse, () => RestClient.CreateCopyCustomModelRequest(modelId, copyRequest));
             }
             catch (Exception e)
             {
