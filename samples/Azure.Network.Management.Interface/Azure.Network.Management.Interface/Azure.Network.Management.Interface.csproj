@@ -11,5 +11,11 @@
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\..\src\assets\Generator.Shared\IOperationSource.cs">
+      <Link>Generator.Shared\IOperationSource.cs</Link>
+    </Compile>
+  </ItemGroup>
+
 </Project>
 

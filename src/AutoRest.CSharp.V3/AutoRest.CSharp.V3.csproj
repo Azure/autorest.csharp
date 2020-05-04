@@ -19,6 +19,9 @@
 
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
+    <Compile Update="..\assets\Generator.Shared\IOperationSource.cs">
+      <Link>Generator.Shared\IOperationSource.cs</Link>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

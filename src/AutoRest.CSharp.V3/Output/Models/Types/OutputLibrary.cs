@@ -16,8 +16,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private readonly CodeModel _codeModel;
         private readonly BuildContext _context;
         private Dictionary<Schema, ISchemaType>? _models;
-        private Client[]? _clients;
-        private RestClient[]? _restClients;
+        private Dictionary<OperationGroup, Client>? _clients;
+        private Dictionary<OperationGroup, RestClient>? _restClients;
         private LongRunningOperation[]? _operations;
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
@@ -28,25 +28,25 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public IEnumerable<ISchemaType> Models => SchemaMap.Values;
 
-        public RestClient[] RestClients
+        public IEnumerable<RestClient> RestClients
         {
             get
             {
                 EnsureClients();
-                return _restClients!;
+                return _restClients!.Values;
             }
         }
 
-        public Client[] Clients
+        public IEnumerable<Client> Clients
         {
             get
             {
                 EnsureClients();
-                return _clients!;
+                return _clients!.Values;
             }
         }
 
-        public LongRunningOperation[] LongRunningOperations
+        public IEnumerable<LongRunningOperation> LongRunningOperations
         {
             get
             {
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 {
                     if (operation.IsLongRunning)
                     {
-                        yield return new LongRunningOperation(operation, _context);
+                        yield return new LongRunningOperation(operationGroup, operation, _context);
                     }
                 }
             }
@@ -79,10 +79,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             var clientBuilder = new ClientBuilder(_context);
 
-            var allClients = _codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
+            var allClients = _codeModel.OperationGroups.ToDictionary(og => og, clientBuilder.BuildClient);
 
-            _clients = allClients.Select(c => c.Client).ToArray();
-            _restClients = allClients.Select(c => c.RestClient).ToArray();
+            _clients = allClients.ToDictionary(c => c.Key, c=> c.Value.Client);
+            _restClients = allClients.ToDictionary(c => c.Key, c=> c.Value.RestClient);
         }
 
         private Dictionary<Schema, ISchemaType> BuildModels()
@@ -108,6 +108,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             Debug.Assert(operation.IsLongRunning);
 
             return LongRunningOperations.Single(lro => lro.Operation == operation);
+        }
+
+        public Client FindClient(OperationGroup operationGroup)
+        {
+            EnsureClients();
+            return _clients![operationGroup];
         }
     }
 }

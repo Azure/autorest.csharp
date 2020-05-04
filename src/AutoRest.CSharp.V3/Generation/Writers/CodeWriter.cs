@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         Append(d);
                         break;
                     case Type t:
-                        AppendType(new CSharpType(t, false));
+                        AppendType(new CSharpType(t));
                         break;
                     case CSharpType t:
                         AppendType(t);

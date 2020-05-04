@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Types;
 

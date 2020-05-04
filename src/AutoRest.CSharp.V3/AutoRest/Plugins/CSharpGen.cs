@@ -80,6 +80,14 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
             }
 
+            foreach (var operation in context.Library.LongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                OperationWriter.Write(codeWriter, operation);
+
+                project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
+            }
+
             if (context.Configuration.AzureArm)
             {
                 var codeWriter = new CodeWriter();

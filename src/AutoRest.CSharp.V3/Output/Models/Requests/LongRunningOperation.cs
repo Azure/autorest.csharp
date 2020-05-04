@@ -6,7 +6,9 @@ using System.Diagnostics;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Builders;
+using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Output.Models.Requests
@@ -15,13 +17,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
     {
         private readonly BuildContext _context;
 
-        public LongRunningOperation(Operation operation, BuildContext context)
+        public LongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext context)
         {
             Debug.Assert(operation.IsLongRunning);
             _context = context;
 
             Operation = operation;
-            Name = operation.CSharpName();
+            Name = operation.CSharpName() + "Operation";
             Diagnostics = new Diagnostic(Name);
             FinalStateVia = operation.LongRunningFinalStateVia switch
             {
@@ -32,19 +34,34 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
                 _ => throw new ArgumentException($"Unknown final-state-via value: {operation.LongRunningFinalStateVia}")
             };
 
-            Schema? finalResponse = operation.LongRunningFinalResponse.ResponseSchema;
-            ResultType = finalResponse != null ? context.TypeFactory.CreateType(finalResponse, false) : null;
+            var finalResponse = operation.LongRunningFinalResponse;
+            Schema? finalResponseSchema = finalResponse.ResponseSchema;
+
+            if (finalResponseSchema != null)
+            {
+                ResultType = context.TypeFactory.CreateType(finalResponseSchema, false);
+                ResultSerialization = new SerializationBuilder().Build(finalResponse.HttpResponse.KnownMediaType, finalResponseSchema, ResultType);
+            }
+            else
+            {
+                ResultType = typeof(Response);
+            }
+
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
-            DeclaredType = BuilderHelpers.CreateTypeAttributes(Name, _context.DefaultNamespace, "public");
+
+            var clientClass = _context.Library.FindClient(operationGroup);
+            // Inherit accessibility from the client
+            DeclaredType = BuilderHelpers.CreateTypeAttributes(Name, _context.DefaultNamespace, clientClass.DeclaredType.Accessibility);
         }
 
         public string Name { get; }
-        public CSharpType? ResultType { get; }
+        public CSharpType ResultType { get; }
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics { get; set; }
         public Operation Operation { get; set; }
         public CSharpType Type => new CSharpType(this,DeclaredType.Namespace, DeclaredType.Name);
-        public TypeDeclarationOptions DeclaredType { get; set; }
+        public TypeDeclarationOptions DeclaredType { get;  }
+        public ObjectSerialization? ResultSerialization { get;  }
         public string Description { get; set; }
     }
 }

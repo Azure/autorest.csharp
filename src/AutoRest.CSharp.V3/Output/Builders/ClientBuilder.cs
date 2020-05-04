@@ -494,13 +494,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
             throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty}");
         }
 
-        private LongRunningOperationMethod BuildLongRunningOperation(string clientName, Operation operation, RestClientMethod startMethod, BuildContext context)
+        private LongRunningOperationMethod BuildLongRunningOperation(string clientName, Operation operation, RestClientMethod startMethod)
         {
             string name = operation.CSharpName();
 
             return new LongRunningOperationMethod(
                 name,
-                context.Library.FindLongRunningOperation(operation),
+                _context.Library.FindLongRunningOperation(operation),
                 startMethod,
                 new Diagnostic($"{clientName}.Start{name}")
             );
