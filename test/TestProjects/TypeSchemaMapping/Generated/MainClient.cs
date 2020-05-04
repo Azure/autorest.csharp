@@ -15,7 +15,7 @@ using TypeSchemaMapping.Models;
 
 namespace CustomNamespace
 {
-    /// <summary> The Service service client. </summary>
+    /// <summary> The Main service client. </summary>
     internal partial class MainClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;

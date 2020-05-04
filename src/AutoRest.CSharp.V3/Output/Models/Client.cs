@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             // Update the client name and prefix based on the existing type is available
             clientName = existingClient?.ExistingType.Name ?? clientName;
-            clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
+            clientPrefix = GetClientPrefix(clientName);
 
             Declaration = BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "public", existingClient?.ExistingType);
             Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, clientPrefix));

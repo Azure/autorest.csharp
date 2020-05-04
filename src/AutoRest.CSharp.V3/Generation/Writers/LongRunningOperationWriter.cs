@@ -14,7 +14,7 @@ using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
-    internal class OperationWriter
+    internal class LongRunningOperationWriter
     {
         public static void Write(CodeWriter writer, LongRunningOperation operation)
         {
