@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                     RestClientMethod? nextMethod = null;
                     if (paging.NextLinkOperation != null)
                     {
-                        nextMethod = GetOperationMethod(paging.NextLinkOperation.SingleRequest);
+                        nextMethod = GetOperationMethod(paging.NextLinkOperation.Requests.Single());
                     }
                     else if (paging.NextLinkName != null)
                     {

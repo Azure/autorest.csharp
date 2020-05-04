@@ -61,18 +61,6 @@ namespace AutoRest.CSharp.V3.Input
                 return Responses.First();
             }
         }
-
-        public ServiceRequest SingleRequest
-        {
-            get
-            {
-                if (Requests.Count != 1)
-                {
-
-                }
-                return Requests.Single();
-            }
-        }
     }
 
     internal partial class ServiceResponse
