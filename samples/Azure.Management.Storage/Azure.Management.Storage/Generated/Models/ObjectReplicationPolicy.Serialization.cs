@@ -42,7 +42,7 @@ namespace Azure.Management.Storage.Models
             if (EnabledTime != null)
             {
                 writer.WritePropertyName("enabledTime");
-                writer.WriteStringValue(EnabledTime.Value, "S");
+                writer.WriteStringValue(EnabledTime.Value, "O");
             }
             if (SourceAccount != null)
             {
@@ -126,7 +126,7 @@ namespace Azure.Management.Storage.Models
                             {
                                 continue;
                             }
-                            enabledTime = property0.Value.GetDateTimeOffset("S");
+                            enabledTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                         if (property0.NameEquals("sourceAccount"))

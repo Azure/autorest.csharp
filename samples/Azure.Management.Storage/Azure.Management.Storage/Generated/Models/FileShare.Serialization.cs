@@ -83,7 +83,7 @@ namespace Azure.Management.Storage.Models
             if (DeletedTime != null)
             {
                 writer.WritePropertyName("deletedTime");
-                writer.WriteStringValue(DeletedTime.Value, "S");
+                writer.WriteStringValue(DeletedTime.Value, "O");
             }
             if (RemainingRetentionDays != null)
             {
@@ -98,7 +98,7 @@ namespace Azure.Management.Storage.Models
             if (AccessTierChangeTime != null)
             {
                 writer.WritePropertyName("accessTierChangeTime");
-                writer.WriteStringValue(AccessTierChangeTime.Value, "S");
+                writer.WriteStringValue(AccessTierChangeTime.Value, "O");
             }
             if (AccessTierStatus != null)
             {
@@ -256,7 +256,7 @@ namespace Azure.Management.Storage.Models
                             {
                                 continue;
                             }
-                            deletedTime = property0.Value.GetDateTimeOffset("S");
+                            deletedTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                         if (property0.NameEquals("remainingRetentionDays"))
@@ -283,7 +283,7 @@ namespace Azure.Management.Storage.Models
                             {
                                 continue;
                             }
-                            accessTierChangeTime = property0.Value.GetDateTimeOffset("S");
+                            accessTierChangeTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                         if (property0.NameEquals("accessTierStatus"))
