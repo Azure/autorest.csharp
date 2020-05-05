@@ -6,7 +6,7 @@ info: !<!Info>
   title: Azure.Network.Management.Interface
 schemas: !<!Schemas> 
   booleans:
-  - !<!BooleanSchema> &ref_200
+  - !<!BooleanSchema> &ref_199
     type: boolean
     language: !<!Languages> 
       default:
@@ -20,7 +20,7 @@ schemas: !<!Schemas>
         name: Boolean
         description: Enables DDoS protection on the public IP.
     protocol: !<!Protocols> {}
-  - !<!BooleanSchema> &ref_146
+  - !<!BooleanSchema> &ref_145
     type: boolean
     language: !<!Languages> 
       default:
@@ -71,14 +71,14 @@ schemas: !<!Schemas>
         name: Boolean
         description: Indicates whether IP forwarding is enabled on this network interface.
     protocol: !<!Protocols> {}
-  - !<!BooleanSchema> &ref_223
+  - !<!BooleanSchema> &ref_222
     type: boolean
     language: !<!Languages> 
       default:
         name: Boolean
         description: 'If true, on-premises routes are not propagated to the network interfaces in the subnet.'
     protocol: !<!Protocols> {}
-  - !<!BooleanSchema> &ref_169
+  - !<!BooleanSchema> &ref_168
     type: boolean
     language: !<!Languages> 
       default:
@@ -134,7 +134,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The timeout for the TCP idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to TCP.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_242
+  - !<!NumberSchema> &ref_241
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -142,7 +142,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The priority of the rule.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_167
+  - !<!NumberSchema> &ref_166
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -150,7 +150,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values are between 0 and 65534. Note that value 0 enables "Any Port".
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_168
+  - !<!NumberSchema> &ref_167
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -158,7 +158,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The port used for internal connections on the endpoint. Acceptable values are between 0 and 65535. Note that value 0 enables "Any Port".
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_174
+  - !<!NumberSchema> &ref_173
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -166,7 +166,7 @@ schemas: !<!Schemas>
         name: Integer
         description: 'The port for communicating the probe. Possible values range from 1 to 65535, inclusive.'
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_175
+  - !<!NumberSchema> &ref_174
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -176,7 +176,7 @@ schemas: !<!Schemas>
           The interval, in seconds, for how frequently to probe the endpoint for health status. Typically, the interval is slightly less than half the allocated timeout period (in seconds) which allows two full probes before taking the
           instance out of rotation. The default value is 15, the minimum value is 5.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_176
+  - !<!NumberSchema> &ref_175
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -186,7 +186,7 @@ schemas: !<!Schemas>
           The number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endpoints to be taken out of rotation faster or slower than the typical times used in
           Azure.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_181
+  - !<!NumberSchema> &ref_180
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -194,7 +194,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The first port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65534.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_182
+  - !<!NumberSchema> &ref_181
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -202,7 +202,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The last port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65535.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_183
+  - !<!NumberSchema> &ref_182
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -210,7 +210,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_187
+  - !<!NumberSchema> &ref_186
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -218,7 +218,7 @@ schemas: !<!Schemas>
         name: Integer
         description: The number of outbound ports to be used for NAT.
     protocol: !<!Protocols> {}
-  - !<!NumberSchema> &ref_189
+  - !<!NumberSchema> &ref_188
     type: integer
     precision: 32
     language: !<!Languages> 
@@ -274,7 +274,7 @@ schemas: !<!Schemas>
         name: CloudErrorBodyTarget
         description: 'The target of the particular error. For example, the name of the property in error.'
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_206
+  - !<!StringSchema> &ref_205
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -284,7 +284,7 @@ schemas: !<!Schemas>
         name: ResourceId
         description: Resource ID.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_207
+  - !<!StringSchema> &ref_206
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -294,7 +294,7 @@ schemas: !<!Schemas>
         name: ResourceName
         description: Resource name.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_208
+  - !<!StringSchema> &ref_207
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -304,7 +304,7 @@ schemas: !<!Schemas>
         name: ResourceType
         description: Resource type.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_209
+  - !<!StringSchema> &ref_208
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -314,7 +314,7 @@ schemas: !<!Schemas>
         name: ResourceLocation
         description: Resource location.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_194
+  - !<!StringSchema> &ref_193
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -476,7 +476,7 @@ schemas: !<!Schemas>
         name: SubnetPropertiesFormatAddressPrefixesItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_197
+  - !<!StringSchema> &ref_196
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -486,7 +486,7 @@ schemas: !<!Schemas>
         name: RoutePropertiesFormatAddressPrefix
         description: The destination CIDR to which the route applies.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_199
+  - !<!StringSchema> &ref_198
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -496,7 +496,7 @@ schemas: !<!Schemas>
         name: RoutePropertiesFormatNextHopIpAddress
         description: The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_195
+  - !<!StringSchema> &ref_194
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -506,7 +506,7 @@ schemas: !<!Schemas>
         name: RouteName
         description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_196
+  - !<!StringSchema> &ref_195
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -870,7 +870,7 @@ schemas: !<!Schemas>
         name: IPConfigurationProfileEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_139
+  - !<!StringSchema> &ref_138
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -880,7 +880,7 @@ schemas: !<!Schemas>
         name: ResourceNavigationLinkFormatLinkedResourceType
         description: Resource type of the linked resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_140
+  - !<!StringSchema> &ref_139
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -907,20 +907,10 @@ schemas: !<!Schemas>
       version: '2019-11-01'
     language: !<!Languages> 
       default:
-        name: ResourceNavigationLinkId
-        description: Resource navigation link identifier.
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_137
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2019-11-01'
-    language: !<!Languages> 
-      default:
         name: ResourceNavigationLinkEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_138
+  - !<!StringSchema> &ref_137
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -930,7 +920,7 @@ schemas: !<!Schemas>
         name: ResourceNavigationLinkType
         description: Resource type.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_144
+  - !<!StringSchema> &ref_143
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -940,7 +930,7 @@ schemas: !<!Schemas>
         name: ServiceAssociationLinkPropertiesFormatLinkedResourceType
         description: Resource type of the linked resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_145
+  - !<!StringSchema> &ref_144
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -950,7 +940,7 @@ schemas: !<!Schemas>
         name: ServiceAssociationLinkPropertiesFormatLink
         description: Link to the external resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_147
+  - !<!StringSchema> &ref_146
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -960,7 +950,7 @@ schemas: !<!Schemas>
         name: ServiceAssociationLinkPropertiesFormatLocationsItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_141
+  - !<!StringSchema> &ref_140
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -970,7 +960,7 @@ schemas: !<!Schemas>
         name: ServiceAssociationLinkName
         description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_142
+  - !<!StringSchema> &ref_141
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -980,7 +970,7 @@ schemas: !<!Schemas>
         name: ServiceAssociationLinkEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_143
+  - !<!StringSchema> &ref_142
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -990,7 +980,7 @@ schemas: !<!Schemas>
         name: ServiceAssociationLinkType
         description: Resource type.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_150
+  - !<!StringSchema> &ref_149
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1000,7 +990,7 @@ schemas: !<!Schemas>
         name: ServiceDelegationPropertiesFormatServiceName
         description: The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers).
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_151
+  - !<!StringSchema> &ref_150
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1010,7 +1000,7 @@ schemas: !<!Schemas>
         name: ServiceDelegationPropertiesFormatActionsItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_148
+  - !<!StringSchema> &ref_147
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1020,7 +1010,7 @@ schemas: !<!Schemas>
         name: DelegationName
         description: The name of the resource that is unique within a subnet. This name can be used to access the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_149
+  - !<!StringSchema> &ref_148
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1030,7 +1020,7 @@ schemas: !<!Schemas>
         name: DelegationEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_152
+  - !<!StringSchema> &ref_151
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1040,7 +1030,7 @@ schemas: !<!Schemas>
         name: SubnetPropertiesFormatPurpose
         description: A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_153
+  - !<!StringSchema> &ref_152
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1050,7 +1040,7 @@ schemas: !<!Schemas>
         name: SubnetPropertiesFormatPrivateEndpointNetworkPolicies
         description: Enable or Disable apply network policies on private end point in the subnet.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_154
+  - !<!StringSchema> &ref_153
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1460,7 +1450,7 @@ schemas: !<!Schemas>
         name: NetworkInterfaceEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_221
+  - !<!StringSchema> &ref_220
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1470,7 +1460,7 @@ schemas: !<!Schemas>
         name: NetworkInterfaceListResultNextLink
         description: The URL to get the next set of results.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_222
+  - !<!StringSchema> &ref_221
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1480,7 +1470,7 @@ schemas: !<!Schemas>
         name: EffectiveRouteName
         description: The name of the user defined route. This is optional.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_226
+  - !<!StringSchema> &ref_225
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1490,7 +1480,7 @@ schemas: !<!Schemas>
         name: EffectiveRouteAddressPrefixItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_227
+  - !<!StringSchema> &ref_226
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1500,7 +1490,7 @@ schemas: !<!Schemas>
         name: EffectiveRouteNextHopIpAddressItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_228
+  - !<!StringSchema> &ref_227
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1510,7 +1500,7 @@ schemas: !<!Schemas>
         name: EffectiveRouteListResultNextLink
         description: The URL to get the next set of results.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_230
+  - !<!StringSchema> &ref_229
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1520,7 +1510,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleName
         description: The name of the security rule specified by the user (if created by the user).
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_232
+  - !<!StringSchema> &ref_231
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1530,7 +1520,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleSourcePortRange
         description: The source port or range.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_233
+  - !<!StringSchema> &ref_232
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1540,7 +1530,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleDestinationPortRange
         description: The destination port or range.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_234
+  - !<!StringSchema> &ref_233
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1550,7 +1540,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleSourcePortRangesItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_235
+  - !<!StringSchema> &ref_234
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1560,7 +1550,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleDestinationPortRangesItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_236
+  - !<!StringSchema> &ref_235
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1570,7 +1560,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleSourceAddressPrefix
         description: The source address prefix.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_237
+  - !<!StringSchema> &ref_236
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1580,7 +1570,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleDestinationAddressPrefix
         description: The destination address prefix.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_238
+  - !<!StringSchema> &ref_237
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1590,7 +1580,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleSourceAddressPrefixesItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_239
+  - !<!StringSchema> &ref_238
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1600,7 +1590,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleDestinationAddressPrefixesItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_240
+  - !<!StringSchema> &ref_239
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1610,7 +1600,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleExpandedSourceAddressPrefixItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_241
+  - !<!StringSchema> &ref_240
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1620,7 +1610,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityRuleExpandedDestinationAddressPrefixItem
         description: ''
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_243
+  - !<!StringSchema> &ref_242
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1630,7 +1620,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityGroupTagMap
         description: Mapping of tags to list of IP Addresses included within the tag.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_244
+  - !<!StringSchema> &ref_243
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1640,7 +1630,7 @@ schemas: !<!Schemas>
         name: EffectiveNetworkSecurityGroupListResultNextLink
         description: The URL to get the next set of results.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_248
+  - !<!StringSchema> &ref_247
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1650,7 +1640,7 @@ schemas: !<!Schemas>
         name: NetworkInterfaceIPConfigurationListResultNextLink
         description: The URL to get the next set of results.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_163
+  - !<!StringSchema> &ref_162
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1660,7 +1650,7 @@ schemas: !<!Schemas>
         name: LoadBalancingRuleName
         description: The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_164
+  - !<!StringSchema> &ref_163
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1670,7 +1660,7 @@ schemas: !<!Schemas>
         name: LoadBalancingRuleEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_165
+  - !<!StringSchema> &ref_164
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1680,7 +1670,7 @@ schemas: !<!Schemas>
         name: LoadBalancingRuleType
         description: Type of the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_177
+  - !<!StringSchema> &ref_176
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1690,7 +1680,7 @@ schemas: !<!Schemas>
         name: ProbePropertiesFormatRequestPath
         description: 'The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value.'
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_170
+  - !<!StringSchema> &ref_169
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1700,7 +1690,7 @@ schemas: !<!Schemas>
         name: ProbeName
         description: The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_171
+  - !<!StringSchema> &ref_170
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1710,7 +1700,7 @@ schemas: !<!Schemas>
         name: ProbeEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_172
+  - !<!StringSchema> &ref_171
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1720,7 +1710,7 @@ schemas: !<!Schemas>
         name: ProbeType
         description: Type of the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_178
+  - !<!StringSchema> &ref_177
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1730,7 +1720,7 @@ schemas: !<!Schemas>
         name: InboundNatPoolName
         description: The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_179
+  - !<!StringSchema> &ref_178
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1740,7 +1730,7 @@ schemas: !<!Schemas>
         name: InboundNatPoolEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_180
+  - !<!StringSchema> &ref_179
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1750,7 +1740,7 @@ schemas: !<!Schemas>
         name: InboundNatPoolType
         description: Type of the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_184
+  - !<!StringSchema> &ref_183
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1760,7 +1750,7 @@ schemas: !<!Schemas>
         name: OutboundRuleName
         description: The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_185
+  - !<!StringSchema> &ref_184
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1770,7 +1760,7 @@ schemas: !<!Schemas>
         name: OutboundRuleEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_186
+  - !<!StringSchema> &ref_185
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1780,7 +1770,7 @@ schemas: !<!Schemas>
         name: OutboundRuleType
         description: Type of the resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_204
+  - !<!StringSchema> &ref_203
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1790,7 +1780,7 @@ schemas: !<!Schemas>
         name: LoadBalancerPropertiesFormatResourceGuid
         description: The resource GUID property of the load balancer resource.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_203
+  - !<!StringSchema> &ref_202
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1800,7 +1790,7 @@ schemas: !<!Schemas>
         name: LoadBalancerEtag
         description: A unique read-only string that changes whenever the resource is updated.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_249
+  - !<!StringSchema> &ref_248
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1810,7 +1800,7 @@ schemas: !<!Schemas>
         name: NetworkInterfaceLoadBalancerListResultNextLink
         description: The URL to get the next set of results.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_251
+  - !<!StringSchema> &ref_250
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1820,7 +1810,7 @@ schemas: !<!Schemas>
         name: NetworkInterfaceTapConfigurationListResultNextLink
         description: The URL to get the next set of results.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_332
+  - !<!StringSchema> &ref_331
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -1829,6 +1819,16 @@ schemas: !<!Schemas>
       default:
         name: EffectiveNetworkSecurityGroupTagMapItemsItem
         description: ''
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> 
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2019-11-01'
+    language: !<!Languages> 
+      default:
+        name: ResourceNavigationLinkId
+        description: Resource navigation link identifier.
     protocol: !<!Protocols> {}
   choices:
   - !<!ChoiceSchema> &ref_15
@@ -1963,7 +1963,7 @@ schemas: !<!Schemas>
         name: SecurityRuleDirection
         description: The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_198
+  - !<!ChoiceSchema> &ref_197
     choices:
     - !<!ChoiceValue> 
       value: VirtualNetworkGateway
@@ -2131,7 +2131,7 @@ schemas: !<!Schemas>
         name: TransportProtocol
         description: The transport protocol for the endpoint.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_224
+  - !<!ChoiceSchema> &ref_223
     choices:
     - !<!ChoiceValue> 
       value: Unknown
@@ -2167,7 +2167,7 @@ schemas: !<!Schemas>
         name: EffectiveRouteSource
         description: Who created the route.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_225
+  - !<!ChoiceSchema> &ref_224
     choices:
     - !<!ChoiceValue> 
       value: Active
@@ -2191,7 +2191,7 @@ schemas: !<!Schemas>
         name: EffectiveRouteState
         description: The value of effective route.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_231
+  - !<!ChoiceSchema> &ref_230
     choices:
     - !<!ChoiceValue> 
       value: Tcp
@@ -2221,7 +2221,7 @@ schemas: !<!Schemas>
         name: EffectiveSecurityRuleProtocol
         description: The network protocol this rule applies to.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_202
+  - !<!ChoiceSchema> &ref_201
     choices:
     - !<!ChoiceValue> 
       value: Basic
@@ -2245,7 +2245,7 @@ schemas: !<!Schemas>
         name: LoadBalancerSkuName
         description: Name of a load balancer SKU.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_166
+  - !<!ChoiceSchema> &ref_165
     choices:
     - !<!ChoiceValue> 
       value: Default
@@ -2275,7 +2275,7 @@ schemas: !<!Schemas>
         name: LoadDistribution
         description: The load distribution policy for this rule.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_173
+  - !<!ChoiceSchema> &ref_172
     choices:
     - !<!ChoiceValue> 
       value: Http
@@ -2307,7 +2307,7 @@ schemas: !<!Schemas>
           The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be
           successful.
     protocol: !<!Protocols> {}
-  - !<!ChoiceSchema> &ref_188
+  - !<!ChoiceSchema> &ref_187
     choices:
     - !<!ChoiceValue> 
       value: Tcp
@@ -2338,7 +2338,7 @@ schemas: !<!Schemas>
         description: The protocol for the outbound rule in load balancer.
     protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_333
+  - !<!ConstantSchema> &ref_332
     type: constant
     value: !<!ConstantValue> 
       value: '2019-11-01'
@@ -2348,7 +2348,7 @@ schemas: !<!Schemas>
         name: ApiVersion20191101
         description: Api Version (2019-11-01)
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_343
+  - !<!ConstantSchema> &ref_342
     type: constant
     value: !<!ConstantValue> 
       value: application/json
@@ -2359,7 +2359,7 @@ schemas: !<!Schemas>
         description: Content Type 'application/json'
     protocol: !<!Protocols> {}
   dictionaries:
-  - !<!DictionarySchema> &ref_210
+  - !<!DictionarySchema> &ref_209
     type: dictionary
     elementType: *ref_1
     language: !<!Languages> 
@@ -2367,7 +2367,7 @@ schemas: !<!Schemas>
         name: ResourceTags
         description: Resource tags.
     protocol: !<!Protocols> {}
-  - !<!DictionarySchema> &ref_220
+  - !<!DictionarySchema> &ref_219
     type: dictionary
     elementType: *ref_1
     language: !<!Languages> 
@@ -2376,7 +2376,7 @@ schemas: !<!Schemas>
         description: Resource tags.
     protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_339
+  - !<!ObjectSchema> &ref_338
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -2414,7 +2414,7 @@ schemas: !<!Schemas>
               description: 'The target of the particular error. For example, the name of the property in error.'
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_252
+          schema: !<!ArraySchema> &ref_251
             type: array
             apiVersions:
             - !<!ApiVersion> 
@@ -2545,7 +2545,7 @@ schemas: !<!Schemas>
               description: A unique read-only string that changes whenever the resource is updated.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_263
+          schema: !<!ArraySchema> &ref_262
             type: array
             apiVersions:
             - !<!ApiVersion> 
@@ -2650,7 +2650,7 @@ schemas: !<!Schemas>
                               specifies where network traffic originates from.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_253
+                        schema: !<!ArraySchema> &ref_252
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -2671,7 +2671,7 @@ schemas: !<!Schemas>
                             description: The CIDR or source IP ranges.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_254
+                        schema: !<!ArraySchema> &ref_253
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -2703,7 +2703,7 @@ schemas: !<!Schemas>
                             description: 'The destination address prefix. CIDR or destination IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used.'
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_255
+                        schema: !<!ArraySchema> &ref_254
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -2724,7 +2724,7 @@ schemas: !<!Schemas>
                             description: The destination address prefixes. CIDR or destination IP ranges.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_256
+                        schema: !<!ArraySchema> &ref_255
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -2745,7 +2745,7 @@ schemas: !<!Schemas>
                             description: The application security group specified as destination.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_257
+                        schema: !<!ArraySchema> &ref_256
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -2766,7 +2766,7 @@ schemas: !<!Schemas>
                             description: The source port ranges.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_258
+                        schema: !<!ArraySchema> &ref_257
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -2894,7 +2894,7 @@ schemas: !<!Schemas>
                             description: Service endpoint name.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_267
+                        schema: !<!ArraySchema> &ref_266
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -2998,7 +2998,7 @@ schemas: !<!Schemas>
                             description: The resource id of private link service.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_272
+                        schema: !<!ArraySchema> &ref_271
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -3030,7 +3030,7 @@ schemas: !<!Schemas>
                             description: A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ObjectSchema> &ref_212
+                        schema: !<!ObjectSchema> &ref_211
                           type: object
                           apiVersions:
                           - !<!ApiVersion> 
@@ -3182,7 +3182,7 @@ schemas: !<!Schemas>
                                 description: The address prefix for the subnet.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_262
+                            schema: !<!ArraySchema> &ref_261
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
@@ -3224,7 +3224,7 @@ schemas: !<!Schemas>
                                     description: A unique read-only string that changes whenever the resource is updated.
                                 protocol: !<!Protocols> {}
                               - !<!Property> 
-                                schema: !<!ArraySchema> &ref_259
+                                schema: !<!ArraySchema> &ref_258
                                   type: array
                                   apiVersions:
                                   - !<!ApiVersion> 
@@ -3245,7 +3245,7 @@ schemas: !<!Schemas>
                                     description: A collection of security rules of the network security group.
                                 protocol: !<!Protocols> {}
                               - !<!Property> 
-                                schema: !<!ArraySchema> &ref_260
+                                schema: !<!ArraySchema> &ref_259
                                   type: array
                                   apiVersions:
                                   - !<!ApiVersion> 
@@ -3267,7 +3267,7 @@ schemas: !<!Schemas>
                                     description: The default security rules of network security group.
                                 protocol: !<!Protocols> {}
                               - !<!Property> 
-                                schema: !<!ArraySchema> &ref_261
+                                schema: !<!ArraySchema> &ref_260
                                   type: array
                                   apiVersions:
                                   - !<!ApiVersion> 
@@ -3348,7 +3348,7 @@ schemas: !<!Schemas>
                                               description: The ID of the subnet from which the private IP will be allocated.
                                           protocol: !<!Protocols> {}
                                         - !<!Property> 
-                                          schema: !<!ArraySchema> &ref_271
+                                          schema: !<!ArraySchema> &ref_270
                                             type: array
                                             apiVersions:
                                             - !<!ApiVersion> 
@@ -3382,7 +3382,7 @@ schemas: !<!Schemas>
                                               description: The provisioning state of the private endpoint resource.
                                           protocol: !<!Protocols> {}
                                         - !<!Property> 
-                                          schema: !<!ArraySchema> &ref_273
+                                          schema: !<!ArraySchema> &ref_272
                                             type: array
                                             apiVersions:
                                             - !<!ApiVersion> 
@@ -3403,7 +3403,7 @@ schemas: !<!Schemas>
                                               description: A grouping of information about the connection to the remote resource.
                                           protocol: !<!Protocols> {}
                                         - !<!Property> 
-                                          schema: !<!ArraySchema> &ref_274
+                                          schema: !<!ArraySchema> &ref_273
                                             type: array
                                             apiVersions:
                                             - !<!ApiVersion> 
@@ -3445,7 +3445,7 @@ schemas: !<!Schemas>
                                           description: A reference to the private endpoint to which the network interface is linked.
                                       protocol: !<!Protocols> {}
                                     - !<!Property> 
-                                      schema: !<!ArraySchema> &ref_303
+                                      schema: !<!ArraySchema> &ref_302
                                         type: array
                                         apiVersions:
                                         - !<!ApiVersion> 
@@ -3479,7 +3479,7 @@ schemas: !<!Schemas>
                                                 description: A unique read-only string that changes whenever the resource is updated.
                                             protocol: !<!Protocols> {}
                                           - !<!Property> 
-                                            schema: !<!ArraySchema> &ref_292
+                                            schema: !<!ArraySchema> &ref_291
                                               type: array
                                               apiVersions:
                                               - !<!ApiVersion> 
@@ -3505,7 +3505,7 @@ schemas: !<!Schemas>
                                                       description: A unique read-only string that changes whenever the resource is updated.
                                                   protocol: !<!Protocols> {}
                                                 - !<!Property> 
-                                                  schema: !<!ArraySchema> &ref_286
+                                                  schema: !<!ArraySchema> &ref_285
                                                     type: array
                                                     apiVersions:
                                                     - !<!ApiVersion> 
@@ -3632,7 +3632,7 @@ schemas: !<!Schemas>
                                                       description: The reference to the private IP Address of the collector nic that will receive the tap.
                                                   protocol: !<!Protocols> {}
                                                 - !<!Property> 
-                                                  schema: !<!ObjectSchema> &ref_159
+                                                  schema: !<!ObjectSchema> &ref_158
                                                     type: object
                                                     apiVersions:
                                                     - !<!ApiVersion> 
@@ -3670,7 +3670,7 @@ schemas: !<!Schemas>
                                                           description: Type of the resource.
                                                       protocol: !<!Protocols> {}
                                                     - !<!Property> 
-                                                      schema: !<!ArraySchema> &ref_291
+                                                      schema: !<!ArraySchema> &ref_290
                                                         type: array
                                                         apiVersions:
                                                         - !<!ApiVersion> 
@@ -3688,7 +3688,7 @@ schemas: !<!Schemas>
                                                           description: A list of availability zones denoting the IP allocated for the resource needs to come from.
                                                       protocol: !<!Protocols> {}
                                                     - !<!Property> 
-                                                      schema: !<!ArraySchema> &ref_287
+                                                      schema: !<!ArraySchema> &ref_286
                                                         type: array
                                                         apiVersions:
                                                         - !<!ApiVersion> 
@@ -3710,7 +3710,7 @@ schemas: !<!Schemas>
                                                           description: An array of references to inbound rules that use this frontend IP.
                                                       protocol: !<!Protocols> {}
                                                     - !<!Property> 
-                                                      schema: !<!ArraySchema> &ref_288
+                                                      schema: !<!ArraySchema> &ref_287
                                                         type: array
                                                         apiVersions:
                                                         - !<!ApiVersion> 
@@ -3732,7 +3732,7 @@ schemas: !<!Schemas>
                                                           description: An array of references to inbound pools that use this frontend IP.
                                                       protocol: !<!Protocols> {}
                                                     - !<!Property> 
-                                                      schema: !<!ArraySchema> &ref_289
+                                                      schema: !<!ArraySchema> &ref_288
                                                         type: array
                                                         apiVersions:
                                                         - !<!ApiVersion> 
@@ -3754,7 +3754,7 @@ schemas: !<!Schemas>
                                                           description: An array of references to outbound rules that use this frontend IP.
                                                       protocol: !<!Protocols> {}
                                                     - !<!Property> 
-                                                      schema: !<!ArraySchema> &ref_290
+                                                      schema: !<!ArraySchema> &ref_289
                                                         type: array
                                                         apiVersions:
                                                         - !<!ApiVersion> 
@@ -3832,7 +3832,7 @@ schemas: !<!Schemas>
                                                           - *ref_6
                                                         properties:
                                                         - !<!Property> 
-                                                          schema: !<!ObjectSchema> &ref_213
+                                                          schema: !<!ObjectSchema> &ref_212
                                                             type: object
                                                             apiVersions:
                                                             - !<!ApiVersion> 
@@ -3873,7 +3873,7 @@ schemas: !<!Schemas>
                                                               description: A unique read-only string that changes whenever the resource is updated.
                                                           protocol: !<!Protocols> {}
                                                         - !<!Property> 
-                                                          schema: !<!ArraySchema> &ref_277
+                                                          schema: !<!ArraySchema> &ref_276
                                                             type: array
                                                             apiVersions:
                                                             - !<!ApiVersion> 
@@ -3925,7 +3925,7 @@ schemas: !<!Schemas>
                                                               description: The IP configuration associated with the public IP address.
                                                           protocol: !<!Protocols> {}
                                                         - !<!Property> 
-                                                          schema: !<!ObjectSchema> &ref_214
+                                                          schema: !<!ObjectSchema> &ref_213
                                                             type: object
                                                             apiVersions:
                                                             - !<!ApiVersion> 
@@ -3980,7 +3980,7 @@ schemas: !<!Schemas>
                                                               description: The FQDN of the DNS record associated with the public IP address.
                                                           protocol: !<!Protocols> {}
                                                         - !<!Property> 
-                                                          schema: !<!ObjectSchema> &ref_215
+                                                          schema: !<!ObjectSchema> &ref_214
                                                             type: object
                                                             apiVersions:
                                                             - !<!ApiVersion> 
@@ -4033,12 +4033,12 @@ schemas: !<!Schemas>
                                                               description: The DDoS protection custom policy associated with the public IP address.
                                                           protocol: !<!Protocols> {}
                                                         - !<!Property> 
-                                                          schema: !<!ArraySchema> &ref_276
+                                                          schema: !<!ArraySchema> &ref_275
                                                             type: array
                                                             apiVersions:
                                                             - !<!ApiVersion> 
                                                               version: '2019-11-01'
-                                                            elementType: !<!ObjectSchema> &ref_216
+                                                            elementType: !<!ObjectSchema> &ref_215
                                                               type: object
                                                               apiVersions:
                                                               - !<!ApiVersion> 
@@ -4242,12 +4242,12 @@ schemas: !<!Schemas>
                                                 description: The reference to Virtual Network Taps.
                                             protocol: !<!Protocols> {}
                                           - !<!Property> 
-                                            schema: !<!ArraySchema> &ref_295
+                                            schema: !<!ArraySchema> &ref_294
                                               type: array
                                               apiVersions:
                                               - !<!ApiVersion> 
                                                 version: '2019-11-01'
-                                              elementType: !<!ObjectSchema> &ref_160
+                                              elementType: !<!ObjectSchema> &ref_159
                                                 type: object
                                                 apiVersions:
                                                 - !<!ApiVersion> 
@@ -4285,7 +4285,7 @@ schemas: !<!Schemas>
                                                       description: Type of the resource.
                                                   protocol: !<!Protocols> {}
                                                 - !<!Property> 
-                                                  schema: !<!ArraySchema> &ref_293
+                                                  schema: !<!ArraySchema> &ref_292
                                                     type: array
                                                     apiVersions:
                                                     - !<!ApiVersion> 
@@ -4307,12 +4307,12 @@ schemas: !<!Schemas>
                                                       description: Collection of references to IPs defined in network interfaces.
                                                   protocol: !<!Protocols> {}
                                                 - !<!Property> 
-                                                  schema: !<!ArraySchema> &ref_294
+                                                  schema: !<!ArraySchema> &ref_293
                                                     type: array
                                                     apiVersions:
                                                     - !<!ApiVersion> 
                                                       version: '2019-11-01'
-                                                    elementType: !<!ObjectSchema> &ref_217
+                                                    elementType: !<!ObjectSchema> &ref_216
                                                       type: object
                                                       apiVersions:
                                                       - !<!ApiVersion> 
@@ -4397,12 +4397,12 @@ schemas: !<!Schemas>
                                                 description: The reference to ApplicationGatewayBackendAddressPool resource.
                                             protocol: !<!Protocols> {}
                                           - !<!Property> 
-                                            schema: !<!ArraySchema> &ref_299
+                                            schema: !<!ArraySchema> &ref_298
                                               type: array
                                               apiVersions:
                                               - !<!ApiVersion> 
                                                 version: '2019-11-01'
-                                              elementType: !<!ObjectSchema> &ref_161
+                                              elementType: !<!ObjectSchema> &ref_160
                                                 type: object
                                                 apiVersions:
                                                 - !<!ApiVersion> 
@@ -4440,7 +4440,7 @@ schemas: !<!Schemas>
                                                       description: Type of the resource.
                                                   protocol: !<!Protocols> {}
                                                 - !<!Property> 
-                                                  schema: !<!ArraySchema> &ref_296
+                                                  schema: !<!ArraySchema> &ref_295
                                                     type: array
                                                     apiVersions:
                                                     - !<!ApiVersion> 
@@ -4462,7 +4462,7 @@ schemas: !<!Schemas>
                                                       description: An array of references to IP addresses defined in network interfaces.
                                                   protocol: !<!Protocols> {}
                                                 - !<!Property> 
-                                                  schema: !<!ArraySchema> &ref_297
+                                                  schema: !<!ArraySchema> &ref_296
                                                     type: array
                                                     apiVersions:
                                                     - !<!ApiVersion> 
@@ -4496,7 +4496,7 @@ schemas: !<!Schemas>
                                                       description: A reference to an outbound rule that uses this backend address pool.
                                                   protocol: !<!Protocols> {}
                                                 - !<!Property> 
-                                                  schema: !<!ArraySchema> &ref_298
+                                                  schema: !<!ArraySchema> &ref_297
                                                     type: array
                                                     apiVersions:
                                                     - !<!ApiVersion> 
@@ -4555,12 +4555,12 @@ schemas: !<!Schemas>
                                                 description: The reference to LoadBalancerBackendAddressPool resource.
                                             protocol: !<!Protocols> {}
                                           - !<!Property> 
-                                            schema: !<!ArraySchema> &ref_300
+                                            schema: !<!ArraySchema> &ref_299
                                               type: array
                                               apiVersions:
                                               - !<!ApiVersion> 
                                                 version: '2019-11-01'
-                                              elementType: !<!ObjectSchema> &ref_162
+                                              elementType: !<!ObjectSchema> &ref_161
                                                 type: object
                                                 apiVersions:
                                                 - !<!ApiVersion> 
@@ -4792,7 +4792,7 @@ schemas: !<!Schemas>
                                                 description: Public IP address bound to the IP configuration.
                                             protocol: !<!Protocols> {}
                                           - !<!Property> 
-                                            schema: !<!ArraySchema> &ref_301
+                                            schema: !<!ArraySchema> &ref_300
                                               type: array
                                               apiVersions:
                                               - !<!ApiVersion> 
@@ -4825,7 +4825,7 @@ schemas: !<!Schemas>
                                                 description: The provisioning state of the network interface IP configuration.
                                             protocol: !<!Protocols> {}
                                           - !<!Property> 
-                                            schema: !<!ObjectSchema> &ref_218
+                                            schema: !<!ObjectSchema> &ref_217
                                               type: object
                                               apiVersions:
                                               - !<!ApiVersion> 
@@ -4850,7 +4850,7 @@ schemas: !<!Schemas>
                                                     description: The required member name for current private link connection.
                                                 protocol: !<!Protocols> {}
                                               - !<!Property> 
-                                                schema: !<!ArraySchema> &ref_302
+                                                schema: !<!ArraySchema> &ref_301
                                                   type: array
                                                   apiVersions:
                                                   - !<!ApiVersion> 
@@ -4915,7 +4915,7 @@ schemas: !<!Schemas>
                                           description: A list of IPConfigurations of the network interface.
                                       protocol: !<!Protocols> {}
                                     - !<!Property> 
-                                      schema: !<!ArraySchema> &ref_304
+                                      schema: !<!ArraySchema> &ref_303
                                         type: array
                                         apiVersions:
                                         - !<!ApiVersion> 
@@ -4937,14 +4937,14 @@ schemas: !<!Schemas>
                                           description: A list of TapConfigurations of the network interface.
                                       protocol: !<!Protocols> {}
                                     - !<!Property> 
-                                      schema: !<!ObjectSchema> &ref_219
+                                      schema: !<!ObjectSchema> &ref_218
                                         type: object
                                         apiVersions:
                                         - !<!ApiVersion> 
                                           version: '2019-11-01'
                                         properties:
                                         - !<!Property> 
-                                          schema: !<!ArraySchema> &ref_305
+                                          schema: !<!ArraySchema> &ref_304
                                             type: array
                                             apiVersions:
                                             - !<!ApiVersion> 
@@ -4966,7 +4966,7 @@ schemas: !<!Schemas>
                                                 dnsServers collection.
                                           protocol: !<!Protocols> {}
                                         - !<!Property> 
-                                          schema: !<!ArraySchema> &ref_306
+                                          schema: !<!ArraySchema> &ref_305
                                             type: array
                                             apiVersions:
                                             - !<!ApiVersion> 
@@ -5083,7 +5083,7 @@ schemas: !<!Schemas>
                                           description: Indicates whether IP forwarding is enabled on this network interface.
                                       protocol: !<!Protocols> {}
                                     - !<!Property> 
-                                      schema: !<!ArraySchema> &ref_307
+                                      schema: !<!ArraySchema> &ref_306
                                         type: array
                                         apiVersions:
                                         - !<!ApiVersion> 
@@ -5155,7 +5155,7 @@ schemas: !<!Schemas>
                                     description: A collection of references to network interfaces.
                                 protocol: !<!Protocols> {}
                               - !<!Property> 
-                                schema: !<!ArraySchema> &ref_285
+                                schema: !<!ArraySchema> &ref_284
                                   type: array
                                   apiVersions:
                                   - !<!ApiVersion> 
@@ -5243,12 +5243,12 @@ schemas: !<!Schemas>
                                 description: Nat gateway associated with this subnet.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_266
+                            schema: !<!ArraySchema> &ref_265
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
                                 version: '2019-11-01'
-                              elementType: !<!ObjectSchema> &ref_211
+                              elementType: !<!ObjectSchema> &ref_210
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -5263,7 +5263,7 @@ schemas: !<!Schemas>
                                       description: The type of the endpoint service.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: !<!ArraySchema> &ref_265
+                                  schema: !<!ArraySchema> &ref_264
                                     type: array
                                     apiVersions:
                                     - !<!ApiVersion> 
@@ -5315,12 +5315,12 @@ schemas: !<!Schemas>
                                 description: An array of service endpoints.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_270
+                            schema: !<!ArraySchema> &ref_269
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
                                 version: '2019-11-01'
-                              elementType: !<!ObjectSchema> &ref_201
+                              elementType: !<!ObjectSchema> &ref_200
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -5341,7 +5341,7 @@ schemas: !<!Schemas>
                                       description: A unique read-only string that changes whenever the resource is updated.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: !<!ArraySchema> &ref_268
+                                  schema: !<!ArraySchema> &ref_267
                                     type: array
                                     apiVersions:
                                     - !<!ApiVersion> 
@@ -5362,7 +5362,7 @@ schemas: !<!Schemas>
                                       description: A collection of service endpoint policy definitions of the service endpoint policy.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: !<!ArraySchema> &ref_269
+                                  schema: !<!ArraySchema> &ref_268
                                     type: array
                                     apiVersions:
                                     - !<!ApiVersion> 
@@ -5433,7 +5433,7 @@ schemas: !<!Schemas>
                                 description: An array of service endpoint policies.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_275
+                            schema: !<!ArraySchema> &ref_274
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
@@ -5455,7 +5455,7 @@ schemas: !<!Schemas>
                                 description: An array of references to private endpoints.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_278
+                            schema: !<!ArraySchema> &ref_277
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
@@ -5477,12 +5477,12 @@ schemas: !<!Schemas>
                                 description: An array of references to the network interface IP configurations using subnet.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_279
+                            schema: !<!ArraySchema> &ref_278
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
                                 version: '2019-11-01'
-                              elementType: !<!ObjectSchema> &ref_155
+                              elementType: !<!ObjectSchema> &ref_154
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -5569,12 +5569,12 @@ schemas: !<!Schemas>
                                 description: Array of IP configuration profiles which reference this subnet.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_280
+                            schema: !<!ArraySchema> &ref_279
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
                                 version: '2019-11-01'
-                              elementType: !<!ObjectSchema> &ref_156
+                              elementType: !<!ObjectSchema> &ref_155
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -5596,15 +5596,6 @@ schemas: !<!Schemas>
                                 - !<!Property> 
                                   schema: *ref_136
                                   readOnly: true
-                                  serializedName: id
-                                  language: !<!Languages> 
-                                    default:
-                                      name: id
-                                      description: Resource navigation link identifier.
-                                  protocol: !<!Protocols> {}
-                                - !<!Property> 
-                                  schema: *ref_137
-                                  readOnly: true
                                   serializedName: etag
                                   language: !<!Languages> 
                                     default:
@@ -5612,7 +5603,7 @@ schemas: !<!Schemas>
                                       description: A unique read-only string that changes whenever the resource is updated.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_138
+                                  schema: *ref_137
                                   readOnly: true
                                   serializedName: type
                                   language: !<!Languages> 
@@ -5621,7 +5612,7 @@ schemas: !<!Schemas>
                                       description: Resource type.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_139
+                                  schema: *ref_138
                                   flattenedNames:
                                   - properties
                                   - linkedResourceType
@@ -5632,7 +5623,7 @@ schemas: !<!Schemas>
                                       description: Resource type of the linked resource.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_140
+                                  schema: *ref_139
                                   flattenedNames:
                                   - properties
                                   - link
@@ -5681,12 +5672,12 @@ schemas: !<!Schemas>
                                 description: An array of references to the external resources using subnet.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_282
+                            schema: !<!ArraySchema> &ref_281
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
                                 version: '2019-11-01'
-                              elementType: !<!ObjectSchema> &ref_157
+                              elementType: !<!ObjectSchema> &ref_156
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -5698,7 +5689,7 @@ schemas: !<!Schemas>
                                   - *ref_11
                                 properties:
                                 - !<!Property> 
-                                  schema: *ref_141
+                                  schema: *ref_140
                                   serializedName: name
                                   language: !<!Languages> 
                                     default:
@@ -5706,7 +5697,7 @@ schemas: !<!Schemas>
                                       description: Name of the resource that is unique within a resource group. This name can be used to access the resource.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_142
+                                  schema: *ref_141
                                   readOnly: true
                                   serializedName: etag
                                   language: !<!Languages> 
@@ -5715,7 +5706,7 @@ schemas: !<!Schemas>
                                       description: A unique read-only string that changes whenever the resource is updated.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_143
+                                  schema: *ref_142
                                   readOnly: true
                                   serializedName: type
                                   language: !<!Languages> 
@@ -5724,7 +5715,7 @@ schemas: !<!Schemas>
                                       description: Resource type.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_144
+                                  schema: *ref_143
                                   flattenedNames:
                                   - properties
                                   - linkedResourceType
@@ -5735,7 +5726,7 @@ schemas: !<!Schemas>
                                       description: Resource type of the linked resource.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_145
+                                  schema: *ref_144
                                   flattenedNames:
                                   - properties
                                   - link
@@ -5758,7 +5749,7 @@ schemas: !<!Schemas>
                                       description: The provisioning state of the service association link resource.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_146
+                                  schema: *ref_145
                                   flattenedNames:
                                   - properties
                                   - allowDelete
@@ -5769,12 +5760,12 @@ schemas: !<!Schemas>
                                       description: 'If true, the resource can be deleted.'
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: !<!ArraySchema> &ref_281
+                                  schema: !<!ArraySchema> &ref_280
                                     type: array
                                     apiVersions:
                                     - !<!ApiVersion> 
                                       version: '2019-11-01'
-                                    elementType: *ref_147
+                                    elementType: *ref_146
                                     language: !<!Languages> 
                                       default:
                                         name: ServiceAssociationLinkPropertiesFormatLocations
@@ -5816,12 +5807,12 @@ schemas: !<!Schemas>
                                 description: An array of references to services injecting into this subnet.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: !<!ArraySchema> &ref_284
+                            schema: !<!ArraySchema> &ref_283
                               type: array
                               apiVersions:
                               - !<!ApiVersion> 
                                 version: '2019-11-01'
-                              elementType: !<!ObjectSchema> &ref_158
+                              elementType: !<!ObjectSchema> &ref_157
                                 type: object
                                 apiVersions:
                                 - !<!ApiVersion> 
@@ -5833,7 +5824,7 @@ schemas: !<!Schemas>
                                   - *ref_11
                                 properties:
                                 - !<!Property> 
-                                  schema: *ref_148
+                                  schema: *ref_147
                                   serializedName: name
                                   language: !<!Languages> 
                                     default:
@@ -5841,7 +5832,7 @@ schemas: !<!Schemas>
                                       description: The name of the resource that is unique within a subnet. This name can be used to access the resource.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_149
+                                  schema: *ref_148
                                   readOnly: true
                                   serializedName: etag
                                   language: !<!Languages> 
@@ -5850,7 +5841,7 @@ schemas: !<!Schemas>
                                       description: A unique read-only string that changes whenever the resource is updated.
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: *ref_150
+                                  schema: *ref_149
                                   flattenedNames:
                                   - properties
                                   - serviceName
@@ -5861,12 +5852,12 @@ schemas: !<!Schemas>
                                       description: The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers).
                                   protocol: !<!Protocols> {}
                                 - !<!Property> 
-                                  schema: !<!ArraySchema> &ref_283
+                                  schema: !<!ArraySchema> &ref_282
                                     type: array
                                     apiVersions:
                                     - !<!ApiVersion> 
                                       version: '2019-11-01'
-                                    elementType: *ref_151
+                                    elementType: *ref_150
                                     language: !<!Languages> 
                                       default:
                                         name: ServiceDelegationPropertiesFormatActions
@@ -5920,7 +5911,7 @@ schemas: !<!Schemas>
                                 description: An array of references to the delegations on the subnet.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_152
+                            schema: *ref_151
                             flattenedNames:
                             - properties
                             - purpose
@@ -5944,7 +5935,7 @@ schemas: !<!Schemas>
                                 description: The provisioning state of the subnet resource.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_153
+                            schema: *ref_152
                             flattenedNames:
                             - properties
                             - privateEndpointNetworkPolicies
@@ -5955,7 +5946,7 @@ schemas: !<!Schemas>
                                 description: Enable or Disable apply network policies on private end point in the subnet.
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_154
+                            schema: *ref_153
                             flattenedNames:
                             - properties
                             - privateLinkServiceNetworkPolicies
@@ -6019,18 +6010,18 @@ schemas: !<!Schemas>
                           description: IP configuration.
                           namespace: ''
                       protocol: !<!Protocols> {}
+                    - *ref_154
                     - *ref_155
                     - *ref_156
                     - *ref_157
-                    - *ref_158
                     - *ref_56
                     - *ref_112
+                    - *ref_158
                     - *ref_159
                     - *ref_160
                     - *ref_161
-                    - *ref_162
                     - *ref_67
-                    - !<!ObjectSchema> &ref_190
+                    - !<!ObjectSchema> &ref_189
                       type: object
                       apiVersions:
                       - !<!ApiVersion> 
@@ -6042,7 +6033,7 @@ schemas: !<!Schemas>
                         - *ref_11
                       properties:
                       - !<!Property> 
-                        schema: *ref_163
+                        schema: *ref_162
                         serializedName: name
                         language: !<!Languages> 
                           default:
@@ -6050,7 +6041,7 @@ schemas: !<!Schemas>
                             description: The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_164
+                        schema: *ref_163
                         readOnly: true
                         serializedName: etag
                         language: !<!Languages> 
@@ -6059,7 +6050,7 @@ schemas: !<!Schemas>
                             description: A unique read-only string that changes whenever the resource is updated.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_165
+                        schema: *ref_164
                         readOnly: true
                         serializedName: type
                         language: !<!Languages> 
@@ -6112,7 +6103,7 @@ schemas: !<!Schemas>
                             description: The reference to the transport protocol used by the load balancing rule.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_166
+                        schema: *ref_165
                         flattenedNames:
                         - properties
                         - loadDistribution
@@ -6123,7 +6114,7 @@ schemas: !<!Schemas>
                             description: The load distribution policy for this rule.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_167
+                        schema: *ref_166
                         flattenedNames:
                         - properties
                         - frontendPort
@@ -6134,7 +6125,7 @@ schemas: !<!Schemas>
                             description: The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values are between 0 and 65534. Note that value 0 enables "Any Port".
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_168
+                        schema: *ref_167
                         flattenedNames:
                         - properties
                         - backendPort
@@ -6180,7 +6171,7 @@ schemas: !<!Schemas>
                             description: Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_169
+                        schema: *ref_168
                         flattenedNames:
                         - properties
                         - disableOutboundSnat
@@ -6213,7 +6204,7 @@ schemas: !<!Schemas>
                           description: A load balancing rule for a load balancer.
                           namespace: ''
                       protocol: !<!Protocols> {}
-                    - !<!ObjectSchema> &ref_191
+                    - !<!ObjectSchema> &ref_190
                       type: object
                       apiVersions:
                       - !<!ApiVersion> 
@@ -6225,7 +6216,7 @@ schemas: !<!Schemas>
                         - *ref_11
                       properties:
                       - !<!Property> 
-                        schema: *ref_170
+                        schema: *ref_169
                         serializedName: name
                         language: !<!Languages> 
                           default:
@@ -6233,7 +6224,7 @@ schemas: !<!Schemas>
                             description: The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_171
+                        schema: *ref_170
                         readOnly: true
                         serializedName: etag
                         language: !<!Languages> 
@@ -6242,7 +6233,7 @@ schemas: !<!Schemas>
                             description: A unique read-only string that changes whenever the resource is updated.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_172
+                        schema: *ref_171
                         readOnly: true
                         serializedName: type
                         language: !<!Languages> 
@@ -6251,7 +6242,7 @@ schemas: !<!Schemas>
                             description: Type of the resource.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_324
+                        schema: !<!ArraySchema> &ref_323
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -6273,7 +6264,7 @@ schemas: !<!Schemas>
                             description: The load balancer rules that use this probe.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_173
+                        schema: *ref_172
                         flattenedNames:
                         - properties
                         - protocol
@@ -6286,7 +6277,7 @@ schemas: !<!Schemas>
                               probe to be successful.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_174
+                        schema: *ref_173
                         flattenedNames:
                         - properties
                         - port
@@ -6297,7 +6288,7 @@ schemas: !<!Schemas>
                             description: 'The port for communicating the probe. Possible values range from 1 to 65535, inclusive.'
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_175
+                        schema: *ref_174
                         flattenedNames:
                         - properties
                         - intervalInSeconds
@@ -6310,7 +6301,7 @@ schemas: !<!Schemas>
                               before taking the instance out of rotation. The default value is 15, the minimum value is 5.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_176
+                        schema: *ref_175
                         flattenedNames:
                         - properties
                         - numberOfProbes
@@ -6323,7 +6314,7 @@ schemas: !<!Schemas>
                               typical times used in Azure.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_177
+                        schema: *ref_176
                         flattenedNames:
                         - properties
                         - requestPath
@@ -6356,7 +6347,7 @@ schemas: !<!Schemas>
                           description: A load balancer probe.
                           namespace: ''
                       protocol: !<!Protocols> {}
-                    - !<!ObjectSchema> &ref_192
+                    - !<!ObjectSchema> &ref_191
                       type: object
                       apiVersions:
                       - !<!ApiVersion> 
@@ -6368,7 +6359,7 @@ schemas: !<!Schemas>
                         - *ref_11
                       properties:
                       - !<!Property> 
-                        schema: *ref_178
+                        schema: *ref_177
                         serializedName: name
                         language: !<!Languages> 
                           default:
@@ -6376,7 +6367,7 @@ schemas: !<!Schemas>
                             description: The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_179
+                        schema: *ref_178
                         readOnly: true
                         serializedName: etag
                         language: !<!Languages> 
@@ -6385,7 +6376,7 @@ schemas: !<!Schemas>
                             description: A unique read-only string that changes whenever the resource is updated.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_180
+                        schema: *ref_179
                         readOnly: true
                         serializedName: type
                         language: !<!Languages> 
@@ -6416,7 +6407,7 @@ schemas: !<!Schemas>
                             description: The reference to the transport protocol used by the inbound NAT pool.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_181
+                        schema: *ref_180
                         flattenedNames:
                         - properties
                         - frontendPortRangeStart
@@ -6427,7 +6418,7 @@ schemas: !<!Schemas>
                             description: The first port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65534.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_182
+                        schema: *ref_181
                         flattenedNames:
                         - properties
                         - frontendPortRangeEnd
@@ -6438,7 +6429,7 @@ schemas: !<!Schemas>
                             description: The last port number in the range of external ports that will be used to provide Inbound Nat to NICs associated with a load balancer. Acceptable values range between 1 and 65535.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_183
+                        schema: *ref_182
                         flattenedNames:
                         - properties
                         - backendPort
@@ -6506,7 +6497,7 @@ schemas: !<!Schemas>
                           description: Inbound NAT pool of the load balancer.
                           namespace: ''
                       protocol: !<!Protocols> {}
-                    - !<!ObjectSchema> &ref_193
+                    - !<!ObjectSchema> &ref_192
                       type: object
                       apiVersions:
                       - !<!ApiVersion> 
@@ -6518,7 +6509,7 @@ schemas: !<!Schemas>
                         - *ref_11
                       properties:
                       - !<!Property> 
-                        schema: *ref_184
+                        schema: *ref_183
                         serializedName: name
                         language: !<!Languages> 
                           default:
@@ -6526,7 +6517,7 @@ schemas: !<!Schemas>
                             description: The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_185
+                        schema: *ref_184
                         readOnly: true
                         serializedName: etag
                         language: !<!Languages> 
@@ -6535,7 +6526,7 @@ schemas: !<!Schemas>
                             description: A unique read-only string that changes whenever the resource is updated.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_186
+                        schema: *ref_185
                         readOnly: true
                         serializedName: type
                         language: !<!Languages> 
@@ -6544,7 +6535,7 @@ schemas: !<!Schemas>
                             description: Type of the resource.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_187
+                        schema: *ref_186
                         flattenedNames:
                         - properties
                         - allocatedOutboundPorts
@@ -6555,7 +6546,7 @@ schemas: !<!Schemas>
                             description: The number of outbound ports to be used for NAT.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: !<!ArraySchema> &ref_328
+                        schema: !<!ArraySchema> &ref_327
                           type: array
                           apiVersions:
                           - !<!ApiVersion> 
@@ -6599,7 +6590,7 @@ schemas: !<!Schemas>
                             description: The provisioning state of the outbound rule resource.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_188
+                        schema: *ref_187
                         flattenedNames:
                         - properties
                         - protocol
@@ -6621,7 +6612,7 @@ schemas: !<!Schemas>
                             description: Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
                         protocol: !<!Protocols> {}
                       - !<!Property> 
-                        schema: *ref_189
+                        schema: *ref_188
                         flattenedNames:
                         - properties
                         - idleTimeoutInMinutes
@@ -6648,24 +6639,24 @@ schemas: !<!Schemas>
                     - *ref_129
                     - *ref_58
                     - *ref_77
+                    - *ref_154
                     - *ref_155
                     - *ref_156
                     - *ref_157
-                    - *ref_158
                     - *ref_56
                     - *ref_112
+                    - *ref_158
                     - *ref_159
                     - *ref_160
                     - *ref_161
-                    - *ref_162
                     - *ref_67
+                    - *ref_189
                     - *ref_190
                     - *ref_191
                     - *ref_192
-                    - *ref_193
                   properties:
                   - !<!Property> 
-                    schema: *ref_194
+                    schema: *ref_193
                     serializedName: id
                     language: !<!Languages> 
                       default:
@@ -6689,7 +6680,7 @@ schemas: !<!Schemas>
                 - *ref_11
               properties:
               - !<!Property> 
-                schema: *ref_195
+                schema: *ref_194
                 serializedName: name
                 language: !<!Languages> 
                   default:
@@ -6697,7 +6688,7 @@ schemas: !<!Schemas>
                     description: The name of the resource that is unique within a resource group. This name can be used to access the resource.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_196
+                schema: *ref_195
                 readOnly: true
                 serializedName: etag
                 language: !<!Languages> 
@@ -6706,7 +6697,7 @@ schemas: !<!Schemas>
                     description: A unique read-only string that changes whenever the resource is updated.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_197
+                schema: *ref_196
                 flattenedNames:
                 - properties
                 - addressPrefix
@@ -6717,7 +6708,7 @@ schemas: !<!Schemas>
                     description: The destination CIDR to which the route applies.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_198
+                schema: *ref_197
                 flattenedNames:
                 - properties
                 - nextHopType
@@ -6728,7 +6719,7 @@ schemas: !<!Schemas>
                     description: The type of Azure hop the packet should be sent to.
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: *ref_199
+                schema: *ref_198
                 flattenedNames:
                 - properties
                 - nextHopIpAddress
@@ -6776,7 +6767,7 @@ schemas: !<!Schemas>
               description: Collection of routes contained within a route table.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_264
+          schema: !<!ArraySchema> &ref_263
             type: array
             apiVersions:
             - !<!ApiVersion> 
@@ -6798,7 +6789,7 @@ schemas: !<!Schemas>
               description: A collection of references to subnets.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_200
+          schema: *ref_199
           flattenedNames:
           - properties
           - disableBgpRoutePropagation
@@ -6831,13 +6822,13 @@ schemas: !<!Schemas>
             description: Route table resource.
             namespace: ''
         protocol: !<!Protocols> {}
-      - *ref_201
+      - *ref_200
       - *ref_131
       - *ref_108
       - *ref_54
       - *ref_65
       - *ref_57
-      - !<!ObjectSchema> &ref_205
+      - !<!ObjectSchema> &ref_204
         type: object
         apiVersions:
         - !<!ApiVersion> 
@@ -6849,14 +6840,14 @@ schemas: !<!Schemas>
           - *ref_6
         properties:
         - !<!Property> 
-          schema: !<!ObjectSchema> &ref_250
+          schema: !<!ObjectSchema> &ref_249
             type: object
             apiVersions:
             - !<!ApiVersion> 
               version: '2019-11-01'
             properties:
             - !<!Property> 
-              schema: *ref_202
+              schema: *ref_201
               serializedName: name
               language: !<!Languages> 
                 default:
@@ -6881,7 +6872,7 @@ schemas: !<!Schemas>
               description: The load balancer SKU.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_203
+          schema: *ref_202
           readOnly: true
           serializedName: etag
           language: !<!Languages> 
@@ -6890,12 +6881,12 @@ schemas: !<!Schemas>
               description: A unique read-only string that changes whenever the resource is updated.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_321
+          schema: !<!ArraySchema> &ref_320
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2019-11-01'
-            elementType: *ref_159
+            elementType: *ref_158
             language: !<!Languages> 
               default:
                 name: LoadBalancerPropertiesFormatFrontendIPConfigurations
@@ -6911,12 +6902,12 @@ schemas: !<!Schemas>
               description: Object representing the frontend IPs to be used for the load balancer.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_322
+          schema: !<!ArraySchema> &ref_321
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2019-11-01'
-            elementType: *ref_161
+            elementType: *ref_160
             language: !<!Languages> 
               default:
                 name: LoadBalancerPropertiesFormatBackendAddressPools
@@ -6932,12 +6923,12 @@ schemas: !<!Schemas>
               description: Collection of backend address pools used by a load balancer.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_323
+          schema: !<!ArraySchema> &ref_322
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2019-11-01'
-            elementType: *ref_190
+            elementType: *ref_189
             language: !<!Languages> 
               default:
                 name: LoadBalancerPropertiesFormatLoadBalancingRules
@@ -6953,12 +6944,12 @@ schemas: !<!Schemas>
               description: Object collection representing the load balancing rules Gets the provisioning.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_325
+          schema: !<!ArraySchema> &ref_324
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2019-11-01'
-            elementType: *ref_191
+            elementType: *ref_190
             language: !<!Languages> 
               default:
                 name: LoadBalancerPropertiesFormatProbes
@@ -6974,12 +6965,12 @@ schemas: !<!Schemas>
               description: Collection of probe objects used in the load balancer.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_326
+          schema: !<!ArraySchema> &ref_325
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2019-11-01'
-            elementType: *ref_162
+            elementType: *ref_161
             language: !<!Languages> 
               default:
                 name: LoadBalancerPropertiesFormatInboundNatRules
@@ -6999,12 +6990,12 @@ schemas: !<!Schemas>
                 sets. NICs that are associated with individual virtual machines cannot reference an Inbound NAT pool. They have to reference individual inbound NAT rules.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_327
+          schema: !<!ArraySchema> &ref_326
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2019-11-01'
-            elementType: *ref_192
+            elementType: *ref_191
             language: !<!Languages> 
               default:
                 name: LoadBalancerPropertiesFormatInboundNatPools
@@ -7026,12 +7017,12 @@ schemas: !<!Schemas>
                 individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_329
+          schema: !<!ArraySchema> &ref_328
             type: array
             apiVersions:
             - !<!ApiVersion> 
               version: '2019-11-01'
-            elementType: *ref_193
+            elementType: *ref_192
             language: !<!Languages> 
               default:
                 name: LoadBalancerPropertiesFormatOutboundRules
@@ -7047,7 +7038,7 @@ schemas: !<!Schemas>
               description: The outbound rules.
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_204
+          schema: *ref_203
           flattenedNames:
           - properties
           - resourceGuid
@@ -7084,16 +7075,16 @@ schemas: !<!Schemas>
       immediate:
       - *ref_20
       - *ref_125
-      - *ref_201
+      - *ref_200
       - *ref_131
       - *ref_108
       - *ref_54
       - *ref_65
       - *ref_57
-      - *ref_205
+      - *ref_204
     properties:
     - !<!Property> 
-      schema: *ref_206
+      schema: *ref_205
       serializedName: id
       language: !<!Languages> 
         default:
@@ -7101,7 +7092,7 @@ schemas: !<!Schemas>
           description: Resource ID.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_207
+      schema: *ref_206
       readOnly: true
       serializedName: name
       language: !<!Languages> 
@@ -7110,7 +7101,7 @@ schemas: !<!Schemas>
           description: Resource name.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_208
+      schema: *ref_207
       readOnly: true
       serializedName: type
       language: !<!Languages> 
@@ -7119,7 +7110,7 @@ schemas: !<!Schemas>
           description: Resource type.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_209
+      schema: *ref_208
       serializedName: location
       language: !<!Languages> 
         default:
@@ -7127,7 +7118,7 @@ schemas: !<!Schemas>
           description: Resource location.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_210
+      schema: *ref_209
       serializedName: tags
       language: !<!Languages> 
         default:
@@ -7155,40 +7146,40 @@ schemas: !<!Schemas>
   - *ref_56
   - *ref_125
   - *ref_28
-  - *ref_211
-  - *ref_201
+  - *ref_210
+  - *ref_200
   - *ref_129
   - *ref_131
   - *ref_58
-  - *ref_212
+  - *ref_211
   - *ref_77
   - *ref_108
+  - *ref_212
   - *ref_213
   - *ref_214
   - *ref_215
-  - *ref_216
+  - *ref_154
   - *ref_155
   - *ref_156
   - *ref_157
-  - *ref_158
   - *ref_67
   - *ref_65
   - *ref_112
+  - *ref_158
   - *ref_159
+  - *ref_216
   - *ref_160
-  - *ref_217
   - *ref_161
-  - *ref_162
+  - *ref_217
   - *ref_218
-  - *ref_219
-  - !<!ObjectSchema> &ref_347
+  - !<!ObjectSchema> &ref_346
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2019-11-01'
     properties:
     - !<!Property> 
-      schema: *ref_220
+      schema: *ref_219
       serializedName: tags
       language: !<!Languages> 
         default:
@@ -7205,14 +7196,14 @@ schemas: !<!Schemas>
         description: Tags object for patch operations.
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_351
+  - !<!ObjectSchema> &ref_350
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2019-11-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_308
+      schema: !<!ArraySchema> &ref_307
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -7230,7 +7221,7 @@ schemas: !<!Schemas>
           description: A list of network interfaces in a resource group.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_221
+      schema: *ref_220
       readOnly: true
       serializedName: nextLink
       language: !<!Languages> 
@@ -7248,26 +7239,26 @@ schemas: !<!Schemas>
         description: Response for the ListNetworkInterface API service call.
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_355
+  - !<!ObjectSchema> &ref_354
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2019-11-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_311
+      schema: !<!ArraySchema> &ref_310
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2019-11-01'
-        elementType: !<!ObjectSchema> &ref_229
+        elementType: !<!ObjectSchema> &ref_228
           type: object
           apiVersions:
           - !<!ApiVersion> 
             version: '2019-11-01'
           properties:
           - !<!Property> 
-            schema: *ref_222
+            schema: *ref_221
             serializedName: name
             language: !<!Languages> 
               default:
@@ -7275,7 +7266,7 @@ schemas: !<!Schemas>
                 description: The name of the user defined route. This is optional.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_223
+            schema: *ref_222
             serializedName: disableBgpRoutePropagation
             language: !<!Languages> 
               default:
@@ -7283,7 +7274,7 @@ schemas: !<!Schemas>
                 description: 'If true, on-premises routes are not propagated to the network interfaces in the subnet.'
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_224
+            schema: *ref_223
             serializedName: source
             language: !<!Languages> 
               default:
@@ -7291,7 +7282,7 @@ schemas: !<!Schemas>
                 description: Who created the route.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_225
+            schema: *ref_224
             serializedName: state
             language: !<!Languages> 
               default:
@@ -7299,12 +7290,12 @@ schemas: !<!Schemas>
                 description: The value of effective route.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_309
+            schema: !<!ArraySchema> &ref_308
               type: array
               apiVersions:
               - !<!ApiVersion> 
                 version: '2019-11-01'
-              elementType: *ref_226
+              elementType: *ref_225
               language: !<!Languages> 
                 default:
                   name: EffectiveRouteAddressPrefix
@@ -7317,12 +7308,12 @@ schemas: !<!Schemas>
                 description: The address prefixes of the effective routes in CIDR notation.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_310
+            schema: !<!ArraySchema> &ref_309
               type: array
               apiVersions:
               - !<!ApiVersion> 
                 version: '2019-11-01'
-              elementType: *ref_227
+              elementType: *ref_226
               language: !<!Languages> 
                 default:
                   name: EffectiveRouteNextHopIpAddress
@@ -7335,7 +7326,7 @@ schemas: !<!Schemas>
                 description: The IP address of the next hop of the effective route.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_198
+            schema: *ref_197
             serializedName: nextHopType
             language: !<!Languages> 
               default:
@@ -7364,7 +7355,7 @@ schemas: !<!Schemas>
           description: A list of effective routes.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_228
+      schema: *ref_227
       readOnly: true
       serializedName: nextLink
       language: !<!Languages> 
@@ -7382,20 +7373,20 @@ schemas: !<!Schemas>
         description: Response for list effective route API service call.
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_229
-  - !<!ObjectSchema> &ref_358
+  - *ref_228
+  - !<!ObjectSchema> &ref_357
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2019-11-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_319
+      schema: !<!ArraySchema> &ref_318
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2019-11-01'
-        elementType: !<!ObjectSchema> &ref_245
+        elementType: !<!ObjectSchema> &ref_244
           type: object
           apiVersions:
           - !<!ApiVersion> 
@@ -7410,7 +7401,7 @@ schemas: !<!Schemas>
                 description: The ID of network security group that is applied.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ObjectSchema> &ref_246
+            schema: !<!ObjectSchema> &ref_245
               type: object
               apiVersions:
               - !<!ApiVersion> 
@@ -7449,19 +7440,19 @@ schemas: !<!Schemas>
                 description: Associated resources.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: !<!ArraySchema> &ref_318
+            schema: !<!ArraySchema> &ref_317
               type: array
               apiVersions:
               - !<!ApiVersion> 
                 version: '2019-11-01'
-              elementType: !<!ObjectSchema> &ref_247
+              elementType: !<!ObjectSchema> &ref_246
                 type: object
                 apiVersions:
                 - !<!ApiVersion> 
                   version: '2019-11-01'
                 properties:
                 - !<!Property> 
-                  schema: *ref_230
+                  schema: *ref_229
                   serializedName: name
                   language: !<!Languages> 
                     default:
@@ -7469,7 +7460,7 @@ schemas: !<!Schemas>
                       description: The name of the security rule specified by the user (if created by the user).
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: *ref_231
+                  schema: *ref_230
                   serializedName: protocol
                   language: !<!Languages> 
                     default:
@@ -7477,7 +7468,7 @@ schemas: !<!Schemas>
                       description: The network protocol this rule applies to.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: *ref_232
+                  schema: *ref_231
                   serializedName: sourcePortRange
                   language: !<!Languages> 
                     default:
@@ -7485,7 +7476,7 @@ schemas: !<!Schemas>
                       description: The source port or range.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: *ref_233
+                  schema: *ref_232
                   serializedName: destinationPortRange
                   language: !<!Languages> 
                     default:
@@ -7493,12 +7484,12 @@ schemas: !<!Schemas>
                       description: The destination port or range.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_312
+                  schema: !<!ArraySchema> &ref_311
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
                       version: '2019-11-01'
-                    elementType: *ref_234
+                    elementType: *ref_233
                     language: !<!Languages> 
                       default:
                         name: EffectiveNetworkSecurityRuleSourcePortRanges
@@ -7511,12 +7502,12 @@ schemas: !<!Schemas>
                       description: 'The source port ranges. Expected values include a single integer between 0 and 65535, a range using ''-'' as separator (e.g. 100-400), or an asterisk (*).'
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_313
+                  schema: !<!ArraySchema> &ref_312
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
                       version: '2019-11-01'
-                    elementType: *ref_235
+                    elementType: *ref_234
                     language: !<!Languages> 
                       default:
                         name: EffectiveNetworkSecurityRuleDestinationPortRanges
@@ -7529,7 +7520,7 @@ schemas: !<!Schemas>
                       description: 'The destination port ranges. Expected values include a single integer between 0 and 65535, a range using ''-'' as separator (e.g. 100-400), or an asterisk (*).'
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: *ref_236
+                  schema: *ref_235
                   serializedName: sourceAddressPrefix
                   language: !<!Languages> 
                     default:
@@ -7537,7 +7528,7 @@ schemas: !<!Schemas>
                       description: The source address prefix.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: *ref_237
+                  schema: *ref_236
                   serializedName: destinationAddressPrefix
                   language: !<!Languages> 
                     default:
@@ -7545,12 +7536,12 @@ schemas: !<!Schemas>
                       description: The destination address prefix.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_314
+                  schema: !<!ArraySchema> &ref_313
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
                       version: '2019-11-01'
-                    elementType: *ref_238
+                    elementType: *ref_237
                     language: !<!Languages> 
                       default:
                         name: EffectiveNetworkSecurityRuleSourceAddressPrefixes
@@ -7563,12 +7554,12 @@ schemas: !<!Schemas>
                       description: 'The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*).'
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_315
+                  schema: !<!ArraySchema> &ref_314
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
                       version: '2019-11-01'
-                    elementType: *ref_239
+                    elementType: *ref_238
                     language: !<!Languages> 
                       default:
                         name: EffectiveNetworkSecurityRuleDestinationAddressPrefixes
@@ -7581,12 +7572,12 @@ schemas: !<!Schemas>
                       description: 'The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*).'
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_316
+                  schema: !<!ArraySchema> &ref_315
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
                       version: '2019-11-01'
-                    elementType: *ref_240
+                    elementType: *ref_239
                     language: !<!Languages> 
                       default:
                         name: EffectiveNetworkSecurityRuleExpandedSourceAddressPrefix
@@ -7599,12 +7590,12 @@ schemas: !<!Schemas>
                       description: The expanded source address prefix.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_317
+                  schema: !<!ArraySchema> &ref_316
                     type: array
                     apiVersions:
                     - !<!ApiVersion> 
                       version: '2019-11-01'
-                    elementType: *ref_241
+                    elementType: *ref_240
                     language: !<!Languages> 
                       default:
                         name: EffectiveNetworkSecurityRuleExpandedDestinationAddressPrefix
@@ -7625,7 +7616,7 @@ schemas: !<!Schemas>
                       description: Whether network traffic is allowed or denied.
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: *ref_242
+                  schema: *ref_241
                   serializedName: priority
                   language: !<!Languages> 
                     default:
@@ -7662,7 +7653,7 @@ schemas: !<!Schemas>
                 description: A collection of effective security rules.
             protocol: !<!Protocols> {}
           - !<!Property> 
-            schema: *ref_243
+            schema: *ref_242
             serializedName: tagMap
             language: !<!Languages> 
               default:
@@ -7691,7 +7682,7 @@ schemas: !<!Schemas>
           description: A list of effective network security groups.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_244
+      schema: *ref_243
       readOnly: true
       serializedName: nextLink
       language: !<!Languages> 
@@ -7709,17 +7700,17 @@ schemas: !<!Schemas>
         description: Response for list effective network security groups API service call.
         namespace: ''
     protocol: !<!Protocols> {}
+  - *ref_244
   - *ref_245
   - *ref_246
-  - *ref_247
-  - !<!ObjectSchema> &ref_361
+  - !<!ObjectSchema> &ref_360
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2019-11-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_320
+      schema: !<!ArraySchema> &ref_319
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -7737,7 +7728,7 @@ schemas: !<!Schemas>
           description: A list of ip configurations.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_248
+      schema: *ref_247
       readOnly: true
       serializedName: nextLink
       language: !<!Languages> 
@@ -7755,19 +7746,19 @@ schemas: !<!Schemas>
         description: Response for list ip configurations API service call.
         namespace: ''
     protocol: !<!Protocols> {}
-  - !<!ObjectSchema> &ref_367
+  - !<!ObjectSchema> &ref_366
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2019-11-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_330
+      schema: !<!ArraySchema> &ref_329
         type: array
         apiVersions:
         - !<!ApiVersion> 
           version: '2019-11-01'
-        elementType: *ref_205
+        elementType: *ref_204
         language: !<!Languages> 
           default:
             name: NetworkInterfaceLoadBalancerListResultValue
@@ -7780,7 +7771,7 @@ schemas: !<!Schemas>
           description: A list of load balancers.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_249
+      schema: *ref_248
       readOnly: true
       serializedName: nextLink
       language: !<!Languages> 
@@ -7798,20 +7789,20 @@ schemas: !<!Schemas>
         description: Response for list ip configurations API service call.
         namespace: ''
     protocol: !<!Protocols> {}
-  - *ref_205
-  - *ref_250
+  - *ref_204
+  - *ref_249
+  - *ref_189
   - *ref_190
   - *ref_191
   - *ref_192
-  - *ref_193
-  - !<!ObjectSchema> &ref_380
+  - !<!ObjectSchema> &ref_379
     type: object
     apiVersions:
     - !<!ApiVersion> 
       version: '2019-11-01'
     properties:
     - !<!Property> 
-      schema: !<!ArraySchema> &ref_331
+      schema: !<!ArraySchema> &ref_330
         type: array
         apiVersions:
         - !<!ApiVersion> 
@@ -7829,7 +7820,7 @@ schemas: !<!Schemas>
           description: A list of tap configurations.
       protocol: !<!Protocols> {}
     - !<!Property> 
-      schema: *ref_251
+      schema: *ref_250
       readOnly: true
       serializedName: nextLink
       language: !<!Languages> 
@@ -7848,6 +7839,7 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   arrays:
+  - *ref_251
   - *ref_252
   - *ref_253
   - *ref_254
@@ -7927,20 +7919,19 @@ schemas: !<!Schemas>
   - *ref_328
   - *ref_329
   - *ref_330
-  - *ref_331
   - !<!ArraySchema> 
     type: array
     apiVersions:
     - !<!ApiVersion> 
       version: '2019-11-01'
-    elementType: *ref_332
+    elementType: *ref_331
     language: !<!Languages> 
       default:
         name: ArrayOfEffectiveNetworkSecurityGroupTagMapItemsItem
         description: List of IP Addresses within the tag (key).
     protocol: !<!Protocols> {}
 globalParameters:
-- !<!Parameter> &ref_336
+- !<!Parameter> &ref_335
   schema: *ref_1
   implementation: Client
   required: true
@@ -7954,7 +7945,7 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: path
-- !<!Parameter> &ref_334
+- !<!Parameter> &ref_333
   schema: *ref_0
   clientDefaultValue: 'https://management.azure.com'
   implementation: Client
@@ -7970,8 +7961,8 @@ globalParameters:
   protocol: !<!Protocols> 
     http: !<!HttpParameter> 
       in: uri
-- !<!Parameter> &ref_335
-  schema: *ref_333
+- !<!Parameter> &ref_334
+  schema: *ref_332
   implementation: Client
   origin: 'modelerfour:synthesized/api-version'
   required: true
@@ -7992,8 +7983,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_337
+    - *ref_333
+    - !<!Parameter> &ref_336
       schema: *ref_1
       implementation: Method
       required: true
@@ -8005,7 +7996,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_338
+    - !<!Parameter> &ref_337
       schema: *ref_1
       implementation: Method
       required: true
@@ -8017,8 +8008,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -8031,8 +8022,8 @@ operationGroups:
           method: delete
           uri: '{$host}'
     signatureParameters:
+    - *ref_336
     - *ref_337
-    - *ref_338
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -8063,7 +8054,7 @@ operationGroups:
           - '204'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -8100,8 +8091,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_340
+    - *ref_333
+    - !<!Parameter> &ref_339
       schema: *ref_1
       implementation: Method
       required: true
@@ -8113,7 +8104,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_341
+    - !<!Parameter> &ref_340
       schema: *ref_1
       implementation: Method
       required: true
@@ -8125,9 +8116,9 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
-    - !<!Parameter> &ref_342
+    - !<!Parameter> &ref_341
       schema: *ref_1
       implementation: Method
       language: !<!Languages> 
@@ -8150,9 +8141,9 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
+    - *ref_339
     - *ref_340
     - *ref_341
-    - *ref_342
     responses:
     - !<!SchemaResponse> 
       schema: *ref_57
@@ -8169,7 +8160,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -8233,8 +8224,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_345
+    - *ref_333
+    - !<!Parameter> &ref_344
       schema: *ref_1
       implementation: Method
       required: true
@@ -8246,7 +8237,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_346
+    - !<!Parameter> &ref_345
       schema: *ref_1
       implementation: Method
       required: true
@@ -8258,13 +8249,13 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_343
+        schema: *ref_342
         implementation: Method
         origin: 'modelerfour:synthesized/content-type'
         required: true
@@ -8276,7 +8267,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_344
+      - !<!Parameter> &ref_343
         schema: *ref_57
         implementation: Method
         required: true
@@ -8289,7 +8280,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_344
+      - *ref_343
       language: !<!Languages> 
         default:
           name: ''
@@ -8303,8 +8294,8 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
+    - *ref_344
     - *ref_345
-    - *ref_346
     responses:
     - !<!SchemaResponse> 
       schema: *ref_57
@@ -8334,7 +8325,7 @@ operationGroups:
           - '201'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -8431,8 +8422,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_349
+    - *ref_333
+    - !<!Parameter> &ref_348
       schema: *ref_1
       implementation: Method
       required: true
@@ -8444,7 +8435,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_350
+    - !<!Parameter> &ref_349
       schema: *ref_1
       implementation: Method
       required: true
@@ -8456,13 +8447,13 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_343
+        schema: *ref_342
         implementation: Method
         origin: 'modelerfour:synthesized/content-type'
         required: true
@@ -8474,8 +8465,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_348
-        schema: *ref_347
+      - !<!Parameter> &ref_347
+        schema: *ref_346
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -8487,7 +8478,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_348
+      - *ref_347
       language: !<!Languages> 
         default:
           name: ''
@@ -8501,8 +8492,8 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
+    - *ref_348
     - *ref_349
-    - *ref_350
     responses:
     - !<!SchemaResponse> 
       schema: *ref_57
@@ -8519,7 +8510,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -8583,9 +8574,9 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
+    - *ref_333
     - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -8600,7 +8591,7 @@ operationGroups:
     signatureParameters: []
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_351
+      schema: *ref_350
       language: !<!Languages> 
         default:
           name: ''
@@ -8614,7 +8605,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -8705,8 +8696,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_352
+    - *ref_333
+    - !<!Parameter> &ref_351
       schema: *ref_1
       implementation: Method
       required: true
@@ -8718,8 +8709,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -8732,10 +8723,10 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
-    - *ref_352
+    - *ref_351
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_351
+      schema: *ref_350
       language: !<!Languages> 
         default:
           name: ''
@@ -8749,7 +8740,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -8841,8 +8832,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_353
+    - *ref_333
+    - !<!Parameter> &ref_352
       schema: *ref_1
       implementation: Method
       required: true
@@ -8854,7 +8845,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_354
+    - !<!Parameter> &ref_353
       schema: *ref_1
       implementation: Method
       required: true
@@ -8866,8 +8857,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -8880,11 +8871,11 @@ operationGroups:
           method: post
           uri: '{$host}'
     signatureParameters:
+    - *ref_352
     - *ref_353
-    - *ref_354
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_355
+      schema: *ref_354
       language: !<!Languages> 
         default:
           name: ''
@@ -8907,7 +8898,7 @@ operationGroups:
           - '202'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -8981,8 +8972,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_356
+    - *ref_333
+    - !<!Parameter> &ref_355
       schema: *ref_1
       implementation: Method
       required: true
@@ -8994,7 +8985,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_357
+    - !<!Parameter> &ref_356
       schema: *ref_1
       implementation: Method
       required: true
@@ -9006,8 +8997,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -9020,11 +9011,11 @@ operationGroups:
           method: post
           uri: '{$host}'
     signatureParameters:
+    - *ref_355
     - *ref_356
-    - *ref_357
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_358
+      schema: *ref_357
       language: !<!Languages> 
         default:
           name: ''
@@ -9047,7 +9038,7 @@ operationGroups:
           - '202'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -9133,8 +9124,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_359
+    - *ref_333
+    - !<!Parameter> &ref_358
       schema: *ref_1
       implementation: Method
       required: true
@@ -9146,7 +9137,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_360
+    - !<!Parameter> &ref_359
       schema: *ref_1
       implementation: Method
       required: true
@@ -9158,8 +9149,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -9172,11 +9163,11 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
+    - *ref_358
     - *ref_359
-    - *ref_360
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_361
+      schema: *ref_360
       language: !<!Languages> 
         default:
           name: ''
@@ -9190,7 +9181,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -9239,8 +9230,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_362
+    - *ref_333
+    - !<!Parameter> &ref_361
       schema: *ref_1
       implementation: Method
       required: true
@@ -9252,7 +9243,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_363
+    - !<!Parameter> &ref_362
       schema: *ref_1
       implementation: Method
       required: true
@@ -9264,7 +9255,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_364
+    - !<!Parameter> &ref_363
       schema: *ref_1
       implementation: Method
       required: true
@@ -9276,8 +9267,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -9290,9 +9281,9 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
+    - *ref_361
     - *ref_362
     - *ref_363
-    - *ref_364
     responses:
     - !<!SchemaResponse> 
       schema: *ref_67
@@ -9309,7 +9300,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -9368,8 +9359,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_365
+    - *ref_333
+    - !<!Parameter> &ref_364
       schema: *ref_1
       implementation: Method
       required: true
@@ -9381,7 +9372,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_366
+    - !<!Parameter> &ref_365
       schema: *ref_1
       implementation: Method
       required: true
@@ -9393,8 +9384,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -9407,11 +9398,11 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
+    - *ref_364
     - *ref_365
-    - *ref_366
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_367
+      schema: *ref_366
       language: !<!Languages> 
         default:
           name: ''
@@ -9425,7 +9416,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -9550,8 +9541,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_368
+    - *ref_333
+    - !<!Parameter> &ref_367
       schema: *ref_1
       implementation: Method
       required: true
@@ -9563,7 +9554,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_369
+    - !<!Parameter> &ref_368
       schema: *ref_1
       implementation: Method
       required: true
@@ -9575,7 +9566,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_370
+    - !<!Parameter> &ref_369
       schema: *ref_1
       implementation: Method
       required: true
@@ -9587,8 +9578,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -9601,9 +9592,9 @@ operationGroups:
           method: delete
           uri: '{$host}'
     signatureParameters:
+    - *ref_367
     - *ref_368
     - *ref_369
-    - *ref_370
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -9634,7 +9625,7 @@ operationGroups:
           - '204'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -9672,8 +9663,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_371
+    - *ref_333
+    - !<!Parameter> &ref_370
       schema: *ref_1
       implementation: Method
       required: true
@@ -9685,7 +9676,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_372
+    - !<!Parameter> &ref_371
       schema: *ref_1
       implementation: Method
       required: true
@@ -9697,7 +9688,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_373
+    - !<!Parameter> &ref_372
       schema: *ref_1
       implementation: Method
       required: true
@@ -9709,8 +9700,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -9723,9 +9714,9 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
+    - *ref_370
     - *ref_371
     - *ref_372
-    - *ref_373
     responses:
     - !<!SchemaResponse> 
       schema: *ref_112
@@ -9742,7 +9733,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -9784,8 +9775,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_375
+    - *ref_333
+    - !<!Parameter> &ref_374
       schema: *ref_1
       implementation: Method
       required: true
@@ -9797,7 +9788,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_376
+    - !<!Parameter> &ref_375
       schema: *ref_1
       implementation: Method
       required: true
@@ -9809,7 +9800,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_377
+    - !<!Parameter> &ref_376
       schema: *ref_1
       implementation: Method
       required: true
@@ -9821,13 +9812,13 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_343
+        schema: *ref_342
         implementation: Method
         origin: 'modelerfour:synthesized/content-type'
         required: true
@@ -9839,7 +9830,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_374
+      - !<!Parameter> &ref_373
         schema: *ref_112
         implementation: Method
         required: true
@@ -9852,7 +9843,7 @@ operationGroups:
             in: body
             style: json
       signatureParameters:
-      - *ref_374
+      - *ref_373
       language: !<!Languages> 
         default:
           name: ''
@@ -9866,9 +9857,9 @@ operationGroups:
           - application/json
           uri: '{$host}'
     signatureParameters:
+    - *ref_374
     - *ref_375
     - *ref_376
-    - *ref_377
     responses:
     - !<!SchemaResponse> 
       schema: *ref_112
@@ -9898,7 +9889,7 @@ operationGroups:
           - '201'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''
@@ -9957,8 +9948,8 @@ operationGroups:
     - !<!ApiVersion> 
       version: '2019-11-01'
     parameters:
-    - *ref_334
-    - !<!Parameter> &ref_378
+    - *ref_333
+    - !<!Parameter> &ref_377
       schema: *ref_1
       implementation: Method
       required: true
@@ -9970,7 +9961,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_379
+    - !<!Parameter> &ref_378
       schema: *ref_1
       implementation: Method
       required: true
@@ -9982,8 +9973,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
+    - *ref_334
     - *ref_335
-    - *ref_336
     requests:
     - !<!Request> 
       language: !<!Languages> 
@@ -9996,11 +9987,11 @@ operationGroups:
           method: get
           uri: '{$host}'
     signatureParameters:
+    - *ref_377
     - *ref_378
-    - *ref_379
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_380
+      schema: *ref_379
       language: !<!Languages> 
         default:
           name: ''
@@ -10014,7 +10005,7 @@ operationGroups:
           - '200'
     exceptions:
     - !<!SchemaResponse> 
-      schema: *ref_339
+      schema: *ref_338
       language: !<!Languages> 
         default:
           name: ''

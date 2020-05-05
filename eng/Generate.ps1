@@ -91,7 +91,7 @@ $projectNames =
     'SignalR',
     'AppConfiguration',
     'CognitiveServices.TextAnalytics',
-    'CognitiveSearch',
+    #'CognitiveSearch',
     'Azure.AI.FormRecognizer',
     'Azure.Storage.Tables',
     'Azure.Management.Storage',

@@ -444,16 +444,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
         private IEnumerable<ObjectSchema> GetCombinedSchemas()
         {
-            var inherited = EnumerateHierarchy().Select(type => type.Schema).ToHashSet();
-
             yield return _objectSchema;
 
             foreach (var parent in _objectSchema.Parents!.All)
             {
-                if (parent is ObjectSchema objectParent && !inherited.Contains(objectParent))
+                if (parent is ObjectSchema objectParent)
                 {
-                    // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/257
-                    inherited.Add(parent);
                     yield return objectParent;
                 }
             }
@@ -476,24 +472,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             foreach (var objectSchema in objectSchemas)
             {
-                bool skip = false;
-
-                // Filter transitive schemas
-                // https://github.com/Azure/autorest.modelerfour/issues/258
-                foreach (var otherSchema in objectSchemas)
-                {
-                    if (otherSchema.Parents!.All.Contains(objectSchema))
-                    {
-                        skip = true;
-                        break;
-                    }
-                }
-
-                if (skip)
-                {
-                    continue;
-                }
-
                 // Take first schema or the one with discriminator
                 selectedSchema ??= objectSchema;
 

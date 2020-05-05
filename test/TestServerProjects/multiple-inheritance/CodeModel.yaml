@@ -132,7 +132,6 @@ schemas: !<!Schemas>
                   all:
                   - *ref_3
                   - *ref_4
-                  - *ref_4
                   immediate:
                   - *ref_3
                 properties:
@@ -163,8 +162,6 @@ schemas: !<!Schemas>
                     description: ''
                     namespace: ''
                 protocol: !<!Protocols> {}
-              - *ref_1
-              - *ref_5
               immediate:
               - *ref_3
             properties:
@@ -193,8 +190,6 @@ schemas: !<!Schemas>
           all:
           - *ref_1
           - *ref_5
-          - *ref_1
-          - *ref_5
           immediate:
           - *ref_1
           - *ref_5
@@ -218,7 +213,6 @@ schemas: !<!Schemas>
             description: ''
             namespace: ''
         protocol: !<!Protocols> {}
-      - *ref_4
       - *ref_4
       immediate:
       - *ref_6
