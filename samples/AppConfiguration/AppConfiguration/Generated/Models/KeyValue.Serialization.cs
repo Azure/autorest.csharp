@@ -40,7 +40,7 @@ namespace AppConfiguration.Models
             if (LastModified != null)
             {
                 writer.WritePropertyName("last_modified");
-                writer.WriteStringValue(LastModified.Value, "S");
+                writer.WriteStringValue(LastModified.Value, "O");
             }
             if (Tags != null)
             {
@@ -120,7 +120,7 @@ namespace AppConfiguration.Models
                     {
                         continue;
                     }
-                    lastModified = property.Value.GetDateTimeOffset("S");
+                    lastModified = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("tags"))

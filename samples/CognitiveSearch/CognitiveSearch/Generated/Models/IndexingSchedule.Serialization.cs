@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
             if (StartTime != null)
             {
                 writer.WritePropertyName("startTime");
-                writer.WriteStringValue(StartTime.Value, "S");
+                writer.WriteStringValue(StartTime.Value, "O");
             }
             writer.WriteEndObject();
         }
@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
                     {
                         continue;
                     }
-                    startTime = property.Value.GetDateTimeOffset("S");
+                    startTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
             }

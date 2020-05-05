@@ -23,7 +23,7 @@ namespace body_complex.Models
                 writer.WriteNumberValue(Age.Value);
             }
             writer.WritePropertyName("birthday");
-            writer.WriteStringValue(Birthday, "S");
+            writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(Fishtype);
             if (Species != null)
@@ -67,7 +67,7 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("birthday"))
                 {
-                    birthday = property.Value.GetDateTimeOffset("S");
+                    birthday = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("fishtype"))

@@ -531,27 +531,10 @@ namespace Azure.AI.FormRecognizer
         }
 
         /// <summary> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </summary>
-        /// <param name="originalResponse"> The original response from starting the operation. </param>
-        /// <param name="createOriginalHttpMessage"> Creates the HTTP message used for the original request. </param>
-        internal Operation<Response> CreateCopyCustomModel(Response originalResponse, Func<HttpMessage> createOriginalHttpMessage)
-        {
-            if (originalResponse == null)
-            {
-                throw new ArgumentNullException(nameof(originalResponse));
-            }
-            if (createOriginalHttpMessage == null)
-            {
-                throw new ArgumentNullException(nameof(createOriginalHttpMessage));
-            }
-
-            return ArmOperationHelpers.Create(_pipeline, _clientDiagnostics, originalResponse, RequestMethod.Post, "ServiceClient.StartCopyCustomModel", OperationFinalStateVia.Location, createOriginalHttpMessage);
-        }
-
-        /// <summary> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="copyRequest"> Copy request parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<Operation<Response>> StartCopyCustomModelAsync(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<ServiceCopyCustomModelOperation> StartCopyCustomModelAsync(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
         {
             if (copyRequest == null)
             {
@@ -563,7 +546,7 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 var originalResponse = await RestClient.CopyCustomModelAsync(modelId, copyRequest, cancellationToken).ConfigureAwait(false);
-                return CreateCopyCustomModel(originalResponse, () => RestClient.CreateCopyCustomModelRequest(modelId, copyRequest));
+                return new ServiceCopyCustomModelOperation(_clientDiagnostics, _pipeline, RestClient.CreateCopyCustomModelRequest(modelId, copyRequest).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -576,7 +559,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="copyRequest"> Copy request parameters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Operation<Response> StartCopyCustomModel(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
+        public virtual ServiceCopyCustomModelOperation StartCopyCustomModel(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
         {
             if (copyRequest == null)
             {
@@ -588,7 +571,7 @@ namespace Azure.AI.FormRecognizer
             try
             {
                 var originalResponse = RestClient.CopyCustomModel(modelId, copyRequest, cancellationToken);
-                return CreateCopyCustomModel(originalResponse, () => RestClient.CreateCopyCustomModelRequest(modelId, copyRequest));
+                return new ServiceCopyCustomModelOperation(_clientDiagnostics, _pipeline, RestClient.CreateCopyCustomModelRequest(modelId, copyRequest).Request, originalResponse);
             }
             catch (Exception e)
             {

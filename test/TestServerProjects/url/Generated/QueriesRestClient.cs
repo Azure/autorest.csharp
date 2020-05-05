@@ -1216,7 +1216,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(host, false);
             uri.AppendPath("/queries/datetime/2012-01-01T01%3A01%3A01Z", false);
-            uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "S", true);
+            uri.AppendQuery("dateTimeQuery", new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
             request.Uri = uri;
             return message;
         }
@@ -1261,7 +1261,7 @@ namespace url
             uri.AppendPath("/queries/datetime/null", false);
             if (dateTimeQuery != null)
             {
-                uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, "S", true);
+                uri.AppendQuery("dateTimeQuery", dateTimeQuery.Value, "O", true);
             }
             request.Uri = uri;
             return message;

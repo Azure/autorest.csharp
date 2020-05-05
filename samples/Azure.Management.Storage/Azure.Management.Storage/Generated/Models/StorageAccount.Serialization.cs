@@ -85,7 +85,7 @@ namespace Azure.Management.Storage.Models
             if (LastGeoFailoverTime != null)
             {
                 writer.WritePropertyName("lastGeoFailoverTime");
-                writer.WriteStringValue(LastGeoFailoverTime.Value, "S");
+                writer.WriteStringValue(LastGeoFailoverTime.Value, "O");
             }
             if (SecondaryLocation != null)
             {
@@ -100,7 +100,7 @@ namespace Azure.Management.Storage.Models
             if (CreationTime != null)
             {
                 writer.WritePropertyName("creationTime");
-                writer.WriteStringValue(CreationTime.Value, "S");
+                writer.WriteStringValue(CreationTime.Value, "O");
             }
             if (CustomDomain != null)
             {
@@ -341,7 +341,7 @@ namespace Azure.Management.Storage.Models
                             {
                                 continue;
                             }
-                            lastGeoFailoverTime = property0.Value.GetDateTimeOffset("S");
+                            lastGeoFailoverTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                         if (property0.NameEquals("secondaryLocation"))
@@ -368,7 +368,7 @@ namespace Azure.Management.Storage.Models
                             {
                                 continue;
                             }
-                            creationTime = property0.Value.GetDateTimeOffset("S");
+                            creationTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                         if (property0.NameEquals("customDomain"))

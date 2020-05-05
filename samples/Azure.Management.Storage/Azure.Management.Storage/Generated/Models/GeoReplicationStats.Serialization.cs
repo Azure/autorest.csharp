@@ -24,7 +24,7 @@ namespace Azure.Management.Storage.Models
             if (LastSyncTime != null)
             {
                 writer.WritePropertyName("lastSyncTime");
-                writer.WriteStringValue(LastSyncTime.Value, "S");
+                writer.WriteStringValue(LastSyncTime.Value, "O");
             }
             if (CanFailover != null)
             {
@@ -56,7 +56,7 @@ namespace Azure.Management.Storage.Models
                     {
                         continue;
                     }
-                    lastSyncTime = property.Value.GetDateTimeOffset("S");
+                    lastSyncTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("canFailover"))

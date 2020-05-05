@@ -2731,7 +2731,7 @@ namespace body_dictionary
                             Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("O"));
                             }
                             value = dictionary;
                         }
@@ -2763,7 +2763,7 @@ namespace body_dictionary
                             Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("O"));
                             }
                             value = dictionary;
                         }
@@ -2789,7 +2789,7 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteStringValue(item.Value, "S");
+                content.JsonWriter.WriteStringValue(item.Value, "O");
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -2871,7 +2871,7 @@ namespace body_dictionary
                             Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("O"));
                             }
                             value = dictionary;
                         }
@@ -2903,7 +2903,7 @@ namespace body_dictionary
                             Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("O"));
                             }
                             value = dictionary;
                         }
@@ -2947,7 +2947,7 @@ namespace body_dictionary
                             Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("O"));
                             }
                             value = dictionary;
                         }
@@ -2979,7 +2979,7 @@ namespace body_dictionary
                             Dictionary<string, DateTimeOffset> dictionary = new Dictionary<string, DateTimeOffset>();
                             foreach (var property in document.RootElement.EnumerateObject())
                             {
-                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("S"));
+                                dictionary.Add(property.Name, property.Value.GetDateTimeOffset("O"));
                             }
                             value = dictionary;
                         }

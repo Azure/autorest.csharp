@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
             if (Timestamp != null)
             {
                 writer.WritePropertyName("timestamp");
-                writer.WriteStringValue(Timestamp.Value, "S");
+                writer.WriteStringValue(Timestamp.Value, "O");
             }
             if (ObjectIdentifier != null)
             {
@@ -83,7 +83,7 @@ namespace Azure.Management.Storage.Models
                     {
                         continue;
                     }
-                    timestamp = property.Value.GetDateTimeOffset("S");
+                    timestamp = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("objectIdentifier"))
