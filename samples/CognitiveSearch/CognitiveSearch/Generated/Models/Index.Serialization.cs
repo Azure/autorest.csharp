@@ -100,6 +100,11 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("encryptionKey");
                 writer.WriteObjectValue(EncryptionKey);
             }
+            if (Similarity != null)
+            {
+                writer.WritePropertyName("similarity");
+                writer.WriteObjectValue(Similarity);
+            }
             if (ETag != null)
             {
                 writer.WritePropertyName("@odata.etag");
@@ -121,6 +126,7 @@ namespace CognitiveSearch.Models
             IList<TokenFilter> tokenFilters = default;
             IList<CharFilter> charFilters = default;
             EncryptionKey encryptionKey = default;
+            Similarity similarity = default;
             string odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -299,6 +305,15 @@ namespace CognitiveSearch.Models
                     encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
                     continue;
                 }
+                if (property.NameEquals("similarity"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    similarity = Similarity.DeserializeSimilarity(property.Value);
+                    continue;
+                }
                 if (property.NameEquals("@odata.etag"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -309,7 +324,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, encryptionKey, odataEtag);
+            return new Index(name, fields, scoringProfiles, defaultScoringProfile, corsOptions, suggesters, analyzers, tokenizers, tokenFilters, charFilters, encryptionKey, similarity, odataEtag);
         }
     }
 }

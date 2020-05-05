@@ -5,7 +5,6 @@
 ``` yaml
 title: AppConfiguration
 require: $(this-folder)/../../readme.md
-# https://github.com/Azure/azure-rest-api-specs-pr/pull/887/files
-input-file: $(this-folder)/appconfiguration.json
+input-file: https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/appconfiguration/data-plane/Microsoft.AppConfiguration/stable/1.0/appconfiguration.json
 namespace: Azure.AppConfiguration
 ```

@@ -155,7 +155,7 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("DataServiceVersion", "3.0");
-            request.Headers.Add("Content-Type", "application/json;odata=fullmetadata");
+            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             using var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(tableProperties);
             request.Content = content;
@@ -580,7 +580,7 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("DataServiceVersion", "3.0");
-            request.Headers.Add("Content-Type", "application/json;odata=fullmetadata");
+            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
                 using var content = new Utf8JsonRequestContent();
@@ -625,7 +625,7 @@ namespace Azure.Storage.Tables
             var headers = new TableInternalUpdateEntityHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
+                case 204:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
@@ -661,7 +661,7 @@ namespace Azure.Storage.Tables
             var headers = new TableInternalUpdateEntityHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
+                case 204:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
@@ -794,7 +794,7 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("DataServiceVersion", "3.0");
-            request.Headers.Add("Content-Type", "application/json;odata=fullmetadata");
+            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
                 using var content = new Utf8JsonRequestContent();

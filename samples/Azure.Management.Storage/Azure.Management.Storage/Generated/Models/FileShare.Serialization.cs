@@ -60,6 +60,56 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("shareQuota");
                 writer.WriteNumberValue(ShareQuota.Value);
             }
+            if (EnabledProtocols != null)
+            {
+                writer.WritePropertyName("enabledProtocols");
+                writer.WriteStringValue(EnabledProtocols.Value.ToString());
+            }
+            if (RootSquash != null)
+            {
+                writer.WritePropertyName("rootSquash");
+                writer.WriteStringValue(RootSquash.Value.ToString());
+            }
+            if (Version != null)
+            {
+                writer.WritePropertyName("version");
+                writer.WriteStringValue(Version);
+            }
+            if (Deleted != null)
+            {
+                writer.WritePropertyName("deleted");
+                writer.WriteBooleanValue(Deleted.Value);
+            }
+            if (DeletedTime != null)
+            {
+                writer.WritePropertyName("deletedTime");
+                writer.WriteStringValue(DeletedTime.Value, "S");
+            }
+            if (RemainingRetentionDays != null)
+            {
+                writer.WritePropertyName("remainingRetentionDays");
+                writer.WriteNumberValue(RemainingRetentionDays.Value);
+            }
+            if (AccessTier != null)
+            {
+                writer.WritePropertyName("accessTier");
+                writer.WriteStringValue(AccessTier.Value.ToString());
+            }
+            if (AccessTierChangeTime != null)
+            {
+                writer.WritePropertyName("accessTierChangeTime");
+                writer.WriteStringValue(AccessTierChangeTime.Value, "S");
+            }
+            if (AccessTierStatus != null)
+            {
+                writer.WritePropertyName("accessTierStatus");
+                writer.WriteStringValue(AccessTierStatus);
+            }
+            if (ShareUsageBytes != null)
+            {
+                writer.WritePropertyName("shareUsageBytes");
+                writer.WriteNumberValue(ShareUsageBytes.Value);
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -73,6 +123,16 @@ namespace Azure.Management.Storage.Models
             DateTimeOffset? lastModifiedTime = default;
             IDictionary<string, string> metadata = default;
             int? shareQuota = default;
+            EnabledProtocols? enabledProtocols = default;
+            RootSquashType? rootSquash = default;
+            string version = default;
+            bool? deleted = default;
+            DateTimeOffset? deletedTime = default;
+            int? remainingRetentionDays = default;
+            ShareAccessTier? accessTier = default;
+            DateTimeOffset? accessTierChangeTime = default;
+            string accessTierStatus = default;
+            int? shareUsageBytes = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"))
@@ -154,11 +214,101 @@ namespace Azure.Management.Storage.Models
                             shareQuota = property0.Value.GetInt32();
                             continue;
                         }
+                        if (property0.NameEquals("enabledProtocols"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            enabledProtocols = new EnabledProtocols(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("rootSquash"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            rootSquash = new RootSquashType(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("version"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            version = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("deleted"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            deleted = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("deletedTime"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            deletedTime = property0.Value.GetDateTimeOffset("S");
+                            continue;
+                        }
+                        if (property0.NameEquals("remainingRetentionDays"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            remainingRetentionDays = property0.Value.GetInt32();
+                            continue;
+                        }
+                        if (property0.NameEquals("accessTier"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            accessTier = new ShareAccessTier(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("accessTierChangeTime"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            accessTierChangeTime = property0.Value.GetDateTimeOffset("S");
+                            continue;
+                        }
+                        if (property0.NameEquals("accessTierStatus"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            accessTierStatus = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("shareUsageBytes"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            shareUsageBytes = property0.Value.GetInt32();
+                            continue;
+                        }
                     }
                     continue;
                 }
             }
-            return new FileShare(id, name, type, etag, lastModifiedTime, metadata, shareQuota);
+            return new FileShare(id, name, type, etag, lastModifiedTime, metadata, shareQuota, enabledProtocols, rootSquash, version, deleted, deletedTime, remainingRetentionDays, accessTier, accessTierChangeTime, accessTierStatus, shareUsageBytes);
         }
     }
 }

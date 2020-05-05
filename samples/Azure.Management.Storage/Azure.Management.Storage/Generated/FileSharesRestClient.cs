@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -71,6 +70,7 @@ namespace Azure.Management.Storage
             {
                 uri.AppendQuery("$filter", filter, true);
             }
+            uri.AppendQuery("$expand", "deleted", true);
             request.Uri = uri;
             return message;
         }
@@ -155,7 +155,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string shareName, FileShare fileShare)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -173,13 +173,8 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new FileShare()
-            {
-                Metadata = metadata,
-                ShareQuota = shareQuota
-            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(fileShare);
             request.Content = content;
             return message;
         }
@@ -188,10 +183,9 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
-        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
+        /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -205,8 +199,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
+            if (fileShare == null)
+            {
+                throw new ArgumentNullException(nameof(fileShare));
+            }
 
-            using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
+            using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, fileShare);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -234,10 +232,9 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
-        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
+        /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
+        public Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -251,8 +248,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
+            if (fileShare == null)
+            {
+                throw new ArgumentNullException(nameof(fileShare));
+            }
 
-            using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
+            using var message = CreateCreateRequest(resourceGroupName, accountName, shareName, fileShare);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -276,7 +277,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata, int? shareQuota)
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string shareName, FileShare fileShare)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -294,13 +295,8 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new FileShare()
-            {
-                Metadata = metadata,
-                ShareQuota = shareQuota
-            };
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(fileShare);
             request.Content = content;
             return message;
         }
@@ -309,10 +305,9 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
-        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
+        /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
+        public async ValueTask<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -326,8 +321,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
+            if (fileShare == null)
+            {
+                throw new ArgumentNullException(nameof(fileShare));
+            }
 
-            using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
+            using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, fileShare);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -354,10 +353,9 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
-        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
+        /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, IDictionary<string, string> metadata = null, int? shareQuota = null, CancellationToken cancellationToken = default)
+        public Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -371,8 +369,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
+            if (fileShare == null)
+            {
+                throw new ArgumentNullException(nameof(fileShare));
+            }
 
-            using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, metadata, shareQuota);
+            using var message = CreateUpdateRequest(resourceGroupName, accountName, shareName, fileShare);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -411,6 +413,7 @@ namespace Azure.Management.Storage
             uri.AppendPath("/fileServices/default/shares/", false);
             uri.AppendPath(shareName, true);
             uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("$expand", "stats", true);
             request.Uri = uri;
             return message;
         }
@@ -579,6 +582,114 @@ namespace Azure.Management.Storage
             {
                 case 200:
                 case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateRestoreRequest(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
+            uri.AppendPath(accountName, true);
+            uri.AppendPath("/fileServices/default/shares/", false);
+            uri.AppendPath(shareName, true);
+            uri.AppendPath("/restore", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var model = new DeletedShare(deletedShareName, deletedShareVersion);
+            using var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(model);
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Restore a file share within a valid retention days if share soft delete is enabled. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
+        /// <param name="deletedShareVersion"> Required. Identify the version of the deleted share that will be restored. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> RestoreAsync(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+            if (shareName == null)
+            {
+                throw new ArgumentNullException(nameof(shareName));
+            }
+            if (deletedShareName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedShareName));
+            }
+            if (deletedShareVersion == null)
+            {
+                throw new ArgumentNullException(nameof(deletedShareVersion));
+            }
+
+            using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Restore a file share within a valid retention days if share soft delete is enabled. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
+        /// <param name="deletedShareVersion"> Required. Identify the version of the deleted share that will be restored. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Restore(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+            if (shareName == null)
+            {
+                throw new ArgumentNullException(nameof(shareName));
+            }
+            if (deletedShareName == null)
+            {
+                throw new ArgumentNullException(nameof(deletedShareName));
+            }
+            if (deletedShareVersion == null)
+            {
+                throw new ArgumentNullException(nameof(deletedShareVersion));
+            }
+
+            using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
                     return message.Response;
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

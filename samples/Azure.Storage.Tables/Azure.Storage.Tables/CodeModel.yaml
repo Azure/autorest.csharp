@@ -371,7 +371,18 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-continuation-NextTableName
+        header: x-ms-continuation-NextPartitionKey
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_101
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-continuation-NextRowKey
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_19
     type: string
@@ -383,7 +394,7 @@ schemas: !<!Schemas>
         name: TableEntityQueryResponseOdataMetadata
         description: The metadata response of the table.
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_101
+  - !<!StringSchema> &ref_102
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -394,7 +405,7 @@ schemas: !<!Schemas>
         description: ''
         header: x-ms-error-code
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_105
+  - !<!StringSchema> &ref_106
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -404,17 +415,6 @@ schemas: !<!Schemas>
         name: String
         description: ''
         header: x-ms-client-request-id
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_111
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-request-id
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_112
     type: string
@@ -425,9 +425,9 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-version
+        header: x-ms-request-id
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_114
+  - !<!StringSchema> &ref_113
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -436,7 +436,7 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-continuation-NextTableName
+        header: x-ms-version
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_115
     type: string
@@ -447,29 +447,29 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
+        header: x-ms-continuation-NextPartitionKey
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_116
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-continuation-NextRowKey
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_117
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
         header: x-ms-error-code
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_124
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-client-request-id
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_125
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-request-id
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_126
     type: string
@@ -480,7 +480,18 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-version
+        header: x-ms-client-request-id
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_127
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-request-id
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_128
     type: string
@@ -491,29 +502,18 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
+        header: x-ms-version
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_130
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
         header: x-ms-error-code
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_136
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-client-request-id
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_137
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-request-id
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_138
     type: string
@@ -524,7 +524,18 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-version
+        header: x-ms-client-request-id
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_139
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-request-id
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_140
     type: string
@@ -535,29 +546,18 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
+        header: x-ms-version
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_142
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
         header: x-ms-error-code
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_147
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-client-request-id
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_148
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-request-id
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_149
     type: string
@@ -568,31 +568,9 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-version
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_151
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-error-code
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_157
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
         header: x-ms-client-request-id
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_158
+  - !<!StringSchema> &ref_150
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -603,7 +581,51 @@ schemas: !<!Schemas>
         description: ''
         header: x-ms-request-id
     protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_151
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-version
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_153
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-error-code
+    protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_159
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-client-request-id
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_160
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-request-id
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_161
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -634,7 +656,7 @@ schemas: !<!Schemas>
         name: AccessPolicyPermission
         description: the permissions for the acl policy
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_161
+  - !<!StringSchema> &ref_163
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -645,7 +667,7 @@ schemas: !<!Schemas>
         description: ''
         header: x-ms-error-code
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_167
+  - !<!StringSchema> &ref_169
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -656,7 +678,7 @@ schemas: !<!Schemas>
         description: ''
         header: x-ms-client-request-id
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_168
+  - !<!StringSchema> &ref_170
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -667,7 +689,7 @@ schemas: !<!Schemas>
         description: ''
         header: x-ms-request-id
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_169
+  - !<!StringSchema> &ref_171
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -678,7 +700,7 @@ schemas: !<!Schemas>
         description: ''
         header: x-ms-version
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_171
+  - !<!StringSchema> &ref_173
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -751,28 +773,6 @@ schemas: !<!Schemas>
         name: CorsRuleExposedHeaders
         description: The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_178
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-client-request-id
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_179
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-request-id
-    protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_180
     type: string
     apiVersions:
@@ -782,7 +782,7 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-version
+        header: x-ms-client-request-id
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_181
     type: string
@@ -793,29 +793,29 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-error-code
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_184
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-client-request-id
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_185
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
         header: x-ms-request-id
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_182
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-version
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_183
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-error-code
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_186
     type: string
@@ -826,7 +826,7 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-version
+        header: x-ms-client-request-id
     protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_187
     type: string
@@ -837,31 +837,9 @@ schemas: !<!Schemas>
       default:
         name: String
         description: ''
-        header: x-ms-error-code
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_192
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-        header: x-ms-client-request-id
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_193
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
         header: x-ms-request-id
     protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_194
+  - !<!StringSchema> &ref_188
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -872,7 +850,51 @@ schemas: !<!Schemas>
         description: ''
         header: x-ms-version
     protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_189
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-error-code
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_194
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-client-request-id
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_195
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-request-id
+    protocol: !<!Protocols> {}
   - !<!StringSchema> &ref_196
+    type: string
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    language: !<!Languages> 
+      default:
+        name: String
+        description: ''
+        header: x-ms-version
+    protocol: !<!Protocols> {}
+  - !<!StringSchema> &ref_198
     type: string
     apiVersions:
     - !<!ApiVersion> 
@@ -978,14 +1000,14 @@ schemas: !<!Schemas>
   - !<!ConstantSchema> &ref_66
     type: constant
     value: !<!ConstantValue> 
-      value: application/json;odata=fullmetadata
+      value: application/json;odata=nometadata
     valueType: *ref_0
     language: !<!Languages> 
       default:
-        name: ApplicationJsonOdataFullmetadata
-        description: Content Type 'application/json;odata=fullmetadata'
+        name: ApplicationJsonOdataNometadata
+        description: Content Type 'application/json;odata=nometadata'
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_152
+  - !<!ConstantSchema> &ref_154
     type: constant
     value: !<!ConstantValue> 
       value: acl
@@ -995,7 +1017,7 @@ schemas: !<!Schemas>
         name: Constant5
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_162
+  - !<!ConstantSchema> &ref_164
     type: constant
     value: !<!ConstantValue> 
       value: application/xml
@@ -1005,7 +1027,7 @@ schemas: !<!Schemas>
         name: ApplicationXml
         description: Content Type 'application/xml'
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_172
+  - !<!ConstantSchema> &ref_174
     type: constant
     value: !<!ConstantValue> 
       value: service
@@ -1015,7 +1037,7 @@ schemas: !<!Schemas>
         name: Constant7
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_173
+  - !<!ConstantSchema> &ref_175
     type: constant
     value: !<!ConstantValue> 
       value: properties
@@ -1025,7 +1047,7 @@ schemas: !<!Schemas>
         name: Constant8
         description: ''
     protocol: !<!Protocols> {}
-  - !<!ConstantSchema> &ref_188
+  - !<!ConstantSchema> &ref_190
     type: constant
     value: !<!ConstantValue> 
       value: stats
@@ -1113,7 +1135,7 @@ schemas: !<!Schemas>
         description: ''
         header: Date
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_113
+  - !<!DateTimeSchema> &ref_114
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -1125,7 +1147,7 @@ schemas: !<!Schemas>
         description: ''
         header: Date
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_127
+  - !<!DateTimeSchema> &ref_129
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -1137,7 +1159,7 @@ schemas: !<!Schemas>
         description: ''
         header: Date
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_139
+  - !<!DateTimeSchema> &ref_141
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -1149,7 +1171,7 @@ schemas: !<!Schemas>
         description: ''
         header: Date
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_150
+  - !<!DateTimeSchema> &ref_152
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -1161,7 +1183,7 @@ schemas: !<!Schemas>
         description: ''
         header: Date
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_160
+  - !<!DateTimeSchema> &ref_162
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -1195,7 +1217,7 @@ schemas: !<!Schemas>
         name: AccessPolicyExpiry
         description: the date-time the policy expires
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_170
+  - !<!DateTimeSchema> &ref_172
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -1207,7 +1229,7 @@ schemas: !<!Schemas>
         description: ''
         header: Date
     protocol: !<!Protocols> {}
-  - !<!DateTimeSchema> &ref_195
+  - !<!DateTimeSchema> &ref_197
     type: date-time
     format: date-time-rfc1123
     apiVersions:
@@ -1294,7 +1316,7 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_102
+      - !<!Parameter> &ref_103
         schema: *ref_2
         groupedBy: !<!Parameter> &ref_8
           schema: *ref_3
@@ -1313,9 +1335,9 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_116
+      - !<!Parameter> &ref_118
         schema: *ref_2
-        groupedBy: !<!Parameter> &ref_117
+        groupedBy: !<!Parameter> &ref_119
           schema: *ref_3
           implementation: Method
           language: !<!Languages> 
@@ -1332,9 +1354,9 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_129
+      - !<!Parameter> &ref_131
         schema: *ref_2
-        groupedBy: !<!Parameter> &ref_130
+        groupedBy: !<!Parameter> &ref_132
           schema: *ref_3
           implementation: Method
           language: !<!Languages> 
@@ -1351,9 +1373,9 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_141
+      - !<!Parameter> &ref_143
         schema: *ref_2
-        groupedBy: !<!Parameter> &ref_142
+        groupedBy: !<!Parameter> &ref_144
           schema: *ref_3
           implementation: Method
           language: !<!Languages> 
@@ -1436,7 +1458,7 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_103
+      - !<!Parameter> &ref_104
         schema: *ref_7
         groupedBy: *ref_8
         implementation: Method
@@ -1481,7 +1503,7 @@ schemas: !<!Schemas>
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: query
-      - !<!Parameter> &ref_104
+      - !<!Parameter> &ref_105
         schema: *ref_7
         groupedBy: *ref_8
         implementation: Method
@@ -1801,7 +1823,7 @@ schemas: !<!Schemas>
         namespace: ''
     protocol: !<!Protocols> {}
   - *ref_25
-  - !<!ObjectSchema> &ref_174
+  - !<!ObjectSchema> &ref_176
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -2080,7 +2102,7 @@ schemas: !<!Schemas>
   - *ref_35
   - *ref_36
   - *ref_43
-  - !<!ObjectSchema> &ref_191
+  - !<!ObjectSchema> &ref_193
     type: object
     apiVersions:
     - !<!ApiVersion> 
@@ -2143,7 +2165,7 @@ schemas: !<!Schemas>
   arrays:
   - *ref_47
   - *ref_48
-  - !<!ArraySchema> &ref_156
+  - !<!ArraySchema> &ref_158
     type: array
     apiVersions:
     - !<!ApiVersion> 
@@ -2276,9 +2298,26 @@ operationGroups:
             header: x-ms-continuation-NextTableName
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - '200'
+    extensions:
+      x-ms-examples:
+        TableGet:
+          parameters:
+            $top: 1
+            DataServiceVersion: '3.0'
+            url: myaccount.table.core.windows.net
+            x-ms-version: '2018-10-10'
+          responses:
+            '200':
+              body:
+                odata.metadata: 'https://myaccount.table.core.windows.net/$metadata#Tables'
+                value:
+                - TableName: mytable
+                  odata.editLink: Tables('mytable')
+                  odata.id: 'https://myaccount.table.core.windows.net/Tables(''mytable'')'
+                  odata.type: myaccount.Tables
     language: !<!Languages> 
       default:
         name: Query
@@ -2357,7 +2396,7 @@ operationGroups:
           method: post
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           uri: '{url}'
     signatureParameters:
     - *ref_70
@@ -2385,7 +2424,7 @@ operationGroups:
             header: Date
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - '201'
     - !<!Response> 
@@ -2425,9 +2464,27 @@ operationGroups:
             header: x-ms-error-code
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - default
+    extensions:
+      x-ms-examples:
+        TableCreate:
+          parameters:
+            DataServiceVersion: '3.0'
+            tableProperties:
+              TableName: mytable
+            url: myaccount.table.core.windows.net
+            x-ms-version: '2018-10-10'
+          responses:
+            '201':
+              body:
+                TableName: mytable
+                odata.editLink: Tables('mytable')
+                odata.id: 'https://myaccount.table.core.windows.net/Tables(''mytable'')'
+                odata.metadata: 'https://myaccount.table.core.windows.net/$metadata#Tables/@Element'
+                odata.type: ' myaccount.Tables'
+            '204': {}
     language: !<!Languages> 
       default:
         name: Create
@@ -2515,9 +2572,18 @@ operationGroups:
             header: x-ms-error-code
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - default
+    extensions:
+      x-ms-examples:
+        TableDelete:
+          parameters:
+            table: mytable
+            url: myaccount.table.core.windows.net
+            x-ms-version: '2018-10-10'
+          responses:
+            '204': {}
     language: !<!Languages> 
       default:
         name: Delete
@@ -2625,10 +2691,13 @@ operationGroups:
             header: Date
           - !<!HttpHeader> 
             schema: *ref_100
-            header: x-ms-continuation-NextTableName
+            header: x-ms-continuation-NextPartitionKey
+          - !<!HttpHeader> 
+            schema: *ref_101
+            header: x-ms-continuation-NextRowKey
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - '200'
     exceptions:
@@ -2642,13 +2711,37 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_101
+            schema: *ref_102
             header: x-ms-error-code
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - default
+    extensions:
+      x-ms-examples:
+        TableQueryEntities:
+          parameters:
+            $top: 1
+            DataServiceVersion: '3.0'
+            table: Customer
+            url: myaccount.table.core.windows.net
+            x-ms-version: '2018-10-10'
+          responses:
+            '200':
+              body:
+                odata.metadata: ' https://myaccount.table.core.windows.net/metadata#Customers'
+                value:
+                - CustomerSince: '2008-10-01T15:25:05.2852025Z'
+                  CustomerSince@odata.type: Edm.DateTime
+                  PartitionKey: Customer
+                  RowKey: Name
+                  Timestamp: '2013-08-22T00:20:16.3134645Z'
+                  Timestamp@odata.type: Edm.DateTime
+                  odata.editLink: 'Customers(PartitionKey=Customer'',RowKey=''Name'')'
+                  odata.etag: W/"0x5B168C7B6E589D2"
+                  odata.id: 'https://myaccount.table.core.windows.net/Customers(PartitionKey=Customer'',RowKey=''Name'')'
+                  odata.type: myaccount.Customers
     language: !<!Languages> 
       default:
         name: QueryEntities
@@ -2660,7 +2753,7 @@ operationGroups:
       version: '2018-10-10'
     parameters:
     - *ref_52
-    - !<!Parameter> &ref_106
+    - !<!Parameter> &ref_107
       schema: *ref_4
       implementation: Method
       language: !<!Languages> 
@@ -2674,7 +2767,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - *ref_53
-    - !<!Parameter> &ref_107
+    - !<!Parameter> &ref_108
       schema: *ref_7
       implementation: Method
       language: !<!Languages> 
@@ -2697,10 +2790,10 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - *ref_102
     - *ref_103
     - *ref_104
-    - !<!Parameter> &ref_108
+    - *ref_105
+    - !<!Parameter> &ref_109
       schema: *ref_81
       implementation: Method
       required: true
@@ -2712,8 +2805,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_109
-      schema: *ref_105
+    - !<!Parameter> &ref_110
+      schema: *ref_106
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2724,8 +2817,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_110
-      schema: *ref_105
+    - !<!Parameter> &ref_111
+      schema: *ref_106
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2752,11 +2845,11 @@ operationGroups:
           method: get
           uri: '{url}'
     signatureParameters:
-    - *ref_106
     - *ref_107
     - *ref_108
     - *ref_109
     - *ref_110
+    - *ref_111
     responses:
     - !<!SchemaResponse> 
       schema: *ref_95
@@ -2768,23 +2861,26 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_105
+            schema: *ref_106
             header: x-ms-client-request-id
           - !<!HttpHeader> 
-            schema: *ref_111
+            schema: *ref_112
             header: x-ms-request-id
           - !<!HttpHeader> 
-            schema: *ref_112
+            schema: *ref_113
             header: x-ms-version
           - !<!HttpHeader> 
-            schema: *ref_113
+            schema: *ref_114
             header: Date
           - !<!HttpHeader> 
-            schema: *ref_114
-            header: x-ms-continuation-NextTableName
+            schema: *ref_115
+            header: x-ms-continuation-NextPartitionKey
+          - !<!HttpHeader> 
+            schema: *ref_116
+            header: x-ms-continuation-NextRowKey
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - '200'
     exceptions:
@@ -2798,13 +2894,38 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_115
+            schema: *ref_117
             header: x-ms-error-code
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - default
+    extensions:
+      x-ms-examples:
+        TableQueryEntitiesWithPartitionAndRowKey:
+          parameters:
+            DataServiceVersion: '3.0'
+            partitionKey: Customer
+            rowKey: Name
+            table: Customers
+            url: myaccount.table.core.windows.net
+            x-ms-version: '2018-10-10'
+          responses:
+            '200':
+              body:
+                odata.metadata: ' https://myaccount.table.core.windows.net/metadata#Customers'
+                value:
+                - CustomerSince: '2008-10-01T15:25:05.2852025Z'
+                  CustomerSince@odata.type: Edm.DateTime
+                  PartitionKey: Customer
+                  RowKey: Name
+                  Timestamp: '2013-08-22T00:20:16.3134645Z'
+                  Timestamp@odata.type: Edm.DateTime
+                  odata.editLink: 'Customers(PartitionKey=Customer'',RowKey=''Name'')'
+                  odata.etag: W/"0x5B168C7B6E589D2"
+                  odata.id: 'https://myaccount.table.core.windows.net/Customers(PartitionKey=Customer'',RowKey=''Name'')'
+                  odata.type: myaccount.Customers
     language: !<!Languages> 
       default:
         name: QueryEntitiesWithPartitionAndRowKey
@@ -2816,7 +2937,7 @@ operationGroups:
       version: '2018-10-10'
     parameters:
     - *ref_52
-    - !<!Parameter> &ref_119
+    - !<!Parameter> &ref_121
       schema: *ref_4
       implementation: Method
       language: !<!Languages> 
@@ -2830,7 +2951,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - *ref_53
-    - !<!Parameter> &ref_120
+    - !<!Parameter> &ref_122
       schema: *ref_7
       implementation: Method
       language: !<!Languages> 
@@ -2853,8 +2974,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - *ref_116
-    - !<!Parameter> &ref_121
+    - *ref_118
+    - !<!Parameter> &ref_123
       schema: *ref_81
       implementation: Method
       required: true
@@ -2866,8 +2987,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_122
-      schema: *ref_105
+    - !<!Parameter> &ref_124
+      schema: *ref_106
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2878,8 +2999,8 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: path
-    - !<!Parameter> &ref_123
-      schema: *ref_105
+    - !<!Parameter> &ref_125
+      schema: *ref_106
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -2906,7 +3027,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_118
+      - !<!Parameter> &ref_120
         schema: *ref_20
         implementation: Method
         required: false
@@ -2918,10 +3039,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      - *ref_117
+      - *ref_119
       signatureParameters:
-      - *ref_118
-      - *ref_117
+      - *ref_120
+      - *ref_119
       language: !<!Languages> 
         default:
           name: ''
@@ -2932,14 +3053,14 @@ operationGroups:
           method: put
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           uri: '{url}'
     signatureParameters:
-    - *ref_119
-    - *ref_120
     - *ref_121
     - *ref_122
     - *ref_123
+    - *ref_124
+    - *ref_125
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -2949,164 +3070,17 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpResponse> 
           headers:
-          - !<!HttpHeader> 
-            schema: *ref_124
-            header: x-ms-client-request-id
-          - !<!HttpHeader> 
-            schema: *ref_125
-            header: x-ms-request-id
           - !<!HttpHeader> 
             schema: *ref_126
-            header: x-ms-version
-          - !<!HttpHeader> 
-            schema: *ref_127
-            header: Date
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_79
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          headers:
-          - !<!HttpHeader> 
-            schema: *ref_128
-            header: x-ms-error-code
-          knownMediaType: json
-          mediaTypes:
-          - application/json;odata=fullmetadata
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: UpdateEntity
-        description: Update entity in a table.
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: '2018-10-10'
-    parameters:
-    - *ref_52
-    - !<!Parameter> &ref_131
-      schema: *ref_4
-      implementation: Method
-      language: !<!Languages> 
-        default:
-          name: timeout
-          description: >-
-            The The timeout parameter is expressed in seconds. For more information, see <a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations>Setting Timeouts for Queue Service
-            Operations.</a>
-          serializedName: timeout
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: query
-    - *ref_53
-    - !<!Parameter> &ref_132
-      schema: *ref_7
-      implementation: Method
-      language: !<!Languages> 
-        default:
-          name: requestId
-          description: 'Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.'
-          serializedName: x-ms-client-request-id
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
-    - !<!Parameter> 
-      schema: *ref_54
-      implementation: Method
-      required: true
-      language: !<!Languages> 
-        default:
-          name: dataServiceVersion
-          description: Specifies the data service version
-          serializedName: DataServiceVersion
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: header
-    - *ref_129
-    - !<!Parameter> &ref_133
-      schema: *ref_81
-      implementation: Method
-      required: true
-      language: !<!Languages> 
-        default:
-          name: table
-          description: The name of the table
-          serializedName: table
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: path
-    - !<!Parameter> &ref_134
-      schema: *ref_105
-      implementation: Method
-      required: true
-      language: !<!Languages> 
-        default:
-          name: partitionKey
-          description: The partition key of the entity
-          serializedName: partitionKey
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: path
-    - !<!Parameter> &ref_135
-      schema: *ref_105
-      implementation: Method
-      required: true
-      language: !<!Languages> 
-        default:
-          name: rowKey
-          description: The row key of the entity
-          serializedName: rowKey
-      protocol: !<!Protocols> 
-        http: !<!HttpParameter> 
-          in: path
-    requests:
-    - !<!Request> 
-      parameters:
-      - *ref_130
-      signatureParameters:
-      - *ref_130
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: '/{table}(PartitionKey=''{partitionKey}'',RowKey=''{rowKey}'')'
-          method: delete
-          uri: '{url}'
-    signatureParameters:
-    - *ref_131
-    - *ref_132
-    - *ref_133
-    - *ref_134
-    - *ref_135
-    responses:
-    - !<!Response> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          headers:
-          - !<!HttpHeader> 
-            schema: *ref_136
             header: x-ms-client-request-id
           - !<!HttpHeader> 
-            schema: *ref_137
+            schema: *ref_127
             header: x-ms-request-id
           - !<!HttpHeader> 
-            schema: *ref_138
+            schema: *ref_128
             header: x-ms-version
           - !<!HttpHeader> 
-            schema: *ref_139
+            schema: *ref_129
             header: Date
           statusCodes:
           - '204'
@@ -3121,17 +3095,42 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_140
+            schema: *ref_130
             header: x-ms-error-code
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - default
+    extensions:
+      x-ms-examples:
+        TableUpdateEntity:
+          parameters:
+            DataServiceVersion: '3.0'
+            partitionKey: mypartitionkey
+            rowKey: myrowkey
+            table: Customers
+            tableEntityProperties:
+              Address: Santa Clara
+              Age: 23
+              AmountDue: 200.23
+              CustomerCode: c9da6455-213d-42c9-9a79-3e9149a57833
+              CustomerCode@odata.type: Edm.Guid
+              CustomerSince: '2008-07-10T00:00:00'
+              CustomerSince@odata.type: Edm.DateTime
+              IsActive: false
+              NumberOfOrders: '255'
+              NumberOfOrders@odata.type: Edm.Int64
+              PartitionKey: mypartitionkey
+              RowKey: myrowkey
+            url: myaccount.table.core.windows.net
+            x-ms-version: '2018-10-10'
+          responses:
+            '204': {}
     language: !<!Languages> 
       default:
-        name: DeleteEntity
-        description: Deletes the specified entity in a table.
+        name: UpdateEntity
+        description: Update entity in a table.
     protocol: !<!Protocols> {}
   - !<!Operation> 
     apiVersions:
@@ -3139,7 +3138,7 @@ operationGroups:
       version: '2018-10-10'
     parameters:
     - *ref_52
-    - !<!Parameter> &ref_144
+    - !<!Parameter> &ref_133
       schema: *ref_4
       implementation: Method
       language: !<!Languages> 
@@ -3153,7 +3152,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - *ref_53
-    - !<!Parameter> &ref_145
+    - !<!Parameter> &ref_134
       schema: *ref_7
       implementation: Method
       language: !<!Languages> 
@@ -3176,8 +3175,167 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - *ref_141
+    - *ref_131
+    - !<!Parameter> &ref_135
+      schema: *ref_81
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: table
+          description: The name of the table
+          serializedName: table
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_136
+      schema: *ref_106
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: partitionKey
+          description: The partition key of the entity
+          serializedName: partitionKey
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    - !<!Parameter> &ref_137
+      schema: *ref_106
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: rowKey
+          description: The row key of the entity
+          serializedName: rowKey
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: path
+    requests:
+    - !<!Request> 
+      parameters:
+      - *ref_132
+      signatureParameters:
+      - *ref_132
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpRequest> 
+          path: '/{table}(PartitionKey=''{partitionKey}'',RowKey=''{rowKey}'')'
+          method: delete
+          uri: '{url}'
+    signatureParameters:
+    - *ref_133
+    - *ref_134
+    - *ref_135
+    - *ref_136
+    - *ref_137
+    responses:
+    - !<!Response> 
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_138
+            header: x-ms-client-request-id
+          - !<!HttpHeader> 
+            schema: *ref_139
+            header: x-ms-request-id
+          - !<!HttpHeader> 
+            schema: *ref_140
+            header: x-ms-version
+          - !<!HttpHeader> 
+            schema: *ref_141
+            header: Date
+          statusCodes:
+          - '204'
+    exceptions:
+    - !<!SchemaResponse> 
+      schema: *ref_79
+      language: !<!Languages> 
+        default:
+          name: ''
+          description: ''
+      protocol: !<!Protocols> 
+        http: !<!HttpResponse> 
+          headers:
+          - !<!HttpHeader> 
+            schema: *ref_142
+            header: x-ms-error-code
+          knownMediaType: json
+          mediaTypes:
+          - application/json;odata=nometadata
+          statusCodes:
+          - default
+    extensions:
+      x-ms-examples:
+        TableDeleteEntity:
+          parameters:
+            DataServiceVersion: '3.0'
+            partitionKey: mypartitionkey
+            rowKey: myrowkey
+            table: Customers
+            url: myaccount.table.core.windows.net
+            x-ms-version: '2018-10-10'
+          responses:
+            '204': {}
+    language: !<!Languages> 
+      default:
+        name: DeleteEntity
+        description: Deletes the specified entity in a table.
+    protocol: !<!Protocols> {}
+  - !<!Operation> 
+    apiVersions:
+    - !<!ApiVersion> 
+      version: '2018-10-10'
+    parameters:
+    - *ref_52
     - !<!Parameter> &ref_146
+      schema: *ref_4
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: timeout
+          description: >-
+            The The timeout parameter is expressed in seconds. For more information, see <a href="https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations>Setting Timeouts for Queue Service
+            Operations.</a>
+          serializedName: timeout
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: query
+    - *ref_53
+    - !<!Parameter> &ref_147
+      schema: *ref_7
+      implementation: Method
+      language: !<!Languages> 
+        default:
+          name: requestId
+          description: 'Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled.'
+          serializedName: x-ms-client-request-id
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - !<!Parameter> 
+      schema: *ref_54
+      implementation: Method
+      required: true
+      language: !<!Languages> 
+        default:
+          name: dataServiceVersion
+          description: Specifies the data service version
+          serializedName: DataServiceVersion
+      protocol: !<!Protocols> 
+        http: !<!HttpParameter> 
+          in: header
+    - *ref_143
+    - !<!Parameter> &ref_148
       schema: *ref_81
       implementation: Method
       required: true
@@ -3205,7 +3363,7 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_143
+      - !<!Parameter> &ref_145
         schema: *ref_20
         implementation: Method
         required: false
@@ -3217,10 +3375,10 @@ operationGroups:
           http: !<!HttpParameter> 
             in: body
             style: json
-      - *ref_142
+      - *ref_144
       signatureParameters:
-      - *ref_143
-      - *ref_142
+      - *ref_145
+      - *ref_144
       language: !<!Languages> 
         default:
           name: ''
@@ -3231,12 +3389,12 @@ operationGroups:
           method: post
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           uri: '{url}'
     signatureParameters:
-    - *ref_144
-    - *ref_145
     - *ref_146
+    - *ref_147
+    - *ref_148
     responses:
     - !<!SchemaResponse> 
       schema: *ref_20
@@ -3248,20 +3406,20 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_147
+            schema: *ref_149
             header: x-ms-client-request-id
           - !<!HttpHeader> 
-            schema: *ref_148
+            schema: *ref_150
             header: x-ms-request-id
           - !<!HttpHeader> 
-            schema: *ref_149
+            schema: *ref_151
             header: x-ms-version
           - !<!HttpHeader> 
-            schema: *ref_150
+            schema: *ref_152
             header: Date
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - '201'
     exceptions:
@@ -3275,13 +3433,56 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_151
+            schema: *ref_153
             header: x-ms-error-code
           knownMediaType: json
           mediaTypes:
-          - application/json;odata=fullmetadata
+          - application/json;odata=nometadata
           statusCodes:
           - default
+    extensions:
+      x-ms-examples:
+        TableInsertEntity:
+          parameters:
+            DataServiceVersion: '3.0'
+            table: Customer
+            tableEntityProperties:
+              Address: Mountain View
+              Age: 23
+              AmountDue: 200.23
+              CustomerCode: c9da6455-213d-42c9-9a79-3e9149a57833
+              CustomerCode@odata.type: Edm.Guid
+              CustomerSince: '2008-07-10T00:00:00'
+              CustomerSince@odata.type: Edm.DateTime
+              IsActive: true
+              NumberOfOrders: '255'
+              NumberOfOrders@odata.type: Edm.Int64
+              PartitionKey: mypartitionkey
+              RowKey: myrowkey
+            url: myaccount.table.core.windows.net
+            x-ms-version: '2018-10-10'
+          responses:
+            '201':
+              body:
+                Address: Mountain View
+                Age: 23
+                AmountDue: 200.23
+                CustomerCode: c9da6455-213d-42c9-9a79-3e9149a57833
+                CustomerCode@odata.type: Edm.Guid
+                CustomerSince: '2008-07-10T00:00:00'
+                CustomerSince@odata.type: Edm.DateTime
+                IsActive: true
+                NumberOfOrders: '255'
+                NumberOfOrders@odata.type: Edm.Int64
+                PartitionKey: mypartitionkey
+                RowKey: myrowkey
+                Timestamp: '2013-08-22T01:12:06.2608595Z'
+                Timestamp@odata.type: Edm.DateTime
+                odata.editLink: 'Customers(PartitionKey=''mypartitionkey'',RowKey=''myrowkey'')'
+                odata.etag: W/"0x5B168C7B6E589D2"
+                odata.id: ' https://myaccount.table.core.windows.net/Customers(PartitionKey=''mypartitionkey'',RowKey=''myrowkey'')'
+                odata.metadata: 'https://myaccount.table.core.windows.net/Customer/$metadata#Customers/@Element'
+                odata.type: myaccount.Customers
     language: !<!Languages> 
       default:
         name: InsertEntity
@@ -3293,7 +3494,7 @@ operationGroups:
       version: '2018-10-10'
     parameters:
     - *ref_52
-    - !<!Parameter> &ref_153
+    - !<!Parameter> &ref_155
       schema: *ref_4
       implementation: Method
       language: !<!Languages> 
@@ -3307,7 +3508,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - *ref_53
-    - !<!Parameter> &ref_154
+    - !<!Parameter> &ref_156
       schema: *ref_7
       implementation: Method
       language: !<!Languages> 
@@ -3318,7 +3519,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_155
+    - !<!Parameter> &ref_157
       schema: *ref_81
       implementation: Method
       required: true
@@ -3331,7 +3532,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: path
     - !<!Parameter> 
-      schema: *ref_152
+      schema: *ref_154
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3354,12 +3555,12 @@ operationGroups:
           method: get
           uri: '{url}'
     signatureParameters:
-    - *ref_153
-    - *ref_154
     - *ref_155
+    - *ref_156
+    - *ref_157
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_156
+      schema: *ref_158
       language: !<!Languages> 
         default:
           name: ''
@@ -3368,16 +3569,16 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_157
+            schema: *ref_159
             header: x-ms-client-request-id
           - !<!HttpHeader> 
-            schema: *ref_158
+            schema: *ref_160
             header: x-ms-request-id
           - !<!HttpHeader> 
-            schema: *ref_159
+            schema: *ref_161
             header: x-ms-version
           - !<!HttpHeader> 
-            schema: *ref_160
+            schema: *ref_162
             header: Date
           knownMediaType: xml
           mediaTypes:
@@ -3395,7 +3596,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_161
+            schema: *ref_163
             header: x-ms-error-code
           knownMediaType: xml
           mediaTypes:
@@ -3413,7 +3614,7 @@ operationGroups:
       version: '2018-10-10'
     parameters:
     - *ref_52
-    - !<!Parameter> &ref_164
+    - !<!Parameter> &ref_166
       schema: *ref_4
       implementation: Method
       language: !<!Languages> 
@@ -3427,7 +3628,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - *ref_53
-    - !<!Parameter> &ref_165
+    - !<!Parameter> &ref_167
       schema: *ref_7
       implementation: Method
       language: !<!Languages> 
@@ -3438,7 +3639,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: header
-    - !<!Parameter> &ref_166
+    - !<!Parameter> &ref_168
       schema: *ref_81
       implementation: Method
       required: true
@@ -3451,7 +3652,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: path
     - !<!Parameter> 
-      schema: *ref_152
+      schema: *ref_154
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3466,7 +3667,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_162
+        schema: *ref_164
         implementation: Method
         origin: 'modelerfour:synthesized/content-type'
         required: true
@@ -3478,8 +3679,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_163
-        schema: *ref_156
+      - !<!Parameter> &ref_165
+        schema: *ref_158
         implementation: Method
         required: false
         language: !<!Languages> 
@@ -3491,7 +3692,7 @@ operationGroups:
             in: body
             style: xml
       signatureParameters:
-      - *ref_163
+      - *ref_165
       language: !<!Languages> 
         default:
           name: ''
@@ -3505,9 +3706,9 @@ operationGroups:
           - application/xml
           uri: '{url}'
     signatureParameters:
-    - *ref_164
-    - *ref_165
     - *ref_166
+    - *ref_167
+    - *ref_168
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3518,16 +3719,16 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_167
+            schema: *ref_169
             header: x-ms-client-request-id
           - !<!HttpHeader> 
-            schema: *ref_168
+            schema: *ref_170
             header: x-ms-request-id
           - !<!HttpHeader> 
-            schema: *ref_169
+            schema: *ref_171
             header: x-ms-version
           - !<!HttpHeader> 
-            schema: *ref_170
+            schema: *ref_172
             header: Date
           statusCodes:
           - '204'
@@ -3542,7 +3743,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_171
+            schema: *ref_173
             header: x-ms-error-code
           knownMediaType: xml
           mediaTypes:
@@ -3569,7 +3770,7 @@ operationGroups:
     parameters:
     - *ref_52
     - !<!Parameter> 
-      schema: *ref_172
+      schema: *ref_174
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3581,7 +3782,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - !<!Parameter> 
-      schema: *ref_173
+      schema: *ref_175
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3592,7 +3793,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_176
+    - !<!Parameter> &ref_178
       schema: *ref_4
       implementation: Method
       language: !<!Languages> 
@@ -3606,7 +3807,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - *ref_53
-    - !<!Parameter> &ref_177
+    - !<!Parameter> &ref_179
       schema: *ref_7
       implementation: Method
       language: !<!Languages> 
@@ -3621,7 +3822,7 @@ operationGroups:
     - !<!Request> 
       parameters:
       - !<!Parameter> 
-        schema: *ref_162
+        schema: *ref_164
         implementation: Method
         origin: 'modelerfour:synthesized/content-type'
         required: true
@@ -3633,8 +3834,8 @@ operationGroups:
         protocol: !<!Protocols> 
           http: !<!HttpParameter> 
             in: header
-      - !<!Parameter> &ref_175
-        schema: *ref_174
+      - !<!Parameter> &ref_177
+        schema: *ref_176
         implementation: Method
         required: true
         language: !<!Languages> 
@@ -3646,7 +3847,7 @@ operationGroups:
             in: body
             style: xml
       signatureParameters:
-      - *ref_175
+      - *ref_177
       language: !<!Languages> 
         default:
           name: ''
@@ -3660,8 +3861,8 @@ operationGroups:
           - application/xml
           uri: '{url}'
     signatureParameters:
-    - *ref_176
-    - *ref_177
+    - *ref_178
+    - *ref_179
     responses:
     - !<!Response> 
       language: !<!Languages> 
@@ -3672,13 +3873,13 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_178
+            schema: *ref_180
             header: x-ms-client-request-id
           - !<!HttpHeader> 
-            schema: *ref_179
+            schema: *ref_181
             header: x-ms-request-id
           - !<!HttpHeader> 
-            schema: *ref_180
+            schema: *ref_182
             header: x-ms-version
           statusCodes:
           - '202'
@@ -3693,7 +3894,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_181
+            schema: *ref_183
             header: x-ms-error-code
           knownMediaType: xml
           mediaTypes:
@@ -3712,7 +3913,7 @@ operationGroups:
     parameters:
     - *ref_52
     - !<!Parameter> 
-      schema: *ref_172
+      schema: *ref_174
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3724,7 +3925,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - !<!Parameter> 
-      schema: *ref_173
+      schema: *ref_175
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3735,7 +3936,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_182
+    - !<!Parameter> &ref_184
       schema: *ref_4
       implementation: Method
       language: !<!Languages> 
@@ -3749,7 +3950,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - *ref_53
-    - !<!Parameter> &ref_183
+    - !<!Parameter> &ref_185
       schema: *ref_7
       implementation: Method
       language: !<!Languages> 
@@ -3772,11 +3973,11 @@ operationGroups:
           method: get
           uri: '{url}'
     signatureParameters:
-    - *ref_182
-    - *ref_183
+    - *ref_184
+    - *ref_185
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_174
+      schema: *ref_176
       language: !<!Languages> 
         default:
           name: ''
@@ -3785,13 +3986,13 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_184
+            schema: *ref_186
             header: x-ms-client-request-id
           - !<!HttpHeader> 
-            schema: *ref_185
+            schema: *ref_187
             header: x-ms-request-id
           - !<!HttpHeader> 
-            schema: *ref_186
+            schema: *ref_188
             header: x-ms-version
           knownMediaType: xml
           mediaTypes:
@@ -3809,7 +4010,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_187
+            schema: *ref_189
             header: x-ms-error-code
           knownMediaType: xml
           mediaTypes:
@@ -3828,7 +4029,7 @@ operationGroups:
     parameters:
     - *ref_52
     - !<!Parameter> 
-      schema: *ref_172
+      schema: *ref_174
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3840,7 +4041,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - !<!Parameter> 
-      schema: *ref_188
+      schema: *ref_190
       implementation: Method
       required: true
       language: !<!Languages> 
@@ -3851,7 +4052,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpParameter> 
           in: query
-    - !<!Parameter> &ref_189
+    - !<!Parameter> &ref_191
       schema: *ref_4
       implementation: Method
       language: !<!Languages> 
@@ -3865,7 +4066,7 @@ operationGroups:
         http: !<!HttpParameter> 
           in: query
     - *ref_53
-    - !<!Parameter> &ref_190
+    - !<!Parameter> &ref_192
       schema: *ref_7
       implementation: Method
       language: !<!Languages> 
@@ -3888,11 +4089,11 @@ operationGroups:
           method: get
           uri: '{url}'
     signatureParameters:
-    - *ref_189
-    - *ref_190
+    - *ref_191
+    - *ref_192
     responses:
     - !<!SchemaResponse> 
-      schema: *ref_191
+      schema: *ref_193
       language: !<!Languages> 
         default:
           name: ''
@@ -3901,16 +4102,16 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_192
+            schema: *ref_194
             header: x-ms-client-request-id
           - !<!HttpHeader> 
-            schema: *ref_193
+            schema: *ref_195
             header: x-ms-request-id
           - !<!HttpHeader> 
-            schema: *ref_194
+            schema: *ref_196
             header: x-ms-version
           - !<!HttpHeader> 
-            schema: *ref_195
+            schema: *ref_197
             header: Date
           knownMediaType: xml
           mediaTypes:
@@ -3928,7 +4129,7 @@ operationGroups:
         http: !<!HttpResponse> 
           headers:
           - !<!HttpHeader> 
-            schema: *ref_196
+            schema: *ref_198
             header: x-ms-error-code
           knownMediaType: xml
           mediaTypes:

@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.V3.Input;
-using AutoRest.CSharp.V3.Output.Builders;
+using AutoRest.CSharp.V3.Output.Models.Requests;
+using AutoRest.CSharp.V3.Output.Models.Responses;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
@@ -14,8 +16,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private readonly CodeModel _codeModel;
         private readonly BuildContext _context;
         private Dictionary<Schema, ISchemaType>? _models;
-        private Client[]? _clients;
-        private RestClient[]? _restClients;
+        private Dictionary<OperationGroup, Client>? _clients;
+        private Dictionary<OperationGroup, RestClient>? _restClients;
+        private Dictionary<Operation, LongRunningOperation>? _operations;
+        private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -25,22 +29,89 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public IEnumerable<ISchemaType> Models => SchemaMap.Values;
 
-        public RestClient[] RestClients
+        public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
+
+        public IEnumerable<Client> Clients => EnsureClients().Values;
+
+        public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+
+        public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
+
+        private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
         {
-            get
+            if (_headerModels != null)
             {
-                EnsureClients();
-                return _restClients!;
+                return _headerModels;
             }
+
+            _headerModels = new Dictionary<Operation, ResponseHeaderGroupType>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var headers = ResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
+                    if (headers != null)
+                    {
+                        _headerModels.Add(operation, headers);
+                    }
+                }
+            }
+
+            return _headerModels;
         }
 
-        public Client[] Clients
+        private Dictionary<Operation, LongRunningOperation> EnsureLongRunningOperations()
         {
-            get
+            if (_operations != null)
             {
-                EnsureClients();
-                return _clients!;
+                return _operations;
             }
+
+            _operations = new Dictionary<Operation, LongRunningOperation>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (operation.IsLongRunning)
+                    {
+                        _operations.Add(operation, new LongRunningOperation(operationGroup, operation, _context));
+                    }
+                }
+            }
+
+            return _operations;
+        }
+
+        private Dictionary<OperationGroup, Client> EnsureClients()
+        {
+            if (_clients != null)
+            {
+                return _clients;
+            }
+
+            _clients = new Dictionary<OperationGroup, Client>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _clients.Add(operationGroup, new Client(operationGroup, _context));
+            }
+
+            return _clients;
+        }
+
+        private Dictionary<OperationGroup, RestClient> EnsureRestClients()
+        {
+            if (_restClients != null)
+            {
+                return _restClients;
+            }
+
+            _restClients = new Dictionary<OperationGroup, RestClient>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _restClients.Add(operationGroup, new RestClient(operationGroup, _context));
+            }
+
+            return _restClients;
         }
 
         public ISchemaType FindTypeForSchema(Schema schema)
@@ -49,16 +120,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         }
 
         private Dictionary<Schema, ISchemaType> SchemaMap => _models ??= BuildModels();
-
-        private void EnsureClients()
-        {
-            var clientBuilder = new ClientBuilder(_context);
-
-            var allClients = _codeModel.OperationGroups.Select(clientBuilder.BuildClient).ToArray();
-
-            _clients = allClients.Select(c => c.Client).ToArray();
-            _restClients = allClients.Select(c => c.RestClient).ToArray();
-        }
 
         private Dictionary<Schema, ISchemaType> BuildModels()
         {
@@ -77,5 +138,28 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
+
+        public LongRunningOperation FindLongRunningOperation(Operation operation)
+        {
+            Debug.Assert(operation.IsLongRunning);
+
+            return EnsureLongRunningOperations()[operation];
+        }
+
+        public Client FindClient(OperationGroup operationGroup)
+        {
+            return EnsureClients()[operationGroup];
+        }
+
+        public RestClient FindRestClient(OperationGroup operationGroup)
+        {
+            return EnsureRestClients()[operationGroup];
+        }
+
+        public ResponseHeaderGroupType? FindHeaderModel(Operation operation)
+        {
+            EnsureHeaderModels().TryGetValue(operation, out var model);
+            return model;
+        }
     }
 }

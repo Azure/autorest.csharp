@@ -96,6 +96,12 @@ namespace Azure.Management.Storage
             return new PrivateLinkResourcesClient(_subscriptionId, _tokenCredential, _options);
         }
 
+        /// <summary> Creates a new instance of ObjectReplicationPoliciesClient. </summary>
+        public ObjectReplicationPoliciesClient GetObjectReplicationPoliciesClient()
+        {
+            return new ObjectReplicationPoliciesClient(_subscriptionId, _tokenCredential, _options);
+        }
+
         /// <summary> Creates a new instance of EncryptionScopesClient. </summary>
         public EncryptionScopesClient GetEncryptionScopesClient()
         {
