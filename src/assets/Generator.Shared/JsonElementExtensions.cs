@@ -64,6 +64,7 @@ namespace Azure.Core
         public static DateTimeOffset GetDateTimeOffset(in this JsonElement element, string format) => format switch
         {
             "D" => element.GetDateTimeOffset(),
+            "U" => DateTimeOffset.FromUnixTimeSeconds(element.GetInt64()),
             _ => TypeFormatters.ParseDateTimeOffset(element.GetString(), format)
         };
 
