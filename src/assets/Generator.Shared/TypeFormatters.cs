@@ -106,5 +106,14 @@ namespace Azure.Core
                     throw new InvalidOperationException("Malformed input");
             }
         }
+
+        public static DateTimeOffset ParseDateTimeOffset(string value, string format) =>
+            DateTimeOffset.Parse(value, CultureInfo.InvariantCulture);
+
+        public static TimeSpan ParseTimeSpan(string value, string format) => format switch
+        {
+            "P" => XmlConvert.ToTimeSpan(value),
+            _ => TimeSpan.ParseExact(value, format, CultureInfo.InvariantCulture)
+        };
     }
 }
