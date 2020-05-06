@@ -3,19 +3,18 @@
 
 using System;
 using AutoRest.CSharp.V3.Generation.Types;
-using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
-    internal abstract class ITypeProvider
+    internal abstract class TypeProvider
     {
         private readonly BuildContext _context;
         private readonly Lazy<INamedTypeSymbol?> _existingType;
         private TypeDeclarationOptions? _type;
 
-        protected ITypeProvider(BuildContext context)
+        protected TypeProvider(BuildContext context)
         {
             _context = context;
             _existingType = new Lazy<INamedTypeSymbol?>(() =>  _context.SourceInputModel.FindForType(DefaultNamespace, DefaultName));

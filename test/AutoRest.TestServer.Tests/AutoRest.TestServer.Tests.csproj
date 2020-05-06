@@ -22,10 +22,6 @@
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
     <Compile Include="../TestProjects/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
-    <Compile Update="..\TestProjects\TypeSchemaMapping\MainOperation.cs">
-      <LinkBase>TestProjects</LinkBase>
-      <Link>TestProjects\TypeSchemaMapping\MainOperation.cs</Link>
-    </Compile>
   </ItemGroup>
 
 </Project>

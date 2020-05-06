@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
-    internal class EnumType : ITypeProvider
+    internal class EnumType : TypeProvider
     {
         private readonly BuildContext _context;
         private readonly IEnumerable<ChoiceValue> _choices;

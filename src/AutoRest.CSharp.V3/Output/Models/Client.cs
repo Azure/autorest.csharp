@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
-                    ITypeProvider implementation = objectResponseBody.Type.Implementation;
+                    TypeProvider implementation = objectResponseBody.Type.Implementation;
                     if (!(implementation is ObjectType type))
                     {
                         throw new InvalidOperationException($"The return type of {method.Name} has to be an object schema to be used in paging");

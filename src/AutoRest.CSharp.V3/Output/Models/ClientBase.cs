@@ -10,7 +10,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Output.Models
 {
-    internal abstract class ClientBase: ITypeProvider
+    internal abstract class ClientBase: TypeProvider
     {
         protected const string ClientSuffix = "Client";
 

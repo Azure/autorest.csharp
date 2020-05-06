@@ -11,7 +11,7 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Output.Models.Responses
 {
-    internal class ResponseHeaderGroupType: ITypeProvider
+    internal class ResponseHeaderGroupType: TypeProvider
     {
         private static string[] _knownResponseHeaders = new[]
         {

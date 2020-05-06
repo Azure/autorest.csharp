@@ -13,7 +13,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
-    internal class LongRunningOperation: ITypeProvider
+    internal class LongRunningOperation: TypeProvider
     {
         public LongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext context) : base(context)
         {

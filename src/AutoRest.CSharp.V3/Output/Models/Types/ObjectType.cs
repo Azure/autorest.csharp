@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
-    internal class ObjectType : ITypeProvider
+    internal class ObjectType : TypeProvider
     {
         private readonly ObjectSchema _objectSchema;
         private readonly SerializationBuilder _serializationBuilder;

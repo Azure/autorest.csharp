@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class SerializationWriter
     {
-        public void WriteSerialization(CodeWriter writer, ITypeProvider schema)
+        public void WriteSerialization(CodeWriter writer, TypeProvider schema)
         {
             switch (schema)
             {
