@@ -34,33 +34,29 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private ObjectTypeConstructor[]? _constructors;
         private ObjectTypeProperty? _additionalPropertiesProperty;
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context): base(context)
         {
             _objectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
+            _sourceTypeMapping = context.SourceInputModel.CreateForModel(ExistingType);
 
-            Schema = objectSchema;
-            var name = objectSchema.CSharpName();
-            var ns = $"{context.DefaultNamespace}.Models";
             var hasUsage = objectSchema.Usage.Any();
-            _sourceTypeMapping = context.SourceInputModel.FindForModel(ns, name);
-            Declaration = BuilderHelpers.CreateTypeAttributes(
-                name,
-                ns,
-                hasUsage ? "public" : "internal",
-                _sourceTypeMapping?.ExistingType);
 
+            DefaultAccessibility = hasUsage ? "public" : "internal";
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            IsStruct = _sourceTypeMapping?.ExistingType.IsValueType == true;
-
-            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: IsStruct);
+            IsStruct = ExistingType?.IsValueType == true;
+            DefaultName = objectSchema.CSharpName();
+            DefaultNamespace =  $"{context.DefaultNamespace}.Models";
         }
 
         public bool IsStruct { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility { get; } = "public";
+        protected override string DefaultNamespace { get; }
+        protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 
         public string? Description { get; }
-
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
 
@@ -269,7 +265,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {Schema.Name}");
+                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {_objectSchema.Name}");
             }
 
             return objectProperty;
@@ -440,7 +436,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
         private IEnumerable<ObjectSchema> GetCombinedSchemas()
         {
-            var inherited = EnumerateHierarchy().Select(type => type.Schema).ToHashSet();
+            var inherited = EnumerateHierarchy().Select(type => type._objectSchema).ToHashSet();
 
             yield return _objectSchema;
 
@@ -449,7 +445,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 if (parent is ObjectSchema objectParent && !inherited.Contains(objectParent))
                 {
                     // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/257
-                    inherited.Add(parent);
+                    inherited.Add(objectParent);
                     yield return objectParent;
                 }
             }
@@ -457,7 +453,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private CSharpType? CreateInheritedType()
         {
-            var sourceBaseType = _sourceTypeMapping?.ExistingType?.BaseType;
+            var sourceBaseType = ExistingType?.BaseType;
             if (sourceBaseType != null &&
                 sourceBaseType.SpecialType != SpecialType.System_ValueType &&
                 sourceBaseType.SpecialType != SpecialType.System_Object &&

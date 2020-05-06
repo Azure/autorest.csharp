@@ -35,17 +35,20 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _choices = choices;
 
             DefaultName = schema.CSharpName();
+            DefaultNamespace = $"{_context.DefaultNamespace}.Models";
 
-            if (_typeMapping != null)
+            if (ExistingType != null)
             {
-                isExtendable = _typeMapping.ExistingType.TypeKind switch
+                isExtendable = ExistingType.TypeKind switch
                 {
                     TypeKind.Enum => false,
                     TypeKind.Struct => true,
                     _ => throw new InvalidOperationException(
-                        $"{_typeMapping.ExistingType.ToDisplayString()} cannot be mapped to enum," +
-                        $" expected enum or struct got {_typeMapping.ExistingType.TypeKind}")
+                        $"{ExistingType.ToDisplayString()} cannot be mapped to enum," +
+                        $" expected enum or struct got {ExistingType.TypeKind}")
                 };
+
+                _typeMapping = context.SourceInputModel.CreateForModel(ExistingType);
             }
 
             BaseType = context.TypeFactory.CreateType(baseType, false);
@@ -58,7 +61,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "public";
-        protected override string DefaultNamespace => $"{_context.DefaultNamespace}.Models";
+        protected override string DefaultNamespace { get; }
         protected override TypeKind TypeKind => IsExtendable ? TypeKind.Struct : TypeKind.Enum;
 
         public IList<EnumTypeValue> Values => _values ??= BuildValues();

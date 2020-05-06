@@ -37,24 +37,19 @@ namespace AutoRest.CSharp.V3.Input.Source
             }
         }
 
-        public ModelTypeMapping? FindForModel(string ns, string name)
+        public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)
         {
-            if (!_nameMap.TryGetValue(name, out var type))
-            {
-                type = _compilation.GetTypeByMetadataName($"{ns}.{name}");
-            }
-
-            return type != null ? new ModelTypeMapping(_schemaMemberNameAttribute, type.Name, type) : null;
+            return new ModelTypeMapping(_schemaMemberNameAttribute, symbol);
         }
 
-        public TypeMapping? FindForType(string ns, string name)
+        public INamedTypeSymbol? FindForType(string ns, string name)
         {
             if (!_nameMap.TryGetValue(name, out var type))
             {
                 type = _compilation.GetTypeByMetadataName($"{ns}.{name}");
             }
 
-            return type != null ? new TypeMapping(type.Name, type) : null;
+            return type;
         }
 
         internal bool TryGetName(ISymbol symbol, [NotNullWhen(true)] out string? name)
@@ -66,7 +61,7 @@ namespace AutoRest.CSharp.V3.Input.Source
                 var type = attribute.AttributeClass;
                 while (type != null)
                 {
-                    if (type == _clientAttribute)
+                    if (SymbolEqualityComparer.Default.Equals(type, _clientAttribute))
                     {
                         if (attribute?.ConstructorArguments.Length > 0)
                         {

@@ -28,16 +28,11 @@ namespace AutoRest.CSharp.V3.Output.Models
             _context = context;
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
             var clientName = clientPrefix + ClientSuffix;
-            var existingClient = _context.SourceInputModel.FindForType(_context.DefaultNamespace, clientName);
 
-            // Update the client name and prefix based on the existing type is available
-            DefaultName = existingClient?.ExistingType.Name ?? clientName;
-            clientPrefix = GetClientPrefix(DefaultName);
-
-            Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, clientPrefix));
+            DefaultName = clientName;
         }
 
-        public string Description { get; }
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
         public RestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 

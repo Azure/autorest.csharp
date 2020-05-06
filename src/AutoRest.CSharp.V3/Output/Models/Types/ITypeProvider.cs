@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input.Source;
 using AutoRest.CSharp.V3.Output.Builders;
@@ -11,12 +12,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
     internal abstract class ITypeProvider
     {
         private readonly BuildContext _context;
+        private readonly Lazy<INamedTypeSymbol?> _existingType;
         private TypeDeclarationOptions? _type;
-        private TypeMapping? _mapping;
 
         protected ITypeProvider(BuildContext context)
         {
             _context = context;
+            _existingType = new Lazy<INamedTypeSymbol?>(() =>  _context.SourceInputModel.FindForType(DefaultNamespace, DefaultName));
         }
 
         public CSharpType Type => new CSharpType(
@@ -30,16 +32,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         protected virtual string DefaultNamespace => _context.DefaultNamespace;
         protected abstract string DefaultAccessibility { get; }
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
+        protected INamedTypeSymbol? ExistingType => _existingType.Value;
 
         private TypeDeclarationOptions BuildType()
         {
-            _mapping = _context.SourceInputModel.FindForType(DefaultNamespace, DefaultName);
-
             return BuilderHelpers.CreateTypeAttributes(
                 DefaultName,
                 DefaultNamespace,
                 DefaultAccessibility,
-                _mapping?.ExistingType,
+                ExistingType,
                 existingTypeOverrides: TypeKind == TypeKind.Enum);
         }
     }
