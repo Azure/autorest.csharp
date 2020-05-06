@@ -91,7 +91,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void OperationTypeCanBeMapped()
         {
-            Assert.AreEqual("MainOperation", typeof(MainOperationOperation).Name);
+            Assert.AreEqual("MainOperation", typeof(MainOperation).Name);
         }
     }
 }
