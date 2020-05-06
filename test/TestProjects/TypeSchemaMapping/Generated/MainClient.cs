@@ -33,40 +33,6 @@ namespace CustomNamespace
             _pipeline = pipeline;
         }
 
-        /// <param name="body"> The Model to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CustomizedModel>> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("MainClient.Operation");
-            scope.Start();
-            try
-            {
-                return await RestClient.OperationAsync(body, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="body"> The Model to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CustomizedModel> Operation(CustomizedModel body = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("MainClient.Operation");
-            scope.Start();
-            try
-            {
-                return RestClient.Operation(body, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <param name="body"> The ModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
@@ -127,6 +93,42 @@ namespace CustomNamespace
             try
             {
                 return RestClient.OperationSecondModel(body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="body"> The Model to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async ValueTask<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.StartOperation");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.OperationAsync(body, cancellationToken).ConfigureAwait(false);
+                return new MainOperation(_clientDiagnostics, _pipeline, RestClient.CreateOperationRequest(body).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="body"> The Model to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual MainOperation StartOperation(CustomizedModel body = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.StartOperation");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.Operation(body, cancellationToken);
+                return new MainOperation(_clientDiagnostics, _pipeline, RestClient.CreateOperationRequest(body).Request, originalResponse);
             }
             catch (Exception e)
             {

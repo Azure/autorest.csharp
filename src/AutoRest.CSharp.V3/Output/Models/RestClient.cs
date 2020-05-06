@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.V3.Output.Models
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
-        protected override string DefaultAccessibility { get; } = "public";
+        protected override string DefaultAccessibility { get; } = "internal";
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
         {

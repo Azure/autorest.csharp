@@ -39,18 +39,18 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _objectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
-            _sourceTypeMapping = context.SourceInputModel.CreateForModel(ExistingType);
 
             var hasUsage = objectSchema.Usage.Any();
 
             DefaultAccessibility = hasUsage ? "public" : "internal";
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            IsStruct = ExistingType?.IsValueType == true;
             DefaultName = objectSchema.CSharpName();
             DefaultNamespace =  $"{context.DefaultNamespace}.Models";
+
+            _sourceTypeMapping = context.SourceInputModel.CreateForModel(ExistingType);
         }
 
-        public bool IsStruct { get; }
+        public bool IsStruct => ExistingType?.IsValueType == true;
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "public";
         protected override string DefaultNamespace { get; }

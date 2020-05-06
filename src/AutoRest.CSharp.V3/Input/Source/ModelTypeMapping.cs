@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.V3.Input.Source
     public class ModelTypeMapping
     {
         private readonly INamedTypeSymbol? _existingType;
-        public SourceMemberMapping[] PropertyMappings { get; }
+        private SourceMemberMapping[] PropertyMappings { get; }
 
         public ModelTypeMapping(INamedTypeSymbol memberAttribute, INamedTypeSymbol? existingType)
         {

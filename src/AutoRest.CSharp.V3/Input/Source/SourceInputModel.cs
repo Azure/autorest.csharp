@@ -44,15 +44,17 @@ namespace AutoRest.CSharp.V3.Input.Source
 
         public INamedTypeSymbol? FindForType(string ns, string name)
         {
-            if (!_nameMap.TryGetValue(name, out var type))
+            var fullyQualifiedMetadataName = $"{ns}.{name}";
+            if (!_nameMap.TryGetValue(name, out var type) &&
+                !_nameMap.TryGetValue(fullyQualifiedMetadataName, out type))
             {
-                type = _compilation.GetTypeByMetadataName($"{ns}.{name}");
+                type = _compilation.GetTypeByMetadataName(fullyQualifiedMetadataName);
             }
 
             return type;
         }
 
-        internal bool TryGetName(ISymbol symbol, [NotNullWhen(true)] out string? name)
+        private bool TryGetName(ISymbol symbol, [NotNullWhen(true)] out string? name)
         {
             name = null;
 
@@ -72,6 +74,20 @@ namespace AutoRest.CSharp.V3.Input.Source
 
                     type = type.BaseType;
                 }
+            }
+
+            return name != null;
+        }
+
+        internal static bool TryGetName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
+        {
+            name = null;
+
+            var attribute = symbol.GetAttributes().SingleOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, attributeType));
+
+            if (attribute?.ConstructorArguments.Length > 0)
+            {
+                name = attribute.ConstructorArguments[0].Value as string;
             }
 
             return name != null;
