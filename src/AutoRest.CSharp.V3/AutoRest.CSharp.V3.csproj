@@ -19,6 +19,9 @@
 
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
+    <Compile Update="..\assets\Generator.Shared\CodeGenTypeAttribute.cs">
+      <Link>Generator.Shared\CodeGenTypeAttribute.cs</Link>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

@@ -13,90 +13,70 @@ namespace AutoRest.CSharp.V3.Input.Source
     public class SourceInputModel
     {
         private readonly Compilation _compilation;
-        private readonly INamedTypeSymbol _schemaNameAttribute;
         private readonly INamedTypeSymbol _clientAttribute;
         private readonly INamedTypeSymbol _schemaMemberNameAttribute;
+        private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
 
         public SourceInputModel(Compilation compilation)
         {
             _compilation = compilation;
-            _schemaNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenModelAttribute).FullName!)!;
             _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
-            _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenClientAttribute).FullName!)!;
+            _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
 
             IAssemblySymbol assembly = _compilation.Assembly;
-
-            var definedSchemas = new List<ModelTypeMapping>();
-            var definedClients = new List<TypeMapping>();
 
             foreach (IModuleSymbol module in assembly.Modules)
             {
                 foreach (var type in GetSymbols(module.GlobalNamespace))
                 {
-                    if (type is INamedTypeSymbol namedTypeSymbol)
+                    if (type is INamedTypeSymbol namedTypeSymbol && TryGetName(type, out var schemaName))
                     {
-                        if (TryGetName(type, _schemaNameAttribute, out var schemaName))
-                        {
-                            var modelTypeMapping = BuildModel(schemaName, namedTypeSymbol);
-                            definedSchemas.Add(modelTypeMapping);
-                        }
-
-                        if (TryGetName(type, _clientAttribute, out var operationName))
-                        {
-                            definedClients.Add(BuildClient(operationName, namedTypeSymbol));
-                        }
+                        _nameMap.Add(schemaName, namedTypeSymbol);
                     }
                 }
             }
-
-            DefinedClientTypes = definedClients.ToArray();
-            DefinedSchemaTypes = definedSchemas.ToArray();
         }
-
-        private static TypeMapping BuildClient(string originalName, INamedTypeSymbol namedTypeSymbol)
-        {
-            return new TypeMapping(originalName, namedTypeSymbol);
-        }
-
-        private ModelTypeMapping BuildModel(string originalName, INamedTypeSymbol namedTypeSymbol)
-        {
-            return new ModelTypeMapping(_schemaMemberNameAttribute, originalName, namedTypeSymbol);
-        }
-
-        private ModelTypeMapping[] DefinedSchemaTypes { get; }
-        private TypeMapping[] DefinedClientTypes { get; }
 
         public ModelTypeMapping? FindForModel(string ns, string name)
         {
-            var mapping = DefinedSchemaTypes.SingleOrDefault(s => string.Compare(s.OriginalName, name, StringComparison.InvariantCultureIgnoreCase) == 0);
-            if (mapping == null && _compilation.GetTypeByMetadataName($"{ns}.{name}") is INamedTypeSymbol type)
+            if (!_nameMap.TryGetValue(name, out var type))
             {
-                mapping = BuildModel(type.Name, type);
+                type = _compilation.GetTypeByMetadataName($"{ns}.{name}");
             }
 
-            return mapping;
+            return type != null ? new ModelTypeMapping(_schemaMemberNameAttribute, type.Name, type) : null;
         }
 
-        public TypeMapping? FindForClient(string ns, string name)
+        public TypeMapping? FindForType(string ns, string name)
         {
-            var mapping = DefinedClientTypes.SingleOrDefault(s => string.Compare(s.OriginalName, name, StringComparison.InvariantCultureIgnoreCase) == 0);
-            if (mapping == null && _compilation.GetTypeByMetadataName($"{ns}.{name}") is INamedTypeSymbol type)
+            if (!_nameMap.TryGetValue(name, out var type))
             {
-                mapping = BuildClient(type.Name, type);
+                type = _compilation.GetTypeByMetadataName($"{ns}.{name}");
             }
 
-            return mapping;
+            return type != null ? new TypeMapping(type.Name, type) : null;
         }
 
-        internal static bool TryGetName(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
+        internal bool TryGetName(ISymbol symbol, [NotNullWhen(true)] out string? name)
         {
             name = null;
 
-            var attribute = symbol.GetAttributes().SingleOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, attributeType));
-
-            if (attribute?.ConstructorArguments.Length > 0)
+            foreach (var attribute in symbol.GetAttributes())
             {
-                name = attribute.ConstructorArguments[0].Value as string;
+                var type = attribute.AttributeClass;
+                while (type != null)
+                {
+                    if (type == _clientAttribute)
+                    {
+                        if (attribute?.ConstructorArguments.Length > 0)
+                        {
+                            name = attribute.ConstructorArguments[0].Value as string;
+                            break;
+                        }
+                    }
+
+                    type = type.BaseType;
+                }
             }
 
             return name != null;

@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
             "x-ms-request-id"
         };
 
-        public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext context)
+        public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext context) : base(context)
         {
             ResponseHeader CreateResponseHeader(HttpResponseHeader header) =>
                 new ResponseHeader(header.Header.ToCleanName(), header.Header, context.TypeFactory.CreateType(header.Schema, true));
@@ -29,15 +29,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
             string operationName = operation.CSharpName();
             var clientName = context.Library.FindRestClient(operationGroup).ClientPrefix;
 
-            Declaration = BuilderHelpers.CreateTypeAttributes(clientName + operationName + "Headers", context.DefaultNamespace, "internal");
+            DefaultName = clientName + operationName + "Headers";
             Description = $"Header model for {operationName}";
             Headers = httpResponseHeaders.Select(CreateResponseHeader).ToArray();
         }
 
         public string Description { get; }
-        public TypeDeclarationOptions Declaration { get; }
         public ResponseHeader[] Headers { get; }
-        public CSharpType Type => new CSharpType(this, Declaration.Namespace, Declaration.Name);
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility { get; } = "internal";
 
         public static ResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext context)
         {

@@ -15,17 +15,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class LongRunningOperation: ITypeProvider
     {
-        private readonly BuildContext _context;
-
-        public LongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext context)
+        public LongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext context) : base(context)
         {
             Debug.Assert(operation.IsLongRunning);
-            _context = context;
 
-            var clientClass = _context.Library.FindClient(operationGroup);
+            var clientClass = context.Library.FindClient(operationGroup);
 
-            Name = clientClass.RestClient.ClientPrefix + operation.CSharpName() + "Operation";
-            Diagnostics = new Diagnostic(Name);
+            DefaultName = clientClass.RestClient.ClientPrefix + operation.CSharpName() + "Operation";
             FinalStateVia = operation.LongRunningFinalStateVia switch
             {
                 "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
@@ -49,18 +45,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
             }
 
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
-
-            // Inherit accessibility from the client
-            DeclaredType = BuilderHelpers.CreateTypeAttributes(Name, _context.DefaultNamespace, clientClass.Declaration.Accessibility);
+            DefaultAccessibility = clientClass.Declaration.Accessibility;
         }
 
-        public string Name { get; }
         public CSharpType ResultType { get; }
         public OperationFinalStateVia FinalStateVia { get; }
-        public Diagnostic Diagnostics { get; }
-        public CSharpType Type => new CSharpType(this,DeclaredType.Namespace, DeclaredType.Name);
-        public TypeDeclarationOptions DeclaredType { get;  }
+        public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
         public ObjectSerialization? ResultSerialization { get;  }
         public string Description { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility { get; }
     }
 }

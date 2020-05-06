@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
-    internal class ObjectType : ISchemaType
+    internal class ObjectType : ITypeProvider
     {
         private readonly ObjectSchema _objectSchema;
         private readonly SerializationBuilder _serializationBuilder;
@@ -59,11 +59,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public bool IsStruct { get; }
 
-        public TypeDeclarationOptions Declaration { get; }
-
         public string? Description { get; }
 
-        public Schema Schema { get; }
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
 
@@ -264,7 +261,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
 
-        public CSharpType Type { get; }
 
         public bool IncludeSerializer => _objectSchema.IsInput;
         public bool IncludeDeserializer => _objectSchema.IsOutput;
@@ -283,7 +279,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {Schema.Name}");
+                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {_objectSchema.Name}");
             }
 
             return objectProperty;
@@ -295,7 +291,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 p => (p.SchemaProperty as GroupProperty)?.OriginalParameter.Contains(groupedParameter) == true,
                 out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Language.Default.Name} in schema {Schema.Name}");
+                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Language.Default.Name} in schema {_objectSchema.Name}");
             }
 
             return objectProperty;

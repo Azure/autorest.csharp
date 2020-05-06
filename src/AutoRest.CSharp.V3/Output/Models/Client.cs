@@ -13,7 +13,7 @@ using AutoRest.CSharp.V3.Output.Models.Types;
 
 namespace AutoRest.CSharp.V3.Output.Models
 {
-    internal class Client: ClientBase, ITypeProvider
+    internal class Client: ClientBase
     {
         private readonly OperationGroup _operationGroup;
         private readonly BuildContext _context;
@@ -28,17 +28,15 @@ namespace AutoRest.CSharp.V3.Output.Models
             _context = context;
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
             var clientName = clientPrefix + ClientSuffix;
-            var existingClient = _context.SourceInputModel.FindForClient(_context.DefaultNamespace, clientName);
+            var existingClient = _context.SourceInputModel.FindForType(_context.DefaultNamespace, clientName);
 
             // Update the client name and prefix based on the existing type is available
-            clientName = existingClient?.ExistingType.Name ?? clientName;
-            clientPrefix = GetClientPrefix(clientName);
+            DefaultName = existingClient?.ExistingType.Name ?? clientName;
+            clientPrefix = GetClientPrefix(DefaultName);
 
-            Declaration = BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "public", existingClient?.ExistingType);
             Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, clientPrefix));
         }
 
-        public TypeDeclarationOptions Declaration { get; }
         public string Description { get; }
         public RestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
@@ -47,7 +45,10 @@ namespace AutoRest.CSharp.V3.Output.Models
 
         public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
-        public CSharpType Type => new CSharpType(this, Declaration.Namespace, Declaration.Name);
+        protected override string DefaultName { get; }
+
+        protected override string DefaultAccessibility { get; } = "public";
+
         private IEnumerable<PagingMethod> BuildPagingMethods()
         {
             foreach (var operation in _operationGroup.Operations)
