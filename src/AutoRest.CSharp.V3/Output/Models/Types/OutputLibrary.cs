@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext _context;
-        private Dictionary<Schema, ISchemaType>? _models;
+        private Dictionary<Schema, TypeProvider>? _models;
         private Dictionary<OperationGroup, Client>? _clients;
         private Dictionary<OperationGroup, RestClient>? _restClients;
         private Dictionary<Operation, LongRunningOperation>? _operations;
@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _context = context;
         }
 
-        public IEnumerable<ISchemaType> Models => SchemaMap.Values;
+        public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
 
@@ -114,14 +114,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             return _restClients;
         }
 
-        public ISchemaType FindTypeForSchema(Schema schema)
+        public TypeProvider FindTypeForSchema(Schema schema)
         {
             return SchemaMap[schema];
         }
 
-        private Dictionary<Schema, ISchemaType> SchemaMap => _models ??= BuildModels();
+        private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
-        private Dictionary<Schema, ISchemaType> BuildModels()
+        private Dictionary<Schema, TypeProvider> BuildModels()
         {
             var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
@@ -131,9 +131,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             return allSchemas.ToDictionary(schema => schema, BuildModel);
         }
 
-        private ISchemaType BuildModel(Schema schema) => schema switch
+        private TypeProvider BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (ISchemaType)new EnumType(sealedChoiceSchema, _context),
+            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
             ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()

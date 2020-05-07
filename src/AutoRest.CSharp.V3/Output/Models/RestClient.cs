@@ -20,7 +20,7 @@ using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
 
 namespace AutoRest.CSharp.V3.Output.Models
 {
-    internal class RestClient: ClientBase, ITypeProvider
+    internal class RestClient: ClientBase
     {
         protected const string RestClientSuffix = "RestClient";
 
@@ -48,18 +48,16 @@ namespace AutoRest.CSharp.V3.Output.Models
             var mainClient = context.Library.FindClient(operationGroup);
 
             ClientPrefix = GetClientPrefix(mainClient.Declaration.Name);
-            var clientName = ClientPrefix + RestClientSuffix;
-
-            Declaration = BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "internal");
+            DefaultName = ClientPrefix + RestClientSuffix;
             Description = "";
         }
 
         public Parameter[] Parameters { get; }
         public string Description { get; }
-        public TypeDeclarationOptions Declaration { get; }
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
-        public CSharpType Type => new CSharpType(this, Declaration.Namespace, Declaration.Name);
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility { get; } = "internal";
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
         {

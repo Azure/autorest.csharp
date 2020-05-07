@@ -17,7 +17,7 @@
   ],
   "paths": {
     "/Operation/": {
-      "patch": {
+      "put": {
         "operationId": "Operation",
         "parameters": [
           {
@@ -35,7 +35,8 @@
               "$ref": "#/definitions/Model"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/OperationStruct/": {

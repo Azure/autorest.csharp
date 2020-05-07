@@ -13,7 +13,7 @@ using AutoRest.CSharp.V3.Output.Models.Types;
 
 namespace AutoRest.CSharp.V3.Output.Models
 {
-    internal class Client: ClientBase, ITypeProvider
+    internal class Client: ClientBase
     {
         private readonly OperationGroup _operationGroup;
         private readonly BuildContext _context;
@@ -28,18 +28,11 @@ namespace AutoRest.CSharp.V3.Output.Models
             _context = context;
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
             var clientName = clientPrefix + ClientSuffix;
-            var existingClient = _context.SourceInputModel.FindForClient(_context.DefaultNamespace, clientName);
 
-            // Update the client name and prefix based on the existing type is available
-            clientName = existingClient?.ExistingType.Name ?? clientName;
-            clientPrefix = GetClientPrefix(clientName);
-
-            Declaration = BuilderHelpers.CreateTypeAttributes(clientName, _context.DefaultNamespace, "public", existingClient?.ExistingType);
-            Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, clientPrefix));
+            DefaultName = clientName;
         }
 
-        public TypeDeclarationOptions Declaration { get; }
-        public string Description { get; }
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
         public RestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 
@@ -47,7 +40,10 @@ namespace AutoRest.CSharp.V3.Output.Models
 
         public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
-        public CSharpType Type => new CSharpType(this, Declaration.Namespace, Declaration.Name);
+        protected override string DefaultName { get; }
+
+        protected override string DefaultAccessibility { get; } = "public";
+
         private IEnumerable<PagingMethod> BuildPagingMethods()
         {
             foreach (var operation in _operationGroup.Operations)
@@ -68,7 +64,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
-                    ITypeProvider implementation = objectResponseBody.Type.Implementation;
+                    TypeProvider implementation = objectResponseBody.Type.Implementation;
                     if (!(implementation is ObjectType type))
                     {
                         throw new InvalidOperationException($"The return type of {method.Name} has to be an object schema to be used in paging");
