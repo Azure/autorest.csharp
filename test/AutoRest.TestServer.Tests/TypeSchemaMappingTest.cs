@@ -87,5 +87,11 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("MainClient", typeof(MainClient).Name);
             Assert.AreEqual("MainRestClient", typeof(MainRestClient).Name);
         }
+
+        [Test]
+        public void OperationTypeCanBeMapped()
+        {
+            Assert.AreEqual("MainOperation", typeof(MainOperation).Name);
+        }
     }
 }

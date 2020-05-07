@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
-    internal class EnumType : ISchemaType
+    internal class EnumType : TypeProvider
     {
         private readonly BuildContext _context;
         private readonly IEnumerable<ChoiceValue> _choices;
@@ -29,37 +29,28 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
         }
 
-        private EnumType(Schema schema, BuildContext context, Schema baseType, IEnumerable<ChoiceValue> choices, bool isExtendable)
+        private EnumType(Schema schema, BuildContext context, Schema baseType, IEnumerable<ChoiceValue> choices, bool isExtendable) : base(context)
         {
             _context = context;
             _choices = choices;
 
-            var name = schema.CSharpName();
-            _typeMapping = context.SourceInputModel.FindForModel($"{context.DefaultNamespace}.Models", name);
-            if (_typeMapping != null)
+            DefaultName = schema.CSharpName();
+            DefaultNamespace = $"{_context.DefaultNamespace}.Models";
+
+            if (ExistingType != null)
             {
-                isExtendable = _typeMapping.ExistingType.TypeKind switch
+                isExtendable = ExistingType.TypeKind switch
                 {
                     TypeKind.Enum => false,
                     TypeKind.Struct => true,
                     _ => throw new InvalidOperationException(
-                        $"{_typeMapping.ExistingType.ToDisplayString()} cannot be mapped to enum," +
-                        $" expected enum or struct got {_typeMapping.ExistingType.TypeKind}")
+                        $"{ExistingType.ToDisplayString()} cannot be mapped to enum," +
+                        $" expected enum or struct got {ExistingType.TypeKind}")
                 };
+
+                _typeMapping = context.SourceInputModel.CreateForModel(ExistingType);
             }
 
-            bool existingTypeOverrides = !isExtendable;
-
-            Schema = schema;
-            Declaration = BuilderHelpers.CreateTypeAttributes(
-                name,
-                $"{context.DefaultNamespace}.Models",
-                "public",
-                _typeMapping?.ExistingType,
-                existingTypeOverrides
-                );
-
-            Type = new CSharpType(this, Declaration.Namespace, Declaration.Name, isValueType: true);
             BaseType = context.TypeFactory.CreateType(baseType, false);
             Description = BuilderHelpers.CreateDescription(schema);
             IsExtendable = isExtendable;
@@ -67,11 +58,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public CSharpType BaseType { get; }
         public bool IsExtendable { get; }
-        public Schema Schema { get; }
-        public TypeDeclarationOptions Declaration { get; }
         public string? Description { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility { get; } = "public";
+        protected override string DefaultNamespace { get; }
+        protected override TypeKind TypeKind => IsExtendable ? TypeKind.Struct : TypeKind.Enum;
+
         public IList<EnumTypeValue> Values => _values ??= BuildValues();
-        public CSharpType Type { get; }
 
         private List<EnumTypeValue> BuildValues()
         {

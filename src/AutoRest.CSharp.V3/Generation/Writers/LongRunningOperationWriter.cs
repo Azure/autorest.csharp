@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var waitForCompletionType = new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), operation.ResultType));
                 var helperType = new CSharpType(typeof(ArmOperationHelpers<>), operation.ResultType);
 
-                using (writer.Scope($"{operation.DeclaredType.Accessibility} partial class {cs.Name}: {baseType}, {interfaceType}"))
+                using (writer.Scope($"{operation.Declaration.Accessibility} partial class {cs.Name}: {baseType}, {interfaceType}"))
                 {
                     writer.Line($"private readonly {helperType} _operation;");
 

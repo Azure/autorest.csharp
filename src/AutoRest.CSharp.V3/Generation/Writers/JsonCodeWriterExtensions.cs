@@ -483,7 +483,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.AppendRaw(")");
         }
 
-        public static void DeserializeImplementation(this CodeWriter writer, ITypeProvider implementation, CodeWriterDelegate element)
+        public static void DeserializeImplementation(this CodeWriter writer, TypeProvider implementation, CodeWriterDelegate element)
         {
             switch (implementation)
             {
