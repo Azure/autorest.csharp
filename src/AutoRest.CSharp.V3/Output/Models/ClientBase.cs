@@ -10,14 +10,14 @@ using AutoRest.CSharp.V3.Utilities;
 
 namespace AutoRest.CSharp.V3.Output.Models
 {
-    internal abstract class ClientBase
+    internal abstract class ClientBase: TypeProvider
     {
         protected const string ClientSuffix = "Client";
 
         private readonly BuildContext _context;
         private readonly TypeFactory _typeFactory;
 
-        public ClientBase(BuildContext context)
+        protected ClientBase(BuildContext context): base(context)
         {
             _typeFactory = context.TypeFactory;
             _context = context;

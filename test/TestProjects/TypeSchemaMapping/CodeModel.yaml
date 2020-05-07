@@ -344,7 +344,7 @@ operationGroups:
       protocol: !<!Protocols> 
         http: !<!HttpWithBodyRequest> 
           path: /Operation/
-          method: patch
+          method: put
           knownMediaType: json
           mediaTypes:
           - application/json
@@ -364,6 +364,8 @@ operationGroups:
           - application/json
           statusCodes:
           - '200'
+    extensions:
+      x-ms-long-running-operation: true
     language: !<!Languages> 
       default:
         name: Operation

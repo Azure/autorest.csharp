@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class ModelWriter
     {
-        public void WriteModel(CodeWriter writer, ISchemaType model)
+        public void WriteModel(CodeWriter writer, TypeProvider model)
         {
             switch (model)
             {

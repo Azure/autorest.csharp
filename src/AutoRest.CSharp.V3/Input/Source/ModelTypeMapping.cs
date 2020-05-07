@@ -10,12 +10,14 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.V3.Input.Source
 {
-    public class ModelTypeMapping: TypeMapping
+    public class ModelTypeMapping
     {
-        public SourceMemberMapping[] PropertyMappings { get; }
+        private readonly INamedTypeSymbol? _existingType;
+        private SourceMemberMapping[] PropertyMappings { get; }
 
-        public ModelTypeMapping(INamedTypeSymbol memberAttribute, string originalName, INamedTypeSymbol existingType): base(originalName, existingType)
+        public ModelTypeMapping(INamedTypeSymbol memberAttribute, INamedTypeSymbol? existingType)
         {
+            _existingType = existingType;
             List<SourceMemberMapping> memberMappings = new List<SourceMemberMapping>();
             foreach (ISymbol member in GetMembers(existingType))
             {
@@ -33,7 +35,7 @@ namespace AutoRest.CSharp.V3.Input.Source
             var memberMapping = PropertyMappings.SingleOrDefault(p => string.Equals(p.OriginalName, name, StringComparison.InvariantCultureIgnoreCase));
             if (memberMapping == null)
             {
-                var memberSymbol = ExistingType.GetMembers(name).FirstOrDefault();
+                var memberSymbol = _existingType?.GetMembers(name).FirstOrDefault();
                 if (memberSymbol != null)
                 {
                     memberMapping = new SourceMemberMapping(memberSymbol.Name, memberSymbol);

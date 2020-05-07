@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
 {
     internal class CSharpType
     {
-        private readonly ITypeProvider? _implementation;
+        private readonly TypeProvider? _implementation;
         private readonly Type? _type;
 
         public CSharpType(Type type) : this(
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
             IsValueType = type.IsValueType;
         }
 
-        public CSharpType(ITypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false)
+        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false)
         {
             _implementation = implementation;
             Name = name;
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
         public Type FrameworkType => _type ?? throw new InvalidOperationException("Not a framework type");
-        public ITypeProvider Implementation => _implementation ?? throw new InvalidOperationException("Not implemented type");
+        public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException("Not implemented type");
         public bool IsNullable { get; }
 
         protected bool Equals(CSharpType other)
