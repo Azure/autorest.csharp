@@ -125,7 +125,7 @@ if (!($Exclude -contains "SmokeTests"))
             $swaggerDefinitions[$projectName] = @{
                 'projectName'=$projectName;
                 'output'=$projectDirectory;
-                'arguments'="--require=$configurationPath $input"
+                'arguments'="--require=$configurationPath --modelerfour.lenient-model-deduplication $input"
             }
         }
     }
