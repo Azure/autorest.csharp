@@ -67,13 +67,13 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/WebSearch/readme.md - https://github.com/Azure/autorest/issues/3498
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/commerce/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/compute/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
+https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/compute/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/consumption/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/containerinstance/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/containerregistry/data-plane/readme.md - https://github.com/Azure/autorest.csharp/issues/734
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/containerregistry/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/containerservice/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cosmos-db/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
+https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cosmos-db/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cost-management/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/customer-insights/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/customerlockbox/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
@@ -145,7 +145,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/migrateprojects/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/mixedreality/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/monitor/data-plane/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/monitor/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
+https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/monitor/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/msi/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/mysql/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/netapp/resource-manager/readme.md
@@ -170,7 +170,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/reservations/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/resourcegraph/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/resourcehealth/resource-manager/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/resources/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
+https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/resources/resource-manager/readme.md:--tag=package-resources-2019-10
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/scheduler/resource-manager/readme.md - https://github.com/Azure/autorest.csharp/issues/660
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/search/data-plane/Azure.Search/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/search/data-plane/Microsoft.Azure.Search.Data/readme.md
@@ -186,7 +186,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/servicefabricmesh/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/signalr/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/softwareplan/resource-manager/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/sql/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/sql/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/285
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/sqlvirtualmachine/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/storage/data-plane/readme.md - https://github.com/Azure/autorest.modelerfour/issues/257
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/storage/resource-manager/readme.md
@@ -201,12 +201,12 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/synapse/data-plane/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/synapse/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/timeseriesinsights/data-plane/readme.md
-https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/timeseriesinsights/resource-manager/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/timeseriesinsights/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/trafficmanager/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/visualstudio/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/vmwarecloudsimple/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/vmwarevirtustream/resource-manager/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/web/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
+https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/web/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/windowsesu/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/windowsiot/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/workloadmonitor/resource-manager/readme.md

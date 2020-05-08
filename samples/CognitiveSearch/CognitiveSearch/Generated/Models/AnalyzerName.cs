@@ -83,8 +83,8 @@ namespace CognitiveSearch.Models
         private const string PlLuceneValue = "pl.lucene";
         private const string PtBrMicrosoftValue = "pt-BR.microsoft";
         private const string PtBrLuceneValue = "pt-BR.lucene";
-        private const string PtMicrosoftValue = "pt-PT.microsoft";
-        private const string PtLuceneValue = "pt-PT.lucene";
+        private const string PtPtMicrosoftValue = "pt-PT.microsoft";
+        private const string PtPtLuceneValue = "pt-PT.lucene";
         private const string PaMicrosoftValue = "pa.microsoft";
         private const string RoMicrosoftValue = "ro.microsoft";
         private const string RoLuceneValue = "ro.lucene";
@@ -240,9 +240,9 @@ namespace CognitiveSearch.Models
         /// <summary> Lucene analyzer for Portuguese (Brazil). </summary>
         public static AnalyzerName PtBrLucene { get; } = new AnalyzerName(PtBrLuceneValue);
         /// <summary> Microsoft analyzer for Portuguese (Portugal). </summary>
-        public static AnalyzerName PtMicrosoft { get; } = new AnalyzerName(PtMicrosoftValue);
+        public static AnalyzerName PtPtMicrosoft { get; } = new AnalyzerName(PtPtMicrosoftValue);
         /// <summary> Lucene analyzer for Portuguese (Portugal). </summary>
-        public static AnalyzerName PtLucene { get; } = new AnalyzerName(PtLuceneValue);
+        public static AnalyzerName PtPtLucene { get; } = new AnalyzerName(PtPtLuceneValue);
         /// <summary> Microsoft analyzer for Punjabi. </summary>
         public static AnalyzerName PaMicrosoft { get; } = new AnalyzerName(PaMicrosoftValue);
         /// <summary> Microsoft analyzer for Romanian. </summary>

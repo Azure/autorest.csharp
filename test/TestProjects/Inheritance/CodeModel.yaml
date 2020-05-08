@@ -4,395 +4,365 @@ info: !<!Info>
   title: Schema mapping
 schemas: !<!Schemas> 
   strings:
-  - !<!StringSchema> &ref_17
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: BaseClassProperty
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_12
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: BaseClassWithDiscriminatorProperty
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_9
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: SomePropertiesSomeProperty
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_10
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: SomePropertiesSomeOtherProperty
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_14
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: ClassThatInheritsFromBaseClassAndRedefinesAPropertyBaseClassProperty
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_18
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: ClassThatAlsoDefinesBaseClassPropertyBaseClassProperty
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_5
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAPropertyBaseClassProperty
-        description: ''
-    protocol: !<!Protocols> {}
-  objects:
-  - !<!ObjectSchema> &ref_1
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    children: !<!Relations> 
-      all:
-      - !<!ObjectSchema> &ref_0
-        type: object
-        apiVersions:
+    - !<!StringSchema> &ref_15
+      type: string
+      apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-        children: !<!Relations> 
-          all:
-          - !<!ObjectSchema> &ref_11
+      language: !<!Languages> 
+        default:
+          name: BaseClassProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_11
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: BaseClassWithDiscriminatorProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_8
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: SomePropertiesSomeProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_9
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: SomePropertiesSomeOtherProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> 
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ClassThatInheritsFromBaseClassAndRedefinesAPropertyBaseClassProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_16
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ClassThatAlsoDefinesBaseClassPropertyBaseClassProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> 
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAPropertyBaseClassProperty
+          description: ''
+      protocol: !<!Protocols> {}
+  objects:
+    - !<!ObjectSchema> &ref_1
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      children: !<!Relations> 
+        all:
+          - !<!ObjectSchema> &ref_0
             type: object
             apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminator
-            parents: !<!Relations> 
+              - !<!ApiVersion> 
+                version: 1.0.0
+            children: !<!Relations> 
               all:
-              - *ref_0
-              - *ref_1
-              immediate:
-              - *ref_0
-            language: !<!Languages> 
-              default:
-                name: ClassThatInheritsFromBaseClassWithDiscriminator
-                description: ''
-                namespace: ''
-            protocol: !<!Protocols> {}
-          - !<!ObjectSchema> &ref_3
-            type: object
-            apiVersions:
-            - !<!ApiVersion> 
-              version: 1.0.0
-            discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
-            parents: !<!Relations> 
-              all:
-              - *ref_0
-              - !<!ObjectSchema> &ref_2
-                type: object
-                apiVersions:
-                - !<!ApiVersion> 
-                  version: 1.0.0
-                children: !<!Relations> 
-                  all:
-                  - !<!ObjectSchema> &ref_7
-                    type: object
-                    apiVersions:
+                - !<!ObjectSchema> &ref_10
+                  type: object
+                  apiVersions:
                     - !<!ApiVersion> 
                       version: 1.0.0
-                    parents: !<!Relations> 
-                      all:
+                  discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminator
+                  parents: !<!Relations> 
+                    all:
+                      - *ref_0
                       - *ref_1
-                      - *ref_2
-                      - *ref_1
-                      - *ref_2
-                      immediate:
-                      - *ref_1
-                      - *ref_2
-                    language: !<!Languages> 
-                      default:
-                        name: ClassThatInheritsFromBaseClassAndSomeProperties
-                        description: ''
-                        namespace: ''
-                    protocol: !<!Protocols> {}
-                  - !<!ObjectSchema> &ref_8
-                    type: object
-                    apiVersions:
+                    immediate:
+                      - *ref_0
+                  language: !<!Languages> 
+                    default:
+                      name: ClassThatInheritsFromBaseClassWithDiscriminator
+                      description: ''
+                      namespace: ''
+                  protocol: !<!Protocols> {}
+                - !<!ObjectSchema> &ref_3
+                  type: object
+                  apiVersions:
                     - !<!ApiVersion> 
                       version: 1.0.0
-                    parents: !<!Relations> 
-                      all:
-                      - *ref_1
-                      - *ref_2
-                      - *ref_1
-                      - *ref_2
-                      immediate:
-                      - *ref_1
-                      - *ref_2
-                    language: !<!Languages> 
-                      default:
-                        name: ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride
-                        description: ''
-                        namespace: ''
-                    protocol: !<!Protocols> {}
-                  - *ref_3
-                  - !<!ObjectSchema> &ref_4
-                    type: object
-                    apiVersions:
-                    - !<!ApiVersion> 
-                      version: 1.0.0
-                    children: !<!Relations> 
-                      all:
-                      - !<!ObjectSchema> &ref_6
+                  discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
+                  parents: !<!Relations> 
+                    all:
+                      - *ref_0
+                      - !<!ObjectSchema> &ref_2
                         type: object
                         apiVersions:
-                        - !<!ApiVersion> 
-                          version: 1.0.0
-                        parents: !<!Relations> 
+                          - !<!ApiVersion> 
+                            version: 1.0.0
+                        children: !<!Relations> 
                           all:
-                          - *ref_4
-                          - *ref_2
-                          - *ref_1
-                          - *ref_2
-                          - *ref_1
+                            - !<!ObjectSchema> &ref_6
+                              type: object
+                              apiVersions:
+                                - !<!ApiVersion> 
+                                  version: 1.0.0
+                              parents: !<!Relations> 
+                                all:
+                                  - *ref_1
+                                  - *ref_2
+                                immediate:
+                                  - *ref_1
+                                  - *ref_2
+                              language: !<!Languages> 
+                                default:
+                                  name: ClassThatInheritsFromBaseClassAndSomeProperties
+                                  description: ''
+                                  namespace: ''
+                              protocol: !<!Protocols> {}
+                            - !<!ObjectSchema> &ref_7
+                              type: object
+                              apiVersions:
+                                - !<!ApiVersion> 
+                                  version: 1.0.0
+                              parents: !<!Relations> 
+                                all:
+                                  - *ref_1
+                                  - *ref_2
+                                immediate:
+                                  - *ref_1
+                                  - *ref_2
+                              language: !<!Languages> 
+                                default:
+                                  name: ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride
+                                  description: ''
+                                  namespace: ''
+                              protocol: !<!Protocols> {}
+                            - *ref_3
+                            - !<!ObjectSchema> &ref_4
+                              type: object
+                              apiVersions:
+                                - !<!ApiVersion> 
+                                  version: 1.0.0
+                              children: !<!Relations> 
+                                all:
+                                  - !<!ObjectSchema> &ref_5
+                                    type: object
+                                    apiVersions:
+                                      - !<!ApiVersion> 
+                                        version: 1.0.0
+                                    parents: !<!Relations> 
+                                      all:
+                                        - *ref_4
+                                        - *ref_2
+                                        - *ref_1
+                                      immediate:
+                                        - *ref_4
+                                    language: !<!Languages> 
+                                      default:
+                                        name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty
+                                        description: ''
+                                        namespace: ''
+                                    protocol: !<!Protocols> {}
+                                immediate:
+                                  - *ref_5
+                              parents: !<!Relations> 
+                                all:
+                                  - *ref_2
+                                  - *ref_1
+                                immediate:
+                                  - *ref_2
+                                  - *ref_1
+                              language: !<!Languages> 
+                                default:
+                                  name: ClassThatInheritsFromSomePropertiesAndBaseClass
+                                  description: ''
+                                  namespace: ''
+                              protocol: !<!Protocols> {}
+                            - *ref_5
                           immediate:
-                          - *ref_4
+                            - *ref_6
+                            - *ref_7
+                            - *ref_3
+                            - *ref_4
                         properties:
-                        - !<!Property> 
-                          schema: *ref_5
-                          serializedName: BaseClassProperty
-                          language: !<!Languages> 
-                            default:
-                              name: baseClassProperty
-                              description: ''
-                          protocol: !<!Protocols> {}
+                          - !<!Property> 
+                            schema: *ref_8
+                            serializedName: SomeProperty
+                            language: !<!Languages> 
+                              default:
+                                name: someProperty
+                                description: ''
+                            protocol: !<!Protocols> {}
+                          - !<!Property> 
+                            schema: *ref_9
+                            serializedName: SomeOtherProperty
+                            language: !<!Languages> 
+                              default:
+                                name: someOtherProperty
+                                description: ''
+                            protocol: !<!Protocols> {}
                         language: !<!Languages> 
                           default:
-                            name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty
+                            name: SomeProperties
                             description: ''
                             namespace: ''
                         protocol: !<!Protocols> {}
-                      immediate:
-                      - *ref_6
-                    parents: !<!Relations> 
-                      all:
-                      - *ref_2
                       - *ref_1
+                    immediate:
+                      - *ref_0
                       - *ref_2
-                      - *ref_1
-                      immediate:
-                      - *ref_2
-                      - *ref_1
-                    language: !<!Languages> 
-                      default:
-                        name: ClassThatInheritsFromSomePropertiesAndBaseClass
-                        description: ''
-                        namespace: ''
-                    protocol: !<!Protocols> {}
-                  - *ref_6
-                  - *ref_6
-                  immediate:
-                  - *ref_7
-                  - *ref_8
-                  - *ref_3
-                  - *ref_4
-                properties:
-                - !<!Property> 
-                  schema: *ref_9
-                  serializedName: SomeProperty
                   language: !<!Languages> 
                     default:
-                      name: someProperty
+                      name: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
                       description: ''
+                      namespace: ''
                   protocol: !<!Protocols> {}
-                - !<!Property> 
-                  schema: *ref_10
-                  serializedName: SomeOtherProperty
-                  language: !<!Languages> 
-                    default:
-                      name: someOtherProperty
-                      description: ''
-                  protocol: !<!Protocols> {}
+              immediate:
+                - *ref_10
+                - *ref_3
+            discriminator: !<!Discriminator> 
+              all:
+                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_10
+                ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
+              immediate:
+                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_10
+                ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
+              property: !<!Property> &ref_12
+                schema: *ref_11
+                isDiscriminator: true
+                required: true
+                serializedName: DiscriminatorProperty
                 language: !<!Languages> 
                   default:
-                    name: SomeProperties
+                    name: discriminatorProperty
                     description: ''
-                    namespace: ''
                 protocol: !<!Protocols> {}
-              - *ref_1
-              - *ref_0
-              - *ref_2
+            discriminatorValue: BaseClassWithDiscriminator
+            parents: !<!Relations> 
+              all:
+                - *ref_1
               immediate:
-              - *ref_0
-              - *ref_2
+                - *ref_1
+            properties:
+              - *ref_12
             language: !<!Languages> 
               default:
-                name: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
+                name: BaseClassWithDiscriminator
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          immediate:
-          - *ref_11
-          - *ref_3
-        discriminator: !<!Discriminator> 
-          all:
-            ClassThatInheritsFromBaseClassWithDiscriminator: *ref_11
-            ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
-          immediate:
-            ClassThatInheritsFromBaseClassWithDiscriminator: *ref_11
-            ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
-          property: !<!Property> &ref_13
-            schema: *ref_12
-            isDiscriminator: true
-            required: true
-            serializedName: DiscriminatorProperty
+          - *ref_6
+          - *ref_7
+          - !<!ObjectSchema> &ref_13
+            type: object
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            parents: !<!Relations> 
+              all:
+                - *ref_1
+              immediate:
+                - *ref_1
             language: !<!Languages> 
               default:
-                name: discriminatorProperty
+                name: ClassThatInheritsFromBaseClass
                 description: ''
+                namespace: ''
             protocol: !<!Protocols> {}
-        discriminatorValue: BaseClassWithDiscriminator
-        parents: !<!Relations> 
-          all:
-          - *ref_1
-          immediate:
-          - *ref_1
-        properties:
-        - *ref_13
-        language: !<!Languages> 
-          default:
-            name: BaseClassWithDiscriminator
-            description: ''
-            namespace: ''
-        protocol: !<!Protocols> {}
-      - *ref_7
-      - *ref_8
-      - !<!ObjectSchema> &ref_15
-        type: object
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        parents: !<!Relations> 
-          all:
-          - *ref_1
-          immediate:
-          - *ref_1
-        language: !<!Languages> 
-          default:
-            name: ClassThatInheritsFromBaseClass
-            description: ''
-            namespace: ''
-        protocol: !<!Protocols> {}
-      - *ref_11
-      - *ref_3
-      - !<!ObjectSchema> &ref_16
-        type: object
-        apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-        parents: !<!Relations> 
-          all:
-          - *ref_1
-          immediate:
-          - *ref_1
-        properties:
+          - *ref_10
+          - *ref_3
+          - !<!ObjectSchema> &ref_14
+            type: object
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            parents: !<!Relations> 
+              all:
+                - *ref_1
+              immediate:
+                - *ref_1
+            language: !<!Languages> 
+              default:
+                name: ClassThatInheritsFromBaseClassAndRedefinesAProperty
+                description: ''
+                namespace: ''
+            protocol: !<!Protocols> {}
+          - *ref_4
+          - *ref_5
+        immediate:
+          - *ref_0
+          - *ref_6
+          - *ref_7
+          - *ref_13
+          - *ref_14
+          - *ref_4
+      properties:
         - !<!Property> 
-          schema: *ref_14
+          schema: *ref_15
           serializedName: BaseClassProperty
           language: !<!Languages> 
             default:
               name: baseClassProperty
               description: ''
           protocol: !<!Protocols> {}
-        language: !<!Languages> 
-          default:
-            name: ClassThatInheritsFromBaseClassAndRedefinesAProperty
-            description: ''
-            namespace: ''
-        protocol: !<!Protocols> {}
-      - *ref_4
-      - *ref_6
-      - *ref_6
-      immediate:
-      - *ref_0
-      - *ref_7
-      - *ref_8
-      - *ref_15
-      - *ref_16
-      - *ref_4
-    properties:
-    - !<!Property> 
-      schema: *ref_17
-      serializedName: BaseClassProperty
       language: !<!Languages> 
         default:
-          name: baseClassProperty
+          name: BaseClass
           description: ''
+          namespace: ''
       protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: BaseClass
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - *ref_0
-  - *ref_2
-  - *ref_7
-  - *ref_8
-  - *ref_15
-  - *ref_11
-  - *ref_3
-  - *ref_16
-  - !<!ObjectSchema> 
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: *ref_18
-      serializedName: BaseClassProperty
+    - *ref_0
+    - *ref_2
+    - *ref_6
+    - *ref_7
+    - *ref_13
+    - *ref_10
+    - *ref_3
+    - *ref_14
+    - !<!ObjectSchema> 
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: *ref_16
+          serializedName: BaseClassProperty
+          language: !<!Languages> 
+            default:
+              name: baseClassProperty
+              description: ''
+          protocol: !<!Protocols> {}
       language: !<!Languages> 
         default:
-          name: baseClassProperty
+          name: ClassThatAlsoDefinesBaseClassProperty
           description: ''
+          namespace: ''
       protocol: !<!Protocols> {}
-    language: !<!Languages> 
-      default:
-        name: ClassThatAlsoDefinesBaseClassProperty
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
-  - *ref_4
-  - *ref_6
+    - *ref_4
+    - *ref_5
 operationGroups: []
 security: !<!Security> 
   authenticationRequired: false

@@ -116,16 +116,18 @@ if (!($Exclude -contains "SmokeTests"))
 {
     foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt"))
     {
-        if ($input -match "^[^#].*?specification/([\w-]+(/[\w-]+)+)/readme.md")
+        if ($input -match "^(?<input>[^#].*?specification/(?<name>[\w-]+(/[\w-]+)+)/readme.md)(:(?<args>.*))?")
         {
-            $projectName = $Matches[1].Replace("/", "-");
+            $input = $Matches["input"]
+            $args = $Matches["args"]
+            $projectName = $Matches["name"].Replace("/", "-");
 
             $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
 
             $swaggerDefinitions[$projectName] = @{
                 'projectName'=$projectName;
                 'output'=$projectDirectory;
-                'arguments'="--require=$configurationPath $input"
+                'arguments'="--require=$configurationPath $args $input"
             }
         }
     }
