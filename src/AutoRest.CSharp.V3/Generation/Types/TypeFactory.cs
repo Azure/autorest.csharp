@@ -35,6 +35,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 typeof(IDictionary<,>),
                 isNullable,
                 new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false)),
+            CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).Type.WithNullable(isNullable)
