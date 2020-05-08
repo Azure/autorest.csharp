@@ -61,9 +61,5 @@ jobs:
       filter: "^[j-r]"
   - template: smoke-test.yml
     parameters:
-      name: SmokeTest_S_V
-      filter: "^[s-v]"
-  - template: smoke-test.yml
-    parameters:
-      name: SmokeTest_V_Z
-      filter: "^[v-z]"
+      name: SmokeTest_S_Z
+      filter: "^[s-z]"
