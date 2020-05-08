@@ -2,12 +2,13 @@ parameters:
   name: ''
   filter: ''
   parallel: 5
+  vmImage: ubuntu-16.04
 
 
 jobs:
 - job: ${{ parameters.name }}
   pool:
-    vmImage: ubuntu-16.04
+    vmImage: ${{ parameters.vmImage }}
   steps:
     - task: DotNetCoreInstaller@2
       displayName: "Use .NET Core SDK"

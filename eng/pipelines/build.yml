@@ -63,4 +63,4 @@ jobs:
     parameters:
       name: SmokeTest_S_Z
       filter: "^[s-z]"
-      parallel: 1
+      vmImage: windows-2019
