@@ -4,256 +4,256 @@ info: !<!Info>
   title: AutoRest Time Test Service
 schemas: !<!Schemas> 
   numbers:
-  - !<!NumberSchema> &ref_1
-    type: integer
-    precision: 32
-    language: !<!Languages> 
-      default:
-        name: Integer
-        description: ''
-    protocol: !<!Protocols> {}
+    - !<!NumberSchema> &ref_1
+      type: integer
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: Integer
+          description: ''
+      protocol: !<!Protocols> {}
   strings:
-  - !<!StringSchema> &ref_0
-    type: string
-    language: !<!Languages> 
-      default:
-        name: String
-        description: simple string
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_2
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: ErrorMessage
-        description: ''
-    protocol: !<!Protocols> {}
-  - !<!StringSchema> &ref_8
-    type: string
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: String
-        description: ''
-    protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_0
+      type: string
+      language: !<!Languages> 
+        default:
+          name: String
+          description: simple string
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_2
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ErrorMessage
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_8
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+      protocol: !<!Protocols> {}
   constants:
-  - !<!ConstantSchema> &ref_6
-    type: constant
-    value: !<!ConstantValue> 
-      value: application/json
-    valueType: *ref_0
-    language: !<!Languages> 
-      default:
-        name: ApplicationJson
-        description: Content Type 'application/json'
-    protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_6
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !<!Protocols> {}
   times:
-  - !<!TimeSchema> &ref_4
-    type: time
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    language: !<!Languages> 
-      default:
-        name: time
-        description: ''
-    protocol: !<!Protocols> {}
+    - !<!TimeSchema> &ref_4
+      type: time
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: time
+          description: ''
+      protocol: !<!Protocols> {}
   objects:
-  - !<!ObjectSchema> &ref_5
-    type: object
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    properties:
-    - !<!Property> 
-      schema: *ref_1
-      serializedName: status
+    - !<!ObjectSchema> &ref_5
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: *ref_1
+          serializedName: status
+          language: !<!Languages> 
+            default:
+              name: status
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          serializedName: message
+          language: !<!Languages> 
+            default:
+              name: message
+              description: ''
+          protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - output
       language: !<!Languages> 
         default:
-          name: status
+          name: Error
           description: ''
+          namespace: ''
       protocol: !<!Protocols> {}
-    - !<!Property> 
-      schema: *ref_2
-      serializedName: message
-      language: !<!Languages> 
-        default:
-          name: message
-          description: ''
-      protocol: !<!Protocols> {}
-    serializationFormats:
-    - json
-    usage:
-    - output
-    language: !<!Languages> 
-      default:
-        name: Error
-        description: ''
-        namespace: ''
-    protocol: !<!Protocols> {}
 globalParameters:
-- !<!Parameter> &ref_3
-  schema: *ref_0
-  clientDefaultValue: 'http://localhost:3000'
-  implementation: Client
-  origin: 'modelerfour:synthesized/host'
-  required: true
-  extensions:
-    x-ms-skip-url-encoding: true
-  language: !<!Languages> 
-    default:
-      name: $host
-      description: server parameter
-      serializedName: $host
-  protocol: !<!Protocols> 
-    http: !<!HttpParameter> 
-      in: uri
+  - !<!Parameter> &ref_3
+    schema: *ref_0
+    clientDefaultValue: 'http://localhost:3000'
+    implementation: Client
+    origin: 'modelerfour:synthesized/host'
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !<!Languages> 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !<!Protocols> 
+      http: !<!HttpParameter> 
+        in: uri
 operationGroups:
-- !<!OperationGroup> 
-  $key: time
-  operations:
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    parameters:
-    - *ref_3
-    requests:
-    - !<!Request> 
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpRequest> 
-          path: /time/get
-          method: get
-          uri: '{$host}'
-    signatureParameters: []
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_4
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_5
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
-    language: !<!Languages> 
-      default:
-        name: Get
-        description: 'Get time value "11:34:56"'
-    protocol: !<!Protocols> {}
-  - !<!Operation> 
-    apiVersions:
-    - !<!ApiVersion> 
-      version: 1.0.0
-    parameters:
-    - *ref_3
-    requests:
-    - !<!Request> 
-      parameters:
-      - !<!Parameter> 
-        schema: *ref_6
-        implementation: Method
-        origin: 'modelerfour:synthesized/content-type'
-        required: true
+  - !<!OperationGroup> 
+    $key: time
+    operations:
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+        requests:
+          - !<!Request> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpRequest> 
+                path: /time/get
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_4
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !<!SchemaResponse> 
+            schema: *ref_5
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
         language: !<!Languages> 
           default:
-            name: contentType
-            description: Body Parameter content-type
-            serializedName: Content-Type
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: header
-      - !<!Parameter> &ref_7
-        schema: *ref_4
-        implementation: Method
-        required: true
+            name: Get
+            description: 'Get time value "11:34:56"'
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_6
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_7
+                schema: *ref_4
+                implementation: Method
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: timeBody
+                    description: 'Put time value "08:07:56" in parameter to pass testserver'
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_7
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /time/put
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_8
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !<!SchemaResponse> 
+            schema: *ref_5
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
         language: !<!Languages> 
           default:
-            name: timeBody
-            description: 'Put time value "08:07:56" in parameter to pass testserver'
-        protocol: !<!Protocols> 
-          http: !<!HttpParameter> 
-            in: body
-            style: json
-      signatureParameters:
-      - *ref_7
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpWithBodyRequest> 
-          path: /time/put
-          method: put
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          uri: '{$host}'
-    signatureParameters: []
-    responses:
-    - !<!SchemaResponse> 
-      schema: *ref_8
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - '200'
-    exceptions:
-    - !<!SchemaResponse> 
-      schema: *ref_5
-      language: !<!Languages> 
-        default:
-          name: ''
-          description: ''
-      protocol: !<!Protocols> 
-        http: !<!HttpResponse> 
-          knownMediaType: json
-          mediaTypes:
-          - application/json
-          statusCodes:
-          - default
+            name: Put
+            description: 'Put time value "08:07:56"'
+        protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
-        name: Put
-        description: 'Put time value "08:07:56"'
+        name: Time
+        description: ''
     protocol: !<!Protocols> {}
-  language: !<!Languages> 
-    default:
-      name: Time
-      description: ''
-  protocol: !<!Protocols> {}
 security: !<!Security> 
   authenticationRequired: false
 language: !<!Languages> 
