@@ -84,7 +84,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FileServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServicesClient.SetServiceProperties");
             scope.Start();
@@ -105,7 +105,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FileServiceProperties> SetServiceProperties(string resourceGroupName, string accountName, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy, CancellationToken cancellationToken = default)
+        public virtual Response<FileServiceProperties> SetServiceProperties(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServicesClient.SetServiceProperties");
             scope.Start();
