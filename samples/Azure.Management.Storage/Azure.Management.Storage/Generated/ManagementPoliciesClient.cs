@@ -27,12 +27,17 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of ManagementPoliciesClient. </summary>
-        public ManagementPoliciesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
+        public ManagementPoliciesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, "https://management.azure.com", tokenCredential, options)
+        {
+        }
+
+        /// <summary> Initializes a new instance of ManagementPoliciesClient. </summary>
+        public ManagementPoliciesClient(string subscriptionId, string host, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new ManagementPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, host, options);
+            RestClient = new ManagementPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, host: host);
         }
 
         /// <summary> Gets the managementpolicy associated with the specified storage account. </summary>
@@ -78,7 +83,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ManagementPolicy>> CreateOrUpdateAsync(string resourceGroupName, string accountName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ManagementPolicy>> CreateOrUpdateAsync(string resourceGroupName, string accountName, ManagementPolicySchema policy, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPoliciesClient.CreateOrUpdate");
             scope.Start();
@@ -98,7 +103,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ManagementPolicy> CreateOrUpdate(string resourceGroupName, string accountName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public virtual Response<ManagementPolicy> CreateOrUpdate(string resourceGroupName, string accountName, ManagementPolicySchema policy, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPoliciesClient.CreateOrUpdate");
             scope.Start();

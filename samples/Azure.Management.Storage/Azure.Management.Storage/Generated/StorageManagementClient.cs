@@ -16,6 +16,7 @@ namespace Azure.Management.Storage
         private readonly StorageManagementClientOptions _options;
         private readonly TokenCredential _tokenCredential;
         private readonly string _subscriptionId;
+        private readonly string _host;
 
         /// <summary> Initializes a new instance of StorageManagementClient for mocking. </summary>
         protected StorageManagementClient()
@@ -23,89 +24,94 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of StorageManagementClient. </summary>
-        public StorageManagementClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
+        public StorageManagementClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, "https://management.azure.com", tokenCredential, options)
+        {
+        }
+        /// <summary> Initializes a new instance of StorageManagementClient. </summary>
+        public StorageManagementClient(string subscriptionId, string host, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
             _options = options ?? new StorageManagementClientOptions();
             _tokenCredential = tokenCredential;
             _subscriptionId = subscriptionId;
+            _host = host;
         }
 
         /// <summary> Creates a new instance of BlobServicesClient. </summary>
         public BlobServicesClient GetBlobServicesClient()
         {
-            return new BlobServicesClient(_subscriptionId, _tokenCredential, _options);
+            return new BlobServicesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of BlobContainersClient. </summary>
         public BlobContainersClient GetBlobContainersClient()
         {
-            return new BlobContainersClient(_subscriptionId, _tokenCredential, _options);
+            return new BlobContainersClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of FileServicesClient. </summary>
         public FileServicesClient GetFileServicesClient()
         {
-            return new FileServicesClient(_subscriptionId, _tokenCredential, _options);
+            return new FileServicesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of FileSharesClient. </summary>
         public FileSharesClient GetFileSharesClient()
         {
-            return new FileSharesClient(_subscriptionId, _tokenCredential, _options);
+            return new FileSharesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of OperationsClient. </summary>
         public OperationsClient GetOperationsClient()
         {
-            return new OperationsClient(_tokenCredential, _options);
+            return new OperationsClient(_host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of SkusClient. </summary>
         public SkusClient GetSkusClient()
         {
-            return new SkusClient(_subscriptionId, _tokenCredential, _options);
+            return new SkusClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of StorageAccountsClient. </summary>
         public StorageAccountsClient GetStorageAccountsClient()
         {
-            return new StorageAccountsClient(_subscriptionId, _tokenCredential, _options);
+            return new StorageAccountsClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of UsagesClient. </summary>
         public UsagesClient GetUsagesClient()
         {
-            return new UsagesClient(_subscriptionId, _tokenCredential, _options);
+            return new UsagesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of ManagementPoliciesClient. </summary>
         public ManagementPoliciesClient GetManagementPoliciesClient()
         {
-            return new ManagementPoliciesClient(_subscriptionId, _tokenCredential, _options);
+            return new ManagementPoliciesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of PrivateEndpointConnectionsClient. </summary>
         public PrivateEndpointConnectionsClient GetPrivateEndpointConnectionsClient()
         {
-            return new PrivateEndpointConnectionsClient(_subscriptionId, _tokenCredential, _options);
+            return new PrivateEndpointConnectionsClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of PrivateLinkResourcesClient. </summary>
         public PrivateLinkResourcesClient GetPrivateLinkResourcesClient()
         {
-            return new PrivateLinkResourcesClient(_subscriptionId, _tokenCredential, _options);
+            return new PrivateLinkResourcesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of ObjectReplicationPoliciesClient. </summary>
         public ObjectReplicationPoliciesClient GetObjectReplicationPoliciesClient()
         {
-            return new ObjectReplicationPoliciesClient(_subscriptionId, _tokenCredential, _options);
+            return new ObjectReplicationPoliciesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of EncryptionScopesClient. </summary>
         public EncryptionScopesClient GetEncryptionScopesClient()
         {
-            return new EncryptionScopesClient(_subscriptionId, _tokenCredential, _options);
+            return new EncryptionScopesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
     }
 }

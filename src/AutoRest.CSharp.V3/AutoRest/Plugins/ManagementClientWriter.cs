@@ -21,8 +21,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 Dictionary<string, Parameter> allParameters = new Dictionary<string, Parameter>();
                 foreach (var parameter in context.Library.Clients.SelectMany(p => p.RestClient.Parameters))
                 {
-                    if (ManagementClientWriterHelpers.IsHostParameter(parameter) ||
-                        ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
+                    if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
                     {
                         continue;
                     }
@@ -48,11 +47,42 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     }
                     writer.Line();
 
+
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {title}ManagementClient");
                     writer.Append($"public {title}ManagementClient(");
                     foreach (Parameter parameter in allParameters.Values)
                     {
+                        if (ManagementClientWriterHelpers.IsHostParameter(parameter))
+                        {
+                            continue;
+                        }
+
                         writer.WriteParameter(parameter);
+                    }
+
+                    writer.Append($"{typeof(TokenCredential)} tokenCredential, {title}ManagementClientOptions options = null) : this(");
+                    foreach (Parameter parameter in allParameters.Values)
+                    {
+                        // Pass the default host
+                        if (ManagementClientWriterHelpers.IsHostParameter(parameter))
+                        {
+                            writer.Append($"{parameter.DefaultValue?.Value:L}, ");
+                            continue;
+                        }
+
+                        writer.Append($"{parameter.Name},");
+                    }
+
+                    writer.Line($"tokenCredential, options)");
+                    using (writer.Scope())
+                    {
+                    }
+
+                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {title}ManagementClient");
+                    writer.Append($"public {title}ManagementClient(");
+                    foreach (Parameter parameter in allParameters.Values)
+                    {
+                        writer.WriteParameter(parameter, false);
                     }
 
                     writer.Append($"{typeof(TokenCredential)} tokenCredential, {title}ManagementClientOptions options = null)");
@@ -78,8 +108,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                             writer.Append($"return new {client.Type}(");
                             foreach (var parameter in client.RestClient.Parameters)
                             {
-                                if (ManagementClientWriterHelpers.IsHostParameter(parameter) ||
-                                    ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
+                                if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
                                 {
                                     continue;
                                 }

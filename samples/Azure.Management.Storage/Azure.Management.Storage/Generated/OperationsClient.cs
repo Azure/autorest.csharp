@@ -27,12 +27,17 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of OperationsClient. </summary>
-        public OperationsClient(TokenCredential tokenCredential, StorageManagementClientOptions options = null)
+        public OperationsClient(TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this("https://management.azure.com", tokenCredential, options)
+        {
+        }
+
+        /// <summary> Initializes a new instance of OperationsClient. </summary>
+        public OperationsClient(string host, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, host, options);
+            RestClient = new OperationsRestClient(_clientDiagnostics, _pipeline, host: host);
         }
 
         /// <summary> Lists all of the available Storage Rest API operations. </summary>
