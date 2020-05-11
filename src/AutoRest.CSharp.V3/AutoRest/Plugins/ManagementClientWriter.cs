@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     foreach (var client in context.Library.Clients)
                     {
                         writer.WriteXmlDocumentationSummary($"Creates a new instance of {client.Type.Name}");
-                        using (writer.Scope($"public {client.Type} Get{client.Type.Name}()"))
+                        using (writer.Scope($"public virtual {client.Type} Get{client.Type.Name}()"))
                         {
                             writer.Append($"return new {client.Type}(");
                             foreach (var parameter in client.RestClient.Parameters)
