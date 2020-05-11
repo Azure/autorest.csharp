@@ -37,79 +37,79 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Creates a new instance of BlobServicesClient. </summary>
-        public BlobServicesClient GetBlobServicesClient()
+        public virtual BlobServicesClient GetBlobServicesClient()
         {
             return new BlobServicesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of BlobContainersClient. </summary>
-        public BlobContainersClient GetBlobContainersClient()
+        public virtual BlobContainersClient GetBlobContainersClient()
         {
             return new BlobContainersClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of FileServicesClient. </summary>
-        public FileServicesClient GetFileServicesClient()
+        public virtual FileServicesClient GetFileServicesClient()
         {
             return new FileServicesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of FileSharesClient. </summary>
-        public FileSharesClient GetFileSharesClient()
+        public virtual FileSharesClient GetFileSharesClient()
         {
             return new FileSharesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of OperationsClient. </summary>
-        public OperationsClient GetOperationsClient()
+        public virtual OperationsClient GetOperationsClient()
         {
             return new OperationsClient(_host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of SkusClient. </summary>
-        public SkusClient GetSkusClient()
+        public virtual SkusClient GetSkusClient()
         {
             return new SkusClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of StorageAccountsClient. </summary>
-        public StorageAccountsClient GetStorageAccountsClient()
+        public virtual StorageAccountsClient GetStorageAccountsClient()
         {
             return new StorageAccountsClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of UsagesClient. </summary>
-        public UsagesClient GetUsagesClient()
+        public virtual UsagesClient GetUsagesClient()
         {
             return new UsagesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of ManagementPoliciesClient. </summary>
-        public ManagementPoliciesClient GetManagementPoliciesClient()
+        public virtual ManagementPoliciesClient GetManagementPoliciesClient()
         {
             return new ManagementPoliciesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of PrivateEndpointConnectionsClient. </summary>
-        public PrivateEndpointConnectionsClient GetPrivateEndpointConnectionsClient()
+        public virtual PrivateEndpointConnectionsClient GetPrivateEndpointConnectionsClient()
         {
             return new PrivateEndpointConnectionsClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of PrivateLinkResourcesClient. </summary>
-        public PrivateLinkResourcesClient GetPrivateLinkResourcesClient()
+        public virtual PrivateLinkResourcesClient GetPrivateLinkResourcesClient()
         {
             return new PrivateLinkResourcesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of ObjectReplicationPoliciesClient. </summary>
-        public ObjectReplicationPoliciesClient GetObjectReplicationPoliciesClient()
+        public virtual ObjectReplicationPoliciesClient GetObjectReplicationPoliciesClient()
         {
             return new ObjectReplicationPoliciesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
 
         /// <summary> Creates a new instance of EncryptionScopesClient. </summary>
-        public EncryptionScopesClient GetEncryptionScopesClient()
+        public virtual EncryptionScopesClient GetEncryptionScopesClient()
         {
             return new EncryptionScopesClient(_subscriptionId, _host, _tokenCredential, _options);
         }
