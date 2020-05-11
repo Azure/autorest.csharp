@@ -177,7 +177,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             foreach (Parameter parameter in parameters)
             {
-                writer.Append($"{parameter.Type} {parameter.Name:D}, ");
+                writer.WriteParameter(parameter);
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
