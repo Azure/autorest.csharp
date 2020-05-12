@@ -8,6 +8,13 @@ pr:
     include:
     - feature/*
 
+resources:
+  repositories:
+    - repository: azure-sdk-tools
+      type: github
+      name: Azure/azure-sdk-tools
+      endpoint: azure
+
 jobs:
   - job: Build
     variables:
@@ -50,7 +57,7 @@ jobs:
         - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion)
           condition: succeeded()
           displayName: 'Update generator version in Azure SDK repo'
-        - template: /eng/common/pipelines/templates/steps/create-pull-request.yml
+        - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
           parameters:
             RepoName: azure-sdk-for-net
             PRBranchName: sync-autorest
