@@ -12,7 +12,7 @@ schemas: !<!Schemas>
           name: Integer
           description: ''
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_38
+    - !<!NumberSchema> &ref_41
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -24,7 +24,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_45
+    - !<!NumberSchema> &ref_48
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -36,7 +36,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_57
+    - !<!NumberSchema> &ref_60
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -48,7 +48,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_59
+    - !<!NumberSchema> &ref_62
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -60,7 +60,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_61
+    - !<!NumberSchema> &ref_64
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -72,7 +72,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_63
+    - !<!NumberSchema> &ref_66
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -84,19 +84,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_65
-      type: integer
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      precision: 32
-      language: !<!Languages> 
-        default:
-          name: Integer
-          description: ''
-          header: Retry-After
-      protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_70
+    - !<!NumberSchema> &ref_68
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -168,7 +156,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_89
+    - !<!NumberSchema> &ref_88
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -180,7 +168,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_93
+    - !<!NumberSchema> &ref_92
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -192,7 +180,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_97
+    - !<!NumberSchema> &ref_96
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -204,7 +192,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_101
+    - !<!NumberSchema> &ref_100
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -216,7 +204,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_106
+    - !<!NumberSchema> &ref_104
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -228,7 +216,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_108
+    - !<!NumberSchema> &ref_109
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -240,7 +228,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_110
+    - !<!NumberSchema> &ref_111
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -276,7 +264,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_120
+    - !<!NumberSchema> &ref_119
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -288,7 +276,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_127
+    - !<!NumberSchema> &ref_123
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -300,7 +288,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_129
+    - !<!NumberSchema> &ref_130
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -312,7 +300,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_131
+    - !<!NumberSchema> &ref_132
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -360,7 +348,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_144
+    - !<!NumberSchema> &ref_143
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -372,7 +360,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_149
+    - !<!NumberSchema> &ref_147
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -384,7 +372,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_153
+    - !<!NumberSchema> &ref_152
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -420,7 +408,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_163
+    - !<!NumberSchema> &ref_162
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -432,7 +420,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_168
+    - !<!NumberSchema> &ref_166
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -444,7 +432,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_172
+    - !<!NumberSchema> &ref_171
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -456,7 +444,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_174
+    - !<!NumberSchema> &ref_175
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -504,7 +492,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_187
+    - !<!NumberSchema> &ref_186
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -516,7 +504,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_191
+    - !<!NumberSchema> &ref_190
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -528,7 +516,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_195
+    - !<!NumberSchema> &ref_194
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -540,7 +528,7 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_199
+    - !<!NumberSchema> &ref_198
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -552,7 +540,19 @@ schemas: !<!Schemas>
           description: ''
           header: Retry-After
       protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_203
+    - !<!NumberSchema> &ref_202
+      type: integer
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      precision: 32
+      language: !<!Languages> 
+        default:
+          name: Integer
+          description: ''
+          header: Retry-After
+      protocol: !<!Protocols> {}
+    - !<!NumberSchema> &ref_206
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -609,7 +609,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: location
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_9
       type: string
@@ -651,18 +651,7 @@ schemas: !<!Schemas>
           name: CloudErrorMessage
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_36
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_37
+    - !<!StringSchema> &ref_29
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -673,7 +662,18 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_40
+    - !<!StringSchema> &ref_37
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_39
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -684,7 +684,7 @@ schemas: !<!Schemas>
           description: ''
           header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_41
+    - !<!StringSchema> &ref_40
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -717,7 +717,7 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_47
+    - !<!StringSchema> &ref_46
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -728,7 +728,7 @@ schemas: !<!Schemas>
           description: ''
           header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_48
+    - !<!StringSchema> &ref_47
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -740,6 +740,28 @@ schemas: !<!Schemas>
           header: Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_50
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_51
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_53
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -790,7 +812,7 @@ schemas: !<!Schemas>
           name: SubProductPropertiesProvisioningState
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_56
+    - !<!StringSchema> &ref_59
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -801,7 +823,7 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_58
+    - !<!StringSchema> &ref_61
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -812,7 +834,7 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_60
+    - !<!StringSchema> &ref_63
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -823,29 +845,7 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_62
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: Location
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_64
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: Location
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_66
+    - !<!StringSchema> &ref_65
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -867,7 +867,7 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_68
+    - !<!StringSchema> &ref_69
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -876,9 +876,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_69
+    - !<!StringSchema> &ref_70
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -955,6 +955,17 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_80
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
+      protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_81
       type: string
       apiVersions:
@@ -986,9 +997,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_88
+    - !<!StringSchema> &ref_90
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -997,7 +1008,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_91
       type: string
@@ -1008,9 +1019,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_92
+    - !<!StringSchema> &ref_94
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1019,7 +1030,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_95
       type: string
@@ -1030,9 +1041,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_96
+    - !<!StringSchema> &ref_98
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1041,7 +1052,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_99
       type: string
@@ -1052,20 +1063,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_100
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_104
+    - !<!StringSchema> &ref_102
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1076,7 +1076,7 @@ schemas: !<!Schemas>
           description: ''
           header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_105
+    - !<!StringSchema> &ref_103
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1096,29 +1096,29 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_109
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: Location
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_111
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
           header: Azure-AsyncOperation
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_108
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_110
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_112
       type: string
@@ -1130,6 +1130,17 @@ schemas: !<!Schemas>
           name: String
           description: ''
           header: Location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_114
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_115
       type: string
@@ -1151,20 +1162,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_119
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_125
+    - !<!StringSchema> &ref_121
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1175,7 +1175,7 @@ schemas: !<!Schemas>
           description: ''
           header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_126
+    - !<!StringSchema> &ref_122
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1195,29 +1195,29 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_130
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: Location
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_132
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
           header: Azure-AsyncOperation
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_129
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_131
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_133
       type: string
@@ -1229,6 +1229,17 @@ schemas: !<!Schemas>
           name: String
           description: ''
           header: Location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_135
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_136
       type: string
@@ -1261,20 +1272,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_143
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_147
+    - !<!StringSchema> &ref_145
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1285,7 +1285,7 @@ schemas: !<!Schemas>
           description: ''
           header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_148
+    - !<!StringSchema> &ref_146
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1295,19 +1295,19 @@ schemas: !<!Schemas>
           name: String
           description: ''
           header: Location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_150
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_151
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_152
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1340,6 +1340,17 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_157
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
+      protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_158
       type: string
       apiVersions:
@@ -1360,20 +1371,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_162
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_166
+    - !<!StringSchema> &ref_164
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1384,7 +1384,7 @@ schemas: !<!Schemas>
           description: ''
           header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_167
+    - !<!StringSchema> &ref_165
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1394,19 +1394,19 @@ schemas: !<!Schemas>
           name: String
           description: ''
           header: Location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_169
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_170
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_171
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1426,9 +1426,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_175
+    - !<!StringSchema> &ref_174
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1437,7 +1437,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_176
       type: string
@@ -1472,6 +1472,17 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_181
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
+      protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_182
       type: string
       apiVersions:
@@ -1492,9 +1503,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_186
+    - !<!StringSchema> &ref_188
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1503,7 +1514,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_189
       type: string
@@ -1514,9 +1525,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_190
+    - !<!StringSchema> &ref_192
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1525,7 +1536,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_193
       type: string
@@ -1536,9 +1547,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_194
+    - !<!StringSchema> &ref_196
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1547,9 +1558,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_198
+    - !<!StringSchema> &ref_197
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1569,9 +1580,20 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
+          header: Location
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_204
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
           header: Azure-AsyncOperation
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_202
+    - !<!StringSchema> &ref_205
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1994,7 +2016,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_51
+    - !<!ObjectSchema> &ref_54
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2164,6 +2186,18 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_23
+  arrays:
+    - !<!ArraySchema> &ref_28
+      type: array
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      elementType: *ref_5
+      language: !<!Languages> 
+        default:
+          name: ArrayOfProduct
+          description: Array of Product
+      protocol: !<!Protocols> {}
 globalParameters:
   - !<!Parameter> &ref_24
     schema: *ref_0
@@ -2286,6 +2320,75 @@ operationGroups:
           - *ref_24
         requests:
           - !<!Request> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpRequest> 
+                path: /lro/list
+                method: post
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_28
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !<!Response> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                headers:
+                  - !<!HttpHeader> 
+                    schema: *ref_1
+                    header: Azure-AsyncOperation
+                  - !<!HttpHeader> 
+                    schema: *ref_29
+                    header: Location
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !<!SchemaResponse> 
+            schema: *ref_27
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !<!Languages> 
+          default:
+            name: Post202List
+            description: 'Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ ''id'': ''100'', ''name'': ''foo'' }].'
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_24
+        requests:
+          - !<!Request> 
             parameters:
               - !<!Parameter> 
                 schema: *ref_25
@@ -2300,7 +2403,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_28
+              - !<!Parameter> &ref_30
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2313,7 +2416,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_28
+              - *ref_30
             language: !<!Languages> 
               default:
                 name: ''
@@ -2384,7 +2487,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_29
+              - !<!Parameter> &ref_31
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2397,7 +2500,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_29
+              - *ref_31
             language: !<!Languages> 
               default:
                 name: ''
@@ -2468,7 +2571,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_30
+              - !<!Parameter> &ref_32
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2481,7 +2584,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_30
+              - *ref_32
             language: !<!Languages> 
               default:
                 name: ''
@@ -2565,7 +2668,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_31
+              - !<!Parameter> &ref_33
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2578,7 +2681,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_31
+              - *ref_33
             language: !<!Languages> 
               default:
                 name: ''
@@ -2649,7 +2752,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_32
+              - !<!Parameter> &ref_34
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2662,7 +2765,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_32
+              - *ref_34
             language: !<!Languages> 
               default:
                 name: ''
@@ -2746,7 +2849,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_33
+              - !<!Parameter> &ref_35
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2759,7 +2862,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_33
+              - *ref_35
             language: !<!Languages> 
               default:
                 name: ''
@@ -2830,7 +2933,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_34
+              - !<!Parameter> &ref_36
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2843,7 +2946,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_34
+              - *ref_36
             language: !<!Languages> 
               default:
                 name: ''
@@ -2868,7 +2971,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_1
+                    schema: *ref_37
                     header: location
                 knownMediaType: json
                 mediaTypes:
@@ -2918,7 +3021,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_35
+              - !<!Parameter> &ref_38
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2931,7 +3034,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_35
+              - *ref_38
             language: !<!Languages> 
               default:
                 name: ''
@@ -2956,13 +3059,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_36
+                    schema: *ref_39
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_37
+                    schema: *ref_40
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_38
+                    schema: *ref_41
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -3012,7 +3115,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_39
+              - !<!Parameter> &ref_42
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3025,7 +3128,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_39
+              - *ref_42
             language: !<!Languages> 
               default:
                 name: ''
@@ -3050,10 +3153,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_40
+                    schema: *ref_43
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_41
+                    schema: *ref_44
                     header: Location
                 knownMediaType: json
                 mediaTypes:
@@ -3103,7 +3206,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_42
+              - !<!Parameter> &ref_45
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3116,7 +3219,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_42
+              - *ref_45
             language: !<!Languages> 
               default:
                 name: ''
@@ -3141,13 +3244,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_43
+                    schema: *ref_46
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_44
+                    schema: *ref_47
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_45
+                    schema: *ref_48
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -3197,7 +3300,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_46
+              - !<!Parameter> &ref_49
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3210,7 +3313,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_46
+              - *ref_49
             language: !<!Languages> 
               default:
                 name: ''
@@ -3235,10 +3338,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_47
+                    schema: *ref_50
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_48
+                    schema: *ref_51
                     header: Location
                 knownMediaType: json
                 mediaTypes:
@@ -3288,7 +3391,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_49
+              - !<!Parameter> &ref_52
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3301,7 +3404,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_49
+              - *ref_52
             language: !<!Languages> 
               default:
                 name: ''
@@ -3326,7 +3429,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_50
+                    schema: *ref_53
                     header: Azure-AsyncOperation
                 knownMediaType: json
                 mediaTypes:
@@ -3376,8 +3479,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_52
-                schema: *ref_51
+              - !<!Parameter> &ref_55
+                schema: *ref_54
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -3389,7 +3492,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_52
+              - *ref_55
             language: !<!Languages> 
               default:
                 name: ''
@@ -3405,7 +3508,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_51
+            schema: *ref_54
             language: !<!Languages> 
               default:
                 name: ''
@@ -3460,8 +3563,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_53
-                schema: *ref_51
+              - !<!Parameter> &ref_56
+                schema: *ref_54
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -3473,7 +3576,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_53
+              - *ref_56
             language: !<!Languages> 
               default:
                 name: ''
@@ -3489,7 +3592,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_51
+            schema: *ref_54
             language: !<!Languages> 
               default:
                 name: ''
@@ -3544,7 +3647,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_54
+              - !<!Parameter> &ref_57
                 schema: *ref_18
                 implementation: Method
                 required: false
@@ -3557,7 +3660,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_54
+              - *ref_57
             language: !<!Languages> 
               default:
                 name: ''
@@ -3628,7 +3731,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_55
+              - !<!Parameter> &ref_58
                 schema: *ref_18
                 implementation: Method
                 required: false
@@ -3641,7 +3744,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_55
+              - *ref_58
             language: !<!Languages> 
               default:
                 name: ''
@@ -3732,10 +3835,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_56
+                    schema: *ref_59
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_57
+                    schema: *ref_60
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -3807,10 +3910,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_58
+                    schema: *ref_61
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_59
+                    schema: *ref_62
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -3880,10 +3983,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_60
+                    schema: *ref_63
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_61
+                    schema: *ref_64
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -4003,10 +4106,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_62
+                    schema: *ref_65
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_63
+                    schema: *ref_66
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -4072,10 +4175,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_64
+                    schema: *ref_67
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_65
+                    schema: *ref_68
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -4128,7 +4231,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_66
+                    schema: *ref_69
                     header: Location
                 statusCodes:
                   - '202'
@@ -4190,7 +4293,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_67
+                    schema: *ref_70
                     header: Location
                 statusCodes:
                   - '202'
@@ -4252,13 +4355,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_68
+                    schema: *ref_71
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_69
+                    schema: *ref_72
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_70
+                    schema: *ref_73
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -4311,13 +4414,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_71
+                    schema: *ref_74
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_72
+                    schema: *ref_75
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_73
+                    schema: *ref_76
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -4370,13 +4473,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_74
+                    schema: *ref_77
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_75
+                    schema: *ref_78
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_76
+                    schema: *ref_79
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -4429,13 +4532,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_77
+                    schema: *ref_80
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_78
+                    schema: *ref_81
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_79
+                    schema: *ref_82
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -4480,7 +4583,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_51
+            schema: *ref_54
             language: !<!Languages> 
               default:
                 name: ''
@@ -4493,7 +4596,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !<!SchemaResponse> 
-            schema: *ref_51
+            schema: *ref_54
             language: !<!Languages> 
               default:
                 name: ''
@@ -4548,7 +4651,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_80
+              - !<!Parameter> &ref_83
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -4561,7 +4664,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_80
+              - *ref_83
             language: !<!Languages> 
               default:
                 name: ''
@@ -4585,10 +4688,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_81
+                    schema: *ref_84
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_82
+                    schema: *ref_85
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -4635,7 +4738,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_83
+              - !<!Parameter> &ref_86
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -4648,7 +4751,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_83
+              - *ref_86
             language: !<!Languages> 
               default:
                 name: ''
@@ -4673,10 +4776,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_84
+                    schema: *ref_87
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_85
+                    schema: *ref_88
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -4891,7 +4994,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_86
+              - !<!Parameter> &ref_89
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -4904,7 +5007,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_86
+              - *ref_89
             language: !<!Languages> 
               default:
                 name: ''
@@ -4941,13 +5044,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_87
+                    schema: *ref_90
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_88
+                    schema: *ref_91
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_89
+                    schema: *ref_92
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -4994,7 +5097,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_90
+              - !<!Parameter> &ref_93
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5007,7 +5110,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_90
+              - *ref_93
             language: !<!Languages> 
               default:
                 name: ''
@@ -5044,13 +5147,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_91
+                    schema: *ref_94
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_92
+                    schema: *ref_95
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_93
+                    schema: *ref_96
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -5097,7 +5200,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_94
+              - !<!Parameter> &ref_97
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5110,7 +5213,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_94
+              - *ref_97
             language: !<!Languages> 
               default:
                 name: ''
@@ -5134,13 +5237,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_95
+                    schema: *ref_98
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_96
+                    schema: *ref_99
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_97
+                    schema: *ref_100
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -5187,7 +5290,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_98
+              - !<!Parameter> &ref_101
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5200,7 +5303,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_98
+              - *ref_101
             language: !<!Languages> 
               default:
                 name: ''
@@ -5224,13 +5327,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_99
+                    schema: *ref_102
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_100
+                    schema: *ref_103
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_101
+                    schema: *ref_104
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -5285,7 +5388,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_102
+              - !<!Parameter> &ref_105
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5298,7 +5401,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_102
+              - *ref_105
             language: !<!Languages> 
               default:
                 name: ''
@@ -5384,7 +5487,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_103
+              - !<!Parameter> &ref_106
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5397,7 +5500,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_103
+              - *ref_106
             language: !<!Languages> 
               default:
                 name: ''
@@ -5422,13 +5525,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_104
+                    schema: *ref_107
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_105
+                    schema: *ref_108
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_106
+                    schema: *ref_109
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -5498,10 +5601,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_107
+                    schema: *ref_110
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_108
+                    schema: *ref_111
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -5559,10 +5662,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_109
+                    schema: *ref_112
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_110
+                    schema: *ref_113
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -5615,13 +5718,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_111
+                    schema: *ref_114
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_112
+                    schema: *ref_115
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_113
+                    schema: *ref_116
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -5668,7 +5771,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_114
+              - !<!Parameter> &ref_117
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5681,7 +5784,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_114
+              - *ref_117
             language: !<!Languages> 
               default:
                 name: ''
@@ -5705,10 +5808,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_115
+                    schema: *ref_118
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_116
+                    schema: *ref_119
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -5755,7 +5858,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_117
+              - !<!Parameter> &ref_120
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5768,7 +5871,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_117
+              - *ref_120
             language: !<!Languages> 
               default:
                 name: ''
@@ -5792,13 +5895,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_118
+                    schema: *ref_121
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_119
+                    schema: *ref_122
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_120
+                    schema: *ref_123
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -5855,7 +5958,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_121
+              - !<!Parameter> &ref_124
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5868,7 +5971,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_121
+              - *ref_124
             language: !<!Languages> 
               default:
                 name: ''
@@ -5952,7 +6055,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_122
+              - !<!Parameter> &ref_125
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -5965,7 +6068,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_122
+              - *ref_125
             language: !<!Languages> 
               default:
                 name: ''
@@ -6049,7 +6152,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_123
+              - !<!Parameter> &ref_126
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6062,7 +6165,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_123
+              - *ref_126
             language: !<!Languages> 
               default:
                 name: ''
@@ -6146,7 +6249,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_124
+              - !<!Parameter> &ref_127
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6159,7 +6262,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_124
+              - *ref_127
             language: !<!Languages> 
               default:
                 name: ''
@@ -6184,13 +6287,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_125
+                    schema: *ref_128
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_126
+                    schema: *ref_129
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_127
+                    schema: *ref_130
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -6246,10 +6349,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_128
+                    schema: *ref_131
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_129
+                    schema: *ref_132
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -6302,10 +6405,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_130
+                    schema: *ref_133
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_131
+                    schema: *ref_134
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -6358,13 +6461,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_132
+                    schema: *ref_135
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_133
+                    schema: *ref_136
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_134
+                    schema: *ref_137
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -6411,7 +6514,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_135
+              - !<!Parameter> &ref_138
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6424,7 +6527,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_135
+              - *ref_138
             language: !<!Languages> 
               default:
                 name: ''
@@ -6448,10 +6551,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_136
+                    schema: *ref_139
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_137
+                    schema: *ref_140
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -6498,7 +6601,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_138
+              - !<!Parameter> &ref_141
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6511,7 +6614,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_138
+              - *ref_141
             language: !<!Languages> 
               default:
                 name: ''
@@ -6535,10 +6638,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_139
+                    schema: *ref_142
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_140
+                    schema: *ref_143
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -6585,7 +6688,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_141
+              - !<!Parameter> &ref_144
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6598,7 +6701,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_141
+              - *ref_144
             language: !<!Languages> 
               default:
                 name: ''
@@ -6622,13 +6725,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_142
+                    schema: *ref_145
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_143
+                    schema: *ref_146
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_144
+                    schema: *ref_147
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -6675,7 +6778,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_145
+              - !<!Parameter> &ref_148
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6688,7 +6791,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_145
+              - *ref_148
             language: !<!Languages> 
               default:
                 name: ''
@@ -6772,7 +6875,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_146
+              - !<!Parameter> &ref_149
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6785,7 +6888,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_146
+              - *ref_149
             language: !<!Languages> 
               default:
                 name: ''
@@ -6810,13 +6913,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_147
+                    schema: *ref_150
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_148
+                    schema: *ref_151
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_149
+                    schema: *ref_152
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -6866,7 +6969,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_150
+              - !<!Parameter> &ref_153
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6879,7 +6982,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_150
+              - *ref_153
             language: !<!Languages> 
               default:
                 name: ''
@@ -6904,13 +7007,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_151
+                    schema: *ref_154
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_152
+                    schema: *ref_155
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_153
+                    schema: *ref_156
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -7015,13 +7118,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_154
+                    schema: *ref_157
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_155
+                    schema: *ref_158
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_156
+                    schema: *ref_159
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7068,7 +7171,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_157
+              - !<!Parameter> &ref_160
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7081,7 +7184,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_157
+              - *ref_160
             language: !<!Languages> 
               default:
                 name: ''
@@ -7105,10 +7208,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_158
+                    schema: *ref_161
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_159
+                    schema: *ref_162
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7155,7 +7258,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_160
+              - !<!Parameter> &ref_163
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7168,7 +7271,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_160
+              - *ref_163
             language: !<!Languages> 
               default:
                 name: ''
@@ -7192,13 +7295,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_161
+                    schema: *ref_164
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_162
+                    schema: *ref_165
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_163
+                    schema: *ref_166
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7245,7 +7348,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_164
+              - !<!Parameter> &ref_167
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7258,7 +7361,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_164
+              - *ref_167
             language: !<!Languages> 
               default:
                 name: ''
@@ -7338,7 +7441,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_165
+              - !<!Parameter> &ref_168
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7351,7 +7454,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_165
+              - *ref_168
             language: !<!Languages> 
               default:
                 name: ''
@@ -7376,13 +7479,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_166
+                    schema: *ref_169
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_167
+                    schema: *ref_170
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_168
+                    schema: *ref_171
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -7432,7 +7535,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_169
+              - !<!Parameter> &ref_172
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7445,7 +7548,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_169
+              - *ref_172
             language: !<!Languages> 
               default:
                 name: ''
@@ -7470,13 +7573,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_170
+                    schema: *ref_173
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_171
+                    schema: *ref_174
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_172
+                    schema: *ref_175
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -7532,10 +7635,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_173
+                    schema: *ref_176
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_174
+                    schema: *ref_177
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7588,13 +7691,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_175
+                    schema: *ref_178
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_176
+                    schema: *ref_179
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_177
+                    schema: *ref_180
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7647,13 +7750,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_178
+                    schema: *ref_181
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_179
+                    schema: *ref_182
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_180
+                    schema: *ref_183
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7700,7 +7803,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_181
+              - !<!Parameter> &ref_184
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7713,7 +7816,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_181
+              - *ref_184
             language: !<!Languages> 
               default:
                 name: ''
@@ -7737,10 +7840,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_182
+                    schema: *ref_185
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_183
+                    schema: *ref_186
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7787,7 +7890,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_184
+              - !<!Parameter> &ref_187
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7800,7 +7903,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_184
+              - *ref_187
             language: !<!Languages> 
               default:
                 name: ''
@@ -7824,13 +7927,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_185
+                    schema: *ref_188
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_186
+                    schema: *ref_189
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_187
+                    schema: *ref_190
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7877,7 +7980,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_188
+              - !<!Parameter> &ref_191
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7890,7 +7993,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_188
+              - *ref_191
             language: !<!Languages> 
               default:
                 name: ''
@@ -7914,13 +8017,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_189
+                    schema: *ref_192
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_190
+                    schema: *ref_193
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_191
+                    schema: *ref_194
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -7975,7 +8078,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_192
+              - !<!Parameter> &ref_195
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7988,7 +8091,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_192
+              - *ref_195
             language: !<!Languages> 
               default:
                 name: ''
@@ -8013,13 +8116,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_193
+                    schema: *ref_196
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_194
+                    schema: *ref_197
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_195
+                    schema: *ref_198
                     header: Retry-After
                 knownMediaType: json
                 mediaTypes:
@@ -8071,7 +8174,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_196
+              - !<!Parameter> &ref_199
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -8084,7 +8187,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_196
+              - *ref_199
             language: !<!Languages> 
               default:
                 name: ''
@@ -8170,7 +8273,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_197
+              - !<!Parameter> &ref_200
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -8183,7 +8286,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_197
+              - *ref_200
             language: !<!Languages> 
               default:
                 name: ''
@@ -8207,10 +8310,10 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_198
+                    schema: *ref_201
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_199
+                    schema: *ref_202
                     header: Retry-After
                 statusCodes:
                   - '202'
@@ -8259,7 +8362,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_200
+              - !<!Parameter> &ref_203
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -8272,7 +8375,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_200
+              - *ref_203
             language: !<!Languages> 
               default:
                 name: ''
@@ -8296,13 +8399,13 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_201
+                    schema: *ref_204
                     header: Azure-AsyncOperation
                   - !<!HttpHeader> 
-                    schema: *ref_202
+                    schema: *ref_205
                     header: Location
                   - !<!HttpHeader> 
-                    schema: *ref_203
+                    schema: *ref_206
                     header: Retry-After
                 statusCodes:
                   - '202'

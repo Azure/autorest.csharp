@@ -125,6 +125,13 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task GetDateTimeMinLocalNoOffset() => Test(async (host, pipeline) =>
+        {
+            var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalNoOffsetMinDateTimeAsync();
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01 00:00:00+00:00"), response.Value);
+        });
+
+        [Test]
         public Task GetDateTimeMaxLocalNegativeOffsetLowercase() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync(Is.InstanceOf<FormatException>(), async () => await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalNegativeOffsetLowercaseMaxDateTimeAsync());
@@ -167,6 +174,12 @@ namespace AutoRest.TestServer.Tests
             var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUtcUppercaseMaxDateTimeAsync();
             Assert.AreEqual(DateTimeOffset.Parse("9999-12-31 23:59:59.999+00:00"), response.Value);
         });
+
+        [Test]
+        public void LROValueTypeIsReadOnlyList()
+        {
+            Assert.AreEqual(typeof(Operation<IReadOnlyList<Product>>), typeof(LROsPost202ListOperation).BaseType);
+        }
 
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new[]
         {

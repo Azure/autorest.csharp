@@ -192,5 +192,85 @@ namespace media_types
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateContentTypeWithEncodingRequest(string input)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/mediatypes/contentTypeWithEncoding", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "text/plain");
+            request.Content = new StringRequestContent(input);
+            return message;
+        }
+
+        /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <param name="input"> Input parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<string>> ContentTypeWithEncodingAsync(string input, CancellationToken cancellationToken = default)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
+            using var message = CreateContentTypeWithEncodingRequest(input);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        string value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = document.RootElement.GetString();
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <param name="input"> Input parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<string> ContentTypeWithEncoding(string input, CancellationToken cancellationToken = default)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
+            using var message = CreateContentTypeWithEncodingRequest(input);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        string value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = document.RootElement.GetString();
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }

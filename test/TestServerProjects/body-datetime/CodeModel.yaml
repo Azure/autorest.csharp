@@ -1408,6 +1408,57 @@ operationGroups:
             name: GetLocalNegativeOffsetMinDateTime
             description: 'Get min datetime value 0001-01-01T00:00:00-14:00'
         protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_4
+        requests:
+          - !<!Request> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpRequest> 
+                path: /datetime/min/localnooffset
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_1
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !<!SchemaResponse> 
+            schema: *ref_5
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !<!Languages> 
+          default:
+            name: GetLocalNoOffsetMinDateTime
+            description: 'Get min datetime value 0001-01-01T00:00:00'
+        protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
         name: Datetime
