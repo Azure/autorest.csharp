@@ -125,6 +125,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
         public Task GetDateTimeMinLocalNoOffset() => Test(async (host, pipeline) =>
         {
             var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalNoOffsetMinDateTimeAsync();
