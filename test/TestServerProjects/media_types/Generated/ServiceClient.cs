@@ -106,5 +106,41 @@ namespace media_types
                 throw;
             }
         }
+
+        /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <param name="input"> Input parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<string>> ContentTypeWithEncodingAsync(string input, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.ContentTypeWithEncoding");
+            scope.Start();
+            try
+            {
+                return await RestClient.ContentTypeWithEncodingAsync(input, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <param name="input"> Input parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<string> ContentTypeWithEncoding(string input, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.ContentTypeWithEncoding");
+            scope.Start();
+            try
+            {
+                return RestClient.ContentTypeWithEncoding(input, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

@@ -27,12 +27,17 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient. </summary>
-        public PrivateEndpointConnectionsClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
+        public PrivateEndpointConnectionsClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, "https://management.azure.com", tokenCredential, options)
+        {
+        }
+
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient. </summary>
+        public PrivateEndpointConnectionsClient(string subscriptionId, string host, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new PrivateEndpointConnectionsRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, host, options);
+            RestClient = new PrivateEndpointConnectionsRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, host: host);
         }
 
         /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>

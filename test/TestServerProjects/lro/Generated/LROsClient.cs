@@ -69,6 +69,42 @@ namespace lro
             }
         }
 
+        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async ValueTask<LROsPost202ListOperation> StartPost202ListAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPost202List");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.Post202ListAsync(cancellationToken).ConfigureAwait(false);
+                return new LROsPost202ListOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost202ListRequest().Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual LROsPost202ListOperation StartPost202List(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPost202List");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.Post202List(cancellationToken);
+                return new LROsPost202ListOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost202ListRequest().Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

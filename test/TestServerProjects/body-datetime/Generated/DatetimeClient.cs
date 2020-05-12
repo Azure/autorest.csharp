@@ -758,5 +758,39 @@ namespace body_datetime
                 throw;
             }
         }
+
+        /// <summary> Get min datetime value 0001-01-01T00:00:00. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<DateTimeOffset>> GetLocalNoOffsetMinDateTimeAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalNoOffsetMinDateTime");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetLocalNoOffsetMinDateTimeAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get min datetime value 0001-01-01T00:00:00. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<DateTimeOffset> GetLocalNoOffsetMinDateTime(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DatetimeClient.GetLocalNoOffsetMinDateTime");
+            scope.Start();
+            try
+            {
+                return RestClient.GetLocalNoOffsetMinDateTime(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

@@ -27,12 +27,17 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of UsagesClient. </summary>
-        public UsagesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
+        public UsagesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, "https://management.azure.com", tokenCredential, options)
+        {
+        }
+
+        /// <summary> Initializes a new instance of UsagesClient. </summary>
+        public UsagesClient(string subscriptionId, string host, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, options);
-            RestClient = new UsagesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, host, options);
+            RestClient = new UsagesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, host: host);
         }
 
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>

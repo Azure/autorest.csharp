@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Plugins;
@@ -75,13 +76,53 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             foreach (Parameter parameter in client.RestClient.Parameters)
             {
                 // Skip host and API Version parameters that would be set later
-                if (ManagementClientWriterHelpers.IsHostParameter(parameter) ||
-                    ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
+                if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter) ||
+                    ManagementClientWriterHelpers.IsHostParameter(parameter))
                 {
                     continue;
                 }
 
-                writer.WriteParameter(parameter);
+                writer.WriteParameter(parameter, false);
+            }
+
+            writer.Append($"{typeof(TokenCredential)} tokenCredential, {configuration.LibraryName}ManagementClientOptions options = null) : this(");
+
+            foreach (Parameter parameter in client.RestClient.Parameters)
+            {
+                // Skip API Version parameters that would be set later
+                if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
+                {
+                    continue;
+                }
+
+                // Pass the default host
+                if (ManagementClientWriterHelpers.IsHostParameter(parameter))
+                {
+                    writer.Append($"{parameter.DefaultValue?.Value:L}, ");
+                    continue;
+                }
+
+                writer.Append($"{parameter.Name},");
+            }
+
+            writer.Line($" tokenCredential, options)");
+            using (writer.Scope())
+            {
+            }
+            writer.Line();
+
+
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
+            writer.Append($"public {client.Type.Name:D}(");
+            foreach (Parameter parameter in client.RestClient.Parameters)
+            {
+                // Skip host and API Version parameters that would be set later
+                if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
+                {
+                    continue;
+                }
+
+                writer.WriteParameter(parameter, false);
             }
 
             writer.Append($"{typeof(TokenCredential)} tokenCredential, {configuration.LibraryName}ManagementClientOptions options = null)");
@@ -90,15 +131,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.Line($"options ??= new {configuration.LibraryName}ManagementClientOptions();");
                 writer.Line($"_clientDiagnostics = new {typeof(ClientDiagnostics)}(options);");
-                writer.Line($"_pipeline = {typeof(ManagementPipelineBuilder)}.Build(tokenCredential, options);");
+                writer.Line($"_pipeline = {typeof(ManagementPipelineBuilder)}.Build(tokenCredential, host, options);");
 
                 writer.Append($"this.RestClient = new {client.RestClient.Type}(_clientDiagnostics, _pipeline, ");
 
                 foreach (Parameter parameter in client.RestClient.Parameters)
                 {
                     // Skip host and API Version parameters that would be set later
-                    if (ManagementClientWriterHelpers.IsHostParameter(parameter) ||
-                        ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
+                    if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
                     {
                         continue;
                     }
