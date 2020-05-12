@@ -175,12 +175,6 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(DateTimeOffset.Parse("9999-12-31 23:59:59.999+00:00"), response.Value);
         });
 
-        [Test]
-        public void LROValueTypeIsReadOnlyList()
-        {
-            Assert.AreEqual(typeof(Operation<IReadOnlyList<Product>>), typeof(LROsPost202ListOperation).BaseType);
-        }
-
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new[]
         {
             "getDateTimeNull",
