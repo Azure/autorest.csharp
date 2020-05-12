@@ -77,6 +77,16 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_11
+      type: constant
+      value: !<!ConstantValue> 
+        value: text/plain
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: TextPlain
+          description: Content Type 'text/plain'
+      protocol: !<!Protocols> {}
   binaries:
     - !<!BinarySchema> &ref_4
       type: binary
@@ -247,6 +257,75 @@ operationGroups:
           default:
             name: AnalyzeBody
             description: 'Analyze body, that could be different media types.'
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 2.0-preview
+        parameters:
+          - *ref_2
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_11
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_12
+                schema: *ref_0
+                implementation: Method
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: input
+                    description: Input parameter.
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: binary
+            signatureParameters:
+              - *ref_12
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpBinaryRequest> 
+                path: /mediatypes/contentTypeWithEncoding
+                method: post
+                binary: true
+                knownMediaType: text
+                mediaTypes:
+                  - text/plain
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_10
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
+            name: ContentTypeWithEncoding
+            description: Pass in contentType 'text/plain; encoding=UTF-8' to pass test. Value for input does not matter
         protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:

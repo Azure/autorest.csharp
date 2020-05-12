@@ -85,6 +85,50 @@ namespace lro
             }
         }
 
+        internal HttpMessage CreatePost202ListRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/lro/list", false);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> Post202ListAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePost202ListRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 202:
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Post202List(CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePost202ListRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 202:
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreatePut200SucceededNoStateRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
