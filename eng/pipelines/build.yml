@@ -44,7 +44,7 @@ jobs:
         condition: succeeded()
         failOnStderr: false
         displayName: 'Publish to GitHub and coverage report'
-      - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion)
+      - pwsh: /eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion)
         condition: succeeded()
         displayName: 'Update generator version in Azure SDK repo'
       - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
