@@ -1,4 +1,4 @@
-param($NewVersion)
+param($Version)
 
 function UpdateValue([Parameter(ValueFromPipeline=$true)]$content, $name, $value)
 {
@@ -8,9 +8,9 @@ function UpdateValue([Parameter(ValueFromPipeline=$true)]$content, $name, $value
 
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
-if (!$NewVersion)
+if (!$Version)
 {
-    $NewVersion = "$RepoRoot\artifacts\bin\AutoRest.CSharp.V3\Debug\netcoreapp3.0"
+    $Version = "$RepoRoot\artifacts\bin\AutoRest.CSharp.V3\Debug\netcoreapp3.0"
 }
 
 $SdkRepoRoot = Resolve-Path azure-sdk-for-net
@@ -30,7 +30,7 @@ git clone --depth 1 --branch master https://github.com/azure/azure-sdk-for-net
 $CodeGenerationTargetsPath = "$SdkRepoRoot\eng\CodeGeneration.targets"
 
 Get-Content -Raw $CodeGenerationTargetsPath | `
-    UpdateValue -Name "_AutoRestCSharpVersion" -Value $NewVersion | `
+    UpdateValue -Name "_AutoRestCSharpVersion" -Value $Version | `
     UpdateValue -Name "_AutoRestCoreVersion" -Value $CoreVersion | `
     UpdateValue -Name "_AutoRestVersion" -Value $AutoRestVersion | `
     Set-Content $CodeGenerationTargetsPath
