@@ -28,10 +28,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return writer;
         }
 
-        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter)
+        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool includeDefaultValue = true)
         {
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
-            if (clientParameter.DefaultValue != null)
+            if (includeDefaultValue && clientParameter.DefaultValue != null)
             {
                 writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
             }
