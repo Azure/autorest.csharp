@@ -353,3 +353,6 @@ MigrationBackup/
 
 # Rider IDE
 .idea/
+
+# created by UpdateAzureSdkForNet
+azure-sdk-for-net
