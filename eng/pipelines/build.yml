@@ -64,19 +64,4 @@ jobs:
           PushArgs: -f
           WorkingDirectory: $(System.DefaultWorkingDirectory)/azure-sdk-for-net
           ScriptDirectory: $(System.DefaultWorkingDirectory)/azure-sdk-tools/eng/common/scripts
-  - template: smoke-test.yml
-    parameters:
-      name: SmokeTest_A_C
-      filter: "^[a-b]"
-  - template: smoke-test.yml
-    parameters:
-      name: SmokeTest_C_I
-      filter: "^[c-i]"
-  - template: smoke-test.yml
-    parameters:
-      name: SmokeTest_J_R
-      filter: "^[j-r]"
-  - template: smoke-test.yml
-    parameters:
-      name: SmokeTest_S_Z
-      filter: "^[s-z]"
+
