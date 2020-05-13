@@ -44,6 +44,15 @@ jobs:
         condition: succeeded()
         failOnStderr: false
         displayName: 'Update generator version in Azure SDK repo'
+      - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+        parameters:
+          RepoName: azure-sdk-for-net
+          PRBranchName: auto-update-autorest
+          CommitMsg: Update AutoRest C# version
+          PRTitle: Update AutoRest C# version to $(AutorestCSharpVersion)
+          PushArgs: -f
+          WorkingDirectory: $(System.DefaultWorkingDirectory)azure-sdk-for-net
+          ScriptDirectory: $(System.DefaultWorkingDirectory)/eng/common/scripts
   - template: smoke-test.yml
     parameters:
       name: SmokeTest_A_C
