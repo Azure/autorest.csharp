@@ -51,7 +51,7 @@ jobs:
         path: azure-sdk-tools
       - checkout: azure-sdk-for-net
         path: azure-sdk-for-net
-      - pwsh: ./autorest.csharp/eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(System.DefaultWorkingDirectory)/azure-sdk-for-net
+      - pwsh: ./autorest.csharp/eng/UpdateAzureSdkForNet.ps1 -SdkRepoRoot $(System.DefaultWorkingDirectory)/azure-sdk-for-net
         condition: succeeded()
         failOnStderr: false
         displayName: 'Update generator version in Azure SDK repo'
