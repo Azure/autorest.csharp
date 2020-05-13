@@ -1,5 +1,7 @@
 param($Version, $SdkRepoRoot)
 
+$SdkRepoRoot = Resolve-Path $SdkRepoRoot
+
 Write-Host "Running $Version, $SdkRepoRoot"
 
 function UpdateValue([Parameter(ValueFromPipeline=$true)]$content, $name, $value)
