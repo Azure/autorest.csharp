@@ -51,7 +51,7 @@ jobs:
         path: azure-sdk-tools
       - checkout: azure-sdk-for-net
         path: azure-sdk-for-net
-      - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -SdkRepoRoot azure-sdk-for-net
+      - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -SdkRepoRoot ../azure-sdk-for-net
         condition: succeeded()
         failOnStderr: false
         workingDirectory: autorest.csharp

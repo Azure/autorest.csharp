@@ -1,5 +1,7 @@
 param($Version, $SdkRepoRoot)
 
+Write-Host "Running $Version, $SdkRepoRoot"
+
 function UpdateValue([Parameter(ValueFromPipeline=$true)]$content, $name, $value)
 {
     Write-Host "Updating $name to $value"
