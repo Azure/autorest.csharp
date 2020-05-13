@@ -14,6 +14,10 @@ resources:
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
+    - repository: azure-sdk-for-net
+      type: github
+      name: Azure/azure-sdk-for-net
+      endpoint: azure
 
 jobs:
   - job: Build
@@ -40,19 +44,25 @@ jobs:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
-      - pwsh: ./eng/UpdateAzureSdkForNet.ps1
+      - checkout: azure-sdk-tools
+        fetchDepth: 1
+        path: azure-sdk-tools
+      - checkout: azure-sdk-for-net
+        fetchDepth: 1
+        path: azure-sdk-for-net
+      - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(System.DefaultWorkingDirectory)/azure-sdk-for-net
         condition: succeeded()
         failOnStderr: false
         displayName: 'Update generator version in Azure SDK repo'
-      - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+      - template: /tools/eng/common/pipelines/templates/steps/create-pull-request.yml
         parameters:
           RepoName: azure-sdk-for-net
           PRBranchName: auto-update-autorest
           CommitMsg: Update AutoRest C# version
           PRTitle: Update AutoRest C# version to $(AutorestCSharpVersion)
           PushArgs: -f
-          WorkingDirectory: $(System.DefaultWorkingDirectory)azure-sdk-for-net
-          ScriptDirectory: $(System.DefaultWorkingDirectory)/eng/common/scripts
+          WorkingDirectory: $(System.DefaultWorkingDirectory)/azure-sdk-for-net
+          ScriptDirectory: $(System.DefaultWorkingDirectory)/azure-sdk-tools/eng/common/scripts
   - template: smoke-test.yml
     parameters:
       name: SmokeTest_A_C

@@ -1,4 +1,4 @@
-param($Version)
+param($Version, $SdkRepoRoot)
 
 function UpdateValue([Parameter(ValueFromPipeline=$true)]$content, $name, $value)
 {
@@ -12,10 +12,6 @@ if (!$Version)
 {
     $Version = "$RepoRoot\artifacts\bin\AutoRest.CSharp.V3\Debug\netcoreapp3.0"
 }
-
-git clone --depth 1 --branch master https://github.com/azure/azure-sdk-for-net
-
-$SdkRepoRoot = Resolve-Path azure-sdk-for-net
 
 if ((Get-Content -Raw "$RepoRoot\readme.md") -match "version: ([\.\d]+)")
 {
