@@ -23,7 +23,6 @@ if ((Get-Content -Raw "$RepoRoot\package.json") -match "`"@autorest/autorest`": 
     $AutoRestVersion = $Matches[1];
 }
 
-
 $CodeGenerationTargetsPath = "$SdkRepoRoot\eng\CodeGeneration.targets"
 
 Get-Content -Raw $CodeGenerationTargetsPath | `
