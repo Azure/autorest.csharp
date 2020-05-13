@@ -18,18 +18,18 @@ using lro.Models;
 namespace lro
 {
     /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
-    public partial class LROsPost202ListOperation : Operation<IList<Product>>, IOperationSource<IList<Product>>
+    public partial class LROsPost202ListOperation : Operation<IReadOnlyList<Product>>, IOperationSource<IReadOnlyList<Product>>
     {
-        private readonly ArmOperationHelpers<IList<Product>> _operation;
+        private readonly ArmOperationHelpers<IReadOnlyList<Product>> _operation;
         internal LROsPost202ListOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<IList<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
+            _operation = new ArmOperationHelpers<IReadOnlyList<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override IList<Product> Value => _operation.Value;
+        public override IReadOnlyList<Product> Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -47,12 +47,12 @@ namespace lro
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<IList<Product>>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<IReadOnlyList<Product>>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<IList<Product>>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<IReadOnlyList<Product>>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        IList<Product> IOperationSource<IList<Product>>.CreateResult(Response response, CancellationToken cancellationToken)
+        IReadOnlyList<Product> IOperationSource<IReadOnlyList<Product>>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             if (document.RootElement.ValueKind == JsonValueKind.Null)
@@ -77,7 +77,7 @@ namespace lro
             }
         }
 
-        async ValueTask<IList<Product>> IOperationSource<IList<Product>>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<IReadOnlyList<Product>> IOperationSource<IReadOnlyList<Product>>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             if (document.RootElement.ValueKind == JsonValueKind.Null)

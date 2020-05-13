@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -464,7 +465,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPutError201NoProvisioningStatePayloadAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
@@ -472,7 +473,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPutError201NoProvisioningStatePayload(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
         });
 
         [Test]
@@ -714,6 +715,16 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
             Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+        });
+
+        [Test]
+        public Task LROPostAndGetList() => Test(async (host, pipeline) =>
+        {
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPost202ListAsync();
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual(1, result.Value.Count);
+            Assert.AreEqual("100", result.Value[0].Id);
+            Assert.AreEqual("foo", result.Value[0].Name);
         });
 
         [Test]
@@ -1382,6 +1393,12 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("foo", result.Value.Name);
             Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
         });
+
+        [Test]
+        public void LROValueTypeIsReadOnlyList()
+        {
+            Assert.AreEqual(typeof(Operation<IReadOnlyList<Product>>), typeof(LROsPost202ListOperation).BaseType);
+        }
 
         private static Response<TResult> WaitForCompletion<TResult>(Operation<TResult> operation, CancellationToken cancellationToken = default) where TResult : notnull
         {

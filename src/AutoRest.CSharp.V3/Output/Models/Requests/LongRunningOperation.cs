@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 
             if (finalResponseSchema != null)
             {
-                ResultType = context.TypeFactory.CreateType(finalResponseSchema, false);
+                ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(finalResponseSchema, false));
                 ResultSerialization = new SerializationBuilder().Build(finalResponse.HttpResponse.KnownMediaType, finalResponseSchema, ResultType);
             }
             else

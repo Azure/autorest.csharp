@@ -36,5 +36,13 @@ namespace AutoRest.TestServer.Tests
             var response = await new ServiceClient(ClientDiagnostics, pipeline, host).AnalyzeBodyAsync(ContentType.ApplicationPdf, value);
             Assert.AreEqual("Nice job with PDF", response.Value);
         });
+
+        [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/751")]
+        public Task MediaTypeWithEncoding() => Test(async (host, pipeline) =>
+        {
+            var response = await new ServiceClient(ClientDiagnostics, pipeline, host).ContentTypeWithEncodingAsync("input");
+            Assert.AreEqual("Nice job sending content type with encoding", response.Value);
+        });
     }
 }

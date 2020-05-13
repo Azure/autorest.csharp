@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     if (async)
                     {
-                        writer.Line($"return await new {typeof(ValueTask<Response>)}({responseVariable});");
+                        writer.Line($"return await new {typeof(ValueTask<Response>)}({responseVariable}).ConfigureAwait(false);");
                     }
                     else
                     {
