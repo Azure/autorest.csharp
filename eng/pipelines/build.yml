@@ -54,7 +54,7 @@ jobs:
         condition: succeeded()
         failOnStderr: false
         displayName: 'Update generator version in Azure SDK repo'
-      - template: /tools/eng/common/pipelines/templates/steps/create-pull-request.yml
+      - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
         parameters:
           RepoName: azure-sdk-for-net
           PRBranchName: auto-update-autorest
