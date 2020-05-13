@@ -38,11 +38,11 @@ jobs:
       - script: |
           npm ci
         displayName: "Install packages"
-        workingDirectory: $(Build.self.LocalPath)
+        workingDirectory: $(Build.Repository.LocalPath)
       - script: |
           dotnet build AutoRest.CSharp.V3.sln
         displayName: "Build"
-        workingDirectory: $(Build.self.LocalPath)
+        workingDirectory: $(Build.Repository.LocalPath)
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
