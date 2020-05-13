@@ -1,5 +1,4 @@
 param($Version, $SdkRepoRoot)
-$ErrorView = "NormalView"
 
 Write-Host "Running $Version, $SdkRepoRoot"
 

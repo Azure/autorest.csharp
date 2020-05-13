@@ -48,12 +48,12 @@ jobs:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
       - checkout: azure-sdk-tools
-        depth: 1
+        fetchDepth: 1
         path: azure-sdk-tools
       - checkout: azure-sdk-for-net
-        depth: 1
+        fetchDepth: 1
         path: azure-sdk-for-net
-      - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -SdkRepoRoot ../azure-sdk-for-net
+      - pwsh: $ErrorView = "NormalView"; ./eng/UpdateAzureSdkForNet.ps1 -SdkRepoRoot ../azure-sdk-for-net
         condition: succeeded()
         failOnStderr: false
         workingDirectory: autorest.csharp
