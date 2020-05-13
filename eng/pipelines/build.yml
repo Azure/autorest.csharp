@@ -27,6 +27,7 @@ jobs:
       vmImage: windows-2019
     steps:
       - checkout: self
+      - checkout: azure-sdk-tools
       - task: DotNetCoreInstaller@2
         displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
         inputs:
@@ -59,7 +60,6 @@ jobs:
           DOTNET_MULTILEVEL_LOOKUP: 0
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-        - checkout: azure-sdk-tools
         - checkout: azure-sdk-for-net
         - pwsh: ./eng/PublishRelease.ps1 -WorkingDirectory ./artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/ -PackageJson ./src/AutoRest.CSharp.V3/package.json -Token $(azuresdk-github-pat) -Artifacts $(Build.ArtifactStagingDirectory) -BuildNumber $(Build.BuildNumber) -Sha $(Build.SourceVersion) -CoverageUser $(storage-coverage-user) -CoveragePass $(storage-coverage-pass)
           condition: succeeded()
