@@ -38,20 +38,18 @@ jobs:
       - script: |
           npm ci
         displayName: "Install packages"
-        workingDirectory: autorest.csharp
+        workingDirectory: $(Build.self.LocalPath)
       - script: |
           dotnet build AutoRest.CSharp.V3.sln
         displayName: "Build"
-        workingDirectory: autorest.csharp
+        workingDirectory: $(Build.self.LocalPath)
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
       - checkout: azure-sdk-tools
-        path: azure-sdk-tools
       - checkout: azure-sdk-for-net
-        path: azure-sdk-for-net
-      - powershell: $ErrorView = "NormalView"; ./eng/UpdateAzureSdkForNet.ps1 -SdkRepoRoot ../azure-sdk-for-net
+      - powershell: $ErrorView = "NormalView"; ./eng/UpdateAzureSdkForNet.ps1 -SdkRepoRoot $(Build.azure-sdk-for-net.LocalPath)
         condition: succeeded()
         failOnStderr: false
         workingDirectory: autorest.csharp
