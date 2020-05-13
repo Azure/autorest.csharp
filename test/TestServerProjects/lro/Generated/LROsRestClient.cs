@@ -85,6 +85,101 @@ namespace lro
             }
         }
 
+        internal HttpMessage CreatePut201SucceededRequest(Product product)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/lro/put/201/succeeded", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            if (product != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> Put201SucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePut201SucceededRequest(product);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Put201Succeeded(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePut201SucceededRequest(product);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePost202ListRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/lro/list", false);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response> Post202ListAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePost202ListRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 202:
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Post202List(CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePost202ListRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 202:
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreatePut200SucceededNoStateRequest(Product product)
         {
             var message = _pipeline.CreateMessage();

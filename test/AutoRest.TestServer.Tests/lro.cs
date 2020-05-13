@@ -1070,6 +1070,28 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task LROPutInlineComplete201() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPut201SucceededAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+        });
+
+        [Test]
+        public Task LROPutInlineComplete201_Sync() => Test((host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPut201Succeeded(value);
+            var result = WaitForCompletion(operation);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+        });
+
+        [Test]
         public Task LROPutNoHeaderInRetry() => Test(async (host, pipeline) =>
         {
             var value = new Product();
