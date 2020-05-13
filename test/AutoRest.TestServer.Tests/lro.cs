@@ -465,7 +465,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPutError201NoProvisioningStatePayloadAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
@@ -473,7 +473,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPutError201NoProvisioningStatePayload(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
         });
 
         [Test]
@@ -1074,6 +1074,28 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPut200Succeeded(value);
+            var result = WaitForCompletion(operation);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+        });
+
+        [Test]
+        public Task LROPutInlineComplete201() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPut201SucceededAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual("Succeeded", result.Value.ProvisioningState);
+        });
+
+        [Test]
+        public Task LROPutInlineComplete201_Sync() => Test((host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPut201Succeeded(value);
             var result = WaitForCompletion(operation);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
