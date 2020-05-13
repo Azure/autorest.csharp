@@ -22,7 +22,7 @@ if ((Get-Content -Raw "$RepoRoot\readme.md") -match "version: ([\.\d]+)")
     $CoreVersion = $Matches[1];
 }
 
-if ((Get-Content -Raw "$RepoRoot\package.json") -match "`"@autorest/autorest`": `"(.*?)`"")
+if ((Get-Content -Raw "$RepoRoot\package.json") -match "`"autorest`": `"(.*?)`"")
 {
     $AutoRestVersion = $Matches[1];
 }
