@@ -27,6 +27,7 @@ jobs:
       vmImage: windows-2019
     steps:
       - checkout: self
+        path: .
       - task: DotNetCoreInstaller@2
         displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
         inputs:
