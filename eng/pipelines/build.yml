@@ -26,7 +26,7 @@ jobs:
     pool:
       vmImage: windows-2019
     steps:
-      - checkout: autorest.csharp
+      - checkout: self
       - task: DotNetCoreInstaller@2
         displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
         inputs:
