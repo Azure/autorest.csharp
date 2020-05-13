@@ -22,7 +22,7 @@ try
 
    cmd /c "npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
 
-   Write-Host "##vso[task.setvariable variable=AutorestCSharpVersion;isSecret=false;isOutput=true;]https://github.com/Azure/autorest.csharp/releases/download/$devVersion/autorest-csharp-v3-$devVersion.tgz"
+   Write-Host "##vso[task.setvariable variable=AutorestCSharpVersion;isSecret=false]https://github.com/Azure/autorest.csharp/releases/download/$devVersion/autorest-csharp-v3-$devVersion.tgz"
 }
 finally
 {

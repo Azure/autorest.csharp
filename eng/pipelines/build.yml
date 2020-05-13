@@ -61,6 +61,7 @@ jobs:
         displayName: 'Update generator version in Azure SDK repo'
       - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
         parameters:
+          BaseBranchName: master
           RepoName: azure-sdk-for-net
           PRBranchName: auto-update-autorest
           CommitMsg: Update AutoRest C# version
