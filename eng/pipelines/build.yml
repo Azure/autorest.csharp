@@ -27,7 +27,6 @@ jobs:
       vmImage: windows-2019
     steps:
       - checkout: self
-        path: .
       - task: DotNetCoreInstaller@2
         displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
         inputs:
@@ -39,9 +38,11 @@ jobs:
       - script: |
           npm ci
         displayName: "Install packages"
+        workingDirectory: autorest.csharp
       - script: |
           dotnet build AutoRest.CSharp.V3.sln
         displayName: "Build"
+        workingDirectory: autorest.csharp
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -50,7 +51,7 @@ jobs:
         path: azure-sdk-tools
       - checkout: azure-sdk-for-net
         path: azure-sdk-for-net
-      - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(System.DefaultWorkingDirectory)/azure-sdk-for-net
+      - pwsh: ./autorest.csharp/eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(System.DefaultWorkingDirectory)/azure-sdk-for-net
         condition: succeeded()
         failOnStderr: false
         displayName: 'Update generator version in Azure SDK repo'
