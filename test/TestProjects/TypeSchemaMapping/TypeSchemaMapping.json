@@ -170,6 +170,24 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "ModelWithCustomNamespace": {
+      "type": "object",
+      "properties": {
+        "EnumWithCustomNamespace": {
+          "type": "string",
+          "description": "Letters",
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ],
+          "x-ms-enum": {
+            "name": "Letters",
+            "modelAsString": true
+          }
+        }
+      }
     }
   }
 }
