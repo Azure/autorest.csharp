@@ -25,25 +25,12 @@ namespace Azure.Management.Storage
         protected FileSharesClient()
         {
         }
-
         /// <summary> Initializes a new instance of FileSharesClient. </summary>
-        public FileSharesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, null, tokenCredential, options)
+        internal FileSharesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-        }
-
-        /// <summary> Initializes a new instance of FileSharesClient. </summary>
-        public FileSharesClient(string subscriptionId, Uri endpoint, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
-        {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            endpoint ??= new Uri("https://management.azure.com");
-
-            options ??= new StorageManagementClientOptions();
-            _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, endpoint, options);
-            RestClient = new FileSharesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, endpoint: endpoint);
+            RestClient = new FileSharesRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. </summary>
