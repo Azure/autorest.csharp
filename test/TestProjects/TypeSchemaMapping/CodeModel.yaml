@@ -43,6 +43,16 @@ schemas: !<!Schemas>
           name: SecondModelStringProperty
           description: .
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_7
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ModelWithCustomNamespaceModelProperty
+          description: .
+      protocol: !<!Protocols> {}
   choices:
     - !<!ChoiceSchema> &ref_3
       choices:
@@ -122,7 +132,7 @@ schemas: !<!Schemas>
           name: DaysOfWeek
           description: Day of week
       protocol: !<!Protocols> {}
-    - !<!ChoiceSchema> &ref_7
+    - !<!ChoiceSchema> 
       choices:
         - !<!ChoiceValue> 
           value: A
@@ -147,9 +157,12 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       choiceType: *ref_0
+      extensions:
+        x-accessibility: internal
+        x-namespace: Test.Namespace
       language: !<!Languages> 
         default:
-          name: Letters
+          name: EnumWithCustomNamespace
           description: Letters
       protocol: !<!Protocols> {}
   constants:
@@ -318,12 +331,15 @@ schemas: !<!Schemas>
       properties:
         - !<!Property> 
           schema: *ref_7
-          serializedName: EnumWithCustomNamespace
+          serializedName: ModelProperty
           language: !<!Languages> 
             default:
-              name: enumWithCustomNamespace
-              description: Letters
+              name: modelProperty
+              description: .
           protocol: !<!Protocols> {}
+      extensions:
+        x-accessibility: internal
+        x-namespace: Test.Namespace
       language: !<!Languages> 
         default:
           name: ModelWithCustomNamespace

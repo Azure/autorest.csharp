@@ -65,8 +65,8 @@ namespace AutoRest.CSharp.V3.Input
 
     internal partial class DictionaryOfAny
     {
-        public string? Accessibility => TryGetValue("x-ms-accessibility", out object? value) ? value?.ToString() : null;
-        public string? Namespace => TryGetValue("x-ms-namespace", out object? value) ? value?.ToString() : null;
+        public string? Accessibility => TryGetValue("x-accessibility", out object? value) ? value?.ToString() : null;
+        public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
     }
 
     internal partial class ServiceResponse

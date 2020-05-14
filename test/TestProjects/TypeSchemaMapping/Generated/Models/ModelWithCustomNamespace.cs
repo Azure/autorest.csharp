@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace TypeSchemaMapping.Models
+namespace Test.Namespace
 {
     /// <summary> The ModelWithCustomNamespace. </summary>
     internal partial class ModelWithCustomNamespace
@@ -16,13 +16,13 @@ namespace TypeSchemaMapping.Models
         }
 
         /// <summary> Initializes a new instance of ModelWithCustomNamespace. </summary>
-        /// <param name="enumWithCustomNamespace"> Letters. </param>
-        internal ModelWithCustomNamespace(Letters? enumWithCustomNamespace)
+        /// <param name="modelProperty"> . </param>
+        internal ModelWithCustomNamespace(string modelProperty)
         {
-            EnumWithCustomNamespace = enumWithCustomNamespace;
+            ModelProperty = modelProperty;
         }
 
-        /// <summary> Letters. </summary>
-        public Letters? EnumWithCustomNamespace { get; set; }
+        /// <summary> . </summary>
+        public string ModelProperty { get; set; }
     }
 }
