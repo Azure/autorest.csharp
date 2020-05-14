@@ -8,6 +8,17 @@ pr:
     include:
     - feature/*
 
+resources:
+  repositories:
+    - repository: azure-sdk-tools
+      type: github
+      name: Azure/azure-sdk-tools
+      endpoint: azure
+    - repository: azure-sdk-for-net
+      type: github
+      name: Azure/azure-sdk-for-net
+      endpoint: azure
+
 jobs:
   - job: Build
     variables:
@@ -15,6 +26,8 @@ jobs:
     pool:
       vmImage: windows-2019
     steps:
+      - checkout: self
+      - checkout: azure-sdk-tools
       - task: DotNetCoreInstaller@2
         displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
         inputs:
@@ -26,15 +39,18 @@ jobs:
       - script: |
           npm ci
         displayName: "Install packages"
+        workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - script: |
           dotnet build AutoRest.CSharp.V3.sln
         displayName: "Build"
+        workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
       - pwsh: ./eng/CodeChecks.ps1
         displayName: "Check if code is up-to-date"
+        workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - script: |
           dotnet test AutoRest.CSharp.V3.sln
         displayName: "Test"
@@ -42,11 +58,36 @@ jobs:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
+        workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-        - pwsh: ./eng/PublishRelease.ps1 -WorkingDirectory ./artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/ -PackageJson ./src/AutoRest.CSharp.V3/package.json -Token $(azuresdk-github-pat) -Artifacts $(Build.ArtifactStagingDirectory) -BuildNumber $(Build.BuildNumber) -Sha $(Build.SourceVersion) -CoverageUser $(storage-coverage-user) -CoveragePass $(storage-coverage-pass)
-          condition: succeeded()
+        - checkout: azure-sdk-for-net
+        - pwsh: > 
+            ./eng/PublishRelease.ps1
+            -WorkingDirectory ./artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
+            -PackageJson ./src/AutoRest.CSharp.V3/package.json
+            -Token $(azuresdk-github-pat)
+            -Artifacts $(Build.ArtifactStagingDirectory)
+            -BuildNumber $(Build.BuildNumber)
+            -Sha $(Build.SourceVersion)
+            -CoverageUser $(storage-coverage-user)
+            -CoveragePass $(storage-coverage-pass)
           failOnStderr: false
           displayName: 'Publish to GitHub and coverage report'
+          workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+          failOnStderr: false
+          workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          displayName: 'Update generator version in Azure SDK repo'
+        - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+          parameters:
+            BaseBranchName: master
+            RepoName: azure-sdk-for-net
+            PRBranchName: auto-update-autorest
+            CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
+            PRTitle:  Update AutoRest C# version
+            PushArgs: -f
+            WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+            ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
   - template: smoke-test.yml
     parameters:
       name: SmokeTest_A_C
