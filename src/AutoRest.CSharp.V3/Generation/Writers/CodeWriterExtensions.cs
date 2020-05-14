@@ -52,26 +52,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             foreach (Parameter parameter in parameters)
             {
-                writer.WriteParameterNullCheck(parameter);
+                CSharpType cs = parameter.Type;
+                if (parameter.DefaultValue != null &&
+                    !CanBeInitializedInline(parameter))
+                {
+                    writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
+                }
+                else if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
+                {
+                    using (writer.Scope($"if ({parameter.Name:I} == null)"))
+                    {
+                        writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
+                    }
+                }
             }
 
             writer.Line();
-        }
-        public static void WriteParameterNullCheck(this CodeWriter writer, Parameter parameter)
-        {
-            CSharpType cs = parameter.Type;
-            if (parameter.DefaultValue != null &&
-                !CanBeInitializedInline(parameter))
-            {
-                writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
-            }
-            else if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
-            {
-                using (writer.Scope($"if ({parameter.Name:I} == null)"))
-                {
-                    writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
-                }
-            }
         }
 
         private static bool CanBeInitializedInline(Parameter parameter)
