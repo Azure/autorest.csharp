@@ -38,11 +38,15 @@ namespace Azure.Core
                 {
                     _position = RawWritingPosition.Query;
                 }
+                else if (!string.IsNullOrEmpty(Path))
+                {
+                    _position = RawWritingPosition.Path;
+                }
                 else if (!string.IsNullOrEmpty(Host))
                 {
                     _position = RawWritingPosition.Host;
                 }
-                else if (!string.IsNullOrEmpty(Scheme))
+                else
                 {
                     _position = RawWritingPosition.Scheme;
                 }
