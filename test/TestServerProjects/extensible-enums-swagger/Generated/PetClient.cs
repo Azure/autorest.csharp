@@ -25,9 +25,9 @@ namespace extensible_enums_swagger
         {
         }
         /// <summary> Initializes a new instance of PetClient. </summary>
-        internal PetClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal PetClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new PetRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new PetRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

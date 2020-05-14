@@ -16,19 +16,16 @@ namespace azure_special_properties
 {
     internal partial class ApiVersionLocalRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ApiVersionLocalRestClient. </summary>
-        public ApiVersionLocalRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public ApiVersionLocalRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -39,7 +36,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/local/2.0", false);
             uri.AppendQuery("api-version", "2.0", true);
             request.Uri = uri;
@@ -82,7 +79,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/local/null", false);
             if (apiVersion != null)
             {
@@ -130,7 +127,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/apiVersion/path/string/none/query/local/2.0", false);
             uri.AppendQuery("api-version", "2.0", true);
             request.Uri = uri;
@@ -173,7 +170,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/apiVersion/swagger/string/none/query/local/2.0", false);
             uri.AppendQuery("api-version", "2.0", true);
             request.Uri = uri;

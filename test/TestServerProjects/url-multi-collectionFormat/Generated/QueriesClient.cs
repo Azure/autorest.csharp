@@ -25,9 +25,9 @@ namespace url_multi_collectionFormat
         {
         }
         /// <summary> Initializes a new instance of QueriesClient. </summary>
-        internal QueriesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal QueriesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new QueriesRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new QueriesRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

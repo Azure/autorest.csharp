@@ -25,9 +25,9 @@ namespace AdditionalPropertiesEx
         {
         }
         /// <summary> Initializes a new instance of APClient. </summary>
-        internal APClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal APClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new APRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new APRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -24,9 +24,9 @@ namespace httpInfrastructure
         {
         }
         /// <summary> Initializes a new instance of HttpSuccessClient. </summary>
-        internal HttpSuccessClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal HttpSuccessClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new HttpSuccessRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new HttpSuccessRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

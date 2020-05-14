@@ -26,9 +26,9 @@ namespace required_optional
         {
         }
         /// <summary> Initializes a new instance of ExplicitClient. </summary>
-        internal ExplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal ExplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new ExplicitRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new ExplicitRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

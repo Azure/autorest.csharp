@@ -16,19 +16,16 @@ namespace httpInfrastructure
 {
     internal partial class HttpClientFailureRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of HttpClientFailureRestClient. </summary>
-        public HttpClientFailureRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public HttpClientFailureRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -39,7 +36,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             return message;
@@ -77,7 +74,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             return message;
@@ -115,7 +112,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             return message;
@@ -153,7 +150,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -195,7 +192,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -237,7 +234,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -279,7 +276,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -321,7 +318,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/401", false);
             request.Uri = uri;
             return message;
@@ -359,7 +356,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/402", false);
             request.Uri = uri;
             return message;
@@ -397,7 +394,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             return message;
@@ -435,7 +432,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             return message;
@@ -473,7 +470,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/404", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -515,7 +512,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/405", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -557,7 +554,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/406", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -599,7 +596,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/407", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -641,7 +638,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/409", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -683,7 +680,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/410", false);
             request.Uri = uri;
             return message;
@@ -721,7 +718,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/411", false);
             request.Uri = uri;
             return message;
@@ -759,7 +756,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             return message;
@@ -797,7 +794,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             return message;
@@ -835,7 +832,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/413", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -877,7 +874,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/414", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -919,7 +916,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/415", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -961,7 +958,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/416", false);
             request.Uri = uri;
             return message;
@@ -999,7 +996,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/417", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -1041,7 +1038,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/http/failure/client/429", false);
             request.Uri = uri;
             return message;

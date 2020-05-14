@@ -26,9 +26,9 @@ namespace paging
         {
         }
         /// <summary> Initializes a new instance of PagingClient. </summary>
-        internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new PagingRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new PagingRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

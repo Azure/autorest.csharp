@@ -18,19 +18,16 @@ namespace ModelShapes
 {
     internal partial class ServiceRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +38,7 @@ namespace ModelShapes
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -97,7 +94,7 @@ namespace ModelShapes
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -177,7 +174,7 @@ namespace ModelShapes
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/op", false);
             request.Uri = uri;
             return message;

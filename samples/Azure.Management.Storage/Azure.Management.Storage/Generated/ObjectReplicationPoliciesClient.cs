@@ -27,17 +27,23 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of ObjectReplicationPoliciesClient. </summary>
-        public ObjectReplicationPoliciesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, "https://management.azure.com", tokenCredential, options)
+        public ObjectReplicationPoliciesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, null, tokenCredential, options)
         {
         }
 
         /// <summary> Initializes a new instance of ObjectReplicationPoliciesClient. </summary>
-        public ObjectReplicationPoliciesClient(string subscriptionId, string host, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
+        public ObjectReplicationPoliciesClient(string subscriptionId, Uri endpoint, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            endpoint ??= new Uri("https://management.azure.com");
+
             options ??= new StorageManagementClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, host, options);
-            RestClient = new ObjectReplicationPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, host: host);
+            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, endpoint, options);
+            RestClient = new ObjectReplicationPoliciesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, endpoint: endpoint);
         }
 
         /// <summary> Get the object replication policy of the storage account by policy ID. </summary>

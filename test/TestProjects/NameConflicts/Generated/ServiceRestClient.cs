@@ -19,19 +19,16 @@ namespace NameConflicts
 {
     internal partial class ServiceRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -42,7 +39,7 @@ namespace NameConflicts
             var request0 = message0.Request;
             request0.Method = RequestMethod.Patch;
             var uri0 = new RawRequestUriBuilder();
-            uri0.AppendRaw(host, false);
+            uri0.Reset(endpoint);
             uri0.AppendPath("/originalOperation", false);
             uri0.AppendQuery("request", request, true);
             uri0.AppendQuery("message", message, true);
@@ -188,7 +185,7 @@ namespace NameConflicts
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/conflictingLROOverloads", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/pdf");
@@ -244,7 +241,7 @@ namespace NameConflicts
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/conflictingLROOverloads", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -295,7 +292,7 @@ namespace NameConflicts
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/HttpMessage", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -368,7 +365,7 @@ namespace NameConflicts
             var request0 = message.Request;
             request0.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/Request", false);
             request0.Uri = uri;
             request0.Headers.Add("Content-Type", "application/json");
@@ -441,7 +438,7 @@ namespace NameConflicts
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/Response", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");

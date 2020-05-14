@@ -16,24 +16,21 @@ namespace azure_special_properties
 {
     internal partial class ApiVersionDefaultRestClient
     {
-        private string host;
+        private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ApiVersionDefaultRestClient. </summary>
-        public ApiVersionDefaultRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", string apiVersion = "2015-07-01-preview")
+        public ApiVersionDefaultRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
             if (apiVersion == null)
             {
                 throw new ArgumentNullException(nameof(apiVersion));
             }
 
-            this.host = host;
+            this.endpoint = endpoint;
             this.apiVersion = apiVersion;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -45,7 +42,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
@@ -88,7 +85,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
@@ -131,7 +128,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
@@ -174,7 +171,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;

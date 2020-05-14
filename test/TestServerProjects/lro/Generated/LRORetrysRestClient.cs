@@ -17,19 +17,16 @@ namespace lro
 {
     internal partial class LRORetrysRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of LRORetrysRestClient. </summary>
-        public LRORetrysRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public LRORetrysRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -40,7 +37,7 @@ namespace lro
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/put/201/creating/succeeded/200", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -93,7 +90,7 @@ namespace lro
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/putasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -144,7 +141,7 @@ namespace lro
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/delete/provisioning/202/accepted/200/succeeded", false);
             request.Uri = uri;
             return message;
@@ -188,7 +185,7 @@ namespace lro
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/delete/202/retry/200", false);
             request.Uri = uri;
             return message;
@@ -230,7 +227,7 @@ namespace lro
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/deleteasync/retry/succeeded", false);
             request.Uri = uri;
             return message;
@@ -272,7 +269,7 @@ namespace lro
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/post/202/retry/200", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -323,7 +320,7 @@ namespace lro
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/postasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");

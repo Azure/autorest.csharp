@@ -19,7 +19,7 @@ namespace AutoRest.TestServer.Tests
                     pipeline,
                     globalStringPath: "globalStringPath",
                     globalStringQuery: "globalStringQuery",
-                    host: host)
+                    endpoint: host)
                 .GetAllWithValuesAsync(
                     pathItemStringPath: "pathItemStringPath",
                     pathItemStringQuery: "pathItemStringQuery",
@@ -33,7 +33,7 @@ namespace AutoRest.TestServer.Tests
                     pipeline,
                     globalStringPath: "globalStringPath",
                     globalStringQuery: "globalStringQuery",
-                    host: host)
+                    endpoint: host)
                 .GetLocalPathItemQueryNullAsync(
                     pathItemStringPath: "pathItemStringPath",
                     pathItemStringQuery: null,

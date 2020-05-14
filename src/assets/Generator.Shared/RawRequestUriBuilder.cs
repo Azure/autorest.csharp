@@ -32,6 +32,11 @@ namespace Azure.Core
 
         public void AppendRaw(string value, bool escape)
         {
+            if (!string.IsNullOrEmpty(Path))
+            {
+                _position = RawWritingPosition.Path;
+            }
+
             while (!string.IsNullOrWhiteSpace(value))
             {
                 if (_position == RawWritingPosition.Scheme)

@@ -24,9 +24,9 @@ namespace httpInfrastructure
         {
         }
         /// <summary> Initializes a new instance of HttpFailureClient. </summary>
-        internal HttpFailureClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal HttpFailureClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new HttpFailureRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new HttpFailureRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

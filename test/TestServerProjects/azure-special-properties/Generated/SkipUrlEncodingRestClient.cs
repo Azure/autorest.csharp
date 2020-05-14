@@ -16,19 +16,16 @@ namespace azure_special_properties
 {
     internal partial class SkipUrlEncodingRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of SkipUrlEncodingRestClient. </summary>
-        public SkipUrlEncodingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public SkipUrlEncodingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -39,7 +36,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/skipUrlEncoding/method/path/valid/", false);
             uri.AppendPath(unencodedPathParam, false);
             request.Uri = uri;
@@ -94,7 +91,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/skipUrlEncoding/path/path/valid/", false);
             uri.AppendPath(unencodedPathParam, false);
             request.Uri = uri;
@@ -149,7 +146,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/skipUrlEncoding/swagger/path/valid/", false);
             uri.AppendPath("path1/path2/path3", false);
             request.Uri = uri;
@@ -192,7 +189,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/skipUrlEncoding/method/query/valid", false);
             uri.AppendQuery("q1", q1, false);
             request.Uri = uri;
@@ -247,7 +244,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/skipUrlEncoding/method/query/null", false);
             if (q1 != null)
             {
@@ -295,7 +292,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/skipUrlEncoding/path/query/valid", false);
             uri.AppendQuery("q1", q1, false);
             request.Uri = uri;
@@ -350,7 +347,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/skipUrlEncoding/swagger/query/valid", false);
             uri.AppendQuery("q1", "value1&q2=value2&q3=value3", false);
             request.Uri = uri;

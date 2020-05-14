@@ -16,19 +16,16 @@ namespace azure_special_properties
 {
     internal partial class SubscriptionInMethodRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of SubscriptionInMethodRestClient. </summary>
-        public SubscriptionInMethodRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public SubscriptionInMethodRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -39,7 +36,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/", false);
             uri.AppendPath(subscriptionId, true);
             request.Uri = uri;
@@ -94,7 +91,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/local/null/", false);
             uri.AppendPath(subscriptionId, true);
             request.Uri = uri;
@@ -149,7 +146,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/", false);
             uri.AppendPath(subscriptionId, true);
             request.Uri = uri;
@@ -204,7 +201,7 @@ namespace azure_special_properties
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/", false);
             uri.AppendPath(subscriptionId, true);
             request.Uri = uri;

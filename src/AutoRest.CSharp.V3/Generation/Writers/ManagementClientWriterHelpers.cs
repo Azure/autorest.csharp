@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class ManagementClientWriterHelpers
     {
-        public static bool IsHostParameter(Parameter parameter) => string.Equals(parameter.Name, "host", StringComparison.InvariantCultureIgnoreCase);
+        public static bool IsEndpointParameter(Parameter parameter) => string.Equals(parameter.Name, "endpoint", StringComparison.InvariantCultureIgnoreCase);
         public static bool IsApiVersionParameter(Parameter parameter) => string.Equals(parameter.Name, "apiVersion", StringComparison.InvariantCultureIgnoreCase);
     }
 }

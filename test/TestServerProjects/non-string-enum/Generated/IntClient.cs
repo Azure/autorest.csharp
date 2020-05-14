@@ -25,9 +25,9 @@ namespace non_string_enum
         {
         }
         /// <summary> Initializes a new instance of IntClient. </summary>
-        internal IntClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal IntClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new IntRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new IntRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

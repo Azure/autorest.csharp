@@ -24,9 +24,9 @@ namespace body_datetime_rfc1123
         {
         }
         /// <summary> Initializes a new instance of Datetimerfc1123Client. </summary>
-        internal Datetimerfc1123Client(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal Datetimerfc1123Client(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new Datetimerfc1123RestClient(clientDiagnostics, pipeline, host);
+            RestClient = new Datetimerfc1123RestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

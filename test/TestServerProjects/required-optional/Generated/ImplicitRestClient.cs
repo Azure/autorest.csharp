@@ -18,13 +18,13 @@ namespace required_optional
     {
         private string requiredGlobalPath;
         private string requiredGlobalQuery;
-        private string host;
+        private Uri endpoint;
         private int? optionalGlobalQuery;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ImplicitRestClient. </summary>
-        public ImplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, string host = "http://localhost:3000", int? optionalGlobalQuery = null)
+        public ImplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
             if (requiredGlobalPath == null)
             {
@@ -34,14 +34,11 @@ namespace required_optional
             {
                 throw new ArgumentNullException(nameof(requiredGlobalQuery));
             }
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
             this.requiredGlobalPath = requiredGlobalPath;
             this.requiredGlobalQuery = requiredGlobalQuery;
-            this.host = host;
+            this.endpoint = endpoint;
             this.optionalGlobalQuery = optionalGlobalQuery;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -53,7 +50,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/implicit/required/path/", false);
             uri.AppendPath(pathParameter, true);
             request.Uri = uri;
@@ -108,7 +105,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/implicit/optional/query", false);
             if (queryParameter != null)
             {
@@ -156,7 +153,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/implicit/optional/header", false);
             request.Uri = uri;
             if (queryParameter != null)
@@ -204,7 +201,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/implicit/optional/body", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -255,7 +252,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/global/required/path/", false);
             uri.AppendPath(requiredGlobalPath, true);
             request.Uri = uri;
@@ -298,7 +295,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/global/required/query", false);
             uri.AppendQuery("required-global-query", requiredGlobalQuery, true);
             request.Uri = uri;
@@ -341,7 +338,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/global/optional/query", false);
             if (optionalGlobalQuery != null)
             {

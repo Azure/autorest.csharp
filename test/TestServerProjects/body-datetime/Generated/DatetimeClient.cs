@@ -24,9 +24,9 @@ namespace body_datetime
         {
         }
         /// <summary> Initializes a new instance of DatetimeClient. </summary>
-        internal DatetimeClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal DatetimeClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new DatetimeRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new DatetimeRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

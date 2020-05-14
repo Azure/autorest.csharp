@@ -18,19 +18,16 @@ namespace paging
 {
     internal partial class PagingRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of PagingRestClient. </summary>
-        public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +38,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/noitemname", false);
             request.Uri = uri;
             return message;
@@ -107,7 +104,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/nullnextlink", false);
             request.Uri = uri;
             return message;
@@ -173,7 +170,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/single", false);
             request.Uri = uri;
             return message;
@@ -239,7 +236,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -321,7 +318,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/getWithQueryParams", false);
             uri.AppendQuery("requiredQueryParameter", requiredQueryParameter, true);
             uri.AppendQuery("queryConstant", true, true);
@@ -391,7 +388,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/nextOperationWithQueryParams", false);
             uri.AppendQuery("queryConstant", true, true);
             request.Uri = uri;
@@ -458,7 +455,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -540,7 +537,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/withpath/", false);
             uri.AppendPath(pagingGetMultiplePagesWithOffsetOptions.Offset, true);
             request.Uri = uri;
@@ -633,7 +630,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/retryfirst", false);
             request.Uri = uri;
             return message;
@@ -699,7 +696,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/retrysecond", false);
             request.Uri = uri;
             return message;
@@ -765,7 +762,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/single/failure", false);
             request.Uri = uri;
             return message;
@@ -831,7 +828,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/failure", false);
             request.Uri = uri;
             return message;
@@ -897,7 +894,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/failureuri", false);
             request.Uri = uri;
             return message;
@@ -963,7 +960,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendQuery("api_version", apiVersion, true);
@@ -1053,7 +1050,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(customParameterGroup.Tenant, true);
             uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
@@ -1133,7 +1130,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1191,7 +1188,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
@@ -1293,7 +1290,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(customParameterGroup.Tenant, true);
             uri.AppendPath("/", false);
@@ -1385,7 +1382,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
@@ -1463,7 +1460,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
@@ -1541,7 +1538,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1635,7 +1632,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1729,7 +1726,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1831,7 +1828,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
@@ -1909,7 +1906,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
@@ -1987,7 +1984,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
@@ -2065,7 +2062,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
@@ -2143,7 +2140,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
@@ -2221,7 +2218,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;
@@ -2319,7 +2316,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             return message;

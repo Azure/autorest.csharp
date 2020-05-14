@@ -20,19 +20,16 @@ namespace xml_service
 {
     internal partial class XmlRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of XmlRestClient. </summary>
-        public XmlRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public XmlRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -43,7 +40,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
             request.Uri = uri;
             return message;
@@ -101,7 +98,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -159,7 +156,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
             request.Uri = uri;
             return message;
@@ -217,7 +214,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -275,7 +272,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/simple", false);
             request.Uri = uri;
             return message;
@@ -333,7 +330,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/simple", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -391,7 +388,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/wrapped-lists", false);
             request.Uri = uri;
             return message;
@@ -449,7 +446,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/wrapped-lists", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -507,7 +504,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/headers", false);
             request.Uri = uri;
             return message;
@@ -551,7 +548,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-list", false);
             request.Uri = uri;
             return message;
@@ -609,7 +606,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-list", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -667,7 +664,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
             request.Uri = uri;
             return message;
@@ -725,7 +722,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -783,7 +780,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/root-list", false);
             request.Uri = uri;
             return message;
@@ -851,7 +848,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/root-list", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -914,7 +911,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/root-list-single-item", false);
             request.Uri = uri;
             return message;
@@ -982,7 +979,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/root-list-single-item", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -1045,7 +1042,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-root-list", false);
             request.Uri = uri;
             return message;
@@ -1113,7 +1110,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-root-list", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -1176,7 +1173,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-child-element", false);
             request.Uri = uri;
             return message;
@@ -1234,7 +1231,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-child-element", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
@@ -1292,7 +1289,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/", false);
             uri.AppendQuery("comp", "list", true);
             request.Uri = uri;
@@ -1351,7 +1348,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/", false);
             uri.AppendQuery("comp", "properties", true);
             uri.AppendQuery("restype", "service", true);
@@ -1411,7 +1408,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/", false);
             uri.AppendQuery("comp", "properties", true);
             uri.AppendQuery("restype", "service", true);
@@ -1471,7 +1468,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/mycontainer", false);
             uri.AppendQuery("comp", "acl", true);
             uri.AppendQuery("restype", "container", true);
@@ -1541,7 +1538,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/mycontainer", false);
             uri.AppendQuery("comp", "acl", true);
             uri.AppendQuery("restype", "container", true);
@@ -1606,7 +1603,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/mycontainer", false);
             uri.AppendQuery("comp", "list", true);
             uri.AppendQuery("restype", "container", true);
@@ -1666,7 +1663,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/jsoninput", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -1724,7 +1721,7 @@ namespace xml_service
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/xml/jsonoutput", false);
             request.Uri = uri;
             return message;

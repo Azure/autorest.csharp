@@ -24,9 +24,9 @@ namespace azure_special_properties
         {
         }
         /// <summary> Initializes a new instance of ApiVersionLocalClient. </summary>
-        internal ApiVersionLocalClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal ApiVersionLocalClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new ApiVersionLocalRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new ApiVersionLocalRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

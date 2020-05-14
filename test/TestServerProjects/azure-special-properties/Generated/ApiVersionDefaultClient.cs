@@ -24,9 +24,9 @@ namespace azure_special_properties
         {
         }
         /// <summary> Initializes a new instance of ApiVersionDefaultClient. </summary>
-        internal ApiVersionDefaultClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000", string apiVersion = "2015-07-01-preview")
+        internal ApiVersionDefaultClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
-            RestClient = new ApiVersionDefaultRestClient(clientDiagnostics, pipeline, host, apiVersion);
+            RestClient = new ApiVersionDefaultRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

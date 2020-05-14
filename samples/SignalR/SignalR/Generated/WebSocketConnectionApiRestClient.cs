@@ -18,19 +18,16 @@ namespace SignalR
 {
     internal partial class WebSocketConnectionApiRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of WebSocketConnectionApiRestClient. </summary>
-        public WebSocketConnectionApiRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "")
+        public WebSocketConnectionApiRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +38,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1", false);
             if (excluded != null)
             {
@@ -105,7 +102,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1", false);
             if (excluded != null)
             {
@@ -169,7 +166,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             if (excluded != null)
@@ -244,7 +241,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             if (excluded != null)
@@ -319,7 +316,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
@@ -388,7 +385,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
@@ -457,7 +454,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/users/", false);
@@ -538,7 +535,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/users/", false);
@@ -619,7 +616,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
@@ -688,7 +685,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
@@ -757,7 +754,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
@@ -816,7 +813,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
@@ -875,7 +872,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             if (reason != null)
@@ -938,7 +935,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/connections/", false);
@@ -1019,7 +1016,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/connections/", false);
@@ -1100,7 +1097,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/connections/", false);
@@ -1171,7 +1168,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/connections/", false);
@@ -1242,7 +1239,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/connections/", false);
@@ -1317,7 +1314,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             if (excluded != null)
@@ -1392,7 +1389,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             if (excluded != null)
@@ -1467,7 +1464,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             request.Uri = uri;
@@ -1526,7 +1523,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             request.Uri = uri;
@@ -1585,7 +1582,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -1672,7 +1669,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -1759,7 +1756,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -1830,7 +1827,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -1901,7 +1898,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
@@ -1960,7 +1957,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
@@ -2019,7 +2016,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             uri.AppendPath("/connections/", false);
@@ -2090,7 +2087,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             uri.AppendPath("/connections/", false);
@@ -2161,7 +2158,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             uri.AppendPath("/users/", false);
@@ -2232,7 +2229,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             uri.AppendPath("/users/", false);
@@ -2303,7 +2300,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             uri.AppendPath("/users/", false);
@@ -2378,7 +2375,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             uri.AppendPath("/users/", false);
@@ -2447,7 +2444,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(user, true);
             uri.AppendPath("/groups", false);
@@ -2507,7 +2504,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/users/", false);
@@ -2578,7 +2575,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/users/", false);
@@ -2649,7 +2646,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -2732,7 +2729,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -2815,7 +2812,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -2898,7 +2895,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -2981,7 +2978,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -3068,7 +3065,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/groups/", false);
@@ -3149,7 +3146,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/ws/api/v1/hubs/", false);
             uri.AppendPath(hub, true);
             uri.AppendPath("/users/", false);

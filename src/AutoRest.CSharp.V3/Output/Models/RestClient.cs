@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
                 .Distinct()
-                .ToDictionary(p => p.Language.Default.Name, BuildParameter);
+                .ToDictionary(p => p.Language.Default.Name, BuildClientParameter);
             _serializationBuilder = new SerializationBuilder();
 
             Parameters = OrderParameters(_parameters.Values);
@@ -465,6 +465,23 @@ namespace AutoRest.CSharp.V3.Output.Models
         public RestClientMethod GetOperationMethod(ServiceRequest request)
         {
             return EnsureNormalMethods()[request];
+        }
+
+        private Parameter BuildClientParameter(RequestParameter requestParameter)
+        {
+            var parameter = BuildParameter(requestParameter);
+            if (requestParameter.Origin == "modelerfour:synthesized/host")
+            {
+                parameter = new Parameter(
+                    "endpoint",
+                    parameter.Description,
+                    typeof(Uri),
+                    parameter.DefaultValue,
+                    parameter.IsRequired
+                );
+            }
+
+            return parameter;
         }
     }
 }

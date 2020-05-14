@@ -17,25 +17,22 @@ namespace url
     internal partial class PathItemsRestClient
     {
         private string globalStringPath;
-        private string host;
+        private Uri endpoint;
         private string globalStringQuery;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of PathItemsRestClient. </summary>
-        public PathItemsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, string host = "http://localhost:3000", string globalStringQuery = null)
+        public PathItemsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, Uri endpoint = null, string globalStringQuery = null)
         {
             if (globalStringPath == null)
             {
                 throw new ArgumentNullException(nameof(globalStringPath));
             }
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
             this.globalStringPath = globalStringPath;
-            this.host = host;
+            this.endpoint = endpoint;
             this.globalStringQuery = globalStringQuery;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -47,7 +44,7 @@ namespace url
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
             uri.AppendPath(globalStringPath, true);
             uri.AppendPath("/pathItemStringPath/", false);
@@ -133,7 +130,7 @@ namespace url
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
             uri.AppendPath(globalStringPath, true);
             uri.AppendPath("/pathItemStringPath/", false);
@@ -219,7 +216,7 @@ namespace url
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
             uri.AppendPath(globalStringPath, true);
             uri.AppendPath("/pathItemStringPath/", false);
@@ -305,7 +302,7 @@ namespace url
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
             uri.AppendPath(globalStringPath, true);
             uri.AppendPath("/pathItemStringPath/", false);
