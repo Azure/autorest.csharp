@@ -99,6 +99,84 @@
           }
         }
       }
+    },
+    "/HttpMessage": {
+      "post": {
+        "description": "",
+        "operationId": "HttpMessage",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "httpMessage",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HttpMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/HttpMessage"
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Request": {
+      "post": {
+        "description": "",
+        "operationId": "Request",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Request"
+            },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/Response": {
+      "post": {
+        "description": "",
+        "operationId": "Response",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "response",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Response"
+            },
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -230,6 +308,24 @@
         "ToString": { "type": "string" },
         "Equals": { "type": "string" },
         "GetHashCode": { "type": "string" }
+      }
+    },
+    "HttpMessage": {
+      "type":  "object",
+      "properties": {
+        "property": { "type": "string" }
+      }
+    },
+    "Request": {
+      "type":  "object",
+      "properties": {
+        "property": { "type": "string" }
+      }
+    },
+    "Response": {
+      "type":  "object",
+      "properties": {
+        "property": { "type": "string" }
       }
     }
   }

@@ -11,7 +11,7 @@ schemas: !<!Schemas>
           name: String
           description: simple string
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_113
+    - !<!StringSchema> &ref_116
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1101,6 +1101,36 @@ schemas: !<!Schemas>
           name: Struct1
           description: ''
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_112
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: HttpMessageProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_113
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: RequestProperty
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_114
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ResponseProperty
+          description: ''
+      protocol: !<!Protocols> {}
   choices:
     - !<!ChoiceSchema> &ref_108
       choices:
@@ -1127,7 +1157,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_114
+    - !<!ConstantSchema> &ref_117
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -1137,7 +1167,7 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_122
+    - !<!ConstantSchema> &ref_125
       type: constant
       value: !<!ConstantValue> 
         value: application/pdf
@@ -1148,7 +1178,7 @@ schemas: !<!Schemas>
           description: Content Type 'application/pdf'
       protocol: !<!Protocols> {}
   binaries:
-    - !<!BinarySchema> &ref_123
+    - !<!BinarySchema> &ref_126
       type: binary
       apiVersions:
         - !<!ApiVersion> 
@@ -2075,8 +2105,83 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_3
+    - !<!ObjectSchema> &ref_129
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: *ref_112
+          serializedName: property
+          language: !<!Languages> 
+            default:
+              name: property
+              description: ''
+          protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !<!Languages> 
+        default:
+          name: HttpMessage
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
+    - !<!ObjectSchema> &ref_131
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: *ref_113
+          serializedName: property
+          language: !<!Languages> 
+            default:
+              name: property
+              description: ''
+          protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !<!Languages> 
+        default:
+          name: Request
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
+    - !<!ObjectSchema> &ref_133
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: *ref_114
+          serializedName: property
+          language: !<!Languages> 
+            default:
+              name: property
+              description: ''
+          protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !<!Languages> 
+        default:
+          name: Response
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
 globalParameters:
-  - !<!Parameter> &ref_112
+  - !<!Parameter> &ref_115
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -2101,9 +2206,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_112
-          - !<!Parameter> &ref_116
-            schema: *ref_113
+          - *ref_115
+          - !<!Parameter> &ref_119
+            schema: *ref_116
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2114,8 +2219,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_117
-            schema: *ref_113
+          - !<!Parameter> &ref_120
+            schema: *ref_116
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2126,8 +2231,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_118
-            schema: *ref_113
+          - !<!Parameter> &ref_121
+            schema: *ref_116
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2138,8 +2243,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_119
-            schema: *ref_113
+          - !<!Parameter> &ref_122
+            schema: *ref_116
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2150,8 +2255,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_120
-            schema: *ref_113
+          - !<!Parameter> &ref_123
+            schema: *ref_116
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2162,8 +2267,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_121
-            schema: *ref_113
+          - !<!Parameter> &ref_124
+            schema: *ref_116
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2178,7 +2283,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_114
+                schema: *ref_117
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -2190,7 +2295,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_115
+              - !<!Parameter> &ref_118
                 schema: *ref_1
                 implementation: Method
                 required: true
@@ -2203,7 +2308,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_115
+              - *ref_118
             language: !<!Languages> 
               default:
                 name: ''
@@ -2217,12 +2322,12 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_116
-          - *ref_117
-          - *ref_118
           - *ref_119
           - *ref_120
           - *ref_121
+          - *ref_122
+          - *ref_123
+          - *ref_124
         responses:
           - !<!SchemaResponse> 
             schema: *ref_3
@@ -2247,12 +2352,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_112
+          - *ref_115
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_122
+                schema: *ref_125
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -2264,8 +2369,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_124
-                schema: *ref_123
+              - !<!Parameter> &ref_127
+                schema: *ref_126
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -2277,7 +2382,7 @@ operationGroups:
                     in: body
                     style: binary
             signatureParameters:
-              - *ref_124
+              - *ref_127
             language: !<!Languages> 
               default:
                 name: ''
@@ -2294,7 +2399,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_114
+                schema: *ref_117
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -2306,8 +2411,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_125
-                schema: *ref_113
+              - !<!Parameter> &ref_128
+                schema: *ref_116
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -2319,7 +2424,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_125
+              - *ref_128
             language: !<!Languages> 
               default:
                 name: ''
@@ -2349,6 +2454,210 @@ operationGroups:
           default:
             name: AnalyzeBody
             description: 'Analyze body, that could be different media types.'
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_115
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_117
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_130
+                schema: *ref_129
+                implementation: Method
+                required: false
+                language: !<!Languages> 
+                  default:
+                    name: httpMessage
+                    description: ''
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_130
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /HttpMessage
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_129
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
+            name: HttpMessage
+            description: ''
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_115
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_117
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_132
+                schema: *ref_131
+                implementation: Method
+                required: false
+                language: !<!Languages> 
+                  default:
+                    name: request
+                    description: ''
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_132
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /Request
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_131
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
+            name: Request
+            description: ''
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_115
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_117
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_134
+                schema: *ref_133
+                implementation: Method
+                required: false
+                language: !<!Languages> 
+                  default:
+                    name: response
+                    description: ''
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_134
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /Response
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_133
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
+            name: Response
+            description: ''
         protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:

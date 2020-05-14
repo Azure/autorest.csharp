@@ -36,7 +36,7 @@ namespace NameConflicts
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateOperationRequest(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class)
+        internal Azure.Core.HttpMessage CreateOperationRequest(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class)
         {
             var message0 = _pipeline.CreateMessage();
             var request0 = message0.Request;
@@ -113,7 +113,7 @@ namespace NameConflicts
                         {
                             value = Struct.DeserializeStruct(document.RootElement);
                         }
-                        return Response.FromValue(value, message0.Response);
+                        return Azure.Response.FromValue(value, message0.Response);
                     }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
@@ -175,14 +175,14 @@ namespace NameConflicts
                         {
                             value = Struct.DeserializeStruct(document.RootElement);
                         }
-                        return Response.FromValue(value, message0.Response);
+                        return Azure.Response.FromValue(value, message0.Response);
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message0.Response);
             }
         }
 
-        internal HttpMessage CreateAnalyzeBodyRequest(Stream stringBody)
+        internal Azure.Core.HttpMessage CreateAnalyzeBodyRequest(Stream stringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -199,7 +199,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> AnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        public async ValueTask<Azure.Response> AnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -220,7 +220,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response AnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
+        public Azure.Response AnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -238,7 +238,7 @@ namespace NameConflicts
             }
         }
 
-        internal HttpMessage CreateAnalyzeBodyRequest(string stringBody)
+        internal Azure.Core.HttpMessage CreateAnalyzeBodyRequest(string stringBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -260,7 +260,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> AnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
+        public async ValueTask<Azure.Response> AnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeBodyRequest(stringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -276,7 +276,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response AnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
+        public Azure.Response AnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeBodyRequest(stringBody);
             _pipeline.Send(message, cancellationToken);
@@ -284,6 +284,225 @@ namespace NameConflicts
             {
                 case 200:
                     return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal Azure.Core.HttpMessage CreateHttpMessageRequest(Models.HttpMessage httpMessage)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/HttpMessage", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            if (httpMessage != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(httpMessage);
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <param name="httpMessage"> The HttpMessage to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<Models.HttpMessage>> HttpMessageAsync(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateHttpMessageRequest(httpMessage);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Models.HttpMessage value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = Models.HttpMessage.DeserializeHttpMessage(document.RootElement);
+                        }
+                        return Azure.Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="httpMessage"> The HttpMessage to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<Models.HttpMessage> HttpMessage(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateHttpMessageRequest(httpMessage);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Models.HttpMessage value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = Models.HttpMessage.DeserializeHttpMessage(document.RootElement);
+                        }
+                        return Azure.Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal Azure.Core.HttpMessage CreateRequestRequest(Models.Request request)
+        {
+            var message = _pipeline.CreateMessage();
+            var request0 = message.Request;
+            request0.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/Request", false);
+            request0.Uri = uri;
+            request0.Headers.Add("Content-Type", "application/json");
+            if (request != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(request);
+                request0.Content = content;
+            }
+            return message;
+        }
+
+        /// <param name="request"> The Request to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<Models.Request>> RequestAsync(Models.Request request = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateRequestRequest(request);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Models.Request value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = Models.Request.DeserializeRequest(document.RootElement);
+                        }
+                        return Azure.Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="request"> The Request to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<Models.Request> Request(Models.Request request = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateRequestRequest(request);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Models.Request value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = Models.Request.DeserializeRequest(document.RootElement);
+                        }
+                        return Azure.Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal Azure.Core.HttpMessage CreateResponseRequest(Models.Response response)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendRaw(host, false);
+            uri.AppendPath("/Response", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            if (response != null)
+            {
+                using var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(response);
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <param name="response"> The Response to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async ValueTask<Response<Models.Response>> ResponseAsync(Models.Response response = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateResponseRequest(response);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Models.Response value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = Models.Response.DeserializeResponse(document.RootElement);
+                        }
+                        return Azure.Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="response"> The Response to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<Models.Response> Response(Models.Response response = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateResponseRequest(response);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Models.Response value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = Models.Response.DeserializeResponse(document.RootElement);
+                        }
+                        return Azure.Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
