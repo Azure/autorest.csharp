@@ -18,7 +18,7 @@ namespace Azure.Core
         private const char QueryContinueSeparator = '&';
         private const char QueryValueSeparator = '=';
 
-        private RawWritingPosition? _position = RawWritingPosition.Scheme;
+        private RawWritingPosition? _position;
 
         private static (string Name, string Value) GetQueryParts(string queryUnparsed)
         {
