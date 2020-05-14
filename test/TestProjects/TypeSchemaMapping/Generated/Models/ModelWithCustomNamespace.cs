@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Test.Namespace
+namespace Very.Custom.Namespace.From.Swagger
 {
     /// <summary> The ModelWithCustomNamespace. </summary>
     internal partial class ModelWithCustomNamespace

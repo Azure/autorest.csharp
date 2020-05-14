@@ -159,7 +159,7 @@ schemas: !<!Schemas>
       choiceType: *ref_0
       extensions:
         x-accessibility: internal
-        x-namespace: Test.Namespace
+        x-namespace: Very.Custom.Namespace.From.Swagger
       language: !<!Languages> 
         default:
           name: EnumWithCustomNamespace
@@ -339,7 +339,7 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
       extensions:
         x-accessibility: internal
-        x-namespace: Test.Namespace
+        x-namespace: Very.Custom.Namespace.From.Swagger
       language: !<!Languages> 
         default:
           name: ModelWithCustomNamespace

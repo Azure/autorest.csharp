@@ -178,7 +178,7 @@
         "B",
         "C"
       ],
-      "x-namespace": "Test.Namespace",
+      "x-namespace": "Very.Custom.Namespace.From.Swagger",
       "x-accessibility": "internal"
     }, 
     "ModelWithCustomNamespace": {
@@ -189,7 +189,7 @@
           "description": "."
         }
       },
-      "x-namespace": "Test.Namespace",
+      "x-namespace": "Very.Custom.Namespace.From.Swagger",
       "x-accessibility": "internal"
     }
   }
