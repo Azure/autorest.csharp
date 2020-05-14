@@ -63,6 +63,12 @@ namespace AutoRest.CSharp.V3.Input
         }
     }
 
+    internal partial class DictionaryOfAny
+    {
+        public string? Accessibility => TryGetValue("x-ms-accessibility", out object? value) ? value?.ToString() : null;
+        public string? Namespace => TryGetValue("x-ms-namespace", out object? value) ? value?.ToString() : null;
+    }
+
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
