@@ -24,9 +24,9 @@ namespace required_optional
         {
         }
         /// <summary> Initializes a new instance of ImplicitClient. </summary>
-        internal ImplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, string host = "http://localhost:3000", int? optionalGlobalQuery = null)
+        internal ImplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
-            RestClient = new ImplicitRestClient(clientDiagnostics, pipeline, requiredGlobalPath, requiredGlobalQuery, host, optionalGlobalQuery);
+            RestClient = new ImplicitRestClient(clientDiagnostics, pipeline, requiredGlobalPath, requiredGlobalQuery, endpoint, optionalGlobalQuery);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

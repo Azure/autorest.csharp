@@ -26,9 +26,9 @@ namespace SignalR
         {
         }
         /// <summary> Initializes a new instance of WebSocketConnectionApiClient. </summary>
-        internal WebSocketConnectionApiClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "")
+        internal WebSocketConnectionApiClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new WebSocketConnectionApiRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new WebSocketConnectionApiRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

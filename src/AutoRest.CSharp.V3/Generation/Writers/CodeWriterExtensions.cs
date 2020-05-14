@@ -31,9 +31,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool includeDefaultValue = true)
         {
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
-            if (includeDefaultValue && clientParameter.DefaultValue != null)
+            if (includeDefaultValue &&
+                clientParameter.DefaultValue != null)
             {
-                writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
+                if (CanBeInitializedInline(clientParameter))
+                {
+                    writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
+                }
+                else
+                {
+                    // initialize with null and set the default later
+                    writer.Append($" = null");
+                }
             }
 
             writer.AppendRaw(",");
@@ -44,7 +53,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             foreach (Parameter parameter in parameters)
             {
                 CSharpType cs = parameter.Type;
-                if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
+                if (parameter.DefaultValue != null &&
+                    !CanBeInitializedInline(parameter))
+                {
+                    writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
+                }
+                else if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
                 {
                     using (writer.Scope($"if ({parameter.Name:I} == null)"))
                     {
@@ -54,6 +68,24 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
 
             writer.Line();
+        }
+
+        private static bool CanBeInitializedInline(Parameter parameter)
+        {
+            Debug.Assert(parameter.DefaultValue.HasValue);
+
+            if (parameter.Type.IsFrameworkType && parameter.Type.FrameworkType == typeof(string))
+            {
+                return true;
+            }
+
+            if (!parameter.Type.IsValueType &&
+                parameter.DefaultValue.Value.Value != null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static void WriteConstant(this CodeWriter writer, Constant constant)

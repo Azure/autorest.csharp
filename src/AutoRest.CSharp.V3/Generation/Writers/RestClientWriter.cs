@@ -325,6 +325,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WritePathSegment(CodeWriter writer, CodeWriterDeclaration uri, PathSegment segment, string? methodName = null)
         {
+            if (segment.Value.Type.IsFrameworkType &&
+                segment.Value.Type.FrameworkType == typeof(Uri))
+            {
+                writer.Append($"{uri}.Reset(");
+                WriteConstantOrParameter(writer, segment.Value, enumAsString: !segment.IsRaw);
+                writer.Line($");");
+                return;
+            }
+
             methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
             writer.Append($"{uri}.{methodName}(");
             WriteConstantOrParameter(writer, segment.Value, enumAsString: !segment.IsRaw);

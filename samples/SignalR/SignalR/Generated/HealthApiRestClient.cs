@@ -16,19 +16,16 @@ namespace SignalR
 {
     internal partial class HealthApiRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of HealthApiRestClient. </summary>
-        public HealthApiRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "")
+        public HealthApiRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -39,7 +36,7 @@ namespace SignalR
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/api/v1/health", false);
             request.Uri = uri;
             return message;

@@ -25,9 +25,9 @@ namespace subscriptionId_apiVersion
         {
         }
         /// <summary> Initializes a new instance of GroupClient. </summary>
-        internal GroupClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "https://management.azure.com", string apiVersion = "2014-04-01-preview")
+        internal GroupClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2014-04-01-preview")
         {
-            RestClient = new GroupRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
+            RestClient = new GroupRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

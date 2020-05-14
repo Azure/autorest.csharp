@@ -24,9 +24,9 @@ namespace body_time
         {
         }
         /// <summary> Initializes a new instance of TimeClient. </summary>
-        internal TimeClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal TimeClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new TimeRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new TimeRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

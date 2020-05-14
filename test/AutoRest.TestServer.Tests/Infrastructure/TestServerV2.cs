@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private readonly Process _process;
 
         public HttpClient Client { get; }
-        public string Host { get; }
+        public Uri Host { get; }
 
         public TestServerV2()
         {
@@ -41,10 +41,10 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 var s = _process.StandardOutput.ReadLine();
                 if (s?.StartsWith(portPhrase) == true)
                 {
-                    Host = $"http://localhost:{s.Substring(portPhrase.Length).Trim()}";
+                    Host = new Uri($"http://localhost:{s.Substring(portPhrase.Length).Trim()}");
                     Client = new HttpClient
                     {
-                        BaseAddress = new Uri(Host)
+                        BaseAddress = Host
                     };
                     _ = Task.Run(() => ReadOutput(_process.StandardError));
                     _ = Task.Run(() => ReadOutput(_process.StandardOutput));

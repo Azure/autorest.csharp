@@ -24,9 +24,9 @@ namespace body_byte
         {
         }
         /// <summary> Initializes a new instance of ByteClient. </summary>
-        internal ByteClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal ByteClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new ByteRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new ByteRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

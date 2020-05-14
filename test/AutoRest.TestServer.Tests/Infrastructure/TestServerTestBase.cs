@@ -62,23 +62,23 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();
 
-        public Task TestStatus(Func<string, HttpPipeline, Response> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        public Task TestStatus(Func<Uri, HttpPipeline, Response> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {
             return TestStatus((host, pipeline) => Task.FromResult(test(host, pipeline)), ignoreScenario, useSimplePipeline);
         }
 
-        public Task TestStatus(Func<string, HttpPipeline, Task<Response>> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        public Task TestStatus(Func<Uri, HttpPipeline, Task<Response>> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {
             return TestStatus(GetScenarioName(), test, ignoreScenario, useSimplePipeline);
         }
 
-        private Task TestStatus(string scenario, Func<string, HttpPipeline, Task<Response>> test, bool ignoreScenario = false, bool useSimplePipeline = false) => Test(scenario, async (host, pipeline) =>
+        private Task TestStatus(string scenario, Func<Uri, HttpPipeline, Task<Response>> test, bool ignoreScenario = false, bool useSimplePipeline = false) => Test(scenario, async (host, pipeline) =>
         {
             var response = await test(host, pipeline);
             Assert.That(response.Status, Is.EqualTo(200).Or.EqualTo(201).Or.EqualTo(202).Or.EqualTo(204), "Unexpected response " + response.ReasonPhrase);
         }, ignoreScenario, useSimplePipeline);
 
-        public Task Test(Action<string, HttpPipeline> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        public Task Test(Action<Uri, HttpPipeline> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {
             return Test(GetScenarioName(), (host, pipeline) =>
             {
@@ -87,12 +87,12 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             }, ignoreScenario, useSimplePipeline);
         }
 
-        public Task Test(Func<string, HttpPipeline, Task> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        public Task Test(Func<Uri, HttpPipeline, Task> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {
             return Test(GetScenarioName(), test, ignoreScenario, useSimplePipeline);
         }
 
-        private async Task Test(string scenario, Func<string, HttpPipeline, Task> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        private async Task Test(string scenario, Func<Uri, HttpPipeline, Task> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {
             var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};
             var server = TestServerSession.Start(scenario, _version, false, scenarioParameter);

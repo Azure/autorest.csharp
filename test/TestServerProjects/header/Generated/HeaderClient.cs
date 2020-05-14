@@ -25,9 +25,9 @@ namespace header
         {
         }
         /// <summary> Initializes a new instance of HeaderClient. </summary>
-        internal HeaderClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal HeaderClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new HeaderRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new HeaderRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

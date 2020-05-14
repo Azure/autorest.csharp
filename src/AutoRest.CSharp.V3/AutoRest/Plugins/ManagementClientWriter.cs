@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     writer.Append($"public {title}ManagementClient(");
                     foreach (Parameter parameter in allParameters.Values)
                     {
-                        if (ManagementClientWriterHelpers.IsHostParameter(parameter))
+                        if (ManagementClientWriterHelpers.IsEndpointParameter(parameter))
                         {
                             continue;
                         }
@@ -64,9 +64,9 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     foreach (Parameter parameter in allParameters.Values)
                     {
                         // Pass the default host
-                        if (ManagementClientWriterHelpers.IsHostParameter(parameter))
+                        if (ManagementClientWriterHelpers.IsEndpointParameter(parameter))
                         {
-                            writer.Append($"{parameter.DefaultValue?.Value:L}, ");
+                            writer.Append($"null, ");
                             continue;
                         }
 
@@ -89,6 +89,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
                     using (writer.Scope())
                     {
+                        writer.WriteParameterNullChecks(allParameters.Values);
+
                         writer.Line($"_options = options ?? new {title}ManagementClientOptions();");
                         writer.Line($"_tokenCredential = tokenCredential;");
 

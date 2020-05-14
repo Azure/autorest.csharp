@@ -25,9 +25,9 @@ namespace non_string_enum
         {
         }
         /// <summary> Initializes a new instance of FloatClient. </summary>
-        internal FloatClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal FloatClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new FloatRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new FloatRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

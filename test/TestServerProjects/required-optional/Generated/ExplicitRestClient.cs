@@ -18,19 +18,16 @@ namespace required_optional
 {
     internal partial class ExplicitRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ExplicitRestClient. </summary>
-        public ExplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public ExplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +38,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/integer/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -89,7 +86,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/integer/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -140,7 +137,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/integer/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -198,7 +195,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/integer/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -249,7 +246,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/integer/header", false);
             request.Uri = uri;
             request.Headers.Add("headerParameter", headerParameter);
@@ -294,7 +291,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/integer/header", false);
             request.Uri = uri;
             if (headerParameter != null)
@@ -342,7 +339,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/string/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -400,7 +397,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/string/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -451,7 +448,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/string/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -509,7 +506,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/string/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -560,7 +557,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/string/header", false);
             request.Uri = uri;
             request.Headers.Add("headerParameter", headerParameter);
@@ -615,7 +612,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/string/header", false);
             request.Uri = uri;
             if (bodyParameter != null)
@@ -663,7 +660,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/class/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -721,7 +718,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/class/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -772,7 +769,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/class/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -830,7 +827,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/class/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -881,7 +878,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/array/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -944,7 +941,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/array/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -1000,7 +997,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/array/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -1058,7 +1055,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/array/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -1109,7 +1106,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/requied/array/header", false);
             request.Uri = uri;
             request.Headers.AddDelimited("headerParameter", headerParameter, ",");
@@ -1164,7 +1161,7 @@ namespace required_optional
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/reqopt/optional/array/header", false);
             request.Uri = uri;
             if (headerParameter != null)

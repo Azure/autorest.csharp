@@ -19,7 +19,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private readonly string[] _expectedCoverage;
 
         public ITestServer Server { get; private set; }
-        public string Host => Server.Host;
+        public Uri Host => Server.Host;
 
         private TestServerSession(string scenario, TestServerVersion version, bool allowUnmatched, string[] expectedCoverage)
         {

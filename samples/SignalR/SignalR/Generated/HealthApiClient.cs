@@ -24,9 +24,9 @@ namespace SignalR
         {
         }
         /// <summary> Initializes a new instance of HealthApiClient. </summary>
-        internal HealthApiClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "")
+        internal HealthApiClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new HealthApiRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new HealthApiRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

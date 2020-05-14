@@ -54,7 +54,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void UrlByteNullAsync()
         {
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await new PathsClient(ClientDiagnostics, null, "").ByteNullAsync(null));
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new PathsClient(ClientDiagnostics, null, null).ByteNullAsync(null));
         }
 
         [Test]

@@ -24,9 +24,9 @@ namespace body_duration
         {
         }
         /// <summary> Initializes a new instance of DurationClient. </summary>
-        internal DurationClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal DurationClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new DurationRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new DurationRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -24,9 +24,9 @@ namespace lro
         {
         }
         /// <summary> Initializes a new instance of LROsClient. </summary>
-        internal LROsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal LROsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new LROsRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new LROsRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -25,9 +25,9 @@ namespace httpInfrastructure
         {
         }
         /// <summary> Initializes a new instance of HttpRedirectsClient. </summary>
-        internal HttpRedirectsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal HttpRedirectsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new HttpRedirectsRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new HttpRedirectsRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

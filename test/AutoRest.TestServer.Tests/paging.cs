@@ -21,12 +21,13 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
-        public Task PagingCustomUrlPartialNextLink() => Test(async (host, pipeline) =>
+        public Task PagingCustomUrlPartialNextLink() => Test(async (endpoint, pipeline) =>
         {
             var id = 1;
             var product = "Product";
+
             // host is not a full hostname for CustomPagingOperations; it is a partial host
-            host = host.Replace("http://", String.Empty);
+            var host = endpoint.ToString().Replace("http://", String.Empty);
             var linkPart = "/paging/customurl/partialnextlink/page/";
             var result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagesPartialUrlAsync(string.Empty);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());
@@ -79,13 +80,13 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
-        public Task PagingCustomUrlPartialOperationNextLink() => Test(async (host, pipeline) =>
+        public Task PagingCustomUrlPartialOperationNextLink() => Test(async (endpoint, pipeline) =>
         {
             var id = 1;
             var accountName = "";
             var product = "Product";
             // host is not a full hostname for CustomPagingOperations; it is a partial host
-            host = host.Replace("http://", String.Empty);
+            var host = endpoint.ToString().Replace("http://", String.Empty);
             var linkPart = "partialnextlinkop/page/";
             var result = await new CustomPagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagesPartialUrlOperationAsync(accountName);
             var resultPage = Page.FromValues(result.Value.Values, result.Value.NextLink, result.GetRawResponse());

@@ -25,9 +25,9 @@ namespace body_complex
         {
         }
         /// <summary> Initializes a new instance of ReadonlypropertyClient. </summary>
-        internal ReadonlypropertyClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal ReadonlypropertyClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new ReadonlypropertyRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new ReadonlypropertyRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

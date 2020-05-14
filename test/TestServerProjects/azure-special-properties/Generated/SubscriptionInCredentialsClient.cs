@@ -24,9 +24,9 @@ namespace azure_special_properties
         {
         }
         /// <summary> Initializes a new instance of SubscriptionInCredentialsClient. </summary>
-        internal SubscriptionInCredentialsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string host = "http://localhost:3000", string apiVersion = "2015-07-01-preview")
+        internal SubscriptionInCredentialsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
-            RestClient = new SubscriptionInCredentialsRestClient(clientDiagnostics, pipeline, subscriptionId, host, apiVersion);
+            RestClient = new SubscriptionInCredentialsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

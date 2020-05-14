@@ -24,9 +24,9 @@ namespace azure_special_properties
         {
         }
         /// <summary> Initializes a new instance of SubscriptionInMethodClient. </summary>
-        internal SubscriptionInMethodClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        internal SubscriptionInMethodClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new SubscriptionInMethodRestClient(clientDiagnostics, pipeline, host);
+            RestClient = new SubscriptionInMethodRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

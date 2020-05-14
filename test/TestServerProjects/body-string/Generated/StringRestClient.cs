@@ -17,19 +17,16 @@ namespace body_string
 {
     internal partial class StringRestClient
     {
-        private string host;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of StringRestClient. </summary>
-        public StringRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "http://localhost:3000")
+        public StringRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
+            endpoint ??= new Uri("http://localhost:3000");
 
-            this.host = host;
+            this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -40,7 +37,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
             return message;
@@ -106,7 +103,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -157,7 +154,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             return message;
@@ -223,7 +220,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -269,7 +266,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             return message;
@@ -335,7 +332,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -381,7 +378,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             return message;
@@ -447,7 +444,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -493,7 +490,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/notProvided", false);
             request.Uri = uri;
             return message;
@@ -559,7 +556,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/base64Encoding", false);
             request.Uri = uri;
             return message;
@@ -625,7 +622,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             return message;
@@ -691,7 +688,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -749,7 +746,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(host, false);
+            uri.Reset(endpoint);
             uri.AppendPath("/string/nullBase64UrlEncoding", false);
             request.Uri = uri;
             return message;
