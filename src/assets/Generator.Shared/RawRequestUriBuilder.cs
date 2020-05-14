@@ -18,7 +18,7 @@ namespace Azure.Core
         private const char QueryContinueSeparator = '&';
         private const char QueryValueSeparator = '=';
 
-        private RawWritingPosition _position = RawWritingPosition.Scheme;
+        private RawWritingPosition? _position = RawWritingPosition.Scheme;
 
         private static (string Name, string Value) GetQueryParts(string queryUnparsed)
         {
@@ -32,11 +32,21 @@ namespace Azure.Core
 
         public void AppendRaw(string value, bool escape)
         {
-            if (!string.IsNullOrEmpty(Path))
+            if (_position == null)
             {
-                _position = RawWritingPosition.Path;
+                if (!string.IsNullOrEmpty(Query))
+                {
+                    _position = RawWritingPosition.Query;
+                }
+                else if (!string.IsNullOrEmpty(Host))
+                {
+                    _position = RawWritingPosition.Host;
+                }
+                else if (!string.IsNullOrEmpty(Scheme))
+                {
+                    _position = RawWritingPosition.Scheme;
+                }
             }
-
             while (!string.IsNullOrWhiteSpace(value))
             {
                 if (_position == RawWritingPosition.Scheme)
