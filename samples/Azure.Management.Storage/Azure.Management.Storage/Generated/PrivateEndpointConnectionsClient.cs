@@ -9,7 +9,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
 
@@ -25,25 +24,12 @@ namespace Azure.Management.Storage
         protected PrivateEndpointConnectionsClient()
         {
         }
-
         /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient. </summary>
-        public PrivateEndpointConnectionsClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, null, tokenCredential, options)
+        internal PrivateEndpointConnectionsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-        }
-
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient. </summary>
-        public PrivateEndpointConnectionsClient(string subscriptionId, Uri endpoint, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
-        {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            endpoint ??= new Uri("https://management.azure.com");
-
-            options ??= new StorageManagementClientOptions();
-            _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, endpoint, options);
-            RestClient = new PrivateEndpointConnectionsRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, endpoint: endpoint);
+            RestClient = new PrivateEndpointConnectionsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>
