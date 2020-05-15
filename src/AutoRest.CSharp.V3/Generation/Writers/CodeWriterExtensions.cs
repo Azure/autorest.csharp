@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
@@ -52,13 +53,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             foreach (Parameter parameter in parameters)
             {
-                CSharpType cs = parameter.Type;
-                if (parameter.DefaultValue != null &&
-                    !CanBeInitializedInline(parameter))
+                if (parameter.DefaultValue != null && !CanBeInitializedInline(parameter))
                 {
                     writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
                 }
-                else if (parameter.IsRequired && (cs.IsNullable || !cs.IsValueType))
+                else if (CanWriteNullCheck(parameter))
                 {
                     using (writer.Scope($"if ({parameter.Name:I} == null)"))
                     {
@@ -79,14 +78,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return true;
             }
 
-            if (!parameter.Type.IsValueType &&
-                parameter.DefaultValue.Value.Value != null)
-            {
-                return false;
-            }
-
-            return true;
+            return parameter.Type.IsValueType || parameter.DefaultValue.Value.Value == null;
         }
+
+        private static bool CanWriteNullCheck(Parameter parameter) => parameter.IsRequired && (parameter.Type.IsNullable || !parameter.Type.IsValueType);
+
+        public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p =>
+            !(p.DefaultValue != null && !CanBeInitializedInline(p)) && CanWriteNullCheck(p));
 
         public static void WriteConstant(this CodeWriter writer, Constant constant)
         {

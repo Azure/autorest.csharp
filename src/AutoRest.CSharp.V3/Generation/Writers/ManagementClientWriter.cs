@@ -4,13 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.V3.Generation.Writers;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace AutoRest.CSharp.V3.AutoRest.Plugins
+namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class ManagementClientWriter
     {
@@ -50,6 +49,17 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
 
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {title}ManagementClient");
+                    foreach (Parameter parameter in allParameters.Values)
+                    {
+                        if (ManagementClientWriterHelpers.IsEndpointParameter(parameter))
+                        {
+                            continue;
+                        }
+                        writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                    }
+                    writer.WriteXmlDocumentationParameter("tokenCredential", "The OAuth token for making client requests.");
+                    writer.WriteXmlDocumentationParameter("options", "The options for configuring the client.");
+
                     writer.Append($"public {title}ManagementClient(");
                     foreach (Parameter parameter in allParameters.Values)
                     {
@@ -80,6 +90,17 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     }
 
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {title}ManagementClient");
+                    foreach (Parameter parameter in allParameters.Values)
+                    {
+                        writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                    }
+                    writer.WriteXmlDocumentationParameter("tokenCredential", "The OAuth token for making client requests.");
+                    writer.WriteXmlDocumentationParameter("options", "The options for configuring the client.");
+                    if (allParameters.Values.HasAnyNullCheck())
+                    {
+                        writer.WriteXmlDocumentationException(typeof(ArgumentNullException), "This occurs when one of the required arguments is null.");
+                    }
+
                     writer.Append($"public {title}ManagementClient(");
                     foreach (Parameter parameter in allParameters.Values)
                     {

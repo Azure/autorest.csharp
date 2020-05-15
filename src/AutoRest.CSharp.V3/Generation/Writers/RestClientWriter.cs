@@ -2,12 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models;
 using AutoRest.CSharp.V3.Output.Models.Requests;
@@ -65,6 +61,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
+            writer.WriteXmlDocumentationParameter("clientDiagnostics", "The handler for diagnostic messaging in the client.");
+            writer.WriteXmlDocumentationParameter("pipeline", "The HTTP pipeline for sending and receiving REST requests and responses.");
+            foreach (Parameter parameter in restClient.Parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+            if (restClient.Parameters.HasAnyNullCheck())
+            {
+                writer.WriteXmlDocumentationException(typeof(ArgumentNullException), "This occurs when one of the required arguments is null.");
+            }
+
             writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
             foreach (Parameter clientParameter in restClient.Parameters)
             {

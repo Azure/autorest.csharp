@@ -24,6 +24,11 @@ namespace Azure.Management.Storage
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of OperationsRestClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public OperationsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
             endpoint ??= new Uri("https://management.azure.com");
