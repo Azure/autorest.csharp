@@ -170,6 +170,27 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "EnumWithCustomNamespace": {
+      "description": "Letters",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ],
+      "x-namespace": "Very.Custom.Namespace.From.Swagger",
+      "x-accessibility": "internal"
+    }, 
+    "ModelWithCustomNamespace": {
+      "type": "object",
+      "properties": {
+        "ModelProperty": {
+          "type": "string",
+          "description": "."
+        }
+      },
+      "x-namespace": "Very.Custom.Namespace.From.Swagger",
+      "x-accessibility": "internal"
     }
   }
 }

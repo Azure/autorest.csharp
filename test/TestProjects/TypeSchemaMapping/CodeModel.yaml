@@ -43,6 +43,16 @@ schemas: !<!Schemas>
           name: SecondModelStringProperty
           description: .
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_7
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: ModelWithCustomNamespaceModelProperty
+          description: .
+      protocol: !<!Protocols> {}
   choices:
     - !<!ChoiceSchema> &ref_3
       choices:
@@ -122,8 +132,41 @@ schemas: !<!Schemas>
           name: DaysOfWeek
           description: Day of week
       protocol: !<!Protocols> {}
+    - !<!ChoiceSchema> 
+      choices:
+        - !<!ChoiceValue> 
+          value: A
+          language:
+            default:
+              name: A
+              description: ''
+        - !<!ChoiceValue> 
+          value: B
+          language:
+            default:
+              name: B
+              description: ''
+        - !<!ChoiceValue> 
+          value: C
+          language:
+            default:
+              name: C
+              description: ''
+      type: choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      choiceType: *ref_0
+      extensions:
+        x-accessibility: internal
+        x-namespace: Very.Custom.Namespace.From.Swagger
+      language: !<!Languages> 
+        default:
+          name: EnumWithCustomNamespace
+          description: Letters
+      protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_8
+    - !<!ConstantSchema> &ref_9
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -143,7 +186,7 @@ schemas: !<!Schemas>
           description: .
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_9
+    - !<!ObjectSchema> &ref_10
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -189,7 +232,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_11
+    - !<!ObjectSchema> &ref_12
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -239,7 +282,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_13
+    - !<!ObjectSchema> &ref_14
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -280,8 +323,31 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
+    - !<!ObjectSchema> 
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: *ref_7
+          serializedName: ModelProperty
+          language: !<!Languages> 
+            default:
+              name: modelProperty
+              description: .
+          protocol: !<!Protocols> {}
+      extensions:
+        x-accessibility: internal
+        x-namespace: Very.Custom.Namespace.From.Swagger
+      language: !<!Languages> 
+        default:
+          name: ModelWithCustomNamespace
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
 globalParameters:
-  - !<!Parameter> &ref_7
+  - !<!Parameter> &ref_8
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -306,12 +372,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_7
+          - *ref_8
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_8
+                schema: *ref_9
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -323,8 +389,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_10
-                schema: *ref_9
+              - !<!Parameter> &ref_11
+                schema: *ref_10
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -336,7 +402,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_10
+              - *ref_11
             language: !<!Languages> 
               default:
                 name: ''
@@ -352,7 +418,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_9
+            schema: *ref_10
             language: !<!Languages> 
               default:
                 name: ''
@@ -376,12 +442,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_7
+          - *ref_8
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_8
+                schema: *ref_9
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -393,8 +459,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_12
-                schema: *ref_11
+              - !<!Parameter> &ref_13
+                schema: *ref_12
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -406,7 +472,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_12
+              - *ref_13
             language: !<!Languages> 
               default:
                 name: ''
@@ -422,7 +488,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_11
+            schema: *ref_12
             language: !<!Languages> 
               default:
                 name: ''
@@ -444,12 +510,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_7
+          - *ref_8
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_8
+                schema: *ref_9
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -461,8 +527,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_14
-                schema: *ref_13
+              - !<!Parameter> &ref_15
+                schema: *ref_14
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -474,7 +540,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_14
+              - *ref_15
             language: !<!Languages> 
               default:
                 name: ''
@@ -490,7 +556,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_13
+            schema: *ref_14
             language: !<!Languages> 
               default:
                 name: ''

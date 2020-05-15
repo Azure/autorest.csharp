@@ -35,7 +35,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _choices = choices;
 
             DefaultName = schema.CSharpName();
-            DefaultNamespace = $"{_context.DefaultNamespace}.Models";
+            DefaultAccessibility = schema.Extensions?.Accessibility ?? "public";
+            DefaultNamespace = schema.Extensions?.Namespace ?? $"{_context.DefaultNamespace}.Models";
 
             if (ExistingType != null)
             {
@@ -60,7 +61,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public bool IsExtendable { get; }
         public string? Description { get; }
         protected override string DefaultName { get; }
-        protected override string DefaultAccessibility { get; } = "public";
+        protected override string DefaultAccessibility { get; }
         protected override string DefaultNamespace { get; }
         protected override TypeKind TypeKind => IsExtendable ? TypeKind.Struct : TypeKind.Enum;
 

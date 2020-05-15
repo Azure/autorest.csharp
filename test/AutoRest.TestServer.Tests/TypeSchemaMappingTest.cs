@@ -8,6 +8,7 @@ using CustomNamespace;
 using NUnit.Framework;
 using TypeSchemaMapping;
 using TypeSchemaMapping.Models;
+using Very.Custom.Namespace.From.Swagger;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -92,6 +93,20 @@ namespace AutoRest.TestServer.Tests
         public void OperationTypeCanBeMapped()
         {
             Assert.AreEqual("MainOperation", typeof(MainOperation).Name);
+        }
+
+        [Test]
+        public void ModelsUseNamespaceAndAccessibilityFromSwagger()
+        {
+            Assert.AreEqual("Very.Custom.Namespace.From.Swagger", typeof(ModelWithCustomNamespace).Namespace);
+            Assert.False(typeof(ModelWithCustomNamespace).IsPublic);
+        }
+
+        [Test]
+        public void EnumsUseNamespaceAndAccessibilityFromSwagger()
+        {
+            Assert.AreEqual("Very.Custom.Namespace.From.Swagger", typeof(EnumWithCustomNamespace).Namespace);
+            Assert.False(typeof(EnumWithCustomNamespace).IsPublic);
         }
     }
 }
