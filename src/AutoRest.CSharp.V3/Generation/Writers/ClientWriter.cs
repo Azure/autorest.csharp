@@ -140,6 +140,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
+            writer.WriteXmlDocumentationParameter("clientDiagnostics", "The handler for diagnostic messaging in the client.");
+            writer.WriteXmlDocumentationParameter("pipeline", "The HTTP pipeline for sending and receiving REST requests and responses.");
+            foreach (Parameter parameter in client.RestClient.Parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
             writer.Append($"internal {client.Type.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
             foreach (Parameter parameter in client.RestClient.Parameters)
             {
