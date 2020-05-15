@@ -30,7 +30,6 @@ namespace AutoRest.CSharp.V3.Output.Models
             var clientName = clientPrefix + ClientSuffix;
 
             DefaultName = clientName;
-            DefaultAccessibility = operationGroup.Extensions?.Accessibility ?? "public";
         }
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
@@ -43,7 +42,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 
         protected override string DefaultName { get; }
 
-        protected override string DefaultAccessibility { get; }
+        protected override string DefaultAccessibility { get; } = "public";
 
         private IEnumerable<PagingMethod> BuildPagingMethods()
         {
