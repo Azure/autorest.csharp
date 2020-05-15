@@ -24,6 +24,9 @@ namespace SignalR
         {
         }
         /// <summary> Initializes a new instance of HealthApiClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> server parameter. </param>
         internal HealthApiClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             RestClient = new HealthApiRestClient(clientDiagnostics, pipeline, endpoint);

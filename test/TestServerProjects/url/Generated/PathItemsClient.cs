@@ -24,6 +24,11 @@ namespace url
         {
         }
         /// <summary> Initializes a new instance of PathItemsClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="globalStringPath"> A string value &apos;globalItemStringPath&apos; that appears in the path. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="globalStringQuery"> should contain value null. </param>
         internal PathItemsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, Uri endpoint = null, string globalStringQuery = null)
         {
             RestClient = new PathItemsRestClient(clientDiagnostics, pipeline, globalStringPath, endpoint, globalStringQuery);
