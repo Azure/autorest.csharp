@@ -71,12 +71,15 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            foreach (var client in context.Library.Clients)
+            if (context.Configuration.PublicClients)
             {
-                var codeWriter = new CodeWriter();
-                clientWriter.WriteClient(codeWriter, client, context.Configuration);
+                foreach (var client in context.Library.Clients)
+                {
+                    var codeWriter = new CodeWriter();
+                    clientWriter.WriteClient(codeWriter, client, context.Configuration);
 
-                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                    project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                }
             }
 
             foreach (var operation in context.Library.LongRunningOperations)
@@ -117,7 +120,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
                 new Uri(GetRequiredOption(autoRest, "shared-source-folder")).LocalPath,
                 autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false
+                autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
+                autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false
             );
 
             if (configuration.SaveInputs)

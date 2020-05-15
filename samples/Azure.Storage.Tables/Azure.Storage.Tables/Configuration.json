@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"Azure.Storage.Tables","LibraryName":"Tables","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false}
+{"OutputFolder":".","Namespace":"Azure.Storage.Tables","LibraryName":"Tables","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true}

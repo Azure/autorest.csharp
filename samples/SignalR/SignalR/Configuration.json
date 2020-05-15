@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"SignalR","LibraryName":"SignalR","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false}
+{"OutputFolder":".","Namespace":"SignalR","LibraryName":"SignalR","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true}
