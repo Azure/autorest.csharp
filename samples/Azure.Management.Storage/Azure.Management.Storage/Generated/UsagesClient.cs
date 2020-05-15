@@ -25,25 +25,12 @@ namespace Azure.Management.Storage
         protected UsagesClient()
         {
         }
-
         /// <summary> Initializes a new instance of UsagesClient. </summary>
-        public UsagesClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, null, tokenCredential, options)
+        internal UsagesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-        }
-
-        /// <summary> Initializes a new instance of UsagesClient. </summary>
-        public UsagesClient(string subscriptionId, Uri endpoint, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
-        {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            endpoint ??= new Uri("https://management.azure.com");
-
-            options ??= new StorageManagementClientOptions();
-            _clientDiagnostics = new ClientDiagnostics(options);
-            _pipeline = ManagementPipelineBuilder.Build(tokenCredential, endpoint, options);
-            RestClient = new UsagesRestClient(_clientDiagnostics, _pipeline, subscriptionId: subscriptionId, endpoint: endpoint);
+            RestClient = new UsagesRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
         }
 
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>

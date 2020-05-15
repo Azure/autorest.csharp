@@ -31,15 +31,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client);
-
-                    if (configuration.AzureArm)
-                    {
-                        WriteManagementClientCtors(writer, client, configuration);
-                    }
-                    else
-                    {
-                        WriteClientCtors(writer, client);
-                    }
+                    WriteClientCtors(writer, client);
 
                     foreach (var clientMethod in client.Methods)
                     {
@@ -60,90 +52,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                 }
             }
-        }
-
-        private void WriteManagementClientCtors(CodeWriter writer, Client client, Configuration configuration)
-        {
-
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
-            using (writer.Scope($"protected {client.Type.Name:D}()"))
-            {
-            }
-
-            writer.Line();
-
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-            writer.Append($"public {client.Type.Name:D}(");
-            foreach (Parameter parameter in client.RestClient.Parameters)
-            {
-                // Skip host and API Version parameters that would be set later
-                if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter) ||
-                    ManagementClientWriterHelpers.IsEndpointParameter(parameter))
-                {
-                    continue;
-                }
-
-                writer.WriteParameter(parameter, false);
-            }
-
-            writer.Append($"{typeof(TokenCredential)} tokenCredential, {configuration.LibraryName}ManagementClientOptions options = null) : this(");
-
-            foreach (Parameter parameter in client.RestClient.Parameters)
-            {
-                // Skip API Version parameters that would be set later
-                if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
-                {
-                    continue;
-                }
-
-                // Pass the default host
-                if (ManagementClientWriterHelpers.IsEndpointParameter(parameter))
-                {
-                    writer.Append($"null, ");
-                    continue;
-                }
-
-                writer.Append($"{parameter.Name},");
-            }
-
-            writer.Line($" tokenCredential, options)");
-            using (writer.Scope())
-            {
-            }
-            writer.Line();
-
-            var allByVersionParameters = client.RestClient.Parameters
-                .Where(p => !ManagementClientWriterHelpers.IsApiVersionParameter(p))
-                .ToArray();
-
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-            writer.Append($"public {client.Type.Name:D}(");
-            foreach (Parameter parameter in allByVersionParameters)
-            {
-                writer.WriteParameter(parameter, false);
-            }
-
-            writer.Append($"{typeof(TokenCredential)} tokenCredential, {configuration.LibraryName}ManagementClientOptions options = null)");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(allByVersionParameters);
-
-                writer.Line($"options ??= new {configuration.LibraryName}ManagementClientOptions();");
-                writer.Line($"_clientDiagnostics = new {typeof(ClientDiagnostics)}(options);");
-                writer.Line($"_pipeline = {typeof(ManagementPipelineBuilder)}.Build(tokenCredential, endpoint, options);");
-
-                writer.Append($"this.RestClient = new {client.RestClient.Type}(_clientDiagnostics, _pipeline, ");
-
-                foreach (Parameter parameter in allByVersionParameters)
-                {
-                    writer.Append($"{parameter.Name}: {parameter.Name:I}, ");
-                }
-                writer.RemoveTrailingComma();
-                writer.Line($");");
-
-            }
-            writer.Line();
         }
 
         private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)

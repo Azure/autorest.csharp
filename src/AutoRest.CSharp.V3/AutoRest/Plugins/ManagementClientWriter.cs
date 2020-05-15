@@ -8,6 +8,7 @@ using AutoRest.CSharp.V3.Generation.Writers;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using Azure.Core;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
@@ -32,8 +33,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 writer.WriteXmlDocumentationSummary($"{title} service management client.");
                 using (writer.Scope($"public class {title}ManagementClient"))
                 {
-                    writer.Line($"private readonly {title}ManagementClientOptions _options;");
-                    writer.Line($"private readonly {typeof(TokenCredential)} _tokenCredential;");
+                    writer.Line($"private readonly {typeof(ClientDiagnostics)}  _clientDiagnostics;");
+                    writer.Line($"private readonly {typeof(HttpPipeline)} _pipeline;");
                     foreach (var parameter in allParameters.Values)
                     {
                         writer.Line($"private readonly {parameter.Type} _{parameter.Name};");
@@ -91,8 +92,9 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                     {
                         writer.WriteParameterNullChecks(allParameters.Values);
 
-                        writer.Line($"_options = options ?? new {title}ManagementClientOptions();");
-                        writer.Line($"_tokenCredential = tokenCredential;");
+                        writer.Line($"options ??= new {title}ManagementClientOptions();");
+                        writer.Line($"_clientDiagnostics = new {typeof(ClientDiagnostics)}(options);");
+                        writer.Line($"_pipeline = {typeof(ManagementPipelineBuilder)}.Build(tokenCredential, endpoint, options);");
 
                         foreach (Parameter parameter in allParameters.Values)
                         {
@@ -107,7 +109,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                         writer.WriteXmlDocumentationSummary($"Creates a new instance of {client.Type.Name}");
                         using (writer.Scope($"public virtual {client.Type} Get{client.Type.Name}()"))
                         {
-                            writer.Append($"return new {client.Type}(");
+                            writer.Append($"return new {client.Type}(_clientDiagnostics, _pipeline, ");
                             foreach (var parameter in client.RestClient.Parameters)
                             {
                                 if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
@@ -117,8 +119,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
                                 writer.Append($"_{parameter.Name}, ");
                             }
-
-                            writer.Line($"_tokenCredential, _options);");
+                            writer.RemoveTrailingComma();
+                            writer.Line($");");
                         }
 
                         writer.Line();
