@@ -24,6 +24,13 @@ namespace required_optional
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ImplicitRestClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="requiredGlobalPath"> number of items to skip. </param>
+        /// <param name="requiredGlobalQuery"> number of items to skip. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="optionalGlobalQuery"> number of items to skip. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public ImplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
             if (requiredGlobalPath == null)

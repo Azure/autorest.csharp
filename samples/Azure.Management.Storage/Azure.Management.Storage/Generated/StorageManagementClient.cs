@@ -26,10 +26,18 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of StorageManagementClient. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
+        /// <param name="tokenCredential"> The OAuth token for making client requests. </param>
+        /// <param name="options"> The options for configuring the client. </param>
         public StorageManagementClient(string subscriptionId, TokenCredential tokenCredential, StorageManagementClientOptions options = null) : this(subscriptionId, null, tokenCredential, options)
         {
         }
         /// <summary> Initializes a new instance of StorageManagementClient. </summary>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="tokenCredential"> The OAuth token for making client requests. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public StorageManagementClient(string subscriptionId, Uri endpoint, TokenCredential tokenCredential, StorageManagementClientOptions options = null)
         {
             if (subscriptionId == null)

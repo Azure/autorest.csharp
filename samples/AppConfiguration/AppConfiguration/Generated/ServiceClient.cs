@@ -27,6 +27,11 @@ namespace AppConfiguration
         {
         }
         /// <summary> Initializes a new instance of ServiceClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> The endpoint of the App Configuration instance to send requests to. </param>
+        /// <param name="syncToken"> Used to guarantee real-time consistency between requests. </param>
+        /// <param name="apiVersion"> Api Version. </param>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string syncToken = null, string apiVersion = "1.0")
         {
             RestClient = new ServiceRestClient(clientDiagnostics, pipeline, endpoint, syncToken, apiVersion);

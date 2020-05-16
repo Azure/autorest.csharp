@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class DocumentationWriterExtensions
@@ -25,6 +27,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, string name, string? text)
         {
             return writer.WriteDocumentationLines($"<param name=\"{name}\">", "</param>", text, skipWhenEmpty: false);
+        }
+
+        public static CodeWriter WriteXmlDocumentationException(this CodeWriter writer, Type exception, string? description)
+        {
+            return writer.WriteDocumentationLines($"<exception cref=\"{exception.FullName}\">", "</exception>", description, skipWhenEmpty: false);
         }
 
         private static CodeWriter WriteDocumentationLines(this CodeWriter writer, string prefix, string suffix, string? text, bool skipWhenEmpty = true)
