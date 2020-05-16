@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"Azure.AI.FormRecognizer","LibraryName":"FormRecognizer","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false}
+{"OutputFolder":".","Namespace":"Azure.AI.FormRecognizer","LibraryName":"FormRecognizer","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":false}

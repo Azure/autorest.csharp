@@ -68,13 +68,17 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             }
 
             _operations = new Dictionary<Operation, LongRunningOperation>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+
+            if (_context.Configuration.PublicClients)
             {
-                foreach (var operation in operationGroup.Operations)
+                foreach (var operationGroup in _codeModel.OperationGroups)
                 {
-                    if (operation.IsLongRunning)
+                    foreach (var operation in operationGroup.Operations)
                     {
-                        _operations.Add(operation, new LongRunningOperation(operationGroup, operation, _context));
+                        if (operation.IsLongRunning)
+                        {
+                            _operations.Add(operation, new LongRunningOperation(operationGroup, operation, _context));
+                        }
                     }
                 }
             }
@@ -90,9 +94,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             }
 
             _clients = new Dictionary<OperationGroup, Client>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+
+            if (_context.Configuration.PublicClients)
             {
-                _clients.Add(operationGroup, new Client(operationGroup, _context));
+                foreach (var operationGroup in _codeModel.OperationGroups)
+                {
+                    _clients.Add(operationGroup, new Client(operationGroup, _context));
+                }
             }
 
             return _clients;
@@ -146,9 +154,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             return EnsureLongRunningOperations()[operation];
         }
 
-        public Client FindClient(OperationGroup operationGroup)
+        public Client? FindClient(OperationGroup operationGroup)
         {
-            return EnsureClients()[operationGroup];
+            EnsureClients().TryGetValue(operationGroup, out var client);
+            return client;
         }
 
         public RestClient FindRestClient(OperationGroup operationGroup)

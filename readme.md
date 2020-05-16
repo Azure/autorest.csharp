@@ -698,7 +698,7 @@ shared-source-folder: $(this-folder)/src/assets
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
 clear-output-folder: false
-
+public-clients: true
 pipeline:
   csharpproj:
     input: modelerfour/identity

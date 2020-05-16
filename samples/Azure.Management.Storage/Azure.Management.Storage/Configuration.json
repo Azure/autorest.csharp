@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"Azure.Management.Storage","LibraryName":"Storage","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":true}
+{"OutputFolder":".","Namespace":"Azure.Management.Storage","LibraryName":"Storage","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":true,"PublicClients":true}
