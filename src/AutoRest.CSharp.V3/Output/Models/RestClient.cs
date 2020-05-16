@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             var mainClient = context.Library.FindClient(operationGroup);
 
-            ClientPrefix = GetClientPrefix(mainClient.Declaration.Name);
+            ClientPrefix = GetClientPrefix(mainClient?.Declaration.Name ?? operationGroup.Language.Default.Name);
             DefaultName = ClientPrefix + RestClientSuffix;
             Description = "";
         }

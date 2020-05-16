@@ -71,15 +71,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            if (context.Configuration.PublicClients)
+            foreach (var client in context.Library.Clients)
             {
-                foreach (var client in context.Library.Clients)
-                {
-                    var codeWriter = new CodeWriter();
-                    clientWriter.WriteClient(codeWriter, client, context.Configuration);
+                var codeWriter = new CodeWriter();
+                clientWriter.WriteClient(codeWriter, client, context.Configuration);
 
-                    project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
-                }
+                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var operation in context.Library.LongRunningOperations)

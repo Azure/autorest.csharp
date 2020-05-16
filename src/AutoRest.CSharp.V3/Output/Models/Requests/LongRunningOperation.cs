@@ -21,6 +21,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 
             var clientClass = context.Library.FindClient(operationGroup);
 
+            Debug.Assert(clientClass != null, "clientClass != null, LROs should be disabled when public clients are disables");
+
             DefaultName = clientClass.RestClient.ClientPrefix + operation.CSharpName() + "Operation";
             FinalStateVia = operation.LongRunningFinalStateVia switch
             {
