@@ -26,6 +26,11 @@ namespace Azure.Management.Storage
         {
         }
         /// <summary> Initializes a new instance of ObjectReplicationPoliciesClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="subscriptionId"> The ID of the target subscription. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="apiVersion"> Api Version. </param>
         internal ObjectReplicationPoliciesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
             RestClient = new ObjectReplicationPoliciesRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);

@@ -23,6 +23,9 @@ namespace required_optional
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ExplicitRestClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> server parameter. </param>
         public ExplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             endpoint ??= new Uri("http://localhost:3000");

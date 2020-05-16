@@ -24,6 +24,12 @@ namespace required_optional
         {
         }
         /// <summary> Initializes a new instance of ImplicitClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="requiredGlobalPath"> number of items to skip. </param>
+        /// <param name="requiredGlobalQuery"> number of items to skip. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        /// <param name="optionalGlobalQuery"> number of items to skip. </param>
         internal ImplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
             RestClient = new ImplicitRestClient(clientDiagnostics, pipeline, requiredGlobalPath, requiredGlobalQuery, endpoint, optionalGlobalQuery);

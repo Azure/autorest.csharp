@@ -25,6 +25,9 @@ namespace url_multi_collectionFormat
         {
         }
         /// <summary> Initializes a new instance of QueriesClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> server parameter. </param>
         internal QueriesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             RestClient = new QueriesRestClient(clientDiagnostics, pipeline, endpoint);
