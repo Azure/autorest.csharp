@@ -2,9 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Plugins;
@@ -125,10 +122,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
+        private const string ClientDiagnosticsVariable = "clientDiagnostics";
+        private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
+        private const string PipelineVariable = "pipeline";
+        private const string PipelineField = "_" + PipelineVariable;
+
         private void WriteClientFields(CodeWriter writer, Client client)
         {
-            writer.Line($"private readonly {typeof(ClientDiagnostics)} _clientDiagnostics;");
-            writer.Line($"private readonly {typeof(HttpPipeline)} _pipeline;");
+            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
+            writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
             writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
         }
 
@@ -140,14 +142,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-            writer.WriteXmlDocumentationParameter("clientDiagnostics", "The handler for diagnostic messaging in the client.");
-            writer.WriteXmlDocumentationParameter("pipeline", "The HTTP pipeline for sending and receiving REST requests and responses.");
+            writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, "The handler for diagnostic messaging in the client.");
+            writer.WriteXmlDocumentationParameter(PipelineVariable, "The HTTP pipeline for sending and receiving REST requests and responses.");
             foreach (Parameter parameter in client.RestClient.Parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
-            writer.Append($"internal {client.Type.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
+            writer.Append($"internal {client.Type.Name:D}({typeof(ClientDiagnostics)} {ClientDiagnosticsVariable}, {typeof(HttpPipeline)} {PipelineVariable},");
             foreach (Parameter parameter in client.RestClient.Parameters)
             {
                 writer.WriteParameter(parameter);
@@ -157,7 +159,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
-                writer.Append($"this.RestClient = new {client.RestClient.Type}(clientDiagnostics, pipeline, ");
+                writer.Append($"this.RestClient = new {client.RestClient.Type}({ClientDiagnosticsVariable}, {PipelineVariable}, ");
                 foreach (var parameter in client.RestClient.Parameters)
                 {
                     writer.Append($"{parameter.Name}, ");
@@ -165,8 +167,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.Line($");");
 
-                writer.Line($"_clientDiagnostics = clientDiagnostics;");
-                writer.Line($"_pipeline = pipeline;");
+                writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
+                writer.Line($"{PipelineField} = {PipelineVariable};");
             }
             writer.Line();
         }
@@ -249,7 +251,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
 
-            writer.Line($"using var {scopeVariable:D} = _clientDiagnostics.CreateScope({diagnostic.ScopeName:L});");
+            writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({diagnostic.ScopeName:L});");
             foreach (DiagnosticAttribute diagnosticScopeAttributes in diagnostic.Attributes)
             {
                 writer.Append($"{scopeVariable}.AddAttribute({diagnosticScopeAttributes.Name:L},");
@@ -309,7 +311,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     writer.Line($"cancellationToken){configureText};");
 
-                    writer.Append($"return new {lroMethod.Operation.Type}(_clientDiagnostics, _pipeline, RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
+                    writer.Append($"return new {lroMethod.Operation.Type}({ClientDiagnosticsField}, {PipelineField}, RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
                     foreach (Parameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");

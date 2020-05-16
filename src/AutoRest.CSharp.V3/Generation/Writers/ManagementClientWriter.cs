@@ -13,6 +13,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal class ManagementClientWriter
     {
+        private const string ClientDiagnosticsField = "_clientDiagnostics";
+        private const string PipelineField = "_pipeline";
+        private const string TokenCredentialVariable = "tokenCredential";
+        private const string OptionsVariable = "options";
+
         public static void WriteAggregateClient(CodeWriter writer, BuildContext context)
         {
             var title = context.Configuration.LibraryName;
@@ -32,8 +37,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationSummary($"{title} service management client.");
                 using (writer.Scope($"public class {title}ManagementClient"))
                 {
-                    writer.Line($"private readonly {typeof(ClientDiagnostics)}  _clientDiagnostics;");
-                    writer.Line($"private readonly {typeof(HttpPipeline)} _pipeline;");
+                    writer.Line($"private readonly {typeof(ClientDiagnostics)}  {ClientDiagnosticsField};");
+                    writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
                     foreach (var parameter in allParameters.Values)
                     {
                         writer.Line($"private readonly {parameter.Type} _{parameter.Name};");
@@ -57,8 +62,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
                     }
-                    writer.WriteXmlDocumentationParameter("tokenCredential", "The OAuth token for making client requests.");
-                    writer.WriteXmlDocumentationParameter("options", "The options for configuring the client.");
+                    writer.WriteXmlDocumentationParameter(TokenCredentialVariable, "The OAuth token for making client requests.");
+                    writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
 
                     writer.Append($"public {title}ManagementClient(");
                     foreach (Parameter parameter in allParameters.Values)
@@ -71,7 +76,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.WriteParameter(parameter);
                     }
 
-                    writer.Append($"{typeof(TokenCredential)} tokenCredential, {title}ManagementClientOptions options = null) : this(");
+                    writer.Append($"{typeof(TokenCredential)} {TokenCredentialVariable}, {title}ManagementClientOptions {OptionsVariable} = null) : this(");
                     foreach (Parameter parameter in allParameters.Values)
                     {
                         // Pass the default host
@@ -84,7 +89,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"{parameter.Name},");
                     }
 
-                    writer.Line($"tokenCredential, options)");
+                    writer.Line($"{TokenCredentialVariable}, {OptionsVariable})");
                     using (writer.Scope())
                     {
                     }
@@ -94,8 +99,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     {
                         writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
                     }
-                    writer.WriteXmlDocumentationParameter("tokenCredential", "The OAuth token for making client requests.");
-                    writer.WriteXmlDocumentationParameter("options", "The options for configuring the client.");
+                    writer.WriteXmlDocumentationParameter(TokenCredentialVariable, "The OAuth token for making client requests.");
+                    writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
                     if (allParameters.Values.HasAnyNullCheck())
                     {
                         writer.WriteXmlDocumentationException(typeof(ArgumentNullException), "This occurs when one of the required arguments is null.");
@@ -107,15 +112,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.WriteParameter(parameter, false);
                     }
 
-                    writer.Append($"{typeof(TokenCredential)} tokenCredential, {title}ManagementClientOptions options = null)");
+                    writer.Append($"{typeof(TokenCredential)} {TokenCredentialVariable}, {title}ManagementClientOptions {OptionsVariable} = null)");
 
                     using (writer.Scope())
                     {
                         writer.WriteParameterNullChecks(allParameters.Values);
 
-                        writer.Line($"options ??= new {title}ManagementClientOptions();");
-                        writer.Line($"_clientDiagnostics = new {typeof(ClientDiagnostics)}(options);");
-                        writer.Line($"_pipeline = {typeof(ManagementPipelineBuilder)}.Build(tokenCredential, endpoint, options);");
+                        writer.Line($"{OptionsVariable} ??= new {title}ManagementClientOptions();");
+                        writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                        writer.Line($"{PipelineField} = {typeof(ManagementPipelineBuilder)}.Build({TokenCredentialVariable}, endpoint, {OptionsVariable});");
 
                         foreach (Parameter parameter in allParameters.Values)
                         {
@@ -130,7 +135,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.WriteXmlDocumentationSummary($"Creates a new instance of {client.Type.Name}");
                         using (writer.Scope($"public virtual {client.Type} Get{client.Type.Name}()"))
                         {
-                            writer.Append($"return new {client.Type}(_clientDiagnostics, _pipeline, ");
+                            writer.Append($"return new {client.Type}({ClientDiagnosticsField}, {PipelineField}, ");
                             foreach (var parameter in client.RestClient.Parameters)
                             {
                                 if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))

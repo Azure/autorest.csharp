@@ -46,6 +46,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
+        private const string ClientDiagnosticsVariable = "clientDiagnostics";
+        private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
+        private const string PipelineVariable = "pipeline";
+        private const string PipelineField = "_" + PipelineVariable;
+
         private void WriteClientFields(CodeWriter writer, RestClient restClient)
         {
             foreach (Parameter clientParameter in restClient.Parameters)
@@ -53,16 +58,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
             }
 
-            writer.Line($"private {typeof(ClientDiagnostics)} _clientDiagnostics;");
-            writer.Line($"private {typeof(HttpPipeline)} _pipeline;");
+            writer.Line($"private {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
+            writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
             writer.Line();
         }
 
         private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
-            writer.WriteXmlDocumentationParameter("clientDiagnostics", "The handler for diagnostic messaging in the client.");
-            writer.WriteXmlDocumentationParameter("pipeline", "The HTTP pipeline for sending and receiving REST requests and responses.");
+            writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, "The handler for diagnostic messaging in the client.");
+            writer.WriteXmlDocumentationParameter(PipelineVariable, "The HTTP pipeline for sending and receiving REST requests and responses.");
             foreach (Parameter parameter in restClient.Parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
@@ -72,7 +77,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationException(typeof(ArgumentNullException), "This occurs when one of the required arguments is null.");
             }
 
-            writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline,");
+            writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} {ClientDiagnosticsVariable}, {typeof(HttpPipeline)} {PipelineVariable},");
             foreach (Parameter clientParameter in restClient.Parameters)
             {
                 writer.WriteParameter(clientParameter);
@@ -89,8 +94,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
                 }
 
-                writer.Line($"_clientDiagnostics = clientDiagnostics;");
-                writer.Line($"_pipeline = pipeline;");
+                writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
+                writer.Line($"{PipelineField} = {PipelineVariable};");
             }
             writer.Line();
         }
@@ -118,7 +123,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                writer.Line($"var {message:D} = {PipelineField}.CreateMessage();");
                 writer.Line($"var {request:D} = {message}.Request;");
                 var method = clientMethod.Request.HttpMethod;
                 writer.Line($"{request}.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
@@ -295,11 +300,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 if (async)
                 {
-                    writer.Line($"await _pipeline.SendAsync({messageVariable}, cancellationToken).ConfigureAwait(false);");
+                    writer.Line($"await {PipelineField}.SendAsync({messageVariable}, cancellationToken).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"_pipeline.Send({messageVariable}, cancellationToken);");
+                    writer.Line($"{PipelineField}.Send({messageVariable}, cancellationToken);");
                 }
 
                 WriteStatusCodeSwitch(writer, messageVariable, operation, async);
@@ -551,11 +556,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"default:");
                 if (async)
                 {
-                    writer.Line($"throw await _clientDiagnostics.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
+                    writer.Line($"throw await {ClientDiagnosticsField}.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"throw _clientDiagnostics.CreateRequestFailedException({responseVariable});");
+                    writer.Line($"throw {ClientDiagnosticsField}.CreateRequestFailedException({responseVariable});");
                 }
             }
         }
