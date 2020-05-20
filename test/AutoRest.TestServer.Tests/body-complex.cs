@@ -1023,7 +1023,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void OutputSchemaPropertiesReadonly()
         {
-            Assert.Null(typeof(Error).GetProperty(nameof(Error.Message)).SetMethod);
+            Assert.Null(typeof(DotSalmon).GetProperty(nameof(DotSalmon.Species)).SetMethod);
         }
 
         [Test]
@@ -1045,7 +1045,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void OutputSchemaCtorIsInternal()
         {
-            Assert.NotNull(typeof(Error)
+            Assert.NotNull(typeof(DotSalmon)
                 .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
                 .SingleOrDefault(c => c.GetParameters().Length == 0));
         }
