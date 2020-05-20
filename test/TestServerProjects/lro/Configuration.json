@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"lro","LibraryName":"lro","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true}
+{"OutputFolder":".","Namespace":"lro","LibraryName":"lro","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true,"IncludeUnused":true}

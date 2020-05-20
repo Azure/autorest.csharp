@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"NameConflicts","LibraryName":"NameConflicts","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true}
+{"OutputFolder":".","Namespace":"NameConflicts","LibraryName":"NameConflicts","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true,"IncludeUnused":true}

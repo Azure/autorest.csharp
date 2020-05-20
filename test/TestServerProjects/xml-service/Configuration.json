@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"xml_service","LibraryName":"xml_service","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true}
+{"OutputFolder":".","Namespace":"xml_service","LibraryName":"xml_service","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true,"IncludeUnused":true}

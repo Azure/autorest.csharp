@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private Dictionary<Schema, TypeProvider> BuildModels()
         {
-            var allObjects = _codeModel.Schemas.Objects.Where(s => !s.IsExceptionOnly);
+            var allObjects = _codeModel.Schemas.Objects.Where(s => _context.Configuration.IncludeUnused || !s.IsExceptionOnly && !s.IsUnused);
             var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(allObjects)

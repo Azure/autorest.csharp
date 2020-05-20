@@ -104,6 +104,7 @@ namespace AutoRest.CSharp.V3.Input
         public bool IsInputOnly => IsInput && !IsOutput && !IsException;
         public bool IsOutputOnly => IsOutput && !IsInput && !IsException;
         public bool IsExceptionOnly => IsException && !IsInput && !IsOutput;
+        public bool IsUnused => !Usage.Any();
     }
 
     // redefined manually to inherit from ObjectSchema

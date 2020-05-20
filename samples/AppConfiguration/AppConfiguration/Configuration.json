@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"AppConfiguration","LibraryName":"AppConfiguration","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true}
+{"OutputFolder":".","Namespace":"AppConfiguration","LibraryName":"AppConfiguration","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true,"IncludeUnused":false}

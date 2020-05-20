@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"url","LibraryName":"url","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true}
+{"OutputFolder":".","Namespace":"url","LibraryName":"url","SharedSourceFolder":"..\\..\\..\\src\\assets","AzureArm":false,"PublicClients":true,"IncludeUnused":true}
