@@ -251,7 +251,7 @@ schemas: !<!Schemas>
                   serializationFormats:
                     - json
                   usage:
-                    - output
+                    - exception
                   extensions:
                     x-ms-discriminator-value: InvalidResourceLink
                   language: !<!Languages> 
@@ -284,7 +284,7 @@ schemas: !<!Schemas>
                   serializationFormats:
                     - json
                   usage:
-                    - output
+                    - exception
                   language: !<!Languages> 
                     default:
                       name: AnimalNotFound
@@ -331,7 +331,7 @@ schemas: !<!Schemas>
             serializationFormats:
               - json
             usage:
-              - output
+              - exception
             language: !<!Languages> 
               default:
                 name: NotFoundErrorBase
@@ -354,7 +354,7 @@ schemas: !<!Schemas>
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       language: !<!Languages> 
         default:
           name: BaseError
@@ -424,7 +424,7 @@ schemas: !<!Schemas>
                   serializationFormats:
                     - json
                   usage:
-                    - output
+                    - exception
                   language: !<!Languages> 
                     default:
                       name: PetHungryOrThirstyError
@@ -466,7 +466,7 @@ schemas: !<!Schemas>
             serializationFormats:
               - json
             usage:
-              - output
+              - exception
             language: !<!Languages> 
               default:
                 name: PetSadError
@@ -497,7 +497,7 @@ schemas: !<!Schemas>
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       language: !<!Languages> 
         default:
           name: PetActionError

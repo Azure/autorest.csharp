@@ -28,6 +28,6 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> is the pet hungry or thirsty or both. </summary>
-        public string HungryOrThirsty { get; }
+        public string HungryOrThirsty { get; set; }
     }
 }

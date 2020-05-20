@@ -27,6 +27,6 @@ namespace xms_error_responses.Models
             WhatNotFound = whatNotFound ?? "InvalidResourceLink";
         }
 
-        public string WhatSubAddress { get; }
+        public string WhatSubAddress { get; set; }
     }
 }

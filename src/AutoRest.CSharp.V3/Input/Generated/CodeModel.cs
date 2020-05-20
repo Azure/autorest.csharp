@@ -964,11 +964,14 @@ namespace AutoRest.CSharp.V3.Input
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal enum SchemaContext
     {
+        [System.Runtime.Serialization.EnumMember(Value = @"exception")]
+        Exception = 0,
+
         [System.Runtime.Serialization.EnumMember(Value = @"input")]
-        Input = 0,
+        Input = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"output")]
-        Output = 1,
+        Output = 2,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]

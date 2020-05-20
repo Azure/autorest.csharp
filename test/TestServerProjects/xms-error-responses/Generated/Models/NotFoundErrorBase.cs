@@ -26,7 +26,7 @@ namespace xms_error_responses.Models
             WhatNotFound = whatNotFound ?? "NotFoundErrorBase";
         }
 
-        public string Reason { get; }
+        public string Reason { get; set; }
         internal string WhatNotFound { get; set; }
     }
 }

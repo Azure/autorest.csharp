@@ -27,6 +27,6 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> why is the pet sad. </summary>
-        public string Reason { get; }
+        public string Reason { get; set; }
     }
 }

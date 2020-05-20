@@ -27,6 +27,6 @@ namespace xms_error_responses.Models
 
         internal string ErrorType { get; set; }
         /// <summary> the error message. </summary>
-        public string ErrorMessage { get; }
+        public string ErrorMessage { get; set; }
     }
 }

@@ -22,6 +22,6 @@ namespace xms_error_responses.Models
             SomeBaseProp = someBaseProp;
         }
 
-        public string SomeBaseProp { get; }
+        public string SomeBaseProp { get; set; }
     }
 }
