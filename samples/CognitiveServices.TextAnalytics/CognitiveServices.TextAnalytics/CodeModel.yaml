@@ -1066,6 +1066,7 @@ schemas: !<!Schemas>
                             - json
                           usage:
                             - output
+                            - exception
                           language: !<!Languages> 
                             default:
                               name: InnerError
@@ -1101,6 +1102,7 @@ schemas: !<!Schemas>
                     serializationFormats:
                       - json
                     usage:
+                      - exception
                       - output
                     language: !<!Languages> 
                       default:

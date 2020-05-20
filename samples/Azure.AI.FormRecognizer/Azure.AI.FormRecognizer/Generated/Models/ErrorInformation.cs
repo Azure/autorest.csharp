@@ -30,7 +30,7 @@ namespace Azure.AI.FormRecognizer.Models
             Message = message;
         }
 
-        public string Code { get; }
-        public string Message { get; }
+        public string Code { get; set; }
+        public string Message { get; set; }
     }
 }

@@ -43,14 +43,14 @@ namespace CognitiveServices.TextAnalytics.Models
         }
 
         /// <summary> Error code. </summary>
-        public ErrorCodeValue Code { get; }
+        public ErrorCodeValue Code { get; set; }
         /// <summary> Error message. </summary>
-        public string Message { get; }
+        public string Message { get; set; }
         /// <summary> Error target. </summary>
-        public string Target { get; }
+        public string Target { get; set; }
         /// <summary> Inner error contains more specific information. </summary>
-        public InnerError InnerError { get; }
+        public InnerError InnerError { get; set; }
         /// <summary> Details about specific errors that led to this reported error. </summary>
-        public IReadOnlyList<TextAnalyticsError> Details { get; }
+        public IReadOnlyList<TextAnalyticsError> Details { get; set; }
     }
 }
