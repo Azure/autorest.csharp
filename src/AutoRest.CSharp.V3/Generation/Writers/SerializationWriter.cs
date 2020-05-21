@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
-using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Types;
