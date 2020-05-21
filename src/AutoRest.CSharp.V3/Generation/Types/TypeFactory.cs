@@ -197,7 +197,9 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 nullable = symbol.NullableAnnotation != NullableAnnotation.NotAnnotated;
             }
 
-            var existingType = Type.GetType(GetFullMetadataName(namedTypeSymbol));
+            var fullMetadataName = GetFullMetadataName(namedTypeSymbol);
+            var fullyQualifiedName = $"{fullMetadataName}, {namedTypeSymbol.ContainingAssembly.Name}";
+            var existingType = Type.GetType(fullMetadataName) ?? Type.GetType(fullyQualifiedName);
             if (existingType != null)
             {
                 var arguments = namedTypeSymbol.TypeArguments.Select(a => CreateType(a)).ToArray();

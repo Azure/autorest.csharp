@@ -102,5 +102,39 @@ namespace SerializationCustomization
                 throw;
             }
         }
+
+        /// <param name="model"> The PropertyToJsonElementModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<PropertyToJsonElementModel>> PropertyToJsonElementModelAsync(PropertyToJsonElementModel model, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PropertyToJsonElementModel");
+            scope.Start();
+            try
+            {
+                return await RestClient.PropertyToJsonElementModelAsync(model, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="model"> The PropertyToJsonElementModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<PropertyToJsonElementModel> PropertyToJsonElementModel(PropertyToJsonElementModel model, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PropertyToJsonElementModel");
+            scope.Start();
+            try
+            {
+                return RestClient.PropertyToJsonElementModel(model, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }
