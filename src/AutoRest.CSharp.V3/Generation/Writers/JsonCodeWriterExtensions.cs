@@ -118,6 +118,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     if (valueSerialization.Type.IsFrameworkType)
                     {
                         var frameworkType = valueSerialization.Type.FrameworkType;
+
+                        if (frameworkType == typeof(JsonElement))
+                        {
+                            writer.Line($"{name}.WriteTo({writerName});");
+                            return;
+                        }
+
                         bool writeFormat = false;
 
                         writer.Append($"{writerName}.");
@@ -429,6 +436,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void DeserializeFrameworkTypeValue(CodeWriter writer, CodeWriterDelegate element, Type frameworkType, SerializationFormat serializationFormat)
         {
+            if (frameworkType == typeof(JsonElement))
+            {
+                writer.Append($"{element}.Clone()");
+                return;
+            }
+
             bool includeFormat = false;
 
             writer.Append($"{element}.");

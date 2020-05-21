@@ -23,6 +23,7 @@
 - [Make model property internal](#make-model-property-internal)
 - [Rename a model property](#rename-a-model-property)
 - [Change a model property type](#change-a-model-property-type)
+- [Preserve raw Json value of a property](#preserve-raw-json-value-of-a-property)
 - [Changing member doc comment](#changing-member-doc-comment)
 - [Customize serialization/deserialization methods](#customize-serializationdeserialization-methods)
 - [Renaming an enum](#renaming-an-enum)
@@ -257,6 +258,51 @@ namespace Azure.Service.Models
     {
 -        public string Property { get; }
 +        // Serialization code now reads and writes DateTime value instead of string  
+    }
+}
+```
+
+</details>
+
+### Preserve raw Json value of a property
+
+Use the [Change a model property type](#Change-a-model-property-type) approach to change property type to `JsonElement`.
+
+<details>
+
+**Generated code before (Generated/Models/Model.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+        public string Property { get; }
+    }
+}
+```
+
+**Add customized model (Model.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+        public JsonElement Property { get; }
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.Serializer.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+    public partial class Model
+    {
+-        public string Property { get; }
++        // Serialization code now reads and writes JsonElement value instead of string  
     }
 }
 ```

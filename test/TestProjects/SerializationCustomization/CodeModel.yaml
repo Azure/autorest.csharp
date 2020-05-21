@@ -22,7 +22,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_10
+    - !<!ConstantSchema> &ref_12
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -32,15 +32,23 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
+  any:
+    - !<!AnySchema> &ref_3
+      type: any
+      language: !<!Languages> 
+        default:
+          name: any
+          description: Any object
+      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_11
+    - !<!ObjectSchema> &ref_13
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_3
+          schema: !<!ArraySchema> &ref_4
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -83,7 +91,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_4
+          schema: !<!ArraySchema> &ref_5
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -102,7 +110,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_5
+          schema: !<!ArraySchema> &ref_6
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -121,7 +129,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_6
+          schema: !<!ArraySchema> &ref_7
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -178,14 +186,14 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_2
-    - !<!ObjectSchema> &ref_13
+    - !<!ObjectSchema> &ref_15
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_7
+          schema: !<!ArraySchema> &ref_8
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -203,7 +211,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_8
+          schema: !<!ArraySchema> &ref_9
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -231,15 +239,67 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
+    - !<!ObjectSchema> &ref_17
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_10
+            type: array
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            elementType: *ref_2
+            language: !<!Languages> 
+              default:
+                name: PropertyToJsonElementModelArrayProperty
+                description: Array of Item
+            protocol: !<!Protocols> {}
+          serializedName: ArrayProperty
+          language: !<!Languages> 
+            default:
+              name: arrayProperty
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          serializedName: ModelProperty
+          language: !<!Languages> 
+            default:
+              name: modelProperty
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_3
+          serializedName: ObjectProperty
+          language: !<!Languages> 
+            default:
+              name: objectProperty
+              description: Any object
+          protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !<!Languages> 
+        default:
+          name: PropertyToJsonElementModel
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
   arrays:
-    - *ref_3
     - *ref_4
     - *ref_5
     - *ref_6
     - *ref_7
     - *ref_8
+    - *ref_9
+    - *ref_10
 globalParameters:
-  - !<!Parameter> &ref_9
+  - !<!Parameter> &ref_11
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -264,80 +324,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_9
+          - *ref_11
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_10
-                implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-              - !<!Parameter> &ref_12
-                schema: *ref_11
-                implementation: Method
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: model
-                    description: ''
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_12
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
-                path: /op1
-                method: patch
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !<!SchemaResponse> 
-            schema: *ref_11
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !<!Languages> 
-          default:
-            name: Operation1
-            description: ''
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
-        apiVersions:
-          - !<!ApiVersion> 
-            version: 1.0.0
-        parameters:
-          - *ref_9
-        requests:
-          - !<!Request> 
-            parameters:
-              - !<!Parameter> 
-                schema: *ref_10
+                schema: *ref_12
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -369,7 +361,7 @@ operationGroups:
                 description: ''
             protocol: !<!Protocols> 
               http: !<!HttpWithBodyRequest> 
-                path: /op2
+                path: /op1
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -392,7 +384,143 @@ operationGroups:
                   - '200'
         language: !<!Languages> 
           default:
+            name: Operation1
+            description: ''
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_11
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_12
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_16
+                schema: *ref_15
+                implementation: Method
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: model
+                    description: ''
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_16
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /op2
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_15
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
             name: Operation2
+            description: ''
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_11
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_12
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_18
+                schema: *ref_17
+                implementation: Method
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: model
+                    description: ''
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_18
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /PropertyToJsonElementModel
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_17
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
+            name: PropertyToJsonElementModel
             description: ''
         protocol: !<!Protocols> {}
     language: !<!Languages> 

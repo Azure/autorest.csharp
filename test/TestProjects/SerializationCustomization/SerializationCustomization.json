@@ -61,6 +61,29 @@
           }
         }
       }
+    },
+    "/PropertyToJsonElementModel": {
+      "post": {
+        "operationId": "PropertyToJsonElementModel",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "model",
+            "schema": {
+              "$ref": "#/definitions/PropertyToJsonElementModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PropertyToJsonElementModel"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -105,6 +128,22 @@
         "EmptyAsAlwaysInitializeList": {
           "type": "array",
           "items": { "$ref": "#/definitions/Item" }
+        }
+      }
+    },
+    "PropertyToJsonElementModel":
+    {
+      "type":  "object",
+      "properties": {
+        "ArrayProperty": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Item" }
+        },
+        "ModelProperty": {
+          "$ref": "#/definitions/Item"
+        },
+        "ObjectProperty": {
+          "type": "object"
         }
       }
     }
