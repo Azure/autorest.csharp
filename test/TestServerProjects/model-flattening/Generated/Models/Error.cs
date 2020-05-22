@@ -8,7 +8,7 @@
 namespace model_flattening.Models
 {
     /// <summary> The Error. </summary>
-    public partial class Error
+    internal partial class Error
     {
         /// <summary> Initializes a new instance of Error. </summary>
         internal Error()
@@ -26,8 +26,8 @@ namespace model_flattening.Models
             ParentError = parentError;
         }
 
-        public int? Status { get; set; }
-        public string Message { get; set; }
-        public Error ParentError { get; set; }
+        public int? Status { get; }
+        public string Message { get; }
+        public Error ParentError { get; }
     }
 }

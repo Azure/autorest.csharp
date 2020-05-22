@@ -8,7 +8,7 @@
 namespace custom_baseUrl_more_options.Models
 {
     /// <summary> The Error. </summary>
-    public partial class Error
+    internal partial class Error
     {
         /// <summary> Initializes a new instance of Error. </summary>
         internal Error()
@@ -24,7 +24,7 @@ namespace custom_baseUrl_more_options.Models
             Message = message;
         }
 
-        public int? Status { get; set; }
-        public string Message { get; set; }
+        public int? Status { get; }
+        public string Message { get; }
     }
 }

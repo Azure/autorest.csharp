@@ -49,7 +49,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                     writer.WriteString(nameof(Configuration.SharedSourceFolder), Path.GetRelativePath(configuration.OutputFolder,configuration.SharedSourceFolder));
                     writer.WriteBoolean(nameof(Configuration.AzureArm), configuration.AzureArm);
                     writer.WriteBoolean(nameof(Configuration.PublicClients), configuration.PublicClients);
-                    writer.WriteBoolean(nameof(Configuration.IncludeUnused), configuration.IncludeUnused);
                     writer.WriteEndObject();
                 }
 
@@ -68,8 +67,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                 Path.Combine(basePath, root.GetProperty(nameof(Configuration.SharedSourceFolder)).GetString()),
                 saveInputs: false,
                 root.GetProperty(nameof(Configuration.AzureArm)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.IncludeUnused)).GetBoolean()
+                root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean()
             );
         }
     }

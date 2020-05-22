@@ -8,7 +8,7 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The LinkNotFound. </summary>
-    public partial class LinkNotFound : NotFoundErrorBase
+    internal partial class LinkNotFound : NotFoundErrorBase
     {
         /// <summary> Initializes a new instance of LinkNotFound. </summary>
         internal LinkNotFound()
@@ -27,6 +27,6 @@ namespace xms_error_responses.Models
             WhatNotFound = whatNotFound ?? "InvalidResourceLink";
         }
 
-        public string WhatSubAddress { get; set; }
+        public string WhatSubAddress { get; }
     }
 }

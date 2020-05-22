@@ -5,9 +5,55 @@
 
 #nullable disable
 
+using System.Text.Json;
+using Azure.Core;
+
 namespace xms_error_responses.Models
 {
-    public partial class AnimalNotFound
+    internal partial class AnimalNotFound
     {
+        internal static AnimalNotFound DeserializeAnimalNotFound(JsonElement element)
+        {
+            string name = default;
+            string reason = default;
+            string whatNotFound = default;
+            string someBaseProp = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("reason"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    reason = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("whatNotFound"))
+                {
+                    whatNotFound = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("someBaseProp"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    someBaseProp = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new AnimalNotFound(someBaseProp, reason, whatNotFound, name);
+        }
     }
 }

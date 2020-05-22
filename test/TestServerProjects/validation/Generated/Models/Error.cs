@@ -8,7 +8,7 @@
 namespace validation.Models
 {
     /// <summary> The Error. </summary>
-    public partial class Error
+    internal partial class Error
     {
         /// <summary> Initializes a new instance of Error. </summary>
         internal Error()
@@ -26,8 +26,8 @@ namespace validation.Models
             Fields = fields;
         }
 
-        public int? Code { get; set; }
-        public string Message { get; set; }
-        public string Fields { get; set; }
+        public int? Code { get; }
+        public string Message { get; }
+        public string Fields { get; }
     }
 }

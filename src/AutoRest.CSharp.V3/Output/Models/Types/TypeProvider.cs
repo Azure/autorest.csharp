@@ -3,7 +3,6 @@
 
 using System;
 using AutoRest.CSharp.V3.Generation.Types;
-using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Builders;
 using Microsoft.CodeAnalysis;
 

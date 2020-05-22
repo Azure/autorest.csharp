@@ -8,7 +8,7 @@
 namespace azure_special_properties.Models
 {
     /// <summary> The Error. </summary>
-    public partial class Error
+    internal partial class Error
     {
         /// <summary> Initializes a new instance of Error. </summary>
         internal Error()
@@ -27,8 +27,8 @@ namespace azure_special_properties.Models
             Message = message;
         }
 
-        public int? Status { get; set; }
-        public int ConstantId { get; set; }
-        public string Message { get; set; }
+        public int? Status { get; }
+        public int ConstantId { get; }
+        public string Message { get; }
     }
 }

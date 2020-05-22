@@ -5,9 +5,49 @@
 
 #nullable disable
 
+using System.Text.Json;
+using Azure.Core;
+
 namespace validation.Models
 {
-    public partial class Error
+    internal partial class Error
     {
+        internal static Error DeserializeError(JsonElement element)
+        {
+            int? code = default;
+            string message = default;
+            string fields = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("code"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    code = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("message"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    message = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("fields"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    fields = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new Error(code, message, fields);
+        }
     }
 }

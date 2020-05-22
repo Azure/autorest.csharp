@@ -39,7 +39,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
 
-            DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (objectSchema.IsReferenced ? "public" : "internal");
+            var hasUsage = objectSchema.Usage.Any() && !objectSchema.IsExceptionOnly;
+            DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
             DefaultName = objectSchema.CSharpName();
             DefaultNamespace = objectSchema.Extensions?.Namespace ?? $"{context.DefaultNamespace}.Models";
@@ -389,9 +390,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                     var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
                     SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+                    bool isNotInput = (objectSchema.IsOutput || objectSchema.IsException) && !objectSchema.IsInput;
                     bool isReadOnly = IsStruct ||
-                                      objectSchema.IsOutputOnly ||
-                                      objectSchema.IsExceptionOnly ||
+                                      isNotInput ||
                                       property.ReadOnly == true ||
                                       // Required properties of input objects should be readonly
                                       (property.Required == true && objectSchema.IsInputOnly);
