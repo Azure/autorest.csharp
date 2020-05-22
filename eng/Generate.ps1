@@ -64,7 +64,7 @@ if (!($Exclude -contains "TestServer"))
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
             'output'=$testServerDirectory;
-            'arguments'="--include-unused=true --require=$configurationPath --input-file=$inputFile"
+            'arguments'="--require=$configurationPath --input-file=$inputFile"
         }
     }
 }
@@ -82,7 +82,7 @@ if (!($Exclude -contains "TestProjects"))
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
             'output'=$testSwaggerPath;
-            'arguments'="--include-unused=true --require=$configurationPath --input-file=$inputFile"
+            'arguments'="--require=$configurationPath --input-file=$inputFile"
         }
     }
 }
