@@ -53,7 +53,7 @@ namespace SerializationCustomization
 
         /// <param name="model"> The AlwaysInitializeTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AlwaysInitializeTestModel>> Operation1Async(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
+        public async Task<Response<AlwaysInitializeTestModel>> Operation1Async(AlwaysInitializeTestModel model, CancellationToken cancellationToken = default)
         {
             if (model == null)
             {
@@ -133,7 +133,7 @@ namespace SerializationCustomization
 
         /// <param name="model"> The EmptyAsUndefinedTestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<EmptyAsUndefinedTestModel>> Operation2Async(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
+        public async Task<Response<EmptyAsUndefinedTestModel>> Operation2Async(EmptyAsUndefinedTestModel model, CancellationToken cancellationToken = default)
         {
             if (model == null)
             {
@@ -213,7 +213,7 @@ namespace SerializationCustomization
 
         /// <param name="model"> The PropertyToJsonElementModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PropertyToJsonElementModel>> PropertyToJsonElementModelAsync(PropertyToJsonElementModel model, CancellationToken cancellationToken = default)
+        public async Task<Response<PropertyToJsonElementModel>> PropertyToJsonElementModelAsync(PropertyToJsonElementModel model, CancellationToken cancellationToken = default)
         {
             if (model == null)
             {

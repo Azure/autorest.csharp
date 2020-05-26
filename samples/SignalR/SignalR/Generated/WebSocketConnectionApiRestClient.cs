@@ -57,7 +57,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostDefaultHubBroadcastAsync(Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostDefaultHubBroadcastAsync(Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
             {
@@ -121,7 +121,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostDefaultHubBroadcastAsync(string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostDefaultHubBroadcastAsync(string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
             {
@@ -187,7 +187,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostBroadcastAsync(string hub, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostBroadcastAsync(string hub, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -262,7 +262,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostBroadcastAsync(string hub, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostBroadcastAsync(string hub, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -332,7 +332,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSendToDefaultHubUserAsync(string id, Stream data, CancellationToken cancellationToken = default)
+        public async Task<Response> PostSendToDefaultHubUserAsync(string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (id == null)
             {
@@ -401,7 +401,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSendToDefaultHubUserAsync(string id, string data, CancellationToken cancellationToken = default)
+        public async Task<Response> PostSendToDefaultHubUserAsync(string id, string data, CancellationToken cancellationToken = default)
         {
             if (id == null)
             {
@@ -473,7 +473,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSendToUserAsync(string hub, string id, Stream data, CancellationToken cancellationToken = default)
+        public async Task<Response> PostSendToUserAsync(string hub, string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -554,7 +554,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSendToUserAsync(string hub, string id, string data, CancellationToken cancellationToken = default)
+        public async Task<Response> PostSendToUserAsync(string hub, string id, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -632,7 +632,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSendToDefaultHubConnectionAsync(string connectionId, Stream data, CancellationToken cancellationToken = default)
+        public async Task<Response> PostSendToDefaultHubConnectionAsync(string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -701,7 +701,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSendToDefaultHubConnectionAsync(string connectionId, string data, CancellationToken cancellationToken = default)
+        public async Task<Response> PostSendToDefaultHubConnectionAsync(string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -767,7 +767,7 @@ namespace SignalR
         /// <summary> Check if the connection with the given connectionId exists. </summary>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response> GetCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -826,7 +826,7 @@ namespace SignalR
         /// <summary> Check if the connection with the given connectionId exists. </summary>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -890,7 +890,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteCloseDefaultHubClientConnectionAsync(string connectionId, string reason = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteCloseDefaultHubClientConnectionAsync(string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -954,7 +954,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSendToConnectionAsync(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
+        public async Task<Response> PostSendToConnectionAsync(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1035,7 +1035,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSendToConnectionAsync(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
+        public async Task<Response> PostSendToConnectionAsync(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1113,7 +1113,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response> GetCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1184,7 +1184,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1260,7 +1260,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteCloseClientConnectionAsync(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteCloseClientConnectionAsync(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1335,7 +1335,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostDefaultHubGroupBroadcastAsync(string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostDefaultHubGroupBroadcastAsync(string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1410,7 +1410,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostDefaultHubGroupBroadcastAsync(string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostDefaultHubGroupBroadcastAsync(string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1477,7 +1477,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections inside the given group. </summary>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
+        public async Task<Response> GetCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1536,7 +1536,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections inside the given group. </summary>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
+        public async Task<Response> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1606,7 +1606,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostGroupBroadcastAsync(string hub, string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostGroupBroadcastAsync(string hub, string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1693,7 +1693,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostGroupBroadcastAsync(string hub, string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostGroupBroadcastAsync(string hub, string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1772,7 +1772,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
+        public async Task<Response> GetCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1843,7 +1843,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
+        public async Task<Response> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1911,7 +1911,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections connected for the given user. </summary>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
+        public async Task<Response> GetCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -1970,7 +1970,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections connected for the given user. </summary>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
+        public async Task<Response> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2032,7 +2032,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAddConnectionToDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAddConnectionToDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2103,7 +2103,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteRemoveConnectionFromDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteRemoveConnectionFromDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2174,7 +2174,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> GetCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2245,7 +2245,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2321,7 +2321,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAddUserToDefaultHubGroupAsync(string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAddUserToDefaultHubGroupAsync(string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2391,7 +2391,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteRemoveUserFromDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteRemoveUserFromDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2458,7 +2458,7 @@ namespace SignalR
         /// <summary> Remove a user from all groups. </summary>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteRemoveUserFromAllDefaultHubGroupsAsync(string user, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteRemoveUserFromAllDefaultHubGroupsAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2520,7 +2520,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> GetCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2591,7 +2591,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2665,7 +2665,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAddConnectionToGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAddConnectionToGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2748,7 +2748,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteRemoveConnectionFromGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteRemoveConnectionFromGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2831,7 +2831,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> GetCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2914,7 +2914,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3002,7 +3002,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAddUserToGroupAsync(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAddUserToGroupAsync(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3084,7 +3084,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteRemoveUserFromGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteRemoveUserFromGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3163,7 +3163,7 @@ namespace SignalR
         /// <param name="hub"> Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteRemoveUserFromAllGroupsAsync(string hub, string user, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteRemoveUserFromAllGroupsAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {

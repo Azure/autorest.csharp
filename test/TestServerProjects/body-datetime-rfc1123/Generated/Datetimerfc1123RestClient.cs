@@ -48,7 +48,7 @@ namespace body_datetime_rfc1123
 
         /// <summary> Get null datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -100,7 +100,7 @@ namespace body_datetime_rfc1123
 
         /// <summary> Get invalid datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -152,7 +152,7 @@ namespace body_datetime_rfc1123
 
         /// <summary> Get overflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetOverflowAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetOverflowRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -204,7 +204,7 @@ namespace body_datetime_rfc1123
 
         /// <summary> Get underflow datetime value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetUnderflowAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUnderflowRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -261,7 +261,7 @@ namespace body_datetime_rfc1123
         /// <summary> Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutUtcMaxDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutUtcMaxDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -304,7 +304,7 @@ namespace body_datetime_rfc1123
 
         /// <summary> Get max datetime value fri, 31 dec 9999 23:59:59 gmt. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetUtcLowercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUtcLowercaseMaxDateTimeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -356,7 +356,7 @@ namespace body_datetime_rfc1123
 
         /// <summary> Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTimeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUtcUppercaseMaxDateTimeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -413,7 +413,7 @@ namespace body_datetime_rfc1123
         /// <summary> Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutUtcMinDateTimeAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutUtcMinDateTimeRequest(datetimeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -456,7 +456,7 @@ namespace body_datetime_rfc1123
 
         /// <summary> Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetUtcMinDateTimeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUtcMinDateTimeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

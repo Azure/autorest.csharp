@@ -37,7 +37,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<LRORetrysPut201CreatingSucceeded200Operation> StartPut201CreatingSucceeded200Async(Product product = null, CancellationToken cancellationToken = default)
+        public virtual async Task<LRORetrysPut201CreatingSucceeded200Operation> StartPut201CreatingSucceeded200Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.StartPut201CreatingSucceeded200");
             scope.Start();
@@ -75,7 +75,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<LRORetrysPutAsyncRelativeRetrySucceededOperation> StartPutAsyncRelativeRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public virtual async Task<LRORetrysPutAsyncRelativeRetrySucceededOperation> StartPutAsyncRelativeRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.StartPutAsyncRelativeRetrySucceeded");
             scope.Start();
@@ -112,7 +112,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<LRORetrysDeleteProvisioning202Accepted200SucceededOperation> StartDeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<LRORetrysDeleteProvisioning202Accepted200SucceededOperation> StartDeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.StartDeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -148,7 +148,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<LRORetrysDelete202Retry200Operation> StartDelete202Retry200Async(CancellationToken cancellationToken = default)
+        public virtual async Task<LRORetrysDelete202Retry200Operation> StartDelete202Retry200Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.StartDelete202Retry200");
             scope.Start();
@@ -184,7 +184,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<LRORetrysDeleteAsyncRelativeRetrySucceededOperation> StartDeleteAsyncRelativeRetrySucceededAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<LRORetrysDeleteAsyncRelativeRetrySucceededOperation> StartDeleteAsyncRelativeRetrySucceededAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.StartDeleteAsyncRelativeRetrySucceeded");
             scope.Start();
@@ -221,7 +221,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<LRORetrysPost202Retry200Operation> StartPost202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
+        public virtual async Task<LRORetrysPost202Retry200Operation> StartPost202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.StartPost202Retry200");
             scope.Start();
@@ -259,7 +259,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<LRORetrysPostAsyncRelativeRetrySucceededOperation> StartPostAsyncRelativeRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public virtual async Task<LRORetrysPostAsyncRelativeRetrySucceededOperation> StartPostAsyncRelativeRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.StartPostAsyncRelativeRetrySucceeded");
             scope.Start();

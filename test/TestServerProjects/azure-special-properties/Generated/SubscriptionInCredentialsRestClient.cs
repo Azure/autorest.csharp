@@ -63,7 +63,7 @@ namespace azure_special_properties
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostMethodGlobalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PostMethodGlobalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePostMethodGlobalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -106,7 +106,7 @@ namespace azure_special_properties
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostMethodGlobalNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PostMethodGlobalNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePostMethodGlobalNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -150,7 +150,7 @@ namespace azure_special_properties
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostMethodGlobalNotProvidedValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PostMethodGlobalNotProvidedValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePostMethodGlobalNotProvidedValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -193,7 +193,7 @@ namespace azure_special_properties
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostPathGlobalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PostPathGlobalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePostPathGlobalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -236,7 +236,7 @@ namespace azure_special_properties
 
         /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostSwaggerGlobalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PostSwaggerGlobalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePostSwaggerGlobalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

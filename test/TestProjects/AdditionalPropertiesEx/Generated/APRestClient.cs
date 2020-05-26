@@ -54,7 +54,7 @@ namespace AdditionalPropertiesEx
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> WriteOnlyAsync(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
+        public async Task<Response> WriteOnlyAsync(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
@@ -107,7 +107,7 @@ namespace AdditionalPropertiesEx
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OutputAdditionalPropertiesModel>> ReadOnlyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<OutputAdditionalPropertiesModel>> ReadOnlyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateReadOnlyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -178,7 +178,7 @@ namespace AdditionalPropertiesEx
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> WriteOnlyStructAsync(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
+        public async Task<Response> WriteOnlyStructAsync(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
         {
             using var message = CreateWriteOnlyStructRequest(createParameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -221,7 +221,7 @@ namespace AdditionalPropertiesEx
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OutputAdditionalPropertiesModelStruct>> ReadOnlyStructAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<OutputAdditionalPropertiesModelStruct>> ReadOnlyStructAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateReadOnlyStructRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

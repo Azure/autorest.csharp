@@ -57,7 +57,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
+        public async Task<Response> OperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateOperationRequest(body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -106,7 +106,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The ModelStruct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
+        public async Task<Response<RenamedModelStruct>> OperationStructAsync(RenamedModelStruct? body = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateOperationStructRequest(body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -165,7 +165,7 @@ namespace TypeSchemaMapping
 
         /// <param name="body"> The SecondModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SecondModel>> OperationSecondModelAsync(SecondModel body = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateOperationSecondModelRequest(body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

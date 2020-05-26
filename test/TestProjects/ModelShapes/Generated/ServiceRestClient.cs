@@ -53,7 +53,7 @@ namespace ModelShapes
 
         /// <param name="value"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> InputAsync(InputModel value, CancellationToken cancellationToken = default)
+        public async Task<Response> InputAsync(InputModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
@@ -109,7 +109,7 @@ namespace ModelShapes
 
         /// <param name="value"> The MixedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MixedModel>> MixedAsync(MixedModel value, CancellationToken cancellationToken = default)
+        public async Task<Response<MixedModel>> MixedAsync(MixedModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
@@ -184,7 +184,7 @@ namespace ModelShapes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OutputModel>> OutputAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<OutputModel>> OutputAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateOutputRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

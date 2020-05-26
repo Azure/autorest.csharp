@@ -57,7 +57,7 @@ namespace body_complex
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Basic>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -129,7 +129,7 @@ namespace body_complex
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
         /// <param name="complexBody"> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutValidAsync(Basic complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutValidAsync(Basic complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -182,7 +182,7 @@ namespace body_complex
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Basic>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -248,7 +248,7 @@ namespace body_complex
 
         /// <summary> Get a basic complex type that is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Basic>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -314,7 +314,7 @@ namespace body_complex
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Basic>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -380,7 +380,7 @@ namespace body_complex
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Basic>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNotProvidedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

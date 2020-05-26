@@ -66,7 +66,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
+        public async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
             {
@@ -199,7 +199,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Azure.Response> AnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        public async Task<Azure.Response> AnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -260,7 +260,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Azure.Response> AnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
+        public async Task<Azure.Response> AnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeBodyRequest(stringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -310,7 +310,7 @@ namespace NameConflicts
 
         /// <param name="httpMessage"> The HttpMessage to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.HttpMessage>> HttpMessageAsync(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.HttpMessage>> HttpMessageAsync(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateHttpMessageRequest(httpMessage);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -383,7 +383,7 @@ namespace NameConflicts
 
         /// <param name="request"> The Request to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Request>> RequestAsync(Models.Request request = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Request>> RequestAsync(Models.Request request = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateRequestRequest(request);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -456,7 +456,7 @@ namespace NameConflicts
 
         /// <param name="response"> The Response to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Response>> ResponseAsync(Models.Response response = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Response>> ResponseAsync(Models.Response response = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateResponseRequest(response);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

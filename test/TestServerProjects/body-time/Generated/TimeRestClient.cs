@@ -48,7 +48,7 @@ namespace body_time
 
         /// <summary> Get time value &quot;11:34:56&quot;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<TimeSpan>> GetAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<TimeSpan>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -105,7 +105,7 @@ namespace body_time
         /// <summary> Put time value &quot;08:07:56&quot;. </summary>
         /// <param name="timeBody"> Put time value &quot;08:07:56&quot; in parameter to pass testserver. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> PutAsync(TimeSpan timeBody, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutAsync(TimeSpan timeBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutRequest(timeBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

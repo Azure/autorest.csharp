@@ -48,7 +48,7 @@ namespace object_type
 
         /// <summary> Basic get that returns an object. Returns object { &apos;message&apos;: &apos;An object was successfully returned&apos; }. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> GetAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<object>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -119,7 +119,7 @@ namespace object_type
         /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
         /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsync(object putObject, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAsync(object putObject, CancellationToken cancellationToken = default)
         {
             if (putObject == null)
             {

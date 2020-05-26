@@ -50,7 +50,7 @@ namespace url
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBooleanTrueRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -93,7 +93,7 @@ namespace url
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBooleanFalseRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -136,7 +136,7 @@ namespace url
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntOneMillionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -179,7 +179,7 @@ namespace url
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntNegativeOneMillionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -222,7 +222,7 @@ namespace url
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetTenBillionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -265,7 +265,7 @@ namespace url
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNegativeTenBillionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -308,7 +308,7 @@ namespace url
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateFloatScientificPositiveRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -351,7 +351,7 @@ namespace url
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateFloatScientificNegativeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -394,7 +394,7 @@ namespace url
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDoubleDecimalPositiveRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -437,7 +437,7 @@ namespace url
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDoubleDecimalNegativeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -480,7 +480,7 @@ namespace url
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUnicodeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -523,7 +523,7 @@ namespace url
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUrlEncodedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -566,7 +566,7 @@ namespace url
 
         /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringUrlNonEncodedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> StringUrlNonEncodedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUrlNonEncodedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -609,7 +609,7 @@ namespace url
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -653,7 +653,7 @@ namespace url
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringNullAsync(string stringPath, CancellationToken cancellationToken = default)
+        public async Task<Response> StringNullAsync(string stringPath, CancellationToken cancellationToken = default)
         {
             if (stringPath == null)
             {
@@ -708,7 +708,7 @@ namespace url
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> EnumValidAsync(UriColor enumPath, CancellationToken cancellationToken = default)
+        public async Task<Response> EnumValidAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
             using var message = CreateEnumValidRequest(enumPath);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -753,7 +753,7 @@ namespace url
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> EnumNullAsync(UriColor enumPath, CancellationToken cancellationToken = default)
+        public async Task<Response> EnumNullAsync(UriColor enumPath, CancellationToken cancellationToken = default)
         {
             using var message = CreateEnumNullRequest(enumPath);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -798,7 +798,7 @@ namespace url
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteMultiByteAsync(byte[] bytePath, CancellationToken cancellationToken = default)
+        public async Task<Response> ByteMultiByteAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
             {
@@ -852,7 +852,7 @@ namespace url
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateByteEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -896,7 +896,7 @@ namespace url
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteNullAsync(byte[] bytePath, CancellationToken cancellationToken = default)
+        public async Task<Response> ByteNullAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
             {
@@ -950,7 +950,7 @@ namespace url
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDateValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -994,7 +994,7 @@ namespace url
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateNullAsync(DateTimeOffset datePath, CancellationToken cancellationToken = default)
+        public async Task<Response> DateNullAsync(DateTimeOffset datePath, CancellationToken cancellationToken = default)
         {
             using var message = CreateDateNullRequest(datePath);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1038,7 +1038,7 @@ namespace url
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDateTimeValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1082,7 +1082,7 @@ namespace url
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
+        public async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
         {
             using var message = CreateDateTimeNullRequest(dateTimePath);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1127,7 +1127,7 @@ namespace url
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Base64UrlAsync(byte[] base64UrlPath, CancellationToken cancellationToken = default)
+        public async Task<Response> Base64UrlAsync(byte[] base64UrlPath, CancellationToken cancellationToken = default)
         {
             if (base64UrlPath == null)
             {
@@ -1182,7 +1182,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
         {
             if (arrayPath == null)
             {
@@ -1237,7 +1237,7 @@ namespace url
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
+        public async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
         {
             using var message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

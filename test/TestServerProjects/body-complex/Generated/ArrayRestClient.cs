@@ -49,7 +49,7 @@ namespace body_complex
 
         /// <summary> Get complex types with array property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ArrayWrapper>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -120,7 +120,7 @@ namespace body_complex
         /// <summary> Put complex types with array property. </summary>
         /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutValidAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutValidAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -173,7 +173,7 @@ namespace body_complex
 
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ArrayWrapper>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -244,7 +244,7 @@ namespace body_complex
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="complexBody"> Please put an empty array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutEmptyAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutEmptyAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -297,7 +297,7 @@ namespace body_complex
 
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ArrayWrapper>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNotProvidedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

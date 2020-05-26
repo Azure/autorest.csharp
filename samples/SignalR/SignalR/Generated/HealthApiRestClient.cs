@@ -47,7 +47,7 @@ namespace SignalR
 
         /// <summary> Get service health status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> HeadIndexAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> HeadIndexAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateHeadIndexRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

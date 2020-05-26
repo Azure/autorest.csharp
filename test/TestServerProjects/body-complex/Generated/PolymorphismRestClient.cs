@@ -49,7 +49,7 @@ namespace body_complex
 
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Fish>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -154,7 +154,7 @@ namespace body_complex
         ///       };.
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -241,7 +241,7 @@ namespace body_complex
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DotFish>> GetDotSyntaxAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DotFish>> GetDotSyntaxAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDotSyntaxRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -307,7 +307,7 @@ namespace body_complex
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DotFishMarket>> GetComposedWithDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetComposedWithDiscriminatorRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -373,7 +373,7 @@ namespace body_complex
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DotFishMarket>> GetComposedWithoutDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetComposedWithoutDiscriminatorRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -439,7 +439,7 @@ namespace body_complex
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Salmon>> GetComplicatedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Salmon>> GetComplicatedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetComplicatedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -510,7 +510,7 @@ namespace body_complex
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -568,7 +568,7 @@ namespace body_complex
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -677,7 +677,7 @@ namespace body_complex
         /// }.
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutValidMissingRequiredAsync(Fish complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutValidMissingRequiredAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {

@@ -56,7 +56,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put200SucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put200SucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut200SucceededRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -107,7 +107,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put201SucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put201SucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut201SucceededRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -150,7 +150,7 @@ namespace lro
 
         /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post202ListAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Post202ListAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202ListRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -202,7 +202,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put200SucceededNoStateAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put200SucceededNoStateAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut200SucceededNoStateRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -253,7 +253,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut202Retry200Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -304,7 +304,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put201CreatingSucceeded200Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put201CreatingSucceeded200Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut201CreatingSucceeded200Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -357,7 +357,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put200UpdatingSucceeded204Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put200UpdatingSucceeded204Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut200UpdatingSucceeded204Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -408,7 +408,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put201CreatingFailed200Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put201CreatingFailed200Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut201CreatingFailed200Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -461,7 +461,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put200Acceptedcanceled200Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put200Acceptedcanceled200Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut200Acceptedcanceled200Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -512,7 +512,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNoHeaderInRetryAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutNoHeaderInRetryAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutNoHeaderInRetryRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -563,7 +563,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRetrySucceededRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -614,7 +614,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncNoRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAsyncNoRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncNoRetrySucceededRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -665,7 +665,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncRetryFailedAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAsyncRetryFailedAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRetryFailedRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -716,7 +716,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncNoRetrycanceledAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAsyncNoRetrycanceledAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncNoRetrycanceledRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -767,7 +767,7 @@ namespace lro
         /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncNoHeaderInRetryAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAsyncNoHeaderInRetryAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncNoHeaderInRetryRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -818,7 +818,7 @@ namespace lro
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="sku"> sku to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNonResourceAsync(Sku sku = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutNonResourceAsync(Sku sku = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutNonResourceRequest(sku);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -869,7 +869,7 @@ namespace lro
         /// <summary> Long running put request with non resource. </summary>
         /// <param name="sku"> Sku to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncNonResourceAsync(Sku sku = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAsyncNonResourceAsync(Sku sku = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncNonResourceRequest(sku);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -920,7 +920,7 @@ namespace lro
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="product"> Sub Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutSubResourceAsync(SubProduct product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutSubResourceAsync(SubProduct product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutSubResourceRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -971,7 +971,7 @@ namespace lro
         /// <summary> Long running put request with sub resource. </summary>
         /// <param name="product"> Sub Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutAsyncSubResourceAsync(SubProduct product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutAsyncSubResourceAsync(SubProduct product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncSubResourceRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1014,7 +1014,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteProvisioning202Accepted200SucceededRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1058,7 +1058,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteProvisioning202DeletingFailed200Async(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteProvisioning202DeletingFailed200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteProvisioning202DeletingFailed200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1102,7 +1102,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteProvisioning202Deletingcanceled200Async(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteProvisioning202Deletingcanceled200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteProvisioning202Deletingcanceled200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1146,7 +1146,7 @@ namespace lro
 
         /// <summary> Long running delete succeeds and returns right away. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete204SucceededAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete204SucceededAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete204SucceededRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1188,7 +1188,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete202Retry200Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete202Retry200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete202Retry200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1232,7 +1232,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete202NoRetry204Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete202NoRetry204Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete202NoRetry204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1276,7 +1276,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteNoHeaderInRetryAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteNoHeaderInRetryAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteNoHeaderInRetryRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1320,7 +1320,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsyncNoHeaderInRetryAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsyncNoHeaderInRetryAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncNoHeaderInRetryRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1364,7 +1364,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsyncRetrySucceededAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsyncRetrySucceededAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRetrySucceededRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1406,7 +1406,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsyncNoRetrySucceededAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsyncNoRetrySucceededAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncNoRetrySucceededRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1448,7 +1448,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsyncRetryFailedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsyncRetryFailedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRetryFailedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1490,7 +1490,7 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsyncRetrycanceledAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsyncRetrycanceledAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRetrycanceledRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1532,7 +1532,7 @@ namespace lro
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header. Poll returns a 200 with a response body after success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post200WithPayloadAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Post200WithPayloadAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost200WithPayloadRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1584,7 +1584,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Post202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202Retry200Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1635,7 +1635,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post202NoRetry204Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Post202NoRetry204Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202NoRetry204Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1678,7 +1678,7 @@ namespace lro
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostDoubleHeadersFinalLocationGetAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PostDoubleHeadersFinalLocationGetAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePostDoubleHeadersFinalLocationGetRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1720,7 +1720,7 @@ namespace lro
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostDoubleHeadersFinalAzureHeaderGetAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PostDoubleHeadersFinalAzureHeaderGetAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1762,7 +1762,7 @@ namespace lro
 
         /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1812,7 +1812,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRetrySucceededRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1865,7 +1865,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncNoRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostAsyncNoRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncNoRetrySucceededRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1918,7 +1918,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncRetryFailedAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostAsyncRetryFailedAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRetryFailedRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1969,7 +1969,7 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostAsyncRetrycanceledAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostAsyncRetrycanceledAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRetrycanceledRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

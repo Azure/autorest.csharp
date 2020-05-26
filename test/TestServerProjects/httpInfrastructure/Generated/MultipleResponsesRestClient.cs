@@ -49,7 +49,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200Model204NoModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Model204NoModelDefaultError200ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -119,7 +119,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError204ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200Model204NoModelDefaultError204ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Model204NoModelDefaultError204ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -189,7 +189,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError201InvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200Model204NoModelDefaultError201InvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -259,7 +259,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError202NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200Model204NoModelDefaultError202NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Model204NoModelDefaultError202NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -329,7 +329,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200Model204NoModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200Model204NoModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Model204NoModelDefaultError400ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -399,7 +399,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200Model201ModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<object>> Get200Model201ModelDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Model201ModelDefaultError200ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -493,7 +493,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200Model201ModelDefaultError201ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<object>> Get200Model201ModelDefaultError201ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Model201ModelDefaultError201ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -587,7 +587,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200Model201ModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<object>> Get200Model201ModelDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Model201ModelDefaultError400ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -681,7 +681,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<object>> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -803,7 +803,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<object>> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -925,7 +925,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<object>> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1047,7 +1047,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<object>> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1169,7 +1169,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 202 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get202None204NoneDefaultError202NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Get202None204NoneDefaultError202NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet202None204NoneDefaultError202NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1213,7 +1213,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get202None204NoneDefaultError204NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Get202None204NoneDefaultError204NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet202None204NoneDefaultError204NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1257,7 +1257,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get202None204NoneDefaultError400ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Get202None204NoneDefaultError400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet202None204NoneDefaultError400ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1301,7 +1301,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 202 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get202None204NoneDefaultNone202InvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Get202None204NoneDefaultNone202InvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet202None204NoneDefaultNone202InvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1345,7 +1345,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 204 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get202None204NoneDefaultNone204NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Get202None204NoneDefaultNone204NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet202None204NoneDefaultNone204NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1389,7 +1389,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get202None204NoneDefaultNone400NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Get202None204NoneDefaultNone400NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet202None204NoneDefaultNone400NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1433,7 +1433,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with an unexpected payload {&apos;property&apos;: &apos;value&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get202None204NoneDefaultNone400InvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> Get202None204NoneDefaultNone400InvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet202None204NoneDefaultNone400InvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1477,7 +1477,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> GetDefaultModelA200ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> GetDefaultModelA200ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultModelA200ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1543,7 +1543,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> GetDefaultModelA200NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> GetDefaultModelA200NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultModelA200NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1609,7 +1609,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetDefaultModelA400ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetDefaultModelA400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultModelA400ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1651,7 +1651,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetDefaultModelA400NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetDefaultModelA400NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultModelA400NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1693,7 +1693,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with invalid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetDefaultNone200InvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetDefaultNone200InvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultNone200InvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1735,7 +1735,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetDefaultNone200NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetDefaultNone200NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultNone200NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1777,7 +1777,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetDefaultNone400InvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetDefaultNone400InvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultNone400InvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1819,7 +1819,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with no payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetDefaultNone400NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetDefaultNone400NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultNone400NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1861,7 +1861,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA200NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200ModelA200NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA200NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1927,7 +1927,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA200ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200ModelA200ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA200ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1993,7 +1993,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA200InvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200ModelA200InvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA200InvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2059,7 +2059,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA400NoneAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200ModelA400NoneAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA400NoneRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2125,7 +2125,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA400ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200ModelA400ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA400ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2191,7 +2191,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA400InvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200ModelA400InvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA400InvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2257,7 +2257,7 @@ namespace httpInfrastructure
 
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyException>> Get200ModelA202ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyException>> Get200ModelA202ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200ModelA202ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
