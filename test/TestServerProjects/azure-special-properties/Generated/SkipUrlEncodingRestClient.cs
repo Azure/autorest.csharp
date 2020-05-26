@@ -49,7 +49,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="unencodedPathParam"> Unencoded path parameter with value &apos;path1/path2/path3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMethodPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default)
+        public async Task<Response> GetMethodPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
             if (unencodedPathParam == null)
             {
@@ -104,7 +104,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="unencodedPathParam"> Unencoded path parameter with value &apos;path1/path2/path3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default)
+        public async Task<Response> GetPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
             if (unencodedPathParam == null)
             {
@@ -158,7 +158,7 @@ namespace azure_special_properties
 
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetSwaggerPathValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetSwaggerPathValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSwaggerPathValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -202,7 +202,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="q1"> Unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMethodQueryValidAsync(string q1, CancellationToken cancellationToken = default)
+        public async Task<Response> GetMethodQueryValidAsync(string q1, CancellationToken cancellationToken = default)
         {
             if (q1 == null)
             {
@@ -260,7 +260,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded query parameter with value null. </summary>
         /// <param name="q1"> Unencoded query parameter with value null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMethodQueryNullAsync(string q1 = null, CancellationToken cancellationToken = default)
+        public async Task<Response> GetMethodQueryNullAsync(string q1 = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMethodQueryNullRequest(q1);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -305,7 +305,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="q1"> Unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetPathQueryValidAsync(string q1, CancellationToken cancellationToken = default)
+        public async Task<Response> GetPathQueryValidAsync(string q1, CancellationToken cancellationToken = default)
         {
             if (q1 == null)
             {
@@ -359,7 +359,7 @@ namespace azure_special_properties
 
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetSwaggerQueryValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetSwaggerQueryValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSwaggerQueryValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

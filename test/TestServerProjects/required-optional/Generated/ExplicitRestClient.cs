@@ -54,7 +54,7 @@ namespace required_optional
         /// <summary> Test explicitly required integer. Please put null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredIntegerParameterAsync(int bodyParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredIntegerParameterAsync(int bodyParameter, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostRequiredIntegerParameterRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -105,7 +105,7 @@ namespace required_optional
         /// <summary> Test explicitly optional integer. Please put null. </summary>
         /// <param name="bodyParameter"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalIntegerParameterAsync(int? bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalIntegerParameterAsync(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalIntegerParameterRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -153,7 +153,7 @@ namespace required_optional
         /// <summary> Test explicitly required integer. Please put a valid int-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The IntWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredIntegerPropertyAsync(IntWrapper bodyParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredIntegerPropertyAsync(IntWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             if (bodyParameter == null)
             {
@@ -214,7 +214,7 @@ namespace required_optional
         /// <summary> Test explicitly optional integer. Please put a valid int-wrapper with &apos;value&apos; = null. </summary>
         /// <param name="bodyParameter"> The IntOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalIntegerPropertyRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -259,7 +259,7 @@ namespace required_optional
         /// <summary> Test explicitly required integer. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredIntegerHeaderAsync(int headerParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredIntegerHeaderAsync(int headerParameter, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostRequiredIntegerHeaderRequest(headerParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -307,7 +307,7 @@ namespace required_optional
         /// <summary> Test explicitly optional integer. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
         /// <param name="headerParameter"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalIntegerHeaderAsync(int? headerParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalIntegerHeaderAsync(int? headerParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalIntegerHeaderRequest(headerParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -355,7 +355,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredStringParameterAsync(string bodyParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredStringParameterAsync(string bodyParameter, CancellationToken cancellationToken = default)
         {
             if (bodyParameter == null)
             {
@@ -416,7 +416,7 @@ namespace required_optional
         /// <summary> Test explicitly optional string. Please put null. </summary>
         /// <param name="bodyParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalStringParameterAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalStringParameterAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalStringParameterRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -464,7 +464,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put a valid string-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The StringWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredStringPropertyAsync(StringWrapper bodyParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredStringPropertyAsync(StringWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             if (bodyParameter == null)
             {
@@ -525,7 +525,7 @@ namespace required_optional
         /// <summary> Test explicitly optional integer. Please put a valid string-wrapper with &apos;value&apos; = null. </summary>
         /// <param name="bodyParameter"> The StringOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalStringPropertyRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -570,7 +570,7 @@ namespace required_optional
         /// <summary> Test explicitly required string. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredStringHeaderAsync(string headerParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredStringHeaderAsync(string headerParameter, CancellationToken cancellationToken = default)
         {
             if (headerParameter == null)
             {
@@ -628,7 +628,7 @@ namespace required_optional
         /// <summary> Test explicitly optional string. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
         /// <param name="bodyParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalStringHeaderAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalStringHeaderAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalStringHeaderRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -676,7 +676,7 @@ namespace required_optional
         /// <summary> Test explicitly required complex object. Please put null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredClassParameterAsync(Product bodyParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredClassParameterAsync(Product bodyParameter, CancellationToken cancellationToken = default)
         {
             if (bodyParameter == null)
             {
@@ -737,7 +737,7 @@ namespace required_optional
         /// <summary> Test explicitly optional complex object. Please put null. </summary>
         /// <param name="bodyParameter"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalClassParameterAsync(Product bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalClassParameterAsync(Product bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalClassParameterRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -785,7 +785,7 @@ namespace required_optional
         /// <summary> Test explicitly required complex object. Please put a valid class-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ClassWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredClassPropertyAsync(ClassWrapper bodyParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredClassPropertyAsync(ClassWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             if (bodyParameter == null)
             {
@@ -846,7 +846,7 @@ namespace required_optional
         /// <summary> Test explicitly optional complex object. Please put a valid class-wrapper with &apos;value&apos; = null. </summary>
         /// <param name="bodyParameter"> The ClassOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalClassPropertyRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -899,7 +899,7 @@ namespace required_optional
         /// <summary> Test explicitly required array. Please put null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ArrayOfPostContentSchemaItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredArrayParameterAsync(IEnumerable<string> bodyParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredArrayParameterAsync(IEnumerable<string> bodyParameter, CancellationToken cancellationToken = default)
         {
             if (bodyParameter == null)
             {
@@ -965,7 +965,7 @@ namespace required_optional
         /// <summary> Test explicitly optional array. Please put null. </summary>
         /// <param name="bodyParameter"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalArrayParameterAsync(IEnumerable<string> bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalArrayParameterAsync(IEnumerable<string> bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalArrayParameterRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1013,7 +1013,7 @@ namespace required_optional
         /// <summary> Test explicitly required array. Please put a valid array-wrapper with &apos;value&apos; = null and the client library should throw before the request is sent. </summary>
         /// <param name="bodyParameter"> The ArrayWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, CancellationToken cancellationToken = default)
         {
             if (bodyParameter == null)
             {
@@ -1074,7 +1074,7 @@ namespace required_optional
         /// <summary> Test explicitly optional array. Please put a valid array-wrapper with &apos;value&apos; = null. </summary>
         /// <param name="bodyParameter"> The ArrayOptionalWrapper to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalArrayPropertyRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1119,7 +1119,7 @@ namespace required_optional
         /// <summary> Test explicitly required array. Please put a header &apos;headerParameter&apos; =&gt; null and the client library should throw before the request is sent. </summary>
         /// <param name="headerParameter"> The ArrayOfPost0ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostRequiredArrayHeaderAsync(IEnumerable<string> headerParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> PostRequiredArrayHeaderAsync(IEnumerable<string> headerParameter, CancellationToken cancellationToken = default)
         {
             if (headerParameter == null)
             {
@@ -1177,7 +1177,7 @@ namespace required_optional
         /// <summary> Test explicitly optional integer. Please put a header &apos;headerParameter&apos; =&gt; null. </summary>
         /// <param name="headerParameter"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PostOptionalArrayHeaderAsync(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PostOptionalArrayHeaderAsync(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostOptionalArrayHeaderRequest(headerParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

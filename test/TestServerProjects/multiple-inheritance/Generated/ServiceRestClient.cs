@@ -49,7 +49,7 @@ namespace multiple_inheritance
 
         /// <summary> Get a horse with name &apos;Fred&apos; and isAShowHorse true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Horse>> GetHorseAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Horse>> GetHorseAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetHorseRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -120,7 +120,7 @@ namespace multiple_inheritance
         /// <summary> Put a horse with name &apos;General&apos; and isAShowHorse false. </summary>
         /// <param name="horse"> Put a horse with name &apos;General&apos; and isAShowHorse false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> PutHorseAsync(Horse horse, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutHorseAsync(Horse horse, CancellationToken cancellationToken = default)
         {
             if (horse == null)
             {
@@ -197,7 +197,7 @@ namespace multiple_inheritance
 
         /// <summary> Get a pet with name &apos;Peanut&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Pet>> GetPetAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Pet>> GetPetAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetPetRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -268,7 +268,7 @@ namespace multiple_inheritance
         /// <summary> Put a pet with name &apos;Butter&apos;. </summary>
         /// <param name="pet"> Put a pet with name &apos;Butter&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> PutPetAsync(Pet pet, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutPetAsync(Pet pet, CancellationToken cancellationToken = default)
         {
             if (pet == null)
             {
@@ -345,7 +345,7 @@ namespace multiple_inheritance
 
         /// <summary> Get a feline where meows and hisses are true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Feline>> GetFelineAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Feline>> GetFelineAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetFelineRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -416,7 +416,7 @@ namespace multiple_inheritance
         /// <summary> Put a feline who hisses and doesn&apos;t meow. </summary>
         /// <param name="feline"> Put a feline who hisses and doesn&apos;t meow. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> PutFelineAsync(Feline feline, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutFelineAsync(Feline feline, CancellationToken cancellationToken = default)
         {
             if (feline == null)
             {
@@ -493,7 +493,7 @@ namespace multiple_inheritance
 
         /// <summary> Get a cat with name &apos;Whiskers&apos; where likesMilk, meows, and hisses is true. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Cat>> GetCatAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Cat>> GetCatAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetCatRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -564,7 +564,7 @@ namespace multiple_inheritance
         /// <summary> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </summary>
         /// <param name="cat"> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> PutCatAsync(Cat cat, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutCatAsync(Cat cat, CancellationToken cancellationToken = default)
         {
             if (cat == null)
             {
@@ -641,7 +641,7 @@ namespace multiple_inheritance
 
         /// <summary> Get a kitten with name &apos;Gatito&apos; where likesMilk and meows is true, and hisses and eatsMiceYet is false. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Kitten>> GetKittenAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Kitten>> GetKittenAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetKittenRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -712,7 +712,7 @@ namespace multiple_inheritance
         /// <summary> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </summary>
         /// <param name="kitten"> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> PutKittenAsync(Kitten kitten, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutKittenAsync(Kitten kitten, CancellationToken cancellationToken = default)
         {
             if (kitten == null)
             {

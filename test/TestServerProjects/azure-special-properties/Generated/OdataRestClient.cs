@@ -62,7 +62,7 @@ namespace azure_special_properties
         /// <param name="top"> The top parameter with value 10. </param>
         /// <param name="orderby"> The orderby parameter with value id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetWithFilterAsync(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async Task<Response> GetWithFilterAsync(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetWithFilterRequest(filter, top, orderby);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

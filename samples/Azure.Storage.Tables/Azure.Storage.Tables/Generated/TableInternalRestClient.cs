@@ -85,7 +85,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableQueryResponse, TableInternalQueryHeaders>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableQueryResponse, TableInternalQueryHeaders>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateQueryRequest(requestId, queryOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -172,7 +172,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableResponse, TableInternalCreateHeaders>> CreateAsync(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableResponse, TableInternalCreateHeaders>> CreateAsync(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -266,7 +266,7 @@ namespace Azure.Storage.Tables
         /// <param name="table"> The name of the table. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableInternalDeleteHeaders>> DeleteAsync(string table, string requestId = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableInternalDeleteHeaders>> DeleteAsync(string table, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -354,7 +354,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesHeaders>> QueryEntitiesAsync(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesHeaders>> QueryEntitiesAsync(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -470,7 +470,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -610,7 +610,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableInternalUpdateEntityHeaders>> UpdateEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableInternalUpdateEntityHeaders>> UpdateEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -713,7 +713,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableInternalDeleteEntityHeaders>> DeleteEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableInternalDeleteEntityHeaders>> DeleteEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -822,7 +822,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInternalInsertEntityHeaders>> InsertEntityAsync(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<IReadOnlyDictionary<string, object>, TableInternalInsertEntityHeaders>> InsertEntityAsync(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -943,7 +943,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, TableInternalGetAccessPolicyHeaders>> GetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<IReadOnlyList<SignedIdentifier>, TableInternalGetAccessPolicyHeaders>> GetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -1053,7 +1053,7 @@ namespace Azure.Storage.Tables
         /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<TableInternalSetAccessPolicyHeaders>> SetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableInternalSetAccessPolicyHeaders>> SetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {

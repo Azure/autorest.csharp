@@ -49,7 +49,7 @@ namespace paging
 
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResultValue>> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResultValue>> GetNoItemNamePagesAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNoItemNamePagesRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -115,7 +115,7 @@ namespace paging
 
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetNullNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullNextLinkNamePagesRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -181,7 +181,7 @@ namespace paging
 
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetSinglePagesAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetSinglePagesAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSinglePagesRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -261,7 +261,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesAsync(string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesAsync(string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMultiplePagesRequest(clientRequestId, pagingGetMultiplePagesOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -332,7 +332,7 @@ namespace paging
         /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetWithQueryParamsAsync(int requiredQueryParameter, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetWithQueryParamsAsync(int requiredQueryParameter, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetWithQueryParamsRequest(requiredQueryParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -400,7 +400,7 @@ namespace paging
 
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> NextOperationWithQueryParamsAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> NextOperationWithQueryParamsAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateNextOperationWithQueryParamsRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -480,7 +480,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<OdataProductResult>> GetOdataMultiplePagesAsync(string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetOdataMultiplePagesRequest(clientRequestId, pagingGetOdataMultiplePagesOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -563,7 +563,7 @@ namespace paging
         /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesWithOffsetAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
         {
             if (pagingGetMultiplePagesWithOffsetOptions == null)
             {
@@ -641,7 +641,7 @@ namespace paging
 
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesRetryFirstAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesRetryFirstAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMultiplePagesRetryFirstRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -707,7 +707,7 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesRetrySecondAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesRetrySecondAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMultiplePagesRetrySecondRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -773,7 +773,7 @@ namespace paging
 
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetSinglePagesFailureAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetSinglePagesFailureAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSinglePagesFailureRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -839,7 +839,7 @@ namespace paging
 
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesFailureAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMultiplePagesFailureRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -905,7 +905,7 @@ namespace paging
 
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureUriAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesFailureUriAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMultiplePagesFailureUriRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -975,7 +975,7 @@ namespace paging
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public async Task<Response<OdataProductResult>> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -1064,7 +1064,7 @@ namespace paging
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetMultiplePagesFragmentWithGroupingNextLinkAsync(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
+        public async Task<Response<OdataProductResult>> GetMultiplePagesFragmentWithGroupingNextLinkAsync(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (customParameterGroup == null)
             {
@@ -1155,7 +1155,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response> GetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1206,7 +1206,7 @@ namespace paging
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> NextFragmentAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<OdataProductResult>> NextFragmentAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
             {
@@ -1307,7 +1307,7 @@ namespace paging
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
+        public async Task<Response<OdataProductResult>> NextFragmentWithGroupingAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1394,7 +1394,7 @@ namespace paging
         /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResultValue>> GetNoItemNamePagesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResultValue>> GetNoItemNamePagesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1472,7 +1472,7 @@ namespace paging
         /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetSinglePagesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetSinglePagesNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1564,7 +1564,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesNextPageAsync(string nextLink, string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesNextPageAsync(string nextLink, string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1658,7 +1658,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> GetOdataMultiplePagesNextPageAsync(string nextLink, string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<OdataProductResult>> GetOdataMultiplePagesNextPageAsync(string nextLink, string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1752,7 +1752,7 @@ namespace paging
         /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesWithOffsetNextPageAsync(string nextLink, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesWithOffsetNextPageAsync(string nextLink, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1840,7 +1840,7 @@ namespace paging
         /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesRetryFirstNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesRetryFirstNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1918,7 +1918,7 @@ namespace paging
         /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesRetrySecondNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesRetrySecondNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1996,7 +1996,7 @@ namespace paging
         /// <summary> A paging operation that receives a 400 on the first call. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetSinglePagesFailureNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetSinglePagesFailureNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2074,7 +2074,7 @@ namespace paging
         /// <summary> A paging operation that receives a 400 on the second call. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesFailureNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2152,7 +2152,7 @@ namespace paging
         /// <summary> A paging operation that receives an invalid nextLink. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ProductResult>> GetMultiplePagesFailureUriNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<ProductResult>> GetMultiplePagesFailureUriNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2232,7 +2232,7 @@ namespace paging
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> NextFragmentNextPageAsync(string nextLink, string apiVersion, string tenant, CancellationToken cancellationToken = default)
+        public async Task<Response<OdataProductResult>> NextFragmentNextPageAsync(string nextLink, string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -2329,7 +2329,7 @@ namespace paging
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<OdataProductResult>> NextFragmentWithGroupingNextPageAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
+        public async Task<Response<OdataProductResult>> NextFragmentWithGroupingNextPageAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {

@@ -73,7 +73,7 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileServiceItems>> ListAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServiceItems>> ListAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -180,7 +180,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -278,7 +278,7 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FileServiceProperties>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServiceProperties>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

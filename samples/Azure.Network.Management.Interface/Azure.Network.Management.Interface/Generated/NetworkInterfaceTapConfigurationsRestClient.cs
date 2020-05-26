@@ -75,7 +75,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -159,7 +159,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<NetworkInterfaceTapConfiguration>> GetAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
+        public async Task<Response<NetworkInterfaceTapConfiguration>> GetAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -270,7 +270,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="tapConfigurationName"> The name of the tap configuration. </param>
         /// <param name="tapConfigurationParameters"> Parameters supplied to the create or update tap configuration operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> CreateOrUpdateAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string networkInterfaceName, string tapConfigurationName, NetworkInterfaceTapConfiguration tapConfigurationParameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -361,7 +361,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<NetworkInterfaceTapConfigurationListResult>> ListAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public async Task<Response<NetworkInterfaceTapConfigurationListResult>> ListAsync(string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -450,7 +450,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<NetworkInterfaceTapConfigurationListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
+        public async Task<Response<NetworkInterfaceTapConfigurationListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string networkInterfaceName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {

@@ -54,7 +54,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
         {
             if (input == null)
             {
@@ -140,7 +140,7 @@ namespace media_types
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> AnalyzeBodyAsync(SourcePath input = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> AnalyzeBodyAsync(SourcePath input = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeBodyRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -210,7 +210,7 @@ namespace media_types
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> ContentTypeWithEncodingAsync(string input, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> ContentTypeWithEncodingAsync(string input, CancellationToken cancellationToken = default)
         {
             if (input == null)
             {

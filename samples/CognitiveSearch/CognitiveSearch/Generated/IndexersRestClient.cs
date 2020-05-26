@@ -69,7 +69,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ResetAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ResetAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -132,7 +132,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to run. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> RunAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response> RunAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -210,7 +210,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Indexer indexer, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Indexer indexer, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -318,7 +318,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string indexerName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string indexerName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -384,7 +384,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> GetAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Indexer>> GetAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {
@@ -473,7 +473,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListIndexersResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ListIndexersResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateListRequest(select, requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -552,7 +552,7 @@ namespace CognitiveSearch
         /// <param name="indexer"> The definition of the indexer to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Indexer>> CreateAsync(Indexer indexer, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Indexer>> CreateAsync(Indexer indexer, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexer == null)
             {
@@ -639,7 +639,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer for which to retrieve status. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexerName == null)
             {

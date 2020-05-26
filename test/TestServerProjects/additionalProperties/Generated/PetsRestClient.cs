@@ -54,7 +54,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
@@ -136,7 +136,7 @@ namespace additionalProperties
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
@@ -218,7 +218,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
@@ -300,7 +300,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
@@ -382,7 +382,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {
@@ -464,7 +464,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
             {

@@ -48,7 +48,7 @@ namespace body_date
 
         /// <summary> Get null date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -100,7 +100,7 @@ namespace body_date
 
         /// <summary> Get invalid date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetInvalidDateAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidDateRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -152,7 +152,7 @@ namespace body_date
 
         /// <summary> Get overflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetOverflowDateAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetOverflowDateRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -204,7 +204,7 @@ namespace body_date
 
         /// <summary> Get underflow date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetUnderflowDateAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUnderflowDateRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -261,7 +261,7 @@ namespace body_date
         /// <summary> Put max date value 9999-12-31. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutMaxDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutMaxDateRequest(dateBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -304,7 +304,7 @@ namespace body_date
 
         /// <summary> Get max date value 9999-12-31. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetMaxDateAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMaxDateRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -361,7 +361,7 @@ namespace body_date
         /// <summary> Put min date value 0000-01-01. </summary>
         /// <param name="dateBody"> The Date to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutMinDateAsync(DateTimeOffset dateBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutMinDateRequest(dateBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -404,7 +404,7 @@ namespace body_date
 
         /// <summary> Get min date value 0000-01-01. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetMinDateAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMinDateRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

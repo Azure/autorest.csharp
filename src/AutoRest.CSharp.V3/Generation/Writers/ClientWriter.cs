@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)
         {
             RestClientMethod originalMethod = lroMethod.StartMethod;
-            CSharpType returnType = async ? new CSharpType(typeof(ValueTask<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
+            CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
             Parameter[] parameters = originalMethod.Parameters;
 
             writer.WriteXmlDocumentationSummary(originalMethod.Description);

@@ -56,7 +56,7 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<ResponseWithHeaders<RenamedSchema, ServiceRenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<RenamedSchema, ServiceRenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)
             {

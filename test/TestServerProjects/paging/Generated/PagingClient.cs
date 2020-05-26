@@ -1350,7 +1350,7 @@ namespace paging
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<PagingGetMultiplePagesLROOperation> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<PagingGetMultiplePagesLROOperation> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PagingClient.StartGetMultiplePagesLRO");
             scope.Start();

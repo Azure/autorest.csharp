@@ -48,7 +48,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Head200Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Head200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -90,7 +90,7 @@ namespace httpInfrastructure
 
         /// <summary> Get 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<bool>> Get200Async(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> Get200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -142,7 +142,7 @@ namespace httpInfrastructure
 
         /// <summary> Options 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<bool>> Options200Async(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> Options200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateOptions200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -198,7 +198,7 @@ namespace httpInfrastructure
 
         /// <summary> Put boolean value true returning 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put200Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePut200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -244,7 +244,7 @@ namespace httpInfrastructure
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Patch200Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Patch200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePatch200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -290,7 +290,7 @@ namespace httpInfrastructure
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post200Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -336,7 +336,7 @@ namespace httpInfrastructure
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete200Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -382,7 +382,7 @@ namespace httpInfrastructure
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put201Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put201Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePut201Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -428,7 +428,7 @@ namespace httpInfrastructure
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post201Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post201Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost201Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -474,7 +474,7 @@ namespace httpInfrastructure
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put202Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put202Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePut202Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -520,7 +520,7 @@ namespace httpInfrastructure
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Patch202Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Patch202Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePatch202Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -566,7 +566,7 @@ namespace httpInfrastructure
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post202Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post202Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -612,7 +612,7 @@ namespace httpInfrastructure
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete202Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete202Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete202Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -654,7 +654,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Head204Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Head204Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -700,7 +700,7 @@ namespace httpInfrastructure
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Put204Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put204Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePut204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -746,7 +746,7 @@ namespace httpInfrastructure
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Patch204Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Patch204Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePatch204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -792,7 +792,7 @@ namespace httpInfrastructure
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post204Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post204Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -838,7 +838,7 @@ namespace httpInfrastructure
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete204Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete204Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -880,7 +880,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 404 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Head404Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Head404Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead404Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

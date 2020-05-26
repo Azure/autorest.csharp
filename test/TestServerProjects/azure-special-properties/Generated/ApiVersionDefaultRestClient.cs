@@ -56,7 +56,7 @@ namespace azure_special_properties
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMethodGlobalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetMethodGlobalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMethodGlobalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -99,7 +99,7 @@ namespace azure_special_properties
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMethodGlobalNotProvidedValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetMethodGlobalNotProvidedValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMethodGlobalNotProvidedValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -142,7 +142,7 @@ namespace azure_special_properties
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetPathGlobalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetPathGlobalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetPathGlobalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -185,7 +185,7 @@ namespace azure_special_properties
 
         /// <summary> GET method with api-version modeled in global settings. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetSwaggerGlobalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetSwaggerGlobalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSwaggerGlobalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

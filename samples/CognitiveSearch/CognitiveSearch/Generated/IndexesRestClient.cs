@@ -71,7 +71,7 @@ namespace CognitiveSearch
         /// <param name="index"> The definition of the index to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> CreateAsync(Models.Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Index>> CreateAsync(Models.Index index, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (index == null)
             {
@@ -160,7 +160,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the index definitions to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ListIndexesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ListIndexesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateListRequest(select, requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -257,7 +257,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Models.Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Index>> CreateOrUpdateAsync(string indexName, Models.Index index, bool? allowIndexDowntime = null, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -366,7 +366,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DeleteAsync(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string indexName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -432,7 +432,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Models.Index>> GetAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Models.Index>> GetAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -519,7 +519,7 @@ namespace CognitiveSearch
         /// <param name="indexName"> The name of the index for which to retrieve statistics. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<GetIndexStatisticsResult>> GetStatisticsAsync(string indexName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {
@@ -611,7 +611,7 @@ namespace CognitiveSearch
         /// <param name="request"> The text and analyzer or analysis components to test. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AnalyzeResult>> AnalyzeAsync(string indexName, AnalyzeRequest request, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             if (indexName == null)
             {

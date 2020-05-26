@@ -47,7 +47,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Head501Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Head501Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead501Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -85,7 +85,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Get501Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Get501Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet501Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -127,7 +127,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Post505Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post505Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost505Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -169,7 +169,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> Delete505Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete505Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete505Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

@@ -48,7 +48,7 @@ namespace azure_special_properties
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMethodLocalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetMethodLocalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMethodLocalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -95,7 +95,7 @@ namespace azure_special_properties
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = null to succeed. </summary>
         /// <param name="apiVersion"> This should appear as a method parameter, use value null, this should result in no serialized parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetMethodLocalNullAsync(string apiVersion = null, CancellationToken cancellationToken = default)
+        public async Task<Response> GetMethodLocalNullAsync(string apiVersion = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMethodLocalNullRequest(apiVersion);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -139,7 +139,7 @@ namespace azure_special_properties
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetPathLocalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetPathLocalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetPathLocalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -182,7 +182,7 @@ namespace azure_special_properties
 
         /// <summary> Get method with api-version modeled in the method.  pass in api-version = &apos;2.0&apos; to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetSwaggerLocalValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetSwaggerLocalValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSwaggerLocalValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
