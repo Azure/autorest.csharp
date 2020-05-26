@@ -335,7 +335,6 @@ namespace AutoRest.CSharp.V3.Output.Models
             );
         }
 
-
         private ResponseBody? BuildResponseBody(ServiceResponse response)
         {
             ResponseBody? responseBody = null;
@@ -355,7 +354,6 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             return responseBody;
         }
-
 
         private static RequestParameterSerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
         {
@@ -405,7 +403,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 
                 responses.Add(new Response(
                     typeGroup.Key,
-                    typeGroup.SelectMany(r=>r.StatusCodes).Distinct().ToArray()));
+                    typeGroup.SelectMany(r => r.StatusCodes).Distinct().ToArray()));
             }
 
             var bodyTypes = responses.Select(r => r.ResponseBody?.Type)
