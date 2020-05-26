@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
@@ -242,9 +243,9 @@ namespace AutoRest.TestServer.Tests
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateValidAsync();
             CollectionAssert.AreEqual(new Dictionary<string, DateTimeOffset>
             {
-                { "0", DateTimeOffset.Parse("2000-12-01") },
-                { "1", DateTimeOffset.Parse("1980-01-02") },
-                { "2", DateTimeOffset.Parse("1492-10-12") }
+                { "0", DateTimeOffset.Parse("2000-12-01", styles: DateTimeStyles.AssumeUniversal) },
+                { "1", DateTimeOffset.Parse("1980-01-02", styles: DateTimeStyles.AssumeUniversal) },
+                { "2", DateTimeOffset.Parse("1492-10-12", styles: DateTimeStyles.AssumeUniversal) }
             }, result.Value);
         });
 
@@ -258,7 +259,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetDictionaryDateWithNull() => Test((host, pipeline) =>
         {
             // Non-nullable item type
-            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateInvalidNullAsync());
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateInvalidNullAsync());
         });
 
         [Test]

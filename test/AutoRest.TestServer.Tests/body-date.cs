@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Globalization;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -25,14 +26,14 @@ namespace AutoRest.TestServer.Tests
         public Task GetDateMax() => Test(async (host, pipeline) =>
         {
             var result = await new DateClient(ClientDiagnostics, pipeline, host).GetMaxDateAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31"), result.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("9999-12-31", styles: DateTimeStyles.AssumeUniversal), result.Value);
         });
 
         [Test]
         public Task GetDateMin() => Test(async (host, pipeline) =>
         {
             var result = await new DateClient(ClientDiagnostics, pipeline, host).GetMinDateAsync();
-            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01"), result.Value);
+            Assert.AreEqual(DateTimeOffset.Parse("0001-01-01", styles: DateTimeStyles.AssumeUniversal), result.Value);
         });
 
         [Test]
