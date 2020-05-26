@@ -72,7 +72,7 @@ namespace validation
         /// <param name="resourceGroupName"> Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+. </param>
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> ValidationOfMethodParametersAsync(string resourceGroupName, int id, CancellationToken cancellationToken = default)
+        public async Task<Response<Product>> ValidationOfMethodParametersAsync(string resourceGroupName, int id, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -166,7 +166,7 @@ namespace validation
         /// <param name="id"> Required int multiple of 10 from 100 to 1000. </param>
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Product>> ValidationOfBodyAsync(string resourceGroupName, int id, Product body = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -246,7 +246,7 @@ namespace validation
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetWithConstantInPathAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetWithConstantInPathRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -296,7 +296,7 @@ namespace validation
 
         /// <param name="body"> The Product to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Product>> PostWithConstantInBodyAsync(Product body = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Product>> PostWithConstantInBodyAsync(Product body = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostWithConstantInBodyRequest(body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

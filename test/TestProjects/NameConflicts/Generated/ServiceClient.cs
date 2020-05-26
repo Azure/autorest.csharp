@@ -187,7 +187,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<ServiceAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<ServiceAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -235,7 +235,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<ServiceAnalyzeBodyOperation> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ServiceAnalyzeBodyOperation> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var scope0 = _clientDiagnostics.CreateScope("ServiceClient.StartAnalyzeBody");
             scope0.Start();

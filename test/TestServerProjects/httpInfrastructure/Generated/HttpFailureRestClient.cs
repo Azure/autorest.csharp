@@ -48,7 +48,7 @@ namespace httpInfrastructure
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<bool>> GetEmptyErrorAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> GetEmptyErrorAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetEmptyErrorRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -100,7 +100,7 @@ namespace httpInfrastructure
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<bool>> GetNoModelErrorAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> GetNoModelErrorAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNoModelErrorRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -152,7 +152,7 @@ namespace httpInfrastructure
 
         /// <summary> Get empty response from server. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<bool>> GetNoModelEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> GetNoModelEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNoModelEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

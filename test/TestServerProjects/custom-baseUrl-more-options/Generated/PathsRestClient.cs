@@ -71,7 +71,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
+        public async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
             if (vault == null)
             {

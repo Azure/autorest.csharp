@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -213,9 +214,9 @@ namespace AutoRest.TestServer.Tests
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetDateValidAsync();
             CollectionAssert.AreEqual(new[]
             {
-                DateTimeOffset.Parse("2000-12-01"),
-                DateTimeOffset.Parse("1980-01-02"),
-                DateTimeOffset.Parse("1492-10-12"),
+                DateTimeOffset.Parse("2000-12-01", styles: DateTimeStyles.AssumeUniversal),
+                DateTimeOffset.Parse("1980-01-02", styles: DateTimeStyles.AssumeUniversal),
+                DateTimeOffset.Parse("1492-10-12", styles: DateTimeStyles.AssumeUniversal),
             }, result.Value);
         });
 

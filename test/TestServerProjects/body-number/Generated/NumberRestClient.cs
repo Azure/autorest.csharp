@@ -48,7 +48,7 @@ namespace body_number
 
         /// <summary> Get null Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<float>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<float>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -100,7 +100,7 @@ namespace body_number
 
         /// <summary> Get invalid float Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<float>> GetInvalidFloatAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<float>> GetInvalidFloatAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidFloatRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -152,7 +152,7 @@ namespace body_number
 
         /// <summary> Get invalid double Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<double>> GetInvalidDoubleAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<double>> GetInvalidDoubleAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidDoubleRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -204,7 +204,7 @@ namespace body_number
 
         /// <summary> Get invalid decimal Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<decimal>> GetInvalidDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<decimal>> GetInvalidDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -261,7 +261,7 @@ namespace body_number
         /// <summary> Put big float value 3.402823e+20. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutBigFloatRequest(numberBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -304,7 +304,7 @@ namespace body_number
 
         /// <summary> Get big float value 3.402823e+20. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<float>> GetBigFloatAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<float>> GetBigFloatAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBigFloatRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -361,7 +361,7 @@ namespace body_number
         /// <summary> Put big double value 2.5976931e+101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutBigDoubleRequest(numberBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -404,7 +404,7 @@ namespace body_number
 
         /// <summary> Get big double value 2.5976931e+101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<double>> GetBigDoubleAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<double>> GetBigDoubleAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBigDoubleRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -460,7 +460,7 @@ namespace body_number
 
         /// <summary> Put big double value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePutBigDoublePositiveDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -502,7 +502,7 @@ namespace body_number
 
         /// <summary> Get big double value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<double>> GetBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<double>> GetBigDoublePositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBigDoublePositiveDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -558,7 +558,7 @@ namespace body_number
 
         /// <summary> Put big double value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePutBigDoubleNegativeDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -600,7 +600,7 @@ namespace body_number
 
         /// <summary> Get big double value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<double>> GetBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<double>> GetBigDoubleNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBigDoubleNegativeDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -657,7 +657,7 @@ namespace body_number
         /// <summary> Put big decimal value 2.5976931e+101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutBigDecimalRequest(numberBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -700,7 +700,7 @@ namespace body_number
 
         /// <summary> Get big decimal value 2.5976931e+101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<decimal>> GetBigDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<decimal>> GetBigDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBigDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -756,7 +756,7 @@ namespace body_number
 
         /// <summary> Put big decimal value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePutBigDecimalPositiveDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -798,7 +798,7 @@ namespace body_number
 
         /// <summary> Get big decimal value 99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<decimal>> GetBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<decimal>> GetBigDecimalPositiveDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBigDecimalPositiveDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -854,7 +854,7 @@ namespace body_number
 
         /// <summary> Put big decimal value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePutBigDecimalNegativeDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -896,7 +896,7 @@ namespace body_number
 
         /// <summary> Get big decimal value -99999999.99. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<decimal>> GetBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<decimal>> GetBigDecimalNegativeDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBigDecimalNegativeDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -953,7 +953,7 @@ namespace body_number
         /// <summary> Put small float value 3.402823e-20. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutSmallFloatRequest(numberBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -996,7 +996,7 @@ namespace body_number
 
         /// <summary> Get big double value 3.402823e-20. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<double>> GetSmallFloatAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<double>> GetSmallFloatAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSmallFloatRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1053,7 +1053,7 @@ namespace body_number
         /// <summary> Put small double value 2.5976931e-101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutSmallDoubleRequest(numberBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1096,7 +1096,7 @@ namespace body_number
 
         /// <summary> Get big double value 2.5976931e-101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<double>> GetSmallDoubleAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<double>> GetSmallDoubleAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSmallDoubleRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1153,7 +1153,7 @@ namespace body_number
         /// <summary> Put small decimal value 2.5976931e-101. </summary>
         /// <param name="numberBody"> The Number to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutSmallDecimalRequest(numberBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1196,7 +1196,7 @@ namespace body_number
 
         /// <summary> Get small decimal value 2.5976931e-101. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<decimal>> GetSmallDecimalAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<decimal>> GetSmallDecimalAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetSmallDecimalRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

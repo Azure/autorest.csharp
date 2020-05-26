@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
                 _ => new CSharpType(typeof(Response)),
             };
-            responseType = async ? new CSharpType(typeof(ValueTask<>), responseType) : responseType;
+            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
             var parameters = operation.Parameters;
             writer.WriteXmlDocumentationSummary(operation.Description);
 

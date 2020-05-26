@@ -48,7 +48,7 @@ namespace body_string
 
         /// <summary> Get null string value value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -122,7 +122,7 @@ namespace body_string
         /// <summary> Set string value null. </summary>
         /// <param name="stringBody"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutNullAsync(string stringBody = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutNullAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutNullRequest(stringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -165,7 +165,7 @@ namespace body_string
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -235,7 +235,7 @@ namespace body_string
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePutEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -277,7 +277,7 @@ namespace body_string
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> GetMbcsAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetMbcsAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetMbcsRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -347,7 +347,7 @@ namespace body_string
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutMbcsAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutMbcsAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePutMbcsRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -389,7 +389,7 @@ namespace body_string
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> GetWhitespaceAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetWhitespaceAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetWhitespaceRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -459,7 +459,7 @@ namespace body_string
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutWhitespaceAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreatePutWhitespaceRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -501,7 +501,7 @@ namespace body_string
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<string>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetNotProvidedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNotProvidedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -567,7 +567,7 @@ namespace body_string
 
         /// <summary> Get value that is base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<byte[]>> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<byte[]>> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBase64EncodedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -633,7 +633,7 @@ namespace body_string
 
         /// <summary> Get value that is base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<byte[]>> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<byte[]>> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBase64UrlEncodedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -704,7 +704,7 @@ namespace body_string
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="stringBody"> The ByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
             {
@@ -757,7 +757,7 @@ namespace body_string
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<byte[]>> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullBase64UrlEncodedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

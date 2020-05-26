@@ -50,7 +50,7 @@ namespace extensible_enums_swagger
 
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
+        public async Task<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
         {
             if (petId == null)
             {
@@ -133,7 +133,7 @@ namespace extensible_enums_swagger
 
         /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Pet>> AddPetAsync(Pet petParam = null, CancellationToken cancellationToken = default)
+        public async Task<Response<Pet>> AddPetAsync(Pet petParam = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAddPetRequest(petParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

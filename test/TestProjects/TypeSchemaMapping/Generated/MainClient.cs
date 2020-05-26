@@ -106,7 +106,7 @@ namespace CustomNamespace
 
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async ValueTask<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
+        public virtual async Task<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MainClient.StartOperation");
             scope.Start();

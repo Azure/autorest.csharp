@@ -53,7 +53,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringMultiNullRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -101,7 +101,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringMultiEmptyRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -149,7 +149,7 @@ namespace url_multi_collectionFormat
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringMultiValidRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

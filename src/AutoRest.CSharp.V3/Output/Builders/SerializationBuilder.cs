@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
@@ -78,6 +79,13 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         private JsonSerialization BuildSerialization(Schema schema, CSharpType type)
         {
+            if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
+            {
+                return new JsonValueSerialization(
+                    type,
+                    BuilderHelpers.GetSerializationFormat(schema));
+            }
+
             switch (schema)
             {
                 case ConstantSchema constantSchema:

@@ -67,7 +67,7 @@ namespace required_optional
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="pathParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default)
+        public async Task<Response> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default)
         {
             if (pathParameter == null)
             {
@@ -125,7 +125,7 @@ namespace required_optional
         /// <summary> Test implicitly optional query parameter. </summary>
         /// <param name="queryParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutOptionalQueryAsync(string queryParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutOptionalQueryAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutOptionalQueryRequest(queryParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -173,7 +173,7 @@ namespace required_optional
         /// <summary> Test implicitly optional header parameter. </summary>
         /// <param name="queryParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutOptionalHeaderAsync(string queryParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutOptionalHeaderAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutOptionalHeaderRequest(queryParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -224,7 +224,7 @@ namespace required_optional
         /// <summary> Test implicitly optional body parameter. </summary>
         /// <param name="bodyParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutOptionalBodyAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PutOptionalBodyAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutOptionalBodyRequest(bodyParameter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -268,7 +268,7 @@ namespace required_optional
 
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetRequiredGlobalPathAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetRequiredGlobalPathAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetRequiredGlobalPathRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -311,7 +311,7 @@ namespace required_optional
 
         /// <summary> Test implicitly required query parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetRequiredGlobalQueryAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetRequiredGlobalQueryAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetRequiredGlobalQueryRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -357,7 +357,7 @@ namespace required_optional
 
         /// <summary> Test implicitly optional query parameter. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetOptionalGlobalQueryAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetOptionalGlobalQueryAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetOptionalGlobalQueryRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

@@ -50,7 +50,7 @@ namespace body_array
 
         /// <summary> Get null array value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<int>>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<int>>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -126,7 +126,7 @@ namespace body_array
 
         /// <summary> Get invalid array [1, 2, 3. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<int>>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -202,7 +202,7 @@ namespace body_array
 
         /// <summary> Get empty array value []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<int>>> GetEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -288,7 +288,7 @@ namespace body_array
         /// <summary> Set array value empty []. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutEmptyAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutEmptyAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -341,7 +341,7 @@ namespace body_array
 
         /// <summary> Get boolean array value [true, false, false, true]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<bool>>> GetBooleanTfftAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBooleanTfftRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -427,7 +427,7 @@ namespace body_array
         /// <summary> Set array value empty [true, false, false, true]. </summary>
         /// <param name="arrayBody"> The ArrayOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBooleanTfftAsync(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutBooleanTfftAsync(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -480,7 +480,7 @@ namespace body_array
 
         /// <summary> Get boolean array value [true, null, false]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<bool>>> GetBooleanInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBooleanInvalidNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -556,7 +556,7 @@ namespace body_array
 
         /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<bool>>> GetBooleanInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBooleanInvalidStringRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -632,7 +632,7 @@ namespace body_array
 
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<int>>> GetIntegerValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntegerValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -718,7 +718,7 @@ namespace body_array
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutIntegerValidAsync(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutIntegerValidAsync(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -771,7 +771,7 @@ namespace body_array
 
         /// <summary> Get integer array value [1, null, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<int>>> GetIntInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntInvalidNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -847,7 +847,7 @@ namespace body_array
 
         /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<int>>> GetIntInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntInvalidStringRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -923,7 +923,7 @@ namespace body_array
 
         /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<long>>> GetLongValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetLongValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1009,7 +1009,7 @@ namespace body_array
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutLongValidAsync(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutLongValidAsync(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1062,7 +1062,7 @@ namespace body_array
 
         /// <summary> Get long array value [1, null, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<long>>> GetLongInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetLongInvalidNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1138,7 +1138,7 @@ namespace body_array
 
         /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<long>>> GetLongInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetLongInvalidStringRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1214,7 +1214,7 @@ namespace body_array
 
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<float>>> GetFloatValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetFloatValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1300,7 +1300,7 @@ namespace body_array
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutFloatValidAsync(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutFloatValidAsync(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1353,7 +1353,7 @@ namespace body_array
 
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<float>>> GetFloatInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetFloatInvalidNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1429,7 +1429,7 @@ namespace body_array
 
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<float>>> GetFloatInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetFloatInvalidStringRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1505,7 +1505,7 @@ namespace body_array
 
         /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<double>>> GetDoubleValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDoubleValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1591,7 +1591,7 @@ namespace body_array
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDoubleValidAsync(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDoubleValidAsync(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1644,7 +1644,7 @@ namespace body_array
 
         /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<double>>> GetDoubleInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDoubleInvalidNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1720,7 +1720,7 @@ namespace body_array
 
         /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<double>>> GetDoubleInvalidStringAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDoubleInvalidStringRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1796,7 +1796,7 @@ namespace body_array
 
         /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<string>>> GetStringValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetStringValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1896,7 +1896,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutStringValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutStringValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -1949,7 +1949,7 @@ namespace body_array
 
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<FooEnum>>> GetEnumValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetEnumValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2035,7 +2035,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutEnumValidAsync(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutEnumValidAsync(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2088,7 +2088,7 @@ namespace body_array
 
         /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<Enum0>>> GetStringEnumValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetStringEnumValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2174,7 +2174,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfEnum1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutStringEnumValidAsync(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutStringEnumValidAsync(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2227,7 +2227,7 @@ namespace body_array
 
         /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<string>>> GetStringWithNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetStringWithNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2317,7 +2317,7 @@ namespace body_array
 
         /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<string>>> GetStringWithInvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetStringWithInvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2407,7 +2407,7 @@ namespace body_array
 
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<Guid>>> GetUuidValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUuidValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2493,7 +2493,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutUuidValidAsync(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutUuidValidAsync(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2546,7 +2546,7 @@ namespace body_array
 
         /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<Guid>>> GetUuidInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUuidInvalidCharsRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2622,7 +2622,7 @@ namespace body_array
 
         /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2708,7 +2708,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDateValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDateValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -2761,7 +2761,7 @@ namespace body_array
 
         /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateInvalidNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2837,7 +2837,7 @@ namespace body_array
 
         /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateInvalidCharsRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2913,7 +2913,7 @@ namespace body_array
 
         /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateTimeValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -2999,7 +2999,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDateTimeValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDateTimeValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -3052,7 +3052,7 @@ namespace body_array
 
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateTimeInvalidNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3128,7 +3128,7 @@ namespace body_array
 
         /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeInvalidCharsAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateTimeInvalidCharsRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3204,7 +3204,7 @@ namespace body_array
 
         /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDateTimeRfc1123ValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateTimeRfc1123ValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3290,7 +3290,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDateTimeRfc1123ValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDateTimeRfc1123ValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -3343,7 +3343,7 @@ namespace body_array
 
         /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<TimeSpan>>> GetDurationValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDurationValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3429,7 +3429,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDurationValidAsync(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDurationValidAsync(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -3482,7 +3482,7 @@ namespace body_array
 
         /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<byte[]>>> GetByteValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetByteValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3582,7 +3582,7 @@ namespace body_array
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The ArrayOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutByteValidAsync(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutByteValidAsync(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -3635,7 +3635,7 @@ namespace body_array
 
         /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<byte[]>>> GetByteInvalidNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetByteInvalidNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3725,7 +3725,7 @@ namespace body_array
 
         /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<byte[]>>> GetBase64UrlAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBase64UrlRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3815,7 +3815,7 @@ namespace body_array
 
         /// <summary> Get array of complex type null value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<Product>>> GetComplexNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetComplexNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3905,7 +3905,7 @@ namespace body_array
 
         /// <summary> Get empty array of complex type []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<Product>>> GetComplexEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetComplexEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3995,7 +3995,7 @@ namespace body_array
 
         /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<Product>>> GetComplexItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetComplexItemNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4085,7 +4085,7 @@ namespace body_array
 
         /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<Product>>> GetComplexItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetComplexItemEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4175,7 +4175,7 @@ namespace body_array
 
         /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<Product>>> GetComplexValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetComplexValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4275,7 +4275,7 @@ namespace body_array
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutComplexValidAsync(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutComplexValidAsync(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4328,7 +4328,7 @@ namespace body_array
 
         /// <summary> Get a null array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IList<string>>>> GetArrayNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetArrayNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4442,7 +4442,7 @@ namespace body_array
 
         /// <summary> Get an empty array []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IList<string>>>> GetArrayEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetArrayEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4556,7 +4556,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IList<string>>>> GetArrayItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetArrayItemNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4670,7 +4670,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IList<string>>>> GetArrayItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetArrayItemEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4784,7 +4784,7 @@ namespace body_array
 
         /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IList<string>>>> GetArrayValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetArrayValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4913,7 +4913,7 @@ namespace body_array
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutArrayValidAsync(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutArrayValidAsync(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4966,7 +4966,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -5080,7 +5080,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -5194,7 +5194,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryItemNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -5308,7 +5308,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryItemEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -5422,7 +5422,7 @@ namespace body_array
 
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -5552,7 +5552,7 @@ namespace body_array
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDictionaryValidAsync(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDictionaryValidAsync(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {

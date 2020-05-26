@@ -48,7 +48,7 @@ namespace body_complex
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<MyBaseType>> GetValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

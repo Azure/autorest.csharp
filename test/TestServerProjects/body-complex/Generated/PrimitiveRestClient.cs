@@ -49,7 +49,7 @@ namespace body_complex
 
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IntWrapper>> GetIntAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -120,7 +120,7 @@ namespace body_complex
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="complexBody"> Please put -1 and 2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -173,7 +173,7 @@ namespace body_complex
 
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<LongWrapper>> GetLongAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetLongRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -244,7 +244,7 @@ namespace body_complex
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="complexBody"> Please put 1099511627775 and -999511627788. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -297,7 +297,7 @@ namespace body_complex
 
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<FloatWrapper>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetFloatRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -368,7 +368,7 @@ namespace body_complex
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="complexBody"> Please put 1.05 and -0.003. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -421,7 +421,7 @@ namespace body_complex
 
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DoubleWrapper>> GetDoubleAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDoubleRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -492,7 +492,7 @@ namespace body_complex
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="complexBody"> Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -545,7 +545,7 @@ namespace body_complex
 
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<BooleanWrapper>> GetBoolAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBoolRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -616,7 +616,7 @@ namespace body_complex
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="complexBody"> Please put true and false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -669,7 +669,7 @@ namespace body_complex
 
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<StringWrapper>> GetStringAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetStringRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -740,7 +740,7 @@ namespace body_complex
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="complexBody"> Please put &apos;goodrequest&apos;, &apos;&apos;, and null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -793,7 +793,7 @@ namespace body_complex
 
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateWrapper>> GetDateAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -864,7 +864,7 @@ namespace body_complex
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -917,7 +917,7 @@ namespace body_complex
 
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DatetimeWrapper>> GetDateTimeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateTimeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -988,7 +988,7 @@ namespace body_complex
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01T12:00:00-04:00&apos; and &apos;2015-05-18T11:38:00-08:00&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -1041,7 +1041,7 @@ namespace body_complex
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
+        public async Task<Response<Datetimerfc1123Wrapper>> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDateTimeRfc1123Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1112,7 +1112,7 @@ namespace body_complex
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="complexBody"> Please put &apos;Mon, 01 Jan 0001 12:00:00 GMT&apos; and &apos;Mon, 18 May 2015 11:38:00 GMT&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -1165,7 +1165,7 @@ namespace body_complex
 
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DurationWrapper>> GetDurationAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDurationRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1236,7 +1236,7 @@ namespace body_complex
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="complexBody"> Please put &apos;P123DT22H14M12.011S&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutDurationAsync(DurationWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDurationAsync(DurationWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {
@@ -1289,7 +1289,7 @@ namespace body_complex
 
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ByteWrapper>> GetByteAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetByteRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1360,7 +1360,7 @@ namespace body_complex
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="complexBody"> Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutByteAsync(ByteWrapper complexBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutByteAsync(ByteWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
             {

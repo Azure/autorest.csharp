@@ -48,7 +48,7 @@ namespace body_integer
 
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -100,7 +100,7 @@ namespace body_integer
 
         /// <summary> Get invalid Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<int>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -152,7 +152,7 @@ namespace body_integer
 
         /// <summary> Get overflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
+        public async Task<Response<int>> GetOverflowInt32Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetOverflowInt32Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -204,7 +204,7 @@ namespace body_integer
 
         /// <summary> Get underflow Int32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
+        public async Task<Response<int>> GetUnderflowInt32Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUnderflowInt32Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -256,7 +256,7 @@ namespace body_integer
 
         /// <summary> Get overflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
+        public async Task<Response<long>> GetOverflowInt64Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetOverflowInt64Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -308,7 +308,7 @@ namespace body_integer
 
         /// <summary> Get underflow Int64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
+        public async Task<Response<long>> GetUnderflowInt64Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUnderflowInt64Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -365,7 +365,7 @@ namespace body_integer
         /// <summary> Put max int32 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutMax32Request(intBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -413,7 +413,7 @@ namespace body_integer
         /// <summary> Put max int64 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutMax64Request(intBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -461,7 +461,7 @@ namespace body_integer
         /// <summary> Put min int32 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutMin32Request(intBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -509,7 +509,7 @@ namespace body_integer
         /// <summary> Put min int64 value. </summary>
         /// <param name="intBody"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutMin64Request(intBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -552,7 +552,7 @@ namespace body_integer
 
         /// <summary> Get datetime encoded as Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetUnixTimeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetUnixTimeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -601,7 +601,7 @@ namespace body_integer
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(intBody, "U");
+            content.JsonWriter.WriteNumberValue(intBody, "U");
             request.Content = content;
             return message;
         }
@@ -609,7 +609,7 @@ namespace body_integer
         /// <summary> Put datetime encoded as Unix time. </summary>
         /// <param name="intBody"> The Unixtime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutUnixTimeDateRequest(intBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -652,7 +652,7 @@ namespace body_integer
 
         /// <summary> Get invalid Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetInvalidUnixTimeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidUnixTimeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -704,7 +704,7 @@ namespace body_integer
 
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullUnixTimeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

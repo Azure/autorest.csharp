@@ -47,7 +47,7 @@ namespace azure_special_properties
 
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -91,7 +91,7 @@ namespace azure_special_properties
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
         /// <param name="xMsClientRequestId"> This should appear as a method parameter, use value &apos;9C4D50EE-2D56-4CD3-8152-34347DC9F2B0&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ParamGetAsync(string xMsClientRequestId, CancellationToken cancellationToken = default)
+        public async Task<Response> ParamGetAsync(string xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (xMsClientRequestId == null)
             {

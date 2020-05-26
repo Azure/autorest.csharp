@@ -48,7 +48,7 @@ namespace body_file
 
         /// <summary> Get file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Stream>> GetFileAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetFileRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -96,7 +96,7 @@ namespace body_file
 
         /// <summary> Get a large file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Stream>> GetFileLargeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetFileLargeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -144,7 +144,7 @@ namespace body_file
 
         /// <summary> Get empty file. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<Stream>> GetEmptyFileAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetEmptyFileRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

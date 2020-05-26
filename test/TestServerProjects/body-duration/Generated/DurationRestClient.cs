@@ -48,7 +48,7 @@ namespace body_duration
 
         /// <summary> Get null duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -105,7 +105,7 @@ namespace body_duration
         /// <summary> Put a positive duration value. </summary>
         /// <param name="durationBody"> The Duration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutPositiveDurationRequest(durationBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -148,7 +148,7 @@ namespace body_duration
 
         /// <summary> Get a positive duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<TimeSpan>> GetPositiveDurationAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetPositiveDurationRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -200,7 +200,7 @@ namespace body_duration
 
         /// <summary> Get an invalid duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<TimeSpan>> GetInvalidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetInvalidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);

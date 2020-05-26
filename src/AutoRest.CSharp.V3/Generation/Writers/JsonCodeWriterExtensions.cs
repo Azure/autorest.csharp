@@ -118,6 +118,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     if (valueSerialization.Type.IsFrameworkType)
                     {
                         var frameworkType = valueSerialization.Type.FrameworkType;
+
+                        if (frameworkType == typeof(JsonElement))
+                        {
+                            writer.Line($"{name}.WriteTo({writerName});");
+                            return;
+                        }
+
                         bool writeFormat = false;
 
                         writer.Append($"{writerName}.");
@@ -153,7 +160,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                  frameworkType == typeof(DateTime) ||
                                  frameworkType == typeof(TimeSpan))
                         {
-                            writer.AppendRaw("WriteStringValue");
+                            if (valueSerialization.Format == SerializationFormat.DateTime_Unix)
+                            {
+                                writer.AppendRaw("WriteNumberValue");
+                            }
+                            else
+                            {
+                                writer.AppendRaw("WriteStringValue");
+                            }
                             writeFormat = true;
                         }
 
@@ -432,6 +446,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             bool includeFormat = false;
 
             writer.Append($"{element}.");
+
+            if (frameworkType == typeof(JsonElement))
+                writer.AppendRaw("Clone");
             if (frameworkType == typeof(object))
                 writer.AppendRaw("GetObject");
             if (frameworkType == typeof(bool))

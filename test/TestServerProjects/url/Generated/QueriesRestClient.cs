@@ -50,7 +50,7 @@ namespace url
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBooleanTrueRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -93,7 +93,7 @@ namespace url
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBooleanFalseRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -140,7 +140,7 @@ namespace url
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetBooleanNullAsync(bool? boolQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> GetBooleanNullAsync(bool? boolQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetBooleanNullRequest(boolQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -184,7 +184,7 @@ namespace url
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntOneMillionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -227,7 +227,7 @@ namespace url
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntNegativeOneMillionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -274,7 +274,7 @@ namespace url
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetIntNullAsync(int? intQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> GetIntNullAsync(int? intQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetIntNullRequest(intQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -318,7 +318,7 @@ namespace url
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetTenBillionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -361,7 +361,7 @@ namespace url
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNegativeTenBillionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -408,7 +408,7 @@ namespace url
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> GetLongNullAsync(long? longQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> GetLongNullAsync(long? longQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetLongNullRequest(longQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -452,7 +452,7 @@ namespace url
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateFloatScientificPositiveRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -495,7 +495,7 @@ namespace url
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateFloatScientificNegativeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -542,7 +542,7 @@ namespace url
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> FloatNullAsync(float? floatQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> FloatNullAsync(float? floatQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateFloatNullRequest(floatQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -586,7 +586,7 @@ namespace url
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDoubleDecimalPositiveRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -629,7 +629,7 @@ namespace url
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDoubleDecimalNegativeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -676,7 +676,7 @@ namespace url
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DoubleNullAsync(double? doubleQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DoubleNullAsync(double? doubleQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateDoubleNullRequest(doubleQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -720,7 +720,7 @@ namespace url
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUnicodeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -763,7 +763,7 @@ namespace url
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringUrlEncodedRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -806,7 +806,7 @@ namespace url
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateStringEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -853,7 +853,7 @@ namespace url
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> StringNullAsync(string stringQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> StringNullAsync(string stringQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateStringNullRequest(stringQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -901,7 +901,7 @@ namespace url
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> EnumValidAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> EnumValidAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateEnumValidRequest(enumQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -949,7 +949,7 @@ namespace url
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> EnumNullAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> EnumNullAsync(UriColor? enumQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateEnumNullRequest(enumQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -997,7 +997,7 @@ namespace url
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteMultiByteAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateByteMultiByteRequest(byteQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1041,7 +1041,7 @@ namespace url
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateByteEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1088,7 +1088,7 @@ namespace url
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ByteNullAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ByteNullAsync(byte[] byteQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateByteNullRequest(byteQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1132,7 +1132,7 @@ namespace url
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DateValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDateValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1179,7 +1179,7 @@ namespace url
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateNullAsync(DateTimeOffset? dateQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateDateNullRequest(dateQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1223,7 +1223,7 @@ namespace url
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDateTimeValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1270,7 +1270,7 @@ namespace url
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateDateTimeNullRequest(dateTimeQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1318,7 +1318,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringCsvValidRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1366,7 +1366,7 @@ namespace url
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringCsvNullRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1414,7 +1414,7 @@ namespace url
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringCsvEmptyRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1462,7 +1462,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringSsvValidRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1510,7 +1510,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringTsvValidRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1558,7 +1558,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async ValueTask<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateArrayStringPipesValidRequest(arrayQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
