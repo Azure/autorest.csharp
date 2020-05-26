@@ -115,7 +115,7 @@ namespace Azure.Core
         {
             return format switch
             {
-                "U" => DateTimeOffset.FromUnixTimeSeconds(long.Parse(value)),
+                "U" => DateTimeOffset.FromUnixTimeSeconds(long.Parse(value, CultureInfo.InvariantCulture)),
                 _ => DateTimeOffset.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
             };
         }
