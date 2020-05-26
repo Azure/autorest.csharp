@@ -296,30 +296,16 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             if (operation.IsLongRunning)
             {
-                // If operation is a long-running operation than we're generating an initial call here so find a response with non 200/204 code
                 // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
-                // Long running operations can respond with both initial or final status code
-
-                clientResponse.Add(new Response(
-                    null,
-                    operation.LongRunningInitialResponse.HttpResponse.IntStatusCodes.ToArray()
-                ));
-                clientResponse.Add(new Response(
-                    null,
-                    operation.LongRunningFinalResponse.HttpResponse.IntStatusCodes.ToArray()
-                ));
                 responseHeaderModel = null;
             }
-            else
-            {
-                foreach (var response in operation.Responses)
-                {
-                    clientResponse.Add(new Response(
-                        BuildResponseBody(response),
-                        response.HttpResponse.IntStatusCodes.ToArray()
-                    ));
-                }
 
+            foreach (var response in operation.Responses)
+            {
+                clientResponse.Add(new Response(
+                    operation.IsLongRunning ? null : BuildResponseBody(response),
+                    response.HttpResponse.IntStatusCodes.ToArray()
+                ));
             }
 
             var responseType = ReduceResponses(clientResponse);
