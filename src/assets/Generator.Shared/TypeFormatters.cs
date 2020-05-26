@@ -12,6 +12,7 @@ namespace Azure.Core
 {
     internal class TypeFormatters
     {
+        private const string RoundtripZFormat = "yyyy-MM-ddTHH:mm:ss.fffffffZ";
         public static string DefaultNumberFormat { get; } = "G";
 
         public static string ToString(bool value) => value ? "true" : "false";
@@ -20,7 +21,8 @@ namespace Azure.Core
         {
             "D" => value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
             "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
-            "O" when value.Offset == TimeSpan.Zero => value.ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ", CultureInfo.InvariantCulture),
+            "O" when value.Offset == TimeSpan.Zero => value.ToString(RoundtripZFormat, CultureInfo.InvariantCulture),
+            "o" when value.Offset == TimeSpan.Zero => value.ToString(RoundtripZFormat, CultureInfo.InvariantCulture),
             _ => value.ToString(format, CultureInfo.InvariantCulture)
         };
 
