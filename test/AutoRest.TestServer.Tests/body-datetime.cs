@@ -69,7 +69,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/391")]
         public Task PutDateTimeMaxUtc7MS() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("9999-12-31T23:59:59.9999999Z");

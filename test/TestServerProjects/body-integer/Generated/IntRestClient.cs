@@ -601,7 +601,7 @@ namespace body_integer
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             using var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStringValue(intBody, "U");
+            content.JsonWriter.WriteNumberValue(intBody, "U");
             request.Content = content;
             return message;
         }

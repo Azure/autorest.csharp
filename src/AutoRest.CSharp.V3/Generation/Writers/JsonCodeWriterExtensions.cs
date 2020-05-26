@@ -160,7 +160,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                  frameworkType == typeof(DateTime) ||
                                  frameworkType == typeof(TimeSpan))
                         {
-                            writer.AppendRaw("WriteStringValue");
+                            if (valueSerialization.Format == SerializationFormat.DateTime_Unix)
+                            {
+                                writer.AppendRaw("WriteNumberValue");
+                            }
+                            else
+                            {
+                                writer.AppendRaw("WriteStringValue");
+                            }
                             writeFormat = true;
                         }
 

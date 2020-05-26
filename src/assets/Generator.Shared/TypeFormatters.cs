@@ -4,6 +4,7 @@
 #nullable enable
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Xml;
 
@@ -19,6 +20,7 @@ namespace Azure.Core
         {
             "D" => value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
             "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
+            "O" when value.Offset == TimeSpan.Zero => value.ToString("yyyy-MM-ddTHH:mm:ss.fffffffZ", CultureInfo.InvariantCulture),
             _ => value.ToString(format, CultureInfo.InvariantCulture)
         };
 
@@ -107,8 +109,14 @@ namespace Azure.Core
             }
         }
 
-        public static DateTimeOffset ParseDateTimeOffset(string value) =>
-            DateTimeOffset.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+        public static DateTimeOffset ParseDateTimeOffset(string value, string format)
+        {
+            return format switch
+            {
+                "U" => DateTimeOffset.FromUnixTimeSeconds(long.Parse(value)),
+                _ => DateTimeOffset.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
+            };
+        }
 
         public static TimeSpan ParseTimeSpan(string value, string format) => format switch
         {
