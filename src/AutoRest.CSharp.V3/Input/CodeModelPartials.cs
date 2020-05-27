@@ -28,7 +28,6 @@ namespace AutoRest.CSharp.V3.Input
             {
                 Debug.Assert(IsLongRunning);
 
-
                 foreach (var operationResponse in Responses)
                 {
                     if (operationResponse.Protocol.Http is HttpResponse operationHttpResponse &&

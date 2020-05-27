@@ -1,4 +1,4 @@
-# Azure.Storage.Management
+# Azure.Management.Storage
 
 ### AutoRest Configuration
 > see https://aka.ms/autorest
