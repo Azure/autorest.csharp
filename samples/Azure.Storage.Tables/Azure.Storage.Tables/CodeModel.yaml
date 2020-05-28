@@ -1695,7 +1695,7 @@ schemas: !<!Schemas>
         - json
         - xml
       usage:
-        - output
+        - exception
       language: !<!Languages> 
         default:
           name: StorageError

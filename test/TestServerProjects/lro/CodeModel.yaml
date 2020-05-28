@@ -2007,7 +2007,7 @@ schemas: !<!Schemas>
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       extensions:
         x-ms-external: true
       language: !<!Languages> 

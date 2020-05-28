@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    public partial class AnimalNotFound
+    internal partial class AnimalNotFound
     {
         internal static AnimalNotFound DeserializeAnimalNotFound(JsonElement element)
         {

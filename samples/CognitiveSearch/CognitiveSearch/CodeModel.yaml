@@ -8811,7 +8811,7 @@ schemas: !<!Schemas>
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       language: !<!Languages> 
         default:
           name: SearchError
@@ -10066,7 +10066,7 @@ schemas: !<!Schemas>
       serializationFormats:
         - json
       usage:
-        - output
+        - exception
       language: !<!Languages> 
         default:
           name: SearchServiceError

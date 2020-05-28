@@ -8,7 +8,7 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The PetActionError. </summary>
-    public partial class PetActionError
+    internal partial class PetActionError
     {
         /// <summary> Initializes a new instance of PetActionError. </summary>
         internal PetActionError()

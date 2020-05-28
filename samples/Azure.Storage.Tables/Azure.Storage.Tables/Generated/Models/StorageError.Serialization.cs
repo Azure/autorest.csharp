@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class StorageError
+    internal partial class StorageError
     {
         internal static StorageError DeserializeStorageError(JsonElement element)
         {

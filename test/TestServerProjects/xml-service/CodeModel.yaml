@@ -1398,7 +1398,7 @@ schemas: !<!Schemas>
       serializationFormats:
         - xml
       usage:
-        - output
+        - exception
       language: !<!Languages> 
         default:
           name: Error

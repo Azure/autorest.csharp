@@ -8,7 +8,7 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The NotFoundErrorBase. </summary>
-    public partial class NotFoundErrorBase : BaseError
+    internal partial class NotFoundErrorBase : BaseError
     {
         /// <summary> Initializes a new instance of NotFoundErrorBase. </summary>
         internal NotFoundErrorBase()

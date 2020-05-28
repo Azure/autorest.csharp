@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -40,8 +39,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
 
-            var hasUsage = objectSchema.Usage.Any();
-
+            var hasUsage = objectSchema.Usage.Any() && !objectSchema.IsExceptionOnly;
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
             DefaultName = objectSchema.CSharpName();
@@ -259,7 +257,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
 
         public bool IncludeSerializer => _objectSchema.IsInput;
-        public bool IncludeDeserializer => _objectSchema.IsOutput;
+        public bool IncludeDeserializer => _objectSchema.IsOutput || _objectSchema.IsException;
 
         public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
@@ -392,8 +390,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                     var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
                     SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+                    bool isNotInput = (objectSchema.IsOutput || objectSchema.IsException) && !objectSchema.IsInput;
                     bool isReadOnly = IsStruct ||
-                                      objectSchema.IsOutputOnly ||
+                                      isNotInput ||
                                       property.ReadOnly == true ||
                                       // Required properties of input objects should be readonly
                                       (property.Required == true && objectSchema.IsInputOnly);

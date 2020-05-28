@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class CloudErrorBody
+    internal partial class CloudErrorBody
     {
         internal static CloudErrorBody DeserializeCloudErrorBody(JsonElement element)
         {

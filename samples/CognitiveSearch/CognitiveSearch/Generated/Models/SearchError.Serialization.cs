@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SearchError
+    internal partial class SearchError
     {
         internal static SearchError DeserializeSearchError(JsonElement element)
         {

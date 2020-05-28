@@ -8,7 +8,7 @@
 namespace azure_special_properties.Models
 {
     /// <summary> The Error. </summary>
-    public partial class Error
+    internal partial class Error
     {
         /// <summary> Initializes a new instance of Error. </summary>
         internal Error()

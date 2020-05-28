@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    public partial class LinkNotFound
+    internal partial class LinkNotFound
     {
         internal static LinkNotFound DeserializeLinkNotFound(JsonElement element)
         {

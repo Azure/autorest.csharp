@@ -8,7 +8,7 @@
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> The StorageError. </summary>
-    public partial class StorageError
+    internal partial class StorageError
     {
         /// <summary> Initializes a new instance of StorageError. </summary>
         internal StorageError()

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace azure_parameter_grouping.Models
 {
-    public partial class Error
+    internal partial class Error
     {
         internal static Error DeserializeError(JsonElement element)
         {

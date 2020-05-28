@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    public partial class BaseError
+    internal partial class BaseError
     {
         internal static BaseError DeserializeBaseError(JsonElement element)
         {

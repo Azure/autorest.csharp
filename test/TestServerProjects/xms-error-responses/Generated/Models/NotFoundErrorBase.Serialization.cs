@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    public partial class NotFoundErrorBase
+    internal partial class NotFoundErrorBase
     {
         internal static NotFoundErrorBase DeserializeNotFoundErrorBase(JsonElement element)
         {

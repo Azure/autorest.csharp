@@ -8,7 +8,7 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The PetHungryOrThirstyError. </summary>
-    public partial class PetHungryOrThirstyError : PetSadError
+    internal partial class PetHungryOrThirstyError : PetSadError
     {
         /// <summary> Initializes a new instance of PetHungryOrThirstyError. </summary>
         internal PetHungryOrThirstyError()

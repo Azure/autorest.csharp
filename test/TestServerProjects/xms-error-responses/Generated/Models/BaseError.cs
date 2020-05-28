@@ -8,7 +8,7 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The BaseError. </summary>
-    public partial class BaseError
+    internal partial class BaseError
     {
         /// <summary> Initializes a new instance of BaseError. </summary>
         internal BaseError()

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    public partial class PetHungryOrThirstyError
+    internal partial class PetHungryOrThirstyError
     {
         internal static PetHungryOrThirstyError DeserializePetHungryOrThirstyError(JsonElement element)
         {

@@ -8,7 +8,7 @@
 namespace lro.Models
 {
     /// <summary> The CloudError. </summary>
-    public partial class CloudError
+    internal partial class CloudError
     {
         /// <summary> Initializes a new instance of CloudError. </summary>
         internal CloudError()

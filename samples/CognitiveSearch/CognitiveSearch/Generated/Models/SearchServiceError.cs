@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace CognitiveSearch.Models
 {
     /// <summary> Describes an error condition for the Azure Cognitive Search API. </summary>
-    public partial class SearchServiceError
+    internal partial class SearchServiceError
     {
         /// <summary> Initializes a new instance of SearchServiceError. </summary>
         /// <param name="message"> A human-readable representation of the error. </param>

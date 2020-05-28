@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Error
+    internal partial class Error
     {
         internal static Error DeserializeError(XElement element)
         {

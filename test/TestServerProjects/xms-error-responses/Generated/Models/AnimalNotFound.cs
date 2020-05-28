@@ -8,7 +8,7 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The AnimalNotFound. </summary>
-    public partial class AnimalNotFound : NotFoundErrorBase
+    internal partial class AnimalNotFound : NotFoundErrorBase
     {
         /// <summary> Initializes a new instance of AnimalNotFound. </summary>
         internal AnimalNotFound()

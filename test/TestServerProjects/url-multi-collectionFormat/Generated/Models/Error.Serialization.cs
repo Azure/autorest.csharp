@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace url_multi_collectionFormat.Models
 {
-    public partial class Error
+    internal partial class Error
     {
         internal static Error DeserializeError(JsonElement element)
         {
