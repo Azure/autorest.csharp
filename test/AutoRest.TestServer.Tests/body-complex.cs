@@ -1024,7 +1024,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void OutputSchemaPropertiesReadonly()
         {
-            Assert.Null(typeof(Error).GetProperty(nameof(Error.Message)).SetMethod);
+            Assert.Null(typeof(DotSalmon).GetProperty(nameof(DotSalmon.Species)).SetMethod);
         }
 
         [Test]
@@ -1046,9 +1046,39 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void OutputSchemaCtorIsInternal()
         {
-            Assert.NotNull(typeof(Error)
+            Assert.NotNull(typeof(DotSalmon)
                 .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
                 .SingleOrDefault(c => c.GetParameters().Length == 0));
+        }
+
+        //https://stackoverflow.com/questions/4971213/how-to-use-reflection-to-determine-if-a-class-is-internal/
+        private static bool IsInternal(Type t) => !t.IsVisible
+           && !t.IsPublic
+           && t.IsNotPublic
+           && !t.IsNested
+           && !t.IsNestedPublic
+           && !t.IsNestedFamily
+           && !t.IsNestedPrivate
+           && !t.IsNestedAssembly
+           && !t.IsNestedFamORAssem
+           && !t.IsNestedFamANDAssem;
+
+        [Test]
+        public void ExceptionSchemaIsInternal()
+        {
+            Assert.True(IsInternal(typeof(Error)));
+        }
+
+        [Test]
+        public void ExceptionSchemaPropertiesReadonly()
+        {
+            Assert.Null(typeof(Error).GetProperty(nameof(Error.Message)).SetMethod);
+        }
+
+        [Test]
+        public void ExceptionSchemaHasDeserializer()
+        {
+            Assert.NotNull(typeof(Error).GetMethods(BindingFlags.Static | BindingFlags.NonPublic).Single(mi => mi.Name == "DeserializeError"));
         }
     }
 }
