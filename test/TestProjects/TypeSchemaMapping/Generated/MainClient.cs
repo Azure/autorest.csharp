@@ -104,6 +104,40 @@ namespace CustomNamespace
             }
         }
 
+        /// <param name="body"> The ModelWithArrayOfEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ModelWithArrayOfEnum>> OperationModelWithArrayOfEnumAsync(ModelWithArrayOfEnum body = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationModelWithArrayOfEnum");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationModelWithArrayOfEnumAsync(body, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="body"> The ModelWithArrayOfEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ModelWithArrayOfEnum> OperationModelWithArrayOfEnum(ModelWithArrayOfEnum body = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationModelWithArrayOfEnum");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationModelWithArrayOfEnum(body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)
