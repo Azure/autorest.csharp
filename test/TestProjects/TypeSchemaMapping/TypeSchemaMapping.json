@@ -82,6 +82,28 @@
           }
         }
       }
+    },
+    "/OperationModelWithArrayOfEnum": {
+      "patch": {
+        "operationId": "OperationModelWithArrayOfEnum",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModelWithArrayOfEnum"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ModelWithArrayOfEnum"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -197,6 +219,20 @@
       "type": "object",
       "properties": {
         "ArrayOfEnum": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B"
+            ],
+            "x-ms-enum": {
+              "name": "EnumForModelWithArrayOfEnum",
+              "modelAsString": false
+            }
+          }
+        },
+        "ArrayOfEnumCustomizedToNullable": {
           "type": "array",
           "items": {
             "type": "string",

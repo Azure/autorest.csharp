@@ -14,5 +14,6 @@ namespace TypeSchemaMapping.Models
     internal partial class ModelWithArrayOfEnum
     {
         public IReadOnlyList<EnumForModelWithArrayOfEnum> ArrayOfEnum { get; }
+        public IReadOnlyList<EnumForModelWithArrayOfEnum?> ArrayOfEnumCustomizedToNullable { get; }
     }
 }

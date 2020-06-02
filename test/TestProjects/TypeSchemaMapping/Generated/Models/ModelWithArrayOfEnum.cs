@@ -13,15 +13,17 @@ namespace TypeSchemaMapping.Models
     internal partial class ModelWithArrayOfEnum
     {
         /// <summary> Initializes a new instance of ModelWithArrayOfEnum. </summary>
-        internal ModelWithArrayOfEnum()
+        public ModelWithArrayOfEnum()
         {
         }
 
         /// <summary> Initializes a new instance of ModelWithArrayOfEnum. </summary>
         /// <param name="arrayOfEnum"> . </param>
-        internal ModelWithArrayOfEnum(IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum)
+        /// <param name="arrayOfEnumCustomizedToNullable"> . </param>
+        internal ModelWithArrayOfEnum(IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum, IReadOnlyList<EnumForModelWithArrayOfEnum?> arrayOfEnumCustomizedToNullable)
         {
             ArrayOfEnum = arrayOfEnum;
+            ArrayOfEnumCustomizedToNullable = arrayOfEnumCustomizedToNullable;
         }
     }
 }

@@ -43,7 +43,7 @@ schemas: !<!Schemas>
           name: SecondModelStringProperty
           description: .
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_7
+    - !<!StringSchema> &ref_8
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -166,7 +166,7 @@ schemas: !<!Schemas>
           description: Letters
       protocol: !<!Protocols> {}
   sealedChoices:
-    - !<!SealedChoiceSchema> &ref_8
+    - !<!SealedChoiceSchema> &ref_7
       choices:
         - !<!ChoiceValue> 
           value: A
@@ -191,7 +191,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_11
+    - !<!ConstantSchema> &ref_12
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -211,7 +211,7 @@ schemas: !<!Schemas>
           description: .
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_12
+    - !<!ObjectSchema> &ref_13
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -257,7 +257,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_14
+    - !<!ObjectSchema> &ref_15
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -307,7 +307,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_16
+    - !<!ObjectSchema> &ref_17
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -348,6 +348,59 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
+    - !<!ObjectSchema> &ref_19
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_9
+            type: array
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            elementType: *ref_7
+            language: !<!Languages> 
+              default:
+                name: ModelWithArrayOfEnumArrayOfEnum
+                description: Array of EnumForModelWithArrayOfEnum
+            protocol: !<!Protocols> {}
+          serializedName: ArrayOfEnum
+          language: !<!Languages> 
+            default:
+              name: arrayOfEnum
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_10
+            type: array
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            elementType: *ref_7
+            language: !<!Languages> 
+              default:
+                name: ModelWithArrayOfEnumArrayOfEnumCustomizedToNullable
+                description: Array of EnumForModelWithArrayOfEnum
+            protocol: !<!Protocols> {}
+          serializedName: ArrayOfEnumCustomizedToNullable
+          language: !<!Languages> 
+            default:
+              name: arrayOfEnumCustomizedToNullable
+              description: ''
+          protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !<!Languages> 
+        default:
+          name: ModelWithArrayOfEnum
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
     - !<!ObjectSchema> 
       type: object
       apiVersions:
@@ -355,7 +408,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: *ref_7
+          schema: *ref_8
           serializedName: ModelProperty
           language: !<!Languages> 
             default:
@@ -371,40 +424,11 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> 
-      type: object
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      properties:
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_9
-            type: array
-            apiVersions:
-              - !<!ApiVersion> 
-                version: 1.0.0
-            elementType: *ref_8
-            language: !<!Languages> 
-              default:
-                name: ModelWithArrayOfEnumArrayOfEnum
-                description: Array of EnumForModelWithArrayOfEnum
-            protocol: !<!Protocols> {}
-          serializedName: ArrayOfEnum
-          language: !<!Languages> 
-            default:
-              name: arrayOfEnum
-              description: ''
-          protocol: !<!Protocols> {}
-      language: !<!Languages> 
-        default:
-          name: ModelWithArrayOfEnum
-          description: ''
-          namespace: ''
-      protocol: !<!Protocols> {}
   arrays:
     - *ref_9
+    - *ref_10
 globalParameters:
-  - !<!Parameter> &ref_10
+  - !<!Parameter> &ref_11
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -429,12 +453,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_10
+          - *ref_11
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_11
+                schema: *ref_12
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -446,8 +470,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_13
-                schema: *ref_12
+              - !<!Parameter> &ref_14
+                schema: *ref_13
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -459,7 +483,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_13
+              - *ref_14
             language: !<!Languages> 
               default:
                 name: ''
@@ -475,7 +499,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_12
+            schema: *ref_13
             language: !<!Languages> 
               default:
                 name: ''
@@ -499,12 +523,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_10
+          - *ref_11
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_11
+                schema: *ref_12
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -516,8 +540,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_15
-                schema: *ref_14
+              - !<!Parameter> &ref_16
+                schema: *ref_15
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -529,7 +553,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_15
+              - *ref_16
             language: !<!Languages> 
               default:
                 name: ''
@@ -545,7 +569,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_14
+            schema: *ref_15
             language: !<!Languages> 
               default:
                 name: ''
@@ -567,12 +591,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_10
+          - *ref_11
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_11
+                schema: *ref_12
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -584,8 +608,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_17
-                schema: *ref_16
+              - !<!Parameter> &ref_18
+                schema: *ref_17
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -597,7 +621,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_17
+              - *ref_18
             language: !<!Languages> 
               default:
                 name: ''
@@ -613,7 +637,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_16
+            schema: *ref_17
             language: !<!Languages> 
               default:
                 name: ''
@@ -628,6 +652,74 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: OperationSecondModel
+            description: ''
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_11
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_12
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_20
+                schema: *ref_19
+                implementation: Method
+                required: false
+                language: !<!Languages> 
+                  default:
+                    name: body
+                    description: ''
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_20
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /OperationModelWithArrayOfEnum
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_19
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
+            name: OperationModelWithArrayOfEnum
             description: ''
         protocol: !<!Protocols> {}
     language: !<!Languages> 
