@@ -173,6 +173,7 @@
     },
     "EnumWithCustomNamespace": {
       "description": "Letters",
+      "type": "string",
       "enum": [
         "A",
         "B",
@@ -180,7 +181,7 @@
       ],
       "x-namespace": "Very.Custom.Namespace.From.Swagger",
       "x-accessibility": "internal"
-    }, 
+    },
     "ModelWithCustomNamespace": {
       "type": "object",
       "properties": {
@@ -191,6 +192,25 @@
       },
       "x-namespace": "Very.Custom.Namespace.From.Swagger",
       "x-accessibility": "internal"
+    },
+    "ModelWithArrayOfEnum": {
+      "type": "object",
+      "properties": {
+        "ArrayOfEnum": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B"
+            ],
+            "x-ms-enum": {
+              "name": "EnumForModelWithArrayOfEnum",
+              "modelAsString": false
+            }
+          }
+        }
+      }
     }
   }
 }

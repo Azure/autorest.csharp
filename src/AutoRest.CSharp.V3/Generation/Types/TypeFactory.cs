@@ -186,37 +186,45 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 throw new InvalidCastException($"Unexpected type {symbol}");
             }
 
-            bool nullable;
             if (namedTypeSymbol.ConstructedFrom.SpecialType == SpecialType.System_Nullable_T)
             {
-                nullable = true;
-                namedTypeSymbol = (INamedTypeSymbol)namedTypeSymbol.TypeArguments[0];
-            }
-            else
-            {
-                nullable = symbol.NullableAnnotation != NullableAnnotation.NotAnnotated;
+                type = CreateType(namedTypeSymbol.TypeArguments[0]).WithNullable(true);
+                return true;
             }
 
             var fullMetadataName = GetFullMetadataName(namedTypeSymbol);
             var fullyQualifiedName = $"{fullMetadataName}, {namedTypeSymbol.ContainingAssembly.Name}";
             var existingType = Type.GetType(fullMetadataName) ?? Type.GetType(fullyQualifiedName);
+
             if (existingType != null)
             {
                 var arguments = namedTypeSymbol.TypeArguments.Select(a => CreateType(a)).ToArray();
-                type = new CSharpType(existingType, nullable, arguments);
-                return true;
+                type = new CSharpType(existingType, false, arguments);
             }
-
-            foreach (var model in _library.Models)
+            else
             {
-                if (namedTypeSymbol.Name == model.Type.Name)
+                foreach (var model in _library.Models)
                 {
-                    type = model.Type.WithNullable(nullable);
-                    return true;
+                    if (namedTypeSymbol.Name == model.Type.Name)
+                    {
+                        type = model.Type;
+                        break;
+                    }
                 }
             }
 
-            return false;
+            if (type == null)
+            {
+                return false;
+            }
+
+            if (!type.IsValueType &&
+                symbol.NullableAnnotation != NullableAnnotation.NotAnnotated)
+            {
+                type = type.WithNullable(true);
+            }
+
+            return true;
         }
 
         private string GetFullMetadataName(ISymbol namedTypeSymbol)

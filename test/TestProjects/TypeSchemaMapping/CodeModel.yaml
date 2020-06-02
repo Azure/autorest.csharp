@@ -165,8 +165,33 @@ schemas: !<!Schemas>
           name: EnumWithCustomNamespace
           description: Letters
       protocol: !<!Protocols> {}
+  sealedChoices:
+    - !<!SealedChoiceSchema> &ref_8
+      choices:
+        - !<!ChoiceValue> 
+          value: A
+          language:
+            default:
+              name: A
+              description: ''
+        - !<!ChoiceValue> 
+          value: B
+          language:
+            default:
+              name: B
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: EnumForModelWithArrayOfEnum
+          description: ''
+      protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_9
+    - !<!ConstantSchema> &ref_11
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -186,7 +211,7 @@ schemas: !<!Schemas>
           description: .
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_10
+    - !<!ObjectSchema> &ref_12
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -232,7 +257,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_12
+    - !<!ObjectSchema> &ref_14
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -282,7 +307,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_14
+    - !<!ObjectSchema> &ref_16
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -346,8 +371,40 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
+    - !<!ObjectSchema> 
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_9
+            type: array
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            elementType: *ref_8
+            language: !<!Languages> 
+              default:
+                name: ModelWithArrayOfEnumArrayOfEnum
+                description: Array of EnumForModelWithArrayOfEnum
+            protocol: !<!Protocols> {}
+          serializedName: ArrayOfEnum
+          language: !<!Languages> 
+            default:
+              name: arrayOfEnum
+              description: ''
+          protocol: !<!Protocols> {}
+      language: !<!Languages> 
+        default:
+          name: ModelWithArrayOfEnum
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
+  arrays:
+    - *ref_9
 globalParameters:
-  - !<!Parameter> &ref_8
+  - !<!Parameter> &ref_10
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -372,82 +429,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_8
+          - *ref_10
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_9
-                implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-              - !<!Parameter> &ref_11
-                schema: *ref_10
-                implementation: Method
-                required: false
-                language: !<!Languages> 
-                  default:
-                    name: body
-                    description: ''
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_11
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
-                path: /Operation/
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !<!SchemaResponse> 
-            schema: *ref_10
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-long-running-operation: true
-        language: !<!Languages> 
-          default:
-            name: Operation
-            description: ''
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
-        apiVersions:
-          - !<!ApiVersion> 
-            version: 1.0.0
-        parameters:
-          - *ref_8
-        requests:
-          - !<!Request> 
-            parameters:
-              - !<!Parameter> 
-                schema: *ref_9
+                schema: *ref_11
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -479,8 +466,8 @@ operationGroups:
                 description: ''
             protocol: !<!Protocols> 
               http: !<!HttpWithBodyRequest> 
-                path: /OperationStruct/
-                method: patch
+                path: /Operation/
+                method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
@@ -500,9 +487,11 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-long-running-operation: true
         language: !<!Languages> 
           default:
-            name: OperationStruct
+            name: Operation
             description: ''
         protocol: !<!Protocols> {}
       - !<!Operation> 
@@ -510,12 +499,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_8
+          - *ref_10
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_9
+                schema: *ref_11
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -547,7 +536,7 @@ operationGroups:
                 description: ''
             protocol: !<!Protocols> 
               http: !<!HttpWithBodyRequest> 
-                path: /OperationSecondModel
+                path: /OperationStruct/
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -557,6 +546,74 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_14
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
+            name: OperationStruct
+            description: ''
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_10
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_11
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_17
+                schema: *ref_16
+                implementation: Method
+                required: false
+                language: !<!Languages> 
+                  default:
+                    name: body
+                    description: ''
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_17
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /OperationSecondModel
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_16
             language: !<!Languages> 
               default:
                 name: ''
