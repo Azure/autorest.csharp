@@ -274,7 +274,7 @@ namespace body_array
             uri.AppendPath("/array/empty", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -413,7 +413,7 @@ namespace body_array
             uri.AppendPath("/array/prim/boolean/tfft", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -704,7 +704,7 @@ namespace body_array
             uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -995,7 +995,7 @@ namespace body_array
             uri.AppendPath("/array/prim/long/1.-1.3.300", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -1286,7 +1286,7 @@ namespace body_array
             uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -1577,7 +1577,7 @@ namespace body_array
             uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -1882,7 +1882,7 @@ namespace body_array
             uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -2021,7 +2021,7 @@ namespace body_array
             uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -2160,7 +2160,7 @@ namespace body_array
             uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -2479,7 +2479,7 @@ namespace body_array
             uri.AppendPath("/array/prim/uuid/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -2694,7 +2694,7 @@ namespace body_array
             uri.AppendPath("/array/prim/date/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -2985,7 +2985,7 @@ namespace body_array
             uri.AppendPath("/array/prim/date-time/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -3276,7 +3276,7 @@ namespace body_array
             uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -3415,7 +3415,7 @@ namespace body_array
             uri.AppendPath("/array/prim/duration/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -3568,7 +3568,7 @@ namespace body_array
             uri.AppendPath("/array/prim/byte/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -4261,7 +4261,7 @@ namespace body_array
             uri.AppendPath("/array/complex/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -4894,7 +4894,7 @@ namespace body_array
             uri.AppendPath("/array/array/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
@@ -5532,7 +5532,7 @@ namespace body_array
             uri.AppendPath("/array/dictionary/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {

@@ -112,7 +112,7 @@ namespace body_string
             request.Headers.Add("Content-Type", "application/json");
             if (stringBody != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(stringBody);
                 request.Content = content;
             }
@@ -227,7 +227,7 @@ namespace body_string
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("");
             request.Content = content;
             return message;
@@ -339,7 +339,7 @@ namespace body_string
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
             request.Content = content;
             return message;
@@ -451,7 +451,7 @@ namespace body_string
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
             request.Content = content;
             return message;
@@ -695,7 +695,7 @@ namespace body_string
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBase64StringValue(stringBody, "U");
             request.Content = content;
             return message;

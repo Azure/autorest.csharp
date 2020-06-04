@@ -179,7 +179,7 @@ namespace Azure.Management.Storage
                 PrivateEndpoint = privateEndpoint,
                 PrivateLinkServiceConnectionState = privateLinkServiceConnectionState
             };
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;

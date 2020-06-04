@@ -46,7 +46,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -99,7 +99,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -152,7 +152,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -205,7 +205,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -382,7 +382,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -433,7 +433,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -484,7 +484,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -535,7 +535,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -588,7 +588,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -639,7 +639,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -774,7 +774,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -825,7 +825,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -876,7 +876,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -929,7 +929,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -980,7 +980,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -1157,7 +1157,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -1208,7 +1208,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -1259,7 +1259,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }

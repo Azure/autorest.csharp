@@ -161,7 +161,7 @@ namespace Azure.Storage.Tables
             }
             request.Headers.Add("DataServiceVersion", "3.0");
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(tableProperties);
             request.Content = content;
             return message;
@@ -588,7 +588,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStartObject();
                 foreach (var item in tableEntityProperties)
                 {
@@ -802,7 +802,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStartObject();
                 foreach (var item in tableEntityProperties)
                 {
@@ -1035,7 +1035,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("Content-Type", "application/xml");
             if (tableAcl != null)
             {
-                using var content = new XmlWriterContent();
+                var content = new XmlWriterContent();
                 content.XmlWriter.WriteStartElement("SignedIdentifiers");
                 foreach (var item in tableAcl)
                 {

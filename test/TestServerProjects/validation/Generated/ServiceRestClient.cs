@@ -154,7 +154,7 @@ namespace validation
             request.Headers.Add("Content-Type", "application/json");
             if (body != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(body);
                 request.Content = content;
             }
@@ -287,7 +287,7 @@ namespace validation
             request.Headers.Add("Content-Type", "application/json");
             if (body != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(body);
                 request.Content = content;
             }

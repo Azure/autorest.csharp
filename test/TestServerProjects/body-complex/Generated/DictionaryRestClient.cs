@@ -111,7 +111,7 @@ namespace body_complex
             uri.AppendPath("/complex/dictionary/typed/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
             return message;
@@ -235,7 +235,7 @@ namespace body_complex
             uri.AppendPath("/complex/dictionary/typed/empty", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
             return message;

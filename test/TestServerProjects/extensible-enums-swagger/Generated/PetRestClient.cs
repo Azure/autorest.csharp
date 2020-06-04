@@ -124,7 +124,7 @@ namespace extensible_enums_swagger
             request.Headers.Add("Content-Type", "application/json");
             if (petParam != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(petParam);
                 request.Content = content;
             }
