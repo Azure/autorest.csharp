@@ -51,7 +51,7 @@ namespace Azure.AI.FormRecognizer
             uri.AppendPath("/custom/models", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(trainRequest);
             request.Content = content;
             return message;
@@ -311,7 +311,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Content-Type", "application/json");
             if (fileStream != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(fileStream);
                 request.Content = content;
             }
@@ -441,7 +441,7 @@ namespace Azure.AI.FormRecognizer
             uri.AppendPath("/copy", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(copyRequest);
             request.Content = content;
             return message;
@@ -716,7 +716,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Content-Type", "application/json");
             if (fileStream != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(fileStream);
                 request.Content = content;
             }
@@ -899,7 +899,7 @@ namespace Azure.AI.FormRecognizer
             request.Headers.Add("Content-Type", "application/json");
             if (fileStream != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(fileStream);
                 request.Content = content;
             }

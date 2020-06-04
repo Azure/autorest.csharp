@@ -96,7 +96,7 @@ namespace body_boolean
             uri.AppendPath("/bool/true", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;
@@ -194,7 +194,7 @@ namespace body_boolean
             uri.AppendPath("/bool/false", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(false);
             request.Content = content;
             return message;

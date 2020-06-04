@@ -111,7 +111,7 @@ namespace multiple_inheritance
             uri.AppendPath("/multipleInheritance/horse", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(horse);
             request.Content = content;
             return message;
@@ -259,7 +259,7 @@ namespace multiple_inheritance
             uri.AppendPath("/multipleInheritance/pet", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(pet);
             request.Content = content;
             return message;
@@ -407,7 +407,7 @@ namespace multiple_inheritance
             uri.AppendPath("/multipleInheritance/feline", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(feline);
             request.Content = content;
             return message;
@@ -555,7 +555,7 @@ namespace multiple_inheritance
             uri.AppendPath("/multipleInheritance/cat", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(cat);
             request.Content = content;
             return message;
@@ -703,7 +703,7 @@ namespace multiple_inheritance
             uri.AppendPath("/multipleInheritance/kitten", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(kitten);
             request.Content = content;
             return message;

@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     var content = new CodeWriterDeclaration("content");
 
-                    writer.Line($"using var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
+                    writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
                     writer.ToSerializeCall(
                         jsonSerialization,
                         valueDelegate,
@@ -235,7 +235,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     var content = new CodeWriterDeclaration("content");
 
-                    writer.Line($"using var {content:D} = new {typeof(XmlWriterContent)}();");
+                    writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
                     writer.ToSerializeCall(
                         xmlSerialization,
                         valueDelegate,

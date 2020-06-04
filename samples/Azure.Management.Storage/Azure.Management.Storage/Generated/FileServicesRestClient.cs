@@ -168,7 +168,7 @@ namespace Azure.Management.Storage
                 Cors = cors,
                 ShareDeleteRetentionPolicy = shareDeleteRetentionPolicy
             };
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;

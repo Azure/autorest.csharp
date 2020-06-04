@@ -252,7 +252,7 @@ namespace body_date
             uri.AppendPath("/date/max", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(dateBody, "D");
             request.Content = content;
             return message;
@@ -352,7 +352,7 @@ namespace body_date
             uri.AppendPath("/date/min", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(dateBody, "D");
             request.Content = content;
             return message;

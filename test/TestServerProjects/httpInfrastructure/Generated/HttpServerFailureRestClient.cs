@@ -119,7 +119,7 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/server/505", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;
@@ -161,7 +161,7 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/server/505", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;

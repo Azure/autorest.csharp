@@ -45,7 +45,7 @@ namespace ModelShapes
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(value);
             request.Content = content;
             return message;
@@ -101,7 +101,7 @@ namespace ModelShapes
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(value);
             request.Content = content;
             return message;

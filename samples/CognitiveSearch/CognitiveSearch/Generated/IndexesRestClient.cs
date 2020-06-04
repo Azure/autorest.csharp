@@ -61,7 +61,7 @@ namespace CognitiveSearch
                 request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(index);
             request.Content = content;
             return message;
@@ -244,7 +244,7 @@ namespace CognitiveSearch
             }
             request.Headers.Add("Prefer", "return=representation");
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(index);
             request.Content = content;
             return message;
@@ -600,7 +600,7 @@ namespace CognitiveSearch
                 request0.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
             request0.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(request);
             request0.Content = content;
             return message;

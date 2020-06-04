@@ -86,7 +86,7 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/500", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;
@@ -132,7 +132,7 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/500", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;
@@ -272,7 +272,7 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/503", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;
@@ -318,7 +318,7 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/503", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;
@@ -364,7 +364,7 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/504", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;
@@ -410,7 +410,7 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/504", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
             return message;

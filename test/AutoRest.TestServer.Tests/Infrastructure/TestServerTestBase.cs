@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Microsoft.AspNetCore.Http;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
@@ -99,15 +100,16 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             try
             {
+                var transport = new HttpClientTransport(server.Server.Client);
                 var testClientOptions = new TestClientOptions
                 {
-                    Transport = new HttpClientTransport(server.Server.Client),
-                    Retry = { Delay = TimeSpan.FromMilliseconds(50) },
+                    Transport = new FailureInjectingTransport(transport),
+                    Retry = { Delay = TimeSpan.FromMilliseconds(1) },
                 };
                 testClientOptions.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
 
                 var pipeline = useSimplePipeline
-                    ? new HttpPipeline(new HttpClientTransport(server.Server.Client))
+                    ? new HttpPipeline(transport)
                     : HttpPipelineBuilder.Build(testClientOptions);
 
                 await test(server.Host, pipeline);

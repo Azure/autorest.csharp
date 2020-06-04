@@ -52,7 +52,7 @@ namespace NameConflicts
             uri0.AppendQuery("clientDiagnostics", clientDiagnostics, true);
             request0.Uri = uri0;
             request0.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(@class);
             request0.Content = content;
             return message0;
@@ -250,7 +250,7 @@ namespace NameConflicts
             request.Headers.Add("Content-Type", "application/json");
             if (stringBody != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(stringBody);
                 request.Content = content;
             }
@@ -301,7 +301,7 @@ namespace NameConflicts
             request.Headers.Add("Content-Type", "application/json");
             if (httpMessage != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(httpMessage);
                 request.Content = content;
             }
@@ -374,7 +374,7 @@ namespace NameConflicts
             request0.Headers.Add("Content-Type", "application/json");
             if (request != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(request);
                 request0.Content = content;
             }
@@ -447,7 +447,7 @@ namespace NameConflicts
             request.Headers.Add("Content-Type", "application/json");
             if (response != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(response);
                 request.Content = content;
             }

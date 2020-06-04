@@ -45,7 +45,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/integer/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(bodyParameter);
             request.Content = content;
             return message;
@@ -95,7 +95,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteNumberValue(bodyParameter.Value);
                 request.Content = content;
             }
@@ -144,7 +144,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/integer/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(bodyParameter);
             request.Content = content;
             return message;
@@ -204,7 +204,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(bodyParameter);
                 request.Content = content;
             }
@@ -346,7 +346,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/string/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(bodyParameter);
             request.Content = content;
             return message;
@@ -406,7 +406,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(bodyParameter);
                 request.Content = content;
             }
@@ -455,7 +455,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/string/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(bodyParameter);
             request.Content = content;
             return message;
@@ -515,7 +515,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(bodyParameter);
                 request.Content = content;
             }
@@ -667,7 +667,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/class/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(bodyParameter);
             request.Content = content;
             return message;
@@ -727,7 +727,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(bodyParameter);
                 request.Content = content;
             }
@@ -776,7 +776,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/class/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(bodyParameter);
             request.Content = content;
             return message;
@@ -836,7 +836,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(bodyParameter);
                 request.Content = content;
             }
@@ -885,7 +885,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/array/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in bodyParameter)
             {
@@ -950,7 +950,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStartArray();
                 foreach (var item in bodyParameter)
                 {
@@ -1004,7 +1004,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/array/property", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(bodyParameter);
             request.Content = content;
             return message;
@@ -1064,7 +1064,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(bodyParameter);
                 request.Content = content;
             }
