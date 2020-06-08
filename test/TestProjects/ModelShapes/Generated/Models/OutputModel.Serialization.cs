@@ -23,6 +23,8 @@ namespace ModelShapes.Models
             int? nonRequiredInt = default;
             IReadOnlyList<string> nonRequiredStringList = default;
             IReadOnlyList<int> nonRequiredIntList = default;
+            IReadOnlyList<string> requiredNullableStringList = default;
+            IReadOnlyList<int> requiredNullableIntList = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("RequiredString"))
@@ -115,8 +117,43 @@ namespace ModelShapes.Models
                     nonRequiredIntList = array;
                     continue;
                 }
+                if (property.NameEquals("RequiredNullableStringList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetString());
+                        }
+                    }
+                    requiredNullableStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("RequiredNullableIntList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredNullableIntList = array;
+                    continue;
+                }
             }
-            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList);
+            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableStringList, requiredNullableIntList);
         }
     }
 }

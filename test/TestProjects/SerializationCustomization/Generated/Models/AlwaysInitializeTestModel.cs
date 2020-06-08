@@ -35,7 +35,7 @@ namespace SerializationCustomization.Models
 
             AlwaysInitializeList = new List<Item>();
             RequiredList = requiredList.ToArray();
-            RequiredAlwaysInitializeList = requiredAlwaysInitializeList.ToArray();
+            RequiredAlwaysInitializeList = requiredAlwaysInitializeList?.ToArray();
             RequiredAlwaysInitializeObject = requiredAlwaysInitializeObject;
             AlwaysInitializeObject = new Item();
         }

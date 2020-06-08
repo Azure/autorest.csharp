@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                         property.Description,
                         TypeFactory.GetInputType(property.Declaration.Type),
                         defaultParameterValue,
-                        true
+                        property.SchemaProperty?.Nullable != true
                     );
 
                     defaultCtorParameters.Add(defaultCtorParameter);
@@ -408,7 +408,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                         _typeFactory);
                     var type = memberDeclaration.Type;
 
-                    bool isAlwaysInitializeType = TypeFactory.IsAlwaysInitializeType(type) && property.Required == true;
+                    bool isAlwaysInitializeType = TypeFactory.IsAlwaysInitializeType(type) &&
+                                                  property.Required == true &&
+                                                  property.Nullable != true;
 
                     bool isNotInput = !objectSchema.IsInput;
                     bool isReadOnly = IsStruct ||
