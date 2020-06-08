@@ -75,7 +75,7 @@ namespace ModelShapes.Models
             }
             else
             {
-                writer.WriteNullValue();
+                writer.WriteNull("RequiredNullableStringList");
             }
             if (RequiredNullableIntList != null)
             {
@@ -89,7 +89,7 @@ namespace ModelShapes.Models
             }
             else
             {
-                writer.WriteNullValue();
+                writer.WriteNull("RequiredNullableIntList");
             }
             writer.WriteEndObject();
         }

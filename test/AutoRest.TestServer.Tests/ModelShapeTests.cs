@@ -120,5 +120,29 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(JsonValueKind.Array, element.GetProperty("RequiredNullableIntList").ValueKind);
             Assert.AreEqual(0, element.GetProperty("RequiredNullableIntList").GetArrayLength());
         }
+
+        [Test]
+        public void NullablePropertiesDeserializedAsNullsWithUndefined()
+        {
+            var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{}").RootElement);
+            Assert.Null(model.RequiredNullableIntList);
+            Assert.Null(model.RequiredNullableStringList);
+        }
+
+        [Test]
+        public void NullablePropertiesDeserializedAsNullsWithNulls()
+        {
+            var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredNullableIntList\":null, \"RequiredNullableStringList\": null}").RootElement);
+            Assert.Null(model.RequiredNullableIntList);
+            Assert.Null(model.RequiredNullableStringList);
+        }
+
+        [Test]
+        public void NullablePropertiesDeserializedAsValues()
+        {
+            var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredNullableIntList\":[1,2,3], \"RequiredNullableStringList\": [\"a\", \"b\"]}").RootElement);
+            Assert.AreEqual(new[] {1, 2, 3}, model.RequiredNullableIntList);
+            Assert.AreEqual(new[] {"a", "b"}, model.RequiredNullableStringList);
+        }
     }
 }

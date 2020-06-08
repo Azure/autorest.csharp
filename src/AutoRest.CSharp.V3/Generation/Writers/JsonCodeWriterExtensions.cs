@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             using (writer.Scope($"else"))
                             {
-                                writer.Line($"{writerName}.WriteNullValue();");
+                                writer.Line($"{writerName}.WriteNull({property.Name:L});");
                             }
                         }
                     }
