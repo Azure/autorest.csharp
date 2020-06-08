@@ -25,8 +25,8 @@ namespace lro.Models
         }
 
         /// <summary> The error code for an operation failure. </summary>
-        public int? Code { get; set; }
+        public int? Code { get; }
         /// <summary> The detailed arror message. </summary>
-        public string Message { get; set; }
+        public string Message { get; }
     }
 }

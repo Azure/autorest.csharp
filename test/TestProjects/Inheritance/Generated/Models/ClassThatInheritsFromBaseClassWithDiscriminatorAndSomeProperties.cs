@@ -28,7 +28,7 @@ namespace Inheritance.Models
             DiscriminatorProperty = discriminatorProperty ?? "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties";
         }
 
-        public string SomeProperty { get; set; }
-        public string SomeOtherProperty { get; set; }
+        public string SomeProperty { get; }
+        public string SomeOtherProperty { get; }
     }
 }

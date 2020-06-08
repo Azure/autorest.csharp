@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
         /// <param name="dataSources"> The datasources in the Search service. </param>
         internal ListDataSourcesResult(IReadOnlyList<DataSource> dataSources)
         {
-            DataSources = dataSources;
+            DataSources = dataSources ?? new List<DataSource>();
         }
 
         /// <summary> The datasources in the Search service. </summary>

@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
             Assert.IsInstanceOf<Item>(inputClass.AlwaysInitializeObject);
             Assert.IsInstanceOf<List<Item>>(inputClass.AlwaysInitializeList);
             Assert.IsInstanceOf<List<Item>>(inputClass.RequiredAlwaysInitializeList);
-            Assert.Null(inputClass.RequiredList);
+            Assert.NotNull(inputClass.RequiredList);
             Assert.Null(inputClass.DefaultList);
             Assert.Null(inputClass.DefaultObject);
         }
@@ -49,7 +49,7 @@ namespace AutoRest.TestServer.Tests
             Assert.IsInstanceOf<Item>(inputClass.AlwaysInitializeObject);
             Assert.IsInstanceOf<List<Item>>(inputClass.AlwaysInitializeList);
             Assert.IsInstanceOf<List<Item>>(inputClass.RequiredAlwaysInitializeList);
-            Assert.Null(inputClass.RequiredList);
+            Assert.NotNull(inputClass.RequiredList);
             Assert.Null(inputClass.DefaultList);
             Assert.Null(inputClass.DefaultObject);
         }

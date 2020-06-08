@@ -53,8 +53,8 @@ namespace ModelShapes.Models
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            RequiredStringList = requiredStringList;
-            RequiredIntList = requiredIntList;
+            RequiredStringList = requiredStringList ?? new List<string>();
+            RequiredIntList = requiredIntList ?? new List<int>();
             NonRequiredString = nonRequiredString;
             NonRequiredInt = nonRequiredInt;
             NonRequiredStringList = nonRequiredStringList;

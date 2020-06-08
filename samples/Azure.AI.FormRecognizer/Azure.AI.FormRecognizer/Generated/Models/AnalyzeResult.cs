@@ -41,7 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors)
         {
             Version = version;
-            ReadResults = readResults;
+            ReadResults = readResults ?? new List<ReadResult>();
             PageResults = pageResults;
             DocumentResults = documentResults;
             Errors = errors;

@@ -390,8 +390,29 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                     var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
                     SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
-                    bool isNotInput = (objectSchema.IsOutput || objectSchema.IsException) && !objectSchema.IsInput;
+
+                    var accessibility = property.IsDiscriminator == true ? "internal" : "public";
+
+                    var defaultType = _typeFactory.CreateType(property.Schema, property.IsNullable());
+
+                    if (!_objectSchema.IsInput)
+                    {
+                        defaultType = TypeFactory.GetOutputType(defaultType);
+                    }
+
+                    var memberDeclaration = BuilderHelpers.CreateMemberDeclaration(
+                        name,
+                        defaultType,
+                        accessibility,
+                        memberMapping?.ExistingMember,
+                        _typeFactory);
+                    var type = memberDeclaration.Type;
+
+                    bool isAlwaysInitializeType = TypeFactory.IsAlwaysInitializeType(type) && property.Required == true;
+
+                    bool isNotInput = !objectSchema.IsInput;
                     bool isReadOnly = IsStruct ||
+                                      isAlwaysInitializeType ||
                                       isNotInput ||
                                       property.ReadOnly == true ||
                                       // Required properties of input objects should be readonly
@@ -403,21 +424,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                         isReadOnly = false;
                     }
 
-                    CSharpType type = _typeFactory.CreateType(
-                        property.Schema,
-                        property.IsNullable());
-
-                    if (!_objectSchema.IsInput)
-                    {
-                        type = TypeFactory.GetOutputType(type);
-                    }
-
-                    var accessibility = property.IsDiscriminator == true ? "internal" : "public";
-
-                    CSharpType? initializeWithType = memberMapping?.Initialize == true ? TypeFactory.GetImplementationType(type) : null;
+                    CSharpType? initializeWithType = (isAlwaysInitializeType || memberMapping?.Initialize == true) ? TypeFactory.GetImplementationType(type) : null;
 
                     yield return new ObjectTypeProperty(
-                        BuilderHelpers.CreateMemberDeclaration(name, type, accessibility, memberMapping?.ExistingMember, _typeFactory),
+                        memberDeclaration,
                         BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                         isReadOnly,
                         property,

@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
         /// <param name="skillsets"> The skillsets defined in the Search service. </param>
         internal ListSkillsetsResult(IReadOnlyList<Skillset> skillsets)
         {
-            Skillsets = skillsets;
+            Skillsets = skillsets ?? new List<Skillset>();
         }
 
         /// <summary> The skillsets defined in the Search service. </summary>

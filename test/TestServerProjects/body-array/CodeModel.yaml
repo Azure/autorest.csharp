@@ -243,6 +243,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_32
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -251,6 +252,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_33
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -259,6 +261,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_34
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -267,6 +270,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_35
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -275,6 +279,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_36
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -283,6 +288,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_37
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString

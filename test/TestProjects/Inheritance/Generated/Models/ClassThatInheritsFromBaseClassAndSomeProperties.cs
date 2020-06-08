@@ -25,7 +25,7 @@ namespace Inheritance.Models
             SomeOtherProperty = someOtherProperty;
         }
 
-        public string SomeProperty { get; set; }
-        public string SomeOtherProperty { get; set; }
+        public string SomeProperty { get; }
+        public string SomeOtherProperty { get; }
     }
 }

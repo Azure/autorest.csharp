@@ -35,5 +35,15 @@ namespace AutoRest.TestServer.Tests
             Assert.Null(requiredInt.SetMethod);
             Assert.Null(requiredString.SetMethod);
         }
+
+        [Test]
+        public void RequiredListsAreReadOnly()
+        {
+            var requiredIntList = TypeAsserts.HasProperty(typeof(InputModel), "RequiredIntList", BindingFlags.Public | BindingFlags.Instance);
+            var requiredStringList = TypeAsserts.HasProperty(typeof(InputModel), "RequiredStringList", BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.Null(requiredIntList.SetMethod);
+            Assert.Null(requiredStringList.SetMethod);
+        }
     }
 }

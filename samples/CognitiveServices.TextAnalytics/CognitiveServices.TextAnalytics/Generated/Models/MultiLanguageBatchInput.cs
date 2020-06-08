@@ -30,7 +30,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
         internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents)
         {
-            Documents = documents;
+            Documents = documents ?? new List<MultiLanguageInput>();
         }
 
         /// <summary> The set of documents to process as part of this batch. </summary>

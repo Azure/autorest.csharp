@@ -53,8 +53,8 @@ namespace ModelShapes.Models
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            RequiredStringList = requiredStringList;
-            RequiredIntList = requiredIntList;
+            RequiredStringList = requiredStringList ?? new List<string>();
+            RequiredIntList = requiredIntList ?? new List<int>();
             NonRequiredString = nonRequiredString;
             NonRequiredInt = nonRequiredInt;
             NonRequiredStringList = nonRequiredStringList;
@@ -63,8 +63,8 @@ namespace ModelShapes.Models
 
         public string RequiredString { get; set; }
         public int RequiredInt { get; set; }
-        public IList<string> RequiredStringList { get; set; }
-        public IList<int> RequiredIntList { get; set; }
+        public IList<string> RequiredStringList { get; }
+        public IList<int> RequiredIntList { get; }
         public string NonRequiredString { get; set; }
         public int? NonRequiredInt { get; set; }
         public IList<string> NonRequiredStringList { get; set; }

@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
         /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
         internal ListSynonymMapsResult(IReadOnlyList<SynonymMap> synonymMaps)
         {
-            SynonymMaps = synonymMaps;
+            SynonymMaps = synonymMaps ?? new List<SynonymMap>();
         }
 
         /// <summary> The synonym maps in the Search service. </summary>

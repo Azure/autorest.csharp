@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
         /// <param name="indexes"> The indexes in the Search service. </param>
         internal ListIndexesResult(IReadOnlyList<Index> indexes)
         {
-            Indexes = indexes;
+            Indexes = indexes ?? new List<Index>();
         }
 
         /// <summary> The indexes in the Search service. </summary>

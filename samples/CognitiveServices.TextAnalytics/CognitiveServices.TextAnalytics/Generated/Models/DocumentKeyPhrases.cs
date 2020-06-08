@@ -39,7 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentKeyPhrases(string id, IReadOnlyList<string> keyPhrases, DocumentStatistics statistics)
         {
             Id = id;
-            KeyPhrases = keyPhrases;
+            KeyPhrases = keyPhrases ?? new List<string>();
             Statistics = statistics;
         }
 

@@ -2362,6 +2362,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_209
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: ResourceTags
@@ -2370,6 +2371,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_219
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: TagsObjectTags

@@ -45,7 +45,7 @@ namespace Azure.AI.FormRecognizer.Models
         {
             DocumentName = documentName;
             Pages = pages;
-            Errors = errors;
+            Errors = errors ?? new List<ErrorInformation>();
             Status = status;
         }
 
