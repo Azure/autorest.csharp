@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
                 .Select(h => h.First())
                 .ToArray();
 
-            if (!httpResponseHeaders.Any() || operation.IsLongRunning)
+            if (!httpResponseHeaders.Any())
             {
                 return null;
             }
