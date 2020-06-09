@@ -45,7 +45,7 @@ namespace SerializationCustomization.Models
             }
             else
             {
-                writer.WriteNullValue();
+                writer.WriteNull("RequiredAlwaysInitializeList");
             }
             if (DefaultList != null)
             {
@@ -64,7 +64,7 @@ namespace SerializationCustomization.Models
             }
             else
             {
-                writer.WriteNullValue();
+                writer.WriteNull("RequiredAlwaysInitializeObject");
             }
             if (AlwaysInitializeObject != null)
             {
