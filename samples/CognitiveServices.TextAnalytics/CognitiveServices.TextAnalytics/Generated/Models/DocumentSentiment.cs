@@ -52,7 +52,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Sentiment = sentiment;
             Statistics = statistics;
             DocumentScores = documentScores;
-            Sentences = sentences;
+            Sentences = sentences ?? new List<SentenceSentiment>();
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>

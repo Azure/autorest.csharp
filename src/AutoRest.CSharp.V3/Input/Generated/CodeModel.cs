@@ -761,6 +761,10 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>if the elements in the array should be unique</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "uniqueItems")]
         public bool? UniqueItems { get; set; }
+
+        /// <summary>if elements in the array should be nullable</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "nullableItems")]
+        public bool? NullableItems { get; set; }
     }
 
     /// <summary>a schema that represents a ByteArray value</summary>
@@ -781,6 +785,10 @@ namespace AutoRest.CSharp.V3.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "elementType")]
         [System.ComponentModel.DataAnnotations.Required]
         public Schema ElementType { get; set; } = new Schema();
+
+        /// <summary>if elements in the dictionary should be nullable</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "nullableItems")]
+        public bool? NullableItems { get; set; }
     }
 
     /// <summary>a schema that represents a boolean value</summary>

@@ -30,7 +30,7 @@ namespace required_optional.Models
         /// <param name="value"> . </param>
         internal ArrayWrapper(IList<string> value)
         {
-            Value = value;
+            Value = value ?? new List<string>();
         }
 
         public IList<string> Value { get; }

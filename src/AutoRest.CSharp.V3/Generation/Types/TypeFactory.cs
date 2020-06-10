@@ -247,5 +247,10 @@ namespace AutoRest.CSharp.V3.Generation.Types
 
             builder.Append(symbol.MetadataName);
         }
+
+        public static bool IsAlwaysInitializeType(CSharpType type)
+        {
+            return type.IsFrameworkType && (IsDictionary(type) || IsList(type));
+        }
     }
 }

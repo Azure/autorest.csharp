@@ -60,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal LinkedEntity(string name, IReadOnlyList<Match> matches, string language, string id, string url, string dataSource)
         {
             Name = name;
-            Matches = matches;
+            Matches = matches ?? new List<Match>();
             Language = language;
             Id = id;
             Url = url;

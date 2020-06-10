@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
         internal AnalyzeResult(IReadOnlyList<TokenInfo> tokens)
         {
-            Tokens = tokens;
+            Tokens = tokens ?? new List<TokenInfo>();
         }
 
         /// <summary> The list of tokens returned by the analyzer specified in the request. </summary>

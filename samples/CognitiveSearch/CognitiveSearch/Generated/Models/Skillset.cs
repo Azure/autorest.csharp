@@ -48,7 +48,7 @@ namespace CognitiveSearch.Models
         {
             Name = name;
             Description = description;
-            Skills = skills;
+            Skills = skills ?? new List<Skill>();
             CognitiveServicesAccount = cognitiveServicesAccount;
             ETag = eTag;
         }
@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
         /// <summary> The description of the skillset. </summary>
         public string Description { get; set; }
         /// <summary> A list of skills in the skillset. </summary>
-        public IList<Skill> Skills { get; set; }
+        public IList<Skill> Skills { get; }
         /// <summary> Details about cognitive services to be used when running skills. </summary>
         public CognitiveServicesAccount CognitiveServicesAccount { get; set; }
         /// <summary> The ETag of the skillset. </summary>

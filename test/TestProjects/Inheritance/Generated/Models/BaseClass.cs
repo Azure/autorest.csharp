@@ -22,6 +22,6 @@ namespace Inheritance.Models
             BaseClassProperty = baseClassProperty;
         }
 
-        public string BaseClassProperty { get; set; }
+        public string BaseClassProperty { get; }
     }
 }

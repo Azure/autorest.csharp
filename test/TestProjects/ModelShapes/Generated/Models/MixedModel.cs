@@ -19,7 +19,9 @@ namespace ModelShapes.Models
         /// <param name="requiredInt"> . </param>
         /// <param name="requiredStringList"> . </param>
         /// <param name="requiredIntList"> . </param>
-        public MixedModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList)
+        /// <param name="requiredNullableStringList"> . </param>
+        /// <param name="requiredNullableIntList"> . </param>
+        public MixedModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
         {
             if (requiredString == null)
             {
@@ -38,6 +40,8 @@ namespace ModelShapes.Models
             RequiredInt = requiredInt;
             RequiredStringList = requiredStringList.ToArray();
             RequiredIntList = requiredIntList.ToArray();
+            RequiredNullableStringList = requiredNullableStringList?.ToArray();
+            RequiredNullableIntList = requiredNullableIntList?.ToArray();
         }
 
         /// <summary> Initializes a new instance of MixedModel. </summary>
@@ -49,25 +53,31 @@ namespace ModelShapes.Models
         /// <param name="nonRequiredInt"> . </param>
         /// <param name="nonRequiredStringList"> . </param>
         /// <param name="nonRequiredIntList"> . </param>
-        internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList)
+        /// <param name="requiredNullableStringList"> . </param>
+        /// <param name="requiredNullableIntList"> . </param>
+        internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            RequiredStringList = requiredStringList;
-            RequiredIntList = requiredIntList;
+            RequiredStringList = requiredStringList ?? new List<string>();
+            RequiredIntList = requiredIntList ?? new List<int>();
             NonRequiredString = nonRequiredString;
             NonRequiredInt = nonRequiredInt;
             NonRequiredStringList = nonRequiredStringList;
             NonRequiredIntList = nonRequiredIntList;
+            RequiredNullableStringList = requiredNullableStringList;
+            RequiredNullableIntList = requiredNullableIntList;
         }
 
         public string RequiredString { get; set; }
         public int RequiredInt { get; set; }
-        public IList<string> RequiredStringList { get; set; }
-        public IList<int> RequiredIntList { get; set; }
+        public IList<string> RequiredStringList { get; }
+        public IList<int> RequiredIntList { get; }
         public string NonRequiredString { get; set; }
         public int? NonRequiredInt { get; set; }
         public IList<string> NonRequiredStringList { get; set; }
         public IList<int> NonRequiredIntList { get; set; }
+        public IList<string> RequiredNullableStringList { get; set; }
+        public IList<int> RequiredNullableIntList { get; set; }
     }
 }

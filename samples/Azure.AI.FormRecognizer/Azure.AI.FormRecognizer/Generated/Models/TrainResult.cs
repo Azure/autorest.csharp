@@ -33,7 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="errors"> Errors returned during the training operation. </param>
         internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments, IReadOnlyList<FormFieldsReport> fields, float? averageModelAccuracy, IReadOnlyList<ErrorInformation> errors)
         {
-            TrainingDocuments = trainingDocuments;
+            TrainingDocuments = trainingDocuments ?? new List<TrainingDocumentInfo>();
             Fields = fields;
             AverageModelAccuracy = averageModelAccuracy;
             Errors = errors;

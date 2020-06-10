@@ -412,7 +412,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                 "The URL to the next page of results.",
                 typeof(string),
                 defaultValue: null,
-                isRequired: true);
+                validateNotNull: true);
 
             PathSegment[] pathSegments = method.Request.PathSegments
                 .Where(ps => ps.IsRaw)
@@ -461,7 +461,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                     parameter.Description,
                     typeof(Uri),
                     parameter.DefaultValue,
-                    parameter.IsRequired
+                    parameter.ValidateNotNull
                 );
             }
 
