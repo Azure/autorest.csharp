@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                    type.FrameworkType == typeof(IReadOnlyDictionary<,>);
         }
 
-        private static bool IsList(CSharpType type)
+        internal static bool IsList(CSharpType type)
         {
             return type.FrameworkType == typeof(IEnumerable<>) ||
                    type.FrameworkType == typeof(IReadOnlyList<>) ||

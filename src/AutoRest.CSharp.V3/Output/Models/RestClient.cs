@@ -122,11 +122,10 @@ namespace AutoRest.CSharp.V3.Output.Models
             foreach (var operation in _operationGroup.Operations)
             {
                 var paging = operation.Language.Default.Paging;
-                if (paging == null || operation.IsLongRunning)
+                if (paging == null)
                 {
                     continue;
                 }
-
                 foreach (var serviceRequest in operation.Requests)
                 {
                     RestClientMethod? nextMethod = null;
@@ -294,12 +293,6 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             List<Response> clientResponse = new List<Response>();
 
-            if (operation.IsLongRunning)
-            {
-                // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
-                responseHeaderModel = null;
-            }
-
             foreach (var response in operation.Responses)
             {
                 clientResponse.Add(new Response(
@@ -419,7 +412,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                 .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
                 .ToArray();
             var request = new Request(
-                method.Request.HttpMethod,
+                RequestMethod.Get,
                 pathSegments,
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,

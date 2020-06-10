@@ -64,37 +64,12 @@ namespace AutoRest.CSharp.V3.Output.Models
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
-                    TypeProvider implementation = objectResponseBody.Type.Implementation;
-                    if (!(implementation is ObjectType type))
-                    {
-                        throw new InvalidOperationException($"The return type of {method.Name} has to be an object schema to be used in paging");
-                    }
-
-                    string? nextLinkName = paging.NextLinkName;
-                    string itemName = paging.ItemName ?? "value";
-
-                    ObjectTypeProperty itemProperty = type.GetPropertyBySerializedName(itemName);
-
-                    ObjectTypeProperty? nextLinkProperty = null;
-                    if (!string.IsNullOrWhiteSpace(nextLinkName))
-                    {
-                        nextLinkProperty = type.GetPropertyBySerializedName(nextLinkName);
-                    }
-
-                    if (!(itemProperty.SchemaProperty?.Schema is ArraySchema arraySchema))
-                    {
-                        throw new InvalidOperationException($"{itemName} property has to be an array schema, actual {itemProperty.SchemaProperty?.Schema}");
-                    }
-
-                    CSharpType itemType = _context.TypeFactory.CreateType(arraySchema.ElementType, false);
                     yield return new PagingMethod(
                         method,
                         nextPageMethod,
                         method.Name,
-                        nextLinkProperty?.Declaration.Name,
-                        itemProperty.Declaration.Name,
-                        itemType,
-                        new Diagnostic($"{Declaration.Name}.{method.Name}"));
+                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
+                        new PagingResponseInfo(paging, objectResponseBody.Type));
                 }
             }
         }

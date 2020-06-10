@@ -21,6 +21,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 
         public RestClientMethod StartMethod { get; }
 
-        public Diagnostic Diagnostics { get; set; }
+        public Diagnostic Diagnostics { get; }
     }
 }

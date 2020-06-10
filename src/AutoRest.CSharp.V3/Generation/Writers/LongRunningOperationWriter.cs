@@ -2,9 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Generation.Types;
+using AutoRest.CSharp.V3.Output.Models;
 using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
 using Azure;
@@ -19,16 +21,37 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public static void Write(CodeWriter writer, LongRunningOperation operation)
         {
             var responseVariable = "response";
+            var pagingResponse = operation.PagingResponse;
 
             void WriteResultFunction(bool async)
             {
                 if (operation.ResultSerialization != null)
                 {
-                    writer.WriteDeserializationForMethods(
-                        operation.ResultSerialization,
-                        async: async,
-                        (w, v) => w.Line($"return {v};"),
-                        responseVariable);
+                    if (pagingResponse != null)
+                    {
+                        var itemPropertyName = pagingResponse.ItemProperty.Declaration.Name;
+                        var nextLinkPropertyName = pagingResponse.NextLinkProperty?.Declaration.Name;
+
+                        writer.Line($"{pagingResponse.ResponseType} firstPageResult;");
+                        writer.WriteDeserializationForMethods(
+                            operation.ResultSerialization,
+                            async: async,
+                            (w, v) => w.Line($"firstPageResult = {v};"),
+                            responseVariable);
+
+                        writer.Line($"{pagingResponse.PageType} firstPage = {typeof(Page)}.FromValues(firstPageResult.{itemPropertyName}, firstPageResult.{nextLinkPropertyName}, {responseVariable});");
+                        writer.Line();
+
+                        writer.Line($"return {typeof(PageableHelpers)}.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken));");
+                    }
+                    else
+                    {
+                        writer.WriteDeserializationForMethods(
+                            operation.ResultSerialization,
+                            async: async,
+                            (w, v) => w.Line($"return {v};"),
+                            responseVariable);
+                    }
                 }
                 else
                 {
@@ -57,9 +80,27 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     writer.Line($"private readonly {helperType} _operation;");
 
-                    using (writer.Scope($"internal {cs.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response)"))
+                    if (pagingResponse != null)
+                    {
+                        writer.Line($"private readonly {typeof(Func<string, Task<Response>>)} _nextPageFunc;");
+                    }
+
+                    writer.Append($"internal {cs.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
+
+                    if (pagingResponse != null)
+                    {
+                        writer.Append($", {typeof(Func<string, Task<Response>>)} nextPageFunc");
+                    }
+                    writer.Line($")");
+
+                    using (writer.Scope())
                     {
                         writer.Line($"_operation = new {helperType}(this, clientDiagnostics, pipeline, request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia}, {operation.Diagnostics.ScopeName:L});");
+
+                        if (pagingResponse != null)
+                        {
+                            writer.Line($"_nextPageFunc = nextPageFunc;");
+                        }
                     }
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -107,6 +148,30 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     using (writer.Scope($"async {new CSharpType(typeof(ValueTask<>), operation.ResultType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
                     {
                         WriteResultFunction(true);
+                    }
+
+                    if (pagingResponse != null)
+                    {
+                        writer.Line();
+
+                        Debug.Assert(operation.ResultSerialization != null);
+
+                        var funcType = new CSharpType(typeof(Task<>), pagingResponse.PageType);
+                        var itemPropertyName = pagingResponse.ItemProperty.Declaration.Name;
+                        var nextLinkPropertyName = pagingResponse.NextLinkProperty?.Declaration.Name;
+
+                        using (writer.Scope($"private async {funcType} GetNextPage({typeof(string)} nextLink, {typeof(CancellationToken)} cancellationToken)"))
+                        {
+                            writer.Line($"{typeof(Response)} {responseVariable} = await _nextPageFunc(nextLink);");
+                            writer.Line($"{pagingResponse.ResponseType} nextPageResult;");
+                            writer.WriteDeserializationForMethods(
+                                operation.ResultSerialization,
+                                async: true,
+                                (w, v) => w.Line($"nextPageResult = {v};"),
+                                responseVariable);
+
+                            writer.Line($"return {typeof(Page)}.FromValues(nextPageResult.{itemPropertyName}, nextPageResult.{nextLinkPropertyName}, {responseVariable});");
+                        }
                     }
                 }
             }

@@ -1357,7 +1357,7 @@ namespace paging
             try
             {
                 var originalResponse = await RestClient.GetMultiplePagesLROAsync(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken).ConfigureAwait(false);
-                return new PagingGetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse);
+                return new PagingGetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse, nextLink => RestClient.GetMultiplePagesLRONextPageAsync(nextLink, clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken));
             }
             catch (Exception e)
             {
@@ -1377,7 +1377,7 @@ namespace paging
             try
             {
                 var originalResponse = RestClient.GetMultiplePagesLRO(clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken);
-                return new PagingGetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse);
+                return new PagingGetMultiplePagesLROOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetMultiplePagesLRORequest(clientRequestId, pagingGetMultiplePagesLroOptions).Request, originalResponse, nextLink => RestClient.GetMultiplePagesLRONextPageAsync(nextLink, clientRequestId, pagingGetMultiplePagesLroOptions, cancellationToken));
             }
             catch (Exception e)
             {

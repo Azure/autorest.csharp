@@ -120,18 +120,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
 
-        private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
+        private static string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
-        private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
+        internal const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
         private const string PipelineVariable = "pipeline";
-        private const string PipelineField = "_" + PipelineVariable;
+        internal const string PipelineField = "_" + PipelineVariable;
+        private const string RestClientProperty = "RestClient";
 
         private void WriteClientFields(CodeWriter writer, Client client)
         {
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
+            writer.Append($"internal {client.RestClient.Type} {RestClientProperty}").LineRaw(" { get; }");
         }
 
         private void WriteClientCtors(CodeWriter writer, Client client)
@@ -175,7 +176,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WritePagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async)
         {
-            var pageType = pagingMethod.ItemType;
+            var pageType = pagingMethod.PagingResponse.ItemType;
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
             var parameters = pagingMethod.Method.Parameters;
 
@@ -202,13 +203,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 var pageWrappedType = new CSharpType(typeof(Page<>), pageType);
                 var funcType = async ? new CSharpType(typeof(Task<>), pageWrappedType) : pageWrappedType;
-                var nullableInt = new CSharpType(typeof(int), true);
 
-                var continuationTokenText = pagingMethod.NextLinkName != null ? $"response.Value.{pagingMethod.NextLinkName}" : "null";
+                var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
+                var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+
+                var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
                 var asyncText = async ? "async" : string.Empty;
                 var awaitText = async ? "await" : string.Empty;
                 var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-                using (writer.Scope($"{asyncText} {funcType} FirstPageFunc({nullableInt} pageSizeHint)"))
+                using (writer.Scope($"{asyncText} {funcType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
                 {
                     WriteDiagnosticScope(writer, pagingMethod.Diagnostics, writer =>
                     {
@@ -219,7 +222,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
 
                         writer.Line($"cancellationToken){configureAwaitText};");
-                        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+                        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}, {continuationTokenText}, response.GetRawResponse());");
                     });
                 }
 
@@ -228,7 +231,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     nextPageFunctionName = "NextPageFunc";
                     var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                    using (writer.Scope($"{asyncText} {funcType} {nextPageFunctionName}({typeof(string)} nextLink, {nullableInt} pageSizeHint)"))
+                    using (writer.Scope($"{asyncText} {funcType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                     {
                         WriteDiagnosticScope(writer, pagingMethod.Diagnostics, writer =>
                         {
@@ -238,7 +241,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writer.Append($"{parameter.Name}, ");
                             }
                             writer.Line($"cancellationToken){configureAwaitText};");
-                            writer.Line($"return {typeof(Page)}.FromValues(response.Value.{pagingMethod.ItemName}, {continuationTokenText}, response.GetRawResponse());");
+                            writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}, {continuationTokenText}, response.GetRawResponse());");
                         });
                     }
                 }
@@ -247,7 +250,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, CodeWriterDelegate inner)
+        private static void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, CodeWriterDelegate inner)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
 
@@ -317,7 +320,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"{parameter.Name}, ");
                     }
                     writer.RemoveTrailingComma();
-                    writer.Line($").Request, originalResponse);");
+                    writer.Append($").Request, originalResponse");
+
+                    var nextPageMethod = lroMethod.Operation.NextPageMethod;
+                    if (nextPageMethod != null)
+                    {
+                        writer.Append($", nextLink => RestClient.{CreateMethodName(nextPageMethod.Name, true)}(nextLink, ");
+
+                        foreach (Parameter parameter in parameters)
+                        {
+                            writer.Append($"{parameter.Name}, ");
+                        }
+
+                        writer.Append($"cancellationToken)");
+                    }
+
+                    writer.Line($");");
                 });
 
             }

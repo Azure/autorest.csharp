@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Builders;
@@ -23,6 +24,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 
             Debug.Assert(clientClass != null, "clientClass != null, LROs should be disabled when public clients are disables");
 
+            Client = clientClass;
             DefaultName = clientClass.RestClient.ClientPrefix + operation.CSharpName() + "Operation";
             FinalStateVia = operation.LongRunningFinalStateVia switch
             {
@@ -40,6 +42,14 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
             {
                 ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(finalResponseSchema, false));
                 ResultSerialization = new SerializationBuilder().Build(finalResponse.HttpResponse.KnownMediaType, finalResponseSchema, ResultType);
+
+                Paging? paging = operation.Language.Default.Paging;
+                if (paging != null)
+                {
+                    NextPageMethod = Client.RestClient.GetNextOperationMethod(operation.Requests.Single());
+                    PagingResponse = new PagingResponseInfo(paging, ResultType);
+                    ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
+                }
             }
             else
             {
@@ -51,9 +61,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
         }
 
         public CSharpType ResultType { get; }
+        public Client Client { get; }
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
-        public ObjectSerialization? ResultSerialization { get;  }
+        public ObjectSerialization? ResultSerialization { get; }
+        public RestClientMethod? NextPageMethod { get; }
+        public PagingResponseInfo? PagingResponse { get; }
         public string Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
