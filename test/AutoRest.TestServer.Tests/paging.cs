@@ -406,8 +406,18 @@ namespace AutoRest.TestServer.Tests
 
             AsyncPageable<Product> pageable = await lro.WaitForCompletionAsync();
 
+            var product = "Product";
+            int id = 1;
             await foreach (var item in pageable)
             {
+                Assert.AreEqual(id, item.Properties.Id);
+                Assert.AreEqual(product, item.Properties.Name);
+
+                if (product == "Product")
+                {
+                    product = "product";
+                }
+                id += 1;
             }
         });
 

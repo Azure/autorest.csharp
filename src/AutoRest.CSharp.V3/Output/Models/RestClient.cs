@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                     else if (paging.NextLinkName != null)
                     {
                         var method = GetOperationMethod(serviceRequest);
-                        nextMethod = BuildNextPageMethod(method);
+                        nextMethod = BuildNextPageMethod(method, operation);
                     }
 
                     if (nextMethod != null)
@@ -293,6 +293,12 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             List<Response> clientResponse = new List<Response>();
 
+            if (operation.IsLongRunning)
+            {
+                // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
+                responseHeaderModel = null;
+            }
+
             foreach (var response in operation.Responses)
             {
                 clientResponse.Add(new Response(
@@ -398,7 +404,7 @@ namespace AutoRest.CSharp.V3.Output.Models
             };
         }
 
-        private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
+        private static RestClientMethod BuildNextPageMethod(RestClientMethod method, Operation operation)
         {
             var nextPageUrlParameter = new Parameter(
                 "nextLink",
@@ -423,13 +429,24 @@ namespace AutoRest.CSharp.V3.Output.Models
                 .Prepend(nextPageUrlParameter)
                 .ToArray();
 
+            var responses = method.Responses;
+
+            // We hardcode 200 as expected response code for paged LRO results
+            if (operation.IsLongRunning)
+            {
+                responses = new[]
+                {
+                    new Response(null, new[] { 200 })
+                };
+            }
+
             return new RestClientMethod(
                 $"{method.Name}NextPage",
                 method.Description,
                 method.ReturnType,
                 request,
                 parameters,
-                method.Responses,
+                responses,
                 method.HeaderModel);
         }
 
