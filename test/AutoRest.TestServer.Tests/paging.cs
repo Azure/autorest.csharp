@@ -400,6 +400,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No recording.")]
         public Task PagingMultipleLRO() => Test(async (host, pipeline) =>
         {
             var lro = await new PagingClient(ClientDiagnostics, pipeline, host).StartGetMultiplePagesLROAsync("id", new PagingGetMultiplePagesLroOptions());
