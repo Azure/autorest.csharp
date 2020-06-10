@@ -400,8 +400,16 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("Needs LRO for paging: https://github.com/Azure/autorest.csharp/issues/450")]
-        public Task PagingMultipleLRO() => TestStatus(async (host, pipeline) => { await Task.FromException(new Exception()); return null; });
+        public Task PagingMultipleLRO() => Test(async (host, pipeline) =>
+        {
+            var lro = await new PagingClient(ClientDiagnostics, pipeline, host).StartGetMultiplePagesLROAsync("id", new PagingGetMultiplePagesLroOptions());
+
+            AsyncPageable<Product> pageable = await lro.WaitForCompletionAsync();
+
+            await foreach (var item in pageable)
+            {
+            }
+        });
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
