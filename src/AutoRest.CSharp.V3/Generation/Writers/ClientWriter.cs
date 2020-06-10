@@ -120,19 +120,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
 
-        private static string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
+        private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
-        internal const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
+        private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
         private const string PipelineVariable = "pipeline";
-        internal const string PipelineField = "_" + PipelineVariable;
-        private const string RestClientProperty = "RestClient";
+        private const string PipelineField = "_" + PipelineVariable;
 
         private void WriteClientFields(CodeWriter writer, Client client)
         {
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            writer.Append($"internal {client.RestClient.Type} {RestClientProperty}").LineRaw(" { get; }");
+            writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
         }
 
         private void WriteClientCtors(CodeWriter writer, Client client)
@@ -250,7 +249,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, CodeWriterDelegate inner)
+        private void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, CodeWriterDelegate inner)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
 
