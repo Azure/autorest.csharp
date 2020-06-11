@@ -504,8 +504,8 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: PutUtcMaxDateTime7Digits
-            description: 'Put max datetime value 9999-12-31T23:59:59.9999999Z'
-            summary: 'This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario'
+            description: 'This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario'
+            summary: 'Put max datetime value 9999-12-31T23:59:59.9999999Z'
         protocol: !<!Protocols> {}
       - !<!Operation> 
         apiVersions:
@@ -658,8 +658,8 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: GetUtcUppercaseMaxDateTime7Digits
-            description: 'Get max datetime value 9999-12-31T23:59:59.9999999Z'
-            summary: 'This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario'
+            description: 'This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario'
+            summary: 'Get max datetime value 9999-12-31T23:59:59.9999999Z'
         protocol: !<!Protocols> {}
       - !<!Operation> 
         apiVersions:

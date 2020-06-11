@@ -36,8 +36,8 @@ namespace AutoRest.TestServer.Tests
         }, ignoreScenario: true);
 
         [Test]
-        [Ignore("Wasn't able to find a server endpoint for this")]
-        public Task UrlStringUnicodeAsync() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).StringUnicodeAsync());
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
+        public Task UrlPathsStringUnicode() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).StringUnicodeAsync());
 
         [Test]
         public Task UrlPathsArrayCSVInPath() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).ArrayCsvInPathAsync( new[] { "ArrayPath1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));

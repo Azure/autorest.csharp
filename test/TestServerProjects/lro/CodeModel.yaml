@@ -1991,10 +1991,10 @@ schemas: !<!Schemas>
       properties:
         - !<!Property> 
           schema: *ref_11
-          serializedName: status
+          serializedName: code
           language: !<!Languages> 
             default:
-              name: status
+              name: code
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
