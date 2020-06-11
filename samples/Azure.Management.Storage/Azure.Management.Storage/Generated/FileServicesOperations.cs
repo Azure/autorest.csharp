@@ -15,24 +15,24 @@ using Azure.Management.Storage.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> The FileServices service client. </summary>
-    public partial class FileServicesClient
+    public partial class FileServicesOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal FileServicesRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of FileServicesClient for mocking. </summary>
-        protected FileServicesClient()
+        internal FileServicesRestOperations RestClient { get; }
+        /// <summary> Initializes a new instance of FileServicesOperations for mocking. </summary>
+        protected FileServicesOperations()
         {
         }
-        /// <summary> Initializes a new instance of FileServicesClient. </summary>
+        /// <summary> Initializes a new instance of FileServicesOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal FileServicesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        internal FileServicesOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-            RestClient = new FileServicesRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new FileServicesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -43,7 +43,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileServiceItems>> ListAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.List");
+            using var scope = _clientDiagnostics.CreateScope("FileServicesOperations.List");
             scope.Start();
             try
             {
@@ -62,7 +62,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileServiceItems> List(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.List");
+            using var scope = _clientDiagnostics.CreateScope("FileServicesOperations.List");
             scope.Start();
             try
             {
@@ -83,7 +83,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.SetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServicesOperations.SetServiceProperties");
             scope.Start();
             try
             {
@@ -104,7 +104,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileServiceProperties> SetServiceProperties(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.SetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServicesOperations.SetServiceProperties");
             scope.Start();
             try
             {
@@ -123,7 +123,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileServiceProperties>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.GetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServicesOperations.GetServiceProperties");
             scope.Start();
             try
             {
@@ -142,7 +142,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileServiceProperties> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServicesClient.GetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServicesOperations.GetServiceProperties");
             scope.Start();
             try
             {

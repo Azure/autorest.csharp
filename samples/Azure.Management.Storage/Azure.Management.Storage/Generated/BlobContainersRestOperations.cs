@@ -18,7 +18,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
-    internal partial class BlobContainersRestClient
+    internal partial class BlobContainersRestOperations
     {
         private string subscriptionId;
         private Uri endpoint;
@@ -26,14 +26,14 @@ namespace Azure.Management.Storage
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of BlobContainersRestClient. </summary>
+        /// <summary> Initializes a new instance of BlobContainersRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
-        public BlobContainersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        public BlobContainersRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
             if (subscriptionId == null)
             {

@@ -132,22 +132,21 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var client in context.Library.Clients)
                     {
-                        writer.WriteXmlDocumentationSummary($"Creates a new instance of {client.Type.Name}");
-                        using (writer.Scope($"public virtual {client.Type} Get{client.Type.Name}()"))
+                        writer.WriteXmlDocumentationSummary($"Returns an instance of {client.Type.Name}");
+                        writer.Append($"public virtual {client.Type} {client.ClientShortName} => ");
+                        writer.Append($"new {client.Type}({ClientDiagnosticsField}, {PipelineField}, ");
+                        foreach (var parameter in client.RestClient.Parameters)
                         {
-                            writer.Append($"return new {client.Type}({ClientDiagnosticsField}, {PipelineField}, ");
-                            foreach (var parameter in client.RestClient.Parameters)
+                            if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
                             {
-                                if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
-                                {
-                                    continue;
-                                }
-
-                                writer.Append($"_{parameter.Name}, ");
+                                continue;
                             }
-                            writer.RemoveTrailingComma();
-                            writer.Line($");");
+
+                            writer.Append($"_{parameter.Name}, ");
                         }
+
+                        writer.RemoveTrailingComma();
+                        writer.Line($");");
 
                         writer.Line();
                     }

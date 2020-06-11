@@ -17,24 +17,24 @@ using Azure.Management.Storage.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> The StorageAccounts service client. </summary>
-    public partial class StorageAccountsClient
+    public partial class StorageAccountsOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal StorageAccountsRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of StorageAccountsClient for mocking. </summary>
-        protected StorageAccountsClient()
+        internal StorageAccountsRestOperations RestClient { get; }
+        /// <summary> Initializes a new instance of StorageAccountsOperations for mocking. </summary>
+        protected StorageAccountsOperations()
         {
         }
-        /// <summary> Initializes a new instance of StorageAccountsClient. </summary>
+        /// <summary> Initializes a new instance of StorageAccountsOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal StorageAccountsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        internal StorageAccountsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-            RestClient = new StorageAccountsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new StorageAccountsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -45,7 +45,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.CheckNameAvailability");
             scope.Start();
             try
             {
@@ -64,7 +64,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.CheckNameAvailability");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.CheckNameAvailability");
             scope.Start();
             try
             {
@@ -83,7 +83,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.Delete");
             scope.Start();
             try
             {
@@ -102,7 +102,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.Delete");
             scope.Start();
             try
             {
@@ -122,7 +122,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<StorageAccount>> GetPropertiesAsync(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.GetProperties");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.GetProperties");
             scope.Start();
             try
             {
@@ -142,7 +142,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageAccount> GetProperties(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.GetProperties");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.GetProperties");
             scope.Start();
             try
             {
@@ -162,7 +162,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<StorageAccount>> UpdateAsync(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.Update");
             scope.Start();
             try
             {
@@ -182,7 +182,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageAccount> Update(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.Update");
             scope.Start();
             try
             {
@@ -201,7 +201,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<StorageAccountListKeysResult>> ListKeysAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListKeys");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.ListKeys");
             scope.Start();
             try
             {
@@ -220,7 +220,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageAccountListKeysResult> ListKeys(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListKeys");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.ListKeys");
             scope.Start();
             try
             {
@@ -240,7 +240,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(string resourceGroupName, string accountName, string keyName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RegenerateKey");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.RegenerateKey");
             scope.Start();
             try
             {
@@ -260,7 +260,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageAccountListKeysResult> RegenerateKey(string resourceGroupName, string accountName, string keyName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RegenerateKey");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.RegenerateKey");
             scope.Start();
             try
             {
@@ -280,7 +280,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ListAccountSasResponse>> ListAccountSASAsync(string resourceGroupName, string accountName, AccountSasParameters parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListAccountSAS");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.ListAccountSAS");
             scope.Start();
             try
             {
@@ -300,7 +300,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListAccountSasResponse> ListAccountSAS(string resourceGroupName, string accountName, AccountSasParameters parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListAccountSAS");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.ListAccountSAS");
             scope.Start();
             try
             {
@@ -320,7 +320,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ListServiceSasResponse>> ListServiceSASAsync(string resourceGroupName, string accountName, ServiceSasParameters parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListServiceSAS");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.ListServiceSAS");
             scope.Start();
             try
             {
@@ -340,7 +340,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ListServiceSasResponse> ListServiceSAS(string resourceGroupName, string accountName, ServiceSasParameters parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListServiceSAS");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.ListServiceSAS");
             scope.Start();
             try
             {
@@ -359,7 +359,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> RevokeUserDelegationKeysAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RevokeUserDelegationKeys");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.RevokeUserDelegationKeys");
             scope.Start();
             try
             {
@@ -378,7 +378,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response RevokeUserDelegationKeys(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.RevokeUserDelegationKeys");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.RevokeUserDelegationKeys");
             scope.Start();
             try
             {
@@ -397,7 +397,7 @@ namespace Azure.Management.Storage
         {
             async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.List");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.List");
                 scope.Start();
                 try
                 {
@@ -412,7 +412,7 @@ namespace Azure.Management.Storage
             }
             async Task<Page<StorageAccount>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.List");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.List");
                 scope.Start();
                 try
                 {
@@ -434,7 +434,7 @@ namespace Azure.Management.Storage
         {
             Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.List");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.List");
                 scope.Start();
                 try
                 {
@@ -449,7 +449,7 @@ namespace Azure.Management.Storage
             }
             Page<StorageAccount> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.List");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.List");
                 scope.Start();
                 try
                 {
@@ -477,7 +477,7 @@ namespace Azure.Management.Storage
 
             async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.ListByResourceGroup");
                 scope.Start();
                 try
                 {
@@ -505,7 +505,7 @@ namespace Azure.Management.Storage
 
             Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.ListByResourceGroup");
                 scope.Start();
                 try
                 {
@@ -541,7 +541,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.StartCreate");
             scope.Start();
             try
             {
@@ -575,7 +575,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.StartCreate");
             scope.Start();
             try
             {
@@ -604,7 +604,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.StartFailover");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.StartFailover");
             scope.Start();
             try
             {
@@ -633,7 +633,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.StartFailover");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.StartFailover");
             scope.Start();
             try
             {
@@ -668,7 +668,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobRanges));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.StartRestoreBlobRanges");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.StartRestoreBlobRanges");
             scope.Start();
             try
             {
@@ -703,7 +703,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobRanges));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountsClient.StartRestoreBlobRanges");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.StartRestoreBlobRanges");
             scope.Start();
             try
             {

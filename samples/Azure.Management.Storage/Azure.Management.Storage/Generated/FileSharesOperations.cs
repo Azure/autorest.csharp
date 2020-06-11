@@ -16,24 +16,24 @@ using Azure.Management.Storage.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> The FileShares service client. </summary>
-    public partial class FileSharesClient
+    public partial class FileSharesOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal FileSharesRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of FileSharesClient for mocking. </summary>
-        protected FileSharesClient()
+        internal FileSharesRestOperations RestClient { get; }
+        /// <summary> Initializes a new instance of FileSharesOperations for mocking. </summary>
+        protected FileSharesOperations()
         {
         }
-        /// <summary> Initializes a new instance of FileSharesClient. </summary>
+        /// <summary> Initializes a new instance of FileSharesOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal FileSharesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        internal FileSharesOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-            RestClient = new FileSharesRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new FileSharesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -46,7 +46,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Create");
             scope.Start();
             try
             {
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Create");
             scope.Start();
             try
             {
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Update");
             scope.Start();
             try
             {
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Update");
             scope.Start();
             try
             {
@@ -129,7 +129,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FileShare>> GetAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Get");
             scope.Start();
             try
             {
@@ -149,7 +149,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileShare> Get(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Get");
             scope.Start();
             try
             {
@@ -169,7 +169,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Delete");
             scope.Start();
             try
             {
@@ -189,7 +189,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Delete");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> RestoreAsync(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Restore");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Restore");
             scope.Start();
             try
             {
@@ -233,7 +233,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Restore(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileSharesClient.Restore");
+            using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.Restore");
             scope.Start();
             try
             {
@@ -265,7 +265,7 @@ namespace Azure.Management.Storage
 
             async Task<Page<FileShareItem>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
+                using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.List");
                 scope.Start();
                 try
                 {
@@ -280,7 +280,7 @@ namespace Azure.Management.Storage
             }
             async Task<Page<FileShareItem>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
+                using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.List");
                 scope.Start();
                 try
                 {
@@ -315,7 +315,7 @@ namespace Azure.Management.Storage
 
             Page<FileShareItem> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
+                using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.List");
                 scope.Start();
                 try
                 {
@@ -330,7 +330,7 @@ namespace Azure.Management.Storage
             }
             Page<FileShareItem> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FileSharesClient.List");
+                using var scope = _clientDiagnostics.CreateScope("FileSharesOperations.List");
                 scope.Start();
                 try
                 {

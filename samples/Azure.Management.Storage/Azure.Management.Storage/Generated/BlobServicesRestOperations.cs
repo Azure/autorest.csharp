@@ -16,7 +16,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
-    internal partial class PrivateEndpointConnectionsRestClient
+    internal partial class BlobServicesRestOperations
     {
         private string subscriptionId;
         private Uri endpoint;
@@ -24,14 +24,14 @@ namespace Azure.Management.Storage
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionsRestClient. </summary>
+        /// <summary> Initializes a new instance of BlobServicesRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
-        public PrivateEndpointConnectionsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        public BlobServicesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
             if (subscriptionId == null)
             {
@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string accountName, string privateEndpointConnectionName)
+        internal HttpMessage CreateListRequest(string resourceGroupName, string accountName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -63,19 +63,17 @@ namespace Azure.Management.Storage
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendPath("/privateEndpointConnections/", false);
-            uri.AppendPath(privateEndpointConnectionName, true);
+            uri.AppendPath("/blobServices", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
 
-        /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>
+        /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<PrivateEndpointConnection>> GetAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceItems>> ListAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -85,18 +83,14 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (privateEndpointConnectionName == null)
-            {
-                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
-            }
 
-            using var message = CreateGetRequest(resourceGroupName, accountName, privateEndpointConnectionName);
+            using var message = CreateListRequest(resourceGroupName, accountName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        PrivateEndpointConnection value = default;
+                        BlobServiceItems value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
@@ -104,7 +98,7 @@ namespace Azure.Management.Storage
                         }
                         else
                         {
-                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
+                            value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -113,12 +107,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>
+        /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PrivateEndpointConnection> Get(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public Response<BlobServiceItems> List(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -128,18 +121,14 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (privateEndpointConnectionName == null)
-            {
-                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
-            }
 
-            using var message = CreateGetRequest(resourceGroupName, accountName, privateEndpointConnectionName);
+            using var message = CreateListRequest(resourceGroupName, accountName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        PrivateEndpointConnection value = default;
+                        BlobServiceItems value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
@@ -147,7 +136,7 @@ namespace Azure.Management.Storage
                         }
                         else
                         {
-                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
+                            value = BlobServiceItems.DeserializeBlobServiceItems(document.RootElement);
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -156,7 +145,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState)
+        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, BlobServiceProperties parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -169,30 +158,23 @@ namespace Azure.Management.Storage
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendPath("/privateEndpointConnections/", false);
-            uri.AppendPath(privateEndpointConnectionName, true);
+            uri.AppendPath("/blobServices/", false);
+            uri.AppendPath("default", true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new PrivateEndpointConnection()
-            {
-                PrivateEndpoint = privateEndpoint,
-                PrivateLinkServiceConnectionState = privateLinkServiceConnectionState
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
             return message;
         }
 
-        /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
+        /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
-        /// <param name="privateEndpoint"> The resource of private end point. </param>
-        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
+        /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<PrivateEndpointConnection>> PutAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, BlobServiceProperties parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -202,18 +184,18 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (privateEndpointConnectionName == null)
+            if (parameters == null)
             {
-                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
+                throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState);
+            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        PrivateEndpointConnection value = default;
+                        BlobServiceProperties value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
@@ -221,7 +203,7 @@ namespace Azure.Management.Storage
                         }
                         else
                         {
-                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
+                            value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -230,14 +212,12 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
+        /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
-        /// <param name="privateEndpoint"> The resource of private end point. </param>
-        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
+        /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<PrivateEndpointConnection> Put(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
+        public Response<BlobServiceProperties> SetServiceProperties(string resourceGroupName, string accountName, BlobServiceProperties parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -247,18 +227,18 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (privateEndpointConnectionName == null)
+            if (parameters == null)
             {
-                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
+                throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState);
+            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        PrivateEndpointConnection value = default;
+                        BlobServiceProperties value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
@@ -266,7 +246,7 @@ namespace Azure.Management.Storage
                         }
                         else
                         {
-                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
+                            value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -275,11 +255,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName, string privateEndpointConnectionName)
+        internal HttpMessage CreateGetServicePropertiesRequest(string resourceGroupName, string accountName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Delete;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
             uri.AppendPath("/subscriptions/", false);
@@ -288,19 +268,18 @@ namespace Azure.Management.Storage
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendPath("/privateEndpointConnections/", false);
-            uri.AppendPath(privateEndpointConnectionName, true);
+            uri.AppendPath("/blobServices/", false);
+            uri.AppendPath("default", true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
 
-        /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
+        /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceProperties>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -310,29 +289,35 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (privateEndpointConnectionName == null)
-            {
-                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
-            }
 
-            using var message = CreateDeleteRequest(resourceGroupName, accountName, privateEndpointConnectionName);
+            using var message = CreateGetServicePropertiesRequest(resourceGroupName, accountName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
-                case 204:
-                    return message.Response;
+                    {
+                        BlobServiceProperties value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
-        /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
+        /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public Response<BlobServiceProperties> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -342,18 +327,25 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (privateEndpointConnectionName == null)
-            {
-                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
-            }
 
-            using var message = CreateDeleteRequest(resourceGroupName, accountName, privateEndpointConnectionName);
+            using var message = CreateGetServicePropertiesRequest(resourceGroupName, accountName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
-                case 204:
-                    return message.Response;
+                    {
+                        BlobServiceProperties value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

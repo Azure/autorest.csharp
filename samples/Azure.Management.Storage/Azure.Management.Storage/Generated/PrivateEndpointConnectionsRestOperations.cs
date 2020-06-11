@@ -16,7 +16,7 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
-    internal partial class ObjectReplicationPoliciesRestClient
+    internal partial class PrivateEndpointConnectionsRestOperations
     {
         private string subscriptionId;
         private Uri endpoint;
@@ -24,14 +24,14 @@ namespace Azure.Management.Storage
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of ObjectReplicationPoliciesRestClient. </summary>
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionsRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
-        public ObjectReplicationPoliciesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        public PrivateEndpointConnectionsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
             if (subscriptionId == null)
             {
@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string accountName)
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string accountName, string privateEndpointConnectionName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -63,17 +63,19 @@ namespace Azure.Management.Storage
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendPath("/objectReplicationPolicies", false);
+            uri.AppendPath("/privateEndpointConnections/", false);
+            uri.AppendPath(privateEndpointConnectionName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
 
-        /// <summary> List the object replication policies associated with the storage account. </summary>
+        /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ObjectReplicationPolicies>> ListAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<PrivateEndpointConnection>> GetAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -83,14 +85,18 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
+            if (privateEndpointConnectionName == null)
+            {
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
+            }
 
-            using var message = CreateListRequest(resourceGroupName, accountName);
+            using var message = CreateGetRequest(resourceGroupName, accountName, privateEndpointConnectionName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        ObjectReplicationPolicies value = default;
+                        PrivateEndpointConnection value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
@@ -98,7 +104,7 @@ namespace Azure.Management.Storage
                         }
                         else
                         {
-                            value = ObjectReplicationPolicies.DeserializeObjectReplicationPolicies(document.RootElement);
+                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -107,11 +113,12 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> List the object replication policies associated with the storage account. </summary>
+        /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ObjectReplicationPolicies> List(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public Response<PrivateEndpointConnection> Get(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -121,14 +128,18 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
+            if (privateEndpointConnectionName == null)
+            {
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
+            }
 
-            using var message = CreateListRequest(resourceGroupName, accountName);
+            using var message = CreateGetRequest(resourceGroupName, accountName, privateEndpointConnectionName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        ObjectReplicationPolicies value = default;
+                        PrivateEndpointConnection value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
@@ -136,7 +147,7 @@ namespace Azure.Management.Storage
                         }
                         else
                         {
-                            value = ObjectReplicationPolicies.DeserializeObjectReplicationPolicies(document.RootElement);
+                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -145,113 +156,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string accountName, string objectReplicationPolicyId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
-            uri.AppendPath(accountName, true);
-            uri.AppendPath("/objectReplicationPolicies/", false);
-            uri.AppendPath(objectReplicationPolicyId, true);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            return message;
-        }
-
-        /// <summary> Get the object replication policy of the storage account by policy ID. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ObjectReplicationPolicy>> GetAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (objectReplicationPolicyId == null)
-            {
-                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
-            }
-
-            using var message = CreateGetRequest(resourceGroupName, accountName, objectReplicationPolicyId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        ObjectReplicationPolicy value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(document.RootElement);
-                        }
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Get the object replication policy of the storage account by policy ID. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ObjectReplicationPolicy> Get(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (objectReplicationPolicyId == null)
-            {
-                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
-            }
-
-            using var message = CreateGetRequest(resourceGroupName, accountName, objectReplicationPolicyId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        ObjectReplicationPolicy value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(document.RootElement);
-                        }
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicy properties)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -264,24 +169,30 @@ namespace Azure.Management.Storage
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendPath("/objectReplicationPolicies/", false);
-            uri.AppendPath(objectReplicationPolicyId, true);
+            uri.AppendPath("/privateEndpointConnections/", false);
+            uri.AppendPath(privateEndpointConnectionName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            var model = new PrivateEndpointConnection()
+            {
+                PrivateEndpoint = privateEndpoint,
+                PrivateLinkServiceConnectionState = privateLinkServiceConnectionState
+            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(properties);
+            content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
             return message;
         }
 
-        /// <summary> Create or update the object replication policy of the storage account. </summary>
+        /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
-        /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
+        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
+        /// <param name="privateEndpoint"> The resource of private end point. </param>
+        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ObjectReplicationPolicy>> CreateOrUpdateAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicy properties, CancellationToken cancellationToken = default)
+        public async Task<Response<PrivateEndpointConnection>> PutAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -291,22 +202,18 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (objectReplicationPolicyId == null)
+            if (privateEndpointConnectionName == null)
             {
-                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
-            }
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, objectReplicationPolicyId, properties);
+            using var message = CreatePutRequest(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        ObjectReplicationPolicy value = default;
+                        PrivateEndpointConnection value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
@@ -314,7 +221,7 @@ namespace Azure.Management.Storage
                         }
                         else
                         {
-                            value = ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(document.RootElement);
+                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -323,13 +230,14 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Create or update the object replication policy of the storage account. </summary>
+        /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
-        /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
+        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
+        /// <param name="privateEndpoint"> The resource of private end point. </param>
+        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ObjectReplicationPolicy> CreateOrUpdate(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicy properties, CancellationToken cancellationToken = default)
+        public Response<PrivateEndpointConnection> Put(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -339,22 +247,18 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (objectReplicationPolicyId == null)
+            if (privateEndpointConnectionName == null)
             {
-                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
-            }
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, objectReplicationPolicyId, properties);
+            using var message = CreatePutRequest(resourceGroupName, accountName, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        ObjectReplicationPolicy value = default;
+                        PrivateEndpointConnection value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
@@ -362,7 +266,7 @@ namespace Azure.Management.Storage
                         }
                         else
                         {
-                            value = ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(document.RootElement);
+                            value = PrivateEndpointConnection.DeserializePrivateEndpointConnection(document.RootElement);
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -371,7 +275,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName, string objectReplicationPolicyId)
+        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string accountName, string privateEndpointConnectionName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -384,19 +288,19 @@ namespace Azure.Management.Storage
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts/", false);
             uri.AppendPath(accountName, true);
-            uri.AppendPath("/objectReplicationPolicies/", false);
-            uri.AppendPath(objectReplicationPolicyId, true);
+            uri.AppendPath("/privateEndpointConnections/", false);
+            uri.AppendPath(privateEndpointConnectionName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
 
-        /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
+        /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
+        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -406,12 +310,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (objectReplicationPolicyId == null)
+            if (privateEndpointConnectionName == null)
             {
-                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, accountName, objectReplicationPolicyId);
+            using var message = CreateDeleteRequest(resourceGroupName, accountName, privateEndpointConnectionName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -423,12 +327,12 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
+        /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
+        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public Response Delete(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -438,12 +342,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
-            if (objectReplicationPolicyId == null)
+            if (privateEndpointConnectionName == null)
             {
-                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
             }
 
-            using var message = CreateDeleteRequest(resourceGroupName, accountName, objectReplicationPolicyId);
+            using var message = CreateDeleteRequest(resourceGroupName, accountName, privateEndpointConnectionName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
