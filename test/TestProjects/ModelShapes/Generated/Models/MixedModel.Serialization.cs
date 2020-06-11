@@ -64,6 +64,24 @@ namespace ModelShapes.Models
                 }
                 writer.WriteEndArray();
             }
+            if (RequiredNullableString != null)
+            {
+                writer.WritePropertyName("RequiredNullableString");
+                writer.WriteStringValue(RequiredNullableString);
+            }
+            else
+            {
+                writer.WriteNull("RequiredNullableString");
+            }
+            if (RequiredNullableInt != null)
+            {
+                writer.WritePropertyName("RequiredNullableInt");
+                writer.WriteNumberValue(RequiredNullableInt.Value);
+            }
+            else
+            {
+                writer.WriteNull("RequiredNullableInt");
+            }
             if (RequiredNullableStringList != null)
             {
                 writer.WritePropertyName("RequiredNullableStringList");
@@ -105,6 +123,8 @@ namespace ModelShapes.Models
             int? nonRequiredInt = default;
             IList<string> nonRequiredStringList = default;
             IList<int> nonRequiredIntList = default;
+            string requiredNullableString = default;
+            int? requiredNullableInt = default;
             IList<string> requiredNullableStringList = default;
             IList<int> requiredNullableIntList = default;
             foreach (var property in element.EnumerateObject())
@@ -199,6 +219,24 @@ namespace ModelShapes.Models
                     nonRequiredIntList = array;
                     continue;
                 }
+                if (property.NameEquals("RequiredNullableString"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    requiredNullableString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("RequiredNullableInt"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    requiredNullableInt = property.Value.GetInt32();
+                    continue;
+                }
                 if (property.NameEquals("RequiredNullableStringList"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -235,7 +273,7 @@ namespace ModelShapes.Models
                     continue;
                 }
             }
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableStringList, requiredNullableIntList);
+            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList);
         }
     }
 }

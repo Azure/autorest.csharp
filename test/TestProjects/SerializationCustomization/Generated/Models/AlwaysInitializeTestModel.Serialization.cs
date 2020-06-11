@@ -33,20 +33,13 @@ namespace SerializationCustomization.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (RequiredAlwaysInitializeList != null)
+            writer.WritePropertyName("RequiredAlwaysInitializeList");
+            writer.WriteStartArray();
+            foreach (var item in RequiredAlwaysInitializeList)
             {
-                writer.WritePropertyName("RequiredAlwaysInitializeList");
-                writer.WriteStartArray();
-                foreach (var item in RequiredAlwaysInitializeList)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WriteObjectValue(item);
             }
-            else
-            {
-                writer.WriteNull("RequiredAlwaysInitializeList");
-            }
+            writer.WriteEndArray();
             if (DefaultList != null)
             {
                 writer.WritePropertyName("DefaultList");
@@ -57,15 +50,8 @@ namespace SerializationCustomization.Models
                 }
                 writer.WriteEndArray();
             }
-            if (RequiredAlwaysInitializeObject != null)
-            {
-                writer.WritePropertyName("RequiredAlwaysInitializeObject");
-                writer.WriteObjectValue(RequiredAlwaysInitializeObject);
-            }
-            else
-            {
-                writer.WriteNull("RequiredAlwaysInitializeObject");
-            }
+            writer.WritePropertyName("RequiredAlwaysInitializeObject");
+            writer.WriteObjectValue(RequiredAlwaysInitializeObject);
             if (AlwaysInitializeObject != null)
             {
                 writer.WritePropertyName("AlwaysInitializeObject");
@@ -130,10 +116,6 @@ namespace SerializationCustomization.Models
                 }
                 if (property.NameEquals("RequiredAlwaysInitializeList"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Item> array = new List<Item>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -172,10 +154,6 @@ namespace SerializationCustomization.Models
                 }
                 if (property.NameEquals("RequiredAlwaysInitializeObject"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     requiredAlwaysInitializeObject = Item.DeserializeItem(property.Value);
                     continue;
                 }

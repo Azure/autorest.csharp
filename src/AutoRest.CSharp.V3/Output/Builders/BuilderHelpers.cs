@@ -93,11 +93,11 @@ namespace AutoRest.CSharp.V3.Output.Builders
                     IFieldSymbol propertySymbol => typeFactory.CreateType(propertySymbol.Type),
                     _ => defaultType
                 };
-                // Not reading the return type information of existing members yet
+
                 return new MemberDeclarationOptions(
                     SyntaxFacts.GetText(existingMember.DeclaredAccessibility),
                     existingMember.Name,
-                    newType
+                    PromoteNullabilityInformation(newType, defaultType)
                 );
             }
             return new MemberDeclarationOptions(
@@ -105,6 +105,37 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 defaultName,
                 defaultType
                 );
+        }
+
+
+        // Because most of our libraries don't use C# nullable reference types we are losing nullability information
+        // for reference types when members are remapped
+        // Try to copy it back where possible from the original type
+        private static CSharpType PromoteNullabilityInformation(CSharpType newType, CSharpType defaultType)
+        {
+            if (newType.IsValueType)
+            {
+                return newType;
+            }
+
+            if (newType.Arguments.Length != defaultType.Arguments.Length)
+            {
+                return newType.WithNullable(defaultType.IsNullable);
+            }
+
+            if ((TypeFactory.IsList(newType) && TypeFactory.IsList(defaultType)) ||
+                (TypeFactory.IsDictionary(newType) && TypeFactory.IsDictionary(defaultType)))
+            {
+                var arguments = new CSharpType[newType.Arguments.Length];
+                for (var i = 0; i < newType.Arguments.Length; i++)
+                {
+                    arguments[i] = PromoteNullabilityInformation(newType.Arguments[i], defaultType.Arguments[i]);
+                }
+
+                return new CSharpType(newType.FrameworkType, defaultType.IsNullable, arguments);
+            }
+
+            return newType.WithNullable(defaultType.IsNullable);
         }
 
         public static string CreateDescription(Schema schema)

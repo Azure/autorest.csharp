@@ -78,9 +78,13 @@ namespace AutoRest.TestServer.Tests
                 Array.Empty<string>(),
                 Array.Empty<int>(),
                 null,
+                null,
+                null,
                 null
             );
 
+            Assert.IsNull(inputModel.RequiredNullableInt);
+            Assert.IsNull(inputModel.RequiredNullableString);
             Assert.IsNull(inputModel.RequiredNullableIntList);
             Assert.IsNull(inputModel.RequiredNullableStringList);
         }
@@ -94,10 +98,14 @@ namespace AutoRest.TestServer.Tests
                 Array.Empty<string>(),
                 Array.Empty<int>(),
                 null,
+                null,
+                null,
                 null
             );
 
             var element = JsonAsserts.AssertSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableString").ValueKind);
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableInt").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableStringList").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableIntList").ValueKind);
         }
@@ -110,6 +118,8 @@ namespace AutoRest.TestServer.Tests
                 1,
                 Array.Empty<string>(),
                 Array.Empty<int>(),
+                "string",
+                1,
                 Array.Empty<string>(),
                 Array.Empty<int>()
             );

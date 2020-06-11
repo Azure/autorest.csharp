@@ -63,6 +63,24 @@ namespace ModelShapes.Models
                 }
                 writer.WriteEndArray();
             }
+            if (RequiredNullableString != null)
+            {
+                writer.WritePropertyName("RequiredNullableString");
+                writer.WriteStringValue(RequiredNullableString);
+            }
+            else
+            {
+                writer.WriteNull("RequiredNullableString");
+            }
+            if (RequiredNullableInt != null)
+            {
+                writer.WritePropertyName("RequiredNullableInt");
+                writer.WriteNumberValue(RequiredNullableInt.Value);
+            }
+            else
+            {
+                writer.WriteNull("RequiredNullableInt");
+            }
             if (RequiredNullableStringList != null)
             {
                 writer.WritePropertyName("RequiredNullableStringList");

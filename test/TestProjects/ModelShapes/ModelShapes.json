@@ -86,10 +86,21 @@
         "NonRequiredStringList": { "type": "array", "items": { "type": "string" } },
         "NonRequiredIntList": { "type": "array", "items": { "type": "integer" } },
 
+        "RequiredNullableString": { "type": "string", "x-nullable": true },
+        "RequiredNullableInt": { "type": "integer", "x-nullable": true },
         "RequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
         "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
       },
-      "required": ["RequiredString", "RequiredInt", "RequiredStringList", "RequiredIntList", "RequiredNullableStringList", "RequiredNullableIntList"]
+      "required": [
+        "RequiredString",
+        "RequiredInt",
+        "RequiredStringList",
+        "RequiredIntList",
+        "RequiredNullableInt",
+        "RequiredNullableString",
+        "RequiredNullableStringList",
+        "RequiredNullableIntList"
+      ]
     },
     "MixedModel": {
       "type": "object",
@@ -104,10 +115,21 @@
         "NonRequiredStringList": { "type": "array", "items": { "type": "string" } },
         "NonRequiredIntList": { "type": "array", "items": { "type": "integer" } },
 
+        "RequiredNullableString": { "type": "string", "x-nullable": true },
+        "RequiredNullableInt": { "type": "integer", "x-nullable": true },
         "RequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
         "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
       },
-      "required": ["RequiredString", "RequiredInt", "RequiredStringList", "RequiredIntList", "RequiredNullableStringList", "RequiredNullableIntList"]
+      "required": [
+        "RequiredString",
+        "RequiredInt",
+        "RequiredStringList",
+        "RequiredIntList",
+        "RequiredNullableInt",
+        "RequiredNullableString",
+        "RequiredNullableStringList",
+        "RequiredNullableIntList"
+      ]
     },
     "OutputModel": {
       "type": "object",
@@ -122,10 +144,21 @@
         "NonRequiredStringList": { "type": "array", "items": { "type": "string" } },
         "NonRequiredIntList": { "type": "array", "items": { "type": "integer" } },
 
+        "RequiredNullableString": { "type": "string", "x-nullable": true },
+        "RequiredNullableInt": { "type": "integer", "x-nullable": true },
         "RequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
         "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
       },
-      "required": ["RequiredString", "RequiredInt", "RequiredStringList", "RequiredIntList", "RequiredNullableStringList", "RequiredNullableIntList"]
+      "required": [
+        "RequiredString",
+        "RequiredInt",
+        "RequiredStringList",
+        "RequiredIntList",
+        "RequiredNullableInt",
+        "RequiredNullableString",
+        "RequiredNullableStringList",
+        "RequiredNullableIntList"
+      ]
     },
     "UnusedModel": {
       "type": "object",
