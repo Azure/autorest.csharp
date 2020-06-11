@@ -76,5 +76,18 @@ namespace ModelShapes.Models
             RequiredNullableStringList = requiredNullableStringList;
             RequiredNullableIntList = requiredNullableIntList;
         }
+
+        public string RequiredString { get; }
+        public int RequiredInt { get; }
+        public IList<string> RequiredStringList { get; }
+        public IList<int> RequiredIntList { get; }
+        public string NonRequiredString { get; set; }
+        public int? NonRequiredInt { get; set; }
+        public IList<string> NonRequiredStringList { get; set; }
+        public IList<int> NonRequiredIntList { get; set; }
+        public string RequiredNullableString { get; }
+        public int? RequiredNullableInt { get; }
+        public IList<string> RequiredNullableStringList { get; }
+        public IList<int> RequiredNullableIntList { get; }
     }
 }
