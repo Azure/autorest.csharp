@@ -23,10 +23,6 @@
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
     <Compile Include="../TestProjects/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
-    <Compile Update="..\TestProjects\ModelShapes\InputModel.cs">
-      <LinkBase>TestProjects</LinkBase>
-      <Link>TestProjects\ModelShapes\InputModel.cs</Link>
-    </Compile>
   </ItemGroup>
 
 </Project>
