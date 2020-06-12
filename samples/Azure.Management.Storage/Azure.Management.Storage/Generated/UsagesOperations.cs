@@ -16,24 +16,24 @@ using Azure.Management.Storage.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> The Usages service client. </summary>
-    public partial class UsagesClient
+    public partial class UsagesOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal UsagesRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of UsagesClient for mocking. </summary>
-        protected UsagesClient()
+        internal UsagesRestOperations RestClient { get; }
+        /// <summary> Initializes a new instance of UsagesOperations for mocking. </summary>
+        protected UsagesOperations()
         {
         }
-        /// <summary> Initializes a new instance of UsagesClient. </summary>
+        /// <summary> Initializes a new instance of UsagesOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal UsagesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        internal UsagesOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-            RestClient = new UsagesRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new UsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
 
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("UsagesClient.ListByLocation");
+                using var scope = _clientDiagnostics.CreateScope("UsagesOperations.ListByLocation");
                 scope.Start();
                 try
                 {
@@ -78,7 +78,7 @@ namespace Azure.Management.Storage
 
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("UsagesClient.ListByLocation");
+                using var scope = _clientDiagnostics.CreateScope("UsagesOperations.ListByLocation");
                 scope.Start();
                 try
                 {

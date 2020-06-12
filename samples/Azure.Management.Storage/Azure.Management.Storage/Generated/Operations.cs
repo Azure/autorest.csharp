@@ -15,24 +15,24 @@ using Azure.Management.Storage.Models;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> The Operations service client. </summary>
-    public partial class OperationsClient
+    /// <summary> The  service client. </summary>
+    public partial class Operations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal OperationsRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of OperationsClient for mocking. </summary>
-        protected OperationsClient()
+        internal RestOperations RestClient { get; }
+        /// <summary> Initializes a new instance of Operations for mocking. </summary>
+        protected Operations()
         {
         }
-        /// <summary> Initializes a new instance of OperationsClient. </summary>
+        /// <summary> Initializes a new instance of Operations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal OperationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2019-06-01")
+        internal Operations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-            RestClient = new OperationsRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
+            RestClient = new RestOperations(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -43,7 +43,7 @@ namespace Azure.Management.Storage
         {
             async Task<Page<Operation>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OperationsClient.List");
+                using var scope = _clientDiagnostics.CreateScope("Operations.List");
                 scope.Start();
                 try
                 {
@@ -65,7 +65,7 @@ namespace Azure.Management.Storage
         {
             Page<Operation> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OperationsClient.List");
+                using var scope = _clientDiagnostics.CreateScope("Operations.List");
                 scope.Start();
                 try
                 {

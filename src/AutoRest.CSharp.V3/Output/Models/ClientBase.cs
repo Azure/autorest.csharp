@@ -12,13 +12,16 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal abstract class ClientBase: TypeProvider
     {
-        protected const string ClientSuffix = "Client";
+        private const string ClientSuffixValue = "Client";
+        private const string OperationsSuffixValue = "Operations";
+        protected string ClientSuffix { get; }
 
         private readonly BuildContext _context;
         private readonly TypeFactory _typeFactory;
 
         protected ClientBase(BuildContext context): base(context)
         {
+            ClientSuffix = context.Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
             _typeFactory = context.TypeFactory;
             _context = context;
         }
@@ -78,16 +81,14 @@ namespace AutoRest.CSharp.V3.Output.Models
         {
             name = string.IsNullOrEmpty(name) ? "Service" : name.ToCleanName();
 
-            var operationsSuffix = "Operations";
-            if (name.EndsWith(operationsSuffix) && name.Length > operationsSuffix.Length)
+            if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
             {
-                name = name.Substring(0, name.Length - operationsSuffix.Length);
+                name = name.Substring(0, name.Length - OperationsSuffixValue.Length);
             }
 
-            var clientSuffix = ClientSuffix;
-            if (name.EndsWith(clientSuffix) && name.Length > clientSuffix.Length)
+            if (name.EndsWith(ClientSuffixValue) && name.Length >= ClientSuffixValue.Length)
             {
-                name = name.Substring(0, name.Length - clientSuffix.Length);
+                name = name.Substring(0, name.Length - ClientSuffixValue.Length);
             }
 
             return name;

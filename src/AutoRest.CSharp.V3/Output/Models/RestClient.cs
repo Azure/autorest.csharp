@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class RestClient: ClientBase
     {
-        protected const string RestClientSuffix = "RestClient";
+        protected string RestClientSuffix { get; }
 
         private readonly OperationGroup _operationGroup;
         private readonly BuildContext _context;
@@ -48,6 +48,7 @@ namespace AutoRest.CSharp.V3.Output.Models
             var mainClient = context.Library.FindClient(operationGroup);
 
             ClientPrefix = GetClientPrefix(mainClient?.Declaration.Name ?? operationGroup.Language.Default.Name);
+            RestClientSuffix = "Rest" + ClientSuffix;
             DefaultName = ClientPrefix + RestClientSuffix;
             Description = "";
         }

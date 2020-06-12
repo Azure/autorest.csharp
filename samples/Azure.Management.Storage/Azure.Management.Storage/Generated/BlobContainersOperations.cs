@@ -17,24 +17,24 @@ using Azure.Management.Storage.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> The BlobContainers service client. </summary>
-    public partial class BlobContainersClient
+    public partial class BlobContainersOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal BlobContainersRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of BlobContainersClient for mocking. </summary>
-        protected BlobContainersClient()
+        internal BlobContainersRestOperations RestClient { get; }
+        /// <summary> Initializes a new instance of BlobContainersOperations for mocking. </summary>
+        protected BlobContainersOperations()
         {
         }
-        /// <summary> Initializes a new instance of BlobContainersClient. </summary>
+        /// <summary> Initializes a new instance of BlobContainersOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal BlobContainersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        internal BlobContainersOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-            RestClient = new BlobContainersRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new BlobContainersRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -47,7 +47,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobContainer>> CreateAsync(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Create");
             scope.Start();
             try
             {
@@ -68,7 +68,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobContainer> Create(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Create");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Create");
             scope.Start();
             try
             {
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobContainer>> UpdateAsync(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Update");
             scope.Start();
             try
             {
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobContainer> Update(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Update");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Update");
             scope.Start();
             try
             {
@@ -130,7 +130,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<BlobContainer>> GetAsync(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Get");
             scope.Start();
             try
             {
@@ -150,7 +150,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobContainer> Get(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Get");
             scope.Start();
             try
             {
@@ -170,7 +170,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Delete");
             scope.Start();
             try
             {
@@ -190,7 +190,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Delete");
             scope.Start();
             try
             {
@@ -211,7 +211,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<LegalHold>> SetLegalHoldAsync(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.SetLegalHold");
             scope.Start();
             try
             {
@@ -232,7 +232,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<LegalHold> SetLegalHold(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.SetLegalHold");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.SetLegalHold");
             scope.Start();
             try
             {
@@ -253,7 +253,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<LegalHold>> ClearLegalHoldAsync(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.ClearLegalHold");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<LegalHold> ClearLegalHold(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ClearLegalHold");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.ClearLegalHold");
             scope.Start();
             try
             {
@@ -297,7 +297,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> CreateOrUpdateImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch = null, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.CreateOrUpdateImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -320,7 +320,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> CreateOrUpdateImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch = null, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.CreateOrUpdateImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.CreateOrUpdateImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -341,7 +341,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> GetImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.GetImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -362,7 +362,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> GetImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.GetImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.GetImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -383,7 +383,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> DeleteImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.DeleteImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -404,7 +404,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> DeleteImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.DeleteImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.DeleteImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -425,7 +425,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> LockImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.LockImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -446,7 +446,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> LockImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.LockImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.LockImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -469,7 +469,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ImmutabilityPolicy>> ExtendImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.ExtendImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -492,7 +492,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ImmutabilityPolicy> ExtendImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.ExtendImmutabilityPolicy");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.ExtendImmutabilityPolicy");
             scope.Start();
             try
             {
@@ -513,7 +513,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(string resourceGroupName, string accountName, string containerName, LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Lease");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Lease");
             scope.Start();
             try
             {
@@ -534,7 +534,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<LeaseContainerResponse> Lease(string resourceGroupName, string accountName, string containerName, LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.Lease");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.Lease");
             scope.Start();
             try
             {
@@ -566,7 +566,7 @@ namespace Azure.Management.Storage
 
             async Task<Page<ListContainerItem>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
+                using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.List");
                 scope.Start();
                 try
                 {
@@ -581,7 +581,7 @@ namespace Azure.Management.Storage
             }
             async Task<Page<ListContainerItem>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
+                using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.List");
                 scope.Start();
                 try
                 {
@@ -616,7 +616,7 @@ namespace Azure.Management.Storage
 
             Page<ListContainerItem> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
+                using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.List");
                 scope.Start();
                 try
                 {
@@ -631,7 +631,7 @@ namespace Azure.Management.Storage
             }
             Page<ListContainerItem> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("BlobContainersClient.List");
+                using var scope = _clientDiagnostics.CreateScope("BlobContainersOperations.List");
                 scope.Start();
                 try
                 {

@@ -15,24 +15,24 @@ using Azure.Management.Storage.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> The PrivateEndpointConnections service client. </summary>
-    public partial class PrivateEndpointConnectionsClient
+    public partial class PrivateEndpointConnectionsOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal PrivateEndpointConnectionsRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient for mocking. </summary>
-        protected PrivateEndpointConnectionsClient()
+        internal PrivateEndpointConnectionsRestOperations RestClient { get; }
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionsOperations for mocking. </summary>
+        protected PrivateEndpointConnectionsOperations()
         {
         }
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionsClient. </summary>
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionsOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal PrivateEndpointConnectionsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
+        internal PrivateEndpointConnectionsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
-            RestClient = new PrivateEndpointConnectionsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new PrivateEndpointConnectionsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -44,7 +44,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PrivateEndpointConnection>> GetAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsOperations.Get");
             scope.Start();
             try
             {
@@ -64,7 +64,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PrivateEndpointConnection> Get(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Get");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsOperations.Get");
             scope.Start();
             try
             {
@@ -86,7 +86,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PrivateEndpointConnection>> PutAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Put");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsOperations.Put");
             scope.Start();
             try
             {
@@ -108,7 +108,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PrivateEndpointConnection> Put(string resourceGroupName, string accountName, string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Put");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsOperations.Put");
             scope.Start();
             try
             {
@@ -128,7 +128,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> DeleteAsync(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsOperations.Delete");
             scope.Start();
             try
             {
@@ -148,7 +148,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Delete(string resourceGroupName, string accountName, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsClient.Delete");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionsOperations.Delete");
             scope.Start();
             try
             {
