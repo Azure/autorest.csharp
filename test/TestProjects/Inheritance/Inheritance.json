@@ -179,6 +179,15 @@
         }
       ],
       "x-ms-discriminator-value": "derived"
+    },
+    "AnotherDerivedClassWithExtensibleEnumDiscriminator": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClassWithExtensibleEnumDiscriminator"
+        }
+      ],
+      "x-ms-discriminator-value": "random value"
     }
   }
 }

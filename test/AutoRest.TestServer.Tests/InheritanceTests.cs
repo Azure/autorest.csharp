@@ -123,6 +123,9 @@ namespace AutoRest.TestServer.Tests
         {
             var derived = new DerivedClassWithExtensibleEnumDiscriminator();
             Assert.AreEqual(BaseClassWithEntensibleEnumDiscriminatorEnum.Derived, derived.DiscriminatorProperty);
+
+            var anotherDerived = new AnotherDerivedClassWithExtensibleEnumDiscriminator();
+            Assert.AreEqual(new BaseClassWithEntensibleEnumDiscriminatorEnum("random value"), anotherDerived.DiscriminatorProperty);
         }
     }
 }

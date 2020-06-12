@@ -82,7 +82,7 @@ schemas: !<!Schemas>
           description: simple string
       protocol: !<!Protocols> {}
   choices:
-    - !<!ChoiceSchema> &ref_24
+    - !<!ChoiceSchema> &ref_25
       choices:
         - !<!ChoiceValue> 
           value: derived
@@ -498,15 +498,37 @@ schemas: !<!Schemas>
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
+          - !<!ObjectSchema> &ref_24
+            type: object
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            discriminatorValue: random value
+            parents: !<!Relations> 
+              all:
+                - *ref_22
+              immediate:
+                - *ref_22
+            extensions:
+              x-ms-discriminator-value: random value
+            language: !<!Languages> 
+              default:
+                name: AnotherDerivedClassWithExtensibleEnumDiscriminator
+                description: ''
+                namespace: ''
+            protocol: !<!Protocols> {}
         immediate:
           - *ref_23
+          - *ref_24
       discriminator: !<!Discriminator> 
         all:
           derived: *ref_23
+          random value: *ref_24
         immediate:
           derived: *ref_23
-        property: !<!Property> &ref_25
-          schema: *ref_24
+          random value: *ref_24
+        property: !<!Property> &ref_26
+          schema: *ref_25
           isDiscriminator: true
           required: true
           serializedName: DiscriminatorProperty
@@ -516,7 +538,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
       properties:
-        - *ref_25
+        - *ref_26
       language: !<!Languages> 
         default:
           name: BaseClassWithExtensibleEnumDiscriminator
@@ -524,6 +546,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_23
+    - *ref_24
 operationGroups: []
 security: !<!Security> 
   authenticationRequired: false

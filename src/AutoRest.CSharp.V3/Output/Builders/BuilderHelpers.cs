@@ -32,7 +32,10 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 }
 
                 var stringValue = Convert.ToString(value);
-                return new Constant(enumType.Values.Single(v => (v.Value.Value as string) == stringValue), type);
+                var enumTypeValue = enumType.Values.SingleOrDefault(v => (v.Value.Value as string) == stringValue);
+
+                // Fallback to the string value if we can't find an appropriate enum member (would work only for extensible enums)
+                return new Constant((object?)enumTypeValue ?? stringValue, type);
             }
 
             Type? frameworkType = type.FrameworkType;
