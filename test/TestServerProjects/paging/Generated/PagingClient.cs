@@ -1346,6 +1346,80 @@ namespace paging
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> GetPagingModelWithItemNameWithXMSClientNameAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetPagingModelWithItemNameWithXMSClientNameAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Indexes, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.GetPagingModelWithItemNameWithXMSClientNameNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Indexes, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> GetPagingModelWithItemNameWithXMSClientName(CancellationToken cancellationToken = default)
+        {
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetPagingModelWithItemNameWithXMSClientName(cancellationToken);
+                    return Page.FromValues(response.Value.Indexes, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.GetPagingModelWithItemNameWithXMSClientNameNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Indexes, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>

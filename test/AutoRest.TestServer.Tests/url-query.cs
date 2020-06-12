@@ -64,8 +64,8 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDoubleNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).DoubleNullAsync( null));
 
         [Test]
-        [Ignore("No test server handler for this one")]
-        public Task StringUnicodeAsync() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).StringUnicodeAsync());
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
+        public Task UrlQueriesStringUnicode() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).StringUnicodeAsync());
 
         [Test]
         public Task UrlQueriesStringUrlEncoded() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).StringUrlEncodedAsync());
