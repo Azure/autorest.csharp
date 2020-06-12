@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
+using AutoRest.CSharp.V3.Output.Models.Shared;
 
 namespace AutoRest.CSharp.V3.Output.Models.Types
 {
@@ -10,11 +11,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public ObjectTypeProperty Property { get; }
         public string SerializedName { get; }
 
-        public string? Value { get; }
+        public Constant? Value { get; }
 
         public ObjectTypeDiscriminatorImplementation[] Implementations { get; }
 
-        public ObjectTypeDiscriminator(ObjectTypeProperty property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, string? value)
+        public ObjectTypeDiscriminator(ObjectTypeProperty property, string serializedName, ObjectTypeDiscriminatorImplementation[] implementations, Constant? value)
         {
             Property = property;
             Implementations = implementations;

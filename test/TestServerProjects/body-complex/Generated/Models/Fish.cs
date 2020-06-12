@@ -17,7 +17,6 @@ namespace body_complex.Models
         public Fish(float length)
         {
             Length = length;
-            Fishtype = null;
         }
 
         /// <summary> Initializes a new instance of Fish. </summary>

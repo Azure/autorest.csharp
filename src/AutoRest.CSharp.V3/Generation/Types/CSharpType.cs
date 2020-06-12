@@ -5,6 +5,7 @@ using System;
 using System.Buffers;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.V3.Generation.Writers;
 using AutoRest.CSharp.V3.Output.Models.Types;
 
 namespace AutoRest.CSharp.V3.Generation.Types
@@ -77,5 +78,10 @@ namespace AutoRest.CSharp.V3.Generation.Types
             : new CSharpType(Implementation, Namespace, Name, IsValueType, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
+
+        public override string ToString()
+        {
+            return new CodeWriter().Append($"{this}").ToString();
+        }
     }
 }

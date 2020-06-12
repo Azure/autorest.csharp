@@ -13,7 +13,6 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of DotFish. </summary>
         internal DotFish()
         {
-            FishType = null;
         }
 
         /// <summary> Initializes a new instance of DotFish. </summary>

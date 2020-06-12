@@ -4,7 +4,7 @@ info: !<!Info>
   title: Schema mapping
 schemas: !<!Schemas> 
   strings:
-    - !<!StringSchema> &ref_15
+    - !<!StringSchema> &ref_16
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -14,7 +14,7 @@ schemas: !<!Schemas>
           name: BaseClassProperty
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_11
+    - !<!StringSchema> &ref_12
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -24,7 +24,7 @@ schemas: !<!Schemas>
           name: BaseClassWithDiscriminatorProperty
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_8
+    - !<!StringSchema> &ref_9
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -34,7 +34,7 @@ schemas: !<!Schemas>
           name: SomePropertiesSomeProperty
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_9
+    - !<!StringSchema> &ref_10
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -54,7 +54,7 @@ schemas: !<!Schemas>
           name: ClassThatInheritsFromBaseClassAndRedefinesAPropertyBaseClassProperty
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_16
+    - !<!StringSchema> &ref_17
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -74,22 +74,79 @@ schemas: !<!Schemas>
           name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAPropertyBaseClassProperty
           description: ''
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_0
+      type: string
+      language: !<!Languages> 
+        default:
+          name: String
+          description: simple string
+      protocol: !<!Protocols> {}
+  choices:
+    - !<!ChoiceSchema> &ref_24
+      choices:
+        - !<!ChoiceValue> 
+          value: derived
+          language:
+            default:
+              name: Derived
+              description: ''
+        - !<!ChoiceValue> 
+          value: other
+          language:
+            default:
+              name: Other
+              description: ''
+      type: choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: BaseClassWithEntensibleEnumDiscriminatorEnum
+          description: ''
+      protocol: !<!Protocols> {}
+  sealedChoices:
+    - !<!SealedChoiceSchema> &ref_20
+      choices:
+        - !<!ChoiceValue> 
+          value: derived
+          language:
+            default:
+              name: Derived
+              description: ''
+        - !<!ChoiceValue> 
+          value: other
+          language:
+            default:
+              name: Other
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: BaseClassWithEnumDiscriminatorEnum
+          description: ''
+      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_1
+    - !<!ObjectSchema> &ref_2
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       children: !<!Relations> 
         all:
-          - !<!ObjectSchema> &ref_0
+          - !<!ObjectSchema> &ref_1
             type: object
             apiVersions:
               - !<!ApiVersion> 
                 version: 1.0.0
             children: !<!Relations> 
               all:
-                - !<!ObjectSchema> &ref_10
+                - !<!ObjectSchema> &ref_11
                   type: object
                   apiVersions:
                     - !<!ApiVersion> 
@@ -97,17 +154,17 @@ schemas: !<!Schemas>
                   discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminator
                   parents: !<!Relations> 
                     all:
-                      - *ref_0
                       - *ref_1
+                      - *ref_2
                     immediate:
-                      - *ref_0
+                      - *ref_1
                   language: !<!Languages> 
                     default:
                       name: ClassThatInheritsFromBaseClassWithDiscriminator
                       description: ''
                       namespace: ''
                   protocol: !<!Protocols> {}
-                - !<!ObjectSchema> &ref_3
+                - !<!ObjectSchema> &ref_4
                   type: object
                   apiVersions:
                     - !<!ApiVersion> 
@@ -115,32 +172,14 @@ schemas: !<!Schemas>
                   discriminatorValue: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
                   parents: !<!Relations> 
                     all:
-                      - *ref_0
-                      - !<!ObjectSchema> &ref_2
+                      - *ref_1
+                      - !<!ObjectSchema> &ref_3
                         type: object
                         apiVersions:
                           - !<!ApiVersion> 
                             version: 1.0.0
                         children: !<!Relations> 
                           all:
-                            - !<!ObjectSchema> &ref_6
-                              type: object
-                              apiVersions:
-                                - !<!ApiVersion> 
-                                  version: 1.0.0
-                              parents: !<!Relations> 
-                                all:
-                                  - *ref_1
-                                  - *ref_2
-                                immediate:
-                                  - *ref_1
-                                  - *ref_2
-                              language: !<!Languages> 
-                                default:
-                                  name: ClassThatInheritsFromBaseClassAndSomeProperties
-                                  description: ''
-                                  namespace: ''
-                              protocol: !<!Protocols> {}
                             - !<!ObjectSchema> &ref_7
                               type: object
                               apiVersions:
@@ -148,37 +187,55 @@ schemas: !<!Schemas>
                                   version: 1.0.0
                               parents: !<!Relations> 
                                 all:
-                                  - *ref_1
                                   - *ref_2
+                                  - *ref_3
                                 immediate:
-                                  - *ref_1
                                   - *ref_2
+                                  - *ref_3
+                              language: !<!Languages> 
+                                default:
+                                  name: ClassThatInheritsFromBaseClassAndSomeProperties
+                                  description: ''
+                                  namespace: ''
+                              protocol: !<!Protocols> {}
+                            - !<!ObjectSchema> &ref_8
+                              type: object
+                              apiVersions:
+                                - !<!ApiVersion> 
+                                  version: 1.0.0
+                              parents: !<!Relations> 
+                                all:
+                                  - *ref_2
+                                  - *ref_3
+                                immediate:
+                                  - *ref_2
+                                  - *ref_3
                               language: !<!Languages> 
                                 default:
                                   name: ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride
                                   description: ''
                                   namespace: ''
                               protocol: !<!Protocols> {}
-                            - *ref_3
-                            - !<!ObjectSchema> &ref_4
+                            - *ref_4
+                            - !<!ObjectSchema> &ref_5
                               type: object
                               apiVersions:
                                 - !<!ApiVersion> 
                                   version: 1.0.0
                               children: !<!Relations> 
                                 all:
-                                  - !<!ObjectSchema> &ref_5
+                                  - !<!ObjectSchema> &ref_6
                                     type: object
                                     apiVersions:
                                       - !<!ApiVersion> 
                                         version: 1.0.0
                                     parents: !<!Relations> 
                                       all:
-                                        - *ref_4
+                                        - *ref_5
+                                        - *ref_3
                                         - *ref_2
-                                        - *ref_1
                                       immediate:
-                                        - *ref_4
+                                        - *ref_5
                                     language: !<!Languages> 
                                       default:
                                         name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty
@@ -186,29 +243,29 @@ schemas: !<!Schemas>
                                         namespace: ''
                                     protocol: !<!Protocols> {}
                                 immediate:
-                                  - *ref_5
+                                  - *ref_6
                               parents: !<!Relations> 
                                 all:
+                                  - *ref_3
                                   - *ref_2
-                                  - *ref_1
                                 immediate:
+                                  - *ref_3
                                   - *ref_2
-                                  - *ref_1
                               language: !<!Languages> 
                                 default:
                                   name: ClassThatInheritsFromSomePropertiesAndBaseClass
                                   description: ''
                                   namespace: ''
                               protocol: !<!Protocols> {}
-                            - *ref_5
-                          immediate:
                             - *ref_6
+                          immediate:
                             - *ref_7
-                            - *ref_3
+                            - *ref_8
                             - *ref_4
+                            - *ref_5
                         properties:
                           - !<!Property> 
-                            schema: *ref_8
+                            schema: *ref_9
                             serializedName: SomeProperty
                             language: !<!Languages> 
                               default:
@@ -216,7 +273,7 @@ schemas: !<!Schemas>
                                 description: ''
                             protocol: !<!Protocols> {}
                           - !<!Property> 
-                            schema: *ref_9
+                            schema: *ref_10
                             serializedName: SomeOtherProperty
                             language: !<!Languages> 
                               default:
@@ -229,10 +286,10 @@ schemas: !<!Schemas>
                             description: ''
                             namespace: ''
                         protocol: !<!Protocols> {}
-                      - *ref_1
-                    immediate:
-                      - *ref_0
                       - *ref_2
+                    immediate:
+                      - *ref_1
+                      - *ref_3
                   language: !<!Languages> 
                     default:
                       name: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
@@ -240,17 +297,17 @@ schemas: !<!Schemas>
                       namespace: ''
                   protocol: !<!Protocols> {}
               immediate:
-                - *ref_10
-                - *ref_3
+                - *ref_11
+                - *ref_4
             discriminator: !<!Discriminator> 
               all:
-                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_10
-                ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
+                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_11
+                ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_4
               immediate:
-                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_10
-                ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_3
-              property: !<!Property> &ref_12
-                schema: *ref_11
+                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_11
+                ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_4
+              property: !<!Property> &ref_13
+                schema: *ref_12
                 isDiscriminator: true
                 required: true
                 serializedName: DiscriminatorProperty
@@ -262,37 +319,19 @@ schemas: !<!Schemas>
             discriminatorValue: BaseClassWithDiscriminator
             parents: !<!Relations> 
               all:
-                - *ref_1
+                - *ref_2
               immediate:
-                - *ref_1
+                - *ref_2
             properties:
-              - *ref_12
+              - *ref_13
             language: !<!Languages> 
               default:
                 name: BaseClassWithDiscriminator
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          - *ref_6
           - *ref_7
-          - !<!ObjectSchema> &ref_13
-            type: object
-            apiVersions:
-              - !<!ApiVersion> 
-                version: 1.0.0
-            parents: !<!Relations> 
-              all:
-                - *ref_1
-              immediate:
-                - *ref_1
-            language: !<!Languages> 
-              default:
-                name: ClassThatInheritsFromBaseClass
-                description: ''
-                namespace: ''
-            protocol: !<!Protocols> {}
-          - *ref_10
-          - *ref_3
+          - *ref_8
           - !<!ObjectSchema> &ref_14
             type: object
             apiVersions:
@@ -300,27 +339,45 @@ schemas: !<!Schemas>
                 version: 1.0.0
             parents: !<!Relations> 
               all:
-                - *ref_1
+                - *ref_2
               immediate:
-                - *ref_1
+                - *ref_2
+            language: !<!Languages> 
+              default:
+                name: ClassThatInheritsFromBaseClass
+                description: ''
+                namespace: ''
+            protocol: !<!Protocols> {}
+          - *ref_11
+          - *ref_4
+          - !<!ObjectSchema> &ref_15
+            type: object
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            parents: !<!Relations> 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
             language: !<!Languages> 
               default:
                 name: ClassThatInheritsFromBaseClassAndRedefinesAProperty
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          - *ref_4
           - *ref_5
-        immediate:
-          - *ref_0
           - *ref_6
+        immediate:
+          - *ref_1
           - *ref_7
-          - *ref_13
+          - *ref_8
           - *ref_14
-          - *ref_4
+          - *ref_15
+          - *ref_5
       properties:
         - !<!Property> 
-          schema: *ref_15
+          schema: *ref_16
           serializedName: BaseClassProperty
           language: !<!Languages> 
             default:
@@ -333,14 +390,14 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - *ref_0
-    - *ref_2
-    - *ref_6
-    - *ref_7
-    - *ref_13
-    - *ref_10
+    - *ref_1
     - *ref_3
+    - *ref_7
+    - *ref_8
     - *ref_14
+    - *ref_11
+    - *ref_4
+    - *ref_15
     - !<!ObjectSchema> 
       type: object
       apiVersions:
@@ -348,7 +405,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: *ref_16
+          schema: *ref_17
           serializedName: BaseClassProperty
           language: !<!Languages> 
             default:
@@ -361,8 +418,112 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - *ref_4
     - *ref_5
+    - *ref_6
+    - !<!ObjectSchema> &ref_18
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      children: !<!Relations> 
+        all:
+          - !<!ObjectSchema> &ref_19
+            type: object
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            discriminatorValue: derived
+            parents: !<!Relations> 
+              all:
+                - *ref_18
+              immediate:
+                - *ref_18
+            extensions:
+              x-ms-discriminator-value: derived
+            language: !<!Languages> 
+              default:
+                name: DerivedClassWithEnumDiscriminator
+                description: ''
+                namespace: ''
+            protocol: !<!Protocols> {}
+        immediate:
+          - *ref_19
+      discriminator: !<!Discriminator> 
+        all:
+          derived: *ref_19
+        immediate:
+          derived: *ref_19
+        property: !<!Property> &ref_21
+          schema: *ref_20
+          isDiscriminator: true
+          required: true
+          serializedName: DiscriminatorProperty
+          language: !<!Languages> 
+            default:
+              name: discriminatorProperty
+              description: ''
+          protocol: !<!Protocols> {}
+      properties:
+        - *ref_21
+      language: !<!Languages> 
+        default:
+          name: BaseClassWithEnumDiscriminator
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
+    - *ref_19
+    - !<!ObjectSchema> &ref_22
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      children: !<!Relations> 
+        all:
+          - !<!ObjectSchema> &ref_23
+            type: object
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            discriminatorValue: derived
+            parents: !<!Relations> 
+              all:
+                - *ref_22
+              immediate:
+                - *ref_22
+            extensions:
+              x-ms-discriminator-value: derived
+            language: !<!Languages> 
+              default:
+                name: DerivedClassWithExtensibleEnumDiscriminator
+                description: ''
+                namespace: ''
+            protocol: !<!Protocols> {}
+        immediate:
+          - *ref_23
+      discriminator: !<!Discriminator> 
+        all:
+          derived: *ref_23
+        immediate:
+          derived: *ref_23
+        property: !<!Property> &ref_25
+          schema: *ref_24
+          isDiscriminator: true
+          required: true
+          serializedName: DiscriminatorProperty
+          language: !<!Languages> 
+            default:
+              name: discriminatorProperty
+              description: ''
+          protocol: !<!Protocols> {}
+      properties:
+        - *ref_25
+      language: !<!Languages> 
+        default:
+          name: BaseClassWithExtensibleEnumDiscriminator
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
+    - *ref_23
 operationGroups: []
 security: !<!Security> 
   authenticationRequired: false

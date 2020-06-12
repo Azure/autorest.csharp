@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Requests;
+using AutoRest.CSharp.V3.Output.Models.Types;
 
 
 namespace AutoRest.CSharp.V3.Output.Models.Shared
@@ -15,7 +16,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
 
         public Constant(object? value, CSharpType type)
         {
-            Debug.Assert(value == null || value.GetType().Namespace?.StartsWith("System") == true);
             Value = value;
             Type = type;
 
@@ -23,9 +23,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
             {
                 if (!type.IsNullable)
                 {
-                    throw new InvalidOperationException("Null constant with non-nullable type");
+                    throw new InvalidOperationException($"Null constant with non-nullable type {type}");
                 }
-                return;
             }
 
             if (value == NewInstanceSentinel)
@@ -33,17 +32,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Shared
                 return;
             }
 
-            Type expectedType;
-            if (type.FrameworkType != null)
+            if (!type.IsFrameworkType &&
+                type.Implementation is EnumType &&
+                value != null &&
+                !(value is EnumTypeValue))
             {
-                expectedType = type.FrameworkType;
-            }
-            else
-            {
-                throw new InvalidOperationException("Unexpected type kind");
+                throw new InvalidOperationException($"Unexpected value '{value}' for enum type '{type}'");
             }
 
-            if (value.GetType() != expectedType)
+            if (value != null && type.IsFrameworkType && value.GetType() != type.FrameworkType)
             {
                 throw new InvalidOperationException("Constant type mismatch");
             }

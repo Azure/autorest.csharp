@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Security;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
@@ -23,10 +24,21 @@ namespace AutoRest.CSharp.V3.Output.Builders
         {
             object? normalizedValue;
 
+            if (!type.IsFrameworkType && type.Implementation is EnumType enumType)
+            {
+                if (value == null)
+                {
+                    return Constant.Default(type);
+                }
+
+                var stringValue = Convert.ToString(value);
+                return new Constant(enumType.Values.Single(v => (v.Value.Value as string) == stringValue), type);
+            }
+
             Type? frameworkType = type.FrameworkType;
             if (frameworkType == null)
             {
-                throw new InvalidOperationException("Only constants of framework type are allowed");
+                throw new InvalidOperationException("Only constants of framework type and enums are allowed");
             }
 
             if (frameworkType == typeof(byte[]) && value is string base64String)

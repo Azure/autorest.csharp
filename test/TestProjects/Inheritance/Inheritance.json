@@ -131,6 +131,54 @@
       "properties": {
         "BaseClassProperty": { "type": "string" }
       }
+    },
+    "BaseClassWithEnumDiscriminator": {
+      "type": "object",
+      "properties": {
+        "DiscriminatorProperty": {
+          "type": "string",
+          "enum": ["derived", "other"],
+          "x-ms-enum": {
+            "name": "BaseClassWithEnumDiscriminatorEnum",
+            "modelAsString": false
+          }
+        }
+      },
+      "discriminator": "DiscriminatorProperty",
+      "required": ["DiscriminatorProperty"]
+    },
+    "DerivedClassWithEnumDiscriminator": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClassWithEnumDiscriminator"
+        }
+      ],
+      "x-ms-discriminator-value": "derived"
+    },
+    "BaseClassWithExtensibleEnumDiscriminator": {
+      "type": "object",
+      "properties": {
+        "DiscriminatorProperty": {
+          "type": "string",
+          "enum": ["derived", "other"],
+          "x-ms-enum": {
+            "name": "BaseClassWithEntensibleEnumDiscriminatorEnum",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "DiscriminatorProperty",
+      "required": ["DiscriminatorProperty"]
+    },
+    "DerivedClassWithExtensibleEnumDiscriminator": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClassWithExtensibleEnumDiscriminator"
+        }
+      ],
+      "x-ms-discriminator-value": "derived"
     }
   }
 }

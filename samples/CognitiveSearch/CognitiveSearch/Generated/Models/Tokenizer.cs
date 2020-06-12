@@ -22,7 +22,6 @@ namespace CognitiveSearch.Models
             }
 
             Name = name;
-            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of Tokenizer. </summary>
