@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
 
         public override string ToString()
         {
-            return new CodeWriter().Append($"{this}").ToString();
+            return new CodeWriter().Append($"{this}").ToString(false);
         }
     }
 }
