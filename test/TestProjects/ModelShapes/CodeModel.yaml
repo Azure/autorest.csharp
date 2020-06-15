@@ -75,7 +75,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: InputModelRequiredNullableStringListItem
+          name: InputModelRequiredNullableString
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_8
@@ -85,7 +85,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: MixedModelRequiredString
+          name: InputModelRequiredNullableStringListItem
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_9
@@ -95,17 +95,17 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: MixedModelRequiredStringListItem
+          name: MixedModelRequiredString
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_11
+    - !<!StringSchema> &ref_10
       type: string
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: MixedModelNonRequiredString
+          name: MixedModelRequiredStringListItem
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_12
@@ -115,17 +115,27 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: MixedModelNonRequiredStringListItem
+          name: MixedModelNonRequiredString
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_14
+    - !<!StringSchema> &ref_13
       type: string
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: MixedModelRequiredNullableStringListItem
+          name: MixedModelNonRequiredStringListItem
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_15
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: MixedModelRequiredNullableString
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_16
@@ -135,17 +145,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: OutputModelRequiredString
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_17
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: OutputModelRequiredStringListItem
+          name: MixedModelRequiredNullableStringListItem
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_18
@@ -155,7 +155,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: OutputModelNonRequiredString
+          name: OutputModelRequiredString
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_19
@@ -165,7 +165,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: OutputModelNonRequiredStringListItem
+          name: OutputModelRequiredStringListItem
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_20
@@ -175,10 +175,40 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: OutputModelRequiredNullableStringListItem
+          name: OutputModelNonRequiredString
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_21
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: OutputModelNonRequiredStringListItem
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_22
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: OutputModelRequiredNullableString
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_23
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: OutputModelRequiredNullableStringListItem
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_24
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -189,7 +219,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_32
+    - !<!ConstantSchema> &ref_35
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -200,7 +230,7 @@ schemas: !<!Schemas>
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_33
+    - !<!ObjectSchema> &ref_36
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -225,7 +255,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_22
+          schema: !<!ArraySchema> &ref_25
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -244,7 +274,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_10
+          schema: !<!ArraySchema> &ref_11
             type: array
             elementType: *ref_4
             language: !<!Languages> 
@@ -278,7 +308,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_23
+          schema: !<!ArraySchema> &ref_26
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -297,7 +327,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_13
+          schema: !<!ArraySchema> &ref_14
             type: array
             elementType: *ref_4
             language: !<!Languages> 
@@ -313,12 +343,32 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_24
+          schema: *ref_7
+          nullable: true
+          required: true
+          serializedName: RequiredNullableString
+          language: !<!Languages> 
+            default:
+              name: requiredNullableString
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          nullable: true
+          required: true
+          serializedName: RequiredNullableInt
+          language: !<!Languages> 
+            default:
+              name: requiredNullableInt
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_27
             type: array
             apiVersions:
               - !<!ApiVersion> 
                 version: 1.0.0
-            elementType: *ref_7
+            elementType: *ref_8
             language: !<!Languages> 
               default:
                 name: InputModelRequiredNullableStringList
@@ -333,7 +383,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_15
+          schema: !<!ArraySchema> &ref_17
             type: array
             elementType: *ref_4
             language: !<!Languages> 
@@ -359,153 +409,14 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_35
+    - !<!ObjectSchema> &ref_38
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: *ref_8
-          required: true
-          serializedName: RequiredString
-          language: !<!Languages> 
-            default:
-              name: requiredString
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: *ref_2
-          required: true
-          serializedName: RequiredInt
-          language: !<!Languages> 
-            default:
-              name: requiredInt
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_25
-            type: array
-            apiVersions:
-              - !<!ApiVersion> 
-                version: 1.0.0
-            elementType: *ref_9
-            language: !<!Languages> 
-              default:
-                name: MixedModelRequiredStringList
-                description: Array of MixedModelRequiredStringListItem
-            protocol: !<!Protocols> {}
-          required: true
-          serializedName: RequiredStringList
-          language: !<!Languages> 
-            default:
-              name: requiredStringList
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: *ref_10
-          required: true
-          serializedName: RequiredIntList
-          language: !<!Languages> 
-            default:
-              name: requiredIntList
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: *ref_11
-          required: false
-          serializedName: NonRequiredString
-          language: !<!Languages> 
-            default:
-              name: nonRequiredString
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: *ref_2
-          required: false
-          serializedName: NonRequiredInt
-          language: !<!Languages> 
-            default:
-              name: nonRequiredInt
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_26
-            type: array
-            apiVersions:
-              - !<!ApiVersion> 
-                version: 1.0.0
-            elementType: *ref_12
-            language: !<!Languages> 
-              default:
-                name: MixedModelNonRequiredStringList
-                description: Array of MixedModelNonRequiredStringListItem
-            protocol: !<!Protocols> {}
-          required: false
-          serializedName: NonRequiredStringList
-          language: !<!Languages> 
-            default:
-              name: nonRequiredStringList
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: *ref_13
-          required: false
-          serializedName: NonRequiredIntList
-          language: !<!Languages> 
-            default:
-              name: nonRequiredIntList
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_27
-            type: array
-            apiVersions:
-              - !<!ApiVersion> 
-                version: 1.0.0
-            elementType: *ref_14
-            language: !<!Languages> 
-              default:
-                name: MixedModelRequiredNullableStringList
-                description: Array of MixedModelRequiredNullableStringListItem
-            protocol: !<!Protocols> {}
-          nullable: true
-          required: true
-          serializedName: RequiredNullableStringList
-          language: !<!Languages> 
-            default:
-              name: requiredNullableStringList
-              description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: *ref_15
-          nullable: true
-          required: true
-          serializedName: RequiredNullableIntList
-          language: !<!Languages> 
-            default:
-              name: requiredNullableIntList
-              description: ''
-          protocol: !<!Protocols> {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      language: !<!Languages> 
-        default:
-          name: MixedModel
-          description: ''
-          namespace: ''
-      protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_37
-      type: object
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      properties:
-        - !<!Property> 
-          schema: *ref_16
+          schema: *ref_9
           required: true
           serializedName: RequiredString
           language: !<!Languages> 
@@ -528,11 +439,11 @@ schemas: !<!Schemas>
             apiVersions:
               - !<!ApiVersion> 
                 version: 1.0.0
-            elementType: *ref_17
+            elementType: *ref_10
             language: !<!Languages> 
               default:
-                name: OutputModelRequiredStringList
-                description: Array of OutputModelRequiredStringListItem
+                name: MixedModelRequiredStringList
+                description: Array of MixedModelRequiredStringListItem
             protocol: !<!Protocols> {}
           required: true
           serializedName: RequiredStringList
@@ -542,7 +453,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_10
+          schema: *ref_11
           required: true
           serializedName: RequiredIntList
           language: !<!Languages> 
@@ -551,7 +462,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_18
+          schema: *ref_12
           required: false
           serializedName: NonRequiredString
           language: !<!Languages> 
@@ -574,7 +485,166 @@ schemas: !<!Schemas>
             apiVersions:
               - !<!ApiVersion> 
                 version: 1.0.0
+            elementType: *ref_13
+            language: !<!Languages> 
+              default:
+                name: MixedModelNonRequiredStringList
+                description: Array of MixedModelNonRequiredStringListItem
+            protocol: !<!Protocols> {}
+          required: false
+          serializedName: NonRequiredStringList
+          language: !<!Languages> 
+            default:
+              name: nonRequiredStringList
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_14
+          required: false
+          serializedName: NonRequiredIntList
+          language: !<!Languages> 
+            default:
+              name: nonRequiredIntList
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_15
+          nullable: true
+          required: true
+          serializedName: RequiredNullableString
+          language: !<!Languages> 
+            default:
+              name: requiredNullableString
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          nullable: true
+          required: true
+          serializedName: RequiredNullableInt
+          language: !<!Languages> 
+            default:
+              name: requiredNullableInt
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_30
+            type: array
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            elementType: *ref_16
+            language: !<!Languages> 
+              default:
+                name: MixedModelRequiredNullableStringList
+                description: Array of MixedModelRequiredNullableStringListItem
+            protocol: !<!Protocols> {}
+          nullable: true
+          required: true
+          serializedName: RequiredNullableStringList
+          language: !<!Languages> 
+            default:
+              name: requiredNullableStringList
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_17
+          nullable: true
+          required: true
+          serializedName: RequiredNullableIntList
+          language: !<!Languages> 
+            default:
+              name: requiredNullableIntList
+              description: ''
+          protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !<!Languages> 
+        default:
+          name: MixedModel
+          description: ''
+          namespace: ''
+      protocol: !<!Protocols> {}
+    - !<!ObjectSchema> &ref_40
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      properties:
+        - !<!Property> 
+          schema: *ref_18
+          required: true
+          serializedName: RequiredString
+          language: !<!Languages> 
+            default:
+              name: requiredString
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          required: true
+          serializedName: RequiredInt
+          language: !<!Languages> 
+            default:
+              name: requiredInt
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_31
+            type: array
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
             elementType: *ref_19
+            language: !<!Languages> 
+              default:
+                name: OutputModelRequiredStringList
+                description: Array of OutputModelRequiredStringListItem
+            protocol: !<!Protocols> {}
+          required: true
+          serializedName: RequiredStringList
+          language: !<!Languages> 
+            default:
+              name: requiredStringList
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_11
+          required: true
+          serializedName: RequiredIntList
+          language: !<!Languages> 
+            default:
+              name: requiredIntList
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_20
+          required: false
+          serializedName: NonRequiredString
+          language: !<!Languages> 
+            default:
+              name: nonRequiredString
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          required: false
+          serializedName: NonRequiredInt
+          language: !<!Languages> 
+            default:
+              name: nonRequiredInt
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_32
+            type: array
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            elementType: *ref_21
             language: !<!Languages> 
               default:
                 name: OutputModelNonRequiredStringList
@@ -588,7 +658,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_13
+          schema: *ref_14
           required: false
           serializedName: NonRequiredIntList
           language: !<!Languages> 
@@ -597,12 +667,32 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_30
+          schema: *ref_22
+          nullable: true
+          required: true
+          serializedName: RequiredNullableString
+          language: !<!Languages> 
+            default:
+              name: requiredNullableString
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          nullable: true
+          required: true
+          serializedName: RequiredNullableInt
+          language: !<!Languages> 
+            default:
+              name: requiredNullableInt
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_33
             type: array
             apiVersions:
               - !<!ApiVersion> 
                 version: 1.0.0
-            elementType: *ref_20
+            elementType: *ref_23
             language: !<!Languages> 
               default:
                 name: OutputModelRequiredNullableStringList
@@ -617,7 +707,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_15
+          schema: *ref_17
           nullable: true
           required: true
           serializedName: RequiredNullableIntList
@@ -643,7 +733,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: *ref_21
+          schema: *ref_24
           serializedName: UnusedString
           language: !<!Languages> 
             default:
@@ -657,20 +747,20 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
   arrays:
-    - *ref_22
-    - *ref_10
-    - *ref_23
-    - *ref_13
-    - *ref_24
-    - *ref_15
     - *ref_25
+    - *ref_11
     - *ref_26
+    - *ref_14
     - *ref_27
+    - *ref_17
     - *ref_28
     - *ref_29
     - *ref_30
+    - *ref_31
+    - *ref_32
+    - *ref_33
 globalParameters:
-  - !<!Parameter> &ref_31
+  - !<!Parameter> &ref_34
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -695,12 +785,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_34
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_32
+                schema: *ref_35
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -712,8 +802,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_34
-                schema: *ref_33
+              - !<!Parameter> &ref_37
+                schema: *ref_36
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -725,7 +815,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_34
+              - *ref_37
             language: !<!Languages> 
               default:
                 name: ''
@@ -759,12 +849,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_34
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_32
+                schema: *ref_35
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -776,8 +866,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_36
-                schema: *ref_35
+              - !<!Parameter> &ref_39
+                schema: *ref_38
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -789,7 +879,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_36
+              - *ref_39
             language: !<!Languages> 
               default:
                 name: ''
@@ -805,7 +895,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_35
+            schema: *ref_38
             language: !<!Languages> 
               default:
                 name: ''
@@ -827,7 +917,7 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_34
         requests:
           - !<!Request> 
             language: !<!Languages> 
@@ -842,7 +932,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_37
+            schema: *ref_40
             language: !<!Languages> 
               default:
                 name: ''

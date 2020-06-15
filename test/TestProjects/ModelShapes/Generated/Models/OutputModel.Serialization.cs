@@ -23,6 +23,8 @@ namespace ModelShapes.Models
             int? nonRequiredInt = default;
             IReadOnlyList<string> nonRequiredStringList = default;
             IReadOnlyList<int> nonRequiredIntList = default;
+            string requiredNullableString = default;
+            int? requiredNullableInt = default;
             IReadOnlyList<string> requiredNullableStringList = default;
             IReadOnlyList<int> requiredNullableIntList = default;
             foreach (var property in element.EnumerateObject())
@@ -117,6 +119,24 @@ namespace ModelShapes.Models
                     nonRequiredIntList = array;
                     continue;
                 }
+                if (property.NameEquals("RequiredNullableString"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    requiredNullableString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("RequiredNullableInt"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    requiredNullableInt = property.Value.GetInt32();
+                    continue;
+                }
                 if (property.NameEquals("RequiredNullableStringList"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -153,7 +173,7 @@ namespace ModelShapes.Models
                     continue;
                 }
             }
-            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableStringList, requiredNullableIntList);
+            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList);
         }
     }
 }

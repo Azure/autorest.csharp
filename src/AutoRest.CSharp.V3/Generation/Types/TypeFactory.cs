@@ -77,18 +77,20 @@ namespace AutoRest.CSharp.V3.Generation.Types
             throw new NotSupportedException(type.Name);
         }
 
-        private static bool IsDictionary(CSharpType type)
+        internal static bool IsDictionary(CSharpType type)
         {
-            return type.FrameworkType == typeof(IDictionary<,>) ||
-                   type.FrameworkType == typeof(IReadOnlyDictionary<,>);
+            return type.IsFrameworkType &&
+                   (type.FrameworkType == typeof(IDictionary<,>) ||
+                   type.FrameworkType == typeof(IReadOnlyDictionary<,>));
         }
 
-        private static bool IsList(CSharpType type)
+        public static bool IsList(CSharpType type)
         {
-            return type.FrameworkType == typeof(IEnumerable<>) ||
+            return type.IsFrameworkType &&
+                   (type.FrameworkType == typeof(IEnumerable<>) ||
                    type.FrameworkType == typeof(IReadOnlyList<>) ||
                    type.FrameworkType == typeof(IList<>) ||
-                   type.FrameworkType == typeof(ICollection<>);
+                   type.FrameworkType == typeof(ICollection<>));
         }
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
