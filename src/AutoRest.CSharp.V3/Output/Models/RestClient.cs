@@ -295,12 +295,6 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             List<Response> clientResponse = new List<Response>();
 
-            if (operation.IsLongRunning)
-            {
-                // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
-                responseHeaderModel = null;
-            }
-
             foreach (var response in operation.Responses)
             {
                 clientResponse.Add(new Response(
