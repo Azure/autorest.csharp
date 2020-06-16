@@ -17,18 +17,20 @@ using paging.Models;
 namespace paging
 {
     /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-    public partial class PagingGetMultiplePagesLROOperation : Operation<ProductResult>, IOperationSource<ProductResult>
+    public partial class PagingGetMultiplePagesLROOperation : Operation<AsyncPageable<Product>>, IOperationSource<AsyncPageable<Product>>
     {
-        private readonly ArmOperationHelpers<ProductResult> _operation;
-        internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        private readonly ArmOperationHelpers<AsyncPageable<Product>> _operation;
+        private readonly Func<string, Task<Response>> _nextPageFunc;
+        internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, Func<string, Task<Response>> nextPageFunc)
         {
-            _operation = new ArmOperationHelpers<ProductResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");
+            _operation = new ArmOperationHelpers<AsyncPageable<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");
+            _nextPageFunc = nextPageFunc;
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override ProductResult Value => _operation.Value;
+        public override AsyncPageable<Product> Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -46,35 +48,59 @@ namespace paging
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ProductResult>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<AsyncPageable<Product>>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ProductResult>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<AsyncPageable<Product>>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        ProductResult IOperationSource<ProductResult>.CreateResult(Response response, CancellationToken cancellationToken)
+        AsyncPageable<Product> IOperationSource<AsyncPageable<Product>>.CreateResult(Response response, CancellationToken cancellationToken)
         {
+            ProductResult firstPageResult;
             using var document = JsonDocument.Parse(response.ContentStream);
             if (document.RootElement.ValueKind == JsonValueKind.Null)
             {
-                return null;
+                firstPageResult = null;
             }
             else
             {
-                return ProductResult.DeserializeProductResult(document.RootElement);
+                firstPageResult = ProductResult.DeserializeProductResult(document.RootElement);
             }
+            Page<Product> firstPage = Page.FromValues(firstPageResult.Values, firstPageResult.NextLink, response);
+
+            return PageableHelpers.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken));
         }
 
-        async ValueTask<ProductResult> IOperationSource<ProductResult>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<AsyncPageable<Product>> IOperationSource<AsyncPageable<Product>>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
+            ProductResult firstPageResult;
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             if (document.RootElement.ValueKind == JsonValueKind.Null)
             {
-                return null;
+                firstPageResult = null;
             }
             else
             {
-                return ProductResult.DeserializeProductResult(document.RootElement);
+                firstPageResult = ProductResult.DeserializeProductResult(document.RootElement);
             }
+            Page<Product> firstPage = Page.FromValues(firstPageResult.Values, firstPageResult.NextLink, response);
+
+            return PageableHelpers.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken));
+        }
+
+        private async Task<Page<Product>> GetNextPage(string nextLink, CancellationToken cancellationToken)
+        {
+            Response response = await _nextPageFunc(nextLink);
+            ProductResult nextPageResult;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            if (document.RootElement.ValueKind == JsonValueKind.Null)
+            {
+                nextPageResult = null;
+            }
+            else
+            {
+                nextPageResult = ProductResult.DeserializeProductResult(document.RootElement);
+            }
+            return Page.FromValues(nextPageResult.Values, nextPageResult.NextLink, response);
         }
     }
 }

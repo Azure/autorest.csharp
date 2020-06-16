@@ -123,11 +123,10 @@ namespace AutoRest.CSharp.V3.Output.Models
             foreach (var operation in _operationGroup.Operations)
             {
                 var paging = operation.Language.Default.Paging;
-                if (paging == null || operation.IsLongRunning)
+                if (paging == null)
                 {
                     continue;
                 }
-
                 foreach (var serviceRequest in operation.Requests)
                 {
                     RestClientMethod? nextMethod = null;
@@ -138,7 +137,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                     else if (paging.NextLinkName != null)
                     {
                         var method = GetOperationMethod(serviceRequest);
-                        nextMethod = BuildNextPageMethod(method);
+                        nextMethod = BuildNextPageMethod(method, operation);
                     }
 
                     if (nextMethod != null)
@@ -400,7 +399,7 @@ namespace AutoRest.CSharp.V3.Output.Models
             };
         }
 
-        private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
+        private static RestClientMethod BuildNextPageMethod(RestClientMethod method, Operation operation)
         {
             var nextPageUrlParameter = new Parameter(
                 "nextLink",
@@ -414,7 +413,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                 .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
                 .ToArray();
             var request = new Request(
-                method.Request.HttpMethod,
+                RequestMethod.Get,
                 pathSegments,
                 Array.Empty<QueryParameter>(),
                 method.Request.Headers,
@@ -425,13 +424,24 @@ namespace AutoRest.CSharp.V3.Output.Models
                 .Prepend(nextPageUrlParameter)
                 .ToArray();
 
+            var responses = method.Responses;
+
+            // We hardcode 200 as expected response code for paged LRO results
+            if (operation.IsLongRunning)
+            {
+                responses = new[]
+                {
+                    new Response(null, new[] { 200 })
+                };
+            }
+
             return new RestClientMethod(
                 $"{method.Name}NextPage",
                 method.Description,
                 method.ReturnType,
                 request,
                 parameters,
-                method.Responses,
+                responses,
                 method.HeaderModel);
         }
 

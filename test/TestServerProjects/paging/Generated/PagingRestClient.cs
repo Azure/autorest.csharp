@@ -2281,6 +2281,76 @@ namespace paging
             }
         }
 
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, string clientRequestId, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            if (clientRequestId != null)
+            {
+                request.Headers.Add("client-request-id", clientRequestId);
+            }
+            if (pagingGetMultiplePagesLroOptions?.Maxresults != null)
+            {
+                request.Headers.Add("maxresults", pagingGetMultiplePagesLroOptions.Maxresults.Value);
+            }
+            if (pagingGetMultiplePagesLroOptions?.Timeout != null)
+            {
+                request.Headers.Add("timeout", pagingGetMultiplePagesLroOptions.Timeout.Value);
+            }
+            return message;
+        }
+
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> GetMultiplePagesLRONextPageAsync(string nextLink, string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, pagingGetMultiplePagesLroOptions);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response GetMultiplePagesLRONextPage(string nextLink, string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+
+            using var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, pagingGetMultiplePagesLroOptions);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreateNextFragmentNextPageRequest(string nextLink, string apiVersion, string tenant)
         {
             var message = _pipeline.CreateMessage();
