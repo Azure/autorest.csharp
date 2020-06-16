@@ -186,7 +186,7 @@ schemas: !<!Schemas>
   byteArrays:
     - !<!ByteArraySchema> &ref_13
       type: byte-array
-      format: byte
+      format: base64url
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0

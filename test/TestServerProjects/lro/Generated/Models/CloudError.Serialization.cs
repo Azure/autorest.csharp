@@ -14,17 +14,17 @@ namespace lro.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
-            int? code = default;
+            int? status = default;
             string message = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("code"))
+                if (property.NameEquals("status"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
-                    code = property.Value.GetInt32();
+                    status = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
@@ -37,7 +37,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new CloudError(code, message);
+            return new CloudError(status, message);
         }
     }
 }

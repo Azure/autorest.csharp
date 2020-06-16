@@ -306,7 +306,7 @@ namespace body_datetime
             return message;
         }
 
-        /// <summary> This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario. </summary>
+        /// <summary> Put max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutUtcMaxDateTime7DigitsAsync(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
@@ -322,7 +322,7 @@ namespace body_datetime
             }
         }
 
-        /// <summary> This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario. </summary>
+        /// <summary> Put max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="datetimeBody"> The DateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutUtcMaxDateTime7Digits(DateTimeOffset datetimeBody, CancellationToken cancellationToken = default)
@@ -454,7 +454,7 @@ namespace body_datetime
             return message;
         }
 
-        /// <summary> This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario. </summary>
+        /// <summary> Get max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<DateTimeOffset>> GetUtcUppercaseMaxDateTime7DigitsAsync(CancellationToken cancellationToken = default)
         {
@@ -474,7 +474,7 @@ namespace body_datetime
             }
         }
 
-        /// <summary> This is against the recommendation that asks for 3 digits, but allow to test what happens in that scenario. </summary>
+        /// <summary> Get max datetime value 9999-12-31T23:59:59.9999999Z. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<DateTimeOffset> GetUtcUppercaseMaxDateTime7Digits(CancellationToken cancellationToken = default)
         {

@@ -583,7 +583,7 @@ namespace body_string
                         }
                         else
                         {
-                            value = document.RootElement.GetBytesFromBase64();
+                            value = document.RootElement.GetBytesFromBase64("U");
                         }
                         return Response.FromValue(value, message.Response);
                     }
@@ -610,7 +610,7 @@ namespace body_string
                         }
                         else
                         {
-                            value = document.RootElement.GetBytesFromBase64();
+                            value = document.RootElement.GetBytesFromBase64("U");
                         }
                         return Response.FromValue(value, message.Response);
                     }
