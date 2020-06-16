@@ -775,7 +775,7 @@ schemas: !<!Schemas>
             name: ArrayOfString
             description: Array of String
         protocol: !<!Protocols> {}
-      nullableItems: true
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfpaths1Xk9Za9DictionaryArrayItemnullGetResponses200ContentApplicationJsonSchemaAdditionalproperties

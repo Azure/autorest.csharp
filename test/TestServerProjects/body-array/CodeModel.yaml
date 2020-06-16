@@ -798,7 +798,6 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_1
-      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfString
@@ -1151,7 +1150,6 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_27
-      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfString
@@ -1229,7 +1227,6 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_32
-      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfDictionaryOfString
@@ -1252,7 +1249,6 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_34
-      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfDictionaryOfString
