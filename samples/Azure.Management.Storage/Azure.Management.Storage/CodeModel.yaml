@@ -3266,6 +3266,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_14
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: ContainerPropertiesMetadata
@@ -3274,6 +3275,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_34
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: FileSharePropertiesMetadata
@@ -3282,6 +3284,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_245
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: StorageAccountCreateParametersTags
@@ -3292,6 +3295,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_138
       type: dictionary
       elementType: *ref_3
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: TrackedResourceTags
@@ -3300,6 +3304,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_266
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: StorageAccountUpdateParametersTags

@@ -47,7 +47,7 @@ namespace non_string_enum
             request.Headers.Add("Content-Type", "application/json");
             if (input != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(input.Value.ToString());
                 request.Content = content;
             }

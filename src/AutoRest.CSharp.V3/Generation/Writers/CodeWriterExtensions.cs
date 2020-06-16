@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return parameter.Type.IsValueType || parameter.DefaultValue.Value.Value == null;
         }
 
-        private static bool CanWriteNullCheck(Parameter parameter) => parameter.IsRequired && (parameter.Type.IsNullable || !parameter.Type.IsValueType);
+        private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && (parameter.Type.IsNullable || !parameter.Type.IsValueType);
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p =>
             !(p.DefaultValue != null && !CanBeInitializedInline(p)) && CanWriteNullCheck(p));
@@ -255,6 +255,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     from.FrameworkType == typeof(IEnumerable<>))
                 {
                     writer.UseNamespace(typeof(Enumerable).Namespace!);
+                    if (from.IsNullable)
+                    {
+                        writer.Append($"?");
+                    }
                     writer.Append($".ToArray()");
                 }
             }

@@ -759,6 +759,10 @@
         "uniqueItems": {
           "description": "if the elements in the array should be unique",
           "type": "boolean"
+        },
+        "nullableItems": {
+          "description": "if elements in the array should be nullable",
+          "type": "boolean"
         }
       },
       "defaultProperties": [],
@@ -809,6 +813,10 @@
         "elementType": {
           "$ref": "#/definitions/Schema",
           "description": "the element type of the dictionary. (Keys are always strings)"
+        },
+        "nullableItems": {
+          "description": "if elements in the dictionary should be nullable",
+          "type": "boolean"
         }
       },
       "defaultProperties": [],

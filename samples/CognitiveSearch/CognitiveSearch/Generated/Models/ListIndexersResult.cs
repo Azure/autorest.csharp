@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
         /// <param name="indexers"> The indexers in the Search service. </param>
         internal ListIndexersResult(IReadOnlyList<Indexer> indexers)
         {
-            Indexers = indexers;
+            Indexers = indexers ?? new List<Indexer>();
         }
 
         /// <summary> The indexers in the Search service. </summary>

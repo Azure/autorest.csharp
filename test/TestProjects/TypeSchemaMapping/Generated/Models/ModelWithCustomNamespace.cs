@@ -23,6 +23,6 @@ namespace Very.Custom.Namespace.From.Swagger
         }
 
         /// <summary> . </summary>
-        public string ModelProperty { get; set; }
+        public string ModelProperty { get; }
     }
 }

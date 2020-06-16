@@ -130,7 +130,7 @@ namespace media_types
             request.Headers.Add("Content-Type", "application/json");
             if (input != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(input);
                 request.Content = content;
             }

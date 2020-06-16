@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class RestClient: ClientBase
     {
-        protected const string RestClientSuffix = "RestClient";
+        protected string RestClientSuffix { get; }
 
         private readonly OperationGroup _operationGroup;
         private readonly BuildContext _context;
@@ -48,6 +48,7 @@ namespace AutoRest.CSharp.V3.Output.Models
             var mainClient = context.Library.FindClient(operationGroup);
 
             ClientPrefix = GetClientPrefix(mainClient?.Declaration.Name ?? operationGroup.Language.Default.Name);
+            RestClientSuffix = "Rest" + ClientSuffix;
             DefaultName = ClientPrefix + RestClientSuffix;
             Description = "";
         }
@@ -293,12 +294,6 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             List<Response> clientResponse = new List<Response>();
 
-            if (operation.IsLongRunning)
-            {
-                // Ignore response body and headers for LROs as the ArmOperationHelpers figures out them dynamically
-                responseHeaderModel = null;
-            }
-
             foreach (var response in operation.Responses)
             {
                 clientResponse.Add(new Response(
@@ -411,7 +406,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                 "The URL to the next page of results.",
                 typeof(string),
                 defaultValue: null,
-                isRequired: true);
+                validateNotNull: true);
 
             PathSegment[] pathSegments = method.Request.PathSegments
                 .Where(ps => ps.IsRaw)
@@ -471,7 +466,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                     parameter.Description,
                     typeof(Uri),
                     parameter.DefaultValue,
-                    parameter.IsRequired
+                    parameter.ValidateNotNull
                 );
             }
 

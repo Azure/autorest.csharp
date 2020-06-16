@@ -6502,6 +6502,7 @@ schemas: !<!Schemas>
             name: ArrayOfFacetResult
             description: Array of FacetResult
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: Facets
@@ -6528,6 +6529,7 @@ schemas: !<!Schemas>
             name: ArrayOfSearchResultSearchHighlightsItemsItem
             description: Array of SearchResultSearchHighlightsItemsItem
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: Highlights
@@ -6568,6 +6570,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_265
       type: dictionary
       elementType: *ref_5
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: TextWeights
@@ -6576,6 +6579,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_204
       type: dictionary
       elementType: *ref_6
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: WebApiHttpHeaders
@@ -9365,6 +9369,7 @@ schemas: !<!Schemas>
               properties:
                 - !<!Property> 
                   schema: *ref_91
+                  nullable: false
                   serializedName: '@search.action'
                   language: !<!Languages> 
                     default:
@@ -10452,6 +10457,7 @@ schemas: !<!Schemas>
       properties:
         - !<!Property> 
           schema: *ref_154
+          nullable: false
           readOnly: true
           required: true
           serializedName: status
@@ -10469,6 +10475,7 @@ schemas: !<!Schemas>
             properties:
               - !<!Property> 
                 schema: *ref_155
+                nullable: false
                 readOnly: true
                 required: true
                 serializedName: status

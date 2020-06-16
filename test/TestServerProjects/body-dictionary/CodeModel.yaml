@@ -140,6 +140,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_29
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -148,6 +149,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_31
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -156,6 +158,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_33
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -164,6 +167,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_35
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -172,6 +176,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_36
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -180,6 +185,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_37
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -188,6 +194,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_38
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -196,6 +203,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_39
       type: dictionary
       elementType: *ref_3
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfBoolean
@@ -204,6 +212,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_40
       type: dictionary
       elementType: *ref_3
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfBoolean
@@ -212,6 +221,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_42
       type: dictionary
       elementType: *ref_3
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfBoolean
@@ -220,6 +230,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_43
       type: dictionary
       elementType: *ref_3
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfBoolean
@@ -228,6 +239,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_44
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -236,6 +248,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_45
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -244,6 +257,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_47
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -252,6 +266,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_48
       type: dictionary
       elementType: *ref_1
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -260,6 +275,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_49
       type: dictionary
       elementType: *ref_4
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -268,6 +284,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_50
       type: dictionary
       elementType: *ref_4
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -276,6 +293,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_52
       type: dictionary
       elementType: *ref_4
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -284,6 +302,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_53
       type: dictionary
       elementType: *ref_4
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfInteger
@@ -292,6 +311,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_54
       type: dictionary
       elementType: *ref_5
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfNumber
@@ -300,6 +320,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_55
       type: dictionary
       elementType: *ref_5
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfNumber
@@ -308,6 +329,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_57
       type: dictionary
       elementType: *ref_5
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfNumber
@@ -316,6 +338,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_58
       type: dictionary
       elementType: *ref_5
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfNumber
@@ -324,6 +347,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_59
       type: dictionary
       elementType: *ref_6
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfNumber
@@ -332,6 +356,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_60
       type: dictionary
       elementType: *ref_6
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfNumber
@@ -340,6 +365,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_62
       type: dictionary
       elementType: *ref_6
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfNumber
@@ -348,6 +374,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_63
       type: dictionary
       elementType: *ref_6
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfNumber
@@ -356,6 +383,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_64
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -364,6 +392,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_65
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -372,6 +401,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_67
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -380,6 +410,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_68
       type: dictionary
       elementType: *ref_2
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -397,6 +428,7 @@ schemas: !<!Schemas>
             name: Date
             description: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDate
@@ -405,6 +437,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_70
       type: dictionary
       elementType: *ref_7
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDate
@@ -413,6 +446,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_72
       type: dictionary
       elementType: *ref_7
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDate
@@ -421,6 +455,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_73
       type: dictionary
       elementType: *ref_7
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDate
@@ -439,6 +474,7 @@ schemas: !<!Schemas>
             name: DateTime
             description: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDateTime
@@ -447,6 +483,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_75
       type: dictionary
       elementType: *ref_8
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDateTime
@@ -455,6 +492,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_77
       type: dictionary
       elementType: *ref_8
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDateTime
@@ -463,6 +501,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_78
       type: dictionary
       elementType: *ref_8
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDateTime
@@ -481,6 +520,7 @@ schemas: !<!Schemas>
             name: DateTime
             description: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDateTime
@@ -489,6 +529,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_80
       type: dictionary
       elementType: *ref_9
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDateTime
@@ -506,6 +547,7 @@ schemas: !<!Schemas>
             name: Duration
             description: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDuration
@@ -514,6 +556,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_83
       type: dictionary
       elementType: *ref_10
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfDuration
@@ -532,6 +575,7 @@ schemas: !<!Schemas>
             name: ByteArray
             description: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfByteArray
@@ -550,6 +594,7 @@ schemas: !<!Schemas>
             name: ByteArray
             description: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfByteArray
@@ -568,6 +613,7 @@ schemas: !<!Schemas>
             name: ByteArray
             description: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfByteArray
@@ -586,6 +632,7 @@ schemas: !<!Schemas>
             name: ByteArray
             description: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfByteArray
@@ -626,6 +673,7 @@ schemas: !<!Schemas>
             description: ''
             namespace: ''
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfWidget
@@ -634,6 +682,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_91
       type: dictionary
       elementType: *ref_13
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfWidget
@@ -642,6 +691,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_92
       type: dictionary
       elementType: *ref_13
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfWidget
@@ -650,6 +700,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_93
       type: dictionary
       elementType: *ref_13
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfWidget
@@ -658,6 +709,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_94
       type: dictionary
       elementType: *ref_13
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfWidget
@@ -666,6 +718,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_95
       type: dictionary
       elementType: *ref_13
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfWidget
@@ -684,6 +737,7 @@ schemas: !<!Schemas>
             name: ArrayOfGet200ApplicationJsonAdditionalPropertiesItem
             description: Array of Get200ApplicationJsonAdditionalPropertiesItem
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfpaths1Y9Iid6DictionaryArrayNullGetResponses200ContentApplicationJsonSchemaAdditionalproperties
@@ -702,6 +756,7 @@ schemas: !<!Schemas>
             name: ArrayOfString
             description: Array of String
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfpathsAfa1HvDictionaryArrayEmptyGetResponses200ContentApplicationJsonSchemaAdditionalproperties
@@ -720,6 +775,7 @@ schemas: !<!Schemas>
             name: ArrayOfString
             description: Array of String
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfpaths1Xk9Za9DictionaryArrayItemnullGetResponses200ContentApplicationJsonSchemaAdditionalproperties
@@ -738,6 +794,7 @@ schemas: !<!Schemas>
             name: ArrayOfString
             description: Array of String
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfpaths3Bo0LmDictionaryArrayItememptyGetResponses200ContentApplicationJsonSchemaAdditionalproperties
@@ -756,6 +813,7 @@ schemas: !<!Schemas>
             name: ArrayOfString
             description: Array of String
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfpathsEx22ApDictionaryArrayValidGetResponses200ContentApplicationJsonSchemaAdditionalproperties
@@ -774,6 +832,7 @@ schemas: !<!Schemas>
             name: ArrayOfPutContentSchemaItemsItem
             description: Array of PutContentSchemaItemsItem
         protocol: !<!Protocols> {}
+      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfpaths1Dxz488DictionaryArrayValidPutRequestbodyContentApplicationJsonSchemaAdditionalproperties

@@ -252,7 +252,7 @@ namespace body_number
             uri.AppendPath("/number/big/float/3.402823e+20", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
             request.Content = content;
             return message;
@@ -352,7 +352,7 @@ namespace body_number
             uri.AppendPath("/number/big/double/2.5976931e+101", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
             request.Content = content;
             return message;
@@ -452,7 +452,7 @@ namespace body_number
             uri.AppendPath("/number/big/double/99999999.99", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(99999999.99);
             request.Content = content;
             return message;
@@ -550,7 +550,7 @@ namespace body_number
             uri.AppendPath("/number/big/double/-99999999.99", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(-99999999.99);
             request.Content = content;
             return message;
@@ -648,7 +648,7 @@ namespace body_number
             uri.AppendPath("/number/big/decimal/2.5976931e+101", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
             request.Content = content;
             return message;
@@ -748,7 +748,7 @@ namespace body_number
             uri.AppendPath("/number/big/decimal/99999999.99", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(99999999.99M);
             request.Content = content;
             return message;
@@ -846,7 +846,7 @@ namespace body_number
             uri.AppendPath("/number/big/decimal/-99999999.99", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(-99999999.99M);
             request.Content = content;
             return message;
@@ -944,7 +944,7 @@ namespace body_number
             uri.AppendPath("/number/small/float/3.402823e-20", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
             request.Content = content;
             return message;
@@ -1044,7 +1044,7 @@ namespace body_number
             uri.AppendPath("/number/small/double/2.5976931e-101", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
             request.Content = content;
             return message;
@@ -1144,7 +1144,7 @@ namespace body_number
             uri.AppendPath("/number/small/decimal/2.5976931e-101", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(numberBody);
             request.Content = content;
             return message;

@@ -51,14 +51,14 @@ namespace SerializationCustomization.Models
         internal AlwaysInitializeTestModel(IList<Item> alwaysInitializeList, IList<Item> requiredList, IList<Item> requiredAlwaysInitializeList, IList<Item> defaultList, Item requiredAlwaysInitializeObject, Item alwaysInitializeObject, Item defaultObject)
         {
             AlwaysInitializeList = alwaysInitializeList ?? new List<Item>();
-            RequiredList = requiredList;
+            RequiredList = requiredList ?? new List<Item>();
             RequiredAlwaysInitializeList = requiredAlwaysInitializeList ?? new List<Item>();
             DefaultList = defaultList;
             RequiredAlwaysInitializeObject = requiredAlwaysInitializeObject ?? new Item();
             AlwaysInitializeObject = alwaysInitializeObject ?? new Item();
             DefaultObject = defaultObject;
         }
-        public IList<Item> RequiredList { get; set; }
+        public IList<Item> RequiredList { get; }
         public IList<Item> DefaultList { get; set; }
         public Item DefaultObject { get; set; }
     }

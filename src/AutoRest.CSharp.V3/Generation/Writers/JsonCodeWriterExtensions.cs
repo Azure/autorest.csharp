@@ -93,6 +93,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 property.ValueSerialization,
                                 w => w.Append($"{property.Property?.Declaration.Name}"));
                         }
+
+                        if (scope != default && property.Required)
+                        {
+                            using (writer.Scope($"else"))
+                            {
+                                writer.Line($"{writerName}.WriteNull({property.Name:L});");
+                            }
+                        }
                     }
 
                     if (obj.AdditionalProperties != null)

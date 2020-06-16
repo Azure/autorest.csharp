@@ -49,7 +49,7 @@ namespace CognitiveSearch.Models
         internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, Similarity similarity, string eTag)
         {
             Name = name;
-            Fields = fields;
+            Fields = fields ?? new List<Field>();
             ScoringProfiles = scoringProfiles;
             DefaultScoringProfile = defaultScoringProfile;
             CorsOptions = corsOptions;
@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
         /// <summary> The name of the index. </summary>
         public string Name { get; set; }
         /// <summary> The fields of the index. </summary>
-        public IList<Field> Fields { get; set; }
+        public IList<Field> Fields { get; }
         /// <summary> The scoring profiles for the index. </summary>
         public IList<ScoringProfile> ScoringProfiles { get; set; }
         /// <summary> The name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used. </summary>

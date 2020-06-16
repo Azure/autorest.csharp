@@ -46,7 +46,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -99,7 +99,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -152,7 +152,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -205,7 +205,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -215,14 +215,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutAsyncRelativeRetry400Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPutAsyncRelativeRetry400Headers>> PutAsyncRelativeRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetry400Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPutAsyncRelativeRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -231,14 +232,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetry400(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPutAsyncRelativeRetry400Headers> PutAsyncRelativeRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetry400Request(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPutAsyncRelativeRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -258,14 +260,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteNonRetry400Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsDeleteNonRetry400Headers>> DeleteNonRetry400Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteNonRetry400Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsDeleteNonRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -273,14 +276,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DeleteNonRetry400(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsDeleteNonRetry400Headers> DeleteNonRetry400(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteNonRetry400Request();
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsDeleteNonRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -300,14 +304,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete202NonRetry400Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsDelete202NonRetry400Headers>> Delete202NonRetry400Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete202NonRetry400Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsDelete202NonRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -315,14 +320,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete202NonRetry400(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsDelete202NonRetry400Headers> Delete202NonRetry400(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete202NonRetry400Request();
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsDelete202NonRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -342,14 +348,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsyncRelativeRetry400Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsDeleteAsyncRelativeRetry400Headers>> DeleteAsyncRelativeRetry400Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRelativeRetry400Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsDeleteAsyncRelativeRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -357,14 +364,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DeleteAsyncRelativeRetry400(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsDeleteAsyncRelativeRetry400Headers> DeleteAsyncRelativeRetry400(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRelativeRetry400Request();
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsDeleteAsyncRelativeRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -382,7 +390,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -392,14 +400,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PostNonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPostNonRetry400Headers>> PostNonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostNonRetry400Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPostNonRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -408,14 +417,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostNonRetry400(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPostNonRetry400Headers> PostNonRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostNonRetry400Request(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPostNonRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -433,7 +443,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -443,14 +453,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post202NonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPost202NonRetry400Headers>> Post202NonRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202NonRetry400Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPost202NonRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -459,14 +470,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202NonRetry400(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPost202NonRetry400Headers> Post202NonRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202NonRetry400Request(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPost202NonRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -484,7 +496,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -494,14 +506,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PostAsyncRelativeRetry400Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPostAsyncRelativeRetry400Headers>> PostAsyncRelativeRetry400Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRelativeRetry400Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPostAsyncRelativeRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -510,14 +523,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRelativeRetry400(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPostAsyncRelativeRetry400Headers> PostAsyncRelativeRetry400(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRelativeRetry400Request(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPostAsyncRelativeRetry400Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -535,7 +549,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -588,7 +602,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -598,14 +612,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutAsyncRelativeRetryNoStatusAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPutAsyncRelativeRetryNoStatusHeaders>> PutAsyncRelativeRetryNoStatusAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetryNoStatusRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPutAsyncRelativeRetryNoStatusHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -614,14 +629,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetryNoStatus(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPutAsyncRelativeRetryNoStatusHeaders> PutAsyncRelativeRetryNoStatus(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetryNoStatusRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPutAsyncRelativeRetryNoStatusHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -639,7 +655,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -649,14 +665,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutAsyncRelativeRetryNoStatusPayloadAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPutAsyncRelativeRetryNoStatusPayloadHeaders>> PutAsyncRelativeRetryNoStatusPayloadAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPutAsyncRelativeRetryNoStatusPayloadHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -665,14 +682,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetryNoStatusPayload(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPutAsyncRelativeRetryNoStatusPayloadHeaders> PutAsyncRelativeRetryNoStatusPayload(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPutAsyncRelativeRetryNoStatusPayloadHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -734,14 +752,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsyncRelativeRetryNoStatusAsync(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders>> DeleteAsyncRelativeRetryNoStatusAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -749,14 +768,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DeleteAsyncRelativeRetryNoStatus(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders> DeleteAsyncRelativeRetryNoStatus(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -774,7 +794,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -784,14 +804,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post202NoLocationAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPost202NoLocationHeaders>> Post202NoLocationAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202NoLocationRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPost202NoLocationHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -800,14 +821,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202NoLocation(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPost202NoLocationHeaders> Post202NoLocation(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202NoLocationRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPost202NoLocationHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -825,7 +847,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -835,14 +857,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PostAsyncRelativeRetryNoPayloadAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPostAsyncRelativeRetryNoPayloadHeaders>> PostAsyncRelativeRetryNoPayloadAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRelativeRetryNoPayloadRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPostAsyncRelativeRetryNoPayloadHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -851,14 +874,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRelativeRetryNoPayload(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPostAsyncRelativeRetryNoPayloadHeaders> PostAsyncRelativeRetryNoPayload(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRelativeRetryNoPayloadRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPostAsyncRelativeRetryNoPayloadHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -876,7 +900,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -929,7 +953,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -939,14 +963,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutAsyncRelativeRetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPutAsyncRelativeRetryInvalidHeaderHeaders>> PutAsyncRelativeRetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPutAsyncRelativeRetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -955,14 +980,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPutAsyncRelativeRetryInvalidHeaderHeaders> PutAsyncRelativeRetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPutAsyncRelativeRetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -980,7 +1006,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -990,14 +1016,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutAsyncRelativeRetryInvalidJsonPollingAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPutAsyncRelativeRetryInvalidJsonPollingHeaders>> PutAsyncRelativeRetryInvalidJsonPollingAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPutAsyncRelativeRetryInvalidJsonPollingHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1006,14 +1033,15 @@ namespace lro
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRelativeRetryInvalidJsonPolling(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPutAsyncRelativeRetryInvalidJsonPollingHeaders> PutAsyncRelativeRetryInvalidJsonPolling(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPutAsyncRelativeRetryInvalidJsonPollingHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1033,14 +1061,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete202RetryInvalidHeaderAsync(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsDelete202RetryInvalidHeaderHeaders>> Delete202RetryInvalidHeaderAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete202RetryInvalidHeaderRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsDelete202RetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1048,14 +1077,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete202RetryInvalidHeader(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsDelete202RetryInvalidHeaderHeaders> Delete202RetryInvalidHeader(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete202RetryInvalidHeaderRequest();
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsDelete202RetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1075,14 +1105,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsyncRelativeRetryInvalidHeaderAsync(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsDeleteAsyncRelativeRetryInvalidHeaderHeaders>> DeleteAsyncRelativeRetryInvalidHeaderAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsDeleteAsyncRelativeRetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1090,14 +1121,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DeleteAsyncRelativeRetryInvalidHeader(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsDeleteAsyncRelativeRetryInvalidHeaderHeaders> DeleteAsyncRelativeRetryInvalidHeader(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsDeleteAsyncRelativeRetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1117,14 +1149,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1132,14 +1165,15 @@ namespace lro
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DeleteAsyncRelativeRetryInvalidJsonPolling(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> DeleteAsyncRelativeRetryInvalidJsonPolling(CancellationToken cancellationToken = default)
         {
             using var message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1157,7 +1191,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -1167,14 +1201,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post202RetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPost202RetryInvalidHeaderHeaders>> Post202RetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202RetryInvalidHeaderRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPost202RetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1183,14 +1218,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202RetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPost202RetryInvalidHeaderHeaders> Post202RetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202RetryInvalidHeaderRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPost202RetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1208,7 +1244,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -1218,14 +1254,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PostAsyncRelativeRetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPostAsyncRelativeRetryInvalidHeaderHeaders>> PostAsyncRelativeRetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPostAsyncRelativeRetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1234,14 +1271,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRelativeRetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPostAsyncRelativeRetryInvalidHeaderHeaders> PostAsyncRelativeRetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPostAsyncRelativeRetryInvalidHeaderHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1259,7 +1297,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -1269,14 +1307,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PostAsyncRelativeRetryInvalidJsonPollingAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LrosaDsPostAsyncRelativeRetryInvalidJsonPollingHeaders>> PostAsyncRelativeRetryInvalidJsonPollingAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LrosaDsPostAsyncRelativeRetryInvalidJsonPollingHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1285,14 +1324,15 @@ namespace lro
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRelativeRetryInvalidJsonPolling(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LrosaDsPostAsyncRelativeRetryInvalidJsonPollingHeaders> PostAsyncRelativeRetryInvalidJsonPolling(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LrosaDsPostAsyncRelativeRetryInvalidJsonPollingHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

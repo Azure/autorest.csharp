@@ -444,7 +444,7 @@ namespace url
             }
         }
 
-        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
+        /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StringUrlNonEncodedAsync(CancellationToken cancellationToken = default)
         {
@@ -461,7 +461,7 @@ namespace url
             }
         }
 
-        /// <summary> Get &apos;begin!*&apos;();:@&amp;=+$,end. </summary>
+        /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StringUrlNonEncoded(CancellationToken cancellationToken = default)
         {

@@ -39,7 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentLinkedEntities(string id, IReadOnlyList<LinkedEntity> entities, DocumentStatistics statistics)
         {
             Id = id;
-            Entities = entities;
+            Entities = entities ?? new List<LinkedEntity>();
             Statistics = statistics;
         }
 

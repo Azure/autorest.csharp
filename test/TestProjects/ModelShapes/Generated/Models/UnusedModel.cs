@@ -22,6 +22,6 @@ namespace ModelShapes.Models
             UnusedString = unusedString;
         }
 
-        public string UnusedString { get; set; }
+        public string UnusedString { get; }
     }
 }

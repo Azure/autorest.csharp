@@ -688,6 +688,33 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
+        public Task PagingReturnModelWithXMSClientName() => Test(async (host, pipeline) =>
+        {
+            var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagingModelWithItemNameWithXMSClientNameAsync();
+            var resultPage = Page.FromValues(result.Value.Indexes, result.Value.NextLink, result.GetRawResponse());
+            Assert.AreEqual(1, resultPage.Values.First().Properties.Id);
+            Assert.AreEqual("Product", resultPage.Values.First().Properties.Name);
+            Assert.IsNull(resultPage.ContinuationToken);
+
+            var pageableAsync = new PagingClient(ClientDiagnostics, pipeline, host).GetPagingModelWithItemNameWithXMSClientNameAsync();
+            await foreach (var page in pageableAsync.AsPages())
+            {
+                Assert.AreEqual(1, page.Values.First().Properties.Id);
+                Assert.AreEqual("Product", page.Values.First().Properties.Name);
+                Assert.IsNull(page.ContinuationToken);
+            }
+
+            var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetPagingModelWithItemNameWithXMSClientName();
+            foreach (var page in pageable.AsPages())
+            {
+                Assert.AreEqual(1, page.Values.First().Properties.Id);
+                Assert.AreEqual("Product", page.Values.First().Properties.Name);
+                Assert.IsNull(page.ContinuationToken);
+            }
+        });
+
+        [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingOdataMultiple() => Test(async (host, pipeline) =>
         {

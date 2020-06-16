@@ -39,13 +39,13 @@ namespace CognitiveSearch.Models
         /// <param name="preserveOriginal"> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </param>
         internal PatternCaptureTokenFilter(string odataType, string name, IList<string> patterns, bool? preserveOriginal) : base(odataType, name)
         {
-            Patterns = patterns;
+            Patterns = patterns ?? new List<string>();
             PreserveOriginal = preserveOriginal;
             OdataType = odataType ?? "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
 
         /// <summary> A list of patterns to match against each token. </summary>
-        public IList<string> Patterns { get; set; }
+        public IList<string> Patterns { get; }
         /// <summary> A value indicating whether to return the original token even if one of the patterns matches. Default is true. </summary>
         public bool? PreserveOriginal { get; set; }
     }

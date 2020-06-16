@@ -96,7 +96,7 @@ namespace body_time
             uri.AppendPath("/time/put", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(timeBody, "T");
             request.Content = content;
             return message;

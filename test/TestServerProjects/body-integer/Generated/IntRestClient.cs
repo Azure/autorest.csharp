@@ -356,7 +356,7 @@ namespace body_integer
             uri.AppendPath("/int/max/32", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
             return message;
@@ -404,7 +404,7 @@ namespace body_integer
             uri.AppendPath("/int/max/64", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
             return message;
@@ -452,7 +452,7 @@ namespace body_integer
             uri.AppendPath("/int/min/32", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
             return message;
@@ -500,7 +500,7 @@ namespace body_integer
             uri.AppendPath("/int/min/64", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
             return message;
@@ -600,7 +600,7 @@ namespace body_integer
             uri.AppendPath("/int/unixtime", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            using var content = new Utf8JsonRequestContent();
+            var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody, "U");
             request.Content = content;
             return message;

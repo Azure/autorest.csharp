@@ -46,7 +46,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -56,14 +56,15 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LROsCustomHeaderPutAsyncRetrySucceededHeaders>> PutAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRetrySucceededRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LROsCustomHeaderPutAsyncRetrySucceededHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -72,14 +73,15 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutAsyncRetrySucceeded(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LROsCustomHeaderPutAsyncRetrySucceededHeaders> PutAsyncRetrySucceeded(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutAsyncRetrySucceededRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LROsCustomHeaderPutAsyncRetrySucceededHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -97,7 +99,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -150,7 +152,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -160,14 +162,15 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LROsCustomHeaderPost202Retry200Headers>> Post202Retry200Async(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202Retry200Request(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LROsCustomHeaderPost202Retry200Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -176,14 +179,15 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202Retry200(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LROsCustomHeaderPost202Retry200Headers> Post202Retry200(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePost202Retry200Request(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LROsCustomHeaderPost202Retry200Headers(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -201,7 +205,7 @@ namespace lro
             request.Headers.Add("Content-Type", "application/json");
             if (product != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
             }
@@ -211,14 +215,15 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PostAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<LROsCustomHeaderPostAsyncRetrySucceededHeaders>> PostAsyncRetrySucceededAsync(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRetrySucceededRequest(product);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LROsCustomHeaderPostAsyncRetrySucceededHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -227,14 +232,15 @@ namespace lro
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PostAsyncRetrySucceeded(Product product = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<LROsCustomHeaderPostAsyncRetrySucceededHeaders> PostAsyncRetrySucceeded(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePostAsyncRetrySucceededRequest(product);
             _pipeline.Send(message, cancellationToken);
+            var headers = new LROsCustomHeaderPostAsyncRetrySucceededHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

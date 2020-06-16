@@ -45,8 +45,8 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
         internal LanguageResult(IReadOnlyList<DocumentLanguage> documents, IReadOnlyList<DocumentError> errors, RequestStatistics statistics, string modelVersion)
         {
-            Documents = documents;
-            Errors = errors;
+            Documents = documents ?? new List<DocumentLanguage>();
+            Errors = errors ?? new List<DocumentError>();
             Statistics = statistics;
             ModelVersion = modelVersion;
         }

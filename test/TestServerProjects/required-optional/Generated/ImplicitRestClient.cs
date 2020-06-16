@@ -214,7 +214,7 @@ namespace required_optional
             request.Headers.Add("Content-Type", "application/json");
             if (bodyParameter != null)
             {
-                using var content = new Utf8JsonRequestContent();
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(bodyParameter);
                 request.Content = content;
             }

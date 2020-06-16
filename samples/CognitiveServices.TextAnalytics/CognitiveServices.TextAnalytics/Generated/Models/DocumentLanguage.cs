@@ -39,7 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentLanguage(string id, IReadOnlyList<DetectedLanguage> detectedLanguages, DocumentStatistics statistics)
         {
             Id = id;
-            DetectedLanguages = detectedLanguages;
+            DetectedLanguages = detectedLanguages ?? new List<DetectedLanguage>();
             Statistics = statistics;
         }
 

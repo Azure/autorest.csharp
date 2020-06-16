@@ -21,5 +21,17 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
             Assert.AreEqual(expected, text);
         }
+
+        public static JsonElement AssertSerializes(IUtf8JsonSerializable serializable)
+        {
+            using var memoryStream = new MemoryStream();
+
+            using (var writer = new Utf8JsonWriter(memoryStream))
+            {
+                serializable.Write(writer);
+            }
+
+            return JsonDocument.Parse(memoryStream.ToArray()).RootElement;
+        }
     }
 }

@@ -39,13 +39,13 @@ namespace CognitiveSearch.Models
         /// <param name="ignoreCase"> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </param>
         internal KeywordMarkerTokenFilter(string odataType, string name, IList<string> keywords, bool? ignoreCase) : base(odataType, name)
         {
-            Keywords = keywords;
+            Keywords = keywords ?? new List<string>();
             IgnoreCase = ignoreCase;
             OdataType = odataType ?? "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 
         /// <summary> A list of words to mark as keywords. </summary>
-        public IList<string> Keywords { get; set; }
+        public IList<string> Keywords { get; }
         /// <summary> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </summary>
         public bool? IgnoreCase { get; set; }
     }

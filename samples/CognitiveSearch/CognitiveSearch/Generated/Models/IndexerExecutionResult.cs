@@ -55,8 +55,8 @@ namespace CognitiveSearch.Models
             ErrorMessage = errorMessage;
             StartTime = startTime;
             EndTime = endTime;
-            Errors = errors;
-            Warnings = warnings;
+            Errors = errors ?? new List<ItemError>();
+            Warnings = warnings ?? new List<ItemWarning>();
             ItemCount = itemCount;
             FailedItemCount = failedItemCount;
             InitialTrackingState = initialTrackingState;

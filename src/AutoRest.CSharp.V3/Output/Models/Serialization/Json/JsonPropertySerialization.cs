@@ -8,11 +8,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
 {
     internal class JsonPropertySerialization
     {
-        public JsonPropertySerialization(string name, ObjectTypeProperty? property, JsonSerialization valueSerialization)
+        public JsonPropertySerialization(string name, bool required, ObjectTypeProperty? property, JsonSerialization valueSerialization)
         {
             Name = name;
             Property = property;
             ValueSerialization = valueSerialization;
+            Required = required;
 
             if (valueSerialization is JsonObjectSerialization && property != null)
             {
@@ -21,6 +22,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
         }
 
         public string Name { get; }
+        public bool Required { get; }
         public ObjectTypeProperty? Property { get; }
         public JsonSerialization ValueSerialization { get; }
     }

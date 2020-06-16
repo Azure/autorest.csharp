@@ -1377,8 +1377,8 @@ operationGroups:
         language: !<!Languages> 
           default:
             name: StringUrlNonEncoded
-            description: 'Get ''begin!*''();:@&=+$,end'
-            summary: 'https://tools.ietf.org/html/rfc3986#appendix-A ''path'' accept any ''pchar'' not encoded'
+            description: 'https://tools.ietf.org/html/rfc3986#appendix-A ''path'' accept any ''pchar'' not encoded'
+            summary: 'Get ''begin!*''();:@&=+$,end'
         protocol: !<!Protocols> {}
       - !<!Operation> 
         apiVersions:
