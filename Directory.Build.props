@@ -4,7 +4,6 @@
     <RepoEngPath>$(MSBuildThisFileDirectory)eng</RepoEngPath>
     <RepoSrcPath>$(RepoRoot)src</RepoSrcPath>
     <IsTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestProject>
-    <RestoreAdditionalProjectSources>https://azuresdkartifacts.blob.core.windows.net/azure-sdk-for-net/index.json</RestoreAdditionalProjectSources>
   </PropertyGroup>
 
   <!-- Setup default project properties -->
