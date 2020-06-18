@@ -9,6 +9,7 @@ using NUnit.Framework;
 using TypeSchemaMapping;
 using TypeSchemaMapping.Models;
 using Very.Custom.Namespace.From.Swagger;
+using Azure;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -66,8 +67,8 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(true, modelType.IsValueType);
             Assert.AreEqual("CustomNamespace", modelType.Namespace);
 
-            var property = TypeAsserts.HasProperty(modelType, "CustomizedFlattenedStringProperty", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(typeof(string), property.PropertyType);
+            var property = TypeAsserts.HasProperty(modelType, "CustomizedFlattenedETagProperty", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.AreEqual(typeof(ETag), property.PropertyType);
 
             var field = TypeAsserts.HasProperty(modelType, "Fruit", BindingFlags.Instance | BindingFlags.Public);
             // TODO: Remove nullable after https://github.com/Azure/autorest.modelerfour/issues/231 is done

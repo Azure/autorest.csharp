@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure;
 using NamespaceForEnums;
 
 namespace CustomNamespace
@@ -14,15 +15,11 @@ namespace CustomNamespace
     internal readonly partial struct RenamedModelStruct
     {
         /// <summary> Initializes a new instance of RenamedModelStruct. </summary>
-        /// <param name="customizedFlattenedStringProperty"> . </param>
+        /// <param name="customizedFlattenedETagProperty"> . </param>
         /// <param name="fruit"> Fruit. </param>
         /// <param name="daysOfWeek"> Day of week. </param>
-        public RenamedModelStruct(string customizedFlattenedStringProperty, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)
+        public RenamedModelStruct(ETag customizedFlattenedETagProperty, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)
         {
-            if (customizedFlattenedStringProperty == null)
-            {
-                throw new ArgumentNullException(nameof(customizedFlattenedStringProperty));
-            }
             if (fruit == null)
             {
                 throw new ArgumentNullException(nameof(fruit));
@@ -32,7 +29,7 @@ namespace CustomNamespace
                 throw new ArgumentNullException(nameof(daysOfWeek));
             }
 
-            CustomizedFlattenedStringProperty = customizedFlattenedStringProperty;
+            CustomizedFlattenedETagProperty = customizedFlattenedETagProperty;
             Fruit = fruit;
             DaysOfWeek = daysOfWeek;
         }

@@ -11,6 +11,7 @@ using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
+using Azure;
 using Azure.Core;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
@@ -151,7 +152,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         else if (frameworkType == typeof(string) ||
                                  frameworkType == typeof(char) ||
-                                 frameworkType == typeof(Guid))
+                                 frameworkType == typeof(Guid) ||
+                                 frameworkType == typeof(ETag))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -181,6 +183,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         writer.Append($"({name}")
                             .AppendNullableValue(valueSerialization.Type);
+
+                        if (frameworkType == typeof(ETag))
+                            writer.Append($".ToString()");
 
                         if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
                         {
@@ -453,6 +458,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             bool includeFormat = false;
 
+            if (frameworkType == typeof(ETag))
+                writer.AppendRaw("new Azure.ETag(");
+
             writer.Append($"{element}.");
 
             if (frameworkType == typeof(JsonElement))
@@ -475,7 +483,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.AppendRaw("GetDouble");
             if (frameworkType == typeof(decimal))
                 writer.AppendRaw("GetDecimal");
-            if (frameworkType == typeof(string))
+            if (frameworkType == typeof(string) || frameworkType == typeof(ETag))
                 writer.AppendRaw("GetString");
             if (frameworkType == typeof(Guid))
                 writer.AppendRaw("GetGuid");
@@ -492,6 +500,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 includeFormat = true;
             }
 
+            if (frameworkType == typeof(DateTime))
+            {
+                writer.AppendRaw("GetDateTime");
+                includeFormat = true;
+            }
+
             if (frameworkType == typeof(TimeSpan))
             {
                 writer.AppendRaw("GetTimeSpan");
@@ -504,6 +518,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.Literal(formatString);
             }
+
+            if (frameworkType == typeof(ETag))
+                writer.AppendRaw(")");
 
             writer.AppendRaw(")");
         }
