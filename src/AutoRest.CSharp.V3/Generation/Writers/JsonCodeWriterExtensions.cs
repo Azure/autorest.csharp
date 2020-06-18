@@ -459,7 +459,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             bool includeFormat = false;
 
             if (frameworkType == typeof(ETag))
-                writer.AppendRaw("new Azure.ETag(");
+                writer.Append($"new {typeof(ETag)}(");
 
             writer.Append($"{element}.");
 

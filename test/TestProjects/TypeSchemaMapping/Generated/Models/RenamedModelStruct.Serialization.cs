@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 using NamespaceForEnums;
 
@@ -19,8 +18,11 @@ namespace CustomNamespace
             writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty");
             writer.WriteStartObject();
-            writer.WritePropertyName("ModelProperty");
-            writer.WriteStringValue(CustomizedFlattenedETagProperty.ToString());
+            if (CustomizedFlattenedStringProperty != null)
+            {
+                writer.WritePropertyName("ModelProperty");
+                writer.WriteStringValue(CustomizedFlattenedStringProperty);
+            }
             if (Fruit != null)
             {
                 writer.WritePropertyName("Fruit");
@@ -37,7 +39,7 @@ namespace CustomNamespace
 
         internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element)
         {
-            ETag modelProperty = default;
+            string modelProperty = default;
             CustomFruitEnum? fruit = default;
             CustomDaysOfWeek? daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
@@ -48,7 +50,11 @@ namespace CustomNamespace
                     {
                         if (property0.NameEquals("ModelProperty"))
                         {
-                            modelProperty = new ETag(property0.Value.GetString());
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                continue;
+                            }
+                            modelProperty = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("Fruit"))

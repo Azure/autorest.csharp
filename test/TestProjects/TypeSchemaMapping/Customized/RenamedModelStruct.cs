@@ -12,6 +12,6 @@ namespace CustomNamespace
     internal partial struct RenamedModelStruct
     {
         [CodeGenMember("ModelProperty")]
-        private ETag CustomizedFlattenedETagProperty { get; }
+        private string CustomizedFlattenedStringProperty { get; }
     }
 }

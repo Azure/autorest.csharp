@@ -10,6 +10,7 @@ using TypeSchemaMapping;
 using TypeSchemaMapping.Models;
 using Very.Custom.Namespace.From.Swagger;
 using Azure;
+using System;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -67,12 +68,29 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(true, modelType.IsValueType);
             Assert.AreEqual("CustomNamespace", modelType.Namespace);
 
-            var property = TypeAsserts.HasProperty(modelType, "CustomizedFlattenedETagProperty", BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(typeof(ETag), property.PropertyType);
+            var property = TypeAsserts.HasProperty(modelType, "CustomizedFlattenedStringProperty", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.AreEqual(typeof(string), property.PropertyType);
 
             var field = TypeAsserts.HasProperty(modelType, "Fruit", BindingFlags.Instance | BindingFlags.Public);
             // TODO: Remove nullable after https://github.com/Azure/autorest.modelerfour/issues/231 is done
             Assert.AreEqual(typeof(CustomFruitEnum?), field.PropertyType);
+        }
+
+        [Test]
+        public void ObjectsAreMappedToSchemas()
+        {
+            Type modelType = typeof(RenamedThirdModel);
+            Assert.AreEqual(false, modelType.IsPublic);
+            Assert.AreEqual("CustomNamespace", modelType.Namespace);
+
+            Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Length);
+            Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Length);
+
+            PropertyInfo firstProperty = TypeAsserts.HasProperty(modelType, "CustomizedETagProperty", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.AreEqual(typeof(ETag), firstProperty.PropertyType);
+
+            PropertyInfo secondProperty = TypeAsserts.HasProperty(modelType, "CustomizedCreatedAtProperty", BindingFlags.Instance | BindingFlags.NonPublic);
+            Assert.AreEqual(typeof(DateTime), secondProperty.PropertyType);
         }
 
         [Test]
