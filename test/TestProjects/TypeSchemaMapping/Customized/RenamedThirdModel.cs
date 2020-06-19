@@ -11,9 +11,9 @@ namespace CustomNamespace
     internal partial class RenamedThirdModel
     {
         [CodeGenMember("ETag")]
-        private ETag CustomizedETagProperty { get; }
+        public ETag CustomizedETagProperty { get; }
 
         [CodeGenMember("CreatedAt")]
-        private DateTime CustomizedCreatedAtProperty { get; }
+        public DateTime CustomizedCreatedAtProperty { get; }
     }
 }

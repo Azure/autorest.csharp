@@ -152,8 +152,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         else if (frameworkType == typeof(string) ||
                                  frameworkType == typeof(char) ||
-                                 frameworkType == typeof(Guid) ||
-                                 frameworkType == typeof(ETag))
+                                 frameworkType == typeof(Guid))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -180,12 +179,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             }
                             writeFormat = true;
                         }
+                        else if (frameworkType == typeof(ETag))
+                        {
+                            writer.Append($"WriteStringValue({name}.ToString()");
+                            writer.LineRaw(");");
+                            return;
+                        }
 
                         writer.Append($"({name}")
                             .AppendNullableValue(valueSerialization.Type);
-
-                        if (frameworkType == typeof(ETag))
-                            writer.Append($".ToString()");
 
                         if (writeFormat && valueSerialization.Format.ToFormatSpecifier() is string formatString)
                         {
@@ -459,7 +461,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             bool includeFormat = false;
 
             if (frameworkType == typeof(ETag))
-                writer.Append($"new {typeof(ETag)}({element}.");
+            {
+                writer.Append($"new {typeof(ETag)}({element}.GetString())");
+                return;
+            }
             else
                 writer.Append($"{element}.");
 
@@ -483,7 +488,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.AppendRaw("GetDouble");
             if (frameworkType == typeof(decimal))
                 writer.AppendRaw("GetDecimal");
-            if (frameworkType == typeof(string) || frameworkType == typeof(ETag))
+            if (frameworkType == typeof(string))
                 writer.AppendRaw("GetString");
             if (frameworkType == typeof(Guid))
                 writer.AppendRaw("GetGuid");
@@ -518,9 +523,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.Literal(formatString);
             }
-
-            if (frameworkType == typeof(ETag))
-                writer.AppendRaw(")");
 
             writer.AppendRaw(")");
         }
