@@ -181,8 +181,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         else if (frameworkType == typeof(ETag))
                         {
-                            writer.Append($"WriteStringValue({name}.ToString()");
-                            writer.LineRaw(");");
+                            writer.Line($"WriteStringValue({name}.ToString());");
                             return;
                         }
 
