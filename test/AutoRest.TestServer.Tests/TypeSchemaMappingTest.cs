@@ -1,10 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Linq;
 using System.Reflection;
-using NamespaceForEnums;
+using System.Text.Json;
+using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
 using CustomNamespace;
+using NamespaceForEnums;
 using NUnit.Framework;
 using TypeSchemaMapping;
 using TypeSchemaMapping.Models;
@@ -72,6 +76,63 @@ namespace AutoRest.TestServer.Tests
             var field = TypeAsserts.HasProperty(modelType, "Fruit", BindingFlags.Instance | BindingFlags.Public);
             // TODO: Remove nullable after https://github.com/Azure/autorest.modelerfour/issues/231 is done
             Assert.AreEqual(typeof(CustomFruitEnum?), field.PropertyType);
+        }
+
+        [Test]
+        public void ObjectsAreMappedToSchemas()
+        {
+            Type modelType = typeof(RenamedThirdModel);
+            Assert.AreEqual(false, modelType.IsPublic);
+            Assert.AreEqual("CustomNamespace", modelType.Namespace);
+
+            Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Length);
+            Assert.AreEqual(1, modelType.GetConstructors(BindingFlags.Instance | BindingFlags.Public).Length);
+
+            PropertyInfo firstProperty = TypeAsserts.HasProperty(modelType, "CustomizedETagProperty", BindingFlags.Instance | BindingFlags.Public);
+            Assert.AreEqual(typeof(ETag), firstProperty.PropertyType);
+
+            PropertyInfo secondProperty = TypeAsserts.HasProperty(modelType, "CustomizedCreatedAtProperty", BindingFlags.Instance | BindingFlags.Public);
+            Assert.AreEqual(typeof(DateTime), secondProperty.PropertyType);
+        }
+
+        [Test]
+        public void ObjectTypePropertiesSerializedAsValues()
+        {
+            DateTime date = DateTime.UtcNow;
+            var inputModel = new RenamedThirdModel(new ETag("Id"), date);
+
+            JsonAsserts.AssertSerialization(
+                @"{""ETag"":""Id"",""CreatedAt"":" + JsonSerializer.Serialize(date) + "}",
+                inputModel);
+        }
+
+        [Test]
+        public void ObjectTypePropertiesDeserializedAsValues()
+        {
+            DateTime date = DateTime.UtcNow;
+            RenamedThirdModel model = RenamedThirdModel.DeserializeRenamedThirdModel(JsonDocument.Parse("{\"ETag\":\"ETagValue\", \"CreatedAt\":" + JsonSerializer.Serialize(date) + "}").RootElement);
+
+            Assert.AreEqual("ETagValue", model.CustomizedETagProperty.ToString());
+            Assert.AreEqual(date, model.CustomizedCreatedAtProperty);
+        }
+
+        [Test]
+        public void ObjectTypePropertiesSerializedAsNull()
+        {
+            var inputModel = new RenamedThirdModel();
+
+            JsonAsserts.AssertSerialization(
+                @"{""ETag"":""\u003Cnull\u003E"",""CreatedAt"":" + JsonSerializer.Serialize(new DateTime()) + "}",
+                inputModel);
+        }
+
+        [Test]
+        public void ObjectTypePropertiesDeserializedAsNull()
+        {
+            var model = RenamedThirdModel.DeserializeRenamedThirdModel(JsonDocument.Parse("{}").RootElement);
+
+            Assert.AreEqual("<null>", model.CustomizedETagProperty.ToString());
+            Assert.AreEqual(new DateTime(), model.CustomizedCreatedAtProperty);
         }
 
         [Test]
