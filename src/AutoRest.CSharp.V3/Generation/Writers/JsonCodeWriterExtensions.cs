@@ -324,7 +324,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
 
                     valueCallback(writer,
-                        w => w.WriteInitialization((ObjectType) obj.Type.Implementation, initializers));
+                        w => w.WriteInitialization((ObjectType)obj.Type.Implementation, initializers));
                 }
             }
             else
@@ -459,9 +459,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             bool includeFormat = false;
 
             if (frameworkType == typeof(ETag))
-                writer.Append($"new {typeof(ETag)}(");
-
-            writer.Append($"{element}.");
+                writer.Append($"new {typeof(ETag)}({element}.");
+            else
+                writer.Append($"{element}.");
 
             if (frameworkType == typeof(JsonElement))
                 writer.AppendRaw("Clone");
