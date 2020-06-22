@@ -89,7 +89,7 @@ namespace paging
 
         private async Task<Page<Product>> GetNextPage(string nextLink, CancellationToken cancellationToken)
         {
-            Response response = await _nextPageFunc(nextLink);
+            Response response = await _nextPageFunc(nextLink).ConfigureAwait(false);
             ProductResult nextPageResult;
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             if (document.RootElement.ValueKind == JsonValueKind.Null)
