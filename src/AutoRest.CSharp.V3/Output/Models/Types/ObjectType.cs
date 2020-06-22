@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
 
-                    serializationInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, BuilderHelpers.StringConstant(Discriminator.Value)));
+                    serializationInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, Discriminator.Value));
                 }
             }
 
@@ -159,18 +159,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             if (property == Discriminator?.Property)
             {
-                if (Discriminator.Value != null)
-                {
-                    return BuilderHelpers.StringConstant(Discriminator.Value);
-                }
-            }
-            else
-            {
-                var initializeWithType = property.InitializeWithType;
-                return initializeWithType != null ? Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+                return Discriminator.Value;
             }
 
-            return null;
+            var initializeWithType = property.InitializeWithType;
+            return initializeWithType != null ? Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
         }
 
         private ObjectTypeConstructor BuildInitializationConstructor()
@@ -233,9 +226,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 }
             }
 
-            if (Discriminator != null)
+            if (Discriminator?.Value != null)
             {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, BuilderHelpers.StringConstant(Discriminator.Value)));
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, Discriminator.Value.Value));
             }
 
             return new ObjectTypeConstructor(
@@ -327,33 +320,37 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            ObjectTypeDiscriminator? discriminator = null;
             Discriminator? schemaDiscriminator = _objectSchema.Discriminator;
+            ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
+            Constant? value = null;
 
-            if (schemaDiscriminator == null && _objectSchema.DiscriminatorValue != null)
+            if (schemaDiscriminator == null)
             {
-                schemaDiscriminator = _objectSchema.Parents!.All.OfType<ObjectSchema>().First(p => p.Discriminator != null).Discriminator;
+                schemaDiscriminator = _objectSchema.Parents!.All.OfType<ObjectSchema>().FirstOrDefault(p => p.Discriminator != null)?.Discriminator;
 
-                Debug.Assert(schemaDiscriminator != null);
-
-                discriminator = new ObjectTypeDiscriminator(
-                    GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true),
-                    schemaDiscriminator.Property.SerializedName,
-                    Array.Empty<ObjectTypeDiscriminatorImplementation>(),
-                    _objectSchema.DiscriminatorValue
-                );
+                if (schemaDiscriminator == null)
+                {
+                    return null;
+                }
             }
-            else if (schemaDiscriminator != null)
+            else
             {
-                discriminator = new ObjectTypeDiscriminator(
-                    GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true),
-                    schemaDiscriminator.Property.SerializedName,
-                    CreateDiscriminatorImplementations(schemaDiscriminator),
-                    _objectSchema.DiscriminatorValue
-                );
+                implementations = CreateDiscriminatorImplementations(schemaDiscriminator);
             }
 
-            return discriminator;
+            var property = GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true);
+
+            if (_objectSchema.DiscriminatorValue != null)
+            {
+                value = BuilderHelpers.ParseConstant(_objectSchema.DiscriminatorValue, property.Declaration.Type);
+            }
+
+            return new ObjectTypeDiscriminator(
+                property,
+                schemaDiscriminator.Property.SerializedName,
+                implementations,
+                value
+            );
         }
 
         private ObjectSerialization[] BuildSerializations()

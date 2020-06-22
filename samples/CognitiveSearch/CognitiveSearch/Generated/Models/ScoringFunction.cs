@@ -24,7 +24,6 @@ namespace CognitiveSearch.Models
 
             FieldName = fieldName;
             Boost = boost;
-            Type = null;
         }
 
         /// <summary> Initializes a new instance of ScoringFunction. </summary>

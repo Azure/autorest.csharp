@@ -30,7 +30,6 @@ namespace CognitiveSearch.Models
 
             Inputs = inputs.ToArray();
             Outputs = outputs.ToArray();
-            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of Skill. </summary>

@@ -13,7 +13,6 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of Similarity. </summary>
         public Similarity()
         {
-            OdataType = null;
         }
 
         /// <summary> Initializes a new instance of Similarity. </summary>

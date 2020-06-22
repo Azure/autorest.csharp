@@ -99,6 +99,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return;
             }
 
+            if (!constant.Type.IsFrameworkType && constant.Value is EnumTypeValue enumTypeValue)
+            {
+                writer.Append($"{constant.Type}.{enumTypeValue.Declaration.Name}");
+                return;
+            }
+
+            if (!constant.Type.IsFrameworkType && constant.Value is string enumValue)
+            {
+                writer.Append($"new {constant.Type}({enumValue:L})");
+                return;
+            }
+
             Type frameworkType = constant.Type.FrameworkType;
             if (frameworkType == typeof(DateTimeOffset))
             {

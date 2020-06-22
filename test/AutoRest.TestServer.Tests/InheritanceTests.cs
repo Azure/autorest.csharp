@@ -110,5 +110,22 @@ namespace AutoRest.TestServer.Tests
             // We expect BaseClassProperty on ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty to be ignored
             Assert.AreEqual(3, typeof(ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty).GetProperties().Length);
         }
+
+        [Test]
+        public void CanCreateInstanceOfDerivedClassWithEnumDiscriminator()
+        {
+            var derived = new DerivedClassWithEnumDiscriminator();
+            Assert.AreEqual(BaseClassWithEnumDiscriminatorEnum.Derived, derived.DiscriminatorProperty);
+        }
+
+        [Test]
+        public void CanCreateInstanceOfDerivedClassWithExtensibleEnumDiscriminator()
+        {
+            var derived = new DerivedClassWithExtensibleEnumDiscriminator();
+            Assert.AreEqual(BaseClassWithEntensibleEnumDiscriminatorEnum.Derived, derived.DiscriminatorProperty);
+
+            var anotherDerived = new AnotherDerivedClassWithExtensibleEnumDiscriminator();
+            Assert.AreEqual(new BaseClassWithEntensibleEnumDiscriminatorEnum("random value"), anotherDerived.DiscriminatorProperty);
+        }
     }
 }
