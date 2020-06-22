@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                         using (writer.Scope($"private async {funcType} GetNextPage({typeof(string)} nextLink, {typeof(CancellationToken)} cancellationToken)"))
                         {
-                            writer.Line($"{typeof(Response)} {responseVariable} = await _nextPageFunc(nextLink);");
+                            writer.Line($"{typeof(Response)} {responseVariable} = await _nextPageFunc(nextLink).ConfigureAwait(false);");
                             writer.Line($"{pagingResponse.ResponseType} nextPageResult;");
                             writer.WriteDeserializationForMethods(
                                 operation.ResultSerialization,
