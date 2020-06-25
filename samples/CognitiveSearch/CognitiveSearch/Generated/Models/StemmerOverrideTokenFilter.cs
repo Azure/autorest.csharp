@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(rules));
             }
 
-            Rules = rules.ToArray();
+            Rules = rules.ToList();
             OdataType = "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
         }
 

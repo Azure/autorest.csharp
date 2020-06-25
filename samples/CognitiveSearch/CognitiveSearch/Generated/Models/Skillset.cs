@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
 
             Name = name;
             Description = description;
-            Skills = skills.ToArray();
+            Skills = skills.ToList();
         }
 
         /// <summary> Initializes a new instance of Skillset. </summary>

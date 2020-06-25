@@ -23,7 +23,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 throw new ArgumentNullException(nameof(documents));
             }
 
-            Documents = documents.ToArray();
+            Documents = documents.ToList();
         }
 
         /// <summary> Initializes a new instance of LanguageBatchInput. </summary>

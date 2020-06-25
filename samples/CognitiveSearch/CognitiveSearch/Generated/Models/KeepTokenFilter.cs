@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(keepWords));
             }
 
-            KeepWords = keepWords.ToArray();
+            KeepWords = keepWords.ToList();
             OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }
 

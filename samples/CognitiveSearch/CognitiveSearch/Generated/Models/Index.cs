@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
             }
 
             Name = name;
-            Fields = fields.ToArray();
+            Fields = fields.ToList();
         }
 
         /// <summary> Initializes a new instance of Index. </summary>

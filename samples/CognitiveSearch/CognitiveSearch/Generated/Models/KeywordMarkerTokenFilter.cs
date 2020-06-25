@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(keywords));
             }
 
-            Keywords = keywords.ToArray();
+            Keywords = keywords.ToList();
             OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 

@@ -28,8 +28,8 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(outputs));
             }
 
-            Inputs = inputs.ToArray();
-            Outputs = outputs.ToArray();
+            Inputs = inputs.ToList();
+            Outputs = outputs.ToList();
         }
 
         /// <summary> Initializes a new instance of Skill. </summary>

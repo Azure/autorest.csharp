@@ -1180,7 +1180,7 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new BlobRestoreParameters(timeToRestore, blobRanges.ToArray());
+            var model = new BlobRestoreParameters(timeToRestore, blobRanges.ToList());
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
