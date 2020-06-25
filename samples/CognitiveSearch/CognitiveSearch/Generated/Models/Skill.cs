@@ -28,8 +28,8 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(outputs));
             }
 
-            Inputs = inputs.ToArray();
-            Outputs = outputs.ToArray();
+            Inputs = inputs.ToList();
+            Outputs = outputs.ToList();
             OdataType = null;
         }
 

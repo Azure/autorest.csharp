@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(patterns));
             }
 
-            Patterns = patterns.ToArray();
+            Patterns = patterns.ToList();
             OdataType = "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
         }
 

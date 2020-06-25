@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(wordList));
             }
 
-            WordList = wordList.ToArray();
+            WordList = wordList.ToList();
             OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 

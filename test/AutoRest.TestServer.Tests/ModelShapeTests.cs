@@ -154,5 +154,24 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(new[] {1, 2, 3}, model.RequiredNullableIntList);
             Assert.AreEqual(new[] {"a", "b"}, model.RequiredNullableStringList);
         }
+
+        [Test]
+        public void InputCollectionPropertiesCanBeMutatedAfterConstruction()
+        {
+            var inputModel = new InputModel(
+                "string",
+                1,
+                Array.Empty<string>(),
+                Array.Empty<int>(),
+                "string",
+                1,
+                Array.Empty<string>(),
+                Array.Empty<int>()
+            );
+
+            inputModel.RequiredIntList.Add(1);
+
+            Assert.AreEqual(1, inputModel.RequiredIntList.Count);
+        }
     }
 }

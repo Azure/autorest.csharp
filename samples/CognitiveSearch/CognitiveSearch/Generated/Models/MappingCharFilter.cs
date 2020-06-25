@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(mappings));
             }
 
-            Mappings = mappings.ToArray();
+            Mappings = mappings.ToList();
             OdataType = "#Microsoft.Azure.Search.MappingCharFilter";
         }
 

@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(synonyms));
             }
 
-            Synonyms = synonyms.ToArray();
+            Synonyms = synonyms.ToList();
             OdataType = "#Microsoft.Azure.Search.SynonymTokenFilter";
         }
 

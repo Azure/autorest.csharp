@@ -250,8 +250,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             if (to.IsFrameworkType && from.IsFrameworkType)
             {
-                if ((to.FrameworkType == typeof(IList<>) ||
-                     to.FrameworkType == typeof(IReadOnlyList<>)) &&
+                if (to.FrameworkType == typeof(IReadOnlyList<>) &&
                     from.FrameworkType == typeof(IEnumerable<>))
                 {
                     writer.UseNamespace(typeof(Enumerable).Namespace!);
@@ -260,6 +259,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"?");
                     }
                     writer.Append($".ToArray()");
+                    return;
+                }
+
+                if (to.FrameworkType == typeof(IList<>) &&
+                    from.FrameworkType == typeof(IEnumerable<>))
+                {
+                    writer.UseNamespace(typeof(Enumerable).Namespace!);
+                    if (from.IsNullable)
+                    {
+                        writer.Append($"?");
+                    }
+                    writer.Append($".ToList()");
+                    return;
                 }
             }
         }

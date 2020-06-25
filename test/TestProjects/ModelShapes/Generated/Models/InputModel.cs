@@ -40,12 +40,12 @@ namespace ModelShapes.Models
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            RequiredStringList = requiredStringList.ToArray();
-            RequiredIntList = requiredIntList.ToArray();
+            RequiredStringList = requiredStringList.ToList();
+            RequiredIntList = requiredIntList.ToList();
             RequiredNullableString = requiredNullableString;
             RequiredNullableInt = requiredNullableInt;
-            RequiredNullableStringList = requiredNullableStringList?.ToArray();
-            RequiredNullableIntList = requiredNullableIntList?.ToArray();
+            RequiredNullableStringList = requiredNullableStringList?.ToList();
+            RequiredNullableIntList = requiredNullableIntList?.ToList();
         }
 
         /// <summary> Initializes a new instance of InputModel. </summary>

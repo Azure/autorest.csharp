@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(commonWords));
             }
 
-            CommonWords = commonWords.ToArray();
+            CommonWords = commonWords.ToList();
             OdataType = "#Microsoft.Azure.Search.CommonGramTokenFilter";
         }
 

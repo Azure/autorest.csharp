@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
 
             Name = name;
             SearchMode = searchMode;
-            SourceFields = sourceFields.ToArray();
+            SourceFields = sourceFields.ToList();
         }
 
         /// <summary> Initializes a new instance of Suggester. </summary>
