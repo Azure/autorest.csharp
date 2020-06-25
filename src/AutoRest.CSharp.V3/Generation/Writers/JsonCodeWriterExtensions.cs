@@ -11,6 +11,7 @@ using AutoRest.CSharp.V3.Output.Models.Serialization;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
+using Azure;
 using Azure.Core;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
@@ -178,6 +179,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             }
                             writeFormat = true;
                         }
+                        else if (frameworkType == typeof(ETag))
+                        {
+                            writer.Line($"WriteStringValue({name}.ToString());");
+                            return;
+                        }
 
                         writer.Append($"({name}")
                             .AppendNullableValue(valueSerialization.Type);
@@ -319,7 +325,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
 
                     valueCallback(writer,
-                        w => w.WriteInitialization((ObjectType) obj.Type.Implementation, initializers));
+                        w => w.WriteInitialization((ObjectType)obj.Type.Implementation, initializers));
                 }
             }
             else
@@ -453,7 +459,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             bool includeFormat = false;
 
-            writer.Append($"{element}.");
+            if (frameworkType == typeof(ETag))
+            {
+                writer.Append($"new {typeof(ETag)}({element}.GetString())");
+                return;
+            }
+            else
+                writer.Append($"{element}.");
 
             if (frameworkType == typeof(JsonElement))
                 writer.AppendRaw("Clone");
@@ -489,6 +501,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (frameworkType == typeof(DateTimeOffset))
             {
                 writer.AppendRaw("GetDateTimeOffset");
+                includeFormat = true;
+            }
+
+            if (frameworkType == typeof(DateTime))
+            {
+                writer.AppendRaw("GetDateTime");
                 includeFormat = true;
             }
 

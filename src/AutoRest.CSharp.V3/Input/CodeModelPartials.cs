@@ -110,13 +110,6 @@ namespace AutoRest.CSharp.V3.Input
     {
     }
 
-
-    // Workaround https://github.com/Azure/autorest.modelerfour/issues/255
-    internal partial class AnySchema : ComplexSchema
-    {
-    }
-
-
     internal partial class Schema
     {
         public string? XmlName => Serialization?.Xml?.Name;

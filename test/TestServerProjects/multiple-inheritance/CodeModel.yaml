@@ -4,7 +4,7 @@ info: !<!Info>
   title: Multiple Inheritance Service Client
 schemas: !<!Schemas> 
   booleans:
-    - !<!BooleanSchema> &ref_2
+    - !<!BooleanSchema> &ref_5
       type: boolean
       language: !<!Languages> 
         default:
@@ -75,38 +75,8 @@ schemas: !<!Schemas>
       apiVersions:
         - !<!ApiVersion> 
           version: 3.0.0
-      children: !<!Relations> 
+      parents: !<!Relations> 
         all:
-          - !<!ObjectSchema> &ref_6
-            type: object
-            apiVersions:
-              - !<!ApiVersion> 
-                version: 3.0.0
-            parents: !<!Relations> 
-              all:
-                - *ref_1
-              immediate:
-                - *ref_1
-            properties:
-              - !<!Property> 
-                schema: *ref_2
-                serializedName: isAShowHorse
-                language: !<!Languages> 
-                  default:
-                    name: isAShowHorse
-                    description: ''
-                protocol: !<!Protocols> {}
-            serializationFormats:
-              - json
-            usage:
-              - output
-              - input
-            language: !<!Languages> 
-              default:
-                name: Horse
-                description: ''
-                namespace: ''
-            protocol: !<!Protocols> {}
           - !<!ObjectSchema> &ref_3
             type: object
             apiVersions:
@@ -114,41 +84,71 @@ schemas: !<!Schemas>
                 version: 3.0.0
             children: !<!Relations> 
               all:
-                - !<!ObjectSchema> &ref_4
+                - *ref_1
+                - !<!ObjectSchema> &ref_2
                   type: object
                   apiVersions:
                     - !<!ApiVersion> 
                       version: 3.0.0
-                  parents: !<!Relations> 
+                  children: !<!Relations> 
                     all:
-                      - *ref_3
-                      - *ref_1
-                      - !<!ObjectSchema> &ref_5
+                      - !<!ObjectSchema> &ref_4
                         type: object
                         apiVersions:
                           - !<!ApiVersion> 
                             version: 3.0.0
-                        children: !<!Relations> 
+                        parents: !<!Relations> 
                           all:
+                            - *ref_2
                             - *ref_3
-                            - *ref_4
+                            - !<!ObjectSchema> &ref_6
+                              type: object
+                              apiVersions:
+                                - !<!ApiVersion> 
+                                  version: 3.0.0
+                              children: !<!Relations> 
+                                all:
+                                  - *ref_2
+                                  - *ref_4
+                                immediate:
+                                  - *ref_2
+                              properties:
+                                - !<!Property> 
+                                  schema: *ref_5
+                                  serializedName: meows
+                                  language: !<!Languages> 
+                                    default:
+                                      name: meows
+                                      description: ''
+                                  protocol: !<!Protocols> {}
+                                - !<!Property> 
+                                  schema: *ref_5
+                                  serializedName: hisses
+                                  language: !<!Languages> 
+                                    default:
+                                      name: hisses
+                                      description: ''
+                                  protocol: !<!Protocols> {}
+                              serializationFormats:
+                                - json
+                              usage:
+                                - output
+                                - input
+                              language: !<!Languages> 
+                                default:
+                                  name: Feline
+                                  description: ''
+                                  namespace: ''
+                              protocol: !<!Protocols> {}
                           immediate:
-                            - *ref_3
+                            - *ref_2
                         properties:
                           - !<!Property> 
-                            schema: *ref_2
-                            serializedName: meows
+                            schema: *ref_5
+                            serializedName: eatsMiceYet
                             language: !<!Languages> 
                               default:
-                                name: meows
-                                description: ''
-                            protocol: !<!Protocols> {}
-                          - !<!Property> 
-                            schema: *ref_2
-                            serializedName: hisses
-                            language: !<!Languages> 
-                              default:
-                                name: hisses
+                                name: eatsMiceYet
                                 description: ''
                             protocol: !<!Protocols> {}
                         serializationFormats:
@@ -158,19 +158,26 @@ schemas: !<!Schemas>
                           - input
                         language: !<!Languages> 
                           default:
-                            name: Feline
+                            name: Kitten
                             description: ''
                             namespace: ''
                         protocol: !<!Protocols> {}
                     immediate:
+                      - *ref_4
+                  parents: !<!Relations> 
+                    all:
                       - *ref_3
+                      - *ref_6
+                    immediate:
+                      - *ref_3
+                      - *ref_6
                   properties:
                     - !<!Property> 
-                      schema: *ref_2
-                      serializedName: eatsMiceYet
+                      schema: *ref_5
+                      serializedName: likesMilk
                       language: !<!Languages> 
                         default:
-                          name: eatsMiceYet
+                          name: likesMilk
                           description: ''
                       protocol: !<!Protocols> {}
                   serializationFormats:
@@ -180,26 +187,22 @@ schemas: !<!Schemas>
                     - input
                   language: !<!Languages> 
                     default:
-                      name: Kitten
+                      name: Cat
                       description: ''
                       namespace: ''
                   protocol: !<!Protocols> {}
-              immediate:
                 - *ref_4
-            parents: !<!Relations> 
-              all:
-                - *ref_1
-                - *ref_5
               immediate:
                 - *ref_1
-                - *ref_5
+                - *ref_2
             properties:
               - !<!Property> 
-                schema: *ref_2
-                serializedName: likesMilk
+                schema: *ref_7
+                required: true
+                serializedName: name
                 language: !<!Languages> 
                   default:
-                    name: likesMilk
+                    name: name
                     description: ''
                 protocol: !<!Protocols> {}
             serializationFormats:
@@ -209,22 +212,19 @@ schemas: !<!Schemas>
               - input
             language: !<!Languages> 
               default:
-                name: Cat
+                name: Pet
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          - *ref_4
         immediate:
-          - *ref_6
           - *ref_3
       properties:
         - !<!Property> 
-          schema: *ref_7
-          required: true
-          serializedName: name
+          schema: *ref_5
+          serializedName: isAShowHorse
           language: !<!Languages> 
             default:
-              name: name
+              name: isAShowHorse
               description: ''
           protocol: !<!Protocols> {}
       serializationFormats:
@@ -234,11 +234,11 @@ schemas: !<!Schemas>
         - input
       language: !<!Languages> 
         default:
-          name: Pet
+          name: Horse
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - *ref_6
+    - *ref_3
     - !<!ObjectSchema> &ref_11
       type: object
       apiVersions:
@@ -271,8 +271,8 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - *ref_5
-    - *ref_3
+    - *ref_6
+    - *ref_2
     - *ref_4
 globalParameters:
   - !<!Parameter> &ref_10
@@ -315,7 +315,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_6
+            schema: *ref_1
             language: !<!Languages> 
               default:
                 name: ''
@@ -369,7 +369,7 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
               - !<!Parameter> &ref_13
-                schema: *ref_6
+                schema: *ref_1
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -434,7 +434,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_1
+            schema: *ref_3
             language: !<!Languages> 
               default:
                 name: ''
@@ -488,7 +488,7 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
               - !<!Parameter> &ref_15
-                schema: *ref_1
+                schema: *ref_3
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -553,7 +553,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_5
+            schema: *ref_6
             language: !<!Languages> 
               default:
                 name: ''
@@ -607,7 +607,7 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
               - !<!Parameter> &ref_16
-                schema: *ref_5
+                schema: *ref_6
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -672,7 +672,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_3
+            schema: *ref_2
             language: !<!Languages> 
               default:
                 name: ''
@@ -726,7 +726,7 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
               - !<!Parameter> &ref_17
-                schema: *ref_3
+                schema: *ref_2
                 implementation: Method
                 required: true
                 language: !<!Languages> 

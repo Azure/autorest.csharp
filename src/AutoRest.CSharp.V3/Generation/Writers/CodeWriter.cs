@@ -423,16 +423,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 builder.AppendLine();
                 builder.AppendLine("#nullable disable");
                 builder.AppendLine();
-            }
 
-            foreach (string ns in namespaces)
-            {
-                builder.Append("using ").Append(ns).AppendLine(";");
-            }
+                foreach (string ns in namespaces)
+                {
+                    builder.Append("using ").Append(ns).AppendLine(";");
+                }
 
-            if (namespaces.Any())
-            {
-                builder.AppendLine();
+                if (namespaces.Any())
+                {
+                    builder.AppendLine();
+                }
             }
 
             // Normalize newlines

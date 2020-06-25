@@ -83,6 +83,28 @@
         }
       }
     },
+    "/OperationThirdModel": {
+      "patch": {
+        "operationId": "OperationThirdModel",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ThirdModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ThirdModel"
+            }
+          }
+        }
+      }
+    },
     "/OperationModelWithArrayOfEnum": {
       "patch": {
         "operationId": "OperationModelWithArrayOfEnum",
@@ -138,6 +160,19 @@
             "modelAsString": true
           }
         }
+      }
+    },
+    "ThirdModel": {
+      "type": "object",
+      "properties": {
+        "ETag": {
+          "type": "string",
+          "description": "ETag property"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "description": "Creation date"
+         }
       }
     },
     "Model": {

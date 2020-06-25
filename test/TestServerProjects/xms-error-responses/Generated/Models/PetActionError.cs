@@ -13,7 +13,6 @@ namespace xms_error_responses.Models
         /// <summary> Initializes a new instance of PetActionError. </summary>
         internal PetActionError()
         {
-            ErrorType = null;
         }
 
         /// <summary> Initializes a new instance of PetActionError. </summary>
