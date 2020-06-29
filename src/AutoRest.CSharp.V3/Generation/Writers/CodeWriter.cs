@@ -526,7 +526,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public void Append(CodeWriterDeclaration declaration)
         {
-            AppendRaw(declaration.ActualName);
+            Identifier(declaration.ActualName);
         }
     }
 }

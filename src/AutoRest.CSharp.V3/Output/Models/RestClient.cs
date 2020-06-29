@@ -174,8 +174,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                 {
                     Parameter? parameter = null;
                     // TODO: always generate virtual parameters
-                    if (!(requestParameter is VirtualParameter) &&
-                        requestParameter.Schema is ConstantSchema constant)
+                    if (requestParameter.Schema is ConstantSchema constant)
                     {
                         constantOrReference = ParseConstant(constant);
                         valueSchema = constant.ValueType;
@@ -263,6 +262,8 @@ namespace AutoRest.CSharp.V3.Output.Models
                         List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
                         foreach (var virtualParameter in virtualParameters)
                         {
+                            if (virtualParameter.Schema is ConstantSchema) continue;
+
                             var actualParameter = allParameters[virtualParameter];
 
                             initializationMap.Add(new ObjectPropertyInitializer(

@@ -87,6 +87,14 @@ namespace AutoRest.CSharp.V3.Input
         {
             Extensions = new DictionaryOfAny();
         }
+
+        public bool IsNullable => Nullable ?? false;
+        public bool IsRequired => Required ?? false;
+    }
+
+    internal partial class Property
+    {
+        public bool IsReadOnly => ReadOnly ?? false;
     }
 
     internal partial class ObjectSchema

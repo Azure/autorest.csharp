@@ -119,7 +119,6 @@ namespace AutoRest.TestServer.Tests
                 description: "product description",
                 maxProductDisplayName: "max name",
                 genericValue: null,
-                capacity: "Large",
                 odataValue: "http://foo");
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
@@ -136,7 +135,7 @@ namespace AutoRest.TestServer.Tests
                 new Resource
                 {
                     Location = "West US",
-                    Tags = new Dictionary<string, string>
+                    Tags =
                     {
                         { "tag1", "value1" },
                         { "tag2", "value3" }
@@ -179,8 +178,7 @@ namespace AutoRest.TestServer.Tests
                     Description = "product description",
                     MaxProductDisplayName = "max name",
                     OdataValue = "http://foo"
-                },
-                capacity: "Large");
+                });
             Assert.AreEqual("123", result.Value.ProductId);
             Assert.AreEqual("product description", result.Value.Description);
             Assert.AreEqual("max name", result.Value.MaxProductDisplayName);
@@ -196,7 +194,7 @@ namespace AutoRest.TestServer.Tests
                 { "Resource1", new FlattenedProduct
                     {
                         Location = "West US",
-                        Tags = new Dictionary<string, string>
+                        Tags =
                         {
                             { "tag1", "value1" },
                             { "tag2", "value3" }
@@ -221,12 +219,12 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new ResourceCollection
             {
-                Arrayofresources = new[]
+                Arrayofresources =
                 {
                     new FlattenedProduct
                     {
                         Location = "West US",
-                        Tags = new Dictionary<string, string>
+                        Tags =
                         {
                             { "tag1", "value1" },
                             { "tag2", "value3" }
@@ -241,12 +239,12 @@ namespace AutoRest.TestServer.Tests
                         TypePropertiesType = "Flat"
                     }
                 },
-                Dictionaryofresources = new Dictionary<string, FlattenedProduct>
+                Dictionaryofresources =
                 {
                     { "Resource1", new FlattenedProduct
                         {
                             Location = "West US",
-                            Tags = new Dictionary<string, string>
+                            Tags =
                             {
                                 { "tag1", "value1" },
                                 { "tag2", "value3" }

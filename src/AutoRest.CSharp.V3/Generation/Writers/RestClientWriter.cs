@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -193,9 +194,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         break;
                     case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
+                        var initializers = new List<PropertyInitializer>();
+                        foreach (var initializer in flattenedSchemaRequestBody.Initializers)
+                        {
+                            initializers.Add(new PropertyInitializer(initializer.Property, w => w.WriteReferenceOrConstant(initializer.Value)));
+                        }
                         var modelVariable = new CodeWriterDeclaration("model");
                         writer.Append($"var {modelVariable:D} = ")
-                            .WriteInitialization(flattenedSchemaRequestBody.ObjectType, flattenedSchemaRequestBody.Initializers)
+                            .WriteInitialization(flattenedSchemaRequestBody.ObjectType, flattenedSchemaRequestBody.ObjectType.InitializationConstructor, initializers)
                             .Line($";");
 
                         WriteSerializeContent(

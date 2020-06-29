@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private readonly ModelTypeMapping? _sourceTypeMapping;
         private ObjectTypeConstructor[]? _constructors;
         private ObjectTypeProperty? _additionalPropertiesProperty;
+        private ObjectTypeConstructor? _serializationConstructor;
+        private ObjectTypeConstructor? _initializationConstructor;
 
         public ObjectType(ObjectSchema objectSchema, BuildContext context): base(context)
         {
@@ -77,7 +79,6 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     string.Empty,
                     true,
                     null,
-                    TypeFactory.GetImplementationType(ImplementsDictionaryType),
                     false
                     );
 
@@ -87,19 +88,19 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
 
+        public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
+        public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
+
         private IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            var initializationCtor = BuildInitializationConstructor();
-            var serializationCtor = BuildSerializationConstructor();
-
-            yield return initializationCtor;
+            yield return InitializationConstructor;
 
             // Skip serialization ctor if they are the same
-            if (!initializationCtor.Parameters
+            if (!InitializationConstructor.Parameters
                 .Select(p => p.Type)
-                .SequenceEqual(serializationCtor.Parameters.Select(p => p.Type)))
+                .SequenceEqual(SerializationConstructor.Parameters.Select(p => p.Type)))
             {
-                yield return serializationCtor;
+                yield return SerializationConstructor;
             }
         }
 
@@ -119,10 +120,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                var type = property.Declaration.Type;
+
                 var deserializationParameter = new Parameter(
                     property.Declaration.Name.ToVariableName(),
                     property.Description,
-                    property.Declaration.Type,
+                    type,
                     null,
                     false
                 );
@@ -157,13 +160,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
         {
-            if (property == Discriminator?.Property)
+            if (property == Discriminator?.Property &&
+                Discriminator.Value != null)
             {
                 return Discriminator.Value;
             }
 
-            var initializeWithType = property.InitializeWithType;
-            return initializeWithType != null ? Constant.NewInstanceOf(initializeWithType) : (ReferenceOrConstant?) null;
+            return null;
         }
 
         private ObjectTypeConstructor BuildInitializationConstructor()
@@ -188,26 +191,27 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 ReferenceOrConstant? initializationValue;
 
+                var propertyType = property.Declaration.Type;
                 if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
                 {
                     // Turn constants into initializers
                     initializationValue = constantSchema.Value.Value != null ?
-                        BuilderHelpers.ParseConstant(constantSchema.Value.Value, property.Declaration.Type) :
-                        Constant.NewInstanceOf(property.Declaration.Type);
+                        BuilderHelpers.ParseConstant(constantSchema.Value.Value, propertyType) :
+                        Constant.NewInstanceOf(propertyType);
                 }
-                else if (IsStruct || property.SchemaProperty?.Required == true)
+                else if (IsStruct || property.SchemaProperty?.IsRequired == true)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
                     if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
                     {
-                        defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, property.Declaration.Type);
+                        defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
                     }
 
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.Description,
-                        TypeFactory.GetInputType(property.Declaration.Type),
+                        TypeFactory.GetInputType(propertyType),
                         defaultParameterValue,
                         property.SchemaProperty?.Nullable != true
                     );
@@ -218,6 +222,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 else
                 {
                     initializationValue = GetPropertyDefaultValue(property);
+
+                    if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
+                    {
+                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                    }
                 }
 
                 if (initializationValue != null)
@@ -229,6 +238,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             if (Discriminator?.Value != null)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, Discriminator.Value.Value));
+            }
+
+            if (AdditionalPropertiesProperty != null &&
+                !defaultCtorInitializers.Any(i=> i.Property == AdditionalPropertiesProperty))
+            {
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type))));
             }
 
             return new ObjectTypeConstructor(
@@ -390,32 +405,45 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                     var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
-                    var defaultType = _typeFactory.CreateType(property.Schema, property.IsNullable());
+                    var propertyType = GetDefaultPropertyType(property);
 
-                    if (!_objectSchema.IsInput)
+                    // We represent property being optional by making it nullable
+                    // Except in the case of collection where there is a special handling
+                    if (!property.IsRequired &&
+                        !TypeFactory.IsCollectionType(propertyType))
                     {
-                        defaultType = TypeFactory.GetOutputType(defaultType);
+                        propertyType = propertyType.WithNullable(true);
                     }
 
                     var memberDeclaration = BuilderHelpers.CreateMemberDeclaration(
                         name,
-                        defaultType,
+                        propertyType,
                         accessibility,
                         memberMapping?.ExistingMember,
                         _typeFactory);
+
                     var type = memberDeclaration.Type;
 
-                    bool isAlwaysInitializeType = TypeFactory.IsAlwaysInitializeType(type) &&
-                                                  property.Required == true &&
-                                                  property.Nullable != true;
+                    var valueType = type;
+                    if (!property.IsRequired && !property.IsNullable)
+                    {
+                        valueType = valueType.WithNullable(false);
+                    }
 
-                    bool isNotInput = !objectSchema.IsInput;
+                    bool isCollection = TypeFactory.IsCollectionType(type);
+
                     bool isReadOnly = IsStruct ||
-                                      isAlwaysInitializeType ||
-                                      isNotInput ||
-                                      property.ReadOnly == true ||
-                                      // Required properties of input objects should be readonly
-                                      (property.Required == true && objectSchema.IsInputOnly);
+                                      !objectSchema.IsInput ||
+                                      property.IsReadOnly;
+
+                    if (isCollection)
+                    {
+                        isReadOnly |= !property.IsNullable;
+                    }
+                    else
+                    {
+                        isReadOnly |= property.IsRequired && objectSchema.IsInputOnly;
+                    }
 
                     if (property.IsDiscriminator == true)
                     {
@@ -423,15 +451,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                         isReadOnly = false;
                     }
 
-                    CSharpType? initializeWithType = (isAlwaysInitializeType || memberMapping?.Initialize == true) ? TypeFactory.GetImplementationType(type) : null;
-
                     yield return new ObjectTypeProperty(
                         memberDeclaration,
                         BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                         isReadOnly,
                         property,
-                        initializeWithType,
-                        memberMapping?.EmptyAsUndefined ?? false);
+                        property.IsRequired,
+                        valueType);
                 }
             }
 
@@ -439,6 +465,18 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             {
                 yield return additionalPropertiesProperty;
             }
+        }
+
+        private CSharpType GetDefaultPropertyType(Property property)
+        {
+            var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable);
+
+            if (!_objectSchema.IsInput)
+            {
+                valueType = TypeFactory.GetOutputType(valueType);
+            }
+
+            return valueType;
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema

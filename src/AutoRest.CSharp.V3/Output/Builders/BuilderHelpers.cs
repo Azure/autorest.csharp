@@ -69,7 +69,6 @@ namespace AutoRest.CSharp.V3.Output.Builders
         public static string EscapeXmlDescription(string s) => SecurityElement.Escape(s) ?? s;
 
         public static bool IsNullable(this RequestParameter parameter) => !(parameter.Required ?? false);
-        public static bool IsNullable(this Property parameter) => !(parameter.Required ?? false) || (parameter.Nullable ?? false);
 
         public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
 
