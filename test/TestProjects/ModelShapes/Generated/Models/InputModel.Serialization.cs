@@ -33,17 +33,17 @@ namespace ModelShapes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (NonRequiredString != null)
+            if (Optional.IsDefined(NonRequiredString))
             {
                 writer.WritePropertyName("NonRequiredString");
                 writer.WriteStringValue(NonRequiredString);
             }
-            if (NonRequiredInt != null)
+            if (Optional.IsDefined(NonRequiredInt))
             {
                 writer.WritePropertyName("NonRequiredInt");
                 writer.WriteNumberValue(NonRequiredInt.Value);
             }
-            if (NonRequiredStringList != null)
+            if (Optional.IsDefined(NonRequiredStringList))
             {
                 writer.WritePropertyName("NonRequiredStringList");
                 writer.WriteStartArray();
@@ -53,7 +53,7 @@ namespace ModelShapes.Models
                 }
                 writer.WriteEndArray();
             }
-            if (NonRequiredIntList != null)
+            if (Optional.IsDefined(NonRequiredIntList))
             {
                 writer.WritePropertyName("NonRequiredIntList");
                 writer.WriteStartArray();

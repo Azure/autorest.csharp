@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -15,6 +16,8 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of Blobs. </summary>
         internal Blobs()
         {
+            BlobPrefix = new ChangeTrackingList<BlobPrefix>();
+            Blob = new ChangeTrackingList<Blob>();
         }
 
         /// <summary> Initializes a new instance of Blobs. </summary>

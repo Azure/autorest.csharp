@@ -15,40 +15,28 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerLimits DeserializeIndexerLimits(JsonElement element)
         {
-            TimeSpan? maxRunTime = default;
-            long? maxDocumentExtractionSize = default;
-            long? maxDocumentContentCharactersToExtract = default;
+            Optional<TimeSpan> maxRunTime = default;
+            Optional<long> maxDocumentExtractionSize = default;
+            Optional<long> maxDocumentContentCharactersToExtract = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxRunTime"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     maxRunTime = property.Value.GetTimeSpan("P");
                     continue;
                 }
                 if (property.NameEquals("maxDocumentExtractionSize"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     maxDocumentExtractionSize = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("maxDocumentContentCharactersToExtract"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     maxDocumentContentCharactersToExtract = property.Value.GetInt64();
                     continue;
                 }
             }
-            return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract);
+            return new IndexerLimits(maxRunTime.HasValue ? maxRunTime.Value : (TimeSpan?)null, maxDocumentExtractionSize.HasValue ? maxDocumentExtractionSize.Value : (long?)null, maxDocumentContentCharactersToExtract.HasValue ? maxDocumentContentCharactersToExtract.Value : (long?)null);
         }
     }
 }

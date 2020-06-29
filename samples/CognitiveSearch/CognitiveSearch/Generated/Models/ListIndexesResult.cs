@@ -23,14 +23,14 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(indexes));
             }
 
-            Indexes = indexes.ToArray();
+            Indexes = indexes.ToList();
         }
 
         /// <summary> Initializes a new instance of ListIndexesResult. </summary>
         /// <param name="indexes"> The indexes in the Search service. </param>
         internal ListIndexesResult(IReadOnlyList<Index> indexes)
         {
-            Indexes = indexes ?? new List<Index>();
+            Indexes = indexes;
         }
 
         /// <summary> The indexes in the Search service. </summary>

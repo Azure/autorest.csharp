@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -27,6 +28,8 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(outputs));
             }
 
+            VisualFeatures = new ChangeTrackingList<VisualFeature>();
+            Details = new ChangeTrackingList<ImageDetail>();
             OdataType = "#Microsoft.Skills.Vision.ImageAnalysisSkill";
         }
 
@@ -51,8 +54,8 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating which language code to use. Default is en. </summary>
         public ImageAnalysisSkillLanguage? DefaultLanguageCode { get; set; }
         /// <summary> A list of visual features. </summary>
-        public IList<VisualFeature> VisualFeatures { get; set; }
+        public IList<VisualFeature> VisualFeatures { get; }
         /// <summary> A string indicating which domain-specific details to return. </summary>
-        public IList<ImageDetail> Details { get; set; }
+        public IList<ImageDetail> Details { get; }
     }
 }

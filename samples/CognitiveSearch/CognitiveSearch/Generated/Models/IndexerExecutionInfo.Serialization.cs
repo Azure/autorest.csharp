@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         internal static IndexerExecutionInfo DeserializeIndexerExecutionInfo(JsonElement element)
         {
             IndexerStatus status = default;
-            IndexerExecutionResult lastResult = default;
+            Optional<IndexerExecutionResult> lastResult = default;
             IReadOnlyList<IndexerExecutionResult> executionHistory = default;
             IndexerLimits limits = default;
             foreach (var property in element.EnumerateObject())
@@ -28,10 +28,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("lastResult"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     lastResult = IndexerExecutionResult.DeserializeIndexerExecutionResult(property.Value);
                     continue;
                 }
@@ -58,7 +54,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerExecutionInfo(status, lastResult, executionHistory, limits);
+            return new IndexerExecutionInfo(status, lastResult.HasValue ? lastResult.Value : null, executionHistory, limits);
         }
     }
 }

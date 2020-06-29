@@ -15,17 +15,17 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Color != null)
+            if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color");
                 writer.WriteStringValue(Color.Value.ToString());
@@ -35,40 +35,28 @@ namespace body_complex.Models
 
         internal static Basic DeserializeBasic(JsonElement element)
         {
-            int? id = default;
-            string name = default;
-            CMYKColors? color = default;
+            Optional<int> id = default;
+            Optional<string> name = default;
+            Optional<CMYKColors> color = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("color"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     color = new CMYKColors(property.Value.GetString());
                     continue;
                 }
             }
-            return new Basic(id, name, color);
+            return new Basic(id.HasValue ? id.Value : (int?)null, name.HasValue ? name.Value : null, color.HasValue ? color.Value : (CMYKColors?)null);
         }
     }
 }

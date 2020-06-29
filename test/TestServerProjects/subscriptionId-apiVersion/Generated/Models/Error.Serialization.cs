@@ -14,30 +14,22 @@ namespace subscriptionId_apiVersion.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            int? code = default;
-            string message = default;
+            Optional<int> code = default;
+            Optional<string> message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     code = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     message = property.Value.GetString();
                     continue;
                 }
             }
-            return new Error(code, message);
+            return new Error(code.HasValue ? code.Value : (int?)null, message.HasValue ? message.Value : null);
         }
     }
 }

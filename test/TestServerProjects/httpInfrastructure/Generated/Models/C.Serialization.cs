@@ -14,20 +14,16 @@ namespace httpInfrastructure.Models
     {
         internal static C DeserializeC(JsonElement element)
         {
-            string httpCode = default;
+            Optional<string> httpCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("httpCode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     httpCode = property.Value.GetString();
                     continue;
                 }
             }
-            return new C(httpCode);
+            return new C(httpCode.HasValue ? httpCode.Value : null);
         }
     }
 }

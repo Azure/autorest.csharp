@@ -41,15 +41,14 @@ namespace Azure.Management.Storage
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="name"> The storage account name. </param>
-        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.CheckNameAvailability");
             scope.Start();
             try
             {
-                return await RestClient.CheckNameAvailabilityAsync(name, type, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CheckNameAvailabilityAsync(name, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -60,15 +59,14 @@ namespace Azure.Management.Storage
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="name"> The storage account name. </param>
-        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
+        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountsOperations.CheckNameAvailability");
             scope.Start();
             try
             {
-                return RestClient.CheckNameAvailability(name, type, cancellationToken);
+                return RestClient.CheckNameAvailability(name, cancellationToken);
             }
             catch (Exception e)
             {

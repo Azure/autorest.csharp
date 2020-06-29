@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace AppConfiguration.Models
 {
@@ -15,6 +16,7 @@ namespace AppConfiguration.Models
         /// <summary> Initializes a new instance of KeyListResult. </summary>
         internal KeyListResult()
         {
+            Items = new ChangeTrackingList<Key>();
         }
 
         /// <summary> Initializes a new instance of KeyListResult. </summary>

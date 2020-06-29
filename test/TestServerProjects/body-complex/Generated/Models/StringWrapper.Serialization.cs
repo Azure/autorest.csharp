@@ -15,17 +15,17 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field");
                 writer.WriteStringValue(Field);
             }
-            if (Empty != null)
+            if (Optional.IsDefined(Empty))
             {
                 writer.WritePropertyName("empty");
                 writer.WriteStringValue(Empty);
             }
-            if (NullProperty != null)
+            if (Optional.IsDefined(NullProperty))
             {
                 writer.WritePropertyName("null");
                 writer.WriteStringValue(NullProperty);
@@ -35,40 +35,28 @@ namespace body_complex.Models
 
         internal static StringWrapper DeserializeStringWrapper(JsonElement element)
         {
-            string field = default;
-            string empty = default;
-            string @null = default;
+            Optional<string> field = default;
+            Optional<string> empty = default;
+            Optional<string> @null = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     field = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("empty"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     empty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("null"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     @null = property.Value.GetString();
                     continue;
                 }
             }
-            return new StringWrapper(field, empty, @null);
+            return new StringWrapper(field.HasValue ? field.Value : null, empty.HasValue ? empty.Value : null, @null.HasValue ? @null.Value : null);
         }
     }
 }

@@ -15,20 +15,16 @@ namespace Azure.Storage.Tables.Models
     {
         internal static StorageError DeserializeStorageError(JsonElement element)
         {
-            string message = default;
+            Optional<string> message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("Message"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     message = property.Value.GetString();
                     continue;
                 }
             }
-            return new StorageError(message);
+            return new StorageError(message.HasValue ? message.Value : null);
         }
 
         internal static StorageError DeserializeStorageError(XElement element)

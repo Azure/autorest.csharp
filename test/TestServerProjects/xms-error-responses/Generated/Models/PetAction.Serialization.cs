@@ -14,20 +14,16 @@ namespace xms_error_responses.Models
     {
         internal static PetAction DeserializePetAction(JsonElement element)
         {
-            string actionResponse = default;
+            Optional<string> actionResponse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("actionResponse"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     actionResponse = property.Value.GetString();
                     continue;
                 }
             }
-            return new PetAction(actionResponse);
+            return new PetAction(actionResponse.HasValue ? actionResponse.Value : null);
         }
     }
 }

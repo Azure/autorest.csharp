@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 using NamespaceForEnums;
 
 namespace TypeSchemaMapping.Models
@@ -16,6 +17,7 @@ namespace TypeSchemaMapping.Models
         /// <summary> Initializes a new instance of SecondModel. </summary>
         public SecondModel()
         {
+            DictionaryProperty = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of SecondModel. </summary>

@@ -15,19 +15,19 @@ namespace lro.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (ProvisioningState != null)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState");
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (ProvisioningStateValues != null)
+            if (Optional.IsDefined(ProvisioningStateValues))
             {
                 writer.WritePropertyName("provisioningStateValues");
                 writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
@@ -38,17 +38,13 @@ namespace lro.Models
 
         internal static SubProduct DeserializeSubProduct(JsonElement element)
         {
-            string id = default;
-            string provisioningState = default;
-            SubProductPropertiesProvisioningStateValues? provisioningStateValues = default;
+            Optional<string> id = default;
+            Optional<string> provisioningState = default;
+            Optional<SubProductPropertiesProvisioningStateValues> provisioningStateValues = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     id = property.Value.GetString();
                     continue;
                 }
@@ -58,19 +54,11 @@ namespace lro.Models
                     {
                         if (property0.NameEquals("provisioningState"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             provisioningState = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningStateValues"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             provisioningStateValues = new SubProductPropertiesProvisioningStateValues(property0.Value.GetString());
                             continue;
                         }
@@ -78,7 +66,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new SubProduct(id, provisioningState, provisioningStateValues);
+            return new SubProduct(id.HasValue ? id.Value : null, provisioningState.HasValue ? provisioningState.Value : null, provisioningStateValues.HasValue ? provisioningStateValues.Value : (SubProductPropertiesProvisioningStateValues?)null);
         }
     }
 }

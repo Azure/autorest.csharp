@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -15,6 +16,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of ArrayWrapper. </summary>
         public ArrayWrapper()
         {
+            Array = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of ArrayWrapper. </summary>
@@ -24,6 +26,6 @@ namespace body_complex.Models
             Array = array;
         }
 
-        public IList<string> Array { get; set; }
+        public IList<string> Array { get; }
     }
 }

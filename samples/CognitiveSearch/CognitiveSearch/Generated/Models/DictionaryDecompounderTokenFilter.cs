@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
         /// <param name="onlyLongestMatch"> A value indicating whether to add only the longest matching subword to the output. Default is false. </param>
         internal DictionaryDecompounderTokenFilter(string odataType, string name, IList<string> wordList, int? minWordSize, int? minSubwordSize, int? maxSubwordSize, bool? onlyLongestMatch) : base(odataType, name)
         {
-            WordList = wordList ?? new List<string>();
+            WordList = wordList;
             MinWordSize = minWordSize;
             MinSubwordSize = minSubwordSize;
             MaxSubwordSize = maxSubwordSize;

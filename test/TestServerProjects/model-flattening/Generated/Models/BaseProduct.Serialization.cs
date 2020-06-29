@@ -17,7 +17,7 @@ namespace model_flattening.Models
             writer.WriteStartObject();
             writer.WritePropertyName("base_product_id");
             writer.WriteStringValue(ProductId);
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("base_product_description");
                 writer.WriteStringValue(Description);
@@ -28,7 +28,7 @@ namespace model_flattening.Models
         internal static BaseProduct DeserializeBaseProduct(JsonElement element)
         {
             string baseProductId = default;
-            string baseProductDescription = default;
+            Optional<string> baseProductDescription = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("base_product_id"))
@@ -38,15 +38,11 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("base_product_description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     baseProductDescription = property.Value.GetString();
                     continue;
                 }
             }
-            return new BaseProduct(baseProductId, baseProductDescription);
+            return new BaseProduct(baseProductId, baseProductDescription.HasValue ? baseProductDescription.Value : null);
         }
     }
 }

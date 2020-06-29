@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(Id);
             writer.WritePropertyName("text");
             writer.WriteStringValue(Text);
-            if (Language != null)
+            if (Optional.IsDefined(Language))
             {
                 writer.WritePropertyName("language");
                 writer.WriteStringValue(Language);

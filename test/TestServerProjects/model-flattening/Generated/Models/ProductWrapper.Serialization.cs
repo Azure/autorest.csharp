@@ -14,7 +14,7 @@ namespace model_flattening.Models
     {
         internal static ProductWrapper DeserializeProductWrapper(JsonElement element)
         {
-            string value = default;
+            Optional<string> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("property"))
@@ -23,10 +23,6 @@ namespace model_flattening.Models
                     {
                         if (property0.NameEquals("value"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             value = property0.Value.GetString();
                             continue;
                         }
@@ -34,7 +30,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new ProductWrapper(value);
+            return new ProductWrapper(value.HasValue ? value.Value : null);
         }
     }
 }

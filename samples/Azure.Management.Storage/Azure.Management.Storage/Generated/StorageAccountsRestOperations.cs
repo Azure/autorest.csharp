@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -52,7 +51,7 @@ namespace Azure.Management.Storage
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCheckNameAvailabilityRequest(string name, string type)
+        internal HttpMessage CreateCheckNameAvailabilityRequest(string name)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -65,7 +64,7 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new StorageAccountCheckNameAvailabilityParameters(name, type);
+            var model = new StorageAccountCheckNameAvailabilityParameters(name);
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -74,20 +73,15 @@ namespace Azure.Management.Storage
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="name"> The storage account name. </param>
-        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
+        public async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
 
-            using var message = CreateCheckNameAvailabilityRequest(name, type);
+            using var message = CreateCheckNameAvailabilityRequest(name);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -112,20 +106,15 @@ namespace Azure.Management.Storage
 
         /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
         /// <param name="name"> The storage account name. </param>
-        /// <param name="type"> The type of resource, Microsoft.Storage/storageAccounts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, string type = "Microsoft.Storage/storageAccounts", CancellationToken cancellationToken = default)
+        public Response<CheckNameAvailabilityResult> CheckNameAvailability(string name, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
 
-            using var message = CreateCheckNameAvailabilityRequest(name, type);
+            using var message = CreateCheckNameAvailabilityRequest(name);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1180,7 +1169,7 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new BlobRestoreParameters(timeToRestore, blobRanges.ToList());
+            var model = new BlobRestoreParameters(timeToRestore, blobRanges);
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;

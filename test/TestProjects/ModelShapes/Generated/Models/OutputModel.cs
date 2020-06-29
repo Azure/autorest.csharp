@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace ModelShapes.Models
 {
@@ -40,12 +41,14 @@ namespace ModelShapes.Models
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            RequiredStringList = requiredStringList.ToArray();
-            RequiredIntList = requiredIntList.ToArray();
+            RequiredStringList = requiredStringList.ToList();
+            RequiredIntList = requiredIntList.ToList();
+            NonRequiredStringList = new ChangeTrackingList<string>();
+            NonRequiredIntList = new ChangeTrackingList<int>();
             RequiredNullableString = requiredNullableString;
             RequiredNullableInt = requiredNullableInt;
-            RequiredNullableStringList = requiredNullableStringList?.ToArray();
-            RequiredNullableIntList = requiredNullableIntList?.ToArray();
+            RequiredNullableStringList = requiredNullableStringList?.ToList();
+            RequiredNullableIntList = requiredNullableIntList?.ToList();
         }
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
@@ -65,8 +68,8 @@ namespace ModelShapes.Models
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            RequiredStringList = requiredStringList ?? new List<string>();
-            RequiredIntList = requiredIntList ?? new List<int>();
+            RequiredStringList = requiredStringList;
+            RequiredIntList = requiredIntList;
             NonRequiredString = nonRequiredString;
             NonRequiredInt = nonRequiredInt;
             NonRequiredStringList = nonRequiredStringList;

@@ -15,12 +15,12 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field1 != null)
+            if (Optional.IsDefined(Field1))
             {
                 writer.WritePropertyName("field1");
                 writer.WriteNumberValue(Field1.Value);
             }
-            if (Field2 != null)
+            if (Optional.IsDefined(Field2))
             {
                 writer.WritePropertyName("field2");
                 writer.WriteNumberValue(Field2.Value);
@@ -30,30 +30,22 @@ namespace body_complex.Models
 
         internal static LongWrapper DeserializeLongWrapper(JsonElement element)
         {
-            long? field1 = default;
-            long? field2 = default;
+            Optional<long> field1 = default;
+            Optional<long> field2 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field1"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     field1 = property.Value.GetInt64();
                     continue;
                 }
                 if (property.NameEquals("field2"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     field2 = property.Value.GetInt64();
                     continue;
                 }
             }
-            return new LongWrapper(field1, field2);
+            return new LongWrapper(field1.HasValue ? field1.Value : (long?)null, field2.HasValue ? field2.Value : (long?)null);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field");
                 writer.WriteBase64StringValue(Field);
@@ -26,20 +26,16 @@ namespace body_complex.Models
 
         internal static ByteWrapper DeserializeByteWrapper(JsonElement element)
         {
-            byte[] field = default;
+            Optional<byte[]> field = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     field = property.Value.GetBytesFromBase64();
                     continue;
                 }
             }
-            return new ByteWrapper(field);
+            return new ByteWrapper(field.HasValue ? field.Value : null);
         }
     }
 }

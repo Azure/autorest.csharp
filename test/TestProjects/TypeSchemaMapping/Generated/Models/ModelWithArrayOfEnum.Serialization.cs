@@ -16,7 +16,7 @@ namespace TypeSchemaMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (ArrayOfEnum != null)
+            if (Optional.IsDefined(ArrayOfEnum))
             {
                 writer.WritePropertyName("ArrayOfEnum");
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (ArrayOfEnumCustomizedToNullable != null)
+            if (Optional.IsDefined(ArrayOfEnumCustomizedToNullable))
             {
                 writer.WritePropertyName("ArrayOfEnumCustomizedToNullable");
                 writer.WriteStartArray();
@@ -41,16 +41,12 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithArrayOfEnum DeserializeModelWithArrayOfEnum(JsonElement element)
         {
-            IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum = default;
-            IReadOnlyList<EnumForModelWithArrayOfEnum?> arrayOfEnumCustomizedToNullable = default;
+            Optional<IReadOnlyList<EnumForModelWithArrayOfEnum>> arrayOfEnum = default;
+            Optional<IReadOnlyList<EnumForModelWithArrayOfEnum?>> arrayOfEnumCustomizedToNullable = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ArrayOfEnum"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<EnumForModelWithArrayOfEnum> array = new List<EnumForModelWithArrayOfEnum>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -61,10 +57,6 @@ namespace TypeSchemaMapping.Models
                 }
                 if (property.NameEquals("ArrayOfEnumCustomizedToNullable"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<EnumForModelWithArrayOfEnum?> array = new List<EnumForModelWithArrayOfEnum?>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -81,7 +73,7 @@ namespace TypeSchemaMapping.Models
                     continue;
                 }
             }
-            return new ModelWithArrayOfEnum(arrayOfEnum, arrayOfEnumCustomizedToNullable);
+            return new ModelWithArrayOfEnum(new ChangeTrackingList<EnumForModelWithArrayOfEnum>(arrayOfEnum), new ChangeTrackingList<EnumForModelWithArrayOfEnum?>(arrayOfEnumCustomizedToNullable));
         }
     }
 }

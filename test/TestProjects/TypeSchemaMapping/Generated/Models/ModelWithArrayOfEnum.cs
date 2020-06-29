@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
@@ -15,6 +16,8 @@ namespace TypeSchemaMapping.Models
         /// <summary> Initializes a new instance of ModelWithArrayOfEnum. </summary>
         public ModelWithArrayOfEnum()
         {
+            ArrayOfEnum = new ChangeTrackingList<EnumForModelWithArrayOfEnum>();
+            ArrayOfEnumCustomizedToNullable = new ChangeTrackingList<EnumForModelWithArrayOfEnum?>();
         }
 
         /// <summary> Initializes a new instance of ModelWithArrayOfEnum. </summary>

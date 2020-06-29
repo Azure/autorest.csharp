@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
+            TokenChars = new ChangeTrackingList<TokenCharacterKind>();
             OdataType = "#Microsoft.Azure.Search.EdgeNGramTokenizer";
         }
 
@@ -44,6 +46,6 @@ namespace CognitiveSearch.Models
         /// <summary> The maximum n-gram length. Default is 2. Maximum is 300. </summary>
         public int? MaxGram { get; set; }
         /// <summary> Character classes to keep in the tokens. </summary>
-        public IList<TokenCharacterKind> TokenChars { get; set; }
+        public IList<TokenCharacterKind> TokenChars { get; }
     }
 }

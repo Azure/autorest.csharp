@@ -17,31 +17,31 @@ namespace model_flattening.Models
             writer.WriteStartObject();
             writer.WritePropertyName("base_product_id");
             writer.WriteStringValue(ProductId);
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("base_product_description");
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("details");
             writer.WriteStartObject();
-            if (MaxProductDisplayName != null)
+            if (Optional.IsDefined(MaxProductDisplayName))
             {
                 writer.WritePropertyName("max_product_display_name");
                 writer.WriteStringValue(MaxProductDisplayName);
             }
-            if (Capacity != null)
+            if (Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("max_product_capacity");
                 writer.WriteStringValue(Capacity);
             }
             writer.WritePropertyName("max_product_image");
             writer.WriteStartObject();
-            if (GenericValue != null)
+            if (Optional.IsDefined(GenericValue))
             {
                 writer.WritePropertyName("generic_value");
                 writer.WriteStringValue(GenericValue);
             }
-            if (OdataValue != null)
+            if (Optional.IsDefined(OdataValue))
             {
                 writer.WritePropertyName("@odata.value");
                 writer.WriteStringValue(OdataValue);
@@ -54,11 +54,11 @@ namespace model_flattening.Models
         internal static SimpleProduct DeserializeSimpleProduct(JsonElement element)
         {
             string baseProductId = default;
-            string baseProductDescription = default;
-            string maxProductDisplayName = default;
-            string maxProductCapacity = default;
-            string genericValue = default;
-            string odataValue = default;
+            Optional<string> baseProductDescription = default;
+            Optional<string> maxProductDisplayName = default;
+            Optional<string> maxProductCapacity = default;
+            Optional<string> genericValue = default;
+            Optional<string> odataValue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("base_product_id"))
@@ -68,10 +68,6 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("base_product_description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     baseProductDescription = property.Value.GetString();
                     continue;
                 }
@@ -81,19 +77,11 @@ namespace model_flattening.Models
                     {
                         if (property0.NameEquals("max_product_display_name"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             maxProductDisplayName = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("max_product_capacity"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             maxProductCapacity = property0.Value.GetString();
                             continue;
                         }
@@ -103,19 +91,11 @@ namespace model_flattening.Models
                             {
                                 if (property1.NameEquals("generic_value"))
                                 {
-                                    if (property1.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        continue;
-                                    }
                                     genericValue = property1.Value.GetString();
                                     continue;
                                 }
                                 if (property1.NameEquals("@odata.value"))
                                 {
-                                    if (property1.Value.ValueKind == JsonValueKind.Null)
-                                    {
-                                        continue;
-                                    }
                                     odataValue = property1.Value.GetString();
                                     continue;
                                 }
@@ -126,7 +106,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new SimpleProduct(baseProductId, baseProductDescription, maxProductDisplayName, maxProductCapacity, genericValue, odataValue);
+            return new SimpleProduct(baseProductId, baseProductDescription.HasValue ? baseProductDescription.Value : null, maxProductDisplayName.HasValue ? maxProductDisplayName.Value : null, maxProductCapacity.HasValue ? maxProductCapacity.Value : null, genericValue.HasValue ? genericValue.Value : null, odataValue.HasValue ? odataValue.Value : null);
         }
     }
 }

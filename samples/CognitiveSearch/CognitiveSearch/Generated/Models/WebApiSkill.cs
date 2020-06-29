@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -33,6 +34,7 @@ namespace CognitiveSearch.Models
             }
 
             Uri = uri;
+            HttpHeaders = new ChangeTrackingDictionary<string, string>();
             OdataType = "#Microsoft.Skills.Custom.WebApiSkill";
         }
 
@@ -63,7 +65,7 @@ namespace CognitiveSearch.Models
         /// <summary> The url for the Web API. </summary>
         public string Uri { get; set; }
         /// <summary> The headers required to make the http request. </summary>
-        public IDictionary<string, string> HttpHeaders { get; set; }
+        public IDictionary<string, string> HttpHeaders { get; }
         /// <summary> The method for the http request. </summary>
         public string HttpMethod { get; set; }
         /// <summary> The desired timeout for the request. Default is 30 seconds. </summary>

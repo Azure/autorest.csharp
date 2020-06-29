@@ -23,7 +23,7 @@ namespace xms_error_responses.Models
                 }
             }
             string errorType = default;
-            string errorMessage = default;
+            Optional<string> errorMessage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("errorType"))
@@ -33,15 +33,11 @@ namespace xms_error_responses.Models
                 }
                 if (property.NameEquals("errorMessage"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     errorMessage = property.Value.GetString();
                     continue;
                 }
             }
-            return new PetActionError(errorType, errorMessage);
+            return new PetActionError(errorType, errorMessage.HasValue ? errorMessage.Value : null);
         }
     }
 }

@@ -16,29 +16,29 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (InsertPreTag != null)
+            if (Optional.IsDefined(InsertPreTag))
             {
                 writer.WritePropertyName("insertPreTag");
                 writer.WriteStringValue(InsertPreTag);
             }
-            if (InsertPostTag != null)
+            if (Optional.IsDefined(InsertPostTag))
             {
                 writer.WritePropertyName("insertPostTag");
                 writer.WriteStringValue(InsertPostTag);
             }
             writer.WritePropertyName("@odata.type");
             writer.WriteStringValue(OdataType);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description");
                 writer.WriteStringValue(Description);
             }
-            if (Context != null)
+            if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context");
                 writer.WriteStringValue(Context);
@@ -62,31 +62,23 @@ namespace CognitiveSearch.Models
 
         internal static MergeSkill DeserializeMergeSkill(JsonElement element)
         {
-            string insertPreTag = default;
-            string insertPostTag = default;
+            Optional<string> insertPreTag = default;
+            Optional<string> insertPostTag = default;
             string odataType = default;
-            string name = default;
-            string description = default;
-            string context = default;
+            Optional<string> name = default;
+            Optional<string> description = default;
+            Optional<string> context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("insertPreTag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     insertPreTag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("insertPostTag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     insertPostTag = property.Value.GetString();
                     continue;
                 }
@@ -97,28 +89,16 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     context = property.Value.GetString();
                     continue;
                 }
@@ -157,7 +137,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MergeSkill(odataType, name, description, context, inputs, outputs, insertPreTag, insertPostTag);
+            return new MergeSkill(odataType, name.HasValue ? name.Value : null, description.HasValue ? description.Value : null, context.HasValue ? context.Value : null, inputs, outputs, insertPreTag.HasValue ? insertPreTag.Value : null, insertPostTag.HasValue ? insertPostTag.Value : null);
         }
     }
 }

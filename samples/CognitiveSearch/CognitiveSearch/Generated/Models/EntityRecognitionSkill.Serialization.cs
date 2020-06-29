@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Categories != null)
+            if (Optional.IsDefined(Categories))
             {
                 writer.WritePropertyName("categories");
                 writer.WriteStartArray();
@@ -26,34 +26,48 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (DefaultLanguageCode != null)
+            if (Optional.IsDefined(DefaultLanguageCode))
             {
                 writer.WritePropertyName("defaultLanguageCode");
                 writer.WriteStringValue(DefaultLanguageCode.Value.ToString());
             }
-            if (IncludeTypelessEntities != null)
+            if (Optional.IsDefined(IncludeTypelessEntities))
             {
-                writer.WritePropertyName("includeTypelessEntities");
-                writer.WriteBooleanValue(IncludeTypelessEntities.Value);
+                if (IncludeTypelessEntities != null)
+                {
+                    writer.WritePropertyName("includeTypelessEntities");
+                    writer.WriteBooleanValue(IncludeTypelessEntities.Value);
+                }
+                else
+                {
+                    writer.WriteNull("includeTypelessEntities");
+                }
             }
-            if (MinimumPrecision != null)
+            if (Optional.IsDefined(MinimumPrecision))
             {
-                writer.WritePropertyName("minimumPrecision");
-                writer.WriteNumberValue(MinimumPrecision.Value);
+                if (MinimumPrecision != null)
+                {
+                    writer.WritePropertyName("minimumPrecision");
+                    writer.WriteNumberValue(MinimumPrecision.Value);
+                }
+                else
+                {
+                    writer.WriteNull("minimumPrecision");
+                }
             }
             writer.WritePropertyName("@odata.type");
             writer.WriteStringValue(OdataType);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description");
                 writer.WriteStringValue(Description);
             }
-            if (Context != null)
+            if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context");
                 writer.WriteStringValue(Context);
@@ -77,24 +91,20 @@ namespace CognitiveSearch.Models
 
         internal static EntityRecognitionSkill DeserializeEntityRecognitionSkill(JsonElement element)
         {
-            IList<EntityCategory> categories = default;
-            EntityRecognitionSkillLanguage? defaultLanguageCode = default;
-            bool? includeTypelessEntities = default;
-            double? minimumPrecision = default;
+            Optional<IList<EntityCategory>> categories = default;
+            Optional<EntityRecognitionSkillLanguage> defaultLanguageCode = default;
+            Optional<bool?> includeTypelessEntities = default;
+            Optional<double?> minimumPrecision = default;
             string odataType = default;
-            string name = default;
-            string description = default;
-            string context = default;
+            Optional<string> name = default;
+            Optional<string> description = default;
+            Optional<string> context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("categories"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<EntityCategory> array = new List<EntityCategory>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -105,10 +115,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("defaultLanguageCode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     defaultLanguageCode = new EntityRecognitionSkillLanguage(property.Value.GetString());
                     continue;
                 }
@@ -116,6 +122,7 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        includeTypelessEntities = null;
                         continue;
                     }
                     includeTypelessEntities = property.Value.GetBoolean();
@@ -125,6 +132,7 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        minimumPrecision = null;
                         continue;
                     }
                     minimumPrecision = property.Value.GetDouble();
@@ -137,28 +145,16 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     context = property.Value.GetString();
                     continue;
                 }
@@ -197,7 +193,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EntityRecognitionSkill(odataType, name, description, context, inputs, outputs, categories, defaultLanguageCode, includeTypelessEntities, minimumPrecision);
+            return new EntityRecognitionSkill(odataType, name.HasValue ? name.Value : null, description.HasValue ? description.Value : null, context.HasValue ? context.Value : null, inputs, outputs, new ChangeTrackingList<EntityCategory>(categories), defaultLanguageCode.HasValue ? defaultLanguageCode.Value : (EntityRecognitionSkillLanguage?)null, includeTypelessEntities.HasValue ? includeTypelessEntities.Value : null, minimumPrecision.HasValue ? minimumPrecision.Value : null);
         }
     }
 }

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
+            Articles = new ChangeTrackingList<string>();
             OdataType = "#Microsoft.Azure.Search.ElisionTokenFilter";
         }
 
@@ -36,6 +38,6 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The set of articles to remove. </summary>
-        public IList<string> Articles { get; set; }
+        public IList<string> Articles { get; }
     }
 }

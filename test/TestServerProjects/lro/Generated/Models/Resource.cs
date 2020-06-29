@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace lro.Models
 {
@@ -15,6 +16,7 @@ namespace lro.Models
         /// <summary> Initializes a new instance of Resource. </summary>
         public Resource()
         {
+            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of Resource. </summary>
@@ -37,7 +39,7 @@ namespace lro.Models
         /// <summary> Resource Type. </summary>
         public string Type { get; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Tags { get; set; }
+        public IDictionary<string, string> Tags { get; }
         /// <summary> Resource Location. </summary>
         public string Location { get; set; }
         /// <summary> Resource Name. </summary>

@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(Id);
             writer.WritePropertyName("text");
             writer.WriteStringValue(Text);
-            if (CountryHint != null)
+            if (Optional.IsDefined(CountryHint))
             {
                 writer.WritePropertyName("countryHint");
                 writer.WriteStringValue(CountryHint);

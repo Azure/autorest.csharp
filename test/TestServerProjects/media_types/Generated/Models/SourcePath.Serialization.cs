@@ -15,7 +15,7 @@ namespace media_types.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Source != null)
+            if (Optional.IsDefined(Source))
             {
                 writer.WritePropertyName("source");
                 writer.WriteStringValue(Source);

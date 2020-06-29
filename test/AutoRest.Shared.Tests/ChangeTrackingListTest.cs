@@ -31,7 +31,7 @@ namespace Azure.Core.Tests
 
             list.CopyTo(new string[5], 0);
 
-            Assert.Throws<IndexOutOfRangeException>(() => _ = list[0]);
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = list[0]);
 
             Assert.True(list.IsUndefined);
         }
@@ -42,7 +42,7 @@ namespace Azure.Core.Tests
             var list = new ChangeTrackingList<string>();
             list.Add("a");
 
-            Assert.AreEqual("b", list[0]);
+            Assert.AreEqual("a", list[0]);
             Assert.False(list.IsUndefined);
         }
 

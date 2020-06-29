@@ -15,16 +15,12 @@ namespace AppConfiguration.Models
     {
         internal static KeyValueListResult DeserializeKeyValueListResult(JsonElement element)
         {
-            IReadOnlyList<KeyValue> items = default;
-            string nextLink = default;
+            Optional<IReadOnlyList<KeyValue>> items = default;
+            Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<KeyValue> array = new List<KeyValue>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -42,15 +38,11 @@ namespace AppConfiguration.Models
                 }
                 if (property.NameEquals("@nextLink"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     nextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return new KeyValueListResult(items, nextLink);
+            return new KeyValueListResult(new ChangeTrackingList<KeyValue>(items), nextLink.HasValue ? nextLink.Value : null);
         }
     }
 }

@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace additionalProperties.Models
 {
@@ -18,7 +19,7 @@ namespace additionalProperties.Models
         public PetAPString(int id)
         {
             Id = id;
-            AdditionalProperties = new Dictionary<string, string>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of PetAPString. </summary>
@@ -31,7 +32,7 @@ namespace additionalProperties.Models
             Id = id;
             Name = name;
             Status = status;
-            AdditionalProperties = additionalProperties ?? new Dictionary<string, string>();
+            AdditionalProperties = additionalProperties;
         }
 
         public int Id { get; set; }

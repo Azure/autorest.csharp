@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -23,7 +24,9 @@ namespace Azure.AI.FormRecognizer.Models
                 throw new ArgumentNullException(nameof(trainingDocuments));
             }
 
-            TrainingDocuments = trainingDocuments.ToArray();
+            TrainingDocuments = trainingDocuments.ToList();
+            Fields = new ChangeTrackingList<FormFieldsReport>();
+            Errors = new ChangeTrackingList<ErrorInformation>();
         }
 
         /// <summary> Initializes a new instance of TrainResult. </summary>
@@ -33,7 +36,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="errors"> Errors returned during the training operation. </param>
         internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments, IReadOnlyList<FormFieldsReport> fields, float? averageModelAccuracy, IReadOnlyList<ErrorInformation> errors)
         {
-            TrainingDocuments = trainingDocuments ?? new List<TrainingDocumentInfo>();
+            TrainingDocuments = trainingDocuments;
             Fields = fields;
             AverageModelAccuracy = averageModelAccuracy;
             Errors = errors;

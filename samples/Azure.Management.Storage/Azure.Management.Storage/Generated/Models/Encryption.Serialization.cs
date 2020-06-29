@@ -15,14 +15,14 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Services != null)
+            if (Optional.IsDefined(Services))
             {
                 writer.WritePropertyName("services");
                 writer.WriteObjectValue(Services);
             }
             writer.WritePropertyName("keySource");
             writer.WriteStringValue(KeySource.ToString());
-            if (KeyVaultProperties != null)
+            if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyvaultproperties");
                 writer.WriteObjectValue(KeyVaultProperties);
@@ -32,17 +32,13 @@ namespace Azure.Management.Storage.Models
 
         internal static Encryption DeserializeEncryption(JsonElement element)
         {
-            EncryptionServices services = default;
+            Optional<EncryptionServices> services = default;
             KeySource keySource = default;
-            KeyVaultProperties keyvaultproperties = default;
+            Optional<KeyVaultProperties> keyvaultproperties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("services"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     services = EncryptionServices.DeserializeEncryptionServices(property.Value);
                     continue;
                 }
@@ -53,15 +49,11 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("keyvaultproperties"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
                     continue;
                 }
             }
-            return new Encryption(services, keySource, keyvaultproperties);
+            return new Encryption(services.HasValue ? services.Value : null, keySource, keyvaultproperties.HasValue ? keyvaultproperties.Value : null);
         }
     }
 }

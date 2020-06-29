@@ -16,9 +16,9 @@ namespace Azure.AI.FormRecognizer.Models
         internal static TrainResult DeserializeTrainResult(JsonElement element)
         {
             IReadOnlyList<TrainingDocumentInfo> trainingDocuments = default;
-            IReadOnlyList<FormFieldsReport> fields = default;
-            float? averageModelAccuracy = default;
-            IReadOnlyList<ErrorInformation> errors = default;
+            Optional<IReadOnlyList<FormFieldsReport>> fields = default;
+            Optional<float> averageModelAccuracy = default;
+            Optional<IReadOnlyList<ErrorInformation>> errors = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("trainingDocuments"))
@@ -40,10 +40,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("fields"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<FormFieldsReport> array = new List<FormFieldsReport>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -61,19 +57,11 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("averageModelAccuracy"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     averageModelAccuracy = property.Value.GetSingle();
                     continue;
                 }
                 if (property.NameEquals("errors"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -90,7 +78,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new TrainResult(trainingDocuments, fields, averageModelAccuracy, errors);
+            return new TrainResult(trainingDocuments, new ChangeTrackingList<FormFieldsReport>(fields), averageModelAccuracy.HasValue ? averageModelAccuracy.Value : (float?)null, new ChangeTrackingList<ErrorInformation>(errors));
         }
     }
 }

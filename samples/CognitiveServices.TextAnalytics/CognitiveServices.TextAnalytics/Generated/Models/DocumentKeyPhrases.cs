@@ -29,7 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
 
             Id = id;
-            KeyPhrases = keyPhrases.ToArray();
+            KeyPhrases = keyPhrases.ToList();
         }
 
         /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>
@@ -39,7 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentKeyPhrases(string id, IReadOnlyList<string> keyPhrases, DocumentStatistics statistics)
         {
             Id = id;
-            KeyPhrases = keyPhrases ?? new List<string>();
+            KeyPhrases = keyPhrases;
             Statistics = statistics;
         }
 

@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             SentimentConfidenceScorePerLabel sentenceScores = default;
             int offset = default;
             int length = default;
-            IReadOnlyList<string> warnings = default;
+            Optional<IReadOnlyList<string>> warnings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sentiment"))
@@ -44,10 +44,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("warnings"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -64,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new SentenceSentiment(sentiment, sentenceScores, offset, length, warnings);
+            return new SentenceSentiment(sentiment, sentenceScores, offset, length, new ChangeTrackingList<string>(warnings));
         }
     }
 }

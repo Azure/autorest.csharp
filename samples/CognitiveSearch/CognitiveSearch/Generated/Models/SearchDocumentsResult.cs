@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -23,7 +24,8 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(results));
             }
 
-            Results = results.ToArray();
+            Facets = new ChangeTrackingDictionary<string, IList<FacetResult>>();
+            Results = results.ToList();
         }
 
         /// <summary> Initializes a new instance of SearchDocumentsResult. </summary>
@@ -39,7 +41,7 @@ namespace CognitiveSearch.Models
             Coverage = coverage;
             Facets = facets;
             NextPageParameters = nextPageParameters;
-            Results = results ?? new List<SearchResult>();
+            Results = results;
             NextLink = nextLink;
         }
 

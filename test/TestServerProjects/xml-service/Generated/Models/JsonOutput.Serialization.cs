@@ -14,20 +14,16 @@ namespace xml_service.Models
     {
         internal static JsonOutput DeserializeJsonOutput(JsonElement element)
         {
-            int? id = default;
+            Optional<int> id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     id = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new JsonOutput(id);
+            return new JsonOutput(id.HasValue ? id.Value : (int?)null);
         }
     }
 }

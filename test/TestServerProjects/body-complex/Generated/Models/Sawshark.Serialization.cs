@@ -17,12 +17,12 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Picture != null)
+            if (Optional.IsDefined(Picture))
             {
                 writer.WritePropertyName("picture");
                 writer.WriteBase64StringValue(Picture);
             }
-            if (Age != null)
+            if (Optional.IsDefined(Age))
             {
                 writer.WritePropertyName("age");
                 writer.WriteNumberValue(Age.Value);
@@ -31,14 +31,14 @@ namespace body_complex.Models
             writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(Fishtype);
-            if (Species != null)
+            if (Optional.IsDefined(Species))
             {
                 writer.WritePropertyName("species");
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length");
             writer.WriteNumberValue(Length);
-            if (Siblings != null)
+            if (Optional.IsDefined(Siblings))
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
@@ -53,30 +53,22 @@ namespace body_complex.Models
 
         internal static Sawshark DeserializeSawshark(JsonElement element)
         {
-            byte[] picture = default;
-            int? age = default;
+            Optional<byte[]> picture = default;
+            Optional<int> age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
-            string species = default;
+            Optional<string> species = default;
             float length = default;
-            IList<Fish> siblings = default;
+            Optional<IList<Fish>> siblings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("picture"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     picture = property.Value.GetBytesFromBase64();
                     continue;
                 }
                 if (property.NameEquals("age"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     age = property.Value.GetInt32();
                     continue;
                 }
@@ -92,10 +84,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("species"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     species = property.Value.GetString();
                     continue;
                 }
@@ -106,10 +94,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("siblings"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -126,7 +110,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Sawshark(fishtype, species, length, siblings, age, birthday, picture);
+            return new Sawshark(fishtype, species.HasValue ? species.Value : null, length, new ChangeTrackingList<Fish>(siblings), age.HasValue ? age.Value : (int?)null, birthday, picture.HasValue ? picture.Value : null);
         }
     }
 }

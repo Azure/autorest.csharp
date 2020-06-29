@@ -21,17 +21,13 @@ namespace xms_error_responses.Models
                     case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element);
                 }
             }
-            string reason = default;
+            Optional<string> reason = default;
             string errorType = default;
-            string errorMessage = default;
+            Optional<string> errorMessage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("reason"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     reason = property.Value.GetString();
                     continue;
                 }
@@ -42,15 +38,11 @@ namespace xms_error_responses.Models
                 }
                 if (property.NameEquals("errorMessage"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     errorMessage = property.Value.GetString();
                     continue;
                 }
             }
-            return new PetSadError(errorType, errorMessage, reason);
+            return new PetSadError(errorType, errorMessage.HasValue ? errorMessage.Value : null, reason.HasValue ? reason.Value : null);
         }
     }
 }

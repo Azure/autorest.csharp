@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -37,6 +38,7 @@ namespace xml_service.Models
             Deleted = deleted;
             Snapshot = snapshot;
             Properties = properties;
+            Metadata = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of Blob. </summary>

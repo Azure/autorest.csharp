@@ -16,7 +16,7 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field");
                 writer.WriteStringValue(Field.Value, "P");
@@ -26,20 +26,16 @@ namespace body_complex.Models
 
         internal static DurationWrapper DeserializeDurationWrapper(JsonElement element)
         {
-            TimeSpan? field = default;
+            Optional<TimeSpan> field = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     field = property.Value.GetTimeSpan("P");
                     continue;
                 }
             }
-            return new DurationWrapper(field);
+            return new DurationWrapper(field.HasValue ? field.Value : (TimeSpan?)null);
         }
     }
 }

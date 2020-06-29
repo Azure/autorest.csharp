@@ -15,12 +15,12 @@ namespace body_dictionary.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Integer != null)
+            if (Optional.IsDefined(Integer))
             {
                 writer.WritePropertyName("integer");
                 writer.WriteNumberValue(Integer.Value);
             }
-            if (String != null)
+            if (Optional.IsDefined(String))
             {
                 writer.WritePropertyName("string");
                 writer.WriteStringValue(String);
@@ -30,30 +30,22 @@ namespace body_dictionary.Models
 
         internal static Widget DeserializeWidget(JsonElement element)
         {
-            int? integer = default;
-            string @string = default;
+            Optional<int> integer = default;
+            Optional<string> @string = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("integer"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     integer = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("string"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     @string = property.Value.GetString();
                     continue;
                 }
             }
-            return new Widget(integer, @string);
+            return new Widget(integer.HasValue ? integer.Value : (int?)null, @string.HasValue ? @string.Value : null);
         }
     }
 }

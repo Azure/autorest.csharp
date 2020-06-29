@@ -21,12 +21,12 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(Format);
             writer.WritePropertyName("synonyms");
             writer.WriteStringValue(Synonyms);
-            if (EncryptionKey != null)
+            if (Optional.IsDefined(EncryptionKey))
             {
                 writer.WritePropertyName("encryptionKey");
                 writer.WriteObjectValue(EncryptionKey);
             }
-            if (ETag != null)
+            if (Optional.IsDefined(ETag))
             {
                 writer.WritePropertyName("@odata.etag");
                 writer.WriteStringValue(ETag);
@@ -39,8 +39,8 @@ namespace CognitiveSearch.Models
             string name = default;
             string format = default;
             string synonyms = default;
-            EncryptionKey encryptionKey = default;
-            string odataEtag = default;
+            Optional<EncryptionKey> encryptionKey = default;
+            Optional<string> odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -60,24 +60,16 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("encryptionKey"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     odataEtag = property.Value.GetString();
                     continue;
                 }
             }
-            return new SynonymMap(name, format, synonyms, encryptionKey, odataEtag);
+            return new SynonymMap(name, format, synonyms, encryptionKey.HasValue ? encryptionKey.Value : null, odataEtag.HasValue ? odataEtag.Value : null);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace NameConflicts.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Property != null)
+            if (Optional.IsDefined(Property))
             {
                 writer.WritePropertyName("property");
                 writer.WriteStringValue(Property);
@@ -25,20 +25,16 @@ namespace NameConflicts.Models
 
         internal static Request DeserializeRequest(JsonElement element)
         {
-            string property = default;
+            Optional<string> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"))
                 {
-                    if (property0.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     property = property0.Value.GetString();
                     continue;
                 }
             }
-            return new Request(property);
+            return new Request(property.HasValue ? property.Value : null);
         }
     }
 }

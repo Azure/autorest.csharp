@@ -14,20 +14,16 @@ namespace httpInfrastructure.Models
     {
         internal static MyException DeserializeMyException(JsonElement element)
         {
-            string statusCode = default;
+            Optional<string> statusCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("statusCode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     statusCode = property.Value.GetString();
                     continue;
                 }
             }
-            return new MyException(statusCode);
+            return new MyException(statusCode.HasValue ? statusCode.Value : null);
         }
     }
 }

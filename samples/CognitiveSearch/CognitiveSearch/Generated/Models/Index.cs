@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -30,6 +31,12 @@ namespace CognitiveSearch.Models
 
             Name = name;
             Fields = fields.ToList();
+            ScoringProfiles = new ChangeTrackingList<ScoringProfile>();
+            Suggesters = new ChangeTrackingList<Suggester>();
+            Analyzers = new ChangeTrackingList<Analyzer>();
+            Tokenizers = new ChangeTrackingList<Tokenizer>();
+            TokenFilters = new ChangeTrackingList<TokenFilter>();
+            CharFilters = new ChangeTrackingList<CharFilter>();
         }
 
         /// <summary> Initializes a new instance of Index. </summary>
@@ -49,7 +56,7 @@ namespace CognitiveSearch.Models
         internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, Similarity similarity, string eTag)
         {
             Name = name;
-            Fields = fields ?? new List<Field>();
+            Fields = fields;
             ScoringProfiles = scoringProfiles;
             DefaultScoringProfile = defaultScoringProfile;
             CorsOptions = corsOptions;
@@ -68,21 +75,21 @@ namespace CognitiveSearch.Models
         /// <summary> The fields of the index. </summary>
         public IList<Field> Fields { get; }
         /// <summary> The scoring profiles for the index. </summary>
-        public IList<ScoringProfile> ScoringProfiles { get; set; }
+        public IList<ScoringProfile> ScoringProfiles { get; }
         /// <summary> The name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used. </summary>
         public string DefaultScoringProfile { get; set; }
         /// <summary> Options to control Cross-Origin Resource Sharing (CORS) for the index. </summary>
         public CorsOptions CorsOptions { get; set; }
         /// <summary> The suggesters for the index. </summary>
-        public IList<Suggester> Suggesters { get; set; }
+        public IList<Suggester> Suggesters { get; }
         /// <summary> The analyzers for the index. </summary>
-        public IList<Analyzer> Analyzers { get; set; }
+        public IList<Analyzer> Analyzers { get; }
         /// <summary> The tokenizers for the index. </summary>
-        public IList<Tokenizer> Tokenizers { get; set; }
+        public IList<Tokenizer> Tokenizers { get; }
         /// <summary> The token filters for the index. </summary>
-        public IList<TokenFilter> TokenFilters { get; set; }
+        public IList<TokenFilter> TokenFilters { get; }
         /// <summary> The character filters for the index. </summary>
-        public IList<CharFilter> CharFilters { get; set; }
+        public IList<CharFilter> CharFilters { get; }
         /// <summary> A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. </summary>
         public EncryptionKey EncryptionKey { get; set; }
         /// <summary> The type of similarity algorithm to be used when scoring and ranking the documents matching a search query. The similarity algorithm can only be defined at index creation time and cannot be modified on existing indexes. If null, the ClassicSimilarity algorithm is used. </summary>

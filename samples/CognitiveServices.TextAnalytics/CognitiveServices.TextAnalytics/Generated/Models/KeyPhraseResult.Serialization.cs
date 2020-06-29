@@ -17,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             IReadOnlyList<DocumentKeyPhrases> documents = default;
             IReadOnlyList<DocumentError> errors = default;
-            RequestStatistics statistics = default;
+            Optional<RequestStatistics> statistics = default;
             string modelVersion = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -57,10 +57,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("statistics"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
                     continue;
                 }
@@ -70,7 +66,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new KeyPhraseResult(documents, errors, statistics, modelVersion);
+            return new KeyPhraseResult(documents, errors, statistics.HasValue ? statistics.Value : null, modelVersion);
         }
     }
 }

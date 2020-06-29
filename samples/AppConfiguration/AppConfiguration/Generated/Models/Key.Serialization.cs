@@ -14,20 +14,16 @@ namespace AppConfiguration.Models
     {
         internal static Key DeserializeKey(JsonElement element)
         {
-            string name = default;
+            Optional<string> name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
             }
-            return new Key(name);
+            return new Key(name.HasValue ? name.Value : null);
         }
     }
 }

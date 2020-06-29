@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
         /// <param name="maxAgeInSeconds"> The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes. </param>
         internal CorsOptions(IList<string> allowedOrigins, long? maxAgeInSeconds)
         {
-            AllowedOrigins = allowedOrigins ?? new List<string>();
+            AllowedOrigins = allowedOrigins;
             MaxAgeInSeconds = maxAgeInSeconds;
         }
 

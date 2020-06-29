@@ -18,7 +18,7 @@ namespace Azure.AI.FormRecognizer.Models
             OperationStatus status = default;
             DateTimeOffset createdDateTime = default;
             DateTimeOffset lastUpdatedDateTime = default;
-            AnalyzeResult analyzeResult = default;
+            Optional<AnalyzeResult> analyzeResult = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
@@ -38,15 +38,11 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("analyzeResult"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     analyzeResult = AnalyzeResult.DeserializeAnalyzeResult(property.Value);
                     continue;
                 }
             }
-            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
+            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult.HasValue ? analyzeResult.Value : null);
         }
     }
 }

@@ -135,18 +135,12 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$count", searchOptions.IncludeTotalResultCount.Value, true);
             }
-            if (searchOptions?.Facets != null)
-            {
-                uri.AppendQueryDelimited("facet", searchOptions.Facets, ",", true);
-            }
+            uri.AppendQueryDelimited("facet", searchOptions.Facets, ",", true);
             if (searchOptions?.Filter != null)
             {
                 uri.AppendQuery("$filter", searchOptions.Filter, true);
             }
-            if (searchOptions?.HighlightFields != null)
-            {
-                uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
-            }
+            uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
             if (searchOptions?.HighlightPostTag != null)
             {
                 uri.AppendQuery("highlightPostTag", searchOptions.HighlightPostTag, true);
@@ -159,34 +153,22 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", searchOptions.MinimumCoverage.Value, true);
             }
-            if (searchOptions?.OrderBy != null)
-            {
-                uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
-            }
+            uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
             if (searchOptions?.QueryType != null)
             {
                 uri.AppendQuery("queryType", searchOptions.QueryType.Value.ToSerialString(), true);
             }
-            if (searchOptions?.ScoringParameters != null)
-            {
-                uri.AppendQueryDelimited("scoringParameter", searchOptions.ScoringParameters, ",", true);
-            }
+            uri.AppendQueryDelimited("scoringParameter", searchOptions.ScoringParameters, ",", true);
             if (searchOptions?.ScoringProfile != null)
             {
                 uri.AppendQuery("scoringProfile", searchOptions.ScoringProfile, true);
             }
-            if (searchOptions?.SearchFields != null)
-            {
-                uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
-            }
+            uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
             if (searchOptions?.SearchMode != null)
             {
                 uri.AppendQuery("searchMode", searchOptions.SearchMode.Value.ToSerialString(), true);
             }
-            if (searchOptions?.Select != null)
-            {
-                uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
-            }
+            uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
             if (searchOptions?.Skip != null)
             {
                 uri.AppendQuery("$skip", searchOptions.Skip.Value, true);
@@ -485,18 +467,9 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", suggestOptions.MinimumCoverage.Value, true);
             }
-            if (suggestOptions?.OrderBy != null)
-            {
-                uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
-            }
-            if (suggestOptions?.SearchFields != null)
-            {
-                uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
-            }
-            if (suggestOptions?.Select != null)
-            {
-                uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
-            }
+            uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
+            uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
+            uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
             if (suggestOptions?.Top != null)
             {
                 uri.AppendQuery("$top", suggestOptions.Top.Value, true);
@@ -814,10 +787,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", autocompleteOptions.MinimumCoverage.Value, true);
             }
-            if (autocompleteOptions?.SearchFields != null)
-            {
-                uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
-            }
+            uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
             if (autocompleteOptions?.Top != null)
             {
                 uri.AppendQuery("$top", autocompleteOptions.Top.Value, true);

@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
-            if (Query != null)
+            if (Optional.IsDefined(Query))
             {
                 writer.WritePropertyName("query");
                 writer.WriteStringValue(Query);
@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
         internal static DataContainer DeserializeDataContainer(JsonElement element)
         {
             string name = default;
-            string query = default;
+            Optional<string> query = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -38,15 +38,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("query"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     query = property.Value.GetString();
                     continue;
                 }
             }
-            return new DataContainer(name, query);
+            return new DataContainer(name, query.HasValue ? query.Value : null);
         }
     }
 }

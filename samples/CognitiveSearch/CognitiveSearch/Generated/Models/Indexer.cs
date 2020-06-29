@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -35,6 +36,8 @@ namespace CognitiveSearch.Models
             Name = name;
             DataSourceName = dataSourceName;
             TargetIndexName = targetIndexName;
+            FieldMappings = new ChangeTrackingList<FieldMapping>();
+            OutputFieldMappings = new ChangeTrackingList<FieldMapping>();
         }
 
         /// <summary> Initializes a new instance of Indexer. </summary>
@@ -79,9 +82,9 @@ namespace CognitiveSearch.Models
         /// <summary> Parameters for indexer execution. </summary>
         public IndexingParameters Parameters { get; set; }
         /// <summary> Defines mappings between fields in the data source and corresponding target fields in the index. </summary>
-        public IList<FieldMapping> FieldMappings { get; set; }
+        public IList<FieldMapping> FieldMappings { get; }
         /// <summary> Output field mappings are applied after enrichment and immediately before indexing. </summary>
-        public IList<FieldMapping> OutputFieldMappings { get; set; }
+        public IList<FieldMapping> OutputFieldMappings { get; }
         /// <summary> A value indicating whether the indexer is disabled. Default is false. </summary>
         public bool? IsDisabled { get; set; }
         /// <summary> The ETag of the Indexer. </summary>

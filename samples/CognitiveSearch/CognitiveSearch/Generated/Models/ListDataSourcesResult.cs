@@ -23,14 +23,14 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(dataSources));
             }
 
-            DataSources = dataSources.ToArray();
+            DataSources = dataSources.ToList();
         }
 
         /// <summary> Initializes a new instance of ListDataSourcesResult. </summary>
         /// <param name="dataSources"> The datasources in the Search service. </param>
         internal ListDataSourcesResult(IReadOnlyList<DataSource> dataSources)
         {
-            DataSources = dataSources ?? new List<DataSource>();
+            DataSources = dataSources;
         }
 
         /// <summary> The datasources in the Search service. </summary>

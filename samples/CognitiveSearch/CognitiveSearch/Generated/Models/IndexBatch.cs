@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
         /// <param name="actions"> The actions in the batch. </param>
         internal IndexBatch(IList<IndexAction> actions)
         {
-            Actions = actions ?? new List<IndexAction>();
+            Actions = actions;
         }
 
         /// <summary> The actions in the batch. </summary>

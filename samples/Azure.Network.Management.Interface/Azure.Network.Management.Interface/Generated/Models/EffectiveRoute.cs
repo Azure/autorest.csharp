@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,6 +16,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of EffectiveRoute. </summary>
         internal EffectiveRoute()
         {
+            AddressPrefix = new ChangeTrackingList<string>();
+            NextHopIpAddress = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of EffectiveRoute. </summary>

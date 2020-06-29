@@ -29,7 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
 
             Id = id;
-            DetectedLanguages = detectedLanguages.ToArray();
+            DetectedLanguages = detectedLanguages.ToList();
         }
 
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>
@@ -39,7 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentLanguage(string id, IReadOnlyList<DetectedLanguage> detectedLanguages, DocumentStatistics statistics)
         {
             Id = id;
-            DetectedLanguages = detectedLanguages ?? new List<DetectedLanguage>();
+            DetectedLanguages = detectedLanguages;
             Statistics = statistics;
         }
 

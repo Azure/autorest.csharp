@@ -29,7 +29,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
 
             Id = id;
-            Entities = entities.ToArray();
+            Entities = entities.ToList();
         }
 
         /// <summary> Initializes a new instance of DocumentEntities. </summary>
@@ -39,7 +39,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal DocumentEntities(string id, IReadOnlyList<Entity> entities, DocumentStatistics statistics)
         {
             Id = id;
-            Entities = entities ?? new List<Entity>();
+            Entities = entities;
             Statistics = statistics;
         }
 

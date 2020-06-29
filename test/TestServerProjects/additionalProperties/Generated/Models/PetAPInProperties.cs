@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace additionalProperties.Models
 {
@@ -17,6 +18,7 @@ namespace additionalProperties.Models
         public PetAPInProperties(int id)
         {
             Id = id;
+            AdditionalProperties = new ChangeTrackingDictionary<string, float>();
         }
 
         /// <summary> Initializes a new instance of PetAPInProperties. </summary>
@@ -36,6 +38,6 @@ namespace additionalProperties.Models
         public string Name { get; set; }
         public bool? Status { get; }
         /// <summary> Dictionary of &lt;number&gt;. </summary>
-        public IDictionary<string, float> AdditionalProperties { get; set; }
+        public IDictionary<string, float> AdditionalProperties { get; }
     }
 }

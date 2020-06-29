@@ -33,8 +33,8 @@ namespace CognitiveServices.TextAnalytics.Models
                 throw new ArgumentNullException(nameof(modelVersion));
             }
 
-            Documents = documents.ToArray();
-            Errors = errors.ToArray();
+            Documents = documents.ToList();
+            Errors = errors.ToList();
             ModelVersion = modelVersion;
         }
 
@@ -45,8 +45,8 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
         internal KeyPhraseResult(IReadOnlyList<DocumentKeyPhrases> documents, IReadOnlyList<DocumentError> errors, RequestStatistics statistics, string modelVersion)
         {
-            Documents = documents ?? new List<DocumentKeyPhrases>();
-            Errors = errors ?? new List<DocumentError>();
+            Documents = documents;
+            Errors = errors;
             Statistics = statistics;
             ModelVersion = modelVersion;
         }

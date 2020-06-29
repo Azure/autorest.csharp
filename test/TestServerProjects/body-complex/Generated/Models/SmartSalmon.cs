@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -17,7 +18,7 @@ namespace body_complex.Models
         /// <param name="length"> . </param>
         public SmartSalmon(float length) : base(length)
         {
-            AdditionalProperties = new Dictionary<string, object>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, object>();
             Fishtype = "smart_salmon";
         }
 
@@ -33,7 +34,7 @@ namespace body_complex.Models
         internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree, IDictionary<string, object> additionalProperties) : base(fishtype, species, length, siblings, location, iswild)
         {
             CollegeDegree = collegeDegree;
-            AdditionalProperties = additionalProperties ?? new Dictionary<string, object>();
+            AdditionalProperties = additionalProperties;
             Fishtype = fishtype ?? "smart_salmon";
         }
 

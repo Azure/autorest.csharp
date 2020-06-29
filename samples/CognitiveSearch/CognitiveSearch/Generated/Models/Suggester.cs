@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
         {
             Name = name;
             SearchMode = searchMode;
-            SourceFields = sourceFields ?? new List<string>();
+            SourceFields = sourceFields;
         }
 
         /// <summary> The name of the suggester. </summary>

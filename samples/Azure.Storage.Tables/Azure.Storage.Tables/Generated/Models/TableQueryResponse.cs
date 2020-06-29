@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
@@ -15,6 +16,7 @@ namespace Azure.Storage.Tables.Models
         /// <summary> Initializes a new instance of TableQueryResponse. </summary>
         internal TableQueryResponse()
         {
+            Value = new ChangeTrackingList<TableResponseProperties>();
         }
 
         /// <summary> Initializes a new instance of TableQueryResponse. </summary>

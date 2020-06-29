@@ -16,17 +16,17 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
             }
-            if (Type != null)
+            if (Optional.IsDefined(Type))
             {
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
-            if (Tags != null)
+            if (Optional.IsDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -37,34 +37,34 @@ namespace model_flattening.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location");
                 writer.WriteStringValue(Location);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (PName != null)
+            if (Optional.IsDefined(PName))
             {
                 writer.WritePropertyName("p.name");
                 writer.WriteStringValue(PName);
             }
-            if (TypePropertiesType != null)
+            if (Optional.IsDefined(TypePropertiesType))
             {
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(TypePropertiesType);
             }
-            if (ProvisioningStateValues != null)
+            if (Optional.IsDefined(ProvisioningStateValues))
             {
                 writer.WritePropertyName("provisioningStateValues");
                 writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
             }
-            if (ProvisioningState != null)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState");
                 writer.WriteStringValue(ProvisioningState);
@@ -75,41 +75,29 @@ namespace model_flattening.Models
 
         internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element)
         {
-            string id = default;
-            string type = default;
-            IDictionary<string, string> tags = default;
-            string location = default;
-            string name = default;
-            string pName = default;
-            string type0 = default;
-            FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = default;
-            string provisioningState = default;
+            Optional<string> id = default;
+            Optional<string> type = default;
+            Optional<IDictionary<string, string>> tags = default;
+            Optional<string> location = default;
+            Optional<string> name = default;
+            Optional<string> pName = default;
+            Optional<string> type0 = default;
+            Optional<FlattenedProductPropertiesProvisioningStateValues> provisioningStateValues = default;
+            Optional<string> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -127,19 +115,11 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("location"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
@@ -149,37 +129,21 @@ namespace model_flattening.Models
                     {
                         if (property0.NameEquals("p.name"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             pName = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("type"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             type0 = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningStateValues"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             provisioningStateValues = new FlattenedProductPropertiesProvisioningStateValues(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             provisioningState = property0.Value.GetString();
                             continue;
                         }
@@ -187,7 +151,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new FlattenedProduct(id, type, tags, location, name, pName, type0, provisioningStateValues, provisioningState);
+            return new FlattenedProduct(id.HasValue ? id.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingDictionary<string, string>(tags), location.HasValue ? location.Value : null, name.HasValue ? name.Value : null, pName.HasValue ? pName.Value : null, type0.HasValue ? type0.Value : null, provisioningStateValues.HasValue ? provisioningStateValues.Value : (FlattenedProductPropertiesProvisioningStateValues?)null, provisioningState.HasValue ? provisioningState.Value : null);
         }
     }
 }

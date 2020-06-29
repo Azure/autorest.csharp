@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
@@ -18,7 +19,7 @@ namespace AdditionalPropertiesEx.Models
         public InputAdditionalPropertiesModel(int id)
         {
             Id = id;
-            AdditionalProperties = new Dictionary<string, object>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, object>();
         }
 
         /// <summary> Initializes a new instance of InputAdditionalPropertiesModel. </summary>
@@ -27,7 +28,7 @@ namespace AdditionalPropertiesEx.Models
         internal InputAdditionalPropertiesModel(int id, IDictionary<string, object> additionalProperties)
         {
             Id = id;
-            AdditionalProperties = additionalProperties ?? new Dictionary<string, object>();
+            AdditionalProperties = additionalProperties;
         }
 
         public int Id { get; }

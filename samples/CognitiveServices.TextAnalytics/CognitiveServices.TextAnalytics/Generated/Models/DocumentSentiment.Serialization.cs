@@ -17,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             string id = default;
             DocumentSentimentValue sentiment = default;
-            DocumentStatistics statistics = default;
+            Optional<DocumentStatistics> statistics = default;
             SentimentConfidenceScorePerLabel documentScores = default;
             IReadOnlyList<SentenceSentiment> sentences = default;
             foreach (var property in element.EnumerateObject())
@@ -34,10 +34,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("statistics"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
@@ -64,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new DocumentSentiment(id, sentiment, statistics, documentScores, sentences);
+            return new DocumentSentiment(id, sentiment, statistics.HasValue ? statistics.Value : null, documentScores, sentences);
         }
     }
 }

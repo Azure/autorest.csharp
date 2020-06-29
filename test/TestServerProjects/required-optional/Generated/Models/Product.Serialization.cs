@@ -17,7 +17,7 @@ namespace required_optional.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id");
             writer.WriteNumberValue(Id);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);

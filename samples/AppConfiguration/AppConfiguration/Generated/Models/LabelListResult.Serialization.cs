@@ -15,16 +15,12 @@ namespace AppConfiguration.Models
     {
         internal static LabelListResult DeserializeLabelListResult(JsonElement element)
         {
-            IReadOnlyList<Label> items = default;
-            string nextLink = default;
+            Optional<IReadOnlyList<Label>> items = default;
+            Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Label> array = new List<Label>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -42,15 +38,11 @@ namespace AppConfiguration.Models
                 }
                 if (property.NameEquals("@nextLink"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     nextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return new LabelListResult(items, nextLink);
+            return new LabelListResult(new ChangeTrackingList<Label>(items), nextLink.HasValue ? nextLink.Value : null);
         }
     }
 }

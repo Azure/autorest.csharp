@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace ExtensionClientName.Models
 {
@@ -15,6 +16,7 @@ namespace ExtensionClientName.Models
         /// <summary> Initializes a new instance of RenamedSchema. </summary>
         public RenamedSchema()
         {
+            RenamedProperty = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of RenamedSchema. </summary>
@@ -27,7 +29,7 @@ namespace ExtensionClientName.Models
         }
 
         /// <summary> A description about the set of tags. </summary>
-        public IDictionary<string, string> RenamedProperty { get; set; }
+        public IDictionary<string, string> RenamedProperty { get; }
         /// <summary> A description about the set of tags. </summary>
         public string RenamedPropertyString { get; set; }
     }

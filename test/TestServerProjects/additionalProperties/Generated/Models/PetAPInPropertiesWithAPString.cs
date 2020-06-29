@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace additionalProperties.Models
 {
@@ -26,7 +27,8 @@ namespace additionalProperties.Models
 
             Id = id;
             OdataLocation = odataLocation;
-            MoreAdditionalProperties = new Dictionary<string, string>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, float>();
+            MoreAdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
@@ -43,7 +45,7 @@ namespace additionalProperties.Models
             Status = status;
             OdataLocation = odataLocation;
             AdditionalProperties = additionalProperties;
-            MoreAdditionalProperties = moreAdditionalProperties ?? new Dictionary<string, string>();
+            MoreAdditionalProperties = moreAdditionalProperties;
         }
 
         public int Id { get; set; }
@@ -51,7 +53,7 @@ namespace additionalProperties.Models
         public bool? Status { get; }
         public string OdataLocation { get; set; }
         /// <summary> Dictionary of &lt;number&gt;. </summary>
-        public IDictionary<string, float> AdditionalProperties { get; set; }
+        public IDictionary<string, float> AdditionalProperties { get; }
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => MoreAdditionalProperties.GetEnumerator();
         /// <inheritdoc />

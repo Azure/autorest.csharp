@@ -14,20 +14,16 @@ namespace AppConfiguration.Models
     {
         internal static Label DeserializeLabel(JsonElement element)
         {
-            string name = default;
+            Optional<string> name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
             }
-            return new Label(name);
+            return new Label(name.HasValue ? name.Value : null);
         }
     }
 }

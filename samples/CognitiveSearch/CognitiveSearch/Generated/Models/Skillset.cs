@@ -48,7 +48,7 @@ namespace CognitiveSearch.Models
         {
             Name = name;
             Description = description;
-            Skills = skills ?? new List<Skill>();
+            Skills = skills;
             CognitiveServicesAccount = cognitiveServicesAccount;
             ETag = eTag;
         }

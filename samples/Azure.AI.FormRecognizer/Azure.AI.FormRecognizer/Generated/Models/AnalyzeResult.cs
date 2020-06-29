@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -29,7 +30,10 @@ namespace Azure.AI.FormRecognizer.Models
             }
 
             Version = version;
-            ReadResults = readResults.ToArray();
+            ReadResults = readResults.ToList();
+            PageResults = new ChangeTrackingList<PageResult>();
+            DocumentResults = new ChangeTrackingList<DocumentResult>();
+            Errors = new ChangeTrackingList<ErrorInformation>();
         }
 
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
@@ -41,7 +45,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors)
         {
             Version = version;
-            ReadResults = readResults ?? new List<ReadResult>();
+            ReadResults = readResults;
             PageResults = pageResults;
             DocumentResults = documentResults;
             Errors = errors;
