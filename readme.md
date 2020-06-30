@@ -20,6 +20,7 @@
 
 - [Make a model internal](#make-a-model-internal)
 - [Rename a model class](#rename-a-model-class)
+- [Change a model namespace](#change-a-model-namespace)
 - [Make model property internal](#make-model-property-internal)
 - [Rename a model property](#rename-a-model-property)
 - [Change a model property type](#change-a-model-property-type)
@@ -103,6 +104,43 @@ namespace Azure.Service.Models
 {
 -    public partial class Model { }
 +    public partial class NewModelClassName { }
+}
+```
+
+</details>
+
+### Change a model namespace
+
+Define a class with a desired namespace and mark it with `[CodeGenModel("OriginalName")]`
+
+<details>
+
+**Generated code before (Generated/Models/Model.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model { }
+}
+```
+
+**Add customized model (NewModelClassName.cs)**
+
+``` C#
+namespace Azure.Service
+{
+    [CodeGenModel("Model")]
+    public partial class Model { }
+}
+```
+
+**Generated code after (Generated/Models/NewModelClassName.cs):**
+
+``` diff
+- namespace Azure.Service.Models
++ namespace Azure.Service
+{
+    public partial class Model { }
 }
 ```
 
