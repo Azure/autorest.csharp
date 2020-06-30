@@ -200,9 +200,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             initializers.Add(new PropertyInitializer(initializer.Property, w => w.WriteReferenceOrConstant(initializer.Value)));
                         }
                         var modelVariable = new CodeWriterDeclaration("model");
-                        writer.Append($"var {modelVariable:D} = ")
-                            .WriteInitialization(flattenedSchemaRequestBody.ObjectType, flattenedSchemaRequestBody.ObjectType.InitializationConstructor, initializers)
-                            .Line($";");
+                        writer.WriteInitialization(
+                                (w, v) => w.Line($"var {modelVariable:D} = {v};"),
+                                flattenedSchemaRequestBody.ObjectType,
+                                flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
+                                initializers);
 
                         WriteSerializeContent(
                             writer,

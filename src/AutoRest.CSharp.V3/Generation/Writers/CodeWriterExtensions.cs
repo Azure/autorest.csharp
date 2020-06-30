@@ -13,6 +13,7 @@ using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis.Options;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
@@ -190,7 +191,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return writer;
         }
 
-        public static CodeWriter WriteInitialization(this CodeWriter writer, ObjectType objectType, ObjectTypeConstructor constructor, IEnumerable<PropertyInitializer> initializers)
+        public static CodeWriter WriteInitialization(
+            this CodeWriter writer,
+            Action<CodeWriter, CodeWriterDelegate> valueCallback,
+            ObjectType objectType,
+            ObjectTypeConstructor constructor,
+            IEnumerable<PropertyInitializer> initializers)
         {
             PropertyInitializer? FindInitializerForParameter(ObjectTypeConstructor constructor, Parameter constructorParameter)
             {
@@ -218,39 +224,91 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             Debug.Assert(selectedCtorInitializers != null);
 
-            writer.Append($"new {objectType.Type}(");
-            foreach (var initializer in selectedCtorInitializers)
-            {
-                if (initializer.Type != null)
-                {
-                    writer.WriteConversion(initializer.Type, initializer.Property.Declaration.Type, w=> w.Append(initializer.Value));
-                }
-                writer.Append($", ");
-            }
-            writer.RemoveTrailingComma();
-            writer.Append($")");
+            // Find properties that would have to be initialized using a foreach loop
+            var collectionInitializers = initializers
+                .Except(selectedCtorInitializers)
+                .Where(i => i.Property.IsReadOnly && TypeFactory.IsCollectionType(i.Property.Declaration.Type))
+                .ToArray();
 
             // Find properties that would have to be initialized via property initializers
-            var restOfInitializers = initializers.Except(selectedCtorInitializers).ToArray();
-            if (restOfInitializers.Any())
+            var restOfInitializers = initializers.Except(selectedCtorInitializers).Except(collectionInitializers).ToArray();
+
+            void WriteObjectInitializer(CodeWriter codeWriter)
             {
-                using (writer.Scope($"", newLine: false))
+                // writes the new Model(param1, param2)
+                // {
+                //    property = param3
+                // }
+                // part
+
+                codeWriter.Append($"new {objectType.Type}(");
+                foreach (var initializer in selectedCtorInitializers)
                 {
-                    foreach (var propertyInitializer in restOfInitializers)
+                    if (initializer.Type != null)
                     {
-                        writer.Append($"{propertyInitializer.Property.Declaration.Name} = ");
-
-                        if (propertyInitializer.Type != null)
-                        {
-                            writer.WriteConversion(propertyInitializer.Type, propertyInitializer.Property.Declaration.Type, w => w.Append(propertyInitializer.Value));
-                        }
-
-                        writer.Line($",");
+                        codeWriter.WriteConversion(initializer.Type, initializer.Property.Declaration.Type, w => w.Append(initializer.Value));
                     }
 
-                    writer.RemoveTrailingComma();
+                    codeWriter.Append($", ");
+                }
+
+                codeWriter.RemoveTrailingComma();
+                codeWriter.Append($")");
+
+                if (restOfInitializers.Any())
+                {
+                    using (codeWriter.Scope($"", newLine: false))
+                    {
+                        foreach (var propertyInitializer in restOfInitializers)
+                        {
+                            codeWriter.Append($"{propertyInitializer.Property.Declaration.Name} = ");
+
+                            if (propertyInitializer.Type != null)
+                            {
+                                codeWriter.WriteConversion(propertyInitializer.Type, propertyInitializer.Property.Declaration.Type, w => w.Append(propertyInitializer.Value));
+                            }
+
+                            codeWriter.Line($",");
+                        }
+
+                        codeWriter.RemoveTrailingComma();
+                    }
                 }
             }
+
+            void WriteCollectionInitializer(CodeWriter writer1, CodeWriterDeclaration codeWriterDeclaration)
+            {
+                // Writes the:
+                // foreach (var value in param)
+                // {
+                //     model.CollectionProperty = value;
+                // }
+                foreach (var propertyInitializer in collectionInitializers)
+                {
+                    var valueVariable = new CodeWriterDeclaration("value");
+                    using (writer1.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
+                    {
+                        writer1.Append($"{codeWriterDeclaration}.{propertyInitializer.Property.Declaration.Name}.Add({valueVariable});");
+                    }
+                }
+            }
+
+            if (collectionInitializers.Any())
+            {
+                var modelVariable = new CodeWriterDeclaration(objectType.Declaration.Name.ToVariableName());
+                writer.Append($"{objectType.Type} {modelVariable:D} = ");
+                WriteObjectInitializer(writer);
+                writer.Line($";");
+
+                WriteCollectionInitializer(writer, modelVariable);
+
+                valueCallback(writer, writer => writer.Append(modelVariable));
+            }
+            else
+            {
+                valueCallback(writer, WriteObjectInitializer);
+            }
+
 
             return writer;
         }

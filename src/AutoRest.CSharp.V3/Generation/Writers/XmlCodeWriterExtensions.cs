@@ -304,7 +304,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     var objectType = (ObjectType) elementSerialization.Type.Implementation;
 
-                    valueCallback?.Invoke(writer, w => w.WriteInitialization(objectType, objectType.SerializationConstructor, initializers));
+                    writer.WriteInitialization(valueCallback, objectType, objectType.SerializationConstructor, initializers);
 
                     return;
                 case XmlElementValueSerialization valueSerialization:

@@ -295,8 +295,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         initializers.Add(new PropertyInitializer(variable.Key, w => ConvertOptional(w, variable.Key, variable.Value)));
                     }
 
-                    valueCallback(writer,
-                        w => w.WriteInitialization(objectType, objectType.SerializationConstructor, initializers));
+                    writer.WriteInitialization(valueCallback, objectType, objectType.SerializationConstructor, initializers);
                 }
             }
             else
