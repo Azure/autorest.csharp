@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Azure.Core.Tests
@@ -44,6 +45,34 @@ namespace Azure.Core.Tests
 
             Assert.AreEqual("a", list[0]);
             Assert.False(list.IsUndefined);
+        }
+
+        [Test]
+        public void CanInsertElement()
+        {
+            var list = new ChangeTrackingList<string>();
+            list.Insert(0, "a");
+
+            Assert.AreEqual("a", list[0]);
+            Assert.False(list.IsUndefined);
+        }
+
+        [Test]
+        public void ContainsWorks()
+        {
+            var list = new ChangeTrackingList<string>();
+            list.Add("a");
+
+            Assert.True(list.Contains("a"));
+        }
+
+        [Test]
+        public void CanEnumerateItems()
+        {
+            var list = new ChangeTrackingList<string>();
+            list.Add("a");
+
+            Assert.AreEqual(new[] { "a" },list.ToArray());
         }
 
         [Test]

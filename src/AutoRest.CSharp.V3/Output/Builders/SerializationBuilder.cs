@@ -177,8 +177,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             {
                 JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
                 JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null);
-                yield return new JsonPropertySerialization(
-                    name,null, objectSerialization);
+                yield return new JsonPropertySerialization(name, null, objectSerialization);
             }
         }
 
