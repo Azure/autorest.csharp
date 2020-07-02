@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Azure.Core;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Output.Models.Requests;
 using AutoRest.CSharp.V3.Output.Models.Serialization;
@@ -12,6 +13,8 @@ using AutoRest.CSharp.V3.Output.Models.Serialization.Json;
 using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using AutoRest.CSharp.V3.Utilities;
+using Microsoft.CodeAnalysis.Options;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -188,77 +191,129 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return writer;
         }
 
-        public static CodeWriter WriteInitialization(this CodeWriter writer, ObjectType objectType, IEnumerable<ObjectPropertyInitializer> initializers)
+        public static CodeWriter WriteInitialization(
+            this CodeWriter writer,
+            Action<CodeWriter, CodeWriterDelegate> valueCallback,
+            ObjectType objectType,
+            ObjectTypeConstructor constructor,
+            IEnumerable<PropertyInitializer> initializers)
         {
-            ObjectPropertyInitializer? FindInitializerForParameter(ObjectTypeConstructor constructor, Parameter constructorParameter)
+            PropertyInitializer? FindInitializerForParameter(ObjectTypeConstructor constructor, Parameter constructorParameter)
             {
                 var property = constructor.FindPropertyInitializedByParameter(constructorParameter);
                 return initializers.SingleOrDefault(i => i.Property == property);
             }
 
             // Checks if constructor parameters can be satisfied by the provided initializer list
-            List<ObjectPropertyInitializer>? TryGetParameters(ObjectTypeConstructor constructor)
+            List<PropertyInitializer>? TryGetParameters(ObjectTypeConstructor constructor)
             {
-                List<ObjectPropertyInitializer> constructorInitializers = new List<ObjectPropertyInitializer>();
+                List<PropertyInitializer> constructorInitializers = new List<PropertyInitializer>();
                 foreach (var constructorParameter in constructor.Parameters)
                 {
                     var objectPropertyInitializer = FindInitializerForParameter(constructor, constructorParameter);
                     if (objectPropertyInitializer == null) return null;
 
-                    constructorInitializers.Add(objectPropertyInitializer);
+                    constructorInitializers.Add(objectPropertyInitializer.Value);
                 }
 
                 return constructorInitializers;
             }
 
             // Find longest satisfiable ctor
-            List<ObjectPropertyInitializer>? selectedCtorInitializers = null;
-            foreach (var constructor in objectType.Constructors)
-            {
-                var newInitializers = TryGetParameters(constructor);
-                if (newInitializers != null &&
-                    newInitializers.Count > (selectedCtorInitializers?.Count ?? -1))
-                {
-                    selectedCtorInitializers = newInitializers;
-                }
-            }
+            List<PropertyInitializer>? selectedCtorInitializers = TryGetParameters(constructor);
 
             Debug.Assert(selectedCtorInitializers != null);
 
-            writer.Append($"new {objectType.Type}(");
-            foreach (var initializer in selectedCtorInitializers)
-            {
-                writer.WriteReferenceOrConstant(initializer.Value);
-                writer.WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type);
-                writer.Append($", ");
-            }
-            writer.RemoveTrailingComma();
-            writer.Append($")");
+            // Find properties that would have to be initialized using a foreach loop
+            var collectionInitializers = initializers
+                .Except(selectedCtorInitializers)
+                .Where(i => i.Property.IsReadOnly && TypeFactory.IsCollectionType(i.Property.Declaration.Type))
+                .ToArray();
 
             // Find properties that would have to be initialized via property initializers
-            var restOfInitializers = initializers.Except(selectedCtorInitializers).ToArray();
-            if (restOfInitializers.Any())
+            var restOfInitializers = initializers.Except(selectedCtorInitializers).Except(collectionInitializers).ToArray();
+
+            void WriteObjectInitializer(CodeWriter codeWriter)
             {
-                using (writer.Scope($"", newLine: false))
+                // writes the new Model(param1, param2)
+                // {
+                //    property = param3
+                // }
+                // part
+
+                codeWriter.Append($"new {objectType.Type}(");
+                foreach (var initializer in selectedCtorInitializers)
                 {
-                    foreach (var propertyInitializer in restOfInitializers)
+                    if (initializer.Type != null)
                     {
-                        writer.Append($"{propertyInitializer.Property.Declaration.Name} = ")
-                            .WriteReferenceOrConstant(propertyInitializer.Value);
-
-                        writer.WriteConversion(propertyInitializer.Value.Type, propertyInitializer.Property.Declaration.Type);
-
-                        writer.Line($",");
+                        codeWriter.WriteConversion(initializer.Type, initializer.Property.Declaration.Type, w => w.Append(initializer.Value));
                     }
 
-                    writer.RemoveTrailingComma();
+                    codeWriter.Append($", ");
+                }
+
+                codeWriter.RemoveTrailingComma();
+                codeWriter.Append($")");
+
+                if (restOfInitializers.Any())
+                {
+                    using (codeWriter.Scope($"", newLine: false))
+                    {
+                        foreach (var propertyInitializer in restOfInitializers)
+                        {
+                            codeWriter.Append($"{propertyInitializer.Property.Declaration.Name} = ");
+
+                            if (propertyInitializer.Type != null)
+                            {
+                                codeWriter.WriteConversion(propertyInitializer.Type, propertyInitializer.Property.Declaration.Type, w => w.Append(propertyInitializer.Value));
+                            }
+
+                            codeWriter.Line($",");
+                        }
+
+                        codeWriter.RemoveTrailingComma();
+                    }
                 }
             }
+
+            void WriteCollectionInitializer(CodeWriter writer1, CodeWriterDeclaration codeWriterDeclaration)
+            {
+                // Writes the:
+                // foreach (var value in param)
+                // {
+                //     model.CollectionProperty = value;
+                // }
+                foreach (var propertyInitializer in collectionInitializers)
+                {
+                    var valueVariable = new CodeWriterDeclaration("value");
+                    using (writer1.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
+                    {
+                        writer1.Append($"{codeWriterDeclaration}.{propertyInitializer.Property.Declaration.Name}.Add({valueVariable});");
+                    }
+                }
+            }
+
+            if (collectionInitializers.Any())
+            {
+                var modelVariable = new CodeWriterDeclaration(objectType.Declaration.Name.ToVariableName());
+                writer.Append($"{objectType.Type} {modelVariable:D} = ");
+                WriteObjectInitializer(writer);
+                writer.Line($";");
+
+                WriteCollectionInitializer(writer, modelVariable);
+
+                valueCallback(writer, writer => writer.Append(modelVariable));
+            }
+            else
+            {
+                valueCallback(writer, WriteObjectInitializer);
+            }
+
 
             return writer;
         }
 
-        public static void WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
+        public static void WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to, CodeWriterDelegate value)
         {
             if (to.IsFrameworkType && from.IsFrameworkType)
             {
@@ -266,11 +321,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     from.FrameworkType == typeof(IEnumerable<>))
                 {
                     writer.UseNamespace(typeof(Enumerable).Namespace!);
+                    writer.Append(value);
                     if (from.IsNullable)
                     {
                         writer.Append($"?");
                     }
-                    writer.Append($".ToArray()");
+                    writer.Append($".ToList()");
                     return;
                 }
 
@@ -278,6 +334,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     from.FrameworkType == typeof(IEnumerable<>))
                 {
                     writer.UseNamespace(typeof(Enumerable).Namespace!);
+                    writer.Append(value);
                     if (from.IsNullable)
                     {
                         writer.Append($"?");
@@ -286,6 +343,40 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     return;
                 }
             }
+
+            writer.Append(value);
+        }
+
+        internal static CodeWriter.CodeWriterScope? WriteDefinedCheck(this CodeWriter writer, ObjectTypeProperty? property)
+        {
+            var canBeUndefined = property != null &&
+                                 !property.IsRequired;
+
+            CodeWriter.CodeWriterScope? scope = default;
+            if (canBeUndefined)
+            {
+                var propertyName = property!.Declaration.Name;
+                return writer.Scope($"if ({typeof(Optional)}.IsDefined({propertyName:I}))");
+            }
+
+            return scope;
+        }
+
+        internal static CodeWriter.CodeWriterScope? WritePropertyNullCheckIf(this CodeWriter writer, ObjectTypeProperty? property)
+        {
+            if (property == null)
+            {
+                return null;
+            }
+
+            bool hasNullableType = property.ValueType.IsNullable;
+            if (hasNullableType)
+            {
+                var propertyName = property.Declaration.Name;
+                return writer.Scope($"if ({propertyName} != null)");
+            }
+
+            return null;
         }
     }
 }

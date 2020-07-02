@@ -16,12 +16,12 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field");
                 writer.WriteStringValue(Field.Value, "D");
             }
-            if (Leap != null)
+            if (Optional.IsDefined(Leap))
             {
                 writer.WritePropertyName("leap");
                 writer.WriteStringValue(Leap.Value, "D");
@@ -31,30 +31,22 @@ namespace body_complex.Models
 
         internal static DateWrapper DeserializeDateWrapper(JsonElement element)
         {
-            DateTimeOffset? field = default;
-            DateTimeOffset? leap = default;
+            Optional<DateTimeOffset> field = default;
+            Optional<DateTimeOffset> leap = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     field = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
                 if (property.NameEquals("leap"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     leap = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
             }
-            return new DateWrapper(field, leap);
+            return new DateWrapper(field.HasValue ? field.Value : (DateTimeOffset?)null, leap.HasValue ? leap.Value : (DateTimeOffset?)null);
         }
     }
 }

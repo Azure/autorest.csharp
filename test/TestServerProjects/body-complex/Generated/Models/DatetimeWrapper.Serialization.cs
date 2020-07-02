@@ -16,12 +16,12 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Field != null)
+            if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field");
                 writer.WriteStringValue(Field.Value, "O");
             }
-            if (Now != null)
+            if (Optional.IsDefined(Now))
             {
                 writer.WritePropertyName("now");
                 writer.WriteStringValue(Now.Value, "O");
@@ -31,30 +31,22 @@ namespace body_complex.Models
 
         internal static DatetimeWrapper DeserializeDatetimeWrapper(JsonElement element)
         {
-            DateTimeOffset? field = default;
-            DateTimeOffset? now = default;
+            Optional<DateTimeOffset> field = default;
+            Optional<DateTimeOffset> now = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     field = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("now"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     now = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
             }
-            return new DatetimeWrapper(field, now);
+            return new DatetimeWrapper(field.HasValue ? field.Value : (DateTimeOffset?)null, now.HasValue ? now.Value : (DateTimeOffset?)null);
         }
     }
 }

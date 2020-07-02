@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -23,6 +24,7 @@ namespace CognitiveSearch.Models
             }
 
             Message = message;
+            Details = new ChangeTrackingList<SearchServiceError>();
         }
 
         /// <summary> Initializes a new instance of SearchServiceError. </summary>

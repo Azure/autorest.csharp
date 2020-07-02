@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace validation.Models
 {
@@ -27,6 +28,7 @@ namespace validation.Models
                 throw new ArgumentNullException(nameof(constChild));
             }
 
+            DisplayNames = new ChangeTrackingList<string>();
             Child = child;
             ConstChild = constChild;
             ConstInt = 0;
@@ -56,7 +58,7 @@ namespace validation.Models
         }
 
         /// <summary> Non required array of unique items from 0 to 6 elements. </summary>
-        public IList<string> DisplayNames { get; set; }
+        public IList<string> DisplayNames { get; }
         /// <summary> Non required int betwen 0 and 100 exclusive. </summary>
         public int? Capacity { get; set; }
         /// <summary> Image URL representing the product. </summary>

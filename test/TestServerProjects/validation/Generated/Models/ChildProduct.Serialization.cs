@@ -17,7 +17,7 @@ namespace validation.Models
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty");
             writer.WriteStringValue(ConstProperty);
-            if (Count != null)
+            if (Optional.IsDefined(Count))
             {
                 writer.WritePropertyName("count");
                 writer.WriteNumberValue(Count.Value);
@@ -28,7 +28,7 @@ namespace validation.Models
         internal static ChildProduct DeserializeChildProduct(JsonElement element)
         {
             string constProperty = default;
-            int? count = default;
+            Optional<int> count = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"))
@@ -38,15 +38,11 @@ namespace validation.Models
                 }
                 if (property.NameEquals("count"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     count = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new ChildProduct(constProperty, count);
+            return new ChildProduct(constProperty, count.HasValue ? count.Value : (int?)null);
         }
     }
 }

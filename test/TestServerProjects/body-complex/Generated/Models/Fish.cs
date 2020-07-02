@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -17,6 +18,7 @@ namespace body_complex.Models
         public Fish(float length)
         {
             Length = length;
+            Siblings = new ChangeTrackingList<Fish>();
         }
 
         /// <summary> Initializes a new instance of Fish. </summary>
@@ -35,6 +37,6 @@ namespace body_complex.Models
         internal string Fishtype { get; set; }
         public string Species { get; set; }
         public float Length { get; set; }
-        public IList<Fish> Siblings { get; set; }
+        public IList<Fish> Siblings { get; }
     }
 }

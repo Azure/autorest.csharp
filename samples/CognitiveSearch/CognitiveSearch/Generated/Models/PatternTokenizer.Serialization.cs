@@ -15,17 +15,17 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Pattern != null)
+            if (Optional.IsDefined(Pattern))
             {
                 writer.WritePropertyName("pattern");
                 writer.WriteStringValue(Pattern);
             }
-            if (Flags != null)
+            if (Optional.IsDefined(Flags))
             {
                 writer.WritePropertyName("flags");
                 writer.WriteStringValue(Flags.Value.ToString());
             }
-            if (Group != null)
+            if (Optional.IsDefined(Group))
             {
                 writer.WritePropertyName("group");
                 writer.WriteNumberValue(Group.Value);
@@ -39,37 +39,25 @@ namespace CognitiveSearch.Models
 
         internal static PatternTokenizer DeserializePatternTokenizer(JsonElement element)
         {
-            string pattern = default;
-            RegexFlags? flags = default;
-            int? group = default;
+            Optional<string> pattern = default;
+            Optional<RegexFlags> flags = default;
+            Optional<int> group = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("pattern"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     pattern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("flags"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     flags = new RegexFlags(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("group"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     group = property.Value.GetInt32();
                     continue;
                 }
@@ -84,7 +72,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternTokenizer(odataType, name, pattern, flags, group);
+            return new PatternTokenizer(odataType, name, pattern.HasValue ? pattern.Value : null, flags.HasValue ? flags.Value : (RegexFlags?)null, group.HasValue ? group.Value : (int?)null);
         }
     }
 }

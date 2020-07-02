@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests
             var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPInPropertiesAsync(new PetAPInProperties(4)
             {
                 Name = "Bunny",
-                AdditionalProperties = new Dictionary<string, float>()
+                AdditionalProperties =
                 {
                     { "height", 5.61f },
                     { "weight", 599f },
@@ -46,7 +46,7 @@ namespace AutoRest.TestServer.Tests
             PetAPInPropertiesWithAPString parameter = new PetAPInPropertiesWithAPString(5, "westus")
             {
                 Name = "Funny",
-                AdditionalProperties = new Dictionary<string, float>()
+                AdditionalProperties =
                 {
                     { "height", 5.61f },
                     { "weight", 599f },

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -15,6 +16,8 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of AppleBarrel. </summary>
         public AppleBarrel()
         {
+            GoodApples = new ChangeTrackingList<string>();
+            BadApples = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of AppleBarrel. </summary>
@@ -26,7 +29,7 @@ namespace xml_service.Models
             BadApples = badApples;
         }
 
-        public IList<string> GoodApples { get; set; }
-        public IList<string> BadApples { get; set; }
+        public IList<string> GoodApples { get; }
+        public IList<string> BadApples { get; }
     }
 }

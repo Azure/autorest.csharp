@@ -16,7 +16,7 @@ namespace xml_service.Models
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "ComplexTypeNoMeta");
-            if (ID != null)
+            if (Optional.IsDefined(ID))
             {
                 writer.WriteStartElement("ID");
                 writer.WriteValue(ID);

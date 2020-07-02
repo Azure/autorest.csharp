@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -25,6 +26,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
             Code = code;
             Message = message;
+            Details = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of InnerError. </summary>

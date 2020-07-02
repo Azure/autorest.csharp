@@ -58,6 +58,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/730")]
         public Task GetComplexBasicNull() => Test(async (host, pipeline) =>
         {
             var result = await new BasicClient(ClientDiagnostics, pipeline, host).GetNullAsync();
@@ -325,8 +326,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutComplexArrayValid() => TestStatus(async (host, pipeline) =>
         {
-            var value = new ArrayWrapper();
-            value.Array = new[] { "1, 2, 3, 4", string.Empty, null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog" };
+            var value = new ArrayWrapper()
+            {
+                Array = { "1, 2, 3, 4", string.Empty, null, "&S#$(*Y", "The quick brown fox jumps over the lazy dog" }
+            };
             return await new ArrayClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
 
@@ -341,7 +344,7 @@ namespace AutoRest.TestServer.Tests
         public Task PutComplexArrayEmpty() => TestStatus(async (host, pipeline) =>
         {
             var value = new ArrayWrapper();
-            value.Array = new List<string>();
+            value.Array.Clear();
             return await new ArrayClient(ClientDiagnostics, pipeline, host).PutEmptyAsync( value);
         });
 
@@ -350,7 +353,7 @@ namespace AutoRest.TestServer.Tests
         {
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
-            Assert.AreEqual(null, result.Value.Array);
+            Assert.NotNull(result.Value.Array);
         });
 
         [Test]
@@ -371,14 +374,16 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutComplexDictionaryValid() => TestStatus(async (host, pipeline) =>
         {
-            var value = new DictionaryWrapper();
-            value.DefaultProgram = new Dictionary<string, string?>
+            var value = new DictionaryWrapper()
             {
-                { "txt", "notepad" },
-                { "bmp", "mspaint" },
-                { "xls", "excel" },
-                { "exe", string.Empty },
-                { string.Empty, null }
+                DefaultProgram =
+                {
+                    { "txt", "notepad" },
+                    { "bmp", "mspaint" },
+                    { "xls", "excel" },
+                    { "exe", string.Empty },
+                    { string.Empty, null }
+                }
             };
             return await new DictionaryClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
         });
@@ -394,11 +399,13 @@ namespace AutoRest.TestServer.Tests
         public Task PutComplexDictionaryEmpty() => TestStatus(async (host, pipeline) =>
         {
             var value = new DictionaryWrapper();
-            value.DefaultProgram = new Dictionary<string, string?>();
+            value.DefaultProgram.Clear();
+
             return await new DictionaryClient(ClientDiagnostics, pipeline, host).PutEmptyAsync( value);
         });
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/730")]
         public Task GetComplexDictionaryNull() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetNullAsync();
@@ -411,7 +418,7 @@ namespace AutoRest.TestServer.Tests
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
-            Assert.AreEqual(null, result.Value.DefaultProgram);
+            CollectionAssert.IsEmpty(result.Value.DefaultProgram);
         });
 
         [Test]
@@ -441,7 +448,7 @@ namespace AutoRest.TestServer.Tests
             {
                 Breed = "persian",
                 Color = "green",
-                Hates = new[]
+                Hates =
                 {
                     new Dog()
                     {
@@ -469,7 +476,7 @@ namespace AutoRest.TestServer.Tests
             {
                 Breed = "persian",
                 Color = "green",
-                Hates = new[]
+                Hates =
                 {
                     new Dog()
                     {
@@ -537,7 +544,7 @@ namespace AutoRest.TestServer.Tests
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
-                Siblings = new[]
+                Siblings =
                 {
                     new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                     {
@@ -620,7 +627,7 @@ namespace AutoRest.TestServer.Tests
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
-                Siblings = new[]
+                Siblings =
                 {
                     new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                     {
@@ -660,7 +667,7 @@ namespace AutoRest.TestServer.Tests
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
-                Siblings = new[]
+                Siblings =
                 {
                     new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                     {
@@ -700,7 +707,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("predator", shark.Species);
             Assert.AreEqual(6, shark.Age);
             Assert.AreEqual(20, shark.Length);
-            Assert.Null(shark.Siblings);
+            CollectionAssert.IsEmpty(shark.Siblings);
 
             var sawshark = (Sawshark)siblings[1];
             Assert.AreEqual("sawshark", sawshark.Fishtype);
@@ -708,7 +715,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("dangerous", sawshark.Species);
             Assert.AreEqual(105, sawshark.Age);
             Assert.AreEqual(10, sawshark.Length);
-            Assert.Null(sawshark.Siblings);
+            CollectionAssert.IsEmpty(sawshark.Siblings);
 
             var goblin = (Goblinshark)siblings[2];
             Assert.AreEqual("goblin", goblin.Fishtype);
@@ -718,7 +725,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(30, goblin.Length);
             Assert.AreEqual(5, goblin.Jawsize);
             Assert.AreEqual("pinkish-gray", goblin.Color.ToString());
-            Assert.Null(goblin.Siblings);
+            CollectionAssert.IsEmpty(goblin.Siblings);
 
             return result.GetRawResponse();
         });
@@ -874,7 +881,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("predator", innerInnerShark.Species);
             Assert.AreEqual(6, innerInnerShark.Age);
             Assert.AreEqual(20, innerInnerShark.Length);
-            Assert.Null(innerInnerShark.Siblings);
+            CollectionAssert.IsEmpty(innerInnerShark.Siblings);
 
             var innerInnerSawshark = (Sawshark)innerSalmonSiblings[1];
             Assert.AreEqual("sawshark", innerInnerSawshark.Fishtype);
@@ -882,7 +889,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("dangerous", innerInnerSawshark.Species);
             Assert.AreEqual(105, innerInnerSawshark.Age);
             Assert.AreEqual(10, innerInnerSawshark.Length);
-            Assert.Null(innerInnerSawshark.Siblings);
+            CollectionAssert.IsEmpty(innerInnerSawshark.Siblings);
 
 
             var innerSawshark = (Sawshark)sharkSiblings[1];
@@ -906,25 +913,33 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphicRecursiveValid() => TestStatus(async (host, pipeline) =>
         {
+            var sawshark = new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
+            {
+                Age = 105,
+                Picture = new byte[] {255, 255, 255, 255, 254},
+                Species = "dangerous"
+            };
+            sawshark.Siblings.Clear();
+
             var value = new Salmon(1)
             {
                 Location = "alaska",
                 Iswild = true,
                 Species = "king",
-                Siblings = new[]
+                Siblings =
                 {
                     new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                     {
                         Age = 6,
                         Species = "predator",
-                        Siblings = new Fish[]
+                        Siblings =
                         {
                             new Salmon(2)
                             {
                                 Location = "atlantic",
                                 Iswild = true,
                                 Species = "coho",
-                                Siblings = new[]
+                                Siblings =
                                 {
                                     new Shark(20, DateTimeOffset.Parse("2012-01-05T01:00:00Z"))
                                     {
@@ -936,26 +951,14 @@ namespace AutoRest.TestServer.Tests
                                         Age = 105,
                                         Picture = new byte[] {255, 255, 255, 255, 254},
                                         Species = "dangerous"
-                                    },
+                                    }
                                 }
                             },
 
-                            new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
-                            {
-                                Age = 105,
-                                Picture = new byte[] {255, 255, 255, 255, 254},
-                                Species = "dangerous",
-                                Siblings = new Fish[] {}
-                            },
+                            sawshark
                         }
                     },
-                    new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
-                    {
-                        Age = 105,
-                        Picture = new byte[] {255, 255, 255, 255, 254},
-                        Species = "dangerous",
-                        Siblings = new Fish[] {}
-                    },
+                    sawshark,
                 }
             };
             return await new PolymorphicrecursiveClient(ClientDiagnostics, pipeline, host).PutValidAsync( value);
@@ -988,17 +991,17 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void OptionalCollectionsAreNullByDefault()
+        public void OptionalCollectionsAreNotNullByDefault()
         {
             var arrayWrapper = new ArrayWrapper();
-            Assert.Null(arrayWrapper.Array);
+            Assert.NotNull(arrayWrapper.Array);
         }
 
         [Test]
-        public void OptionalDictionariesAreNullByDefault()
+        public void OptionalDictionariesAreNotNullByDefault()
         {
             var dictionaryWrapper = new DictionaryWrapper();
-            Assert.Null(dictionaryWrapper.DefaultProgram);
+            Assert.NotNull(dictionaryWrapper.DefaultProgram);
         }
 
         [Test]

@@ -17,19 +17,19 @@ namespace xml_service.Models
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "banana");
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WriteStartElement("name");
                 writer.WriteValue(Name);
                 writer.WriteEndElement();
             }
-            if (Flavor != null)
+            if (Optional.IsDefined(Flavor))
             {
                 writer.WriteStartElement("flavor");
                 writer.WriteValue(Flavor);
                 writer.WriteEndElement();
             }
-            if (Expiration != null)
+            if (Optional.IsDefined(Expiration))
             {
                 writer.WriteStartElement("expiration");
                 writer.WriteValue(Expiration.Value, "O");

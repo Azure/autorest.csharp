@@ -15,22 +15,22 @@ namespace multiple_inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (EatsMiceYet != null)
+            if (Optional.IsDefined(EatsMiceYet))
             {
                 writer.WritePropertyName("eatsMiceYet");
                 writer.WriteBooleanValue(EatsMiceYet.Value);
             }
-            if (LikesMilk != null)
+            if (Optional.IsDefined(LikesMilk))
             {
                 writer.WritePropertyName("likesMilk");
                 writer.WriteBooleanValue(LikesMilk.Value);
             }
-            if (Meows != null)
+            if (Optional.IsDefined(Meows))
             {
                 writer.WritePropertyName("meows");
                 writer.WriteBooleanValue(Meows.Value);
             }
-            if (Hisses != null)
+            if (Optional.IsDefined(Hisses))
             {
                 writer.WritePropertyName("hisses");
                 writer.WriteBooleanValue(Hisses.Value);
@@ -42,46 +42,30 @@ namespace multiple_inheritance.Models
 
         internal static Kitten DeserializeKitten(JsonElement element)
         {
-            bool? eatsMiceYet = default;
-            bool? likesMilk = default;
-            bool? meows = default;
-            bool? hisses = default;
+            Optional<bool> eatsMiceYet = default;
+            Optional<bool> likesMilk = default;
+            Optional<bool> meows = default;
+            Optional<bool> hisses = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("eatsMiceYet"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     eatsMiceYet = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("likesMilk"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     likesMilk = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("meows"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     meows = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("hisses"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     hisses = property.Value.GetBoolean();
                     continue;
                 }
@@ -91,7 +75,7 @@ namespace multiple_inheritance.Models
                     continue;
                 }
             }
-            return new Kitten(name, likesMilk, meows, hisses, eatsMiceYet);
+            return new Kitten(name, likesMilk.HasValue ? likesMilk.Value : (bool?)null, meows.HasValue ? meows.Value : (bool?)null, hisses.HasValue ? hisses.Value : (bool?)null, eatsMiceYet.HasValue ? eatsMiceYet.Value : (bool?)null);
         }
     }
 }

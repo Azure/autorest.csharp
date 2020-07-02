@@ -14,30 +14,22 @@ namespace xms_error_responses.Models
     {
         internal static Pet DeserializePet(JsonElement element)
         {
-            string name = default;
-            string aniType = default;
+            Optional<string> name = default;
+            Optional<string> aniType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("aniType"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     aniType = property.Value.GetString();
                     continue;
                 }
             }
-            return new Pet(aniType, name);
+            return new Pet(aniType.HasValue ? aniType.Value : null, name.HasValue ? name.Value : null);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (LowerCaseKeepWords != null)
+            if (Optional.IsDefined(LowerCaseKeepWords))
             {
                 writer.WritePropertyName("keepWordsCase");
                 writer.WriteBooleanValue(LowerCaseKeepWords.Value);
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
         internal static KeepTokenFilter DeserializeKeepTokenFilter(JsonElement element)
         {
             IList<string> keepWords = default;
-            bool? keepWordsCase = default;
+            Optional<bool> keepWordsCase = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -62,10 +62,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("keepWordsCase"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     keepWordsCase = property.Value.GetBoolean();
                     continue;
                 }
@@ -80,7 +76,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeepTokenFilter(odataType, name, keepWords, keepWordsCase);
+            return new KeepTokenFilter(odataType, name, keepWords, keepWordsCase.HasValue ? keepWordsCase.Value : (bool?)null);
         }
     }
 }

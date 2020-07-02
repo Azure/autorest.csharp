@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,6 +16,15 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of Subnet. </summary>
         public Subnet()
         {
+            AddressPrefixes = new ChangeTrackingList<string>();
+            ServiceEndpoints = new ChangeTrackingList<ServiceEndpointPropertiesFormat>();
+            ServiceEndpointPolicies = new ChangeTrackingList<ServiceEndpointPolicy>();
+            PrivateEndpoints = new ChangeTrackingList<PrivateEndpoint>();
+            IpConfigurations = new ChangeTrackingList<IPConfiguration>();
+            IpConfigurationProfiles = new ChangeTrackingList<IPConfigurationProfile>();
+            ResourceNavigationLinks = new ChangeTrackingList<ResourceNavigationLink>();
+            ServiceAssociationLinks = new ChangeTrackingList<ServiceAssociationLink>();
+            Delegations = new ChangeTrackingList<Delegation>();
         }
 
         /// <summary> Initializes a new instance of Subnet. </summary>
@@ -68,7 +78,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The address prefix for the subnet. </summary>
         public string AddressPrefix { get; set; }
         /// <summary> List of address prefixes for the subnet. </summary>
-        public IList<string> AddressPrefixes { get; set; }
+        public IList<string> AddressPrefixes { get; }
         /// <summary> The reference to the NetworkSecurityGroup resource. </summary>
         public NetworkSecurityGroup NetworkSecurityGroup { get; set; }
         /// <summary> The reference to the RouteTable resource. </summary>
@@ -76,9 +86,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Nat gateway associated with this subnet. </summary>
         public SubResource NatGateway { get; set; }
         /// <summary> An array of service endpoints. </summary>
-        public IList<ServiceEndpointPropertiesFormat> ServiceEndpoints { get; set; }
+        public IList<ServiceEndpointPropertiesFormat> ServiceEndpoints { get; }
         /// <summary> An array of service endpoint policies. </summary>
-        public IList<ServiceEndpointPolicy> ServiceEndpointPolicies { get; set; }
+        public IList<ServiceEndpointPolicy> ServiceEndpointPolicies { get; }
         /// <summary> An array of references to private endpoints. </summary>
         public IList<PrivateEndpoint> PrivateEndpoints { get; }
         /// <summary> An array of references to the network interface IP configurations using subnet. </summary>
@@ -90,7 +100,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> An array of references to services injecting into this subnet. </summary>
         public IList<ServiceAssociationLink> ServiceAssociationLinks { get; }
         /// <summary> An array of references to the delegations on the subnet. </summary>
-        public IList<Delegation> Delegations { get; set; }
+        public IList<Delegation> Delegations { get; }
         /// <summary> A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties. </summary>
         public string Purpose { get; }
         /// <summary> The provisioning state of the subnet resource. </summary>

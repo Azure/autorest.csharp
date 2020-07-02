@@ -18,17 +18,17 @@ namespace CustomNamespace
             writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty");
             writer.WriteStartObject();
-            if (CustomizedFlattenedStringProperty != null)
+            if (Optional.IsDefined(CustomizedFlattenedStringProperty))
             {
                 writer.WritePropertyName("ModelProperty");
                 writer.WriteStringValue(CustomizedFlattenedStringProperty);
             }
-            if (Fruit != null)
+            if (Optional.IsDefined(Fruit))
             {
                 writer.WritePropertyName("Fruit");
                 writer.WriteStringValue(Fruit.Value.ToSerialString());
             }
-            if (DaysOfWeek != null)
+            if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek");
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
@@ -39,9 +39,9 @@ namespace CustomNamespace
 
         internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element)
         {
-            string modelProperty = default;
-            CustomFruitEnum? fruit = default;
-            CustomDaysOfWeek? daysOfWeek = default;
+            Optional<string> modelProperty = default;
+            Optional<CustomFruitEnum> fruit = default;
+            Optional<CustomDaysOfWeek> daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"))
@@ -50,28 +50,16 @@ namespace CustomNamespace
                     {
                         if (property0.NameEquals("ModelProperty"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             modelProperty = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("Fruit"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             fruit = property0.Value.GetString().ToCustomFruitEnum();
                             continue;
                         }
                         if (property0.NameEquals("DaysOfWeek"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             daysOfWeek = new CustomDaysOfWeek(property0.Value.GetString());
                             continue;
                         }
@@ -79,7 +67,7 @@ namespace CustomNamespace
                     continue;
                 }
             }
-            return new RenamedModelStruct(modelProperty, fruit, daysOfWeek);
+            return new RenamedModelStruct(modelProperty.HasValue ? modelProperty.Value : null, fruit.HasValue ? fruit.Value : (CustomFruitEnum?)null, daysOfWeek.HasValue ? daysOfWeek.Value : (CustomDaysOfWeek?)null);
         }
     }
 }

@@ -15,12 +15,12 @@ namespace multiple_inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Meows != null)
+            if (Optional.IsDefined(Meows))
             {
                 writer.WritePropertyName("meows");
                 writer.WriteBooleanValue(Meows.Value);
             }
-            if (Hisses != null)
+            if (Optional.IsDefined(Hisses))
             {
                 writer.WritePropertyName("hisses");
                 writer.WriteBooleanValue(Hisses.Value);
@@ -30,30 +30,22 @@ namespace multiple_inheritance.Models
 
         internal static Feline DeserializeFeline(JsonElement element)
         {
-            bool? meows = default;
-            bool? hisses = default;
+            Optional<bool> meows = default;
+            Optional<bool> hisses = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("meows"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     meows = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("hisses"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     hisses = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return new Feline(meows, hisses);
+            return new Feline(meows.HasValue ? meows.Value : (bool?)null, hisses.HasValue ? hisses.Value : (bool?)null);
         }
     }
 }

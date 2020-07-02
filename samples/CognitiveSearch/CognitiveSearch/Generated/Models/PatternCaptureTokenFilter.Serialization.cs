@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (PreserveOriginal != null)
+            if (Optional.IsDefined(PreserveOriginal))
             {
                 writer.WritePropertyName("preserveOriginal");
                 writer.WriteBooleanValue(PreserveOriginal.Value);
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
         internal static PatternCaptureTokenFilter DeserializePatternCaptureTokenFilter(JsonElement element)
         {
             IList<string> patterns = default;
-            bool? preserveOriginal = default;
+            Optional<bool> preserveOriginal = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -62,10 +62,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("preserveOriginal"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     preserveOriginal = property.Value.GetBoolean();
                     continue;
                 }
@@ -80,7 +76,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternCaptureTokenFilter(odataType, name, patterns, preserveOriginal);
+            return new PatternCaptureTokenFilter(odataType, name, patterns, preserveOriginal.HasValue ? preserveOriginal.Value : (bool?)null);
         }
     }
 }

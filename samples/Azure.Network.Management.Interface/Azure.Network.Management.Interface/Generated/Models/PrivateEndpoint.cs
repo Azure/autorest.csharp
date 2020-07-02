@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
@@ -15,6 +16,9 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
         public PrivateEndpoint()
         {
+            NetworkInterfaces = new ChangeTrackingList<NetworkInterface>();
+            PrivateLinkServiceConnections = new ChangeTrackingList<PrivateLinkServiceConnection>();
+            ManualPrivateLinkServiceConnections = new ChangeTrackingList<PrivateLinkServiceConnection>();
         }
 
         /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
@@ -48,8 +52,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The provisioning state of the private endpoint resource. </summary>
         public ProvisioningState? ProvisioningState { get; }
         /// <summary> A grouping of information about the connection to the remote resource. </summary>
-        public IList<PrivateLinkServiceConnection> PrivateLinkServiceConnections { get; set; }
+        public IList<PrivateLinkServiceConnection> PrivateLinkServiceConnections { get; }
         /// <summary> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </summary>
-        public IList<PrivateLinkServiceConnection> ManualPrivateLinkServiceConnections { get; set; }
+        public IList<PrivateLinkServiceConnection> ManualPrivateLinkServiceConnections { get; }
     }
 }

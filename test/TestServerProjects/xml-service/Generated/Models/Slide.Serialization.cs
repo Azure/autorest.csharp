@@ -17,19 +17,19 @@ namespace xml_service.Models
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "slide");
-            if (Type != null)
+            if (Optional.IsDefined(Type))
             {
                 writer.WriteStartAttribute("type");
                 writer.WriteValue(Type);
                 writer.WriteEndAttribute();
             }
-            if (Title != null)
+            if (Optional.IsDefined(Title))
             {
                 writer.WriteStartElement("title");
                 writer.WriteValue(Title);
                 writer.WriteEndElement();
             }
-            if (Items != null)
+            if (Optional.IsDefined(Items))
             {
                 foreach (var item in Items)
                 {

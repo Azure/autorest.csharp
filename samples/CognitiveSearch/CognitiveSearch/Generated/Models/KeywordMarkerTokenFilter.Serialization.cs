@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (IgnoreCase != null)
+            if (Optional.IsDefined(IgnoreCase))
             {
                 writer.WritePropertyName("ignoreCase");
                 writer.WriteBooleanValue(IgnoreCase.Value);
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
         internal static KeywordMarkerTokenFilter DeserializeKeywordMarkerTokenFilter(JsonElement element)
         {
             IList<string> keywords = default;
-            bool? ignoreCase = default;
+            Optional<bool> ignoreCase = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -62,10 +62,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("ignoreCase"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     ignoreCase = property.Value.GetBoolean();
                     continue;
                 }
@@ -80,7 +76,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeywordMarkerTokenFilter(odataType, name, keywords, ignoreCase);
+            return new KeywordMarkerTokenFilter(odataType, name, keywords, ignoreCase.HasValue ? ignoreCase.Value : (bool?)null);
         }
     }
 }

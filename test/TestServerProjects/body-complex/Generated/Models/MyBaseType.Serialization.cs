@@ -22,8 +22,8 @@ namespace body_complex.Models
                 }
             }
             string kind = default;
-            string propB1 = default;
-            string propBH1 = default;
+            Optional<string> propB1 = default;
+            Optional<string> propBH1 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"))
@@ -33,10 +33,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("propB1"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     propB1 = property.Value.GetString();
                     continue;
                 }
@@ -46,10 +42,6 @@ namespace body_complex.Models
                     {
                         if (property0.NameEquals("propBH1"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             propBH1 = property0.Value.GetString();
                             continue;
                         }
@@ -57,7 +49,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new MyBaseType(kind, propB1, propBH1);
+            return new MyBaseType(kind, propB1.HasValue ? propB1.Value : null, propBH1.HasValue ? propBH1.Value : null);
         }
     }
 }

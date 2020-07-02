@@ -17,14 +17,14 @@ namespace Azure.AI.FormRecognizer.Models
         {
             int rowIndex = default;
             int columnIndex = default;
-            int? rowSpan = default;
-            int? columnSpan = default;
+            Optional<int> rowSpan = default;
+            Optional<int> columnSpan = default;
             string text = default;
             IReadOnlyList<float> boundingBox = default;
             float confidence = default;
-            IReadOnlyList<string> elements = default;
-            bool? isHeader = default;
-            bool? isFooter = default;
+            Optional<IReadOnlyList<string>> elements = default;
+            Optional<bool> isHeader = default;
+            Optional<bool> isFooter = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rowIndex"))
@@ -39,19 +39,11 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("rowSpan"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     rowSpan = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("columnSpan"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     columnSpan = property.Value.GetInt32();
                     continue;
                 }
@@ -77,10 +69,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("elements"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -98,24 +86,16 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("isHeader"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     isHeader = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("isFooter"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     isFooter = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox, confidence, elements, isHeader, isFooter);
+            return new DataTableCell(rowIndex, columnIndex, rowSpan.HasValue ? rowSpan.Value : (int?)null, columnSpan.HasValue ? columnSpan.Value : (int?)null, text, boundingBox, confidence, new ChangeTrackingList<string>(elements), isHeader.HasValue ? isHeader.Value : (bool?)null, isFooter.HasValue ? isFooter.Value : (bool?)null);
         }
     }
 }

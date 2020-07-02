@@ -14,20 +14,16 @@ namespace custom_baseUrl_paging.Models
     {
         internal static Product DeserializeProduct(JsonElement element)
         {
-            ProductProperties properties = default;
+            Optional<ProductProperties> properties = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     properties = ProductProperties.DeserializeProductProperties(property.Value);
                     continue;
                 }
             }
-            return new Product(properties);
+            return new Product(properties.HasValue ? properties.Value : null);
         }
     }
 }

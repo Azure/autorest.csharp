@@ -44,7 +44,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
 
             Name = name;
-            Matches = matches.ToArray();
+            Matches = matches.ToList();
             Language = language;
             Url = url;
             DataSource = dataSource;
@@ -60,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
         internal LinkedEntity(string name, IReadOnlyList<Match> matches, string language, string id, string url, string dataSource)
         {
             Name = name;
-            Matches = matches ?? new List<Match>();
+            Matches = matches;
             Language = language;
             Id = id;
             Url = url;

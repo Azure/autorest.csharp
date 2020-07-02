@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -25,6 +26,8 @@ namespace CognitiveSearch.Models
 
             Name = name;
             Type = type;
+            SynonymMaps = new ChangeTrackingList<string>();
+            Fields = new ChangeTrackingList<Field>();
         }
 
         /// <summary> Initializes a new instance of Field. </summary>
@@ -81,8 +84,8 @@ namespace CognitiveSearch.Models
         /// <summary> The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. </summary>
         public AnalyzerName? IndexAnalyzer { get; set; }
         /// <summary> A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields. </summary>
-        public IList<string> SynonymMaps { get; set; }
+        public IList<string> SynonymMaps { get; }
         /// <summary> A list of sub-fields if this is a field of type Edm.ComplexType or Collection(Edm.ComplexType). Must be null or empty for simple fields. </summary>
-        public IList<Field> Fields { get; set; }
+        public IList<Field> Fields { get; }
     }
 }

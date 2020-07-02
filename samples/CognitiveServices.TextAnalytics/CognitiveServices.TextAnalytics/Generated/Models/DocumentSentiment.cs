@@ -37,7 +37,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Id = id;
             Sentiment = sentiment;
             DocumentScores = documentScores;
-            Sentences = sentences.ToArray();
+            Sentences = sentences.ToList();
         }
 
         /// <summary> Initializes a new instance of DocumentSentiment. </summary>
@@ -52,7 +52,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Sentiment = sentiment;
             Statistics = statistics;
             DocumentScores = documentScores;
-            Sentences = sentences ?? new List<SentenceSentiment>();
+            Sentences = sentences;
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>

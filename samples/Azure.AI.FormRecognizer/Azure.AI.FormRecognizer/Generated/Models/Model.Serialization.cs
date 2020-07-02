@@ -15,8 +15,8 @@ namespace Azure.AI.FormRecognizer.Models
         internal static Model DeserializeModel(JsonElement element)
         {
             ModelInfo modelInfo = default;
-            KeysResult keys = default;
-            TrainResult trainResult = default;
+            Optional<KeysResult> keys = default;
+            Optional<TrainResult> trainResult = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("modelInfo"))
@@ -26,24 +26,16 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("keys"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     keys = KeysResult.DeserializeKeysResult(property.Value);
                     continue;
                 }
                 if (property.NameEquals("trainResult"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     trainResult = TrainResult.DeserializeTrainResult(property.Value);
                     continue;
                 }
             }
-            return new Model(modelInfo, keys, trainResult);
+            return new Model(modelInfo, keys.HasValue ? keys.Value : null, trainResult.HasValue ? trainResult.Value : null);
         }
     }
 }

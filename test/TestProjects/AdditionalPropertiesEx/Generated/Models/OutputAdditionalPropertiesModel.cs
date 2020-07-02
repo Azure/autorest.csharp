@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
@@ -18,7 +19,7 @@ namespace AdditionalPropertiesEx.Models
         internal OutputAdditionalPropertiesModel(int id)
         {
             Id = id;
-            AdditionalProperties = new Dictionary<string, string>();
+            AdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
@@ -27,7 +28,7 @@ namespace AdditionalPropertiesEx.Models
         internal OutputAdditionalPropertiesModel(int id, IReadOnlyDictionary<string, string> additionalProperties)
         {
             Id = id;
-            AdditionalProperties = additionalProperties ?? new Dictionary<string, string>();
+            AdditionalProperties = additionalProperties;
         }
 
         public int Id { get; }

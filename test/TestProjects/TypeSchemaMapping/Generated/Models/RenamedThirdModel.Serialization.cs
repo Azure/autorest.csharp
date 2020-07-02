@@ -17,17 +17,23 @@ namespace CustomNamespace
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("ETag");
-            writer.WriteStringValue(CustomizedETagProperty.ToString());
-            writer.WritePropertyName("CreatedAt");
-            writer.WriteStringValue(CustomizedCreatedAtProperty);
+            if (Optional.IsDefined(CustomizedETagProperty))
+            {
+                writer.WritePropertyName("ETag");
+                writer.WriteStringValue(CustomizedETagProperty.ToString());
+            }
+            if (Optional.IsDefined(CustomizedCreatedAtProperty))
+            {
+                writer.WritePropertyName("CreatedAt");
+                writer.WriteStringValue(CustomizedCreatedAtProperty);
+            }
             writer.WriteEndObject();
         }
 
         internal static RenamedThirdModel DeserializeRenamedThirdModel(JsonElement element)
         {
-            ETag eTag = default;
-            DateTime createdAt = default;
+            Optional<ETag> eTag = default;
+            Optional<DateTime> createdAt = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ETag"))

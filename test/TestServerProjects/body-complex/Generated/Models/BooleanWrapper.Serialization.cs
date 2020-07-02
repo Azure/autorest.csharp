@@ -15,12 +15,12 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (FieldTrue != null)
+            if (Optional.IsDefined(FieldTrue))
             {
                 writer.WritePropertyName("field_true");
                 writer.WriteBooleanValue(FieldTrue.Value);
             }
-            if (FieldFalse != null)
+            if (Optional.IsDefined(FieldFalse))
             {
                 writer.WritePropertyName("field_false");
                 writer.WriteBooleanValue(FieldFalse.Value);
@@ -30,30 +30,22 @@ namespace body_complex.Models
 
         internal static BooleanWrapper DeserializeBooleanWrapper(JsonElement element)
         {
-            bool? fieldTrue = default;
-            bool? fieldFalse = default;
+            Optional<bool> fieldTrue = default;
+            Optional<bool> fieldFalse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("field_true"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     fieldTrue = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("field_false"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     fieldFalse = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return new BooleanWrapper(fieldTrue, fieldFalse);
+            return new BooleanWrapper(fieldTrue.HasValue ? fieldTrue.Value : (bool?)null, fieldFalse.HasValue ? fieldFalse.Value : (bool?)null);
         }
     }
 }

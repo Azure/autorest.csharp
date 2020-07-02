@@ -15,12 +15,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MinGram != null)
+            if (Optional.IsDefined(MinGram))
             {
                 writer.WritePropertyName("minGram");
                 writer.WriteNumberValue(MinGram.Value);
             }
-            if (MaxGram != null)
+            if (Optional.IsDefined(MaxGram))
             {
                 writer.WritePropertyName("maxGram");
                 writer.WriteNumberValue(MaxGram.Value);
@@ -34,27 +34,19 @@ namespace CognitiveSearch.Models
 
         internal static NGramTokenFilterV2 DeserializeNGramTokenFilterV2(JsonElement element)
         {
-            int? minGram = default;
-            int? maxGram = default;
+            Optional<int> minGram = default;
+            Optional<int> maxGram = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("minGram"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     minGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxGram"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     maxGram = property.Value.GetInt32();
                     continue;
                 }
@@ -69,7 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new NGramTokenFilterV2(odataType, name, minGram, maxGram);
+            return new NGramTokenFilterV2(odataType, name, minGram.HasValue ? minGram.Value : (int?)null, maxGram.HasValue ? maxGram.Value : (int?)null);
         }
     }
 }

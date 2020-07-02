@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -23,6 +24,7 @@ namespace CognitiveSearch.Models
             }
 
             Name = name;
+            Inputs = new ChangeTrackingList<InputFieldMappingEntry>();
         }
 
         /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
@@ -45,6 +47,6 @@ namespace CognitiveSearch.Models
         /// <summary> The source context used for selecting recursive inputs. </summary>
         public string SourceContext { get; set; }
         /// <summary> The recursive inputs used when creating a complex type. </summary>
-        public IList<InputFieldMappingEntry> Inputs { get; set; }
+        public IList<InputFieldMappingEntry> Inputs { get; }
     }
 }

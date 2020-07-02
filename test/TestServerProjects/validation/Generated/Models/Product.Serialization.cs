@@ -16,7 +16,7 @@ namespace validation.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DisplayNames != null)
+            if (Optional.IsDefined(DisplayNames))
             {
                 writer.WritePropertyName("display_names");
                 writer.WriteStartArray();
@@ -26,12 +26,12 @@ namespace validation.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Capacity != null)
+            if (Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("capacity");
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (Image != null)
+            if (Optional.IsDefined(Image))
             {
                 writer.WritePropertyName("image");
                 writer.WriteStringValue(Image);
@@ -44,7 +44,7 @@ namespace validation.Models
             writer.WriteNumberValue(ConstInt);
             writer.WritePropertyName("constString");
             writer.WriteStringValue(ConstString);
-            if (ConstStringAsEnum != null)
+            if (Optional.IsDefined(ConstStringAsEnum))
             {
                 writer.WritePropertyName("constStringAsEnum");
                 writer.WriteStringValue(ConstStringAsEnum);
@@ -54,22 +54,18 @@ namespace validation.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
-            IList<string> displayNames = default;
-            int? capacity = default;
-            string image = default;
+            Optional<IList<string>> displayNames = default;
+            Optional<int> capacity = default;
+            Optional<string> image = default;
             ChildProduct child = default;
             ConstantProduct constChild = default;
             int constInt = default;
             string constString = default;
-            string constStringAsEnum = default;
+            Optional<string> constStringAsEnum = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("display_names"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -87,19 +83,11 @@ namespace validation.Models
                 }
                 if (property.NameEquals("capacity"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     capacity = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("image"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     image = property.Value.GetString();
                     continue;
                 }
@@ -125,15 +113,11 @@ namespace validation.Models
                 }
                 if (property.NameEquals("constStringAsEnum"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     constStringAsEnum = property.Value.GetString();
                     continue;
                 }
             }
-            return new Product(displayNames, capacity, image, child, constChild, constInt, constString, constStringAsEnum);
+            return new Product(new ChangeTrackingList<string>(displayNames), capacity.HasValue ? capacity.Value : (int?)null, image.HasValue ? image.Value : null, child, constChild, constInt, constString, constStringAsEnum.HasValue ? constStringAsEnum.Value : null);
         }
     }
 }

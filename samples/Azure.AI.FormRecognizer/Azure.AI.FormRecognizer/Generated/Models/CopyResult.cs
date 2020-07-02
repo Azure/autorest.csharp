@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
@@ -18,6 +19,7 @@ namespace Azure.AI.FormRecognizer.Models
         internal CopyResult(Guid modelId)
         {
             ModelId = modelId;
+            Errors = new ChangeTrackingList<ErrorInformation>();
         }
 
         /// <summary> Initializes a new instance of CopyResult. </summary>

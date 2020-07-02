@@ -16,7 +16,7 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DefaultProgram != null)
+            if (Optional.IsDefined(DefaultProgram))
             {
                 writer.WritePropertyName("defaultProgram");
                 writer.WriteStartObject();
@@ -32,15 +32,11 @@ namespace body_complex.Models
 
         internal static DictionaryWrapper DeserializeDictionaryWrapper(JsonElement element)
         {
-            IDictionary<string, string> defaultProgram = default;
+            Optional<IDictionary<string, string>> defaultProgram = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("defaultProgram"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -57,7 +53,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DictionaryWrapper(defaultProgram);
+            return new DictionaryWrapper(new ChangeTrackingDictionary<string, string>(defaultProgram));
         }
     }
 }

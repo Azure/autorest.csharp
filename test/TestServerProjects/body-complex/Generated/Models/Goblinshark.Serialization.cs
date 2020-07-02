@@ -17,17 +17,17 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Jawsize != null)
+            if (Optional.IsDefined(Jawsize))
             {
                 writer.WritePropertyName("jawsize");
                 writer.WriteNumberValue(Jawsize.Value);
             }
-            if (Color != null)
+            if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color");
                 writer.WriteStringValue(Color.Value.ToString());
             }
-            if (Age != null)
+            if (Optional.IsDefined(Age))
             {
                 writer.WritePropertyName("age");
                 writer.WriteNumberValue(Age.Value);
@@ -36,14 +36,14 @@ namespace body_complex.Models
             writer.WriteStringValue(Birthday, "O");
             writer.WritePropertyName("fishtype");
             writer.WriteStringValue(Fishtype);
-            if (Species != null)
+            if (Optional.IsDefined(Species))
             {
                 writer.WritePropertyName("species");
                 writer.WriteStringValue(Species);
             }
             writer.WritePropertyName("length");
             writer.WriteNumberValue(Length);
-            if (Siblings != null)
+            if (Optional.IsDefined(Siblings))
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
@@ -58,40 +58,28 @@ namespace body_complex.Models
 
         internal static Goblinshark DeserializeGoblinshark(JsonElement element)
         {
-            int? jawsize = default;
-            GoblinSharkColor? color = default;
-            int? age = default;
+            Optional<int> jawsize = default;
+            Optional<GoblinSharkColor> color = default;
+            Optional<int> age = default;
             DateTimeOffset birthday = default;
             string fishtype = default;
-            string species = default;
+            Optional<string> species = default;
             float length = default;
-            IList<Fish> siblings = default;
+            Optional<IList<Fish>> siblings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jawsize"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     jawsize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("color"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     color = new GoblinSharkColor(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("age"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     age = property.Value.GetInt32();
                     continue;
                 }
@@ -107,10 +95,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("species"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     species = property.Value.GetString();
                     continue;
                 }
@@ -121,10 +105,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("siblings"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -141,7 +121,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Goblinshark(fishtype, species, length, siblings, age, birthday, jawsize, color);
+            return new Goblinshark(fishtype, species.HasValue ? species.Value : null, length, new ChangeTrackingList<Fish>(siblings), age.HasValue ? age.Value : (int?)null, birthday, jawsize.HasValue ? jawsize.Value : (int?)null, color.HasValue ? color.Value : (GoblinSharkColor?)null);
         }
     }
 }

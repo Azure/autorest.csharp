@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
@@ -15,6 +16,7 @@ namespace Azure.Storage.Tables.Models
         /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
         public StorageServiceProperties()
         {
+            Cors = new ChangeTrackingList<CorsRule>();
         }
 
         /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
@@ -37,6 +39,6 @@ namespace Azure.Storage.Tables.Models
         /// <summary> a summary of request statistics grouped by API in minute aggregates for queues. </summary>
         public Metrics MinuteMetrics { get; set; }
         /// <summary> The set of CORS rules. </summary>
-        public IList<CorsRule> Cors { get; set; }
+        public IList<CorsRule> Cors { get; }
     }
 }

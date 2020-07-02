@@ -14,60 +14,40 @@ namespace AppConfiguration.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            string type = default;
-            string title = default;
-            string name = default;
-            string detail = default;
-            int? status = default;
+            Optional<string> type = default;
+            Optional<string> title = default;
+            Optional<string> name = default;
+            Optional<string> detail = default;
+            Optional<int> status = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("title"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     title = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("detail"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     detail = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     status = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new Error(type, title, name, detail, status);
+            return new Error(type.HasValue ? type.Value : null, title.HasValue ? title.Value : null, name.HasValue ? name.Value : null, detail.HasValue ? detail.Value : null, status.HasValue ? status.Value : (int?)null);
         }
     }
 }

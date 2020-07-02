@@ -17,44 +17,44 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("search");
             writer.WriteStringValue(SearchText);
-            if (AutocompleteMode != null)
+            if (Optional.IsDefined(AutocompleteMode))
             {
                 writer.WritePropertyName("autocompleteMode");
                 writer.WriteStringValue(AutocompleteMode.Value.ToSerialString());
             }
-            if (Filter != null)
+            if (Optional.IsDefined(Filter))
             {
                 writer.WritePropertyName("filter");
                 writer.WriteStringValue(Filter);
             }
-            if (UseFuzzyMatching != null)
+            if (Optional.IsDefined(UseFuzzyMatching))
             {
                 writer.WritePropertyName("fuzzy");
                 writer.WriteBooleanValue(UseFuzzyMatching.Value);
             }
-            if (HighlightPostTag != null)
+            if (Optional.IsDefined(HighlightPostTag))
             {
                 writer.WritePropertyName("highlightPostTag");
                 writer.WriteStringValue(HighlightPostTag);
             }
-            if (HighlightPreTag != null)
+            if (Optional.IsDefined(HighlightPreTag))
             {
                 writer.WritePropertyName("highlightPreTag");
                 writer.WriteStringValue(HighlightPreTag);
             }
-            if (MinimumCoverage != null)
+            if (Optional.IsDefined(MinimumCoverage))
             {
                 writer.WritePropertyName("minimumCoverage");
                 writer.WriteNumberValue(MinimumCoverage.Value);
             }
-            if (SearchFields != null)
+            if (Optional.IsDefined(SearchFields))
             {
                 writer.WritePropertyName("searchFields");
                 writer.WriteStringValue(SearchFields);
             }
             writer.WritePropertyName("suggesterName");
             writer.WriteStringValue(SuggesterName);
-            if (Top != null)
+            if (Optional.IsDefined(Top))
             {
                 writer.WritePropertyName("top");
                 writer.WriteNumberValue(Top.Value);

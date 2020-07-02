@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeyValuePair DeserializeKeyValuePair(JsonElement element)
         {
-            string label = default;
+            Optional<string> label = default;
             KeyValueElement key = default;
             KeyValueElement value = default;
             float confidence = default;
@@ -22,10 +22,6 @@ namespace Azure.AI.FormRecognizer.Models
             {
                 if (property.NameEquals("label"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     label = property.Value.GetString();
                     continue;
                 }
@@ -45,7 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new KeyValuePair(label, key, value, confidence);
+            return new KeyValuePair(label.HasValue ? label.Value : null, key, value, confidence);
         }
     }
 }

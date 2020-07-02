@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -15,6 +16,7 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of Slideshow. </summary>
         public Slideshow()
         {
+            Slides = new ChangeTrackingList<Slide>();
         }
 
         /// <summary> Initializes a new instance of Slideshow. </summary>
@@ -33,6 +35,6 @@ namespace xml_service.Models
         public string Title { get; set; }
         public string Date { get; set; }
         public string Author { get; set; }
-        public IList<Slide> Slides { get; set; }
+        public IList<Slide> Slides { get; }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -15,6 +16,8 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of DotFishMarket. </summary>
         internal DotFishMarket()
         {
+            Salmons = new ChangeTrackingList<DotSalmon>();
+            Fishes = new ChangeTrackingList<DotFish>();
         }
 
         /// <summary> Initializes a new instance of DotFishMarket. </summary>

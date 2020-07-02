@@ -16,7 +16,7 @@ namespace CustomNamespace
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (PropertyRenamedAndTypeChanged != null)
+            if (Optional.IsDefined(PropertyRenamedAndTypeChanged))
             {
                 writer.WritePropertyName("ModelProperty");
                 writer.WriteNumberValue(PropertyRenamedAndTypeChanged.Value);

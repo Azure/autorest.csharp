@@ -17,9 +17,9 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             ErrorCodeValue code = default;
             string message = default;
-            string target = default;
-            InnerError innerError = default;
-            IReadOnlyList<TextAnalyticsError> details = default;
+            Optional<string> target = default;
+            Optional<InnerError> innerError = default;
+            Optional<IReadOnlyList<TextAnalyticsError>> details = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
@@ -34,28 +34,16 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("target"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     target = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("innerError"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     innerError = InnerError.DeserializeInnerError(property.Value);
                     continue;
                 }
                 if (property.NameEquals("details"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<TextAnalyticsError> array = new List<TextAnalyticsError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -72,7 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new TextAnalyticsError(code, message, target, innerError, details);
+            return new TextAnalyticsError(code, message, target.HasValue ? target.Value : null, innerError.HasValue ? innerError.Value : null, new ChangeTrackingList<TextAnalyticsError>(details));
         }
     }
 }

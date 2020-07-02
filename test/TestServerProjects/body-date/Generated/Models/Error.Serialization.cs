@@ -14,30 +14,22 @@ namespace body_date.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            int? status = default;
-            string message = default;
+            Optional<int> status = default;
+            Optional<string> message = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     status = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     message = property.Value.GetString();
                     continue;
                 }
             }
-            return new Error(status, message);
+            return new Error(status.HasValue ? status.Value : (int?)null, message.HasValue ? message.Value : null);
         }
     }
 }

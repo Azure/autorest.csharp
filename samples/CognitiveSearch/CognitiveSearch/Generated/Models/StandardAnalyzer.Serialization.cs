@@ -16,12 +16,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MaxTokenLength != null)
+            if (Optional.IsDefined(MaxTokenLength))
             {
                 writer.WritePropertyName("maxTokenLength");
                 writer.WriteNumberValue(MaxTokenLength.Value);
             }
-            if (Stopwords != null)
+            if (Optional.IsDefined(Stopwords))
             {
                 writer.WritePropertyName("stopwords");
                 writer.WriteStartArray();
@@ -40,27 +40,19 @@ namespace CognitiveSearch.Models
 
         internal static StandardAnalyzer DeserializeStandardAnalyzer(JsonElement element)
         {
-            int? maxTokenLength = default;
-            IList<string> stopwords = default;
+            Optional<int> maxTokenLength = default;
+            Optional<IList<string>> stopwords = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxTokenLength"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     maxTokenLength = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("stopwords"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -87,7 +79,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StandardAnalyzer(odataType, name, maxTokenLength, stopwords);
+            return new StandardAnalyzer(odataType, name, maxTokenLength.HasValue ? maxTokenLength.Value : (int?)null, new ChangeTrackingList<string>(stopwords));
         }
     }
 }

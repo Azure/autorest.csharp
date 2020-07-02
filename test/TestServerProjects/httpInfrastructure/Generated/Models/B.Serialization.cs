@@ -14,30 +14,22 @@ namespace httpInfrastructure.Models
     {
         internal static B DeserializeB(JsonElement element)
         {
-            string textStatusCode = default;
-            string statusCode = default;
+            Optional<string> textStatusCode = default;
+            Optional<string> statusCode = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("textStatusCode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     textStatusCode = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("statusCode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     statusCode = property.Value.GetString();
                     continue;
                 }
             }
-            return new B(statusCode, textStatusCode);
+            return new B(statusCode.HasValue ? statusCode.Value : null, textStatusCode.HasValue ? textStatusCode.Value : null);
         }
     }
 }

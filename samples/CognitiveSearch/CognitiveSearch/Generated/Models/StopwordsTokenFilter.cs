@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
+            Stopwords = new ChangeTrackingList<string>();
             OdataType = "#Microsoft.Azure.Search.StopwordsTokenFilter";
         }
 
@@ -42,7 +44,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> The list of stopwords. This property and the stopwords list property cannot both be set. </summary>
-        public IList<string> Stopwords { get; set; }
+        public IList<string> Stopwords { get; }
         /// <summary> A predefined list of stopwords to use. This property and the stopwords property cannot both be set. Default is English. </summary>
         public StopwordsList? StopwordsList { get; set; }
         /// <summary> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </summary>

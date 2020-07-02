@@ -15,17 +15,13 @@ namespace CognitiveSearch.Models
     {
         internal static SearchError DeserializeSearchError(JsonElement element)
         {
-            string code = default;
+            Optional<string> code = default;
             string message = default;
-            IReadOnlyList<SearchError> details = default;
+            Optional<IReadOnlyList<SearchError>> details = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     code = property.Value.GetString();
                     continue;
                 }
@@ -36,10 +32,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("details"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<SearchError> array = new List<SearchError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -56,7 +48,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchError(code, message, details);
+            return new SearchError(code.HasValue ? code.Value : null, message, new ChangeTrackingList<SearchError>(details));
         }
     }
 }

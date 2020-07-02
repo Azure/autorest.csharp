@@ -23,12 +23,12 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (IgnoreCase != null)
+            if (Optional.IsDefined(IgnoreCase))
             {
                 writer.WritePropertyName("ignoreCase");
                 writer.WriteBooleanValue(IgnoreCase.Value);
             }
-            if (UseQueryMode != null)
+            if (Optional.IsDefined(UseQueryMode))
             {
                 writer.WritePropertyName("queryMode");
                 writer.WriteBooleanValue(UseQueryMode.Value);
@@ -43,8 +43,8 @@ namespace CognitiveSearch.Models
         internal static CommonGramTokenFilter DeserializeCommonGramTokenFilter(JsonElement element)
         {
             IList<string> commonWords = default;
-            bool? ignoreCase = default;
-            bool? queryMode = default;
+            Optional<bool> ignoreCase = default;
+            Optional<bool> queryMode = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -68,19 +68,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("ignoreCase"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     ignoreCase = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("queryMode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     queryMode = property.Value.GetBoolean();
                     continue;
                 }
@@ -95,7 +87,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CommonGramTokenFilter(odataType, name, commonWords, ignoreCase, queryMode);
+            return new CommonGramTokenFilter(odataType, name, commonWords, ignoreCase.HasValue ? ignoreCase.Value : (bool?)null, queryMode.HasValue ? queryMode.Value : (bool?)null);
         }
     }
 }

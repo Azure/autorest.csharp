@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -15,6 +16,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of Cat. </summary>
         public Cat()
         {
+            Hates = new ChangeTrackingList<Dog>();
         }
 
         /// <summary> Initializes a new instance of Cat. </summary>
@@ -29,6 +31,6 @@ namespace body_complex.Models
         }
 
         public string Color { get; set; }
-        public IList<Dog> Hates { get; set; }
+        public IList<Dog> Hates { get; }
     }
 }

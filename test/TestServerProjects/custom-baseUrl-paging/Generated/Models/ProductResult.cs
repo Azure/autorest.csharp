@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace custom_baseUrl_paging.Models
 {
@@ -15,6 +16,7 @@ namespace custom_baseUrl_paging.Models
         /// <summary> Initializes a new instance of ProductResult. </summary>
         internal ProductResult()
         {
+            Values = new ChangeTrackingList<Product>();
         }
 
         /// <summary> Initializes a new instance of ProductResult. </summary>

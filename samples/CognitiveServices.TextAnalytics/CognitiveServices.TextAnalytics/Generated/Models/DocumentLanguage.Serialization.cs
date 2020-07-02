@@ -17,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             string id = default;
             IReadOnlyList<DetectedLanguage> detectedLanguages = default;
-            DocumentStatistics statistics = default;
+            Optional<DocumentStatistics> statistics = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -44,15 +44,11 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("statistics"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
             }
-            return new DocumentLanguage(id, detectedLanguages, statistics);
+            return new DocumentLanguage(id, detectedLanguages, statistics.HasValue ? statistics.Value : null);
         }
     }
 }

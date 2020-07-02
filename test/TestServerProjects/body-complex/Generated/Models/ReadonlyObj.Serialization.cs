@@ -15,12 +15,12 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
             }
-            if (Size != null)
+            if (Optional.IsDefined(Size))
             {
                 writer.WritePropertyName("size");
                 writer.WriteNumberValue(Size.Value);
@@ -30,30 +30,22 @@ namespace body_complex.Models
 
         internal static ReadonlyObj DeserializeReadonlyObj(JsonElement element)
         {
-            string id = default;
-            int? size = default;
+            Optional<string> id = default;
+            Optional<int> size = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("size"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     size = property.Value.GetInt32();
                     continue;
                 }
             }
-            return new ReadonlyObj(id, size);
+            return new ReadonlyObj(id.HasValue ? id.Value : null, size.HasValue ? size.Value : (int?)null);
         }
     }
 }

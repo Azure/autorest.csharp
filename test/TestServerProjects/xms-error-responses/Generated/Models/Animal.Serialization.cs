@@ -14,20 +14,16 @@ namespace xms_error_responses.Models
     {
         internal static Animal DeserializeAnimal(JsonElement element)
         {
-            string aniType = default;
+            Optional<string> aniType = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("aniType"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     aniType = property.Value.GetString();
                     continue;
                 }
             }
-            return new Animal(aniType);
+            return new Animal(aniType.HasValue ? aniType.Value : null);
         }
     }
 }

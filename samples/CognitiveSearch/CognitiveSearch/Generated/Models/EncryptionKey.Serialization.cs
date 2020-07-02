@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(KeyVaultKeyVersion);
             writer.WritePropertyName("keyVaultUri");
             writer.WriteStringValue(KeyVaultUri);
-            if (AccessCredentials != null)
+            if (Optional.IsDefined(AccessCredentials))
             {
                 writer.WritePropertyName("accessCredentials");
                 writer.WriteObjectValue(AccessCredentials);
@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
             string keyVaultKeyName = default;
             string keyVaultKeyVersion = default;
             string keyVaultUri = default;
-            AzureActiveDirectoryApplicationCredentials accessCredentials = default;
+            Optional<AzureActiveDirectoryApplicationCredentials> accessCredentials = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keyVaultKeyName"))
@@ -54,15 +54,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("accessCredentials"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     accessCredentials = AzureActiveDirectoryApplicationCredentials.DeserializeAzureActiveDirectoryApplicationCredentials(property.Value);
                     continue;
                 }
             }
-            return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials);
+            return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials.HasValue ? accessCredentials.Value : null);
         }
     }
 }

@@ -16,17 +16,17 @@ namespace lro.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
             }
-            if (Type != null)
+            if (Optional.IsDefined(Type))
             {
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
-            if (Tags != null)
+            if (Optional.IsDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -37,24 +37,24 @@ namespace lro.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Location != null)
+            if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location");
                 writer.WriteStringValue(Location);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (ProvisioningState != null)
+            if (Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState");
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (ProvisioningStateValues != null)
+            if (Optional.IsDefined(ProvisioningStateValues))
             {
                 writer.WritePropertyName("provisioningStateValues");
                 writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
@@ -65,39 +65,27 @@ namespace lro.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
-            string id = default;
-            string type = default;
-            IDictionary<string, string> tags = default;
-            string location = default;
-            string name = default;
-            string provisioningState = default;
-            ProductPropertiesProvisioningStateValues? provisioningStateValues = default;
+            Optional<string> id = default;
+            Optional<string> type = default;
+            Optional<IDictionary<string, string>> tags = default;
+            Optional<string> location = default;
+            Optional<string> name = default;
+            Optional<string> provisioningState = default;
+            Optional<ProductPropertiesProvisioningStateValues> provisioningStateValues = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -115,19 +103,11 @@ namespace lro.Models
                 }
                 if (property.NameEquals("location"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
@@ -137,19 +117,11 @@ namespace lro.Models
                     {
                         if (property0.NameEquals("provisioningState"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             provisioningState = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("provisioningStateValues"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                continue;
-                            }
                             provisioningStateValues = new ProductPropertiesProvisioningStateValues(property0.Value.GetString());
                             continue;
                         }
@@ -157,7 +129,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new Product(id, type, tags, location, name, provisioningState, provisioningStateValues);
+            return new Product(id.HasValue ? id.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingDictionary<string, string>(tags), location.HasValue ? location.Value : null, name.HasValue ? name.Value : null, provisioningState.HasValue ? provisioningState.Value : null, provisioningStateValues.HasValue ? provisioningStateValues.Value : (ProductPropertiesProvisioningStateValues?)null);
         }
     }
 }

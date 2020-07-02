@@ -23,12 +23,12 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (IgnoreCase != null)
+            if (Optional.IsDefined(IgnoreCase))
             {
                 writer.WritePropertyName("ignoreCase");
                 writer.WriteBooleanValue(IgnoreCase.Value);
             }
-            if (Expand != null)
+            if (Optional.IsDefined(Expand))
             {
                 writer.WritePropertyName("expand");
                 writer.WriteBooleanValue(Expand.Value);
@@ -43,8 +43,8 @@ namespace CognitiveSearch.Models
         internal static SynonymTokenFilter DeserializeSynonymTokenFilter(JsonElement element)
         {
             IList<string> synonyms = default;
-            bool? ignoreCase = default;
-            bool? expand = default;
+            Optional<bool> ignoreCase = default;
+            Optional<bool> expand = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -68,19 +68,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("ignoreCase"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     ignoreCase = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("expand"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     expand = property.Value.GetBoolean();
                     continue;
                 }
@@ -95,7 +87,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SynonymTokenFilter(odataType, name, synonyms, ignoreCase, expand);
+            return new SynonymTokenFilter(odataType, name, synonyms, ignoreCase.HasValue ? ignoreCase.Value : (bool?)null, expand.HasValue ? expand.Value : (bool?)null);
         }
     }
 }

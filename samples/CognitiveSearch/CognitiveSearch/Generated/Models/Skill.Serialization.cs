@@ -18,17 +18,17 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type");
             writer.WriteStringValue(OdataType);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description");
                 writer.WriteStringValue(Description);
             }
-            if (Context != null)
+            if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context");
                 writer.WriteStringValue(Context);
@@ -71,9 +71,9 @@ namespace CognitiveSearch.Models
                 }
             }
             string odataType = default;
-            string name = default;
-            string description = default;
-            string context = default;
+            Optional<string> name = default;
+            Optional<string> description = default;
+            Optional<string> context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -85,28 +85,16 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     context = property.Value.GetString();
                     continue;
                 }
@@ -145,7 +133,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Skill(odataType, name, description, context, inputs, outputs);
+            return new Skill(odataType, name.HasValue ? name.Value : null, description.HasValue ? description.Value : null, context.HasValue ? context.Value : null, inputs, outputs);
         }
     }
 }

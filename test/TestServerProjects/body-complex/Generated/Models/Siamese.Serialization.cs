@@ -16,17 +16,17 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Breed != null)
+            if (Optional.IsDefined(Breed))
             {
                 writer.WritePropertyName("breed");
                 writer.WriteStringValue(Breed);
             }
-            if (Color != null)
+            if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color");
                 writer.WriteStringValue(Color);
             }
-            if (Hates != null)
+            if (Optional.IsDefined(Hates))
             {
                 writer.WritePropertyName("hates");
                 writer.WriteStartArray();
@@ -36,12 +36,12 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Id != null)
+            if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
                 writer.WriteNumberValue(Id.Value);
             }
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
@@ -51,37 +51,25 @@ namespace body_complex.Models
 
         internal static Siamese DeserializeSiamese(JsonElement element)
         {
-            string breed = default;
-            string color = default;
-            IList<Dog> hates = default;
-            int? id = default;
-            string name = default;
+            Optional<string> breed = default;
+            Optional<string> color = default;
+            Optional<IList<Dog>> hates = default;
+            Optional<int> id = default;
+            Optional<string> name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("breed"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     breed = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("color"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     color = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("hates"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Dog> array = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -99,24 +87,16 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     id = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
             }
-            return new Siamese(id, name, color, hates, breed);
+            return new Siamese(id.HasValue ? id.Value : (int?)null, name.HasValue ? name.Value : null, color.HasValue ? color.Value : null, new ChangeTrackingList<Dog>(hates), breed.HasValue ? breed.Value : null);
         }
     }
 }

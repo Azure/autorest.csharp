@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace AppConfiguration.Models
 {
@@ -16,6 +17,7 @@ namespace AppConfiguration.Models
         /// <summary> Initializes a new instance of KeyValue. </summary>
         public KeyValue()
         {
+            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of KeyValue. </summary>
@@ -45,7 +47,7 @@ namespace AppConfiguration.Models
         public string Value { get; set; }
         public DateTimeOffset? LastModified { get; set; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Tags { get; set; }
+        public IDictionary<string, string> Tags { get; }
         public bool? Locked { get; set; }
         public string Etag { get; set; }
     }

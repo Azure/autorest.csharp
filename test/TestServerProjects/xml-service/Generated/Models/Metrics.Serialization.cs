@@ -16,7 +16,7 @@ namespace xml_service.Models
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "Metrics");
-            if (Version != null)
+            if (Optional.IsDefined(Version))
             {
                 writer.WriteStartElement("Version");
                 writer.WriteValue(Version);
@@ -25,13 +25,13 @@ namespace xml_service.Models
             writer.WriteStartElement("Enabled");
             writer.WriteValue(Enabled);
             writer.WriteEndElement();
-            if (IncludeAPIs != null)
+            if (Optional.IsDefined(IncludeAPIs))
             {
                 writer.WriteStartElement("IncludeAPIs");
                 writer.WriteValue(IncludeAPIs.Value);
                 writer.WriteEndElement();
             }
-            if (RetentionPolicy != null)
+            if (Optional.IsDefined(RetentionPolicy))
             {
                 writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
             }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace model_flattening.Models
 {
@@ -15,6 +16,8 @@ namespace model_flattening.Models
         /// <summary> Initializes a new instance of ResourceCollection. </summary>
         public ResourceCollection()
         {
+            Arrayofresources = new ChangeTrackingList<FlattenedProduct>();
+            Dictionaryofresources = new ChangeTrackingDictionary<string, FlattenedProduct>();
         }
 
         /// <summary> Initializes a new instance of ResourceCollection. </summary>
@@ -30,8 +33,8 @@ namespace model_flattening.Models
 
         /// <summary> Flattened product. </summary>
         public FlattenedProduct Productresource { get; set; }
-        public IList<FlattenedProduct> Arrayofresources { get; set; }
+        public IList<FlattenedProduct> Arrayofresources { get; }
         /// <summary> Dictionary of &lt;FlattenedProduct&gt;. </summary>
-        public IDictionary<string, FlattenedProduct> Dictionaryofresources { get; set; }
+        public IDictionary<string, FlattenedProduct> Dictionaryofresources { get; }
     }
 }

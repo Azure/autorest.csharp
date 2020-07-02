@@ -14,30 +14,22 @@ namespace subscriptionId_apiVersion.Models
     {
         internal static SampleResourceGroup DeserializeSampleResourceGroup(JsonElement element)
         {
-            string name = default;
-            string location = default;
+            Optional<string> name = default;
+            Optional<string> location = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     location = property.Value.GetString();
                     continue;
                 }
             }
-            return new SampleResourceGroup(name, location);
+            return new SampleResourceGroup(name.HasValue ? name.Value : null, location.HasValue ? location.Value : null);
         }
     }
 }

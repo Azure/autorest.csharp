@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace ModelShapes.Models
 {
@@ -42,6 +43,8 @@ namespace ModelShapes.Models
             RequiredInt = requiredInt;
             RequiredStringList = requiredStringList.ToList();
             RequiredIntList = requiredIntList.ToList();
+            NonRequiredStringList = new ChangeTrackingList<string>();
+            NonRequiredIntList = new ChangeTrackingList<int>();
             RequiredNullableString = requiredNullableString;
             RequiredNullableInt = requiredNullableInt;
             RequiredNullableStringList = requiredNullableStringList?.ToList();
@@ -65,8 +68,8 @@ namespace ModelShapes.Models
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            RequiredStringList = requiredStringList ?? new List<string>();
-            RequiredIntList = requiredIntList ?? new List<int>();
+            RequiredStringList = requiredStringList;
+            RequiredIntList = requiredIntList;
             NonRequiredString = nonRequiredString;
             NonRequiredInt = nonRequiredInt;
             NonRequiredStringList = nonRequiredStringList;
@@ -83,8 +86,8 @@ namespace ModelShapes.Models
         public IList<int> RequiredIntList { get; }
         public string NonRequiredString { get; set; }
         public int? NonRequiredInt { get; set; }
-        public IList<string> NonRequiredStringList { get; set; }
-        public IList<int> NonRequiredIntList { get; set; }
+        public IList<string> NonRequiredStringList { get; }
+        public IList<int> NonRequiredIntList { get; }
         public string RequiredNullableString { get; set; }
         public int? RequiredNullableInt { get; set; }
         public IList<string> RequiredNullableStringList { get; set; }

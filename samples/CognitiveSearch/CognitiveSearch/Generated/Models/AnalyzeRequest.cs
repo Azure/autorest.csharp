@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -23,6 +24,8 @@ namespace CognitiveSearch.Models
             }
 
             Text = text;
+            TokenFilters = new ChangeTrackingList<TokenFilterName>();
+            CharFilters = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of AnalyzeRequest. </summary>
@@ -47,8 +50,8 @@ namespace CognitiveSearch.Models
         /// <summary> The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive. </summary>
         public TokenizerName? Tokenizer { get; set; }
         /// <summary> An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </summary>
-        public IList<TokenFilterName> TokenFilters { get; set; }
+        public IList<TokenFilterName> TokenFilters { get; }
         /// <summary> An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter. </summary>
-        public IList<string> CharFilters { get; set; }
+        public IList<string> CharFilters { get; }
     }
 }

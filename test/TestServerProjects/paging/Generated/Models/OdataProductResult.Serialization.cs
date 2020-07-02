@@ -15,16 +15,12 @@ namespace paging.Models
     {
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element)
         {
-            IReadOnlyList<Product> values = default;
-            string odataNextLink = default;
+            Optional<IReadOnlyList<Product>> values = default;
+            Optional<string> odataNextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("values"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -42,15 +38,11 @@ namespace paging.Models
                 }
                 if (property.NameEquals("odata.nextLink"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     odataNextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return new OdataProductResult(values, odataNextLink);
+            return new OdataProductResult(new ChangeTrackingList<Product>(values), odataNextLink.HasValue ? odataNextLink.Value : null);
         }
     }
 }

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -22,6 +23,7 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(name));
             }
 
+            ProtectedWords = new ChangeTrackingList<string>();
             OdataType = "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
         }
 
@@ -72,6 +74,6 @@ namespace CognitiveSearch.Models
         /// <summary> A value indicating whether to remove trailing &quot;&apos;s&quot; for each subword. Default is true. </summary>
         public bool? StemEnglishPossessive { get; set; }
         /// <summary> A list of tokens to protect from being delimited. </summary>
-        public IList<string> ProtectedWords { get; set; }
+        public IList<string> ProtectedWords { get; }
     }
 }

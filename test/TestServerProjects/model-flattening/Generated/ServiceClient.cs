@@ -356,17 +356,16 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, string capacity = "Large", string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
             {
-                return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -379,17 +378,16 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, string capacity = "Large", string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
             {
-                return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken);
+                return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -400,15 +398,14 @@ namespace model_flattening
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="flattenParameterGroup"> Parameter group. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, string capacity = "Large", CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PutSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutSimpleProductWithGrouping");
             scope.Start();
             try
             {
-                return await RestClient.PutSimpleProductWithGroupingAsync(flattenParameterGroup, capacity, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutSimpleProductWithGroupingAsync(flattenParameterGroup, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -419,15 +416,14 @@ namespace model_flattening
 
         /// <summary> Put Simple Product with client flattening true on the model. </summary>
         /// <param name="flattenParameterGroup"> Parameter group. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup, string capacity = "Large", CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PutSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutSimpleProductWithGrouping");
             scope.Start();
             try
             {
-                return RestClient.PutSimpleProductWithGrouping(flattenParameterGroup, capacity, cancellationToken);
+                return RestClient.PutSimpleProductWithGrouping(flattenParameterGroup, cancellationToken);
             }
             catch (Exception e)
             {

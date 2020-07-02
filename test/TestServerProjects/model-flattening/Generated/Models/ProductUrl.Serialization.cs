@@ -15,12 +15,12 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (OdataValue != null)
+            if (Optional.IsDefined(OdataValue))
             {
                 writer.WritePropertyName("@odata.value");
                 writer.WriteStringValue(OdataValue);
             }
-            if (GenericValue != null)
+            if (Optional.IsDefined(GenericValue))
             {
                 writer.WritePropertyName("generic_value");
                 writer.WriteStringValue(GenericValue);
@@ -30,30 +30,22 @@ namespace model_flattening.Models
 
         internal static ProductUrl DeserializeProductUrl(JsonElement element)
         {
-            string odataValue = default;
-            string genericValue = default;
+            Optional<string> odataValue = default;
+            Optional<string> genericValue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("@odata.value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     odataValue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("generic_value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     genericValue = property.Value.GetString();
                     continue;
                 }
             }
-            return new ProductUrl(genericValue, odataValue);
+            return new ProductUrl(genericValue.HasValue ? genericValue.Value : null, odataValue.HasValue ? odataValue.Value : null);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace body_string.Models
             writer.WriteStartObject();
             writer.WritePropertyName("ColorConstant");
             writer.WriteStringValue(ColorConstant);
-            if (Field1 != null)
+            if (Optional.IsDefined(Field1))
             {
                 writer.WritePropertyName("field1");
                 writer.WriteStringValue(Field1);
@@ -28,7 +28,7 @@ namespace body_string.Models
         internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
         {
             string colorConstant = default;
-            string field1 = default;
+            Optional<string> field1 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ColorConstant"))
@@ -38,15 +38,11 @@ namespace body_string.Models
                 }
                 if (property.NameEquals("field1"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     field1 = property.Value.GetString();
                     continue;
                 }
             }
-            return new RefColorConstant(colorConstant, field1);
+            return new RefColorConstant(colorConstant, field1.HasValue ? field1.Value : null);
         }
     }
 }

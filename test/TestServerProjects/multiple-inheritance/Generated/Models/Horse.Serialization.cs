@@ -15,7 +15,7 @@ namespace multiple_inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (IsAShowHorse != null)
+            if (Optional.IsDefined(IsAShowHorse))
             {
                 writer.WritePropertyName("isAShowHorse");
                 writer.WriteBooleanValue(IsAShowHorse.Value);
@@ -27,16 +27,12 @@ namespace multiple_inheritance.Models
 
         internal static Horse DeserializeHorse(JsonElement element)
         {
-            bool? isAShowHorse = default;
+            Optional<bool> isAShowHorse = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("isAShowHorse"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     isAShowHorse = property.Value.GetBoolean();
                     continue;
                 }
@@ -46,7 +42,7 @@ namespace multiple_inheritance.Models
                     continue;
                 }
             }
-            return new Horse(name, isAShowHorse);
+            return new Horse(name, isAShowHorse.HasValue ? isAShowHorse.Value : (bool?)null);
         }
     }
 }

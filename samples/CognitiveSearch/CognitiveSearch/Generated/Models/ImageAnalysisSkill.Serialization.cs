@@ -16,12 +16,12 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (DefaultLanguageCode != null)
+            if (Optional.IsDefined(DefaultLanguageCode))
             {
                 writer.WritePropertyName("defaultLanguageCode");
                 writer.WriteStringValue(DefaultLanguageCode.Value.ToString());
             }
-            if (VisualFeatures != null)
+            if (Optional.IsDefined(VisualFeatures))
             {
                 writer.WritePropertyName("visualFeatures");
                 writer.WriteStartArray();
@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Details != null)
+            if (Optional.IsDefined(Details))
             {
                 writer.WritePropertyName("details");
                 writer.WriteStartArray();
@@ -43,17 +43,17 @@ namespace CognitiveSearch.Models
             }
             writer.WritePropertyName("@odata.type");
             writer.WriteStringValue(OdataType);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description");
                 writer.WriteStringValue(Description);
             }
-            if (Context != null)
+            if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context");
                 writer.WriteStringValue(Context);
@@ -77,32 +77,24 @@ namespace CognitiveSearch.Models
 
         internal static ImageAnalysisSkill DeserializeImageAnalysisSkill(JsonElement element)
         {
-            ImageAnalysisSkillLanguage? defaultLanguageCode = default;
-            IList<VisualFeature> visualFeatures = default;
-            IList<ImageDetail> details = default;
+            Optional<ImageAnalysisSkillLanguage> defaultLanguageCode = default;
+            Optional<IList<VisualFeature>> visualFeatures = default;
+            Optional<IList<ImageDetail>> details = default;
             string odataType = default;
-            string name = default;
-            string description = default;
-            string context = default;
+            Optional<string> name = default;
+            Optional<string> description = default;
+            Optional<string> context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("defaultLanguageCode"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     defaultLanguageCode = new ImageAnalysisSkillLanguage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("visualFeatures"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<VisualFeature> array = new List<VisualFeature>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -113,10 +105,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("details"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<ImageDetail> array = new List<ImageDetail>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -132,28 +120,16 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     context = property.Value.GetString();
                     continue;
                 }
@@ -192,7 +168,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ImageAnalysisSkill(odataType, name, description, context, inputs, outputs, defaultLanguageCode, visualFeatures, details);
+            return new ImageAnalysisSkill(odataType, name.HasValue ? name.Value : null, description.HasValue ? description.Value : null, context.HasValue ? context.Value : null, inputs, outputs, defaultLanguageCode.HasValue ? defaultLanguageCode.Value : (ImageAnalysisSkillLanguage?)null, new ChangeTrackingList<VisualFeature>(visualFeatures), new ChangeTrackingList<ImageDetail>(details));
         }
     }
 }

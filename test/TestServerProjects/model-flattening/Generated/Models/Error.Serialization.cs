@@ -14,40 +14,28 @@ namespace model_flattening.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
-            int? status = default;
-            string message = default;
-            Error parentError = default;
+            Optional<int> status = default;
+            Optional<string> message = default;
+            Optional<Error> parentError = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("status"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     status = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     message = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("parentError"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     parentError = DeserializeError(property.Value);
                     continue;
                 }
             }
-            return new Error(status, message, parentError);
+            return new Error(status.HasValue ? status.Value : (int?)null, message.HasValue ? message.Value : null, parentError.HasValue ? parentError.Value : null);
         }
     }
 }

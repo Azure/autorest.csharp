@@ -16,12 +16,12 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Productresource != null)
+            if (Optional.IsDefined(Productresource))
             {
                 writer.WritePropertyName("productresource");
                 writer.WriteObjectValue(Productresource);
             }
-            if (Arrayofresources != null)
+            if (Optional.IsDefined(Arrayofresources))
             {
                 writer.WritePropertyName("arrayofresources");
                 writer.WriteStartArray();
@@ -31,7 +31,7 @@ namespace model_flattening.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Dictionaryofresources != null)
+            if (Optional.IsDefined(Dictionaryofresources))
             {
                 writer.WritePropertyName("dictionaryofresources");
                 writer.WriteStartObject();
@@ -47,26 +47,18 @@ namespace model_flattening.Models
 
         internal static ResourceCollection DeserializeResourceCollection(JsonElement element)
         {
-            FlattenedProduct productresource = default;
-            IList<FlattenedProduct> arrayofresources = default;
-            IDictionary<string, FlattenedProduct> dictionaryofresources = default;
+            Optional<FlattenedProduct> productresource = default;
+            Optional<IList<FlattenedProduct>> arrayofresources = default;
+            Optional<IDictionary<string, FlattenedProduct>> dictionaryofresources = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("productresource"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
                     continue;
                 }
                 if (property.NameEquals("arrayofresources"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<FlattenedProduct> array = new List<FlattenedProduct>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -84,10 +76,6 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("dictionaryofresources"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -104,7 +92,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new ResourceCollection(productresource, arrayofresources, dictionaryofresources);
+            return new ResourceCollection(productresource.HasValue ? productresource.Value : null, new ChangeTrackingList<FlattenedProduct>(arrayofresources), new ChangeTrackingDictionary<string, FlattenedProduct>(dictionaryofresources));
         }
     }
 }

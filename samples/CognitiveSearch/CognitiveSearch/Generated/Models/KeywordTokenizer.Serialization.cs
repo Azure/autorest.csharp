@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (BufferSize != null)
+            if (Optional.IsDefined(BufferSize))
             {
                 writer.WritePropertyName("bufferSize");
                 writer.WriteNumberValue(BufferSize.Value);
@@ -29,17 +29,13 @@ namespace CognitiveSearch.Models
 
         internal static KeywordTokenizer DeserializeKeywordTokenizer(JsonElement element)
         {
-            int? bufferSize = default;
+            Optional<int> bufferSize = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("bufferSize"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     bufferSize = property.Value.GetInt32();
                     continue;
                 }
@@ -54,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeywordTokenizer(odataType, name, bufferSize);
+            return new KeywordTokenizer(odataType, name, bufferSize.HasValue ? bufferSize.Value : (int?)null);
         }
     }
 }

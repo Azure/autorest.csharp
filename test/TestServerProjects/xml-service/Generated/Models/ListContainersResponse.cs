@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -36,6 +37,7 @@ namespace xml_service.Models
             ServiceEndpoint = serviceEndpoint;
             Prefix = prefix;
             MaxResults = maxResults;
+            Containers = new ChangeTrackingList<Container>();
             NextMarker = nextMarker;
         }
 

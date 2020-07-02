@@ -16,22 +16,22 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (LowerCaseTerms != null)
+            if (Optional.IsDefined(LowerCaseTerms))
             {
                 writer.WritePropertyName("lowercase");
                 writer.WriteBooleanValue(LowerCaseTerms.Value);
             }
-            if (Pattern != null)
+            if (Optional.IsDefined(Pattern))
             {
                 writer.WritePropertyName("pattern");
                 writer.WriteStringValue(Pattern);
             }
-            if (Flags != null)
+            if (Optional.IsDefined(Flags))
             {
                 writer.WritePropertyName("flags");
                 writer.WriteStringValue(Flags.Value.ToString());
             }
-            if (Stopwords != null)
+            if (Optional.IsDefined(Stopwords))
             {
                 writer.WritePropertyName("stopwords");
                 writer.WriteStartArray();
@@ -50,47 +50,31 @@ namespace CognitiveSearch.Models
 
         internal static PatternAnalyzer DeserializePatternAnalyzer(JsonElement element)
         {
-            bool? lowercase = default;
-            string pattern = default;
-            RegexFlags? flags = default;
-            IList<string> stopwords = default;
+            Optional<bool> lowercase = default;
+            Optional<string> pattern = default;
+            Optional<RegexFlags> flags = default;
+            Optional<IList<string>> stopwords = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("lowercase"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     lowercase = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("pattern"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     pattern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("flags"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     flags = new RegexFlags(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("stopwords"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -117,7 +101,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternAnalyzer(odataType, name, lowercase, pattern, flags, stopwords);
+            return new PatternAnalyzer(odataType, name, lowercase.HasValue ? lowercase.Value : (bool?)null, pattern.HasValue ? pattern.Value : null, flags.HasValue ? flags.Value : (RegexFlags?)null, new ChangeTrackingList<string>(stopwords));
         }
     }
 }

@@ -15,16 +15,12 @@ namespace custom_baseUrl_paging.Models
     {
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {
-            IReadOnlyList<Product> values = default;
-            string nextLink = default;
+            Optional<IReadOnlyList<Product>> values = default;
+            Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("values"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -42,15 +38,11 @@ namespace custom_baseUrl_paging.Models
                 }
                 if (property.NameEquals("nextLink"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     nextLink = property.Value.GetString();
                     continue;
                 }
             }
-            return new ProductResult(values, nextLink);
+            return new ProductResult(new ChangeTrackingList<Product>(values), nextLink.HasValue ? nextLink.Value : null);
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace body_complex.Models
 {
@@ -15,6 +16,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of DictionaryWrapper. </summary>
         public DictionaryWrapper()
         {
+            DefaultProgram = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of DictionaryWrapper. </summary>
@@ -25,6 +27,6 @@ namespace body_complex.Models
         }
 
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> DefaultProgram { get; set; }
+        public IDictionary<string, string> DefaultProgram { get; }
     }
 }

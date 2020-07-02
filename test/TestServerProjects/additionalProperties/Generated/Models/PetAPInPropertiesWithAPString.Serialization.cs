@@ -18,19 +18,19 @@ namespace additionalProperties.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id");
             writer.WriteNumberValue(Id);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Status != null)
+            if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status");
                 writer.WriteBooleanValue(Status.Value);
             }
             writer.WritePropertyName("@odata.location");
             writer.WriteStringValue(OdataLocation);
-            if (AdditionalProperties != null)
+            if (Optional.IsDefined(AdditionalProperties))
             {
                 writer.WritePropertyName("additionalProperties");
                 writer.WriteStartObject();
@@ -52,10 +52,10 @@ namespace additionalProperties.Models
         internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element)
         {
             int id = default;
-            string name = default;
-            bool? status = default;
+            Optional<string> name = default;
+            Optional<bool> status = default;
             string odataLocation = default;
-            IDictionary<string, float> additionalProperties = default;
+            Optional<IDictionary<string, float>> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = default;
             foreach (var property in element.EnumerateObject())
@@ -67,19 +67,11 @@ namespace additionalProperties.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("status"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     status = property.Value.GetBoolean();
                     continue;
                 }
@@ -90,10 +82,6 @@ namespace additionalProperties.Models
                 }
                 if (property.NameEquals("additionalProperties"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     Dictionary<string, float> dictionary = new Dictionary<string, float>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -113,7 +101,7 @@ namespace additionalProperties.Models
                 }
             }
             moreAdditionalProperties = additionalPropertiesDictionary;
-            return new PetAPInPropertiesWithAPString(id, name, status, odataLocation, additionalProperties, moreAdditionalProperties);
+            return new PetAPInPropertiesWithAPString(id, name.HasValue ? name.Value : null, status.HasValue ? status.Value : (bool?)null, odataLocation, new ChangeTrackingDictionary<string, float>(additionalProperties), moreAdditionalProperties);
         }
     }
 }

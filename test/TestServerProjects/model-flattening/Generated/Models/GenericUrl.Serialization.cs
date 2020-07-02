@@ -15,7 +15,7 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (GenericValue != null)
+            if (Optional.IsDefined(GenericValue))
             {
                 writer.WritePropertyName("generic_value");
                 writer.WriteStringValue(GenericValue);
@@ -25,20 +25,16 @@ namespace model_flattening.Models
 
         internal static GenericUrl DeserializeGenericUrl(JsonElement element)
         {
-            string genericValue = default;
+            Optional<string> genericValue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("generic_value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     genericValue = property.Value.GetString();
                     continue;
                 }
             }
-            return new GenericUrl(genericValue);
+            return new GenericUrl(genericValue.HasValue ? genericValue.Value : null);
         }
     }
 }

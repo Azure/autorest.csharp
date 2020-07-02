@@ -17,25 +17,25 @@ namespace xml_service.Models
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "slideshow");
-            if (Title != null)
+            if (Optional.IsDefined(Title))
             {
                 writer.WriteStartAttribute("title");
                 writer.WriteValue(Title);
                 writer.WriteEndAttribute();
             }
-            if (Date != null)
+            if (Optional.IsDefined(Date))
             {
                 writer.WriteStartAttribute("date");
                 writer.WriteValue(Date);
                 writer.WriteEndAttribute();
             }
-            if (Author != null)
+            if (Optional.IsDefined(Author))
             {
                 writer.WriteStartAttribute("author");
                 writer.WriteValue(Author);
                 writer.WriteEndAttribute();
             }
-            if (Slides != null)
+            if (Optional.IsDefined(Slides))
             {
                 foreach (var item in Slides)
                 {

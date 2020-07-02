@@ -18,7 +18,7 @@ namespace CognitiveServices.TextAnalytics.Models
             string name = default;
             IReadOnlyList<Match> matches = default;
             string language = default;
-            string id = default;
+            Optional<string> id = default;
             string url = default;
             string dataSource = default;
             foreach (var property in element.EnumerateObject())
@@ -52,10 +52,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     id = property.Value.GetString();
                     continue;
                 }
@@ -70,7 +66,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new LinkedEntity(name, matches, language, id, url, dataSource);
+            return new LinkedEntity(name, matches, language, id.HasValue ? id.Value : null, url, dataSource);
         }
     }
 }

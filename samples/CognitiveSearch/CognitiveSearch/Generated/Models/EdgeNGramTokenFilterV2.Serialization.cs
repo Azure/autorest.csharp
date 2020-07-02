@@ -15,17 +15,17 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MinGram != null)
+            if (Optional.IsDefined(MinGram))
             {
                 writer.WritePropertyName("minGram");
                 writer.WriteNumberValue(MinGram.Value);
             }
-            if (MaxGram != null)
+            if (Optional.IsDefined(MaxGram))
             {
                 writer.WritePropertyName("maxGram");
                 writer.WriteNumberValue(MaxGram.Value);
             }
-            if (Side != null)
+            if (Optional.IsDefined(Side))
             {
                 writer.WritePropertyName("side");
                 writer.WriteStringValue(Side.Value.ToSerialString());
@@ -39,37 +39,25 @@ namespace CognitiveSearch.Models
 
         internal static EdgeNGramTokenFilterV2 DeserializeEdgeNGramTokenFilterV2(JsonElement element)
         {
-            int? minGram = default;
-            int? maxGram = default;
-            EdgeNGramTokenFilterSide? side = default;
+            Optional<int> minGram = default;
+            Optional<int> maxGram = default;
+            Optional<EdgeNGramTokenFilterSide> side = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("minGram"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     minGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxGram"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     maxGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("side"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     side = property.Value.GetString().ToEdgeNGramTokenFilterSide();
                     continue;
                 }
@@ -84,7 +72,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EdgeNGramTokenFilterV2(odataType, name, minGram, maxGram, side);
+            return new EdgeNGramTokenFilterV2(odataType, name, minGram.HasValue ? minGram.Value : (int?)null, maxGram.HasValue ? maxGram.Value : (int?)null, side.HasValue ? side.Value : (EdgeNGramTokenFilterSide?)null);
         }
     }
 }

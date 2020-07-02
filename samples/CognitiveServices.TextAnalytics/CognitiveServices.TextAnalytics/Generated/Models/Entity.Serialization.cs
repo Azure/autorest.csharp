@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             string text = default;
             string type = default;
-            string subtype = default;
+            Optional<string> subtype = default;
             int offset = default;
             int length = default;
             double score = default;
@@ -34,10 +34,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("subtype"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     subtype = property.Value.GetString();
                     continue;
                 }
@@ -57,7 +53,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new Entity(text, type, subtype, offset, length, score);
+            return new Entity(text, type, subtype.HasValue ? subtype.Value : null, offset, length, score);
         }
     }
 }

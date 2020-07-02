@@ -30,7 +30,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="documents"> . </param>
         internal LanguageBatchInput(IList<LanguageInput> documents)
         {
-            Documents = documents ?? new List<LanguageInput>();
+            Documents = documents;
         }
 
         public IList<LanguageInput> Documents { get; }

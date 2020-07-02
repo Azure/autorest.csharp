@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("uri");
             writer.WriteStringValue(Uri);
-            if (HttpHeaders != null)
+            if (Optional.IsDefined(HttpHeaders))
             {
                 writer.WritePropertyName("httpHeaders");
                 writer.WriteStartObject();
@@ -30,39 +30,53 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndObject();
             }
-            if (HttpMethod != null)
+            if (Optional.IsDefined(HttpMethod))
             {
                 writer.WritePropertyName("httpMethod");
                 writer.WriteStringValue(HttpMethod);
             }
-            if (Timeout != null)
+            if (Optional.IsDefined(Timeout))
             {
                 writer.WritePropertyName("timeout");
                 writer.WriteStringValue(Timeout.Value, "P");
             }
-            if (BatchSize != null)
+            if (Optional.IsDefined(BatchSize))
             {
-                writer.WritePropertyName("batchSize");
-                writer.WriteNumberValue(BatchSize.Value);
+                if (BatchSize != null)
+                {
+                    writer.WritePropertyName("batchSize");
+                    writer.WriteNumberValue(BatchSize.Value);
+                }
+                else
+                {
+                    writer.WriteNull("batchSize");
+                }
             }
-            if (DegreeOfParallelism != null)
+            if (Optional.IsDefined(DegreeOfParallelism))
             {
-                writer.WritePropertyName("degreeOfParallelism");
-                writer.WriteNumberValue(DegreeOfParallelism.Value);
+                if (DegreeOfParallelism != null)
+                {
+                    writer.WritePropertyName("degreeOfParallelism");
+                    writer.WriteNumberValue(DegreeOfParallelism.Value);
+                }
+                else
+                {
+                    writer.WriteNull("degreeOfParallelism");
+                }
             }
             writer.WritePropertyName("@odata.type");
             writer.WriteStringValue(OdataType);
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Description != null)
+            if (Optional.IsDefined(Description))
             {
                 writer.WritePropertyName("description");
                 writer.WriteStringValue(Description);
             }
-            if (Context != null)
+            if (Optional.IsDefined(Context))
             {
                 writer.WritePropertyName("context");
                 writer.WriteStringValue(Context);
@@ -87,15 +101,15 @@ namespace CognitiveSearch.Models
         internal static WebApiSkill DeserializeWebApiSkill(JsonElement element)
         {
             string uri = default;
-            IDictionary<string, string> httpHeaders = default;
-            string httpMethod = default;
-            TimeSpan? timeout = default;
-            int? batchSize = default;
-            int? degreeOfParallelism = default;
+            Optional<IDictionary<string, string>> httpHeaders = default;
+            Optional<string> httpMethod = default;
+            Optional<TimeSpan> timeout = default;
+            Optional<int?> batchSize = default;
+            Optional<int?> degreeOfParallelism = default;
             string odataType = default;
-            string name = default;
-            string description = default;
-            string context = default;
+            Optional<string> name = default;
+            Optional<string> description = default;
+            Optional<string> context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
             foreach (var property in element.EnumerateObject())
@@ -107,10 +121,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("httpHeaders"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -128,19 +138,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("httpMethod"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     httpMethod = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("timeout"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     timeout = property.Value.GetTimeSpan("P");
                     continue;
                 }
@@ -148,6 +150,7 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        batchSize = null;
                         continue;
                     }
                     batchSize = property.Value.GetInt32();
@@ -157,6 +160,7 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        degreeOfParallelism = null;
                         continue;
                     }
                     degreeOfParallelism = property.Value.GetInt32();
@@ -169,28 +173,16 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     context = property.Value.GetString();
                     continue;
                 }
@@ -229,7 +221,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new WebApiSkill(odataType, name, description, context, inputs, outputs, uri, httpHeaders, httpMethod, timeout, batchSize, degreeOfParallelism);
+            return new WebApiSkill(odataType, name.HasValue ? name.Value : null, description.HasValue ? description.Value : null, context.HasValue ? context.Value : null, inputs, outputs, uri, new ChangeTrackingDictionary<string, string>(httpHeaders), httpMethod.HasValue ? httpMethod.Value : null, timeout.HasValue ? timeout.Value : (TimeSpan?)null, batchSize.HasValue ? batchSize.Value : null, degreeOfParallelism.HasValue ? degreeOfParallelism.Value : null);
         }
     }
 }

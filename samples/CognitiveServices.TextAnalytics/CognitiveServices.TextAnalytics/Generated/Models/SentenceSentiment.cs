@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -29,6 +30,7 @@ namespace CognitiveServices.TextAnalytics.Models
             SentenceScores = sentenceScores;
             Offset = offset;
             Length = length;
+            Warnings = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of SentenceSentiment. </summary>

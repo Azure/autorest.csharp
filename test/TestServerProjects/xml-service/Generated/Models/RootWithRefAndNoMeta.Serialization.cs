@@ -16,11 +16,11 @@ namespace xml_service.Models
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "RootWithRefAndNoMeta");
-            if (RefToModel != null)
+            if (Optional.IsDefined(RefToModel))
             {
                 writer.WriteObjectValue(RefToModel, "RefToModel");
             }
-            if (Something != null)
+            if (Optional.IsDefined(Something))
             {
                 writer.WriteStartElement("Something");
                 writer.WriteValue(Something);

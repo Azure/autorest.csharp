@@ -14,27 +14,19 @@ namespace xms_error_responses.Models
     {
         internal static PetHungryOrThirstyError DeserializePetHungryOrThirstyError(JsonElement element)
         {
-            string hungryOrThirsty = default;
-            string reason = default;
+            Optional<string> hungryOrThirsty = default;
+            Optional<string> reason = default;
             string errorType = default;
-            string errorMessage = default;
+            Optional<string> errorMessage = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hungryOrThirsty"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     hungryOrThirsty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("reason"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     reason = property.Value.GetString();
                     continue;
                 }
@@ -45,15 +37,11 @@ namespace xms_error_responses.Models
                 }
                 if (property.NameEquals("errorMessage"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     errorMessage = property.Value.GetString();
                     continue;
                 }
             }
-            return new PetHungryOrThirstyError(errorType, errorMessage, reason, hungryOrThirsty);
+            return new PetHungryOrThirstyError(errorType, errorMessage.HasValue ? errorMessage.Value : null, reason.HasValue ? reason.Value : null, hungryOrThirsty.HasValue ? hungryOrThirsty.Value : null);
         }
     }
 }

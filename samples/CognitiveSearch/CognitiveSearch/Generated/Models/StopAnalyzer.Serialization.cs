@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Stopwords != null)
+            if (Optional.IsDefined(Stopwords))
             {
                 writer.WritePropertyName("stopwords");
                 writer.WriteStartArray();
@@ -35,17 +35,13 @@ namespace CognitiveSearch.Models
 
         internal static StopAnalyzer DeserializeStopAnalyzer(JsonElement element)
         {
-            IList<string> stopwords = default;
+            Optional<IList<string>> stopwords = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("stopwords"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -72,7 +68,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StopAnalyzer(odataType, name, stopwords);
+            return new StopAnalyzer(odataType, name, new ChangeTrackingList<string>(stopwords));
         }
     }
 }

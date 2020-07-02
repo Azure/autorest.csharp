@@ -172,10 +172,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional"
     },
-    "SerializationCustomization": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SerializationCustomization"
-    },
     "SignalR": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\SignalR\\SignalR"

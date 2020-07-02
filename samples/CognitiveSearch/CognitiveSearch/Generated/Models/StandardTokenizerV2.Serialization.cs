@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (MaxTokenLength != null)
+            if (Optional.IsDefined(MaxTokenLength))
             {
                 writer.WritePropertyName("maxTokenLength");
                 writer.WriteNumberValue(MaxTokenLength.Value);
@@ -29,17 +29,13 @@ namespace CognitiveSearch.Models
 
         internal static StandardTokenizerV2 DeserializeStandardTokenizerV2(JsonElement element)
         {
-            int? maxTokenLength = default;
+            Optional<int> maxTokenLength = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxTokenLength"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     maxTokenLength = property.Value.GetInt32();
                     continue;
                 }
@@ -54,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StandardTokenizerV2(odataType, name, maxTokenLength);
+            return new StandardTokenizerV2(odataType, name, maxTokenLength.HasValue ? maxTokenLength.Value : (int?)null);
         }
     }
 }

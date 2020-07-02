@@ -14,27 +14,19 @@ namespace xms_error_responses.Models
     {
         internal static AnimalNotFound DeserializeAnimalNotFound(JsonElement element)
         {
-            string name = default;
-            string reason = default;
+            Optional<string> name = default;
+            Optional<string> reason = default;
             string whatNotFound = default;
-            string someBaseProp = default;
+            Optional<string> someBaseProp = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("reason"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     reason = property.Value.GetString();
                     continue;
                 }
@@ -45,15 +37,11 @@ namespace xms_error_responses.Models
                 }
                 if (property.NameEquals("someBaseProp"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     someBaseProp = property.Value.GetString();
                     continue;
                 }
             }
-            return new AnimalNotFound(someBaseProp, reason, whatNotFound, name);
+            return new AnimalNotFound(someBaseProp.HasValue ? someBaseProp.Value : null, reason.HasValue ? reason.Value : null, whatNotFound, name.HasValue ? name.Value : null);
         }
     }
 }

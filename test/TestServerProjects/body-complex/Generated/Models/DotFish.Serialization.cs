@@ -22,7 +22,7 @@ namespace body_complex.Models
                 }
             }
             string fishType = default;
-            string species = default;
+            Optional<string> species = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("fish.type"))
@@ -32,15 +32,11 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("species"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     species = property.Value.GetString();
                     continue;
                 }
             }
-            return new DotFish(fishType, species);
+            return new DotFish(fishType, species.HasValue ? species.Value : null);
         }
     }
 }

@@ -23,14 +23,14 @@ namespace CognitiveSearch.Models
                 throw new ArgumentNullException(nameof(skillsets));
             }
 
-            Skillsets = skillsets.ToArray();
+            Skillsets = skillsets.ToList();
         }
 
         /// <summary> Initializes a new instance of ListSkillsetsResult. </summary>
         /// <param name="skillsets"> The skillsets defined in the Search service. </param>
         internal ListSkillsetsResult(IReadOnlyList<Skillset> skillsets)
         {
-            Skillsets = skillsets ?? new List<Skillset>();
+            Skillsets = skillsets;
         }
 
         /// <summary> The skillsets defined in the Search service. </summary>

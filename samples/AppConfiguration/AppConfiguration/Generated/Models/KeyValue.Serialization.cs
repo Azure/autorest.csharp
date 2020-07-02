@@ -17,32 +17,32 @@ namespace AppConfiguration.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Key != null)
+            if (Optional.IsDefined(Key))
             {
                 writer.WritePropertyName("key");
                 writer.WriteStringValue(Key);
             }
-            if (Label != null)
+            if (Optional.IsDefined(Label))
             {
                 writer.WritePropertyName("label");
                 writer.WriteStringValue(Label);
             }
-            if (ContentType != null)
+            if (Optional.IsDefined(ContentType))
             {
                 writer.WritePropertyName("content_type");
                 writer.WriteStringValue(ContentType);
             }
-            if (Value != null)
+            if (Optional.IsDefined(Value))
             {
                 writer.WritePropertyName("value");
                 writer.WriteStringValue(Value);
             }
-            if (LastModified != null)
+            if (Optional.IsDefined(LastModified))
             {
                 writer.WritePropertyName("last_modified");
                 writer.WriteStringValue(LastModified.Value, "O");
             }
-            if (Tags != null)
+            if (Optional.IsDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -53,12 +53,12 @@ namespace AppConfiguration.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Locked != null)
+            if (Optional.IsDefined(Locked))
             {
                 writer.WritePropertyName("locked");
                 writer.WriteBooleanValue(Locked.Value);
             }
-            if (Etag != null)
+            if (Optional.IsDefined(Etag))
             {
                 writer.WritePropertyName("etag");
                 writer.WriteStringValue(Etag);
@@ -68,67 +68,43 @@ namespace AppConfiguration.Models
 
         internal static KeyValue DeserializeKeyValue(JsonElement element)
         {
-            string key = default;
-            string label = default;
-            string contentType = default;
-            string value = default;
-            DateTimeOffset? lastModified = default;
-            IDictionary<string, string> tags = default;
-            bool? locked = default;
-            string etag = default;
+            Optional<string> key = default;
+            Optional<string> label = default;
+            Optional<string> contentType = default;
+            Optional<string> value = default;
+            Optional<DateTimeOffset> lastModified = default;
+            Optional<IDictionary<string, string>> tags = default;
+            Optional<bool> locked = default;
+            Optional<string> etag = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("key"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     key = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("label"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     label = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("content_type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     contentType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     value = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("last_modified"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     lastModified = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("tags"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -146,24 +122,16 @@ namespace AppConfiguration.Models
                 }
                 if (property.NameEquals("locked"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     locked = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("etag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     etag = property.Value.GetString();
                     continue;
                 }
             }
-            return new KeyValue(key, label, contentType, value, lastModified, tags, locked, etag);
+            return new KeyValue(key.HasValue ? key.Value : null, label.HasValue ? label.Value : null, contentType.HasValue ? contentType.Value : null, value.HasValue ? value.Value : null, lastModified.HasValue ? lastModified.Value : (DateTimeOffset?)null, new ChangeTrackingDictionary<string, string>(tags), locked.HasValue ? locked.Value : (bool?)null, etag.HasValue ? etag.Value : null);
         }
     }
 }

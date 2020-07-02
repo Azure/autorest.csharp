@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -61,45 +62,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
-                        bool hasNullableType = property.Property?.Declaration.Type.IsNullable == true;
-                        bool emptyAsUndefined = property.Property?.EmptyAsUndefined == true;
-
-                        CodeWriter.CodeWriterScope? scope = default;
-                        if (hasNullableType || emptyAsUndefined)
+                        using (writer.WriteDefinedCheck(property.Property))
                         {
-                            var propertyName = property.Property!.Declaration.Name;
-                            writer.Append($"if (");
-                            if (hasNullableType)
+                            var ifScope = writer.WritePropertyNullCheckIf(property.Property);
+                            using (ifScope)
                             {
-                                writer.Append($"{propertyName} != null");
+                                writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
+                                writer.ToSerializeCall(
+                                    property.ValueSerialization,
+                                    w => w.Append($"{property.Property?.Declaration.Name}"));
                             }
-
-                            if (emptyAsUndefined)
+                            if (ifScope != null)
                             {
-                                if (hasNullableType)
+                                using (writer.Scope($"else"))
                                 {
-                                    writer.Append($" && ");
+                                    writer.Line($"{writerName}.WriteNull({property.Name:L});");
                                 }
-                                writer.UseNamespace(typeof(Enumerable).Namespace!);
-                                writer.Append($"{propertyName}.Any()");
-                            }
-                            writer.Append($")");
-                            scope = writer.Scope();
-                        }
-
-                        using (scope)
-                        {
-                            writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
-                            writer.ToSerializeCall(
-                                property.ValueSerialization,
-                                w => w.Append($"{property.Property?.Declaration.Name}"));
-                        }
-
-                        if (scope != default && property.Required)
-                        {
-                            using (writer.Scope($"else"))
-                            {
-                                writer.Line($"{writerName}.WriteNull({property.Name:L});");
                             }
                         }
                     }
@@ -222,7 +200,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             JsonSerialization serialization,
             Action<CodeWriter, CodeWriterDelegate> valueCallback,
             CodeWriterDelegate element,
-            Dictionary<ObjectTypeProperty, CodeWriterDeclaration>? propertyVariables = null)
+            Dictionary<ObjectTypeProperty, ObjectPropertyVariable>? propertyVariables = null)
         {
             if (serialization is JsonObjectSerialization obj)
             {
@@ -232,14 +210,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     // this is the first level of object hierarchy
                     // collect all properties and initialize the dictionary
-                    propertyVariables = new Dictionary<ObjectTypeProperty, CodeWriterDeclaration>();
+                    propertyVariables = new Dictionary<ObjectTypeProperty, ObjectPropertyVariable>();
 
                     CollectProperties(propertyVariables, obj);
 
                     foreach (var variable in propertyVariables)
                     {
-                        var objectTypeProperty = variable.Key;
-                        writer.Line($"{objectTypeProperty.Declaration.Type} {variable.Value:D} = default;");
+                        writer.Line($"{variable.Value.Type} {variable.Value.Declaration:D} = default;");
                     }
                 }
 
@@ -255,24 +232,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
-                        CSharpType? type = property.Property?.Declaration.Type;
+                        CSharpType? type = property.Property?.ValueType;
 
                         bool hasNullableType = type != null && type.IsNullable;
-
-                        void WriteNullCheck()
-                        {
-                            using (writer.Scope($"if ({itemVariable.ActualName}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                            {
-                                writer.Append($"continue;");
-                            }
-                        }
 
                         writer.Append($"if({itemVariable.ActualName}.NameEquals({property.Name:L}))");
                         using (writer.Scope())
                         {
                             if (hasNullableType)
                             {
-                                WriteNullCheck();
+                                using (writer.Scope($"if ({itemVariable.ActualName}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                {
+                                    writer.Line($"{propertyVariables[property.Property!].Declaration} = null;");
+                                    writer.Append($"continue;");
+                                }
                             }
 
                             if (property.Property != null)
@@ -280,7 +253,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 // Reading a property value
                                 writer.DeserializeIntoVariable(
                                     property.ValueSerialization,
-                                    (w, v) => w.Line($"{propertyVariables[property.Property]} = {v};"),
+                                    (w, v) => w.Line($"{propertyVariables[property.Property].Declaration} = {v};"),
                                     w => w.Append($"{itemVariable.ActualName}.Value"));
                             }
                             else
@@ -309,23 +282,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 if (objAdditionalProperties != null)
                 {
-                    writer.Line($"{propertyVariables[objAdditionalProperties.Property]} = {dictionaryVariable};");
+                    writer.Line($"{propertyVariables[objAdditionalProperties.Property].Declaration} = {dictionaryVariable};");
                 }
 
                 if (obj.Type != null)
                 {
-                    var initializers = new List<ObjectPropertyInitializer>();
+                    var objectType = (ObjectType) obj.Type.Implementation;
+
+                    var initializers = new List<PropertyInitializer>();
                     foreach (var variable in propertyVariables)
                     {
-                        var property = variable.Key;
-
-                        initializers.Add(new ObjectPropertyInitializer(
-                            property,
-                            new Reference(variable.Value.ActualName, property.Declaration.Type)));
+                        initializers.Add(new PropertyInitializer(variable.Key, w => ConvertOptional(w, variable.Key, variable.Value)));
                     }
 
-                    valueCallback(writer,
-                        w => w.WriteInitialization((ObjectType)obj.Type.Implementation, initializers));
+                    writer.WriteInitialization(valueCallback, objectType, objectType.SerializationConstructor, initializers);
                 }
             }
             else
@@ -334,8 +304,31 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
+        private static void ConvertOptional(CodeWriter writer, ObjectTypeProperty target, ObjectPropertyVariable variable)
+        {
+            var targetType = target.Declaration.Type;
+            var sourceType = variable.Type;
+            if (sourceType.IsFrameworkType && sourceType.FrameworkType == typeof(Optional<>))
+            {
+                if (TypeFactory.IsCollectionType(targetType))
+                {
+                    var impl = TypeFactory.GetPropertyImplementationType(targetType);
+                    writer.Append($"new {impl}({variable.Declaration})");
+                    return;
+                }
+
+                if (targetType.IsNullable)
+                {
+                    writer.Append($"{variable.Declaration}.HasValue ? {variable.Declaration}.Value : ({targetType})null");
+                    return;
+                }
+            }
+
+            writer.Append(variable.Declaration);
+        }
+
         /// Collects a list of properties being read from all level of object hierarchy
-        private static void CollectProperties(Dictionary<ObjectTypeProperty, CodeWriterDeclaration> propertyVariables, JsonObjectSerialization obj)
+        private static void CollectProperties(Dictionary<ObjectTypeProperty, ObjectPropertyVariable> propertyVariables, JsonObjectSerialization obj)
         {
             foreach (JsonPropertySerialization jsonProperty in obj.Properties)
             {
@@ -344,7 +337,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 if (objectProperty != null)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.Name.ToVariableName());
-                    propertyVariables.Add(objectProperty, propertyDeclaration);
+
+                    var type = objectProperty.ValueType;
+                    if (!objectProperty.IsRequired)
+                    {
+                        type = new CSharpType(typeof(Optional<>), type);
+                    }
+
+                    propertyVariables.Add(objectProperty, new ObjectPropertyVariable(propertyDeclaration, type));
                 }
                 else if (jsonProperty.ValueSerialization is JsonObjectSerialization objectSerialization)
                 {
@@ -356,7 +356,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (additionalPropertiesProperty != null)
             {
                 var propertyDeclaration = new CodeWriterDeclaration(additionalPropertiesProperty.Declaration.Name.ToVariableName());
-                propertyVariables.Add(additionalPropertiesProperty, propertyDeclaration);
+                propertyVariables.Add(additionalPropertiesProperty, new ObjectPropertyVariable(propertyDeclaration, additionalPropertiesProperty.Declaration.Type));
             }
         }
 
@@ -578,6 +578,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 w => w.Append($"{documentVariable}.RootElement"),
                 callback
             );
+        }
+
+        private readonly struct ObjectPropertyVariable
+        {
+            public ObjectPropertyVariable(CodeWriterDeclaration declaration, CSharpType type)
+            {
+                Declaration = declaration;
+                Type = type;
+            }
+
+            public CodeWriterDeclaration Declaration { get; }
+            public CSharpType Type { get; }
         }
     }
 }

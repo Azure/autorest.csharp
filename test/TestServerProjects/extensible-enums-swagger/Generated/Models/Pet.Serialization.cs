@@ -15,12 +15,12 @@ namespace extensible_enums_swagger.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Name != null)
+            if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (DaysOfWeek != null)
+            if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek");
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
@@ -32,26 +32,18 @@ namespace extensible_enums_swagger.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
-            string name = default;
-            DaysOfWeekExtensibleEnum? daysOfWeek = default;
+            Optional<string> name = default;
+            Optional<DaysOfWeekExtensibleEnum> daysOfWeek = default;
             IntEnum intEnum = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("DaysOfWeek"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     daysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());
                     continue;
                 }
@@ -61,7 +53,7 @@ namespace extensible_enums_swagger.Models
                     continue;
                 }
             }
-            return new Pet(name, daysOfWeek, intEnum);
+            return new Pet(name.HasValue ? name.Value : null, daysOfWeek.HasValue ? daysOfWeek.Value : (DaysOfWeekExtensibleEnum?)null, intEnum);
         }
     }
 }

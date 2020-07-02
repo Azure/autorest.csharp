@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Models.Types;
+using Azure.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Generation.Types
@@ -59,6 +60,24 @@ namespace AutoRest.CSharp.V3.Generation.Types
             return type;
         }
 
+        public static CSharpType GetPropertyImplementationType(CSharpType type)
+        {
+            if (type.IsFrameworkType)
+            {
+                if (IsList(type))
+                {
+                    return new CSharpType(typeof(ChangeTrackingList<>), type.Arguments);
+                }
+
+                if (IsDictionary(type))
+                {
+                    return new CSharpType(typeof(ChangeTrackingDictionary<,>), type.Arguments);
+                }
+            }
+
+            return type;
+        }
+
         public static CSharpType GetElementType(CSharpType type)
         {
             if (type.IsFrameworkType)
@@ -84,7 +103,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                    type.FrameworkType == typeof(IReadOnlyDictionary<,>));
         }
 
-        public static bool IsList(CSharpType type)
+        internal static bool IsList(CSharpType type)
         {
             return type.IsFrameworkType &&
                    (type.FrameworkType == typeof(IEnumerable<>) ||
@@ -250,7 +269,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
             builder.Append(symbol.MetadataName);
         }
 
-        public static bool IsAlwaysInitializeType(CSharpType type)
+        public static bool IsCollectionType(CSharpType type)
         {
             return type.IsFrameworkType && (IsDictionary(type) || IsList(type));
         }
