@@ -1120,6 +1120,42 @@ namespace url
             }
         }
 
+        /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
+        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
+            scope.Start();
+            try
+            {
+                return await RestClient.ArrayStringNoCollectionFormatEmptyAsync(arrayQuery, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
+        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
+            scope.Start();
+            try
+            {
+                return RestClient.ArrayStringNoCollectionFormatEmpty(arrayQuery, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

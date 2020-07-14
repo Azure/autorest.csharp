@@ -401,7 +401,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: 'The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.'
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_7
@@ -546,7 +546,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: 'The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.'
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_419
@@ -557,7 +557,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: 'The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.'
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_424
@@ -568,7 +568,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: 'The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.'
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_429
@@ -579,7 +579,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: 'The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.'
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_195

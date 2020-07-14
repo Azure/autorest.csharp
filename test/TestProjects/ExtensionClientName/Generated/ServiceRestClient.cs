@@ -52,8 +52,8 @@ namespace ExtensionClientName
             return message;
         }
 
-        /// <param name="renamedPathParameter"> The String to use. </param>
-        /// <param name="renamedQueryParameter"> The String to use. </param>
+        /// <param name="renamedPathParameter"> The RenamedHeader to use. </param>
+        /// <param name="renamedQueryParameter"> The RenamedHeader to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<ResponseWithHeaders<RenamedSchema, ServiceRenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
@@ -88,8 +88,8 @@ namespace ExtensionClientName
             }
         }
 
-        /// <param name="renamedPathParameter"> The String to use. </param>
-        /// <param name="renamedQueryParameter"> The String to use. </param>
+        /// <param name="renamedPathParameter"> The RenamedHeader to use. </param>
+        /// <param name="renamedQueryParameter"> The RenamedHeader to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public ResponseWithHeaders<RenamedSchema, ServiceRenamedOperationHeaders> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)

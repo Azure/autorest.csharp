@@ -1443,6 +1443,54 @@ namespace url
             }
         }
 
+        internal HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/queries/array/none/string/empty", false);
+            if (arrayQuery != null)
+            {
+                uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
+            }
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
+        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
+        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
         {
             var message = _pipeline.CreateMessage();

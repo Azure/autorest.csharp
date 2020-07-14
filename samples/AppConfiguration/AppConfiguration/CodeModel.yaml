@@ -35,7 +35,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_2
@@ -106,7 +106,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_48
@@ -117,7 +117,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_10
@@ -168,7 +168,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_17
@@ -199,7 +199,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_70
@@ -210,7 +210,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: An identifier representing the returned state of the resource.
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_71
@@ -221,7 +221,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: A UTC datetime that specifies the last time the resource was modified.
           header: Last-Modified
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_72
@@ -232,7 +232,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_79
@@ -243,7 +243,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: An identifier representing the returned state of the resource.
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_80
@@ -254,7 +254,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_84
@@ -265,7 +265,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: An identifier representing the returned state of the resource.
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_85
@@ -276,7 +276,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_86
@@ -287,7 +287,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_94
@@ -298,7 +298,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: An identifier representing the returned state of the resource.
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_95
@@ -309,7 +309,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: A UTC datetime that specifies the last time the resource was modified.
           header: Last-Modified
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_96
@@ -320,7 +320,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_20
@@ -351,7 +351,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_109
@@ -362,7 +362,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_114
@@ -373,7 +373,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: An identifier representing the returned state of the resource.
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_115
@@ -384,7 +384,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_120
@@ -395,7 +395,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: An identifier representing the returned state of the resource.
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_121
@@ -406,7 +406,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_128
@@ -417,7 +417,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> 

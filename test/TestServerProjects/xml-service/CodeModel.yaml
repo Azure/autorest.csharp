@@ -273,7 +273,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: A custom response header.
           header: Custom-Header
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_19

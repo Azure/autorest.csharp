@@ -7587,6 +7587,7 @@ schemas: !<!Schemas>
                   serializedName: facet
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
+                  explode: true
                   in: query
                   style: form
           serializedName: Facets
@@ -7800,6 +7801,7 @@ schemas: !<!Schemas>
                   serializedName: scoringParameter
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
+                  explode: true
                   in: query
                   style: form
           serializedName: ScoringParameters

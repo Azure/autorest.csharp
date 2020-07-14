@@ -18,6 +18,6 @@ namespace header
         {
             _response = response;
         }
-        public GreyscaleColors? Value => _response.Headers.TryGetValue("value", out GreyscaleColors? value) ? value : null;
+        public Enum0? Value => _response.Headers.TryGetValue("value", out Enum0? value) ? value : null;
     }
 }

@@ -12,7 +12,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Boolean
-          description: ''
+          description: 'response with header value "value": true or false'
           header: value
       protocol: !<!Protocols> {}
   numbers:
@@ -33,7 +33,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Integer
-          description: ''
+          description: 'response with header value "value": 1 or -2'
           header: value
       protocol: !<!Protocols> {}
     - !<!NumberSchema> &ref_14
@@ -45,7 +45,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Integer
-          description: ''
+          description: 'response with header value "value": 105 or -2'
           header: value
       protocol: !<!Protocols> {}
     - !<!NumberSchema> &ref_18
@@ -57,7 +57,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Number
-          description: ''
+          description: 'response with header value "value": 0.07 or -3.0'
           header: value
       protocol: !<!Protocols> {}
     - !<!NumberSchema> &ref_22
@@ -69,7 +69,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Number
-          description: ''
+          description: 'response with header value "value": 7e120 or -3.0'
           header: value
       protocol: !<!Protocols> {}
   strings:
@@ -88,7 +88,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: 'response with header value "User-Agent": "overwrite"'
           header: User-Agent
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_2
@@ -109,7 +109,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: 'response with header value "Content-Type": "text/html"'
           header: Content-Type
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_9
@@ -120,7 +120,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: response with header values "The quick brown fox jumps over the lazy dog" or null or ""
           header: value
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_33
@@ -161,8 +161,8 @@ schemas: !<!Schemas>
       choiceType: *ref_0
       language: !<!Languages> 
         default:
-          name: GreyscaleColors
-          description: ''
+          name: Enum0
+          description: response with header values "GREY" or null
           header: value
       protocol: !<!Protocols> {}
   byteArrays:
@@ -186,7 +186,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: ByteArray
-          description: ''
+          description: response with header values "啊齄丂狛狜隣郎隣兀﨩"
           header: value
       protocol: !<!Protocols> {}
   dateTimes:
@@ -199,7 +199,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: ''
+          description: 'response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"'
           header: value
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_42
@@ -211,7 +211,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: ''
+          description: 'response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"'
           header: value
       protocol: !<!Protocols> {}
   dates:
@@ -223,7 +223,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Date
-          description: ''
+          description: response with header values "2010-01-01" or "0001-01-01"
           header: value
       protocol: !<!Protocols> {}
   durations:
@@ -235,7 +235,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Duration
-          description: ''
+          description: response with header values "P123DT22H14M12.011S"
           header: value
       protocol: !<!Protocols> {}
   objects:

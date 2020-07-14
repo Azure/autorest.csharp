@@ -357,7 +357,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant20
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_30
@@ -371,7 +371,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant21
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_31
@@ -385,7 +385,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant22
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_32
@@ -399,7 +399,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant23
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_33
@@ -426,7 +426,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant25
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_35
@@ -440,7 +440,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant26
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_36
@@ -454,7 +454,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant27
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_37
@@ -481,7 +481,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant29
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_39
@@ -508,7 +508,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant31
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_41
@@ -522,7 +522,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant32
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_42
@@ -536,7 +536,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant33
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_43
@@ -550,7 +550,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant34
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_44
@@ -577,7 +577,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant36
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_46
@@ -604,7 +604,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant38
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_48
@@ -631,7 +631,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant40
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_50
@@ -658,7 +658,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant42
-          description: ''
+          description: The redirect location for this request
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_52

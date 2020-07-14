@@ -39,7 +39,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Gets the foo-request-id.
           header: foo-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_5
@@ -60,7 +60,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Gets the foo-request-id.
           header: foo-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_34
@@ -71,7 +71,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Gets the foo-request-id.
           header: foo-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> 

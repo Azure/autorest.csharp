@@ -154,6 +154,7 @@ operationGroups:
                 serializedName: arrayQuery
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
+                explode: true
                 in: query
                 style: form
         requests:
@@ -214,6 +215,7 @@ operationGroups:
                 serializedName: arrayQuery
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
+                explode: true
                 in: query
                 style: form
         requests:
@@ -274,6 +276,7 @@ operationGroups:
                 serializedName: arrayQuery
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
+                explode: true
                 in: query
                 style: form
         requests:
