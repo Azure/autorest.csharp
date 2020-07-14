@@ -17,16 +17,6 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Sku))
-            {
-                writer.WritePropertyName("sku");
-                writer.WriteObjectValue(Sku);
-            }
-            if (Optional.IsDefined(Kind))
-            {
-                writer.WritePropertyName("kind");
-                writer.WriteStringValue(Kind.Value.ToString());
-            }
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity");
@@ -45,83 +35,8 @@ namespace Azure.Management.Storage.Models
             }
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToSerialString());
-            }
-            if (Optional.IsDefined(PrimaryEndpoints))
-            {
-                writer.WritePropertyName("primaryEndpoints");
-                writer.WriteObjectValue(PrimaryEndpoints);
-            }
-            if (Optional.IsDefined(PrimaryLocation))
-            {
-                writer.WritePropertyName("primaryLocation");
-                writer.WriteStringValue(PrimaryLocation);
-            }
-            if (Optional.IsDefined(StatusOfPrimary))
-            {
-                writer.WritePropertyName("statusOfPrimary");
-                writer.WriteStringValue(StatusOfPrimary.Value.ToSerialString());
-            }
-            if (Optional.IsDefined(LastGeoFailoverTime))
-            {
-                writer.WritePropertyName("lastGeoFailoverTime");
-                writer.WriteStringValue(LastGeoFailoverTime.Value, "O");
-            }
-            if (Optional.IsDefined(SecondaryLocation))
-            {
-                writer.WritePropertyName("secondaryLocation");
-                writer.WriteStringValue(SecondaryLocation);
-            }
-            if (Optional.IsDefined(StatusOfSecondary))
-            {
-                writer.WritePropertyName("statusOfSecondary");
-                writer.WriteStringValue(StatusOfSecondary.Value.ToSerialString());
-            }
-            if (Optional.IsDefined(CreationTime))
-            {
-                writer.WritePropertyName("creationTime");
-                writer.WriteStringValue(CreationTime.Value, "O");
-            }
-            if (Optional.IsDefined(CustomDomain))
-            {
-                writer.WritePropertyName("customDomain");
-                writer.WriteObjectValue(CustomDomain);
-            }
-            if (Optional.IsDefined(SecondaryEndpoints))
-            {
-                writer.WritePropertyName("secondaryEndpoints");
-                writer.WriteObjectValue(SecondaryEndpoints);
-            }
-            if (Optional.IsDefined(Encryption))
-            {
-                writer.WritePropertyName("encryption");
-                writer.WriteObjectValue(Encryption);
-            }
-            if (Optional.IsDefined(AccessTier))
-            {
-                writer.WritePropertyName("accessTier");
-                writer.WriteStringValue(AccessTier.Value.ToSerialString());
-            }
             if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
                 writer.WritePropertyName("azureFilesIdentityBasedAuthentication");
@@ -132,50 +47,20 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("supportsHttpsTrafficOnly");
                 writer.WriteBooleanValue(EnableHttpsTrafficOnly.Value);
             }
-            if (Optional.IsDefined(NetworkRuleSet))
-            {
-                writer.WritePropertyName("networkAcls");
-                writer.WriteObjectValue(NetworkRuleSet);
-            }
             if (Optional.IsDefined(IsHnsEnabled))
             {
                 writer.WritePropertyName("isHnsEnabled");
                 writer.WriteBooleanValue(IsHnsEnabled.Value);
-            }
-            if (Optional.IsDefined(GeoReplicationStats))
-            {
-                writer.WritePropertyName("geoReplicationStats");
-                writer.WriteObjectValue(GeoReplicationStats);
-            }
-            if (Optional.IsDefined(FailoverInProgress))
-            {
-                writer.WritePropertyName("failoverInProgress");
-                writer.WriteBooleanValue(FailoverInProgress.Value);
             }
             if (Optional.IsDefined(LargeFileSharesState))
             {
                 writer.WritePropertyName("largeFileSharesState");
                 writer.WriteStringValue(LargeFileSharesState.Value.ToString());
             }
-            if (Optional.IsCollectionDefined(PrivateEndpointConnections))
-            {
-                writer.WritePropertyName("privateEndpointConnections");
-                writer.WriteStartArray();
-                foreach (var item in PrivateEndpointConnections)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference");
                 writer.WriteObjectValue(RoutingPreference);
-            }
-            if (Optional.IsDefined(BlobRestoreStatus))
-            {
-                writer.WritePropertyName("blobRestoreStatus");
-                writer.WriteObjectValue(BlobRestoreStatus);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

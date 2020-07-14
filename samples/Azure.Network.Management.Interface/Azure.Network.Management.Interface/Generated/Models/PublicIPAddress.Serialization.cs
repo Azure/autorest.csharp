@@ -21,11 +21,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("sku");
                 writer.WriteObjectValue(Sku);
             }
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
             if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones");
@@ -40,16 +35,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -78,11 +63,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 writer.WritePropertyName("publicIPAddressVersion");
                 writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
-            }
-            if (Optional.IsDefined(IpConfiguration))
-            {
-                writer.WritePropertyName("ipConfiguration");
-                writer.WriteObjectValue(IpConfiguration);
             }
             if (Optional.IsDefined(DnsSettings))
             {
@@ -118,16 +98,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 writer.WritePropertyName("idleTimeoutInMinutes");
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
-            }
-            if (Optional.IsDefined(ResourceGuid))
-            {
-                writer.WritePropertyName("resourceGuid");
-                writer.WriteStringValue(ResourceGuid);
-            }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

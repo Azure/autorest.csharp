@@ -21,16 +21,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -38,16 +28,6 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(LoadBalancingRules))
-            {
-                writer.WritePropertyName("loadBalancingRules");
-                writer.WriteStartArray();
-                foreach (var item in LoadBalancingRules)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol");
@@ -72,11 +52,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 writer.WritePropertyName("requestPath");
                 writer.WriteStringValue(RequestPath);
-            }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

@@ -21,16 +21,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -38,16 +28,6 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(BackendIPConfigurations))
-            {
-                writer.WritePropertyName("backendIPConfigurations");
-                writer.WriteStartArray();
-                foreach (var item in BackendIPConfigurations)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsCollectionDefined(BackendAddresses))
             {
                 writer.WritePropertyName("backendAddresses");
@@ -57,11 +37,6 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

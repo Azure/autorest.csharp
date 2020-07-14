@@ -21,11 +21,6 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("enabled");
                 writer.WriteBooleanValue(Enabled.Value);
             }
-            if (Optional.IsDefined(LastEnabledTime))
-            {
-                writer.WritePropertyName("lastEnabledTime");
-                writer.WriteStringValue(LastEnabledTime.Value, "O");
-            }
             if (Optional.IsDefined(KeyType))
             {
                 writer.WritePropertyName("keyType");

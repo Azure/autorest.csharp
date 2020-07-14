@@ -17,33 +17,8 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(LastModifiedTime))
-            {
-                writer.WritePropertyName("lastModifiedTime");
-                writer.WriteStringValue(LastModifiedTime.Value, "O");
-            }
             if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata");
@@ -70,45 +45,10 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("rootSquash");
                 writer.WriteStringValue(RootSquash.Value.ToString());
             }
-            if (Optional.IsDefined(Version))
-            {
-                writer.WritePropertyName("version");
-                writer.WriteStringValue(Version);
-            }
-            if (Optional.IsDefined(Deleted))
-            {
-                writer.WritePropertyName("deleted");
-                writer.WriteBooleanValue(Deleted.Value);
-            }
-            if (Optional.IsDefined(DeletedTime))
-            {
-                writer.WritePropertyName("deletedTime");
-                writer.WriteStringValue(DeletedTime.Value, "O");
-            }
-            if (Optional.IsDefined(RemainingRetentionDays))
-            {
-                writer.WritePropertyName("remainingRetentionDays");
-                writer.WriteNumberValue(RemainingRetentionDays.Value);
-            }
             if (Optional.IsDefined(AccessTier))
             {
                 writer.WritePropertyName("accessTier");
                 writer.WriteStringValue(AccessTier.Value.ToString());
-            }
-            if (Optional.IsDefined(AccessTierChangeTime))
-            {
-                writer.WritePropertyName("accessTierChangeTime");
-                writer.WriteStringValue(AccessTierChangeTime.Value, "O");
-            }
-            if (Optional.IsDefined(AccessTierStatus))
-            {
-                writer.WritePropertyName("accessTierStatus");
-                writer.WriteStringValue(AccessTierStatus);
-            }
-            if (Optional.IsDefined(ShareUsageBytes))
-            {
-                writer.WritePropertyName("shareUsageBytes");
-                writer.WriteNumberValue(ShareUsageBytes.Value);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

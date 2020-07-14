@@ -17,26 +17,6 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(DefaultEncryptionScope))
@@ -54,26 +34,6 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("publicAccess");
                 writer.WriteStringValue(PublicAccess.Value.ToSerialString());
             }
-            if (Optional.IsDefined(LastModifiedTime))
-            {
-                writer.WritePropertyName("lastModifiedTime");
-                writer.WriteStringValue(LastModifiedTime.Value, "O");
-            }
-            if (Optional.IsDefined(LeaseStatus))
-            {
-                writer.WritePropertyName("leaseStatus");
-                writer.WriteStringValue(LeaseStatus.Value.ToString());
-            }
-            if (Optional.IsDefined(LeaseState))
-            {
-                writer.WritePropertyName("leaseState");
-                writer.WriteStringValue(LeaseState.Value.ToString());
-            }
-            if (Optional.IsDefined(LeaseDuration))
-            {
-                writer.WritePropertyName("leaseDuration");
-                writer.WriteStringValue(LeaseDuration.Value.ToString());
-            }
             if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata");
@@ -84,26 +44,6 @@ namespace Azure.Management.Storage.Models
                     writer.WriteStringValue(item.Value);
                 }
                 writer.WriteEndObject();
-            }
-            if (Optional.IsDefined(ImmutabilityPolicy))
-            {
-                writer.WritePropertyName("immutabilityPolicy");
-                writer.WriteObjectValue(ImmutabilityPolicy);
-            }
-            if (Optional.IsDefined(LegalHold))
-            {
-                writer.WritePropertyName("legalHold");
-                writer.WriteObjectValue(LegalHold);
-            }
-            if (Optional.IsDefined(HasLegalHold))
-            {
-                writer.WritePropertyName("hasLegalHold");
-                writer.WriteBooleanValue(HasLegalHold.Value);
-            }
-            if (Optional.IsDefined(HasImmutabilityPolicy))
-            {
-                writer.WritePropertyName("hasImmutabilityPolicy");
-                writer.WriteBooleanValue(HasImmutabilityPolicy.Value);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

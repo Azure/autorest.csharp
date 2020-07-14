@@ -23,11 +23,6 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Status))
-            {
-                writer.WritePropertyName("status");
-                writer.WriteBooleanValue(Status.Value);
-            }
             writer.WritePropertyName("@odata.location");
             writer.WriteStringValue(OdataLocation);
             if (Optional.IsCollectionDefined(AdditionalProperties))

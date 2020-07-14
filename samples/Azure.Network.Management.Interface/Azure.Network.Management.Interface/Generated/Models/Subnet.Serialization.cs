@@ -21,11 +21,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -83,56 +78,6 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(PrivateEndpoints))
-            {
-                writer.WritePropertyName("privateEndpoints");
-                writer.WriteStartArray();
-                foreach (var item in PrivateEndpoints)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(IpConfigurations))
-            {
-                writer.WritePropertyName("ipConfigurations");
-                writer.WriteStartArray();
-                foreach (var item in IpConfigurations)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(IpConfigurationProfiles))
-            {
-                writer.WritePropertyName("ipConfigurationProfiles");
-                writer.WriteStartArray();
-                foreach (var item in IpConfigurationProfiles)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(ResourceNavigationLinks))
-            {
-                writer.WritePropertyName("resourceNavigationLinks");
-                writer.WriteStartArray();
-                foreach (var item in ResourceNavigationLinks)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(ServiceAssociationLinks))
-            {
-                writer.WritePropertyName("serviceAssociationLinks");
-                writer.WriteStartArray();
-                foreach (var item in ServiceAssociationLinks)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsCollectionDefined(Delegations))
             {
                 writer.WritePropertyName("delegations");
@@ -142,16 +87,6 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(Purpose))
-            {
-                writer.WritePropertyName("purpose");
-                writer.WriteStringValue(Purpose);
-            }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             if (Optional.IsDefined(PrivateEndpointNetworkPolicies))
             {

@@ -31,16 +31,6 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("keyvaulturi");
                 writer.WriteStringValue(KeyVaultUri);
             }
-            if (Optional.IsDefined(CurrentVersionedKeyIdentifier))
-            {
-                writer.WritePropertyName("currentVersionedKeyIdentifier");
-                writer.WriteStringValue(CurrentVersionedKeyIdentifier);
-            }
-            if (Optional.IsDefined(LastKeyRotationTimestamp))
-            {
-                writer.WritePropertyName("lastKeyRotationTimestamp");
-                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
-            }
             writer.WriteEndObject();
         }
 

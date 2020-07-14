@@ -16,21 +16,6 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Status))
-            {
-                writer.WritePropertyName("status");
-                writer.WriteStringValue(Status.Value.ToString());
-            }
-            if (Optional.IsDefined(LastSyncTime))
-            {
-                writer.WritePropertyName("lastSyncTime");
-                writer.WriteStringValue(LastSyncTime.Value, "O");
-            }
-            if (Optional.IsDefined(CanFailover))
-            {
-                writer.WritePropertyName("canFailover");
-                writer.WriteBooleanValue(CanFailover.Value);
-            }
             writer.WriteEndObject();
         }
 

@@ -26,30 +26,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(AppliedDnsServers))
-            {
-                writer.WritePropertyName("appliedDnsServers");
-                writer.WriteStartArray();
-                foreach (var item in AppliedDnsServers)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsDefined(InternalDnsNameLabel))
             {
                 writer.WritePropertyName("internalDnsNameLabel");
                 writer.WriteStringValue(InternalDnsNameLabel);
-            }
-            if (Optional.IsDefined(InternalFqdn))
-            {
-                writer.WritePropertyName("internalFqdn");
-                writer.WriteStringValue(InternalFqdn);
-            }
-            if (Optional.IsDefined(InternalDomainNameSuffix))
-            {
-                writer.WritePropertyName("internalDomainNameSuffix");
-                writer.WriteStringValue(InternalDomainNameSuffix);
             }
             writer.WriteEndObject();
         }

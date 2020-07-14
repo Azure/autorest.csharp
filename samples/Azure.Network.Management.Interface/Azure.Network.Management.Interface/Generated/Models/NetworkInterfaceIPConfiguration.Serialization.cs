@@ -21,11 +21,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -112,16 +107,6 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteObjectValue(item);
                 }
                 writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
-            }
-            if (Optional.IsDefined(PrivateLinkConnectionProperties))
-            {
-                writer.WritePropertyName("privateLinkConnectionProperties");
-                writer.WriteObjectValue(PrivateLinkConnectionProperties);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

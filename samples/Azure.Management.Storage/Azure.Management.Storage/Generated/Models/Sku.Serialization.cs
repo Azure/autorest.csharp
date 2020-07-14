@@ -17,11 +17,6 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name.ToString());
-            if (Optional.IsDefined(Tier))
-            {
-                writer.WritePropertyName("tier");
-                writer.WriteStringValue(Tier.Value.ToSerialString());
-            }
             writer.WriteEndObject();
         }
 
