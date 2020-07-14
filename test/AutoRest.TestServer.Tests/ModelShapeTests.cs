@@ -22,6 +22,11 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void InputModelsHaveOnlyOnePublicCtor()
+        {
+            Assert.AreEqual(1, typeof(InputModel).GetConstructors().Length);
+        }
+        [Test]
         public void RequiredPropertiesAreSetableInMixedModels()
         {
             var requiredInt = TypeAsserts.HasProperty(typeof(MixedModel), "RequiredInt", BindingFlags.Public | BindingFlags.Instance);

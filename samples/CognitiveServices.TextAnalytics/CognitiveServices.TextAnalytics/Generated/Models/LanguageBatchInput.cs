@@ -26,13 +26,6 @@ namespace CognitiveServices.TextAnalytics.Models
             Documents = documents.ToList();
         }
 
-        /// <summary> Initializes a new instance of LanguageBatchInput. </summary>
-        /// <param name="documents"> . </param>
-        internal LanguageBatchInput(IList<LanguageInput> documents)
-        {
-            Documents = documents;
-        }
-
         public IList<LanguageInput> Documents { get; }
     }
 }

@@ -97,7 +97,10 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredClassParameter() => Test((host, pipeline) =>
         {
-            var value = new Product(0, string.Empty);
+            var value = new Product(0)
+            {
+                Name = string.Empty
+            };
             Assert.ThrowsAsync<RequestFailedException>(async () => await new ExplicitClient(ClientDiagnostics, pipeline, host).RestClient.PostRequiredClassParameterAsync(value));
             TestNotDefaultParameter(typeof(ExplicitRestClient), nameof(ExplicitRestClient.PostRequiredClassParameterAsync), "bodyParameter");
         }, ignoreScenario: true);
@@ -114,7 +117,10 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredClassProperty() => Test((host, pipeline) =>
         {
-            var value = new ClassWrapper(new Product(0, string.Empty));
+            var value = new ClassWrapper(new Product(0)
+            {
+                Name = string.Empty
+            });
             Assert.ThrowsAsync<RequestFailedException>(async () => await new ExplicitClient(ClientDiagnostics, pipeline, host).RestClient.PostRequiredClassPropertyAsync(value));
             TestNotDefaultParameter(typeof(ExplicitRestClient), nameof(ExplicitRestClient.PostRequiredClassPropertyAsync), "bodyParameter");
         }, ignoreScenario: true);

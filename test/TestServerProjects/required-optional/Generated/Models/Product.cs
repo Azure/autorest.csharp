@@ -17,15 +17,6 @@ namespace required_optional.Models
             Id = id;
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        internal Product(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
         public int Id { get; }
         public string Name { get; set; }
     }

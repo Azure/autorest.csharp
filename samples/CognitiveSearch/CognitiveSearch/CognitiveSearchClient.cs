@@ -87,23 +87,11 @@ namespace Azure.CognitiveSearch
         public virtual async Task<Response<SearchDocumentsResult>> SearchAsync(string searchText, string filter = null, CancellationToken cancellationToken = default) =>
             await Operations.SearchGetAsync(
                 searchText: searchText,
-                new SearchOptions(includeTotalResultCount: null,
-                    facets: null,
-                    filter: filter,
-                    highlightFields: null,
-                    highlightPostTag: null,
-                    highlightPreTag: null,
-                    minimumCoverage: null,
-                    orderBy: null,
-                    queryType: QueryType.Full,
-                    scoringParameters: null,
-                    scoringProfile: null,
-                    searchFields: null,
-                    searchMode: null,
-                    select: null,
-                    skip: null,
-                    top: null),
-                new RequestOptions(null),
+                new SearchOptions()
+                {
+                    Filter = filter
+                },
+                new RequestOptions(),
                 cancellationToken: cancellationToken);
     }
 }

@@ -30,25 +30,6 @@ namespace model_flattening.Models
             ProductId = productId;
         }
 
-        /// <summary> Initializes a new instance of FlattenParameterGroup. </summary>
-        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
-        /// <param name="simpleBodyProduct"> Simple body product to put. </param>
-        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <param name="description"> Description of product. </param>
-        /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
-        internal FlattenParameterGroup(string name, SimpleProduct simpleBodyProduct, string productId, string description, string maxProductDisplayName, string genericValue, string odataValue)
-        {
-            Name = name;
-            SimpleBodyProduct = simpleBodyProduct;
-            ProductId = productId;
-            Description = description;
-            MaxProductDisplayName = maxProductDisplayName;
-            GenericValue = genericValue;
-            OdataValue = odataValue;
-        }
-
         /// <summary> Product name with value &apos;groupproduct&apos;. </summary>
         public string Name { get; }
         /// <summary> Simple body product to put. </summary>
