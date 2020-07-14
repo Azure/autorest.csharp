@@ -31,6 +31,8 @@ namespace ModelShapes.Models
             Optional<int?> nonRequiredNullableInt = default;
             Optional<IReadOnlyList<string>> nonRequiredNullableStringList = default;
             Optional<IReadOnlyList<int>> nonRequiredNullableIntList = default;
+            int requiredReadonlyInt = default;
+            Optional<int> nonRequiredReadonlyInt = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("RequiredString"))
@@ -193,8 +195,18 @@ namespace ModelShapes.Models
                     nonRequiredNullableIntList = array;
                     continue;
                 }
+                if (property.NameEquals("RequiredReadonlyInt"))
+                {
+                    requiredReadonlyInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("NonRequiredReadonlyInt"))
+                {
+                    nonRequiredReadonlyInt = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList));
+            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt));
         }
     }
 }

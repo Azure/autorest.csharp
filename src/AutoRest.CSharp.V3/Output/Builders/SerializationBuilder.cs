@@ -172,6 +172,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
                 yield return new JsonPropertySerialization(
                     property.SerializedName,
                     property.IsRequired,
+                    property.IsReadOnly,
                     objectProperty,
                     BuildSerialization(property.Schema, objectProperty.ValueType)
                     );
@@ -181,7 +182,7 @@ namespace AutoRest.CSharp.V3.Output.Builders
             {
                 JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
                 JsonObjectSerialization objectSerialization = new JsonObjectSerialization(null, serializationProperties, null, false);
-                yield return new JsonPropertySerialization(name, false, null, objectSerialization);
+                yield return new JsonPropertySerialization(name, false, false, null, objectSerialization);
             }
         }
 

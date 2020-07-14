@@ -62,6 +62,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
+                        if (property.IsReadOnly)
+                        {
+                            continue;
+                        }
+
                         var objectProperty = property.Property;
                         if (objectProperty == null)
                         {

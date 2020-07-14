@@ -24,7 +24,8 @@ namespace ModelShapes.Models
         /// <param name="requiredNullableInt"> . </param>
         /// <param name="requiredNullableStringList"> . </param>
         /// <param name="requiredNullableIntList"> . </param>
-        public MixedModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
+        /// <param name="requiredReadonlyInt"> . </param>
+        public MixedModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList, int requiredReadonlyInt)
         {
             if (requiredString == null)
             {
@@ -51,6 +52,7 @@ namespace ModelShapes.Models
             RequiredNullableIntList = requiredNullableIntList?.ToList();
             NonRequiredNullableStringList = new ChangeTrackingList<string>();
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
+            RequiredReadonlyInt = requiredReadonlyInt;
         }
 
         /// <summary> Initializes a new instance of MixedModel. </summary>
@@ -70,7 +72,9 @@ namespace ModelShapes.Models
         /// <param name="nonRequiredNullableInt"> . </param>
         /// <param name="nonRequiredNullableStringList"> . </param>
         /// <param name="nonRequiredNullableIntList"> . </param>
-        internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList)
+        /// <param name="requiredReadonlyInt"> . </param>
+        /// <param name="nonRequiredReadonlyInt"> . </param>
+        internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -88,6 +92,8 @@ namespace ModelShapes.Models
             NonRequiredNullableInt = nonRequiredNullableInt;
             NonRequiredNullableStringList = nonRequiredNullableStringList;
             NonRequiredNullableIntList = nonRequiredNullableIntList;
+            RequiredReadonlyInt = requiredReadonlyInt;
+            NonRequiredReadonlyInt = nonRequiredReadonlyInt;
         }
 
         public string RequiredString { get; set; }
@@ -106,5 +112,7 @@ namespace ModelShapes.Models
         public int? NonRequiredNullableInt { get; set; }
         public IList<string> NonRequiredNullableStringList { get; set; }
         public IList<int> NonRequiredNullableIntList { get; set; }
+        public int RequiredReadonlyInt { get; }
+        public int? NonRequiredReadonlyInt { get; }
     }
 }
