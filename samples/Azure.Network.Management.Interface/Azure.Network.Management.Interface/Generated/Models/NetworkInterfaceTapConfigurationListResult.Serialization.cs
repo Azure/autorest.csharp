@@ -24,14 +24,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<NetworkInterfaceTapConfiguration> array = new List<NetworkInterfaceTapConfiguration>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
-                        }
+                        array.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceTapConfigurationListResult(new ChangeTrackingList<NetworkInterfaceTapConfiguration>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new NetworkInterfaceTapConfigurationListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

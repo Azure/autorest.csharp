@@ -23,20 +23,13 @@ namespace Azure.Management.Storage.Models
                     List<PrivateLinkResource> array = new List<PrivateLinkResource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(PrivateLinkResource.DeserializePrivateLinkResource(item));
-                        }
+                        array.Add(PrivateLinkResource.DeserializePrivateLinkResource(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new PrivateLinkResourceListResult(new ChangeTrackingList<PrivateLinkResource>(value));
+            return new PrivateLinkResourceListResult(Optional.ToList(value));
         }
     }
 }

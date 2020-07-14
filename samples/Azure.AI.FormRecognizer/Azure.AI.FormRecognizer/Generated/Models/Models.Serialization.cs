@@ -30,14 +30,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<ModelInfo> array = new List<ModelInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(ModelInfo.DeserializeModelInfo(item));
-                        }
+                        array.Add(ModelInfo.DeserializeModelInfo(item));
                     }
                     modelList = array;
                     continue;
@@ -48,7 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new Models(summary.HasValue ? summary.Value : null, new ChangeTrackingList<ModelInfo>(modelList), nextLink.HasValue ? nextLink.Value : null);
+            return new Models(summary.Value, Optional.ToList(modelList), nextLink.Value);
         }
     }
 }

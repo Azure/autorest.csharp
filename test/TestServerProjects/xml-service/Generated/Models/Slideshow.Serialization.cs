@@ -35,7 +35,7 @@ namespace xml_service.Models
                 writer.WriteValue(Author);
                 writer.WriteEndAttribute();
             }
-            if (Optional.IsDefined(Slides))
+            if (Optional.IsCollectionDefined(Slides))
             {
                 foreach (var item in Slides)
                 {

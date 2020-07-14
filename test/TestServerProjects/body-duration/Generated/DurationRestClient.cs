@@ -48,7 +48,7 @@ namespace body_duration
 
         /// <summary> Get null duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<TimeSpan?>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -56,9 +56,16 @@ namespace body_duration
             {
                 case 200:
                     {
-                        TimeSpan value = default;
+                        TimeSpan? value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetTimeSpan("P");
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = document.RootElement.GetTimeSpan("P");
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -68,7 +75,7 @@ namespace body_duration
 
         /// <summary> Get null duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<TimeSpan> GetNull(CancellationToken cancellationToken = default)
+        public Response<TimeSpan?> GetNull(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             _pipeline.Send(message, cancellationToken);
@@ -76,9 +83,16 @@ namespace body_duration
             {
                 case 200:
                     {
-                        TimeSpan value = default;
+                        TimeSpan? value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetTimeSpan("P");
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = document.RootElement.GetTimeSpan("P");
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:

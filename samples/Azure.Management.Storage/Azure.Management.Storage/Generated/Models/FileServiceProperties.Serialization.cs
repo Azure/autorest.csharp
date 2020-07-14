@@ -99,7 +99,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new FileServiceProperties(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, sku.HasValue ? sku.Value : null, cors.HasValue ? cors.Value : null, shareDeleteRetentionPolicy.HasValue ? shareDeleteRetentionPolicy.Value : null);
+            return new FileServiceProperties(id.Value, name.Value, type.Value, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value);
         }
     }
 }

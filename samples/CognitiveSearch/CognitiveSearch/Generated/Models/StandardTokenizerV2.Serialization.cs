@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StandardTokenizerV2(odataType, name, maxTokenLength.HasValue ? maxTokenLength.Value : (int?)null);
+            return new StandardTokenizerV2(odataType, name, Optional.ToNullable(maxTokenLength));
         }
     }
 }

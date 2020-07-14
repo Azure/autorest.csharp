@@ -49,14 +49,7 @@ namespace Azure.Management.Storage.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     locations = array;
                     continue;
@@ -66,14 +59,7 @@ namespace Azure.Management.Storage.Models
                     List<SKUCapability> array = new List<SKUCapability>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(SKUCapability.DeserializeSKUCapability(item));
-                        }
+                        array.Add(SKUCapability.DeserializeSKUCapability(item));
                     }
                     capabilities = array;
                     continue;
@@ -83,20 +69,13 @@ namespace Azure.Management.Storage.Models
                     List<Restriction> array = new List<Restriction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Restriction.DeserializeRestriction(item));
-                        }
+                        array.Add(Restriction.DeserializeRestriction(item));
                     }
                     restrictions = array;
                     continue;
                 }
             }
-            return new SkuInformation(name, tier.HasValue ? tier.Value : (SkuTier?)null, resourceType.HasValue ? resourceType.Value : null, kind.HasValue ? kind.Value : (Kind?)null, new ChangeTrackingList<string>(locations), new ChangeTrackingList<SKUCapability>(capabilities), new ChangeTrackingList<Restriction>(restrictions));
+            return new SkuInformation(name, Optional.ToNullable(tier), resourceType.Value, Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions));
         }
     }
 }

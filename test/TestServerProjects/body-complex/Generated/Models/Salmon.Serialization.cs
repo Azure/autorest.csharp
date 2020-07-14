@@ -35,7 +35,7 @@ namespace body_complex.Models
             }
             writer.WritePropertyName("length");
             writer.WriteNumberValue(Length);
-            if (Optional.IsDefined(Siblings))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
@@ -95,20 +95,13 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeFish(item));
-                        }
+                        array.Add(DeserializeFish(item));
                     }
                     siblings = array;
                     continue;
                 }
             }
-            return new Salmon(fishtype, species.HasValue ? species.Value : null, length, new ChangeTrackingList<Fish>(siblings), location.HasValue ? location.Value : null, iswild.HasValue ? iswild.Value : (bool?)null);
+            return new Salmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild));
         }
     }
 }

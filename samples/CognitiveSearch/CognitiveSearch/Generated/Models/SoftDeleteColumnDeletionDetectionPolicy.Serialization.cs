@@ -53,7 +53,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName.HasValue ? softDeleteColumnName.Value : null, softDeleteMarkerValue.HasValue ? softDeleteMarkerValue.Value : null);
+            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName.Value, softDeleteMarkerValue.Value);
         }
     }
 }

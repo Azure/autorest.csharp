@@ -45,7 +45,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new ReadonlyObj(id.HasValue ? id.Value : null, size.HasValue ? size.Value : (int?)null);
+            return new ReadonlyObj(id.Value, Optional.ToNullable(size));
         }
     }
 }

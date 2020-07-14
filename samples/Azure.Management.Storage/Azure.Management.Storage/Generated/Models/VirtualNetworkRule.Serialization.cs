@@ -53,7 +53,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new VirtualNetworkRule(id, action.HasValue ? action.Value : null, state.HasValue ? state.Value : (State?)null);
+            return new VirtualNetworkRule(id, action.Value, Optional.ToNullable(state));
         }
     }
 }

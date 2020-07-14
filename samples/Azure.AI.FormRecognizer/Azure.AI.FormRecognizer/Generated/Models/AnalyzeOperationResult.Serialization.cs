@@ -42,7 +42,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult.HasValue ? analyzeResult.Value : null);
+            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult.Value);
         }
     }
 }

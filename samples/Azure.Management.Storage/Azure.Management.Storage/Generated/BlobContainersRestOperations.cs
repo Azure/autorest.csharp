@@ -103,14 +103,7 @@ namespace Azure.Management.Storage
                     {
                         ListContainerItems value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
-                        }
+                        value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -143,14 +136,7 @@ namespace Azure.Management.Storage
                     {
                         ListContainerItems value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
-                        }
+                        value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -216,14 +202,7 @@ namespace Azure.Management.Storage
                     {
                         BlobContainer value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                        }
+                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -265,14 +244,7 @@ namespace Azure.Management.Storage
                     {
                         BlobContainer value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                        }
+                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -337,14 +309,7 @@ namespace Azure.Management.Storage
                     {
                         BlobContainer value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                        }
+                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -385,14 +350,7 @@ namespace Azure.Management.Storage
                     {
                         BlobContainer value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                        }
+                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -448,14 +406,7 @@ namespace Azure.Management.Storage
                     {
                         BlobContainer value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                        }
+                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -491,14 +442,7 @@ namespace Azure.Management.Storage
                     {
                         BlobContainer value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = BlobContainer.DeserializeBlobContainer(document.RootElement);
-                        }
+                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -649,14 +593,7 @@ namespace Azure.Management.Storage
                     {
                         LegalHold value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LegalHold.DeserializeLegalHold(document.RootElement);
-                        }
+                        value = LegalHold.DeserializeLegalHold(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -697,14 +634,7 @@ namespace Azure.Management.Storage
                     {
                         LegalHold value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LegalHold.DeserializeLegalHold(document.RootElement);
-                        }
+                        value = LegalHold.DeserializeLegalHold(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -771,14 +701,7 @@ namespace Azure.Management.Storage
                     {
                         LegalHold value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LegalHold.DeserializeLegalHold(document.RootElement);
-                        }
+                        value = LegalHold.DeserializeLegalHold(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -819,14 +742,7 @@ namespace Azure.Management.Storage
                     {
                         LegalHold value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LegalHold.DeserializeLegalHold(document.RootElement);
-                        }
+                        value = LegalHold.DeserializeLegalHold(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -900,14 +816,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -946,14 +855,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1016,14 +918,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1060,14 +955,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1131,14 +1019,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1179,14 +1060,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1249,14 +1123,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1297,14 +1164,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1378,14 +1238,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1428,14 +1281,7 @@ namespace Azure.Management.Storage
                     {
                         ImmutabilityPolicy value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
-                        }
+                        value = ImmutabilityPolicy.DeserializeImmutabilityPolicy(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1500,14 +1346,7 @@ namespace Azure.Management.Storage
                     {
                         LeaseContainerResponse value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
-                        }
+                        value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1544,14 +1383,7 @@ namespace Azure.Management.Storage
                     {
                         LeaseContainerResponse value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
-                        }
+                        value = LeaseContainerResponse.DeserializeLeaseContainerResponse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1601,14 +1433,7 @@ namespace Azure.Management.Storage
                     {
                         ListContainerItems value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
-                        }
+                        value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1646,14 +1471,7 @@ namespace Azure.Management.Storage
                     {
                         ListContainerItems value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
-                        }
+                        value = ListContainerItems.DeserializeListContainerItems(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

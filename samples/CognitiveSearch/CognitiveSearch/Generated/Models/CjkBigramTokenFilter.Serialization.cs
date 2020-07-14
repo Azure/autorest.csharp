@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(IgnoreScripts))
+            if (Optional.IsCollectionDefined(IgnoreScripts))
             {
                 writer.WritePropertyName("ignoreScripts");
                 writer.WriteStartArray();
@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CjkBigramTokenFilter(odataType, name, new ChangeTrackingList<CjkBigramTokenFilterScripts>(ignoreScripts), outputUnigrams.HasValue ? outputUnigrams.Value : (bool?)null);
+            return new CjkBigramTokenFilter(odataType, name, Optional.ToList(ignoreScripts), Optional.ToNullable(outputUnigrams));
         }
     }
 }

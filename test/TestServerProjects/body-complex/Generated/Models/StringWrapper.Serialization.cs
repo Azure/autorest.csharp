@@ -56,7 +56,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new StringWrapper(field.HasValue ? field.Value : null, empty.HasValue ? empty.Value : null, @null.HasValue ? @null.Value : null);
+            return new StringWrapper(field.Value, empty.Value, @null.Value);
         }
     }
 }

@@ -331,6 +331,7 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_1
+            nullable: true
             language: !<!Languages> 
               default:
                 name: ''

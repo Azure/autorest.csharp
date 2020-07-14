@@ -21,7 +21,7 @@ namespace model_flattening.Models
                 writer.WritePropertyName("productresource");
                 writer.WriteObjectValue(Productresource);
             }
-            if (Optional.IsDefined(Arrayofresources))
+            if (Optional.IsCollectionDefined(Arrayofresources))
             {
                 writer.WritePropertyName("arrayofresources");
                 writer.WriteStartArray();
@@ -31,7 +31,7 @@ namespace model_flattening.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Dictionaryofresources))
+            if (Optional.IsCollectionDefined(Dictionaryofresources))
             {
                 writer.WritePropertyName("dictionaryofresources");
                 writer.WriteStartObject();
@@ -62,14 +62,7 @@ namespace model_flattening.Models
                     List<FlattenedProduct> array = new List<FlattenedProduct>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
-                        }
+                        array.Add(FlattenedProduct.DeserializeFlattenedProduct(item));
                     }
                     arrayofresources = array;
                     continue;
@@ -79,20 +72,13 @@ namespace model_flattening.Models
                     Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
-                        }
+                        dictionary.Add(property0.Name, FlattenedProduct.DeserializeFlattenedProduct(property0.Value));
                     }
                     dictionaryofresources = dictionary;
                     continue;
                 }
             }
-            return new ResourceCollection(productresource.HasValue ? productresource.Value : null, new ChangeTrackingList<FlattenedProduct>(arrayofresources), new ChangeTrackingDictionary<string, FlattenedProduct>(dictionaryofresources));
+            return new ResourceCollection(productresource.Value, Optional.ToList(arrayofresources), Optional.ToDictionary(dictionaryofresources));
         }
     }
 }

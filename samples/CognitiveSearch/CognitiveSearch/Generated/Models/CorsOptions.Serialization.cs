@@ -42,14 +42,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     allowedOrigins = array;
                     continue;
@@ -60,7 +53,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CorsOptions(allowedOrigins, maxAgeInSeconds.HasValue ? maxAgeInSeconds.Value : (long?)null);
+            return new CorsOptions(allowedOrigins, Optional.ToNullable(maxAgeInSeconds));
         }
     }
 }

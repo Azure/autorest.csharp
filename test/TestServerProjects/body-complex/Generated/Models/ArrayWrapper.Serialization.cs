@@ -16,7 +16,7 @@ namespace body_complex.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Array))
+            if (Optional.IsCollectionDefined(Array))
             {
                 writer.WritePropertyName("array");
                 writer.WriteStartArray();
@@ -39,20 +39,13 @@ namespace body_complex.Models
                     List<string> array0 = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array0.Add(null);
-                        }
-                        else
-                        {
-                            array0.Add(item.GetString());
-                        }
+                        array0.Add(item.GetString());
                     }
                     array = array0;
                     continue;
                 }
             }
-            return new ArrayWrapper(new ChangeTrackingList<string>(array));
+            return new ArrayWrapper(Optional.ToList(array));
         }
     }
 }

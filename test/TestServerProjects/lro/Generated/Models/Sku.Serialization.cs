@@ -45,7 +45,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new Sku(name.HasValue ? name.Value : null, id.HasValue ? id.Value : null);
+            return new Sku(name.Value, id.Value);
         }
     }
 }

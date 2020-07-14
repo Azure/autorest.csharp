@@ -44,7 +44,7 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("NonRequiredInt");
                 writer.WriteNumberValue(NonRequiredInt.Value);
             }
-            if (Optional.IsDefined(NonRequiredStringList))
+            if (Optional.IsCollectionDefined(NonRequiredStringList))
             {
                 writer.WritePropertyName("NonRequiredStringList");
                 writer.WriteStartArray();
@@ -54,7 +54,7 @@ namespace ModelShapes.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(NonRequiredIntList))
+            if (Optional.IsCollectionDefined(NonRequiredIntList))
             {
                 writer.WritePropertyName("NonRequiredIntList");
                 writer.WriteStartArray();
@@ -110,6 +110,64 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableIntList");
             }
+            if (Optional.IsDefined(NonRequiredNullableString))
+            {
+                if (NonRequiredNullableString != null)
+                {
+                    writer.WritePropertyName("NonRequiredNullableString");
+                    writer.WriteStringValue(NonRequiredNullableString);
+                }
+                else
+                {
+                    writer.WriteNull("NonRequiredNullableString");
+                }
+            }
+            if (Optional.IsDefined(NonRequiredNullableInt))
+            {
+                if (NonRequiredNullableInt != null)
+                {
+                    writer.WritePropertyName("NonRequiredNullableInt");
+                    writer.WriteNumberValue(NonRequiredNullableInt.Value);
+                }
+                else
+                {
+                    writer.WriteNull("NonRequiredNullableInt");
+                }
+            }
+            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
+            {
+                if (NonRequiredNullableStringList != null)
+                {
+                    writer.WritePropertyName("NonRequiredNullableStringList");
+                    writer.WriteStartArray();
+                    foreach (var item in NonRequiredNullableStringList)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("NonRequiredNullableStringList");
+                }
+            }
+            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
+            {
+                if (NonRequiredNullableIntList != null)
+                {
+                    writer.WritePropertyName("NonRequiredNullableIntList");
+                    writer.WriteStartArray();
+                    foreach (var item in NonRequiredNullableIntList)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("NonRequiredNullableIntList");
+                }
+            }
             writer.WriteEndObject();
         }
 
@@ -127,6 +185,10 @@ namespace ModelShapes.Models
             int? requiredNullableInt = default;
             IList<string> requiredNullableStringList = default;
             IList<int> requiredNullableIntList = default;
+            Optional<string> nonRequiredNullableString = default;
+            Optional<int?> nonRequiredNullableInt = default;
+            Optional<IList<string>> nonRequiredNullableStringList = default;
+            Optional<IList<int>> nonRequiredNullableIntList = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("RequiredString"))
@@ -144,14 +206,7 @@ namespace ModelShapes.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     requiredStringList = array;
                     continue;
@@ -181,14 +236,7 @@ namespace ModelShapes.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     nonRequiredStringList = array;
                     continue;
@@ -233,14 +281,7 @@ namespace ModelShapes.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     requiredNullableStringList = array;
                     continue;
@@ -260,8 +301,58 @@ namespace ModelShapes.Models
                     requiredNullableIntList = array;
                     continue;
                 }
+                if (property.NameEquals("NonRequiredNullableString"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nonRequiredNullableString = null;
+                        continue;
+                    }
+                    nonRequiredNullableString = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("NonRequiredNullableInt"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nonRequiredNullableInt = null;
+                        continue;
+                    }
+                    nonRequiredNullableInt = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("NonRequiredNullableStringList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nonRequiredNullableStringList = null;
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    nonRequiredNullableStringList = array;
+                    continue;
+                }
+                if (property.NameEquals("NonRequiredNullableIntList"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nonRequiredNullableIntList = null;
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    nonRequiredNullableIntList = array;
+                    continue;
+                }
             }
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.HasValue ? nonRequiredString.Value : null, nonRequiredInt.HasValue ? nonRequiredInt.Value : (int?)null, new ChangeTrackingList<string>(nonRequiredStringList), new ChangeTrackingList<int>(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList);
+            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList));
         }
     }
 }

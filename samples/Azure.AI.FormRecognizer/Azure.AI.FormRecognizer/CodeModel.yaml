@@ -876,7 +876,6 @@ schemas: !<!Schemas>
             name: ArrayOfKeysResultClustersItemsItem
             description: Array of KeysResultClustersItemsItem
         protocol: !<!Protocols> {}
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: KeysResultClusters
@@ -1086,7 +1085,6 @@ schemas: !<!Schemas>
             description: Recognized field value.
             namespace: ''
         protocol: !<!Protocols> {}
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: FieldValueObject
@@ -1095,7 +1093,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_69
       type: dictionary
       elementType: *ref_7
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DocumentResultFields

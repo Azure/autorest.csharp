@@ -36,14 +36,7 @@ namespace CognitiveSearch.Models
                     List<IndexerExecutionResult> array = new List<IndexerExecutionResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(IndexerExecutionResult.DeserializeIndexerExecutionResult(item));
-                        }
+                        array.Add(IndexerExecutionResult.DeserializeIndexerExecutionResult(item));
                     }
                     executionHistory = array;
                     continue;
@@ -54,7 +47,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerExecutionInfo(status, lastResult.HasValue ? lastResult.Value : null, executionHistory, limits);
+            return new IndexerExecutionInfo(status, lastResult.Value, executionHistory, limits);
         }
     }
 }

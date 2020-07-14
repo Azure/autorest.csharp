@@ -165,7 +165,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new BlobServiceProperties(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, sku.HasValue ? sku.Value : null, cors.HasValue ? cors.Value : null, defaultServiceVersion.HasValue ? defaultServiceVersion.Value : null, deleteRetentionPolicy.HasValue ? deleteRetentionPolicy.Value : null, isVersioningEnabled.HasValue ? isVersioningEnabled.Value : (bool?)null, automaticSnapshotPolicyEnabled.HasValue ? automaticSnapshotPolicyEnabled.Value : (bool?)null, changeFeed.HasValue ? changeFeed.Value : null, restorePolicy.HasValue ? restorePolicy.Value : null, containerDeleteRetentionPolicy.HasValue ? containerDeleteRetentionPolicy.Value : null);
+            return new BlobServiceProperties(id.Value, name.Value, type.Value, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value);
         }
     }
 }

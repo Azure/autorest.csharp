@@ -41,20 +41,13 @@ namespace Azure.Network.Management.Interface.Models
                     List<CloudErrorBody> array = new List<CloudErrorBody>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeCloudErrorBody(item));
-                        }
+                        array.Add(DeserializeCloudErrorBody(item));
                     }
                     details = array;
                     continue;
                 }
             }
-            return new CloudErrorBody(code.HasValue ? code.Value : null, message.HasValue ? message.Value : null, target.HasValue ? target.Value : null, new ChangeTrackingList<CloudErrorBody>(details));
+            return new CloudErrorBody(code.Value, message.Value, target.Value, Optional.ToList(details));
         }
     }
 }

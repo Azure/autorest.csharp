@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("indexAnalyzer");
                 writer.WriteStringValue(IndexAnalyzer.Value.ToString());
             }
-            if (Optional.IsDefined(SynonymMaps))
+            if (Optional.IsCollectionDefined(SynonymMaps))
             {
                 writer.WritePropertyName("synonymMaps");
                 writer.WriteStartArray();
@@ -75,7 +75,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Fields))
+            if (Optional.IsCollectionDefined(Fields))
             {
                 writer.WritePropertyName("fields");
                 writer.WriteStartArray();
@@ -165,14 +165,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     synonymMaps = array;
                     continue;
@@ -182,20 +175,13 @@ namespace CognitiveSearch.Models
                     List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeField(item));
-                        }
+                        array.Add(DeserializeField(item));
                     }
                     fields = array;
                     continue;
                 }
             }
-            return new Field(name, type, key.HasValue ? key.Value : (bool?)null, retrievable.HasValue ? retrievable.Value : (bool?)null, searchable.HasValue ? searchable.Value : (bool?)null, filterable.HasValue ? filterable.Value : (bool?)null, sortable.HasValue ? sortable.Value : (bool?)null, facetable.HasValue ? facetable.Value : (bool?)null, analyzer.HasValue ? analyzer.Value : (AnalyzerName?)null, searchAnalyzer.HasValue ? searchAnalyzer.Value : (AnalyzerName?)null, indexAnalyzer.HasValue ? indexAnalyzer.Value : (AnalyzerName?)null, new ChangeTrackingList<string>(synonymMaps), new ChangeTrackingList<Field>(fields));
+            return new Field(name, type, Optional.ToNullable(key), Optional.ToNullable(retrievable), Optional.ToNullable(searchable), Optional.ToNullable(filterable), Optional.ToNullable(sortable), Optional.ToNullable(facetable), Optional.ToNullable(analyzer), Optional.ToNullable(searchAnalyzer), Optional.ToNullable(indexAnalyzer), Optional.ToList(synonymMaps), Optional.ToList(fields));
         }
     }
 }

@@ -104,14 +104,7 @@ namespace CognitiveSearch
                     {
                         Skillset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Skillset.DeserializeSkillset(document.RootElement);
-                        }
+                        value = Skillset.DeserializeSkillset(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -145,14 +138,7 @@ namespace CognitiveSearch
                     {
                         Skillset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Skillset.DeserializeSkillset(document.RootElement);
-                        }
+                        value = Skillset.DeserializeSkillset(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -273,14 +259,7 @@ namespace CognitiveSearch
                     {
                         Skillset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Skillset.DeserializeSkillset(document.RootElement);
-                        }
+                        value = Skillset.DeserializeSkillset(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -307,14 +286,7 @@ namespace CognitiveSearch
                     {
                         Skillset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Skillset.DeserializeSkillset(document.RootElement);
-                        }
+                        value = Skillset.DeserializeSkillset(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -357,14 +329,7 @@ namespace CognitiveSearch
                     {
                         ListSkillsetsResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
-                        }
+                        value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -386,14 +351,7 @@ namespace CognitiveSearch
                     {
                         ListSkillsetsResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
-                        }
+                        value = ListSkillsetsResult.DeserializeListSkillsetsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -441,14 +399,7 @@ namespace CognitiveSearch
                     {
                         Skillset value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Skillset.DeserializeSkillset(document.RootElement);
-                        }
+                        value = Skillset.DeserializeSkillset(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -475,14 +426,7 @@ namespace CognitiveSearch
                     {
                         Skillset value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Skillset.DeserializeSkillset(document.RootElement);
-                        }
+                        value = Skillset.DeserializeSkillset(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

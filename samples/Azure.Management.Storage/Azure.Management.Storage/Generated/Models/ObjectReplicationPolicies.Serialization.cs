@@ -23,20 +23,13 @@ namespace Azure.Management.Storage.Models
                     List<ObjectReplicationPolicy> array = new List<ObjectReplicationPolicy>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(item));
-                        }
+                        array.Add(ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new ObjectReplicationPolicies(new ChangeTrackingList<ObjectReplicationPolicy>(value));
+            return new ObjectReplicationPolicies(Optional.ToList(value));
         }
     }
 }

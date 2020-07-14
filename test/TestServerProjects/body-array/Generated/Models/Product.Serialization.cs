@@ -45,7 +45,7 @@ namespace body_array.Models
                     continue;
                 }
             }
-            return new Product(integer.HasValue ? integer.Value : (int?)null, @string.HasValue ? @string.Value : null);
+            return new Product(Optional.ToNullable(integer), @string.Value);
         }
     }
 }

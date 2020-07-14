@@ -57,7 +57,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionService(enabled.HasValue ? enabled.Value : (bool?)null, lastEnabledTime.HasValue ? lastEnabledTime.Value : (DateTimeOffset?)null, keyType.HasValue ? keyType.Value : (KeyType?)null);
+            return new EncryptionService(Optional.ToNullable(enabled), Optional.ToNullable(lastEnabledTime), Optional.ToNullable(keyType));
         }
     }
 }

@@ -30,7 +30,7 @@ namespace additionalProperties.Models
             }
             writer.WritePropertyName("@odata.location");
             writer.WriteStringValue(OdataLocation);
-            if (Optional.IsDefined(AdditionalProperties))
+            if (Optional.IsCollectionDefined(AdditionalProperties))
             {
                 writer.WritePropertyName("additionalProperties");
                 writer.WriteStartObject();
@@ -91,17 +91,10 @@ namespace additionalProperties.Models
                     continue;
                 }
                 additionalPropertiesDictionary ??= new Dictionary<string, string>();
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    additionalPropertiesDictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
-                }
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             moreAdditionalProperties = additionalPropertiesDictionary;
-            return new PetAPInPropertiesWithAPString(id, name.HasValue ? name.Value : null, status.HasValue ? status.Value : (bool?)null, odataLocation, new ChangeTrackingDictionary<string, float>(additionalProperties), moreAdditionalProperties);
+            return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, Optional.ToDictionary(additionalProperties), moreAdditionalProperties);
         }
     }
 }

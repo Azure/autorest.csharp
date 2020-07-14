@@ -61,17 +61,10 @@ namespace additionalProperties.Models
                     continue;
                 }
                 additionalPropertiesDictionary ??= new Dictionary<string, string>();
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    additionalPropertiesDictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
-                }
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new PetAPString(id, name.HasValue ? name.Value : null, status.HasValue ? status.Value : (bool?)null, additionalProperties);
+            return new PetAPString(id, name.Value, Optional.ToNullable(status), additionalProperties);
         }
     }
 }

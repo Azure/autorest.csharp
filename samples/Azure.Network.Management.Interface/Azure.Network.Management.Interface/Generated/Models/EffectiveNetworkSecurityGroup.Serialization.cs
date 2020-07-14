@@ -36,14 +36,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<EffectiveNetworkSecurityRule> array = new List<EffectiveNetworkSecurityRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(EffectiveNetworkSecurityRule.DeserializeEffectiveNetworkSecurityRule(item));
-                        }
+                        array.Add(EffectiveNetworkSecurityRule.DeserializeEffectiveNetworkSecurityRule(item));
                     }
                     effectiveSecurityRules = array;
                     continue;
@@ -54,7 +47,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveNetworkSecurityGroup(networkSecurityGroup.HasValue ? networkSecurityGroup.Value : null, association.HasValue ? association.Value : null, new ChangeTrackingList<EffectiveNetworkSecurityRule>(effectiveSecurityRules), tagMap.HasValue ? tagMap.Value : null);
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup.Value, association.Value, Optional.ToList(effectiveSecurityRules), tagMap.Value);
         }
     }
 }

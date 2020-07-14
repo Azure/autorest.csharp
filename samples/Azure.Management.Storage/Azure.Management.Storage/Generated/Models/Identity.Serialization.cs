@@ -53,7 +53,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new Identity(principalId.HasValue ? principalId.Value : null, tenantId.HasValue ? tenantId.Value : null, type);
+            return new Identity(principalId.Value, tenantId.Value, type);
         }
     }
 }

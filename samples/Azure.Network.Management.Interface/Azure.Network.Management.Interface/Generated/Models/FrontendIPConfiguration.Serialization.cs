@@ -31,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
-            if (Optional.IsDefined(Zones))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones");
                 writer.WriteStartArray();
@@ -48,7 +48,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(InboundNatRules))
+            if (Optional.IsCollectionDefined(InboundNatRules))
             {
                 writer.WritePropertyName("inboundNatRules");
                 writer.WriteStartArray();
@@ -58,7 +58,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(InboundNatPools))
+            if (Optional.IsCollectionDefined(InboundNatPools))
             {
                 writer.WritePropertyName("inboundNatPools");
                 writer.WriteStartArray();
@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(OutboundRules))
+            if (Optional.IsCollectionDefined(OutboundRules))
             {
                 writer.WritePropertyName("outboundRules");
                 writer.WriteStartArray();
@@ -78,7 +78,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(LoadBalancingRules))
+            if (Optional.IsCollectionDefined(LoadBalancingRules))
             {
                 writer.WritePropertyName("loadBalancingRules");
                 writer.WriteStartArray();
@@ -167,14 +167,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     zones = array;
                     continue;
@@ -193,14 +186,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(DeserializeSubResource(item));
-                                }
+                                array.Add(DeserializeSubResource(item));
                             }
                             inboundNatRules = array;
                             continue;
@@ -210,14 +196,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(DeserializeSubResource(item));
-                                }
+                                array.Add(DeserializeSubResource(item));
                             }
                             inboundNatPools = array;
                             continue;
@@ -227,14 +206,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(DeserializeSubResource(item));
-                                }
+                                array.Add(DeserializeSubResource(item));
                             }
                             outboundRules = array;
                             continue;
@@ -244,14 +216,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(DeserializeSubResource(item));
-                                }
+                                array.Add(DeserializeSubResource(item));
                             }
                             loadBalancingRules = array;
                             continue;
@@ -295,7 +260,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new FrontendIPConfiguration(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingList<string>(zones), new ChangeTrackingList<SubResource>(inboundNatRules), new ChangeTrackingList<SubResource>(inboundNatPools), new ChangeTrackingList<SubResource>(outboundRules), new ChangeTrackingList<SubResource>(loadBalancingRules), privateIPAddress.HasValue ? privateIPAddress.Value : null, privateIPAllocationMethod.HasValue ? privateIPAllocationMethod.Value : (IPAllocationMethod?)null, privateIPAddressVersion.HasValue ? privateIPAddressVersion.Value : (IPVersion?)null, subnet.HasValue ? subnet.Value : null, publicIPAddress.HasValue ? publicIPAddress.Value : null, publicIPPrefix.HasValue ? publicIPPrefix.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new FrontendIPConfiguration(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(zones), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), Optional.ToList(loadBalancingRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, publicIPAddress.Value, publicIPPrefix.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

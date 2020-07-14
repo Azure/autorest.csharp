@@ -45,7 +45,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddress(fqdn.HasValue ? fqdn.Value : null, ipAddress.HasValue ? ipAddress.Value : null);
+            return new ApplicationGatewayBackendAddress(fqdn.Value, ipAddress.Value);
         }
     }
 }

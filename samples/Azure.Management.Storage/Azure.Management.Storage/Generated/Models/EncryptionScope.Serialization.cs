@@ -122,7 +122,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionScope(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, source.HasValue ? source.Value : (EncryptionScopeSource?)null, state.HasValue ? state.Value : (EncryptionScopeState?)null, creationTime.HasValue ? creationTime.Value : (DateTimeOffset?)null, lastModifiedTime.HasValue ? lastModifiedTime.Value : (DateTimeOffset?)null, keyVaultProperties.HasValue ? keyVaultProperties.Value : null);
+            return new EncryptionScope(id.Value, name.Value, type.Value, Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value);
         }
     }
 }

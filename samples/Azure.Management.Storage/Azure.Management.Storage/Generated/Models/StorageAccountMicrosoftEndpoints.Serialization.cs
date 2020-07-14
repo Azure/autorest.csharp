@@ -89,7 +89,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new StorageAccountMicrosoftEndpoints(blob.HasValue ? blob.Value : null, queue.HasValue ? queue.Value : null, table.HasValue ? table.Value : null, file.HasValue ? file.Value : null, web.HasValue ? web.Value : null, dfs.HasValue ? dfs.Value : null);
+            return new StorageAccountMicrosoftEndpoints(blob.Value, queue.Value, table.Value, file.Value, web.Value, dfs.Value);
         }
     }
 }

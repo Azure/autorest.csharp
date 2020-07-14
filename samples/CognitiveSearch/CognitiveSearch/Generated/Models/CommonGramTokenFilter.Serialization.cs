@@ -54,14 +54,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     commonWords = array;
                     continue;
@@ -87,7 +80,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CommonGramTokenFilter(odataType, name, commonWords, ignoreCase.HasValue ? ignoreCase.Value : (bool?)null, queryMode.HasValue ? queryMode.Value : (bool?)null);
+            return new CommonGramTokenFilter(odataType, name, commonWords, Optional.ToNullable(ignoreCase), Optional.ToNullable(queryMode));
         }
     }
 }

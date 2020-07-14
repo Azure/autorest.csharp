@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new FreshnessScoringFunction(type, fieldName, boost, interpolation.HasValue ? interpolation.Value : (ScoringFunctionInterpolation?)null, freshness);
+            return new FreshnessScoringFunction(type, fieldName, boost, Optional.ToNullable(interpolation), freshness);
         }
     }
 }

@@ -209,7 +209,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new LoadBalancingRule(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, type.HasValue ? type.Value : null, frontendIPConfiguration.HasValue ? frontendIPConfiguration.Value : null, backendAddressPool.HasValue ? backendAddressPool.Value : null, probe.HasValue ? probe.Value : null, protocol.HasValue ? protocol.Value : (TransportProtocol?)null, loadDistribution.HasValue ? loadDistribution.Value : (LoadDistribution?)null, frontendPort.HasValue ? frontendPort.Value : (int?)null, backendPort.HasValue ? backendPort.Value : (int?)null, idleTimeoutInMinutes.HasValue ? idleTimeoutInMinutes.Value : (int?)null, enableFloatingIP.HasValue ? enableFloatingIP.Value : (bool?)null, enableTcpReset.HasValue ? enableTcpReset.Value : (bool?)null, disableOutboundSnat.HasValue ? disableOutboundSnat.Value : (bool?)null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new LoadBalancingRule(id.Value, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, backendAddressPool.Value, probe.Value, Optional.ToNullable(protocol), Optional.ToNullable(loadDistribution), Optional.ToNullable(frontendPort), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(disableOutboundSnat), Optional.ToNullable(provisioningState));
         }
     }
 }

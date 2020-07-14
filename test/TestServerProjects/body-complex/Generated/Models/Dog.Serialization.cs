@@ -56,7 +56,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Dog(id.HasValue ? id.Value : (int?)null, name.HasValue ? name.Value : null, food.HasValue ? food.Value : null);
+            return new Dog(Optional.ToNullable(id), name.Value, food.Value);
         }
     }
 }

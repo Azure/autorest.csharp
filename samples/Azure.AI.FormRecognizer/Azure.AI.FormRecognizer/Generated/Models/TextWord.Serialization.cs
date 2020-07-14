@@ -41,7 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new TextWord(text, boundingBox, confidence.HasValue ? confidence.Value : (float?)null);
+            return new TextWord(text, boundingBox, Optional.ToNullable(confidence));
         }
     }
 }

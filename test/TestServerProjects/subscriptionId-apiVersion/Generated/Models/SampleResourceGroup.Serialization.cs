@@ -29,7 +29,7 @@ namespace subscriptionId_apiVersion.Models
                     continue;
                 }
             }
-            return new SampleResourceGroup(name.HasValue ? name.Value : null, location.HasValue ? location.Value : null);
+            return new SampleResourceGroup(name.Value, location.Value);
         }
     }
 }

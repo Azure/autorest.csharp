@@ -45,7 +45,7 @@ namespace multiple_inheritance.Models
                     continue;
                 }
             }
-            return new Feline(meows.HasValue ? meows.Value : (bool?)null, hisses.HasValue ? hisses.Value : (bool?)null);
+            return new Feline(Optional.ToNullable(meows), Optional.ToNullable(hisses));
         }
     }
 }

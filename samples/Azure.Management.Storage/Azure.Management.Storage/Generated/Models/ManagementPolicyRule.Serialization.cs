@@ -23,7 +23,7 @@ namespace Azure.Management.Storage.Models
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
             writer.WritePropertyName("type");
-            writer.WriteStringValue(Type);
+            writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("definition");
             writer.WriteObjectValue(Definition);
             writer.WriteEndObject();
@@ -33,7 +33,7 @@ namespace Azure.Management.Storage.Models
         {
             Optional<bool> enabled = default;
             string name = default;
-            string type = default;
+            RuleType type = default;
             ManagementPolicyDefinition definition = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -49,7 +49,7 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type = new RuleType(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("definition"))
@@ -58,7 +58,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicyRule(enabled.HasValue ? enabled.Value : (bool?)null, name, type, definition);
+            return new ManagementPolicyRule(Optional.ToNullable(enabled), name, type, definition);
         }
     }
 }

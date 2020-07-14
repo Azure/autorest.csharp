@@ -184,14 +184,7 @@ namespace Azure.Network.Management.Interface
                     {
                         NetworkInterfaceTapConfiguration value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
-                        }
+                        value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -227,14 +220,7 @@ namespace Azure.Network.Management.Interface
                     {
                         NetworkInterfaceTapConfiguration value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
-                        }
+                        value = NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -382,14 +368,7 @@ namespace Azure.Network.Management.Interface
                     {
                         NetworkInterfaceTapConfigurationListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
-                        }
+                        value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -420,14 +399,7 @@ namespace Azure.Network.Management.Interface
                     {
                         NetworkInterfaceTapConfigurationListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
-                        }
+                        value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -475,14 +447,7 @@ namespace Azure.Network.Management.Interface
                     {
                         NetworkInterfaceTapConfigurationListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
-                        }
+                        value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -518,14 +483,7 @@ namespace Azure.Network.Management.Interface
                     {
                         NetworkInterfaceTapConfigurationListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
-                        }
+                        value = NetworkInterfaceTapConfigurationListResult.DeserializeNetworkInterfaceTapConfigurationListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

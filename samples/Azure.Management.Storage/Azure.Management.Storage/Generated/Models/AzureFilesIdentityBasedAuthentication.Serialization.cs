@@ -42,7 +42,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties.HasValue ? activeDirectoryProperties.Value : null);
+            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties.Value);
         }
     }
 }

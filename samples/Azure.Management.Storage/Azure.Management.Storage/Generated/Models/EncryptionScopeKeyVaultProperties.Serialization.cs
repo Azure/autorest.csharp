@@ -34,7 +34,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionScopeKeyVaultProperties(keyUri.HasValue ? keyUri.Value : null);
+            return new EncryptionScopeKeyVaultProperties(keyUri.Value);
         }
     }
 }

@@ -60,19 +60,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -92,19 +85,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -136,19 +122,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -168,19 +147,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -212,19 +184,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -244,19 +209,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -351,19 +309,12 @@ namespace body_array
                     {
                         IReadOnlyList<bool> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<bool> array = new List<bool>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBoolean());
                         }
-                        else
-                        {
-                            List<bool> array = new List<bool>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetBoolean());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -383,19 +334,12 @@ namespace body_array
                     {
                         IReadOnlyList<bool> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<bool> array = new List<bool>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBoolean());
                         }
-                        else
-                        {
-                            List<bool> array = new List<bool>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetBoolean());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -490,19 +434,12 @@ namespace body_array
                     {
                         IReadOnlyList<bool> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<bool> array = new List<bool>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBoolean());
                         }
-                        else
-                        {
-                            List<bool> array = new List<bool>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetBoolean());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -522,19 +459,12 @@ namespace body_array
                     {
                         IReadOnlyList<bool> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<bool> array = new List<bool>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBoolean());
                         }
-                        else
-                        {
-                            List<bool> array = new List<bool>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetBoolean());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -566,19 +496,12 @@ namespace body_array
                     {
                         IReadOnlyList<bool> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<bool> array = new List<bool>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBoolean());
                         }
-                        else
-                        {
-                            List<bool> array = new List<bool>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetBoolean());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -598,19 +521,12 @@ namespace body_array
                     {
                         IReadOnlyList<bool> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<bool> array = new List<bool>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBoolean());
                         }
-                        else
-                        {
-                            List<bool> array = new List<bool>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetBoolean());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -642,19 +558,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -674,19 +583,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -781,19 +683,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -813,19 +708,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -857,19 +745,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -889,19 +770,12 @@ namespace body_array
                     {
                         IReadOnlyList<int> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<int> array = new List<int>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt32());
                         }
-                        else
-                        {
-                            List<int> array = new List<int>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt32());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -933,19 +807,12 @@ namespace body_array
                     {
                         IReadOnlyList<long> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<long> array = new List<long>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt64());
                         }
-                        else
-                        {
-                            List<long> array = new List<long>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt64());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -965,19 +832,12 @@ namespace body_array
                     {
                         IReadOnlyList<long> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<long> array = new List<long>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt64());
                         }
-                        else
-                        {
-                            List<long> array = new List<long>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt64());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1072,19 +932,12 @@ namespace body_array
                     {
                         IReadOnlyList<long> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<long> array = new List<long>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt64());
                         }
-                        else
-                        {
-                            List<long> array = new List<long>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt64());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1104,19 +957,12 @@ namespace body_array
                     {
                         IReadOnlyList<long> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<long> array = new List<long>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt64());
                         }
-                        else
-                        {
-                            List<long> array = new List<long>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt64());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1148,19 +994,12 @@ namespace body_array
                     {
                         IReadOnlyList<long> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<long> array = new List<long>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt64());
                         }
-                        else
-                        {
-                            List<long> array = new List<long>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt64());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1180,19 +1019,12 @@ namespace body_array
                     {
                         IReadOnlyList<long> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<long> array = new List<long>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetInt64());
                         }
-                        else
-                        {
-                            List<long> array = new List<long>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetInt64());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1224,19 +1056,12 @@ namespace body_array
                     {
                         IReadOnlyList<float> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<float> array = new List<float>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetSingle());
                         }
-                        else
-                        {
-                            List<float> array = new List<float>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetSingle());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1256,19 +1081,12 @@ namespace body_array
                     {
                         IReadOnlyList<float> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<float> array = new List<float>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetSingle());
                         }
-                        else
-                        {
-                            List<float> array = new List<float>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetSingle());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1363,19 +1181,12 @@ namespace body_array
                     {
                         IReadOnlyList<float> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<float> array = new List<float>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetSingle());
                         }
-                        else
-                        {
-                            List<float> array = new List<float>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetSingle());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1395,19 +1206,12 @@ namespace body_array
                     {
                         IReadOnlyList<float> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<float> array = new List<float>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetSingle());
                         }
-                        else
-                        {
-                            List<float> array = new List<float>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetSingle());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1439,19 +1243,12 @@ namespace body_array
                     {
                         IReadOnlyList<float> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<float> array = new List<float>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetSingle());
                         }
-                        else
-                        {
-                            List<float> array = new List<float>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetSingle());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1471,19 +1268,12 @@ namespace body_array
                     {
                         IReadOnlyList<float> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<float> array = new List<float>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetSingle());
                         }
-                        else
-                        {
-                            List<float> array = new List<float>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetSingle());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1515,19 +1305,12 @@ namespace body_array
                     {
                         IReadOnlyList<double> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<double> array = new List<double>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDouble());
                         }
-                        else
-                        {
-                            List<double> array = new List<double>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDouble());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1547,19 +1330,12 @@ namespace body_array
                     {
                         IReadOnlyList<double> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<double> array = new List<double>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDouble());
                         }
-                        else
-                        {
-                            List<double> array = new List<double>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDouble());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1654,19 +1430,12 @@ namespace body_array
                     {
                         IReadOnlyList<double> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<double> array = new List<double>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDouble());
                         }
-                        else
-                        {
-                            List<double> array = new List<double>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDouble());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1686,19 +1455,12 @@ namespace body_array
                     {
                         IReadOnlyList<double> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<double> array = new List<double>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDouble());
                         }
-                        else
-                        {
-                            List<double> array = new List<double>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDouble());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1730,19 +1492,12 @@ namespace body_array
                     {
                         IReadOnlyList<double> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<double> array = new List<double>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDouble());
                         }
-                        else
-                        {
-                            List<double> array = new List<double>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDouble());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1762,19 +1517,12 @@ namespace body_array
                     {
                         IReadOnlyList<double> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<double> array = new List<double>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDouble());
                         }
-                        else
-                        {
-                            List<double> array = new List<double>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDouble());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1806,26 +1554,12 @@ namespace body_array
                     {
                         IReadOnlyList<string> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetString());
                         }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1845,26 +1579,12 @@ namespace body_array
                     {
                         IReadOnlyList<string> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetString());
                         }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1959,19 +1679,12 @@ namespace body_array
                     {
                         IReadOnlyList<FooEnum> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<FooEnum> array = new List<FooEnum>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetString().ToFooEnum());
                         }
-                        else
-                        {
-                            List<FooEnum> array = new List<FooEnum>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetString().ToFooEnum());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1991,19 +1704,12 @@ namespace body_array
                     {
                         IReadOnlyList<FooEnum> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<FooEnum> array = new List<FooEnum>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetString().ToFooEnum());
                         }
-                        else
-                        {
-                            List<FooEnum> array = new List<FooEnum>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetString().ToFooEnum());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2098,19 +1804,12 @@ namespace body_array
                     {
                         IReadOnlyList<Enum0> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Enum0> array = new List<Enum0>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(new Enum0(item.GetString()));
                         }
-                        else
-                        {
-                            List<Enum0> array = new List<Enum0>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(new Enum0(item.GetString()));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2130,19 +1829,12 @@ namespace body_array
                     {
                         IReadOnlyList<Enum0> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Enum0> array = new List<Enum0>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(new Enum0(item.GetString()));
                         }
-                        else
-                        {
-                            List<Enum0> array = new List<Enum0>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(new Enum0(item.GetString()));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2237,26 +1929,19 @@ namespace body_array
                     {
                         IReadOnlyList<string> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2276,26 +1961,19 @@ namespace body_array
                     {
                         IReadOnlyList<string> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                array.Add(item.GetString());
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2327,26 +2005,12 @@ namespace body_array
                     {
                         IReadOnlyList<string> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetString());
                         }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2366,26 +2030,12 @@ namespace body_array
                     {
                         IReadOnlyList<string> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetString());
                         }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2417,19 +2067,12 @@ namespace body_array
                     {
                         IReadOnlyList<Guid> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Guid> array = new List<Guid>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetGuid());
                         }
-                        else
-                        {
-                            List<Guid> array = new List<Guid>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetGuid());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2449,19 +2092,12 @@ namespace body_array
                     {
                         IReadOnlyList<Guid> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Guid> array = new List<Guid>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetGuid());
                         }
-                        else
-                        {
-                            List<Guid> array = new List<Guid>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetGuid());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2556,19 +2192,12 @@ namespace body_array
                     {
                         IReadOnlyList<Guid> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Guid> array = new List<Guid>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetGuid());
                         }
-                        else
-                        {
-                            List<Guid> array = new List<Guid>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetGuid());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2588,19 +2217,12 @@ namespace body_array
                     {
                         IReadOnlyList<Guid> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Guid> array = new List<Guid>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetGuid());
                         }
-                        else
-                        {
-                            List<Guid> array = new List<Guid>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetGuid());
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2632,19 +2254,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("D"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("D"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2664,19 +2279,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("D"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("D"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2771,19 +2379,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("D"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("D"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2803,19 +2404,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("D"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("D"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2847,19 +2441,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("D"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("D"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2879,19 +2466,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("D"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("D"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2923,19 +2503,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("O"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("O"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2955,19 +2528,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("O"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("O"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3062,19 +2628,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("O"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("O"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3094,19 +2653,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("O"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("O"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3138,19 +2690,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("O"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("O"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3170,19 +2715,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("O"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("O"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3214,19 +2752,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("R"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("R"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3246,19 +2777,12 @@ namespace body_array
                     {
                         IReadOnlyList<DateTimeOffset> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<DateTimeOffset> array = new List<DateTimeOffset>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetDateTimeOffset("R"));
                         }
-                        else
-                        {
-                            List<DateTimeOffset> array = new List<DateTimeOffset>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetDateTimeOffset("R"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3353,19 +2877,12 @@ namespace body_array
                     {
                         IReadOnlyList<TimeSpan> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<TimeSpan> array = new List<TimeSpan>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetTimeSpan("P"));
                         }
-                        else
-                        {
-                            List<TimeSpan> array = new List<TimeSpan>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetTimeSpan("P"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3385,19 +2902,12 @@ namespace body_array
                     {
                         IReadOnlyList<TimeSpan> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<TimeSpan> array = new List<TimeSpan>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetTimeSpan("P"));
                         }
-                        else
-                        {
-                            List<TimeSpan> array = new List<TimeSpan>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                array.Add(item.GetTimeSpan("P"));
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3492,26 +3002,12 @@ namespace body_array
                     {
                         IReadOnlyList<byte[]> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<byte[]> array = new List<byte[]>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBytesFromBase64());
                         }
-                        else
-                        {
-                            List<byte[]> array = new List<byte[]>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetBytesFromBase64());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3531,26 +3027,12 @@ namespace body_array
                     {
                         IReadOnlyList<byte[]> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<byte[]> array = new List<byte[]>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBytesFromBase64());
                         }
-                        else
-                        {
-                            List<byte[]> array = new List<byte[]>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetBytesFromBase64());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3645,26 +3127,12 @@ namespace body_array
                     {
                         IReadOnlyList<byte[]> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<byte[]> array = new List<byte[]>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBytesFromBase64());
                         }
-                        else
-                        {
-                            List<byte[]> array = new List<byte[]>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetBytesFromBase64());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3684,26 +3152,12 @@ namespace body_array
                     {
                         IReadOnlyList<byte[]> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<byte[]> array = new List<byte[]>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBytesFromBase64());
                         }
-                        else
-                        {
-                            List<byte[]> array = new List<byte[]>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetBytesFromBase64());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3735,26 +3189,12 @@ namespace body_array
                     {
                         IReadOnlyList<byte[]> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<byte[]> array = new List<byte[]>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBytesFromBase64("U"));
                         }
-                        else
-                        {
-                            List<byte[]> array = new List<byte[]>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetBytesFromBase64("U"));
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3774,26 +3214,12 @@ namespace body_array
                     {
                         IReadOnlyList<byte[]> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<byte[]> array = new List<byte[]>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetBytesFromBase64("U"));
                         }
-                        else
-                        {
-                            List<byte[]> array = new List<byte[]>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetBytesFromBase64("U"));
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3825,26 +3251,19 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3864,26 +3283,19 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3915,26 +3327,12 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(Product.DeserializeProduct(item));
                         }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3954,26 +3352,12 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(Product.DeserializeProduct(item));
                         }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4005,26 +3389,19 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4044,26 +3421,19 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                array.Add(Product.DeserializeProduct(item));
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4095,26 +3465,12 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(Product.DeserializeProduct(item));
                         }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4134,26 +3490,12 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(Product.DeserializeProduct(item));
                         }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4185,26 +3527,12 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(Product.DeserializeProduct(item));
                         }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4224,26 +3552,12 @@ namespace body_array
                     {
                         IReadOnlyList<Product> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<Product> array = new List<Product>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(Product.DeserializeProduct(item));
                         }
-                        else
-                        {
-                            List<Product> array = new List<Product>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Product.DeserializeProduct(item));
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4338,38 +3652,17 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array0.Add(item0.GetString());
                             }
-                            value = array;
+                            array.Add(array0);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4389,38 +3682,17 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array0.Add(item0.GetString());
                             }
-                            value = array;
+                            array.Add(array0);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4452,38 +3724,17 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array0.Add(item0.GetString());
                             }
-                            value = array;
+                            array.Add(array0);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4503,38 +3754,17 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array0.Add(item0.GetString());
                             }
-                            value = array;
+                            array.Add(array0);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4566,38 +3796,24 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4617,38 +3833,24 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                List<string> array0 = new List<string>();
+                                foreach (var item0 in item.EnumerateArray())
+                                {
+                                    array0.Add(item0.GetString());
+                                }
+                                array.Add(array0);
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4680,38 +3882,17 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array0.Add(item0.GetString());
                             }
-                            value = array;
+                            array.Add(array0);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4731,38 +3912,17 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array0.Add(item0.GetString());
                             }
-                            value = array;
+                            array.Add(array0);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4794,38 +3954,17 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array0.Add(item0.GetString());
                             }
-                            value = array;
+                            array.Add(array0);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4845,38 +3984,17 @@ namespace body_array
                     {
                         IReadOnlyList<IList<string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IList<string>> array = new List<IList<string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IList<string>> array = new List<IList<string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    List<string> array0 = new List<string>();
-                                    foreach (var item0 in item.EnumerateArray())
-                                    {
-                                        if (item0.ValueKind == JsonValueKind.Null)
-                                        {
-                                            array0.Add(null);
-                                        }
-                                        else
-                                        {
-                                            array0.Add(item0.GetString());
-                                        }
-                                    }
-                                    array.Add(array0);
-                                }
+                                array0.Add(item0.GetString());
                             }
-                            value = array;
+                            array.Add(array0);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -4976,38 +4094,24 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5027,38 +4131,24 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5090,38 +4180,17 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in item.EnumerateObject())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
+                            array.Add(dictionary);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5141,38 +4210,17 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in item.EnumerateObject())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
+                            array.Add(dictionary);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5204,38 +4252,24 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5255,38 +4289,24 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                array.Add(null);
                             }
-                            value = array;
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5318,38 +4338,17 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in item.EnumerateObject())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
+                            array.Add(dictionary);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5369,38 +4368,17 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in item.EnumerateObject())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
+                            array.Add(dictionary);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5432,38 +4410,17 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in item.EnumerateObject())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
+                            array.Add(dictionary);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -5483,38 +4440,17 @@ namespace body_array
                     {
                         IReadOnlyList<IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
-                        }
-                        else
-                        {
-                            List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
-                            foreach (var item in document.RootElement.EnumerateArray())
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property in item.EnumerateObject())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                                    foreach (var property in item.EnumerateObject())
-                                    {
-                                        if (property.Value.ValueKind == JsonValueKind.Null)
-                                        {
-                                            dictionary.Add(property.Name, null);
-                                        }
-                                        else
-                                        {
-                                            dictionary.Add(property.Name, property.Value.GetString());
-                                        }
-                                    }
-                                    array.Add(dictionary);
-                                }
+                                dictionary.Add(property.Name, property.Value.GetString());
                             }
-                            value = array;
+                            array.Add(dictionary);
                         }
+                        value = array;
                         return Response.FromValue(value, message.Response);
                     }
                 default:

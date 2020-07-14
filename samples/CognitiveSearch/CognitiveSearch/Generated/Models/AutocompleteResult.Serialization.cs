@@ -29,20 +29,13 @@ namespace CognitiveSearch.Models
                     List<AutocompleteItem> array = new List<AutocompleteItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(AutocompleteItem.DeserializeAutocompleteItem(item));
-                        }
+                        array.Add(AutocompleteItem.DeserializeAutocompleteItem(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new AutocompleteResult(searchCoverage.HasValue ? searchCoverage.Value : (double?)null, value);
+            return new AutocompleteResult(Optional.ToNullable(searchCoverage), value);
         }
     }
 }

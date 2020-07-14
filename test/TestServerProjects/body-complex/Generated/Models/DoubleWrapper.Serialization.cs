@@ -45,7 +45,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DoubleWrapper(field1.HasValue ? field1.Value : (double?)null, field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.HasValue ? field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.Value : (double?)null);
+            return new DoubleWrapper(Optional.ToNullable(field1), Optional.ToNullable(field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose));
         }
     }
 }

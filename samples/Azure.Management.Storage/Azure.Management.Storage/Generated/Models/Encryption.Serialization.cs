@@ -53,7 +53,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new Encryption(services.HasValue ? services.Value : null, keySource, keyvaultproperties.HasValue ? keyvaultproperties.Value : null);
+            return new Encryption(services.Value, keySource, keyvaultproperties.Value);
         }
     }
 }

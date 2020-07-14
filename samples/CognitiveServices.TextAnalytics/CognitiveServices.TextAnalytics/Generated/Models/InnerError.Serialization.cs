@@ -37,14 +37,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     details = dictionary;
                     continue;
@@ -60,7 +53,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new InnerError(code, message, new ChangeTrackingDictionary<string, string>(details), target.HasValue ? target.Value : null, innerError.HasValue ? innerError.Value : null);
+            return new InnerError(code, message, Optional.ToDictionary(details), target.Value, innerError.Value);
         }
     }
 }

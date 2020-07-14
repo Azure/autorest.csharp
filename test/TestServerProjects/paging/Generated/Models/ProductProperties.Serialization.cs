@@ -29,7 +29,7 @@ namespace paging.Models
                     continue;
                 }
             }
-            return new ProductProperties(id.HasValue ? id.Value : (int?)null, name.HasValue ? name.Value : null);
+            return new ProductProperties(Optional.ToNullable(id), name.Value);
         }
     }
 }

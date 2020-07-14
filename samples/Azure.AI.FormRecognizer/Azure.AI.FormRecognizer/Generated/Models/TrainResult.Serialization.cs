@@ -26,14 +26,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<TrainingDocumentInfo> array = new List<TrainingDocumentInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
-                        }
+                        array.Add(TrainingDocumentInfo.DeserializeTrainingDocumentInfo(item));
                     }
                     trainingDocuments = array;
                     continue;
@@ -43,14 +36,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<FormFieldsReport> array = new List<FormFieldsReport>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
-                        }
+                        array.Add(FormFieldsReport.DeserializeFormFieldsReport(item));
                     }
                     fields = array;
                     continue;
@@ -65,20 +51,13 @@ namespace Azure.AI.FormRecognizer.Models
                     List<ErrorInformation> array = new List<ErrorInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(ErrorInformation.DeserializeErrorInformation(item));
-                        }
+                        array.Add(ErrorInformation.DeserializeErrorInformation(item));
                     }
                     errors = array;
                     continue;
                 }
             }
-            return new TrainResult(trainingDocuments, new ChangeTrackingList<FormFieldsReport>(fields), averageModelAccuracy.HasValue ? averageModelAccuracy.Value : (float?)null, new ChangeTrackingList<ErrorInformation>(errors));
+            return new TrainResult(trainingDocuments, Optional.ToList(fields), Optional.ToNullable(averageModelAccuracy), Optional.ToList(errors));
         }
     }
 }

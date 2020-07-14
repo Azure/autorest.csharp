@@ -53,7 +53,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ItemError(key.HasValue ? key.Value : null, errorMessage, statusCode, name.HasValue ? name.Value : null, details.HasValue ? details.Value : null, documentationLink.HasValue ? documentationLink.Value : null);
+            return new ItemError(key.Value, errorMessage, statusCode, name.Value, details.Value, documentationLink.Value);
         }
     }
 }

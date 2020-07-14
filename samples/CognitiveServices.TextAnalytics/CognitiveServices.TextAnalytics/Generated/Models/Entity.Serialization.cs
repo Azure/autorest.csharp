@@ -53,7 +53,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new Entity(text, type, subtype.HasValue ? subtype.Value : null, offset, length, score);
+            return new Entity(text, type, subtype.Value, offset, length, score);
         }
     }
 }

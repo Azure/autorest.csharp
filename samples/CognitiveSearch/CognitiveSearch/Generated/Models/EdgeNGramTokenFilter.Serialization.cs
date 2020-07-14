@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EdgeNGramTokenFilter(odataType, name, minGram.HasValue ? minGram.Value : (int?)null, maxGram.HasValue ? maxGram.Value : (int?)null, side.HasValue ? side.Value : (EdgeNGramTokenFilterSide?)null);
+            return new EdgeNGramTokenFilter(odataType, name, Optional.ToNullable(minGram), Optional.ToNullable(maxGram), Optional.ToNullable(side));
         }
     }
 }

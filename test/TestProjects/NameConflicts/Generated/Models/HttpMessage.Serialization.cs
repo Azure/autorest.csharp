@@ -34,7 +34,7 @@ namespace NameConflicts.Models
                     continue;
                 }
             }
-            return new HttpMessage(property.HasValue ? property.Value : null);
+            return new HttpMessage(property.Value);
         }
     }
 }

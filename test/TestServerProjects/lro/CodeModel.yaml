@@ -1864,7 +1864,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_5
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: ResourceTags

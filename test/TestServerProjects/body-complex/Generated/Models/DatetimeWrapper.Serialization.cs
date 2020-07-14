@@ -46,7 +46,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DatetimeWrapper(field.HasValue ? field.Value : (DateTimeOffset?)null, now.HasValue ? now.Value : (DateTimeOffset?)null);
+            return new DatetimeWrapper(Optional.ToNullable(field), Optional.ToNullable(now));
         }
     }
 }

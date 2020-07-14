@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexingSchedule(interval, startTime.HasValue ? startTime.Value : (DateTimeOffset?)null);
+            return new IndexingSchedule(interval, Optional.ToNullable(startTime));
         }
     }
 }

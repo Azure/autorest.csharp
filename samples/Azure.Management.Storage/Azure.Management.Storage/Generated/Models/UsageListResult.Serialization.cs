@@ -23,20 +23,13 @@ namespace Azure.Management.Storage.Models
                     List<Usage> array = new List<Usage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Usage.DeserializeUsage(item));
-                        }
+                        array.Add(Usage.DeserializeUsage(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new UsageListResult(new ChangeTrackingList<Usage>(value));
+            return new UsageListResult(Optional.ToList(value));
         }
     }
 }

@@ -23,20 +23,13 @@ namespace Azure.Management.Storage.Models
                     List<StorageAccountKey> array = new List<StorageAccountKey>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(StorageAccountKey.DeserializeStorageAccountKey(item));
-                        }
+                        array.Add(StorageAccountKey.DeserializeStorageAccountKey(item));
                     }
                     keys = array;
                     continue;
                 }
             }
-            return new StorageAccountListKeysResult(new ChangeTrackingList<StorageAccountKey>(keys));
+            return new StorageAccountListKeysResult(Optional.ToList(keys));
         }
     }
 }

@@ -99,7 +99,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IPConfigurationProfile(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, etag.HasValue ? etag.Value : null, subnet.HasValue ? subnet.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new IPConfigurationProfile(id.Value, name.Value, type.Value, etag.Value, subnet.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

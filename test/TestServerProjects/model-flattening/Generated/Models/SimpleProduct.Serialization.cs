@@ -106,7 +106,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new SimpleProduct(baseProductId, baseProductDescription.HasValue ? baseProductDescription.Value : null, maxProductDisplayName.HasValue ? maxProductDisplayName.Value : null, maxProductCapacity.HasValue ? maxProductCapacity.Value : null, genericValue.HasValue ? genericValue.Value : null, odataValue.HasValue ? odataValue.Value : null);
+            return new SimpleProduct(baseProductId, baseProductDescription.Value, maxProductDisplayName.Value, maxProductCapacity.Value, genericValue.Value, odataValue.Value);
         }
     }
 }

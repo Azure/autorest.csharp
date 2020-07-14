@@ -45,7 +45,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new FloatWrapper(field1.HasValue ? field1.Value : (float?)null, field2.HasValue ? field2.Value : (float?)null);
+            return new FloatWrapper(Optional.ToNullable(field1), Optional.ToNullable(field2));
         }
     }
 }

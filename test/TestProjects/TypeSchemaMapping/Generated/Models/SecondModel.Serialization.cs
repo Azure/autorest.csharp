@@ -22,7 +22,7 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("StringProperty");
                 writer.WriteNumberValue(IntProperty);
             }
-            if (Optional.IsDefined(DictionaryProperty))
+            if (Optional.IsCollectionDefined(DictionaryProperty))
             {
                 writer.WritePropertyName("DictionaryProperty");
                 writer.WriteStartObject();
@@ -58,14 +58,7 @@ namespace TypeSchemaMapping.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     dictionaryProperty = dictionary;
                     continue;
@@ -76,7 +69,7 @@ namespace TypeSchemaMapping.Models
                     continue;
                 }
             }
-            return new SecondModel(stringProperty, new ChangeTrackingDictionary<string, string>(dictionaryProperty), daysOfWeek.HasValue ? daysOfWeek.Value : (CustomDaysOfWeek?)null);
+            return new SecondModel(stringProperty, Optional.ToDictionary(dictionaryProperty), Optional.ToNullable(daysOfWeek));
         }
     }
 }

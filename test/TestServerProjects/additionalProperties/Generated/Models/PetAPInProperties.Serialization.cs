@@ -28,7 +28,7 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("status");
                 writer.WriteBooleanValue(Status.Value);
             }
-            if (Optional.IsDefined(AdditionalProperties))
+            if (Optional.IsCollectionDefined(AdditionalProperties))
             {
                 writer.WritePropertyName("additionalProperties");
                 writer.WriteStartObject();
@@ -76,7 +76,7 @@ namespace additionalProperties.Models
                     continue;
                 }
             }
-            return new PetAPInProperties(id, name.HasValue ? name.Value : null, status.HasValue ? status.Value : (bool?)null, new ChangeTrackingDictionary<string, float>(additionalProperties));
+            return new PetAPInProperties(id, name.Value, Optional.ToNullable(status), Optional.ToDictionary(additionalProperties));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace xml_service.Models
                 writer.WriteValue(Title);
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(Items))
+            if (Optional.IsCollectionDefined(Items))
             {
                 foreach (var item in Items)
                 {

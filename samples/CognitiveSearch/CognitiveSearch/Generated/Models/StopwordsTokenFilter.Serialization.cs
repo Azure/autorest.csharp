@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Stopwords))
+            if (Optional.IsCollectionDefined(Stopwords))
             {
                 writer.WritePropertyName("stopwords");
                 writer.WriteStartArray();
@@ -63,14 +63,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     stopwords = array;
                     continue;
@@ -101,7 +94,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StopwordsTokenFilter(odataType, name, new ChangeTrackingList<string>(stopwords), stopwordsList.HasValue ? stopwordsList.Value : (StopwordsList?)null, ignoreCase.HasValue ? ignoreCase.Value : (bool?)null, removeTrailing.HasValue ? removeTrailing.Value : (bool?)null);
+            return new StopwordsTokenFilter(odataType, name, Optional.ToList(stopwords), Optional.ToNullable(stopwordsList), Optional.ToNullable(ignoreCase), Optional.ToNullable(removeTrailing));
         }
     }
 }

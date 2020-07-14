@@ -36,7 +36,7 @@ namespace body_duration
 
         /// <summary> Get null duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TimeSpan>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TimeSpan?>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DurationClient.GetNull");
             scope.Start();
@@ -53,7 +53,7 @@ namespace body_duration
 
         /// <summary> Get null duration value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TimeSpan> GetNull(CancellationToken cancellationToken = default)
+        public virtual Response<TimeSpan?> GetNull(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DurationClient.GetNull");
             scope.Start();

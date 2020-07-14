@@ -35,7 +35,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new CheckNameAvailabilityResult(nameAvailable.HasValue ? nameAvailable.Value : (bool?)null, reason.HasValue ? reason.Value : (Reason?)null, message.HasValue ? message.Value : null);
+            return new CheckNameAvailabilityResult(Optional.ToNullable(nameAvailable), Optional.ToNullable(reason), message.Value);
         }
     }
 }

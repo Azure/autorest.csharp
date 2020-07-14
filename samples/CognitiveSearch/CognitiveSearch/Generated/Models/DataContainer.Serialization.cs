@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataContainer(name, query.HasValue ? query.Value : null);
+            return new DataContainer(name, query.Value);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new Sku(name, tier.HasValue ? tier.Value : (SkuTier?)null);
+            return new Sku(name, Optional.ToNullable(tier));
         }
     }
 }

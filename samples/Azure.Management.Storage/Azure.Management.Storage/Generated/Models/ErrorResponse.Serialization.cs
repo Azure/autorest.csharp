@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ErrorResponse(code.HasValue ? code.Value : null, message.HasValue ? message.Value : null);
+            return new ErrorResponse(code.Value, message.Value);
         }
     }
 }

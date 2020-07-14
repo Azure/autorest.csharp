@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("flags");
                 writer.WriteStringValue(Flags.Value.ToString());
             }
-            if (Optional.IsDefined(Stopwords))
+            if (Optional.IsCollectionDefined(Stopwords))
             {
                 writer.WritePropertyName("stopwords");
                 writer.WriteStartArray();
@@ -78,14 +78,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     stopwords = array;
                     continue;
@@ -101,7 +94,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternAnalyzer(odataType, name, lowercase.HasValue ? lowercase.Value : (bool?)null, pattern.HasValue ? pattern.Value : null, flags.HasValue ? flags.Value : (RegexFlags?)null, new ChangeTrackingList<string>(stopwords));
+            return new PatternAnalyzer(odataType, name, Optional.ToNullable(lowercase), pattern.Value, Optional.ToNullable(flags), Optional.ToList(stopwords));
         }
     }
 }

@@ -59,14 +59,7 @@ namespace multiple_inheritance
                     {
                         Horse value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Horse.DeserializeHorse(document.RootElement);
-                        }
+                        value = Horse.DeserializeHorse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -86,14 +79,7 @@ namespace multiple_inheritance
                     {
                         Horse value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Horse.DeserializeHorse(document.RootElement);
-                        }
+                        value = Horse.DeserializeHorse(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -135,14 +121,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -168,14 +147,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -207,14 +179,7 @@ namespace multiple_inheritance
                     {
                         Pet value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Pet.DeserializePet(document.RootElement);
-                        }
+                        value = Pet.DeserializePet(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -234,14 +199,7 @@ namespace multiple_inheritance
                     {
                         Pet value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Pet.DeserializePet(document.RootElement);
-                        }
+                        value = Pet.DeserializePet(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -283,14 +241,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -316,14 +267,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -355,14 +299,7 @@ namespace multiple_inheritance
                     {
                         Feline value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Feline.DeserializeFeline(document.RootElement);
-                        }
+                        value = Feline.DeserializeFeline(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -382,14 +319,7 @@ namespace multiple_inheritance
                     {
                         Feline value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Feline.DeserializeFeline(document.RootElement);
-                        }
+                        value = Feline.DeserializeFeline(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -431,14 +361,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -464,14 +387,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -503,14 +419,7 @@ namespace multiple_inheritance
                     {
                         Cat value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Cat.DeserializeCat(document.RootElement);
-                        }
+                        value = Cat.DeserializeCat(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -530,14 +439,7 @@ namespace multiple_inheritance
                     {
                         Cat value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Cat.DeserializeCat(document.RootElement);
-                        }
+                        value = Cat.DeserializeCat(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -579,14 +481,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -612,14 +507,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -651,14 +539,7 @@ namespace multiple_inheritance
                     {
                         Kitten value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Kitten.DeserializeKitten(document.RootElement);
-                        }
+                        value = Kitten.DeserializeKitten(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -678,14 +559,7 @@ namespace multiple_inheritance
                     {
                         Kitten value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Kitten.DeserializeKitten(document.RootElement);
-                        }
+                        value = Kitten.DeserializeKitten(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -727,14 +601,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -760,14 +627,7 @@ namespace multiple_inheritance
                     {
                         string value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = document.RootElement.GetString();
-                        }
+                        value = document.RootElement.GetString();
                         return Response.FromValue(value, message.Response);
                     }
                 default:

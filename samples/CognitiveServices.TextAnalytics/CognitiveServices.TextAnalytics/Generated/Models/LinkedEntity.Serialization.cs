@@ -33,14 +33,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<Match> array = new List<Match>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Match.DeserializeMatch(item));
-                        }
+                        array.Add(Match.DeserializeMatch(item));
                     }
                     matches = array;
                     continue;
@@ -66,7 +59,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new LinkedEntity(name, matches, language, id.HasValue ? id.Value : null, url, dataSource);
+            return new LinkedEntity(name, matches, language, id.Value, url, dataSource);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("maxTokenLength");
                 writer.WriteNumberValue(MaxTokenLength.Value);
             }
-            if (Optional.IsDefined(Stopwords))
+            if (Optional.IsCollectionDefined(Stopwords))
             {
                 writer.WritePropertyName("stopwords");
                 writer.WriteStartArray();
@@ -56,14 +56,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     stopwords = array;
                     continue;
@@ -79,7 +72,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new StandardAnalyzer(odataType, name, maxTokenLength.HasValue ? maxTokenLength.Value : (int?)null, new ChangeTrackingList<string>(stopwords));
+            return new StandardAnalyzer(odataType, name, Optional.ToNullable(maxTokenLength), Optional.ToList(stopwords));
         }
     }
 }

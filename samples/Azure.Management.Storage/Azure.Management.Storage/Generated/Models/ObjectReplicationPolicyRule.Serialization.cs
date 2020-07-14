@@ -61,7 +61,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ObjectReplicationPolicyRule(ruleId.HasValue ? ruleId.Value : null, sourceContainer, destinationContainer, filters.HasValue ? filters.Value : null);
+            return new ObjectReplicationPolicyRule(ruleId.Value, sourceContainer, destinationContainer, filters.Value);
         }
     }
 }

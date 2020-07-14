@@ -124,14 +124,7 @@ namespace ModelShapes
                     {
                         MixedModel value0 = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value0 = null;
-                        }
-                        else
-                        {
-                            value0 = MixedModel.DeserializeMixedModel(document.RootElement);
-                        }
+                        value0 = MixedModel.DeserializeMixedModel(document.RootElement);
                         return Response.FromValue(value0, message.Response);
                     }
                 default:
@@ -156,14 +149,7 @@ namespace ModelShapes
                     {
                         MixedModel value0 = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value0 = null;
-                        }
-                        else
-                        {
-                            value0 = MixedModel.DeserializeMixedModel(document.RootElement);
-                        }
+                        value0 = MixedModel.DeserializeMixedModel(document.RootElement);
                         return Response.FromValue(value0, message.Response);
                     }
                 default:
@@ -194,14 +180,7 @@ namespace ModelShapes
                     {
                         OutputModel value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OutputModel.DeserializeOutputModel(document.RootElement);
-                        }
+                        value = OutputModel.DeserializeOutputModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -220,14 +199,7 @@ namespace ModelShapes
                     {
                         OutputModel value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OutputModel.DeserializeOutputModel(document.RootElement);
-                        }
+                        value = OutputModel.DeserializeOutputModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

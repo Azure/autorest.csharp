@@ -45,7 +45,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Pet(id.HasValue ? id.Value : (int?)null, name.HasValue ? name.Value : null);
+            return new Pet(Optional.ToNullable(id), name.Value);
         }
     }
 }

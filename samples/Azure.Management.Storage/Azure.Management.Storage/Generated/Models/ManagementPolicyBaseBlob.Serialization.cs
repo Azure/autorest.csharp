@@ -56,7 +56,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicyBaseBlob(tierToCool.HasValue ? tierToCool.Value : null, tierToArchive.HasValue ? tierToArchive.Value : null, delete.HasValue ? delete.Value : null);
+            return new ManagementPolicyBaseBlob(tierToCool.Value, tierToArchive.Value, delete.Value);
         }
     }
 }

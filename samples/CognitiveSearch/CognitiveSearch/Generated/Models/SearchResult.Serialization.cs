@@ -31,42 +31,21 @@ namespace CognitiveSearch.Models
                     Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in property0.Value.EnumerateArray())
                         {
-                            dictionary.Add(property0.Name, null);
+                            array.Add(item.GetString());
                         }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in property0.Value.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
-                            }
-                            dictionary.Add(property0.Name, array);
-                        }
+                        dictionary.Add(property0.Name, array);
                     }
                     searchHighlights = dictionary;
                     continue;
                 }
                 additionalPropertiesDictionary ??= new Dictionary<string, object>();
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    additionalPropertiesDictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
-                }
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SearchResult(searchScore, new ChangeTrackingDictionary<string, IList<string>>(searchHighlights), additionalProperties);
+            return new SearchResult(searchScore, Optional.ToDictionary(searchHighlights), additionalProperties);
         }
     }
 }

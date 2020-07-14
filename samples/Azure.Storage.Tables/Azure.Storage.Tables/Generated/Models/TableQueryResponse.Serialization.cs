@@ -29,20 +29,13 @@ namespace Azure.Storage.Tables.Models
                     List<TableResponseProperties> array = new List<TableResponseProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
-                        }
+                        array.Add(TableResponseProperties.DeserializeTableResponseProperties(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new TableQueryResponse(odataMetadata.HasValue ? odataMetadata.Value : null, new ChangeTrackingList<TableResponseProperties>(value));
+            return new TableQueryResponse(odataMetadata.Value, Optional.ToList(value));
         }
     }
 }

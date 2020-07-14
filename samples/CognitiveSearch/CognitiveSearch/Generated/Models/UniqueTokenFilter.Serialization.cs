@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new UniqueTokenFilter(odataType, name, onlyOnSamePosition.HasValue ? onlyOnSamePosition.Value : (bool?)null);
+            return new UniqueTokenFilter(odataType, name, Optional.ToNullable(onlyOnSamePosition));
         }
     }
 }

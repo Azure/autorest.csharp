@@ -57,14 +57,7 @@ namespace paging
         {
             ProductResult firstPageResult;
             using var document = JsonDocument.Parse(response.ContentStream);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
-            {
-                firstPageResult = null;
-            }
-            else
-            {
-                firstPageResult = ProductResult.DeserializeProductResult(document.RootElement);
-            }
+            firstPageResult = ProductResult.DeserializeProductResult(document.RootElement);
             Page<Product> firstPage = Page.FromValues(firstPageResult.Values, firstPageResult.NextLink, response);
 
             return PageableHelpers.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken));
@@ -74,14 +67,7 @@ namespace paging
         {
             ProductResult firstPageResult;
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
-            {
-                firstPageResult = null;
-            }
-            else
-            {
-                firstPageResult = ProductResult.DeserializeProductResult(document.RootElement);
-            }
+            firstPageResult = ProductResult.DeserializeProductResult(document.RootElement);
             Page<Product> firstPage = Page.FromValues(firstPageResult.Values, firstPageResult.NextLink, response);
 
             return PageableHelpers.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken));
@@ -92,14 +78,7 @@ namespace paging
             Response response = await _nextPageFunc(nextLink).ConfigureAwait(false);
             ProductResult nextPageResult;
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
-            {
-                nextPageResult = null;
-            }
-            else
-            {
-                nextPageResult = ProductResult.DeserializeProductResult(document.RootElement);
-            }
+            nextPageResult = ProductResult.DeserializeProductResult(document.RootElement);
             return Page.FromValues(nextPageResult.Values, nextPageResult.NextLink, response);
         }
     }

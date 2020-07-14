@@ -56,7 +56,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnectionState(status.HasValue ? status.Value : null, description.HasValue ? description.Value : null, actionsRequired.HasValue ? actionsRequired.Value : null);
+            return new PrivateLinkServiceConnectionState(status.Value, description.Value, actionsRequired.Value);
         }
     }
 }

@@ -110,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Route(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, addressPrefix.HasValue ? addressPrefix.Value : null, nextHopType.HasValue ? nextHopType.Value : (RouteNextHopType?)null, nextHopIpAddress.HasValue ? nextHopIpAddress.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new Route(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToNullable(nextHopType), nextHopIpAddress.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

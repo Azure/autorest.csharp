@@ -42,7 +42,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new BaseProduct(baseProductId, baseProductDescription.HasValue ? baseProductDescription.Value : null);
+            return new BaseProduct(baseProductId, baseProductDescription.Value);
         }
     }
 }

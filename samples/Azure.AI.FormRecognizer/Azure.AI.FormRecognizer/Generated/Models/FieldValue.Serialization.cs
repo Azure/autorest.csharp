@@ -72,14 +72,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<FieldValue> array = new List<FieldValue>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeFieldValue(item));
-                        }
+                        array.Add(DeserializeFieldValue(item));
                     }
                     valueArray = array;
                     continue;
@@ -89,14 +82,7 @@ namespace Azure.AI.FormRecognizer.Models
                     Dictionary<string, FieldValue> dictionary = new Dictionary<string, FieldValue>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, DeserializeFieldValue(property0.Value));
-                        }
+                        dictionary.Add(property0.Name, DeserializeFieldValue(property0.Value));
                     }
                     valueObject = dictionary;
                     continue;
@@ -126,14 +112,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     elements = array;
                     continue;
@@ -144,7 +123,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new FieldValue(type, valueString.HasValue ? valueString.Value : null, valueDate.HasValue ? valueDate.Value : (DateTimeOffset?)null, valueTime.HasValue ? valueTime.Value : (TimeSpan?)null, valuePhoneNumber.HasValue ? valuePhoneNumber.Value : null, valueNumber.HasValue ? valueNumber.Value : (float?)null, valueInteger.HasValue ? valueInteger.Value : (int?)null, new ChangeTrackingList<FieldValue>(valueArray), new ChangeTrackingDictionary<string, FieldValue>(valueObject), text.HasValue ? text.Value : null, new ChangeTrackingList<float>(boundingBox), confidence.HasValue ? confidence.Value : (float?)null, new ChangeTrackingList<string>(elements), page.HasValue ? page.Value : (int?)null);
+            return new FieldValue(type, valueString.Value, Optional.ToNullable(valueDate), Optional.ToNullable(valueTime), valuePhoneNumber.Value, Optional.ToNullable(valueNumber), Optional.ToNullable(valueInteger), Optional.ToList(valueArray), Optional.ToDictionary(valueObject), text.Value, Optional.ToList(boundingBox), Optional.ToNullable(confidence), Optional.ToList(elements), Optional.ToNullable(page));
         }
     }
 }

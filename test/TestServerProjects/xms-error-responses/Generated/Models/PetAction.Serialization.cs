@@ -23,7 +23,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new PetAction(actionResponse.HasValue ? actionResponse.Value : null);
+            return new PetAction(actionResponse.Value);
         }
     }
 }

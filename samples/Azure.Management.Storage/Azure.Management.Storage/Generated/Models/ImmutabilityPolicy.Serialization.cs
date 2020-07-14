@@ -110,7 +110,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ImmutabilityPolicy(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, etag.HasValue ? etag.Value : null, immutabilityPeriodSinceCreationInDays.HasValue ? immutabilityPeriodSinceCreationInDays.Value : (int?)null, state.HasValue ? state.Value : (ImmutabilityPolicyState?)null, allowProtectedAppendWrites.HasValue ? allowProtectedAppendWrites.Value : (bool?)null);
+            return new ImmutabilityPolicy(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites));
         }
     }
 }

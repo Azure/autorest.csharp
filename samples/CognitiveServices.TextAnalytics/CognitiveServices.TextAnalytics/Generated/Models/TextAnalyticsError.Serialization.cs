@@ -47,20 +47,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<TextAnalyticsError> array = new List<TextAnalyticsError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeTextAnalyticsError(item));
-                        }
+                        array.Add(DeserializeTextAnalyticsError(item));
                     }
                     details = array;
                     continue;
                 }
             }
-            return new TextAnalyticsError(code, message, target.HasValue ? target.Value : null, innerError.HasValue ? innerError.Value : null, new ChangeTrackingList<TextAnalyticsError>(details));
+            return new TextAnalyticsError(code, message, target.Value, innerError.Value, Optional.ToList(details));
         }
     }
 }

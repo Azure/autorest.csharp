@@ -79,7 +79,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new TagProperty(tag.HasValue ? tag.Value : null, timestamp.HasValue ? timestamp.Value : (DateTimeOffset?)null, objectIdentifier.HasValue ? objectIdentifier.Value : null, tenantId.HasValue ? tenantId.Value : null, upn.HasValue ? upn.Value : null);
+            return new TagProperty(tag.Value, Optional.ToNullable(timestamp), objectIdentifier.Value, tenantId.Value, upn.Value);
         }
     }
 }

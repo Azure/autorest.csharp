@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new SKUCapability(name.HasValue ? name.Value : null, value.HasValue ? value.Value : null);
+            return new SKUCapability(name.Value, value.Value);
         }
     }
 }

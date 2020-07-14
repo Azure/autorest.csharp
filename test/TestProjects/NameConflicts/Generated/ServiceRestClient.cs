@@ -105,14 +105,7 @@ namespace NameConflicts
                     {
                         Struct value = default;
                         using var document = await JsonDocument.ParseAsync(message0.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Struct.DeserializeStruct(document.RootElement);
-                        }
+                        value = Struct.DeserializeStruct(document.RootElement);
                         return Azure.Response.FromValue(value, message0.Response);
                     }
                 default:
@@ -167,14 +160,7 @@ namespace NameConflicts
                     {
                         Struct value = default;
                         using var document = JsonDocument.Parse(message0.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Struct.DeserializeStruct(document.RootElement);
-                        }
+                        value = Struct.DeserializeStruct(document.RootElement);
                         return Azure.Response.FromValue(value, message0.Response);
                     }
                 default:
@@ -320,14 +306,7 @@ namespace NameConflicts
                     {
                         Models.HttpMessage value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Models.HttpMessage.DeserializeHttpMessage(document.RootElement);
-                        }
+                        value = Models.HttpMessage.DeserializeHttpMessage(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
@@ -347,14 +326,7 @@ namespace NameConflicts
                     {
                         Models.HttpMessage value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Models.HttpMessage.DeserializeHttpMessage(document.RootElement);
-                        }
+                        value = Models.HttpMessage.DeserializeHttpMessage(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
@@ -393,14 +365,7 @@ namespace NameConflicts
                     {
                         Models.Request value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Models.Request.DeserializeRequest(document.RootElement);
-                        }
+                        value = Models.Request.DeserializeRequest(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
@@ -420,14 +385,7 @@ namespace NameConflicts
                     {
                         Models.Request value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Models.Request.DeserializeRequest(document.RootElement);
-                        }
+                        value = Models.Request.DeserializeRequest(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
@@ -466,14 +424,7 @@ namespace NameConflicts
                     {
                         Models.Response value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Models.Response.DeserializeResponse(document.RootElement);
-                        }
+                        value = Models.Response.DeserializeResponse(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
@@ -493,14 +444,7 @@ namespace NameConflicts
                     {
                         Models.Response value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Models.Response.DeserializeResponse(document.RootElement);
-                        }
+                        value = Models.Response.DeserializeResponse(document.RootElement);
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:

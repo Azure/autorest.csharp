@@ -59,14 +59,7 @@ namespace body_complex
                     {
                         Fish value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Fish.DeserializeFish(document.RootElement);
-                        }
+                        value = Fish.DeserializeFish(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -86,14 +79,7 @@ namespace body_complex
                     {
                         Fish value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Fish.DeserializeFish(document.RootElement);
-                        }
+                        value = Fish.DeserializeFish(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -251,14 +237,7 @@ namespace body_complex
                     {
                         DotFish value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = DotFish.DeserializeDotFish(document.RootElement);
-                        }
+                        value = DotFish.DeserializeDotFish(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -278,14 +257,7 @@ namespace body_complex
                     {
                         DotFish value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = DotFish.DeserializeDotFish(document.RootElement);
-                        }
+                        value = DotFish.DeserializeDotFish(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -317,14 +289,7 @@ namespace body_complex
                     {
                         DotFishMarket value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
-                        }
+                        value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -344,14 +309,7 @@ namespace body_complex
                     {
                         DotFishMarket value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
-                        }
+                        value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -383,14 +341,7 @@ namespace body_complex
                     {
                         DotFishMarket value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
-                        }
+                        value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -410,14 +361,7 @@ namespace body_complex
                     {
                         DotFishMarket value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
-                        }
+                        value = DotFishMarket.DeserializeDotFishMarket(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -449,14 +393,7 @@ namespace body_complex
                     {
                         Salmon value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Salmon.DeserializeSalmon(document.RootElement);
-                        }
+                        value = Salmon.DeserializeSalmon(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -476,14 +413,7 @@ namespace body_complex
                     {
                         Salmon value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Salmon.DeserializeSalmon(document.RootElement);
-                        }
+                        value = Salmon.DeserializeSalmon(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -583,14 +513,7 @@ namespace body_complex
                     {
                         Salmon value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Salmon.DeserializeSalmon(document.RootElement);
-                        }
+                        value = Salmon.DeserializeSalmon(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -616,14 +539,7 @@ namespace body_complex
                     {
                         Salmon value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Salmon.DeserializeSalmon(document.RootElement);
-                        }
+                        value = Salmon.DeserializeSalmon(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

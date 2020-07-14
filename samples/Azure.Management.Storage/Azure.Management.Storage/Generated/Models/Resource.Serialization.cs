@@ -56,7 +56,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new Resource(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null);
+            return new Resource(id.Value, name.Value, type.Value);
         }
     }
 }

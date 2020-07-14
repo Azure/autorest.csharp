@@ -24,14 +24,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
-                        }
+                        array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceIPConfigurationListResult(new ChangeTrackingList<NetworkInterfaceIPConfiguration>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new NetworkInterfaceIPConfigurationListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new BaseError(someBaseProp.HasValue ? someBaseProp.Value : null);
+            return new BaseError(someBaseProp.Value);
         }
     }
 }

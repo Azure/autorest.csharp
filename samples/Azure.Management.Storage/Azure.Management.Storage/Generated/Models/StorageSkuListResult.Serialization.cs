@@ -23,20 +23,13 @@ namespace Azure.Management.Storage.Models
                     List<SkuInformation> array = new List<SkuInformation>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(SkuInformation.DeserializeSkuInformation(item));
-                        }
+                        array.Add(SkuInformation.DeserializeSkuInformation(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new StorageSkuListResult(new ChangeTrackingList<SkuInformation>(value));
+            return new StorageSkuListResult(Optional.ToList(value));
         }
     }
 }

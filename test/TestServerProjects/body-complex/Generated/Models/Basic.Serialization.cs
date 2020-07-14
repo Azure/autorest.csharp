@@ -17,8 +17,15 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("id");
-                writer.WriteNumberValue(Id.Value);
+                if (Id != null)
+                {
+                    writer.WritePropertyName("id");
+                    writer.WriteNumberValue(Id.Value);
+                }
+                else
+                {
+                    writer.WriteNull("id");
+                }
             }
             if (Optional.IsDefined(Name))
             {
@@ -35,13 +42,18 @@ namespace body_complex.Models
 
         internal static Basic DeserializeBasic(JsonElement element)
         {
-            Optional<int> id = default;
+            Optional<int?> id = default;
             Optional<string> name = default;
             Optional<CMYKColors> color = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        id = null;
+                        continue;
+                    }
                     id = property.Value.GetInt32();
                     continue;
                 }
@@ -56,7 +68,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Basic(id.HasValue ? id.Value : (int?)null, name.HasValue ? name.Value : null, color.HasValue ? color.Value : (CMYKColors?)null);
+            return new Basic(Optional.ToNullable(id), name.Value, Optional.ToNullable(color));
         }
     }
 }

@@ -34,7 +34,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new SubResource(id.HasValue ? id.Value : null);
+            return new SubResource(id.Value);
         }
     }
 }

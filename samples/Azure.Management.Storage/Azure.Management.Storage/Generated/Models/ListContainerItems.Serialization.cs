@@ -24,14 +24,7 @@ namespace Azure.Management.Storage.Models
                     List<ListContainerItem> array = new List<ListContainerItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(ListContainerItem.DeserializeListContainerItem(item));
-                        }
+                        array.Add(ListContainerItem.DeserializeListContainerItem(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ListContainerItems(new ChangeTrackingList<ListContainerItem>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new ListContainerItems(Optional.ToList(value), nextLink.Value);
         }
     }
 }

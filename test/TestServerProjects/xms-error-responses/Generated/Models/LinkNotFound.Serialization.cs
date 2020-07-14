@@ -41,7 +41,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new LinkNotFound(someBaseProp.HasValue ? someBaseProp.Value : null, reason.HasValue ? reason.Value : null, whatNotFound, whatSubAddress.HasValue ? whatSubAddress.Value : null);
+            return new LinkNotFound(someBaseProp.Value, reason.Value, whatNotFound, whatSubAddress.Value);
         }
     }
 }

@@ -230,14 +230,7 @@ namespace CognitiveSearch
                     {
                         Indexer value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Indexer.DeserializeIndexer(document.RootElement);
-                        }
+                        value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -271,14 +264,7 @@ namespace CognitiveSearch
                     {
                         Indexer value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Indexer.DeserializeIndexer(document.RootElement);
-                        }
+                        value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -399,14 +385,7 @@ namespace CognitiveSearch
                     {
                         Indexer value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Indexer.DeserializeIndexer(document.RootElement);
-                        }
+                        value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -433,14 +412,7 @@ namespace CognitiveSearch
                     {
                         Indexer value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Indexer.DeserializeIndexer(document.RootElement);
-                        }
+                        value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -483,14 +455,7 @@ namespace CognitiveSearch
                     {
                         ListIndexersResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
-                        }
+                        value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -512,14 +477,7 @@ namespace CognitiveSearch
                     {
                         ListIndexersResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
-                        }
+                        value = ListIndexersResult.DeserializeListIndexersResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -567,14 +525,7 @@ namespace CognitiveSearch
                     {
                         Indexer value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Indexer.DeserializeIndexer(document.RootElement);
-                        }
+                        value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -601,14 +552,7 @@ namespace CognitiveSearch
                     {
                         Indexer value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Indexer.DeserializeIndexer(document.RootElement);
-                        }
+                        value = Indexer.DeserializeIndexer(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -654,14 +598,7 @@ namespace CognitiveSearch
                     {
                         IndexerExecutionInfo value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
-                        }
+                        value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -688,14 +625,7 @@ namespace CognitiveSearch
                     {
                         IndexerExecutionInfo value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
-                        }
+                        value = IndexerExecutionInfo.DeserializeIndexerExecutionInfo(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

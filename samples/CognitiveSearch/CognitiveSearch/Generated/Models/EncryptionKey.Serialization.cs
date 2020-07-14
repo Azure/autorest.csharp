@@ -58,7 +58,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials.HasValue ? accessCredentials.Value : null);
+            return new EncryptionKey(keyVaultKeyName, keyVaultKeyVersion, keyVaultUri, accessCredentials.Value);
         }
     }
 }

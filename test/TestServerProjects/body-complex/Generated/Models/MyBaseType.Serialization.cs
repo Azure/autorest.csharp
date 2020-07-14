@@ -21,14 +21,14 @@ namespace body_complex.Models
                     case "Kind1": return MyDerivedType.DeserializeMyDerivedType(element);
                 }
             }
-            string kind = default;
+            MyKind kind = default;
             Optional<string> propB1 = default;
             Optional<string> propBH1 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"))
                 {
-                    kind = property.Value.GetString();
+                    kind = new MyKind(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("propB1"))
@@ -49,7 +49,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new MyBaseType(kind, propB1.HasValue ? propB1.Value : null, propBH1.HasValue ? propBH1.Value : null);
+            return new MyBaseType(kind, propB1.Value, propBH1.Value);
         }
     }
 }

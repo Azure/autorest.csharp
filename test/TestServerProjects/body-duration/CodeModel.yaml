@@ -127,6 +127,7 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_4
+            nullable: true
             language: !<!Languages> 
               default:
                 name: ''

@@ -53,7 +53,7 @@ namespace extensible_enums_swagger.Models
                     continue;
                 }
             }
-            return new Pet(name.HasValue ? name.Value : null, daysOfWeek.HasValue ? daysOfWeek.Value : (DaysOfWeekExtensibleEnum?)null, intEnum);
+            return new Pet(name.Value, Optional.ToNullable(daysOfWeek), intEnum);
         }
     }
 }

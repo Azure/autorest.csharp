@@ -23,20 +23,13 @@ namespace Azure.Management.Storage.Models
                     List<BlobServiceProperties> array = new List<BlobServiceProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(BlobServiceProperties.DeserializeBlobServiceProperties(item));
-                        }
+                        array.Add(BlobServiceProperties.DeserializeBlobServiceProperties(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new BlobServiceItems(new ChangeTrackingList<BlobServiceProperties>(value));
+            return new BlobServiceItems(Optional.ToList(value));
         }
     }
 }

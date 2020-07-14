@@ -48,14 +48,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     keywords = array;
                     continue;
@@ -76,7 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeywordMarkerTokenFilter(odataType, name, keywords, ignoreCase.HasValue ? ignoreCase.Value : (bool?)null);
+            return new KeywordMarkerTokenFilter(odataType, name, keywords, Optional.ToNullable(ignoreCase));
         }
     }
 }

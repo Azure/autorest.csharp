@@ -23,7 +23,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new Animal(aniType.HasValue ? aniType.Value : null);
+            return new Animal(aniType.Value);
         }
     }
 }

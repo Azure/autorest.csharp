@@ -53,14 +53,7 @@ namespace CognitiveSearch.Models
                     List<ItemError> array = new List<ItemError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(ItemError.DeserializeItemError(item));
-                        }
+                        array.Add(ItemError.DeserializeItemError(item));
                     }
                     errors = array;
                     continue;
@@ -70,14 +63,7 @@ namespace CognitiveSearch.Models
                     List<ItemWarning> array = new List<ItemWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(ItemWarning.DeserializeItemWarning(item));
-                        }
+                        array.Add(ItemWarning.DeserializeItemWarning(item));
                     }
                     warnings = array;
                     continue;
@@ -103,7 +89,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerExecutionResult(status, errorMessage.HasValue ? errorMessage.Value : null, startTime.HasValue ? startTime.Value : (DateTimeOffset?)null, endTime.HasValue ? endTime.Value : (DateTimeOffset?)null, errors, warnings, itemsProcessed, itemsFailed, initialTrackingState.HasValue ? initialTrackingState.Value : null, finalTrackingState.HasValue ? finalTrackingState.Value : null);
+            return new IndexerExecutionResult(status, errorMessage.Value, Optional.ToNullable(startTime), Optional.ToNullable(endTime), errors, warnings, itemsProcessed, itemsFailed, initialTrackingState.Value, finalTrackingState.Value);
         }
     }
 }

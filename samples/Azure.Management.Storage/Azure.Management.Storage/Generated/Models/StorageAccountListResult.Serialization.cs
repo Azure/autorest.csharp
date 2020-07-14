@@ -24,14 +24,7 @@ namespace Azure.Management.Storage.Models
                     List<StorageAccount> array = new List<StorageAccount>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(StorageAccount.DeserializeStorageAccount(item));
-                        }
+                        array.Add(StorageAccount.DeserializeStorageAccount(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new StorageAccountListResult(new ChangeTrackingList<StorageAccount>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new StorageAccountListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new DdosSettings(ddosCustomPolicy.HasValue ? ddosCustomPolicy.Value : null, protectionCoverage.HasValue ? protectionCoverage.Value : (DdosSettingsProtectionCoverage?)null, protectedIP.HasValue ? protectedIP.Value : (bool?)null);
+            return new DdosSettings(ddosCustomPolicy.Value, Optional.ToNullable(protectionCoverage), Optional.ToNullable(protectedIP));
         }
     }
 }

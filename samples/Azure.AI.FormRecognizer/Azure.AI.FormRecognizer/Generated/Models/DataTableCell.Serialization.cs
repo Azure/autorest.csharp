@@ -72,14 +72,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     elements = array;
                     continue;
@@ -95,7 +88,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new DataTableCell(rowIndex, columnIndex, rowSpan.HasValue ? rowSpan.Value : (int?)null, columnSpan.HasValue ? columnSpan.Value : (int?)null, text, boundingBox, confidence, new ChangeTrackingList<string>(elements), isHeader.HasValue ? isHeader.Value : (bool?)null, isFooter.HasValue ? isFooter.Value : (bool?)null);
+            return new DataTableCell(rowIndex, columnIndex, Optional.ToNullable(rowSpan), Optional.ToNullable(columnSpan), text, boundingBox, confidence, Optional.ToList(elements), Optional.ToNullable(isHeader), Optional.ToNullable(isFooter));
         }
     }
 }

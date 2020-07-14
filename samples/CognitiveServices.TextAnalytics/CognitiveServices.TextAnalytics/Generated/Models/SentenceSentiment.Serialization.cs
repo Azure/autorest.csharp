@@ -47,20 +47,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     warnings = array;
                     continue;
                 }
             }
-            return new SentenceSentiment(sentiment, sentenceScores, offset, length, new ChangeTrackingList<string>(warnings));
+            return new SentenceSentiment(sentiment, sentenceScores, offset, length, Optional.ToList(warnings));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace required_optional.Models
                     continue;
                 }
             }
-            return new Error(status.HasValue ? status.Value : (int?)null, message.HasValue ? message.Value : null);
+            return new Error(Optional.ToNullable(status), message.Value);
         }
     }
 }

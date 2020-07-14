@@ -1782,7 +1782,7 @@ schemas: !<!Schemas>
           name: ObjectReplicationPolicyFilterMinCreationTime
           description: 'Blobs created after the time will be replicated to the destination. It must be in datetime format ''yyyy-MM-ddTHH:mm:ssZ''. Example: 2020-02-19T16:05:00Z'
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_574
+    - !<!StringSchema> &ref_577
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -2738,6 +2738,39 @@ schemas: !<!Schemas>
           name: SignedResource
           description: 'The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s).'
       protocol: !<!Protocols> {}
+    - !<!ChoiceSchema> &ref_543
+      choices:
+        - !<!ChoiceValue> 
+          value: default
+          language:
+            default:
+              name: Default
+              description: ''
+      type: choice
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ManagementPolicyName
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!ChoiceSchema> &ref_144
+      choices:
+        - !<!ChoiceValue> 
+          value: Lifecycle
+          language:
+            default:
+              name: Lifecycle
+              description: ''
+      type: choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2019-06-01'
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: RuleType
+          description: The valid value is Lifecycle
+      protocol: !<!Protocols> {}
     - !<!ChoiceSchema> &ref_165
       choices:
         - !<!ChoiceValue> 
@@ -3148,7 +3181,7 @@ schemas: !<!Schemas>
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Constant42
+          name: Constant44
           description: ''
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_367
@@ -3239,34 +3272,10 @@ schemas: !<!Schemas>
           name: ListKeyExpand
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_543
-      type: constant
-      value: !<!ConstantValue> 
-        value: default
-      valueType: *ref_0
-      language: !<!Languages> 
-        default:
-          name: ManagementPolicyName
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_144
-      type: constant
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2019-06-01'
-      value: !<!ConstantValue> 
-        value: Lifecycle
-      valueType: *ref_0
-      language: !<!Languages> 
-        default:
-          name: RuleType
-          description: The valid value is Lifecycle
-      protocol: !<!Protocols> {}
   dictionaries:
     - !<!DictionarySchema> &ref_14
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: ContainerPropertiesMetadata
@@ -3275,7 +3284,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_34
       type: dictionary
       elementType: *ref_2
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: FileSharePropertiesMetadata
@@ -3284,7 +3292,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_245
       type: dictionary
       elementType: *ref_2
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: StorageAccountCreateParametersTags
@@ -3295,7 +3302,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_139
       type: dictionary
       elementType: *ref_3
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: TrackedResourceTags
@@ -3304,7 +3310,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_266
       type: dictionary
       elementType: *ref_2
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: StorageAccountUpdateParametersTags
@@ -4865,7 +4870,7 @@ schemas: !<!Schemas>
                             immediate:
                               - *ref_6
                           properties:
-                            - !<!Property> &ref_558
+                            - !<!Property> &ref_561
                               schema: !<!ObjectSchema> &ref_261
                                 type: object
                                 apiVersions:
@@ -4901,7 +4906,7 @@ schemas: !<!Schemas>
                                   name: privateEndpoint
                                   description: The resource of private end point.
                               protocol: !<!Protocols> {}
-                            - !<!Property> &ref_559
+                            - !<!Property> &ref_562
                               schema: !<!ObjectSchema> &ref_262
                                 type: object
                                 apiVersions:
@@ -6323,7 +6328,7 @@ schemas: !<!Schemas>
                                   name: lastModifiedTime
                                   description: Returns the date and time the ManagementPolicies was last modified.
                               protocol: !<!Protocols> {}
-                            - !<!Property> &ref_547
+                            - !<!Property> &ref_548
                               schema: !<!ObjectSchema> &ref_302
                                 type: object
                                 apiVersions:
@@ -9299,7 +9304,7 @@ schemas: !<!Schemas>
     - *ref_308
     - *ref_309
     - *ref_310
-    - !<!ObjectSchema> &ref_556
+    - !<!ObjectSchema> &ref_559
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -9331,7 +9336,7 @@ schemas: !<!Schemas>
           description: An error response from the storage resource provider.
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_570
+    - !<!ObjectSchema> &ref_573
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -9366,7 +9371,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_172
-    - !<!ObjectSchema> &ref_573
+    - !<!ObjectSchema> &ref_576
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -9405,7 +9410,7 @@ schemas: !<!Schemas>
     - *ref_314
     - *ref_174
     - *ref_315
-    - !<!ObjectSchema> &ref_598
+    - !<!ObjectSchema> &ref_601
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -19880,7 +19885,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> 
+          - !<!Parameter> &ref_546
             schema: *ref_543
             implementation: Method
             required: true
@@ -19906,6 +19911,7 @@ operationGroups:
         signatureParameters:
           - *ref_544
           - *ref_545
+          - *ref_546
         responses:
           - !<!SchemaResponse> 
             schema: *ref_171
@@ -19971,7 +19977,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_549
+          - !<!Parameter> &ref_550
             schema: *ref_359
             implementation: Method
             required: true
@@ -19983,7 +19989,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_550
+          - !<!Parameter> &ref_551
             schema: *ref_360
             implementation: Method
             required: true
@@ -19997,7 +20003,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> 
+          - !<!Parameter> &ref_552
             schema: *ref_543
             implementation: Method
             required: true
@@ -20025,7 +20031,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_546
+              - !<!Parameter> &ref_547
                 schema: *ref_171
                 flattened: true
                 implementation: Method
@@ -20038,19 +20044,19 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
-              - !<!VirtualParameter> &ref_548
+              - !<!VirtualParameter> &ref_549
                 schema: *ref_302
                 implementation: Method
-                originalParameter: *ref_546
+                originalParameter: *ref_547
                 pathToProperty: []
-                targetProperty: *ref_547
+                targetProperty: *ref_548
                 language: !<!Languages> 
                   default:
                     name: policy
                     description: 'The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts.'
                 protocol: !<!Protocols> {}
             signatureParameters:
-              - *ref_548
+              - *ref_549
             language: !<!Languages> 
               default:
                 name: ''
@@ -20064,8 +20070,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_549
           - *ref_550
+          - *ref_551
+          - *ref_552
         responses:
           - !<!SchemaResponse> 
             schema: *ref_171
@@ -20203,7 +20210,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_551
+          - !<!Parameter> &ref_553
             schema: *ref_359
             implementation: Method
             required: true
@@ -20215,7 +20222,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_552
+          - !<!Parameter> &ref_554
             schema: *ref_360
             implementation: Method
             required: true
@@ -20229,7 +20236,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> 
+          - !<!Parameter> &ref_555
             schema: *ref_543
             implementation: Method
             required: true
@@ -20253,8 +20260,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_551
-          - *ref_552
+          - *ref_553
+          - *ref_554
+          - *ref_555
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -20306,7 +20314,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_553
+          - !<!Parameter> &ref_556
             schema: *ref_359
             implementation: Method
             required: true
@@ -20318,7 +20326,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_554
+          - !<!Parameter> &ref_557
             schema: *ref_360
             implementation: Method
             required: true
@@ -20332,7 +20340,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_555
+          - !<!Parameter> &ref_558
             schema: *ref_2
             implementation: Method
             required: true
@@ -20356,9 +20364,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_553
-          - *ref_554
-          - *ref_555
+          - *ref_556
+          - *ref_557
+          - *ref_558
         responses:
           - !<!SchemaResponse> 
             schema: *ref_128
@@ -20375,7 +20383,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -20422,7 +20430,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_562
+          - !<!Parameter> &ref_565
             schema: *ref_359
             implementation: Method
             required: true
@@ -20434,7 +20442,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_563
+          - !<!Parameter> &ref_566
             schema: *ref_360
             implementation: Method
             required: true
@@ -20448,7 +20456,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_564
+          - !<!Parameter> &ref_567
             schema: *ref_2
             implementation: Method
             required: true
@@ -20476,7 +20484,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_557
+              - !<!Parameter> &ref_560
                 schema: *ref_128
                 flattened: true
                 implementation: Method
@@ -20489,31 +20497,31 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
-              - !<!VirtualParameter> &ref_560
+              - !<!VirtualParameter> &ref_563
                 schema: *ref_261
                 implementation: Method
-                originalParameter: *ref_557
+                originalParameter: *ref_560
                 pathToProperty: []
-                targetProperty: *ref_558
+                targetProperty: *ref_561
                 language: !<!Languages> 
                   default:
                     name: privateEndpoint
                     description: The resource of private end point.
                 protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_561
+              - !<!VirtualParameter> &ref_564
                 schema: *ref_262
                 implementation: Method
-                originalParameter: *ref_557
+                originalParameter: *ref_560
                 pathToProperty: []
-                targetProperty: *ref_559
+                targetProperty: *ref_562
                 language: !<!Languages> 
                   default:
                     name: privateLinkServiceConnectionState
                     description: A collection of information about the state of the connection between service consumer and provider.
                 protocol: !<!Protocols> {}
             signatureParameters:
-              - *ref_560
-              - *ref_561
+              - *ref_563
+              - *ref_564
             language: !<!Languages> 
               default:
                 name: ''
@@ -20527,9 +20535,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_562
-          - *ref_563
-          - *ref_564
+          - *ref_565
+          - *ref_566
+          - *ref_567
         responses:
           - !<!SchemaResponse> 
             schema: *ref_128
@@ -20546,7 +20554,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -20598,7 +20606,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_565
+          - !<!Parameter> &ref_568
             schema: *ref_359
             implementation: Method
             required: true
@@ -20610,7 +20618,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_566
+          - !<!Parameter> &ref_569
             schema: *ref_360
             implementation: Method
             required: true
@@ -20624,7 +20632,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_567
+          - !<!Parameter> &ref_570
             schema: *ref_2
             implementation: Method
             required: true
@@ -20648,9 +20656,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_565
-          - *ref_566
-          - *ref_567
+          - *ref_568
+          - *ref_569
+          - *ref_570
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -20672,7 +20680,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -20716,7 +20724,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_568
+          - !<!Parameter> &ref_571
             schema: *ref_359
             implementation: Method
             required: true
@@ -20728,7 +20736,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_569
+          - !<!Parameter> &ref_572
             schema: *ref_360
             implementation: Method
             required: true
@@ -20754,11 +20762,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_568
-          - *ref_569
+          - *ref_571
+          - *ref_572
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_570
+            schema: *ref_573
             language: !<!Languages> 
               default:
                 name: ''
@@ -20856,7 +20864,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_571
+          - !<!Parameter> &ref_574
             schema: *ref_359
             implementation: Method
             required: true
@@ -20868,7 +20876,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_572
+          - !<!Parameter> &ref_575
             schema: *ref_360
             implementation: Method
             required: true
@@ -20894,11 +20902,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_571
-          - *ref_572
+          - *ref_574
+          - *ref_575
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_573
+            schema: *ref_576
             language: !<!Languages> 
               default:
                 name: ''
@@ -20912,7 +20920,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -20964,7 +20972,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_575
+          - !<!Parameter> &ref_578
             schema: *ref_359
             implementation: Method
             required: true
@@ -20976,7 +20984,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_576
+          - !<!Parameter> &ref_579
             schema: *ref_360
             implementation: Method
             required: true
@@ -20990,8 +20998,8 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_577
-            schema: *ref_574
+          - !<!Parameter> &ref_580
+            schema: *ref_577
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -21014,9 +21022,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_575
-          - *ref_576
-          - *ref_577
+          - *ref_578
+          - *ref_579
+          - *ref_580
         responses:
           - !<!SchemaResponse> 
             schema: *ref_173
@@ -21033,7 +21041,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -21090,7 +21098,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_579
+          - !<!Parameter> &ref_582
             schema: *ref_359
             implementation: Method
             required: true
@@ -21102,7 +21110,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_580
+          - !<!Parameter> &ref_583
             schema: *ref_360
             implementation: Method
             required: true
@@ -21116,8 +21124,8 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_581
-            schema: *ref_574
+          - !<!Parameter> &ref_584
+            schema: *ref_577
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -21144,7 +21152,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_578
+              - !<!Parameter> &ref_581
                 schema: *ref_173
                 implementation: Method
                 required: true
@@ -21157,7 +21165,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_578
+              - *ref_581
             language: !<!Languages> 
               default:
                 name: ''
@@ -21171,9 +21179,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_579
-          - *ref_580
-          - *ref_581
+          - *ref_582
+          - *ref_583
+          - *ref_584
         responses:
           - !<!SchemaResponse> 
             schema: *ref_173
@@ -21190,7 +21198,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -21381,7 +21389,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_582
+          - !<!Parameter> &ref_585
             schema: *ref_359
             implementation: Method
             required: true
@@ -21393,7 +21401,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_583
+          - !<!Parameter> &ref_586
             schema: *ref_360
             implementation: Method
             required: true
@@ -21407,8 +21415,8 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_584
-            schema: *ref_574
+          - !<!Parameter> &ref_587
+            schema: *ref_577
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -21431,9 +21439,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_582
-          - *ref_583
-          - *ref_584
+          - *ref_585
+          - *ref_586
+          - *ref_587
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -21455,7 +21463,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -21499,7 +21507,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_586
+          - !<!Parameter> &ref_589
             schema: *ref_359
             implementation: Method
             required: true
@@ -21511,7 +21519,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_587
+          - !<!Parameter> &ref_590
             schema: *ref_360
             implementation: Method
             required: true
@@ -21525,7 +21533,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_588
+          - !<!Parameter> &ref_591
             schema: *ref_378
             implementation: Method
             required: true
@@ -21555,7 +21563,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_585
+              - !<!Parameter> &ref_588
                 schema: *ref_174
                 implementation: Method
                 required: true
@@ -21568,7 +21576,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_585
+              - *ref_588
             language: !<!Languages> 
               default:
                 name: ''
@@ -21582,9 +21590,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_586
-          - *ref_587
-          - *ref_588
+          - *ref_589
+          - *ref_590
+          - *ref_591
         responses:
           - !<!SchemaResponse> 
             schema: *ref_174
@@ -21614,7 +21622,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -21671,7 +21679,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_590
+          - !<!Parameter> &ref_593
             schema: *ref_359
             implementation: Method
             required: true
@@ -21683,7 +21691,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_591
+          - !<!Parameter> &ref_594
             schema: *ref_360
             implementation: Method
             required: true
@@ -21697,7 +21705,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_592
+          - !<!Parameter> &ref_595
             schema: *ref_378
             implementation: Method
             required: true
@@ -21727,7 +21735,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_589
+              - !<!Parameter> &ref_592
                 schema: *ref_174
                 implementation: Method
                 required: true
@@ -21740,7 +21748,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_589
+              - *ref_592
             language: !<!Languages> 
               default:
                 name: ''
@@ -21754,9 +21762,9 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_590
-          - *ref_591
-          - *ref_592
+          - *ref_593
+          - *ref_594
+          - *ref_595
         responses:
           - !<!SchemaResponse> 
             schema: *ref_174
@@ -21773,7 +21781,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -21824,7 +21832,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_593
+          - !<!Parameter> &ref_596
             schema: *ref_359
             implementation: Method
             required: true
@@ -21836,7 +21844,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_594
+          - !<!Parameter> &ref_597
             schema: *ref_360
             implementation: Method
             required: true
@@ -21850,7 +21858,7 @@ operationGroups:
                 in: path
           - *ref_361
           - *ref_362
-          - !<!Parameter> &ref_595
+          - !<!Parameter> &ref_598
             schema: *ref_378
             implementation: Method
             required: true
@@ -21876,9 +21884,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_593
-          - *ref_594
-          - *ref_595
+          - *ref_596
+          - *ref_597
+          - *ref_598
         responses:
           - !<!SchemaResponse> 
             schema: *ref_174
@@ -21895,7 +21903,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_556
+            schema: *ref_559
             language: !<!Languages> 
               default:
                 name: ''
@@ -21939,7 +21947,7 @@ operationGroups:
             version: '2019-06-01'
         parameters:
           - *ref_358
-          - !<!Parameter> &ref_596
+          - !<!Parameter> &ref_599
             schema: *ref_359
             implementation: Method
             required: true
@@ -21951,7 +21959,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_597
+          - !<!Parameter> &ref_600
             schema: *ref_360
             implementation: Method
             required: true
@@ -21977,11 +21985,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_596
-          - *ref_597
+          - *ref_599
+          - *ref_600
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_598
+            schema: *ref_601
             language: !<!Languages> 
               default:
                 name: ''

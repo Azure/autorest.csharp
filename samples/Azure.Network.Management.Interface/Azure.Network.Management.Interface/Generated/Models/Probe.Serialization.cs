@@ -38,7 +38,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(LoadBalancingRules))
+            if (Optional.IsCollectionDefined(LoadBalancingRules))
             {
                 writer.WritePropertyName("loadBalancingRules");
                 writer.WriteStartArray();
@@ -126,14 +126,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(DeserializeSubResource(item));
-                                }
+                                array.Add(DeserializeSubResource(item));
                             }
                             loadBalancingRules = array;
                             continue;
@@ -172,7 +165,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Probe(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingList<SubResource>(loadBalancingRules), protocol.HasValue ? protocol.Value : (ProbeProtocol?)null, port.HasValue ? port.Value : (int?)null, intervalInSeconds.HasValue ? intervalInSeconds.Value : (int?)null, numberOfProbes.HasValue ? numberOfProbes.Value : (int?)null, requestPath.HasValue ? requestPath.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new Probe(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(loadBalancingRules), Optional.ToNullable(protocol), Optional.ToNullable(port), Optional.ToNullable(intervalInSeconds), Optional.ToNullable(numberOfProbes), requestPath.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

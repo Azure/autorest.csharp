@@ -16,7 +16,7 @@ namespace validation.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(DisplayNames))
+            if (Optional.IsCollectionDefined(DisplayNames))
             {
                 writer.WritePropertyName("display_names");
                 writer.WriteStartArray();
@@ -69,14 +69,7 @@ namespace validation.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     displayNames = array;
                     continue;
@@ -117,7 +110,7 @@ namespace validation.Models
                     continue;
                 }
             }
-            return new Product(new ChangeTrackingList<string>(displayNames), capacity.HasValue ? capacity.Value : (int?)null, image.HasValue ? image.Value : null, child, constChild, constInt, constString, constStringAsEnum.HasValue ? constStringAsEnum.Value : null);
+            return new Product(Optional.ToList(displayNames), Optional.ToNullable(capacity), image.Value, child, constChild, constInt, constString, constStringAsEnum.Value);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new CloudError(code.HasValue ? code.Value : (int?)null, message.HasValue ? message.Value : null);
+            return new CloudError(Optional.ToNullable(code), message.Value);
         }
     }
 }

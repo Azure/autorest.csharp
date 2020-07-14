@@ -1513,6 +1513,10 @@ namespace AutoRest.CSharp.V3.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "schema")]
         [System.ComponentModel.DataAnnotations.Required]
         public Schema Schema { get; set; } = new Schema();
+
+        /// <summary>indicates whether the response can be 'null'</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "nullable")]
+        public bool? Nullable { get; set; }
     }
 
     /// <summary>represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)</summary>
@@ -2232,6 +2236,10 @@ namespace AutoRest.CSharp.V3.Input
         /// <summary>the Serialization Style used for the parameter.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "style")]
         public SerializationStyle? Style { get; set; }
+
+        /// <summary>when set, 'form' style parameters generate separate parameters for each value of an array.</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "explode")]
+        public bool? Explode { get; set; }
 
         /// <summary>when set, this indicates that the content of the parameter should not be subject to URI encoding rules.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "skipUriEncoding")]

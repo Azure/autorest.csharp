@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new AzureActiveDirectoryApplicationCredentials(applicationId, applicationSecret.HasValue ? applicationSecret.Value : null);
+            return new AzureActiveDirectoryApplicationCredentials(applicationId, applicationSecret.Value);
         }
     }
 }

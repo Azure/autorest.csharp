@@ -30,7 +30,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new ProductWrapper(value.HasValue ? value.Value : null);
+            return new ProductWrapper(value.Value);
         }
     }
 }

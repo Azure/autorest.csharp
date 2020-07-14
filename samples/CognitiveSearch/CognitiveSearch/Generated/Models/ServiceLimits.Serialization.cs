@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ServiceLimits(maxFieldsPerIndex.HasValue ? maxFieldsPerIndex.Value : null, maxFieldNestingDepthPerIndex.HasValue ? maxFieldNestingDepthPerIndex.Value : null, maxComplexCollectionFieldsPerIndex.HasValue ? maxComplexCollectionFieldsPerIndex.Value : null, maxComplexObjectsInCollectionsPerDocument.HasValue ? maxComplexObjectsInCollectionsPerDocument.Value : null);
+            return new ServiceLimits(Optional.ToNullable(maxFieldsPerIndex), Optional.ToNullable(maxFieldNestingDepthPerIndex), Optional.ToNullable(maxComplexCollectionFieldsPerIndex), Optional.ToNullable(maxComplexObjectsInCollectionsPerDocument));
         }
     }
 }

@@ -66,7 +66,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new SubProduct(id.HasValue ? id.Value : null, provisioningState.HasValue ? provisioningState.Value : null, provisioningStateValues.HasValue ? provisioningStateValues.Value : (SubProductPropertiesProvisioningStateValues?)null);
+            return new SubProduct(id.Value, provisioningState.Value, Optional.ToNullable(provisioningStateValues));
         }
     }
 }

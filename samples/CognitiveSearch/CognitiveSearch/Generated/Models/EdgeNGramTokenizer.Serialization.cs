@@ -26,7 +26,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("maxGram");
                 writer.WriteNumberValue(MaxGram.Value);
             }
-            if (Optional.IsDefined(TokenChars))
+            if (Optional.IsCollectionDefined(TokenChars))
             {
                 writer.WritePropertyName("tokenChars");
                 writer.WriteStartArray();
@@ -83,7 +83,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new EdgeNGramTokenizer(odataType, name, minGram.HasValue ? minGram.Value : (int?)null, maxGram.HasValue ? maxGram.Value : (int?)null, new ChangeTrackingList<TokenCharacterKind>(tokenChars));
+            return new EdgeNGramTokenizer(odataType, name, Optional.ToNullable(minGram), Optional.ToNullable(maxGram), Optional.ToList(tokenChars));
         }
     }
 }

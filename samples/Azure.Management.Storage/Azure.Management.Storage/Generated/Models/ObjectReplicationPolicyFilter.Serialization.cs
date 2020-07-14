@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(PrefixMatch))
+            if (Optional.IsCollectionDefined(PrefixMatch))
             {
                 writer.WritePropertyName("prefixMatch");
                 writer.WriteStartArray();
@@ -45,14 +45,7 @@ namespace Azure.Management.Storage.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     prefixMatch = array;
                     continue;
@@ -63,7 +56,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ObjectReplicationPolicyFilter(new ChangeTrackingList<string>(prefixMatch), minCreationTime.HasValue ? minCreationTime.Value : null);
+            return new ObjectReplicationPolicyFilter(Optional.ToList(prefixMatch), minCreationTime.Value);
         }
     }
 }

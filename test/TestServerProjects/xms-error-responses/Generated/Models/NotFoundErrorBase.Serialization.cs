@@ -43,7 +43,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new NotFoundErrorBase(someBaseProp.HasValue ? someBaseProp.Value : null, reason.HasValue ? reason.Value : null, whatNotFound);
+            return new NotFoundErrorBase(someBaseProp.Value, reason.Value, whatNotFound);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IpTag(ipTagType.HasValue ? ipTagType.Value : null, tag.HasValue ? tag.Value : null);
+            return new IpTag(ipTagType.Value, tag.Value);
         }
     }
 }

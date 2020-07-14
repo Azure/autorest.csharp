@@ -119,14 +119,7 @@ namespace CognitiveSearch.Models
                     List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
-                        }
+                        array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
                     }
                     inputs = array;
                     continue;
@@ -136,20 +129,13 @@ namespace CognitiveSearch.Models
                     List<OutputFieldMappingEntry> array = new List<OutputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
-                        }
+                        array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
                     }
                     outputs = array;
                     continue;
                 }
             }
-            return new KeyPhraseExtractionSkill(odataType, name.HasValue ? name.Value : null, description.HasValue ? description.Value : null, context.HasValue ? context.Value : null, inputs, outputs, defaultLanguageCode.HasValue ? defaultLanguageCode.Value : (KeyPhraseExtractionSkillLanguage?)null, maxKeyPhraseCount.HasValue ? maxKeyPhraseCount.Value : null);
+            return new KeyPhraseExtractionSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(maxKeyPhraseCount));
         }
     }
 }

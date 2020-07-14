@@ -41,7 +41,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new OperationDisplay(provider.HasValue ? provider.Value : null, resource.HasValue ? resource.Value : null, operation.HasValue ? operation.Value : null, description.HasValue ? description.Value : null);
+            return new OperationDisplay(provider.Value, resource.Value, operation.Value, description.Value);
         }
     }
 }

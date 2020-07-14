@@ -35,7 +35,7 @@ namespace validation.Models
                     continue;
                 }
             }
-            return new Error(code.HasValue ? code.Value : (int?)null, message.HasValue ? message.Value : null, fields.HasValue ? fields.Value : null);
+            return new Error(Optional.ToNullable(code), message.Value, fields.Value);
         }
     }
 }

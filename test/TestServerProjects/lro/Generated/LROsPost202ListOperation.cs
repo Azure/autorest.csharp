@@ -55,51 +55,23 @@ namespace lro
         IReadOnlyList<Product> IOperationSource<IReadOnlyList<Product>>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
+            List<Product> array = new List<Product>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                return null;
+                array.Add(Product.DeserializeProduct(item));
             }
-            else
-            {
-                List<Product> array = new List<Product>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    if (item.ValueKind == JsonValueKind.Null)
-                    {
-                        array.Add(null);
-                    }
-                    else
-                    {
-                        array.Add(Product.DeserializeProduct(item));
-                    }
-                }
-                return array;
-            }
+            return array;
         }
 
         async ValueTask<IReadOnlyList<Product>> IOperationSource<IReadOnlyList<Product>>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
+            List<Product> array = new List<Product>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                return null;
+                array.Add(Product.DeserializeProduct(item));
             }
-            else
-            {
-                List<Product> array = new List<Product>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    if (item.ValueKind == JsonValueKind.Null)
-                    {
-                        array.Add(null);
-                    }
-                    else
-                    {
-                        array.Add(Product.DeserializeProduct(item));
-                    }
-                }
-                return array;
-            }
+            return array;
         }
     }
 }

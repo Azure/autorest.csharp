@@ -23,14 +23,7 @@ namespace CognitiveSearch.Models
                     List<Skillset> array = new List<Skillset>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Skillset.DeserializeSkillset(item));
-                        }
+                        array.Add(Skillset.DeserializeSkillset(item));
                     }
                     value = array;
                     continue;

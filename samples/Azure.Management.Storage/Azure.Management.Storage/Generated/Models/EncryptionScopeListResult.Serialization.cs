@@ -24,14 +24,7 @@ namespace Azure.Management.Storage.Models
                     List<EncryptionScope> array = new List<EncryptionScope>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(EncryptionScope.DeserializeEncryptionScope(item));
-                        }
+                        array.Add(EncryptionScope.DeserializeEncryptionScope(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionScopeListResult(new ChangeTrackingList<EncryptionScope>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new EncryptionScopeListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

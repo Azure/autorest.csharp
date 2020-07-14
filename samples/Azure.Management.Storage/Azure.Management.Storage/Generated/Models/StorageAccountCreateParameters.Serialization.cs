@@ -21,7 +21,7 @@ namespace Azure.Management.Storage.Models
             writer.WriteStringValue(Kind.ToString());
             writer.WritePropertyName("location");
             writer.WriteStringValue(Location);
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();

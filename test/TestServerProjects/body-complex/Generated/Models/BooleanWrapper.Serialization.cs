@@ -45,7 +45,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new BooleanWrapper(fieldTrue.HasValue ? fieldTrue.Value : (bool?)null, fieldFalse.HasValue ? fieldFalse.Value : (bool?)null);
+            return new BooleanWrapper(Optional.ToNullable(fieldTrue), Optional.ToNullable(fieldFalse));
         }
     }
 }

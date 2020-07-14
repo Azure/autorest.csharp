@@ -75,7 +75,7 @@ namespace multiple_inheritance.Models
                     continue;
                 }
             }
-            return new Kitten(name, likesMilk.HasValue ? likesMilk.Value : (bool?)null, meows.HasValue ? meows.Value : (bool?)null, hisses.HasValue ? hisses.Value : (bool?)null, eatsMiceYet.HasValue ? eatsMiceYet.Value : (bool?)null);
+            return new Kitten(name, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses), Optional.ToNullable(eatsMiceYet));
         }
     }
 }

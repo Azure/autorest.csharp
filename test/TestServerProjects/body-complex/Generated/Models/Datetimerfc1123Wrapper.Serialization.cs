@@ -46,7 +46,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Datetimerfc1123Wrapper(field.HasValue ? field.Value : (DateTimeOffset?)null, now.HasValue ? now.Value : (DateTimeOffset?)null);
+            return new Datetimerfc1123Wrapper(Optional.ToNullable(field), Optional.ToNullable(now));
         }
     }
 }

@@ -45,7 +45,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new IntWrapper(field1.HasValue ? field1.Value : (int?)null, field2.HasValue ? field2.Value : (int?)null);
+            return new IntWrapper(Optional.ToNullable(field1), Optional.ToNullable(field2));
         }
     }
 }

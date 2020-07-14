@@ -21,7 +21,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("bypass");
                 writer.WriteStringValue(Bypass.Value.ToString());
             }
-            if (Optional.IsDefined(VirtualNetworkRules))
+            if (Optional.IsCollectionDefined(VirtualNetworkRules))
             {
                 writer.WritePropertyName("virtualNetworkRules");
                 writer.WriteStartArray();
@@ -31,7 +31,7 @@ namespace Azure.Management.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IpRules))
+            if (Optional.IsCollectionDefined(IpRules))
             {
                 writer.WritePropertyName("ipRules");
                 writer.WriteStartArray();
@@ -64,14 +64,7 @@ namespace Azure.Management.Storage.Models
                     List<VirtualNetworkRule> array = new List<VirtualNetworkRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(VirtualNetworkRule.DeserializeVirtualNetworkRule(item));
-                        }
+                        array.Add(VirtualNetworkRule.DeserializeVirtualNetworkRule(item));
                     }
                     virtualNetworkRules = array;
                     continue;
@@ -81,14 +74,7 @@ namespace Azure.Management.Storage.Models
                     List<IPRule> array = new List<IPRule>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(IPRule.DeserializeIPRule(item));
-                        }
+                        array.Add(IPRule.DeserializeIPRule(item));
                     }
                     ipRules = array;
                     continue;
@@ -99,7 +85,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new NetworkRuleSet(bypass.HasValue ? bypass.Value : (Bypass?)null, new ChangeTrackingList<VirtualNetworkRule>(virtualNetworkRules), new ChangeTrackingList<IPRule>(ipRules), defaultAction);
+            return new NetworkRuleSet(Optional.ToNullable(bypass), Optional.ToList(virtualNetworkRules), Optional.ToList(ipRules), defaultAction);
         }
     }
 }

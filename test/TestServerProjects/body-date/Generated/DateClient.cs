@@ -36,7 +36,7 @@ namespace body_date
 
         /// <summary> Get null date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DateTimeOffset>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset?>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DateClient.GetNull");
             scope.Start();
@@ -53,7 +53,7 @@ namespace body_date
 
         /// <summary> Get null date value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DateTimeOffset> GetNull(CancellationToken cancellationToken = default)
+        public virtual Response<DateTimeOffset?> GetNull(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DateClient.GetNull");
             scope.Start();

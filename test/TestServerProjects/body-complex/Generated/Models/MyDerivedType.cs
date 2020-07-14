@@ -13,7 +13,7 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of MyDerivedType. </summary>
         internal MyDerivedType()
         {
-            Kind = "Kind1";
+            Kind = MyKind.Kind1;
         }
 
         /// <summary> Initializes a new instance of MyDerivedType. </summary>
@@ -21,10 +21,10 @@ namespace body_complex.Models
         /// <param name="propB1"> . </param>
         /// <param name="propBH1"> . </param>
         /// <param name="propD1"> . </param>
-        internal MyDerivedType(string kind, string propB1, string propBH1, string propD1) : base(kind, propB1, propBH1)
+        internal MyDerivedType(MyKind kind, string propB1, string propBH1, string propD1) : base(kind, propB1, propBH1)
         {
             PropD1 = propD1;
-            Kind = kind ?? "Kind1";
+            Kind = kind;
         }
 
         public string PropD1 { get; }

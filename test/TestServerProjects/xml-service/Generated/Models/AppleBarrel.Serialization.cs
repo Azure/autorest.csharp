@@ -17,7 +17,7 @@ namespace xml_service.Models
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "AppleBarrel");
-            if (Optional.IsDefined(GoodApples))
+            if (Optional.IsCollectionDefined(GoodApples))
             {
                 writer.WriteStartElement("GoodApples");
                 foreach (var item in GoodApples)
@@ -28,7 +28,7 @@ namespace xml_service.Models
                 }
                 writer.WriteEndElement();
             }
-            if (Optional.IsDefined(BadApples))
+            if (Optional.IsCollectionDefined(BadApples))
             {
                 writer.WriteStartElement("BadApples");
                 foreach (var item in BadApples)

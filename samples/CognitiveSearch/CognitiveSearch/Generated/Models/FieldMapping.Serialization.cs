@@ -53,7 +53,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new FieldMapping(sourceFieldName, targetFieldName.HasValue ? targetFieldName.Value : null, mappingFunction.HasValue ? mappingFunction.Value : null);
+            return new FieldMapping(sourceFieldName, targetFieldName.Value, mappingFunction.Value);
         }
     }
 }

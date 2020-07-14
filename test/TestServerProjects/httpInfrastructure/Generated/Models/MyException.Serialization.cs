@@ -23,7 +23,7 @@ namespace httpInfrastructure.Models
                     continue;
                 }
             }
-            return new MyException(statusCode.HasValue ? statusCode.Value : null);
+            return new MyException(statusCode.Value);
         }
     }
 }

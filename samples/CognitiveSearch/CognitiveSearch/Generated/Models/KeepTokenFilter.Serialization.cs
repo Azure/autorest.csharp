@@ -48,14 +48,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     keepWords = array;
                     continue;
@@ -76,7 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeepTokenFilter(odataType, name, keepWords, keepWordsCase.HasValue ? keepWordsCase.Value : (bool?)null);
+            return new KeepTokenFilter(odataType, name, keepWords, Optional.ToNullable(keepWordsCase));
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new RoutingPreference(routingChoice.HasValue ? routingChoice.Value : (RoutingChoice?)null, publishMicrosoftEndpoints.HasValue ? publishMicrosoftEndpoints.Value : (bool?)null, publishInternetEndpoints.HasValue ? publishInternetEndpoints.Value : (bool?)null);
+            return new RoutingPreference(Optional.ToNullable(routingChoice), Optional.ToNullable(publishMicrosoftEndpoints), Optional.ToNullable(publishInternetEndpoints));
         }
     }
 }

@@ -21,7 +21,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("color");
                 writer.WriteStringValue(Color);
             }
-            if (Optional.IsDefined(Hates))
+            if (Optional.IsCollectionDefined(Hates))
             {
                 writer.WritePropertyName("hates");
                 writer.WriteStartArray();
@@ -62,14 +62,7 @@ namespace body_complex.Models
                     List<Dog> array = new List<Dog>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Dog.DeserializeDog(item));
-                        }
+                        array.Add(Dog.DeserializeDog(item));
                     }
                     hates = array;
                     continue;
@@ -85,7 +78,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new Cat(id.HasValue ? id.Value : (int?)null, name.HasValue ? name.Value : null, color.HasValue ? color.Value : null, new ChangeTrackingList<Dog>(hates));
+            return new Cat(Optional.ToNullable(id), name.Value, color.Value, Optional.ToList(hates));
         }
     }
 }

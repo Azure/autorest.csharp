@@ -277,7 +277,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_5
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: ResourceTags
@@ -416,7 +415,6 @@ schemas: !<!Schemas>
             description: Flattened product.
             namespace: ''
         protocol: !<!Protocols> {}
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfFlattenedProduct
@@ -425,7 +423,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_49
       type: dictionary
       elementType: *ref_2
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfFlattenedProduct
@@ -434,7 +431,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_33
       type: dictionary
       elementType: *ref_2
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: ResourceCollectionDictionaryofresources

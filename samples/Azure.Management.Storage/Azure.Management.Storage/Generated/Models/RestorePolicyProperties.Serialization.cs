@@ -54,7 +54,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new RestorePolicyProperties(enabled, days.HasValue ? days.Value : (int?)null, lastEnabledTime.HasValue ? lastEnabledTime.Value : (DateTimeOffset?)null);
+            return new RestorePolicyProperties(enabled, Optional.ToNullable(days), Optional.ToNullable(lastEnabledTime));
         }
     }
 }

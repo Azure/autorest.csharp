@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new OutputFieldMappingEntry(name, targetName.HasValue ? targetName.Value : null);
+            return new OutputFieldMappingEntry(name, targetName.Value);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new PetHungryOrThirstyError(errorType, errorMessage.HasValue ? errorMessage.Value : null, reason.HasValue ? reason.Value : null, hungryOrThirsty.HasValue ? hungryOrThirsty.Value : null);
+            return new PetHungryOrThirstyError(errorType, errorMessage.Value, reason.Value, hungryOrThirsty.Value);
         }
     }
 }

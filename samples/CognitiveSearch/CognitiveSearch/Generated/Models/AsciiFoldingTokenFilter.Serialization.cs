@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new AsciiFoldingTokenFilter(odataType, name, preserveOriginal.HasValue ? preserveOriginal.Value : (bool?)null);
+            return new AsciiFoldingTokenFilter(odataType, name, Optional.ToNullable(preserveOriginal));
         }
     }
 }

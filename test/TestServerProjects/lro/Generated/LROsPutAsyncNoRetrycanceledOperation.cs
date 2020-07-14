@@ -54,27 +54,13 @@ namespace lro
         Product IOperationSource<Product>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            else
-            {
-                return Product.DeserializeProduct(document.RootElement);
-            }
+            return Product.DeserializeProduct(document.RootElement);
         }
 
         async ValueTask<Product> IOperationSource<Product>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            else
-            {
-                return Product.DeserializeProduct(document.RootElement);
-            }
+            return Product.DeserializeProduct(document.RootElement);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace custom_baseUrl_paging.Models
                     continue;
                 }
             }
-            return new Product(properties.HasValue ? properties.Value : null);
+            return new Product(properties.Value);
         }
     }
 }

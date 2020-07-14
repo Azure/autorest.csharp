@@ -45,7 +45,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new DeleteRetentionPolicy(enabled.HasValue ? enabled.Value : (bool?)null, days.HasValue ? days.Value : (int?)null);
+            return new DeleteRetentionPolicy(Optional.ToNullable(enabled), Optional.ToNullable(days));
         }
     }
 }

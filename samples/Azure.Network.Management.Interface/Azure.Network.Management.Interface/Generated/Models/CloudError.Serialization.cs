@@ -23,7 +23,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new CloudError(error.HasValue ? error.Value : null);
+            return new CloudError(error.Value);
         }
     }
 }

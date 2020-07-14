@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("text");
                 writer.WriteObjectValue(TextWeights);
             }
-            if (Optional.IsDefined(Functions))
+            if (Optional.IsCollectionDefined(Functions))
             {
                 writer.WritePropertyName("functions");
                 writer.WriteStartArray();
@@ -64,14 +64,7 @@ namespace CognitiveSearch.Models
                     List<ScoringFunction> array = new List<ScoringFunction>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(ScoringFunction.DeserializeScoringFunction(item));
-                        }
+                        array.Add(ScoringFunction.DeserializeScoringFunction(item));
                     }
                     functions = array;
                     continue;
@@ -82,7 +75,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ScoringProfile(name, text.HasValue ? text.Value : null, new ChangeTrackingList<ScoringFunction>(functions), functionAggregation.HasValue ? functionAggregation.Value : (ScoringFunctionAggregation?)null);
+            return new ScoringProfile(name, text.Value, Optional.ToList(functions), Optional.ToNullable(functionAggregation));
         }
     }
 }
