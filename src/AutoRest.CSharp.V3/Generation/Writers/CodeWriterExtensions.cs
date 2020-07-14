@@ -349,14 +349,15 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         internal static CodeWriter.CodeWriterScope? WriteDefinedCheck(this CodeWriter writer, ObjectTypeProperty? property)
         {
-            var canBeUndefined = property != null &&
-                                 !property.IsRequired;
-
             CodeWriter.CodeWriterScope? scope = default;
-            if (canBeUndefined)
+            if (property != null &&
+                property.SchemaProperty != null &&
+                !property.SchemaProperty.IsRequired)
             {
+                var method = TypeFactory.IsCollectionType(property.Declaration.Type) ? nameof(Optional.IsCollectionDefined): nameof(Optional.IsDefined);
+
                 var propertyName = property!.Declaration.Name;
-                return writer.Scope($"if ({typeof(Optional)}.IsDefined({propertyName:I}))");
+                return writer.Scope($"if ({typeof(Optional)}.{method}({propertyName:I}))");
             }
 
             return scope;

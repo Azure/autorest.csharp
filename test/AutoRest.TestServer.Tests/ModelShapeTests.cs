@@ -80,6 +80,98 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void NotRequiredNullableListsAreSetable()
+        {
+            var requiredIntList = TypeAsserts.HasProperty(typeof(MixedModel), "NonRequiredNullableIntList", BindingFlags.Public | BindingFlags.Instance);
+            var requiredStringList = TypeAsserts.HasProperty(typeof(MixedModel), "NonRequiredNullableStringList", BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.NotNull(requiredIntList.SetMethod);
+            Assert.NotNull(requiredStringList.SetMethod);
+        }
+
+        [Test]
+        public void NotRequiredNullableListsAreNotNullByDefault()
+        {
+            var inputModel = CreateInputModel();
+
+            Assert.NotNull(inputModel.NonRequiredNullableIntList);
+            Assert.NotNull(inputModel.NonRequiredNullableStringList);
+        }
+
+
+        [Test]
+        public void NotRequiredNullablePropertiesOmitedByDefault()
+        {
+            var inputModel = CreateInputModel();
+
+            var element = JsonAsserts.AssertSerializes(inputModel);
+            Assert.False(element.TryGetProperty("NonRequiredNullableInt", out _));
+            Assert.False(element.TryGetProperty("NonRequiredNullableString", out _));
+            Assert.False(element.TryGetProperty("NonRequiredNullableIntList", out _));
+            Assert.False(element.TryGetProperty("NonRequiredNullableStringList", out _));
+        }
+
+        [Test]
+        public void NotRequiredNullableListsSerializedAsNull()
+        {
+            var inputModel = CreateInputModel();
+            inputModel.NonRequiredNullableIntList = null;
+            inputModel.NonRequiredNullableStringList = null;
+
+            var element = JsonAsserts.AssertSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("NonRequiredNullableIntList").ValueKind);
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("NonRequiredNullableStringList").ValueKind);
+        }
+
+        [Test]
+        public void NotRequiredNullableListsSerializedEmptyWhenCleared()
+        {
+            var inputModel = CreateInputModel();
+            inputModel.NonRequiredNullableIntList.Clear();
+            inputModel.NonRequiredNullableStringList.Clear();
+
+            var element = JsonAsserts.AssertSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Array, element.GetProperty("NonRequiredNullableIntList").ValueKind);
+            Assert.AreEqual(JsonValueKind.Array, element.GetProperty("NonRequiredNullableStringList").ValueKind);
+        }
+
+        [Test]
+        public void NotRequiredNullablePropertiesSerializeWhenSet()
+        {
+            var inputModel = CreateInputModel();
+            inputModel.NonRequiredNullableInt = 1;
+            inputModel.NonRequiredNullableString = "2";
+
+            var element = JsonAsserts.AssertSerializes(inputModel);
+            Assert.AreEqual(1, element.GetProperty("NonRequiredNullableInt").GetInt32());
+            Assert.AreEqual("2", element.GetProperty("NonRequiredNullableString").GetString());
+        }
+
+        [Test]
+        public void NotRequiredNullablePropertiesDeserializedWithNulls()
+        {
+            var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"NonRequiredNullableInt\":null, \"NonRequiredNullableString\": null}").RootElement);
+            Assert.Null(model.NonRequiredNullableInt);
+            Assert.Null(model.NonRequiredNullableString);
+        }
+
+        [Test]
+        public void NotRequiredNullablePropertiesDeserializedWithNullsWhenUndefined()
+        {
+            var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{}").RootElement);
+            Assert.Null(model.NonRequiredNullableInt);
+            Assert.Null(model.NonRequiredNullableString);
+        }
+
+        [Test]
+        public void NotRequiredNullablePropertiesDeserializedWithValues()
+        {
+            var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"NonRequiredNullableInt\":1, \"NonRequiredNullableString\": \"2\"}").RootElement);
+            Assert.AreEqual(1, model.NonRequiredNullableInt);
+            Assert.AreEqual("2", model.NonRequiredNullableString);
+        }
+
+        [Test]
         public void NullablePropertiesCanBeInitializedWithNull()
         {
             var inputModel = new InputModel(
@@ -248,6 +340,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableIntList").ValueKind);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableStringList").ValueKind);
         }
+
 
         private static InputModel CreateInputModel()
         {

@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
 {
     internal class JsonObjectSerialization: JsonSerialization
     {
-        public JsonObjectSerialization(CSharpType? type, JsonPropertySerialization[] properties, JsonAdditionalPropertiesSerialization? additionalProperties)
+        public JsonObjectSerialization(CSharpType? type, JsonPropertySerialization[] properties, JsonAdditionalPropertiesSerialization? additionalProperties, bool isNullable) : base(isNullable)
         {
             Type = type;
             Properties = properties;

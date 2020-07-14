@@ -58,7 +58,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/730")]
         public Task GetComplexBasicNull() => Test(async (host, pipeline) =>
         {
             var result = await new BasicClient(ClientDiagnostics, pipeline, host).GetNullAsync();
@@ -405,7 +404,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/730")]
         public Task GetComplexDictionaryNull() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetNullAsync();

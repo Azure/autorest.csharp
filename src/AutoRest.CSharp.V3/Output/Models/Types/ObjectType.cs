@@ -78,8 +78,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember, _typeFactory),
                     string.Empty,
                     true,
-                    null,
-                    false
+                    null
                     );
 
                 return _additionalPropertiesProperty;
@@ -409,8 +408,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                     // We represent property being optional by making it nullable
                     // Except in the case of collection where there is a special handling
-                    if (!property.IsRequired &&
-                        !TypeFactory.IsCollectionType(propertyType))
+                    bool optionalViaNullability = !property.IsRequired &&
+                                                  !property.IsNullable &&
+                                                  !TypeFactory.IsCollectionType(propertyType);
+
+                    if (optionalViaNullability)
                     {
                         propertyType = propertyType.WithNullable(true);
                     }
@@ -425,7 +427,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     var type = memberDeclaration.Type;
 
                     var valueType = type;
-                    if (!property.IsRequired && !property.IsNullable)
+                    if (optionalViaNullability)
                     {
                         valueType = valueType.WithNullable(false);
                     }
@@ -456,8 +458,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                         BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
                         isReadOnly,
                         property,
-                        property.IsRequired,
-                        valueType);
+                        valueType,
+                        optionalViaNullability);
                 }
             }
 

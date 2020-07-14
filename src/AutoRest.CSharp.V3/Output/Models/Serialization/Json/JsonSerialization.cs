@@ -5,5 +5,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Serialization.Json
 {
     internal abstract class JsonSerialization: ObjectSerialization
     {
+        protected JsonSerialization(bool isNullable)
+        {
+            IsNullable = isNullable;
+        }
+
+        public bool IsNullable { get; }
     }
 }

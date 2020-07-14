@@ -10,17 +10,17 @@ namespace Azure.Core
 {
     internal static class Optional
     {
-        public static bool IsDefined<T>(IEnumerable<T> collection)
+        public static bool IsCollectionDefined<T>(IEnumerable<T> collection)
         {
             return !(collection is ChangeTrackingList<T> changeTrackingList && changeTrackingList.IsUndefined);
         }
 
-        public static bool IsDefined<TKey, TValue>(IReadOnlyDictionary<TKey, TValue> collection)
+        public static bool IsCollectionDefined<TKey, TValue>(IReadOnlyDictionary<TKey, TValue> collection)
         {
             return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingList && changeTrackingList.IsUndefined);
         }
 
-        public static bool IsDefined<TKey, TValue>(IDictionary<TKey, TValue> collection)
+        public static bool IsCollectionDefined<TKey, TValue>(IDictionary<TKey, TValue> collection)
         {
             return !(collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingList && changeTrackingList.IsUndefined);
         }
@@ -36,6 +36,55 @@ namespace Azure.Core
         public static bool IsDefined(string value)
         {
             return value != null;
+        }
+
+        public static IReadOnlyDictionary<TKey, TValue> ToDictionary<TKey, TValue>(Optional<IReadOnlyDictionary<TKey, TValue>> optional)
+        {
+            if (optional.HasValue)
+            {
+                return optional.Value;
+            }
+            return new ChangeTrackingDictionary<TKey, TValue>(optional);
+        }
+
+        public static IDictionary<TKey, TValue> ToDictionary<TKey, TValue>(Optional<IDictionary<TKey, TValue>> optional)
+        {
+            if (optional.HasValue)
+            {
+                return optional.Value;
+            }
+            return new ChangeTrackingDictionary<TKey, TValue>(optional);
+        }
+        public static IReadOnlyList<T> ToList<T>(Optional<IReadOnlyList<T>> optional)
+        {
+            if (optional.HasValue)
+            {
+                return optional.Value;
+            }
+            return new ChangeTrackingList<T>(optional);
+        }
+
+        public static IList<T> ToList<T>(Optional<IList<T>> optional)
+        {
+            if (optional.HasValue)
+            {
+                return optional.Value;
+            }
+            return new ChangeTrackingList<T>(optional);
+        }
+
+        public static T? ToNullable<T>(Optional<T> optional) where T: struct
+        {
+            if (optional.HasValue)
+            {
+                return optional.Value;
+            }
+            return default;
+        }
+
+        public static T? ToNullable<T>(Optional<T?> optional) where T: struct
+        {
+            return optional.Value;
         }
     }
 

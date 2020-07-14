@@ -89,7 +89,12 @@
         "RequiredNullableString": { "type": "string", "x-nullable": true },
         "RequiredNullableInt": { "type": "integer", "x-nullable": true },
         "RequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
-        "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
+        "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } },
+
+        "NonRequiredNullableString": { "type": "string", "x-nullable": true },
+        "NonRequiredNullableInt": { "type": "integer", "x-nullable": true },
+        "NonRequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
+        "NonRequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
       },
       "required": [
         "RequiredString",
@@ -118,7 +123,12 @@
         "RequiredNullableString": { "type": "string", "x-nullable": true },
         "RequiredNullableInt": { "type": "integer", "x-nullable": true },
         "RequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
-        "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
+        "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } },
+
+        "NonRequiredNullableString": { "type": "string", "x-nullable": true },
+        "NonRequiredNullableInt": { "type": "integer", "x-nullable": true },
+        "NonRequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
+        "NonRequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
       },
       "required": [
         "RequiredString",
@@ -147,7 +157,12 @@
         "RequiredNullableString": { "type": "string", "x-nullable": true },
         "RequiredNullableInt": { "type": "integer", "x-nullable": true },
         "RequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
-        "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
+        "RequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } },
+
+        "NonRequiredNullableString": { "type": "string", "x-nullable": true },
+        "NonRequiredNullableInt": { "type": "integer", "x-nullable": true },
+        "NonRequiredNullableStringList": { "type": "array", "x-nullable": true, "items": { "type": "string" } },
+        "NonRequiredNullableIntList": { "type": "array", "x-nullable": true, "items": { "type": "integer" } }
       },
       "required": [
         "RequiredString",
