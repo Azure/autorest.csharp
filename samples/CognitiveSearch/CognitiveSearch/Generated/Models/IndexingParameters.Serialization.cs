@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("maxFailedItemsPerBatch");
                 writer.WriteNumberValue(MaxFailedItemsPerBatch.Value);
             }
-            if (Optional.IsDefined(Configuration))
+            if (Optional.IsCollectionDefined(Configuration))
             {
                 writer.WritePropertyName("configuration");
                 writer.WriteStartObject();
@@ -73,20 +73,13 @@ namespace CognitiveSearch.Models
                     Dictionary<string, object> dictionary = new Dictionary<string, object>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetObject());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetObject());
                     }
                     configuration = dictionary;
                     continue;
                 }
             }
-            return new IndexingParameters(batchSize.HasValue ? batchSize.Value : (int?)null, maxFailedItems.HasValue ? maxFailedItems.Value : (int?)null, maxFailedItemsPerBatch.HasValue ? maxFailedItemsPerBatch.Value : (int?)null, new ChangeTrackingDictionary<string, object>(configuration));
+            return new IndexingParameters(Optional.ToNullable(batchSize), Optional.ToNullable(maxFailedItems), Optional.ToNullable(maxFailedItemsPerBatch), Optional.ToDictionary(configuration));
         }
     }
 }

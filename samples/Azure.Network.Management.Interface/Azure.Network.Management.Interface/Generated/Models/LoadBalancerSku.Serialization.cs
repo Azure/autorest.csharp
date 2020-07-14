@@ -34,7 +34,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new LoadBalancerSku(name.HasValue ? name.Value : (LoadBalancerSkuName?)null);
+            return new LoadBalancerSku(Optional.ToNullable(name));
         }
     }
 }

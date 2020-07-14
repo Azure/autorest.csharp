@@ -38,7 +38,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("serviceName");
                 writer.WriteStringValue(ServiceName);
             }
-            if (Optional.IsDefined(Actions))
+            if (Optional.IsCollectionDefined(Actions))
             {
                 writer.WritePropertyName("actions");
                 writer.WriteStartArray();
@@ -96,14 +96,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(item.GetString());
                             }
                             actions = array;
                             continue;
@@ -117,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Delegation(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, serviceName.HasValue ? serviceName.Value : null, new ChangeTrackingList<string>(actions), provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new Delegation(id.Value, name.Value, etag.Value, serviceName.Value, Optional.ToList(actions), Optional.ToNullable(provisioningState));
         }
     }
 }

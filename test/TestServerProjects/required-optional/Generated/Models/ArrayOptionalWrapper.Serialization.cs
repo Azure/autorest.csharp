@@ -15,7 +15,7 @@ namespace required_optional.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Value))
+            if (Optional.IsCollectionDefined(Value))
             {
                 writer.WritePropertyName("value");
                 writer.WriteStartArray();

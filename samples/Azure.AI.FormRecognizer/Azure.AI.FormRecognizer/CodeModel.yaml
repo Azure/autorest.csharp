@@ -295,7 +295,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Location and ID of the model being trained. The status of model training is specified in the status property at the model location.
           header: Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_21
@@ -367,7 +367,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: URL containing the resultId used to track the progress and obtain the result of the analyze operation.
           header: Operation-Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_44
@@ -535,7 +535,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: URL containing the resultId used to track the progress and obtain the result of the copy operation.
           header: Operation-Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_146
@@ -546,7 +546,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: Location and ID of the model being copied. The status of model copy is specified in the status property at the model location.
           header: Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_152
@@ -557,7 +557,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: URL containing the resultId used to track the progress and obtain the result of the analyze operation.
           header: Operation-Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_158
@@ -568,7 +568,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: ''
+          description: URL containing the resultId used to track the progress and obtain the result of the analyze operation.
           header: Operation-Location
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_92
@@ -876,7 +876,6 @@ schemas: !<!Schemas>
             name: ArrayOfKeysResultClustersItemsItem
             description: Array of KeysResultClustersItemsItem
         protocol: !<!Protocols> {}
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: KeysResultClusters
@@ -1086,7 +1085,6 @@ schemas: !<!Schemas>
             description: Recognized field value.
             namespace: ''
         protocol: !<!Protocols> {}
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: FieldValueObject
@@ -1095,7 +1093,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_69
       type: dictionary
       elementType: *ref_7
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DocumentResultFields

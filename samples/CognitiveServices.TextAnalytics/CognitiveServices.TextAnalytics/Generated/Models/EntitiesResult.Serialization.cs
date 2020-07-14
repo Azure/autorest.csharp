@@ -26,14 +26,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<DocumentEntities> array = new List<DocumentEntities>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DocumentEntities.DeserializeDocumentEntities(item));
-                        }
+                        array.Add(DocumentEntities.DeserializeDocumentEntities(item));
                     }
                     documents = array;
                     continue;
@@ -43,14 +36,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<DocumentError> array = new List<DocumentError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DocumentError.DeserializeDocumentError(item));
-                        }
+                        array.Add(DocumentError.DeserializeDocumentError(item));
                     }
                     errors = array;
                     continue;
@@ -66,7 +52,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new EntitiesResult(documents, errors, statistics.HasValue ? statistics.Value : null, modelVersion);
+            return new EntitiesResult(documents, errors, statistics.Value, modelVersion);
         }
     }
 }

@@ -30,14 +30,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<LinkedEntity> array = new List<LinkedEntity>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(LinkedEntity.DeserializeLinkedEntity(item));
-                        }
+                        array.Add(LinkedEntity.DeserializeLinkedEntity(item));
                     }
                     entities = array;
                     continue;
@@ -48,7 +41,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new DocumentLinkedEntities(id, entities, statistics.HasValue ? statistics.Value : null);
+            return new DocumentLinkedEntities(id, entities, statistics.Value);
         }
     }
 }

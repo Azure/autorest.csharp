@@ -41,7 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new KeyValuePair(label.HasValue ? label.Value : null, key, value, confidence);
+            return new KeyValuePair(label.Value, key, value, confidence);
         }
     }
 }

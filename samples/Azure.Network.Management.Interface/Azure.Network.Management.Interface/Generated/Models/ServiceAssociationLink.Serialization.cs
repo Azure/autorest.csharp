@@ -58,7 +58,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("allowDelete");
                 writer.WriteBooleanValue(AllowDelete.Value);
             }
-            if (Optional.IsDefined(Locations))
+            if (Optional.IsCollectionDefined(Locations))
             {
                 writer.WritePropertyName("locations");
                 writer.WriteStartArray();
@@ -134,14 +134,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(item.GetString());
                             }
                             locations = array;
                             continue;
@@ -150,7 +143,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceAssociationLink(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, type.HasValue ? type.Value : null, linkedResourceType.HasValue ? linkedResourceType.Value : null, link.HasValue ? link.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null, allowDelete.HasValue ? allowDelete.Value : (bool?)null, new ChangeTrackingList<string>(locations));
+            return new ServiceAssociationLink(id.Value, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(allowDelete), Optional.ToList(locations));
         }
     }
 }

@@ -26,14 +26,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<DocumentKeyPhrases> array = new List<DocumentKeyPhrases>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DocumentKeyPhrases.DeserializeDocumentKeyPhrases(item));
-                        }
+                        array.Add(DocumentKeyPhrases.DeserializeDocumentKeyPhrases(item));
                     }
                     documents = array;
                     continue;
@@ -43,14 +36,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<DocumentError> array = new List<DocumentError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DocumentError.DeserializeDocumentError(item));
-                        }
+                        array.Add(DocumentError.DeserializeDocumentError(item));
                     }
                     errors = array;
                     continue;
@@ -66,7 +52,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new KeyPhraseResult(documents, errors, statistics.HasValue ? statistics.Value : null, modelVersion);
+            return new KeyPhraseResult(documents, errors, statistics.Value, modelVersion);
         }
     }
 }

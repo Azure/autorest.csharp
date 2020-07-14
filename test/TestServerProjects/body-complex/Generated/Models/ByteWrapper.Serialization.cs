@@ -35,7 +35,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new ByteWrapper(field.HasValue ? field.Value : null);
+            return new ByteWrapper(field.Value);
         }
     }
 }

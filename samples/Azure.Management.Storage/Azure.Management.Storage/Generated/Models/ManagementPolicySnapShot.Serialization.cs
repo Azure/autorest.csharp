@@ -34,7 +34,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicySnapShot(delete.HasValue ? delete.Value : null);
+            return new ManagementPolicySnapShot(delete.Value);
         }
     }
 }

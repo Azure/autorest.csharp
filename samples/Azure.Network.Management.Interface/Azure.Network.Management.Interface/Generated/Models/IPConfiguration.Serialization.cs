@@ -121,7 +121,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new IPConfiguration(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, privateIPAddress.HasValue ? privateIPAddress.Value : null, privateIPAllocationMethod.HasValue ? privateIPAllocationMethod.Value : (IPAllocationMethod?)null, subnet.HasValue ? subnet.Value : null, publicIPAddress.HasValue ? publicIPAddress.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new IPConfiguration(id.Value, name.Value, etag.Value, privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), subnet.Value, publicIPAddress.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new LimitTokenFilter(odataType, name, maxTokenCount.HasValue ? maxTokenCount.Value : (int?)null, consumeAllTokens.HasValue ? consumeAllTokens.Value : (bool?)null);
+            return new LimitTokenFilter(odataType, name, Optional.ToNullable(maxTokenCount), Optional.ToNullable(consumeAllTokens));
         }
     }
 }

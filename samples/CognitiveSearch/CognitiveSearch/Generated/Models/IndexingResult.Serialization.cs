@@ -41,7 +41,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexingResult(key, errorMessage.HasValue ? errorMessage.Value : null, status, statusCode);
+            return new IndexingResult(key, errorMessage.Value, status, statusCode);
         }
     }
 }

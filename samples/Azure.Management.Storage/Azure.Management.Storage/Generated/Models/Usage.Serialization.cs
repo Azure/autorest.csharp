@@ -41,7 +41,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new Usage(unit.HasValue ? unit.Value : (UsageUnit?)null, currentValue.HasValue ? currentValue.Value : (int?)null, limit.HasValue ? limit.Value : (int?)null, name.HasValue ? name.Value : null);
+            return new Usage(Optional.ToNullable(unit), Optional.ToNullable(currentValue), Optional.ToNullable(limit), name.Value);
         }
     }
 }

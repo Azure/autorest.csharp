@@ -54,7 +54,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("destinationAccount");
                 writer.WriteStringValue(DestinationAccount);
             }
-            if (Optional.IsDefined(Rules))
+            if (Optional.IsCollectionDefined(Rules))
             {
                 writer.WritePropertyName("rules");
                 writer.WriteStartArray();
@@ -124,14 +124,7 @@ namespace Azure.Management.Storage.Models
                             List<ObjectReplicationPolicyRule> array = new List<ObjectReplicationPolicyRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(ObjectReplicationPolicyRule.DeserializeObjectReplicationPolicyRule(item));
-                                }
+                                array.Add(ObjectReplicationPolicyRule.DeserializeObjectReplicationPolicyRule(item));
                             }
                             rules = array;
                             continue;
@@ -140,7 +133,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ObjectReplicationPolicy(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, policyId.HasValue ? policyId.Value : null, enabledTime.HasValue ? enabledTime.Value : (DateTimeOffset?)null, sourceAccount.HasValue ? sourceAccount.Value : null, destinationAccount.HasValue ? destinationAccount.Value : null, new ChangeTrackingList<ObjectReplicationPolicyRule>(rules));
+            return new ObjectReplicationPolicy(id.Value, name.Value, type.Value, policyId.Value, Optional.ToNullable(enabledTime), sourceAccount.Value, destinationAccount.Value, Optional.ToList(rules));
         }
     }
 }

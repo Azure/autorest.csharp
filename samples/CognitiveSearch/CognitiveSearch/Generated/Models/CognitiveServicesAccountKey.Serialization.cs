@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CognitiveServicesAccountKey(odataType, description.HasValue ? description.Value : null, key);
+            return new CognitiveServicesAccountKey(odataType, description.Value, key);
         }
     }
 }

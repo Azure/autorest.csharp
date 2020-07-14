@@ -42,7 +42,7 @@ namespace validation.Models
                     continue;
                 }
             }
-            return new ChildProduct(constProperty, count.HasValue ? count.Value : (int?)null);
+            return new ChildProduct(constProperty, Optional.ToNullable(count));
         }
     }
 }

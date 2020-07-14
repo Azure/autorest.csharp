@@ -36,7 +36,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new IndexerLimits(maxRunTime.HasValue ? maxRunTime.Value : (TimeSpan?)null, maxDocumentExtractionSize.HasValue ? maxDocumentExtractionSize.Value : (long?)null, maxDocumentContentCharactersToExtract.HasValue ? maxDocumentContentCharactersToExtract.Value : (long?)null);
+            return new IndexerLimits(Optional.ToNullable(maxRunTime), Optional.ToNullable(maxDocumentExtractionSize), Optional.ToNullable(maxDocumentContentCharactersToExtract));
         }
     }
 }

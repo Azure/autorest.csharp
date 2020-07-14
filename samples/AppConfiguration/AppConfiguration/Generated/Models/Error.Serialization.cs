@@ -47,7 +47,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new Error(type.HasValue ? type.Value : null, title.HasValue ? title.Value : null, name.HasValue ? name.Value : null, detail.HasValue ? detail.Value : null, status.HasValue ? status.Value : (int?)null);
+            return new Error(type.Value, title.Value, name.Value, detail.Value, Optional.ToNullable(status));
         }
     }
 }

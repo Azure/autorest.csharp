@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("requiredMemberName");
                 writer.WriteStringValue(RequiredMemberName);
             }
-            if (Optional.IsDefined(Fqdns))
+            if (Optional.IsCollectionDefined(Fqdns))
             {
                 writer.WritePropertyName("fqdns");
                 writer.WriteStartArray();
@@ -61,20 +61,13 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     fqdns = array;
                     continue;
                 }
             }
-            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId.HasValue ? groupId.Value : null, requiredMemberName.HasValue ? requiredMemberName.Value : null, new ChangeTrackingList<string>(fqdns));
+            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId.Value, requiredMemberName.Value, Optional.ToList(fqdns));
         }
     }
 }

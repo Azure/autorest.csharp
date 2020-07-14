@@ -33,7 +33,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(VirtualNetworkTaps))
+            if (Optional.IsCollectionDefined(VirtualNetworkTaps))
             {
                 writer.WritePropertyName("virtualNetworkTaps");
                 writer.WriteStartArray();
@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ApplicationGatewayBackendAddressPools))
+            if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
             {
                 writer.WritePropertyName("applicationGatewayBackendAddressPools");
                 writer.WriteStartArray();
@@ -53,7 +53,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(LoadBalancerBackendAddressPools))
+            if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
             {
                 writer.WritePropertyName("loadBalancerBackendAddressPools");
                 writer.WriteStartArray();
@@ -63,7 +63,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(LoadBalancerInboundNatRules))
+            if (Optional.IsCollectionDefined(LoadBalancerInboundNatRules))
             {
                 writer.WritePropertyName("loadBalancerInboundNatRules");
                 writer.WriteStartArray();
@@ -103,7 +103,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("publicIPAddress");
                 writer.WriteObjectValue(PublicIPAddress);
             }
-            if (Optional.IsDefined(ApplicationSecurityGroups))
+            if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
                 writer.WritePropertyName("applicationSecurityGroups");
                 writer.WriteStartArray();
@@ -171,14 +171,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<VirtualNetworkTap> array = new List<VirtualNetworkTap>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
-                                }
+                                array.Add(VirtualNetworkTap.DeserializeVirtualNetworkTap(item));
                             }
                             virtualNetworkTaps = array;
                             continue;
@@ -188,14 +181,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationGatewayBackendAddressPool> array = new List<ApplicationGatewayBackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
-                                }
+                                array.Add(ApplicationGatewayBackendAddressPool.DeserializeApplicationGatewayBackendAddressPool(item));
                             }
                             applicationGatewayBackendAddressPools = array;
                             continue;
@@ -205,14 +191,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<BackendAddressPool> array = new List<BackendAddressPool>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
-                                }
+                                array.Add(BackendAddressPool.DeserializeBackendAddressPool(item));
                             }
                             loadBalancerBackendAddressPools = array;
                             continue;
@@ -222,14 +201,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<InboundNatRule> array = new List<InboundNatRule>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(InboundNatRule.DeserializeInboundNatRule(item));
-                                }
+                                array.Add(InboundNatRule.DeserializeInboundNatRule(item));
                             }
                             loadBalancerInboundNatRules = array;
                             continue;
@@ -269,14 +241,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationSecurityGroup> array = new List<ApplicationSecurityGroup>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
-                                }
+                                array.Add(ApplicationSecurityGroup.DeserializeApplicationSecurityGroup(item));
                             }
                             applicationSecurityGroups = array;
                             continue;
@@ -295,7 +260,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceIPConfiguration(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, new ChangeTrackingList<VirtualNetworkTap>(virtualNetworkTaps), new ChangeTrackingList<ApplicationGatewayBackendAddressPool>(applicationGatewayBackendAddressPools), new ChangeTrackingList<BackendAddressPool>(loadBalancerBackendAddressPools), new ChangeTrackingList<InboundNatRule>(loadBalancerInboundNatRules), privateIPAddress.HasValue ? privateIPAddress.Value : null, privateIPAllocationMethod.HasValue ? privateIPAllocationMethod.Value : (IPAllocationMethod?)null, privateIPAddressVersion.HasValue ? privateIPAddressVersion.Value : (IPVersion?)null, subnet.HasValue ? subnet.Value : null, primary.HasValue ? primary.Value : (bool?)null, publicIPAddress.HasValue ? publicIPAddress.Value : null, new ChangeTrackingList<ApplicationSecurityGroup>(applicationSecurityGroups), provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null, privateLinkConnectionProperties.HasValue ? privateLinkConnectionProperties.Value : null);
+            return new NetworkInterfaceIPConfiguration(id.Value, name.Value, etag.Value, Optional.ToList(virtualNetworkTaps), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, Optional.ToNullable(primary), publicIPAddress.Value, Optional.ToList(applicationSecurityGroups), Optional.ToNullable(provisioningState), privateLinkConnectionProperties.Value);
         }
     }
 }

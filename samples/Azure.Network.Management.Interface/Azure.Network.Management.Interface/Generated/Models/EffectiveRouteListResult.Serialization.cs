@@ -24,14 +24,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<EffectiveRoute> array = new List<EffectiveRoute>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(EffectiveRoute.DeserializeEffectiveRoute(item));
-                        }
+                        array.Add(EffectiveRoute.DeserializeEffectiveRoute(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveRouteListResult(new ChangeTrackingList<EffectiveRoute>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new EffectiveRouteListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

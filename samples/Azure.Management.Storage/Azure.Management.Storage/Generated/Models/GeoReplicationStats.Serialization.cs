@@ -57,7 +57,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new GeoReplicationStats(status.HasValue ? status.Value : (GeoReplicationStatus?)null, lastSyncTime.HasValue ? lastSyncTime.Value : (DateTimeOffset?)null, canFailover.HasValue ? canFailover.Value : (bool?)null);
+            return new GeoReplicationStats(Optional.ToNullable(status), Optional.ToNullable(lastSyncTime), Optional.ToNullable(canFailover));
         }
     }
 }

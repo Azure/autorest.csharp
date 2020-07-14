@@ -31,11 +31,11 @@ namespace AutoRest.CSharp.V3.Generation.Types
             ArraySchema array => new CSharpType(
                 typeof(IList<>),
                 isNullable,
-                CreateType(array.ElementType, false)),
+                CreateType(array.ElementType, array.NullableItems ?? false)),
             DictionarySchema dictionary => new CSharpType(
                 typeof(IDictionary<,>),
                 isNullable,
-                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, false)),
+                new CSharpType(typeof(string)), CreateType(dictionary.ElementType, dictionary.NullableItems ?? false)),
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),

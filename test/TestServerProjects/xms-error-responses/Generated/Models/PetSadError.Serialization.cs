@@ -42,7 +42,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new PetSadError(errorType, errorMessage.HasValue ? errorMessage.Value : null, reason.HasValue ? reason.Value : null);
+            return new PetSadError(errorType, errorMessage.Value, reason.Value);
         }
     }
 }

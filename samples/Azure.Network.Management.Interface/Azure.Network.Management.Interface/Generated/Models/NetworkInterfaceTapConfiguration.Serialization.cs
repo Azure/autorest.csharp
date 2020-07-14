@@ -99,7 +99,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceTapConfiguration(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, type.HasValue ? type.Value : null, virtualNetworkTap.HasValue ? virtualNetworkTap.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new NetworkInterfaceTapConfiguration(id.Value, name.Value, etag.Value, type.Value, virtualNetworkTap.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

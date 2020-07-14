@@ -42,7 +42,7 @@ namespace multiple_inheritance.Models
                     continue;
                 }
             }
-            return new Horse(name, isAShowHorse.HasValue ? isAShowHorse.Value : (bool?)null);
+            return new Horse(name, Optional.ToNullable(isAShowHorse));
         }
     }
 }

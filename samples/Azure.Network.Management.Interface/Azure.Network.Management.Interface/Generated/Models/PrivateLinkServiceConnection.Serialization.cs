@@ -48,7 +48,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("privateLinkServiceId");
                 writer.WriteStringValue(PrivateLinkServiceId);
             }
-            if (Optional.IsDefined(GroupIds))
+            if (Optional.IsCollectionDefined(GroupIds))
             {
                 writer.WritePropertyName("groupIds");
                 writer.WriteStartArray();
@@ -124,14 +124,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(item.GetString());
                             }
                             groupIds = array;
                             continue;
@@ -150,7 +143,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnection(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, etag.HasValue ? etag.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null, privateLinkServiceId.HasValue ? privateLinkServiceId.Value : null, new ChangeTrackingList<string>(groupIds), requestMessage.HasValue ? requestMessage.Value : null, privateLinkServiceConnectionState.HasValue ? privateLinkServiceConnectionState.Value : null);
+            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value);
         }
     }
 }

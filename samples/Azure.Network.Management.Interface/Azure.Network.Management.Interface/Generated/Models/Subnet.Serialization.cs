@@ -38,7 +38,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("addressPrefix");
                 writer.WriteStringValue(AddressPrefix);
             }
-            if (Optional.IsDefined(AddressPrefixes))
+            if (Optional.IsCollectionDefined(AddressPrefixes))
             {
                 writer.WritePropertyName("addressPrefixes");
                 writer.WriteStartArray();
@@ -63,7 +63,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("natGateway");
                 writer.WriteObjectValue(NatGateway);
             }
-            if (Optional.IsDefined(ServiceEndpoints))
+            if (Optional.IsCollectionDefined(ServiceEndpoints))
             {
                 writer.WritePropertyName("serviceEndpoints");
                 writer.WriteStartArray();
@@ -73,7 +73,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ServiceEndpointPolicies))
+            if (Optional.IsCollectionDefined(ServiceEndpointPolicies))
             {
                 writer.WritePropertyName("serviceEndpointPolicies");
                 writer.WriteStartArray();
@@ -83,7 +83,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(PrivateEndpoints))
+            if (Optional.IsCollectionDefined(PrivateEndpoints))
             {
                 writer.WritePropertyName("privateEndpoints");
                 writer.WriteStartArray();
@@ -93,7 +93,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IpConfigurations))
+            if (Optional.IsCollectionDefined(IpConfigurations))
             {
                 writer.WritePropertyName("ipConfigurations");
                 writer.WriteStartArray();
@@ -103,7 +103,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(IpConfigurationProfiles))
+            if (Optional.IsCollectionDefined(IpConfigurationProfiles))
             {
                 writer.WritePropertyName("ipConfigurationProfiles");
                 writer.WriteStartArray();
@@ -113,7 +113,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ResourceNavigationLinks))
+            if (Optional.IsCollectionDefined(ResourceNavigationLinks))
             {
                 writer.WritePropertyName("resourceNavigationLinks");
                 writer.WriteStartArray();
@@ -123,7 +123,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ServiceAssociationLinks))
+            if (Optional.IsCollectionDefined(ServiceAssociationLinks))
             {
                 writer.WritePropertyName("serviceAssociationLinks");
                 writer.WriteStartArray();
@@ -133,7 +133,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Delegations))
+            if (Optional.IsCollectionDefined(Delegations))
             {
                 writer.WritePropertyName("delegations");
                 writer.WriteStartArray();
@@ -220,14 +220,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(item.GetString());
                             }
                             addressPrefixes = array;
                             continue;
@@ -252,14 +245,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceEndpointPropertiesFormat> array = new List<ServiceEndpointPropertiesFormat>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(ServiceEndpointPropertiesFormat.DeserializeServiceEndpointPropertiesFormat(item));
-                                }
+                                array.Add(ServiceEndpointPropertiesFormat.DeserializeServiceEndpointPropertiesFormat(item));
                             }
                             serviceEndpoints = array;
                             continue;
@@ -269,14 +255,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceEndpointPolicy> array = new List<ServiceEndpointPolicy>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(ServiceEndpointPolicy.DeserializeServiceEndpointPolicy(item));
-                                }
+                                array.Add(ServiceEndpointPolicy.DeserializeServiceEndpointPolicy(item));
                             }
                             serviceEndpointPolicies = array;
                             continue;
@@ -286,14 +265,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateEndpoint> array = new List<PrivateEndpoint>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(PrivateEndpoint.DeserializePrivateEndpoint(item));
-                                }
+                                array.Add(PrivateEndpoint.DeserializePrivateEndpoint(item));
                             }
                             privateEndpoints = array;
                             continue;
@@ -303,14 +275,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<IPConfiguration> array = new List<IPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(IPConfiguration.DeserializeIPConfiguration(item));
-                                }
+                                array.Add(IPConfiguration.DeserializeIPConfiguration(item));
                             }
                             ipConfigurations = array;
                             continue;
@@ -320,14 +285,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<IPConfigurationProfile> array = new List<IPConfigurationProfile>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(IPConfigurationProfile.DeserializeIPConfigurationProfile(item));
-                                }
+                                array.Add(IPConfigurationProfile.DeserializeIPConfigurationProfile(item));
                             }
                             ipConfigurationProfiles = array;
                             continue;
@@ -337,14 +295,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ResourceNavigationLink> array = new List<ResourceNavigationLink>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(ResourceNavigationLink.DeserializeResourceNavigationLink(item));
-                                }
+                                array.Add(ResourceNavigationLink.DeserializeResourceNavigationLink(item));
                             }
                             resourceNavigationLinks = array;
                             continue;
@@ -354,14 +305,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ServiceAssociationLink> array = new List<ServiceAssociationLink>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(ServiceAssociationLink.DeserializeServiceAssociationLink(item));
-                                }
+                                array.Add(ServiceAssociationLink.DeserializeServiceAssociationLink(item));
                             }
                             serviceAssociationLinks = array;
                             continue;
@@ -371,14 +315,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<Delegation> array = new List<Delegation>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Delegation.DeserializeDelegation(item));
-                                }
+                                array.Add(Delegation.DeserializeDelegation(item));
                             }
                             delegations = array;
                             continue;
@@ -407,7 +344,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new Subnet(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, addressPrefix.HasValue ? addressPrefix.Value : null, new ChangeTrackingList<string>(addressPrefixes), networkSecurityGroup.HasValue ? networkSecurityGroup.Value : null, routeTable.HasValue ? routeTable.Value : null, natGateway.HasValue ? natGateway.Value : null, new ChangeTrackingList<ServiceEndpointPropertiesFormat>(serviceEndpoints), new ChangeTrackingList<ServiceEndpointPolicy>(serviceEndpointPolicies), new ChangeTrackingList<PrivateEndpoint>(privateEndpoints), new ChangeTrackingList<IPConfiguration>(ipConfigurations), new ChangeTrackingList<IPConfigurationProfile>(ipConfigurationProfiles), new ChangeTrackingList<ResourceNavigationLink>(resourceNavigationLinks), new ChangeTrackingList<ServiceAssociationLink>(serviceAssociationLinks), new ChangeTrackingList<Delegation>(delegations), purpose.HasValue ? purpose.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null, privateEndpointNetworkPolicies.HasValue ? privateEndpointNetworkPolicies.Value : null, privateLinkServiceNetworkPolicies.HasValue ? privateLinkServiceNetworkPolicies.Value : null);
+            return new Subnet(id.Value, name.Value, etag.Value, addressPrefix.Value, Optional.ToList(addressPrefixes), networkSecurityGroup.Value, routeTable.Value, natGateway.Value, Optional.ToList(serviceEndpoints), Optional.ToList(serviceEndpointPolicies), Optional.ToList(privateEndpoints), Optional.ToList(ipConfigurations), Optional.ToList(ipConfigurationProfiles), Optional.ToList(resourceNavigationLinks), Optional.ToList(serviceAssociationLinks), Optional.ToList(delegations), purpose.Value, Optional.ToNullable(provisioningState), privateEndpointNetworkPolicies.Value, privateLinkServiceNetworkPolicies.Value);
         }
     }
 }

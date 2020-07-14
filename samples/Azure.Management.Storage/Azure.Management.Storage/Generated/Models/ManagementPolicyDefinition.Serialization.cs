@@ -42,7 +42,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicyDefinition(actions, filters.HasValue ? filters.Value : null);
+            return new ManagementPolicyDefinition(actions, filters.Value);
         }
     }
 }

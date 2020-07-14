@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("tokenizer");
             writer.WriteStringValue(Tokenizer.ToString());
-            if (Optional.IsDefined(TokenFilters))
+            if (Optional.IsCollectionDefined(TokenFilters))
             {
                 writer.WritePropertyName("tokenFilters");
                 writer.WriteStartArray();
@@ -28,13 +28,13 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(CharFilters))
+            if (Optional.IsCollectionDefined(CharFilters))
             {
                 writer.WritePropertyName("charFilters");
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
-                    writer.WriteStringValue(item);
+                    writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();
             }
@@ -49,7 +49,7 @@ namespace CognitiveSearch.Models
         {
             TokenizerName tokenizer = default;
             Optional<IList<TokenFilterName>> tokenFilters = default;
-            Optional<IList<string>> charFilters = default;
+            Optional<IList<CharFilterName>> charFilters = default;
             string odataType = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
@@ -71,17 +71,10 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("charFilters"))
                 {
-                    List<string> array = new List<string>();
+                    List<CharFilterName> array = new List<CharFilterName>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(new CharFilterName(item.GetString()));
                     }
                     charFilters = array;
                     continue;
@@ -97,7 +90,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new CustomAnalyzer(odataType, name, tokenizer, new ChangeTrackingList<TokenFilterName>(tokenFilters), new ChangeTrackingList<string>(charFilters));
+            return new CustomAnalyzer(odataType, name, tokenizer, Optional.ToList(tokenFilters), Optional.ToList(charFilters));
         }
     }
 }

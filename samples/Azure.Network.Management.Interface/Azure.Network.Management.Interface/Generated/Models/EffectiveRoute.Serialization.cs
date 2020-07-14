@@ -49,14 +49,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     addressPrefix = array;
                     continue;
@@ -66,14 +59,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     nextHopIpAddress = array;
                     continue;
@@ -84,7 +70,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveRoute(name.HasValue ? name.Value : null, disableBgpRoutePropagation.HasValue ? disableBgpRoutePropagation.Value : (bool?)null, source.HasValue ? source.Value : (EffectiveRouteSource?)null, state.HasValue ? state.Value : (EffectiveRouteState?)null, new ChangeTrackingList<string>(addressPrefix), new ChangeTrackingList<string>(nextHopIpAddress), nextHopType.HasValue ? nextHopType.Value : (RouteNextHopType?)null);
+            return new EffectiveRoute(name.Value, Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToList(addressPrefix), Optional.ToList(nextHopIpAddress), Optional.ToNullable(nextHopType));
         }
     }
 }

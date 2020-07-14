@@ -66,14 +66,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     wordList = array;
                     continue;
@@ -109,7 +102,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DictionaryDecompounderTokenFilter(odataType, name, wordList, minWordSize.HasValue ? minWordSize.Value : (int?)null, minSubwordSize.HasValue ? minSubwordSize.Value : (int?)null, maxSubwordSize.HasValue ? maxSubwordSize.Value : (int?)null, onlyLongestMatch.HasValue ? onlyLongestMatch.Value : (bool?)null);
+            return new DictionaryDecompounderTokenFilter(odataType, name, wordList, Optional.ToNullable(minWordSize), Optional.ToNullable(minSubwordSize), Optional.ToNullable(maxSubwordSize), Optional.ToNullable(onlyLongestMatch));
         }
     }
 }

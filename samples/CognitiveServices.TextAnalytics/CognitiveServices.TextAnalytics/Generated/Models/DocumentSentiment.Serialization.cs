@@ -47,20 +47,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<SentenceSentiment> array = new List<SentenceSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
-                        }
+                        array.Add(SentenceSentiment.DeserializeSentenceSentiment(item));
                     }
                     sentences = array;
                     continue;
                 }
             }
-            return new DocumentSentiment(id, sentiment, statistics.HasValue ? statistics.Value : null, documentScores, sentences);
+            return new DocumentSentiment(id, sentiment, statistics.Value, documentScores, sentences);
         }
     }
 }

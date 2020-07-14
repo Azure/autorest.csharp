@@ -35,14 +35,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<DataTableCell> array = new List<DataTableCell>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DataTableCell.DeserializeDataTableCell(item));
-                        }
+                        array.Add(DataTableCell.DeserializeDataTableCell(item));
                     }
                     cells = array;
                     continue;

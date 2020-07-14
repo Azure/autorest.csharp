@@ -38,7 +38,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(BackendIPConfigurations))
+            if (Optional.IsCollectionDefined(BackendIPConfigurations))
             {
                 writer.WritePropertyName("backendIPConfigurations");
                 writer.WriteStartArray();
@@ -48,7 +48,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(BackendAddresses))
+            if (Optional.IsCollectionDefined(BackendAddresses))
             {
                 writer.WritePropertyName("backendAddresses");
                 writer.WriteStartArray();
@@ -107,14 +107,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
-                                }
+                                array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
                             }
                             backendIPConfigurations = array;
                             continue;
@@ -124,14 +117,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<ApplicationGatewayBackendAddress> array = new List<ApplicationGatewayBackendAddress>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(ApplicationGatewayBackendAddress.DeserializeApplicationGatewayBackendAddress(item));
-                                }
+                                array.Add(ApplicationGatewayBackendAddress.DeserializeApplicationGatewayBackendAddress(item));
                             }
                             backendAddresses = array;
                             continue;
@@ -145,7 +131,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ApplicationGatewayBackendAddressPool(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingList<NetworkInterfaceIPConfiguration>(backendIPConfigurations), new ChangeTrackingList<ApplicationGatewayBackendAddress>(backendAddresses), provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new ApplicationGatewayBackendAddressPool(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(backendIPConfigurations), Optional.ToList(backendAddresses), Optional.ToNullable(provisioningState));
         }
     }
 }

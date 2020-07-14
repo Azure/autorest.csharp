@@ -107,26 +107,12 @@ namespace httpInfrastructure
                     {
                         IReadOnlyList<string> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetString());
                         }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -149,26 +135,12 @@ namespace httpInfrastructure
                     {
                         IReadOnlyList<string> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        List<string> array = new List<string>();
+                        foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            value = null;
+                            array.Add(item.GetString());
                         }
-                        else
-                        {
-                            List<string> array = new List<string>();
-                            foreach (var item in document.RootElement.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
-                            }
-                            value = array;
-                        }
+                        value = array;
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:

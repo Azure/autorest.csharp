@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MagnitudeScoringFunction(type, fieldName, boost, interpolation.HasValue ? interpolation.Value : (ScoringFunctionInterpolation?)null, magnitude);
+            return new MagnitudeScoringFunction(type, fieldName, boost, Optional.ToNullable(interpolation), magnitude);
         }
     }
 }

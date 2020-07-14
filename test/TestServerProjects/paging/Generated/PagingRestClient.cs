@@ -59,14 +59,7 @@ namespace paging
                     {
                         ProductResultValue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
-                        }
+                        value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -86,14 +79,7 @@ namespace paging
                     {
                         ProductResultValue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
-                        }
+                        value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -125,14 +111,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -152,14 +131,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -191,14 +163,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,14 +183,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -271,14 +229,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -300,14 +251,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -342,14 +286,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -370,14 +307,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -410,14 +340,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -437,14 +360,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -490,14 +406,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -519,14 +428,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -578,14 +480,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -612,14 +507,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -651,14 +539,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -678,14 +559,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -717,14 +591,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -744,14 +611,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -783,14 +643,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -810,14 +663,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -849,14 +695,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -876,14 +715,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -915,14 +747,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -942,14 +767,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -994,14 +812,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1032,14 +843,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1079,14 +883,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1112,14 +909,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1229,14 +1019,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1272,14 +1055,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1326,14 +1102,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1364,14 +1133,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1403,14 +1165,7 @@ namespace paging
                     {
                         ProductResultValueWithXMSClientName value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
-                        }
+                        value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1430,14 +1185,7 @@ namespace paging
                     {
                         ProductResultValueWithXMSClientName value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
-                        }
+                        value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1475,14 +1223,7 @@ namespace paging
                     {
                         ProductResultValue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
-                        }
+                        value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1508,14 +1249,7 @@ namespace paging
                     {
                         ProductResultValue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
-                        }
+                        value = ProductResultValue.DeserializeProductResultValue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1553,14 +1287,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1586,14 +1313,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1645,14 +1365,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1680,14 +1393,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1739,14 +1445,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1774,14 +1473,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1837,14 +1529,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1876,14 +1561,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1921,14 +1599,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1954,14 +1625,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1999,14 +1663,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2032,14 +1689,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2077,14 +1727,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2110,14 +1753,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2155,14 +1791,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2188,14 +1817,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2233,14 +1855,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2266,14 +1881,7 @@ namespace paging
                     {
                         ProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResult.DeserializeProductResult(document.RootElement);
-                        }
+                        value = ProductResult.DeserializeProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2391,14 +1999,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2434,14 +2035,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2484,14 +2078,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2522,14 +2109,7 @@ namespace paging
                     {
                         OdataProductResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
-                        }
+                        value = OdataProductResult.DeserializeOdataProductResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2567,14 +2147,7 @@ namespace paging
                     {
                         ProductResultValueWithXMSClientName value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
-                        }
+                        value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -2600,14 +2173,7 @@ namespace paging
                     {
                         ProductResultValueWithXMSClientName value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
-                        }
+                        value = ProductResultValueWithXMSClientName.DeserializeProductResultValueWithXMSClientName(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

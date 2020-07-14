@@ -23,7 +23,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ListServiceSasResponse(serviceSasToken.HasValue ? serviceSasToken.Value : null);
+            return new ListServiceSasResponse(serviceSasToken.Value);
         }
     }
 }

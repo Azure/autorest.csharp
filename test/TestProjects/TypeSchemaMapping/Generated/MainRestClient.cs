@@ -175,14 +175,7 @@ namespace TypeSchemaMapping
                     {
                         SecondModel value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = SecondModel.DeserializeSecondModel(document.RootElement);
-                        }
+                        value = SecondModel.DeserializeSecondModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -202,14 +195,7 @@ namespace TypeSchemaMapping
                     {
                         SecondModel value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = SecondModel.DeserializeSecondModel(document.RootElement);
-                        }
+                        value = SecondModel.DeserializeSecondModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -248,14 +234,7 @@ namespace TypeSchemaMapping
                     {
                         RenamedThirdModel value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = RenamedThirdModel.DeserializeRenamedThirdModel(document.RootElement);
-                        }
+                        value = RenamedThirdModel.DeserializeRenamedThirdModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -275,14 +254,7 @@ namespace TypeSchemaMapping
                     {
                         RenamedThirdModel value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = RenamedThirdModel.DeserializeRenamedThirdModel(document.RootElement);
-                        }
+                        value = RenamedThirdModel.DeserializeRenamedThirdModel(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -321,14 +293,7 @@ namespace TypeSchemaMapping
                     {
                         ModelWithArrayOfEnum value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ModelWithArrayOfEnum.DeserializeModelWithArrayOfEnum(document.RootElement);
-                        }
+                        value = ModelWithArrayOfEnum.DeserializeModelWithArrayOfEnum(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -348,14 +313,7 @@ namespace TypeSchemaMapping
                     {
                         ModelWithArrayOfEnum value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = ModelWithArrayOfEnum.DeserializeModelWithArrayOfEnum(document.RootElement);
-                        }
+                        value = ModelWithArrayOfEnum.DeserializeModelWithArrayOfEnum(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

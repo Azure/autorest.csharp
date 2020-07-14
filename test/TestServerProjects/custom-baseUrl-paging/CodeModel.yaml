@@ -290,6 +290,18 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Paging_getPagesPartialUrl:
+              parameters:
+                accountName: testaccount
+              responses:
+                '200':
+                  body:
+                    nextLink: /paging/customurl/partialnextlink/page/2
+                    values:
+                      - properties:
+                          name: Product
+                          id: 1
           x-ms-pageable:
             itemName: values
             nextLinkName: nextLink
@@ -363,6 +375,18 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Paging_getPagesPartialUrlOperation:
+              parameters:
+                accountName: testaccount
+              responses:
+                '200':
+                  body:
+                    nextLink: partialnextlinkop/page/2
+                    values:
+                      - properties:
+                          name: Product
+                          id: 1
           x-ms-pageable:
             itemName: values
             nextLinkName: nextLink

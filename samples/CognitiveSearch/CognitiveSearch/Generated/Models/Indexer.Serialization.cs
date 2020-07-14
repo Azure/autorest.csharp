@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("parameters");
                 writer.WriteObjectValue(Parameters);
             }
-            if (Optional.IsDefined(FieldMappings))
+            if (Optional.IsCollectionDefined(FieldMappings))
             {
                 writer.WritePropertyName("fieldMappings");
                 writer.WriteStartArray();
@@ -52,7 +52,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(OutputFieldMappings))
+            if (Optional.IsCollectionDefined(OutputFieldMappings))
             {
                 writer.WritePropertyName("outputFieldMappings");
                 writer.WriteStartArray();
@@ -130,14 +130,7 @@ namespace CognitiveSearch.Models
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(FieldMapping.DeserializeFieldMapping(item));
-                        }
+                        array.Add(FieldMapping.DeserializeFieldMapping(item));
                     }
                     fieldMappings = array;
                     continue;
@@ -147,14 +140,7 @@ namespace CognitiveSearch.Models
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(FieldMapping.DeserializeFieldMapping(item));
-                        }
+                        array.Add(FieldMapping.DeserializeFieldMapping(item));
                     }
                     outputFieldMappings = array;
                     continue;
@@ -170,7 +156,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Indexer(name, description.HasValue ? description.Value : null, dataSourceName, skillsetName.HasValue ? skillsetName.Value : null, targetIndexName, schedule.HasValue ? schedule.Value : null, parameters.HasValue ? parameters.Value : null, new ChangeTrackingList<FieldMapping>(fieldMappings), new ChangeTrackingList<FieldMapping>(outputFieldMappings), disabled.HasValue ? disabled.Value : (bool?)null, odataEtag.HasValue ? odataEtag.Value : null);
+            return new Indexer(name, description.Value, dataSourceName, skillsetName.Value, targetIndexName, schedule.Value, parameters.Value, Optional.ToList(fieldMappings), Optional.ToList(outputFieldMappings), Optional.ToNullable(disabled), odataEtag.Value);
         }
     }
 }

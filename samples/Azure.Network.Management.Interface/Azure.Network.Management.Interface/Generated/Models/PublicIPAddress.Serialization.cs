@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("etag");
                 writer.WriteStringValue(Etag);
             }
-            if (Optional.IsDefined(Zones))
+            if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones");
                 writer.WriteStartArray();
@@ -56,7 +56,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("location");
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -94,7 +94,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("ddosSettings");
                 writer.WriteObjectValue(DdosSettings);
             }
-            if (Optional.IsDefined(IpTags))
+            if (Optional.IsCollectionDefined(IpTags))
             {
                 writer.WritePropertyName("ipTags");
                 writer.WriteStartArray();
@@ -171,14 +171,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     zones = array;
                     continue;
@@ -208,14 +201,7 @@ namespace Azure.Network.Management.Interface.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -254,14 +240,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<IpTag> array = new List<IpTag>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(IpTag.DeserializeIpTag(item));
-                                }
+                                array.Add(IpTag.DeserializeIpTag(item));
                             }
                             ipTags = array;
                             continue;
@@ -295,7 +274,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PublicIPAddress(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, location.HasValue ? location.Value : null, new ChangeTrackingDictionary<string, string>(tags), sku.HasValue ? sku.Value : null, etag.HasValue ? etag.Value : null, new ChangeTrackingList<string>(zones), publicIPAllocationMethod.HasValue ? publicIPAllocationMethod.Value : (IPAllocationMethod?)null, publicIPAddressVersion.HasValue ? publicIPAddressVersion.Value : (IPVersion?)null, ipConfiguration.HasValue ? ipConfiguration.Value : null, dnsSettings.HasValue ? dnsSettings.Value : null, ddosSettings.HasValue ? ddosSettings.Value : null, new ChangeTrackingList<IpTag>(ipTags), ipAddress.HasValue ? ipAddress.Value : null, publicIPPrefix.HasValue ? publicIPPrefix.Value : null, idleTimeoutInMinutes.HasValue ? idleTimeoutInMinutes.Value : (int?)null, resourceGuid.HasValue ? resourceGuid.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new PublicIPAddress(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), sku.Value, etag.Value, Optional.ToList(zones), Optional.ToNullable(publicIPAllocationMethod), Optional.ToNullable(publicIPAddressVersion), ipConfiguration.Value, dnsSettings.Value, ddosSettings.Value, Optional.ToList(ipTags), ipAddress.Value, publicIPPrefix.Value, Optional.ToNullable(idleTimeoutInMinutes), resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

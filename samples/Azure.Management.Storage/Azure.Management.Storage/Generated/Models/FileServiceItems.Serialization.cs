@@ -23,20 +23,13 @@ namespace Azure.Management.Storage.Models
                     List<FileServiceProperties> array = new List<FileServiceProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(FileServiceProperties.DeserializeFileServiceProperties(item));
-                        }
+                        array.Add(FileServiceProperties.DeserializeFileServiceProperties(item));
                     }
                     value = array;
                     continue;
                 }
             }
-            return new FileServiceItems(new ChangeTrackingList<FileServiceProperties>(value));
+            return new FileServiceItems(Optional.ToList(value));
         }
     }
 }

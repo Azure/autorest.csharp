@@ -29,32 +29,18 @@ namespace Azure.Storage.Tables.Models
                     List<IDictionary<string, object>> array = new List<IDictionary<string, object>>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
+                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        foreach (var property0 in item.EnumerateObject())
                         {
-                            array.Add(null);
+                            dictionary.Add(property0.Name, property0.Value.GetObject());
                         }
-                        else
-                        {
-                            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                            foreach (var property0 in item.EnumerateObject())
-                            {
-                                if (property0.Value.ValueKind == JsonValueKind.Null)
-                                {
-                                    dictionary.Add(property0.Name, null);
-                                }
-                                else
-                                {
-                                    dictionary.Add(property0.Name, property0.Value.GetObject());
-                                }
-                            }
-                            array.Add(dictionary);
-                        }
+                        array.Add(dictionary);
                     }
                     value = array;
                     continue;
                 }
             }
-            return new TableEntityQueryResponse(odataMetadata.HasValue ? odataMetadata.Value : null, new ChangeTrackingList<IDictionary<string, object>>(value));
+            return new TableEntityQueryResponse(odataMetadata.Value, Optional.ToList(value));
         }
     }
 }

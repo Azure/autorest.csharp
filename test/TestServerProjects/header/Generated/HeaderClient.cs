@@ -993,7 +993,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamEnumAsync(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ParamEnumAsync(string scenario, Enum0? value = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
@@ -1012,7 +1012,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ParamEnum(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
+        public virtual Response ParamEnum(string scenario, Enum0? value = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();

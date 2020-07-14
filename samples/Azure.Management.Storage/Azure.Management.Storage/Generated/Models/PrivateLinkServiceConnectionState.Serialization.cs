@@ -56,7 +56,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new PrivateLinkServiceConnectionState(status.HasValue ? status.Value : (PrivateEndpointServiceConnectionStatus?)null, description.HasValue ? description.Value : null, actionRequired.HasValue ? actionRequired.Value : null);
+            return new PrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionRequired.Value);
         }
     }
 }

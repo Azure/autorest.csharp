@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new LeaseContainerResponse(leaseId.HasValue ? leaseId.Value : null, leaseTimeSeconds.HasValue ? leaseTimeSeconds.Value : null);
+            return new LeaseContainerResponse(leaseId.Value, leaseTimeSeconds.Value);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("stemEnglishPossessive");
                 writer.WriteBooleanValue(StemEnglishPossessive.Value);
             }
-            if (Optional.IsDefined(ProtectedWords))
+            if (Optional.IsCollectionDefined(ProtectedWords))
             {
                 writer.WritePropertyName("protectedWords");
                 writer.WriteStartArray();
@@ -144,14 +144,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     protectedWords = array;
                     continue;
@@ -167,7 +160,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new WordDelimiterTokenFilter(odataType, name, generateWordParts.HasValue ? generateWordParts.Value : (bool?)null, generateNumberParts.HasValue ? generateNumberParts.Value : (bool?)null, catenateWords.HasValue ? catenateWords.Value : (bool?)null, catenateNumbers.HasValue ? catenateNumbers.Value : (bool?)null, catenateAll.HasValue ? catenateAll.Value : (bool?)null, splitOnCaseChange.HasValue ? splitOnCaseChange.Value : (bool?)null, preserveOriginal.HasValue ? preserveOriginal.Value : (bool?)null, splitOnNumerics.HasValue ? splitOnNumerics.Value : (bool?)null, stemEnglishPossessive.HasValue ? stemEnglishPossessive.Value : (bool?)null, new ChangeTrackingList<string>(protectedWords));
+            return new WordDelimiterTokenFilter(odataType, name, Optional.ToNullable(generateWordParts), Optional.ToNullable(generateNumberParts), Optional.ToNullable(catenateWords), Optional.ToNullable(catenateNumbers), Optional.ToNullable(catenateAll), Optional.ToNullable(splitOnCaseChange), Optional.ToNullable(preserveOriginal), Optional.ToNullable(splitOnNumerics), Optional.ToNullable(stemEnglishPossessive), Optional.ToList(protectedWords));
         }
     }
 }

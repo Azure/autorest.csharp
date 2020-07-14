@@ -41,7 +41,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return new TableResponseProperties(tableName.HasValue ? tableName.Value : null, odataType.HasValue ? odataType.Value : null, odataId.HasValue ? odataId.Value : null, odataEditLink.HasValue ? odataEditLink.Value : null);
+            return new TableResponseProperties(tableName.Value, odataType.Value, odataId.Value, odataEditLink.Value);
         }
     }
 }

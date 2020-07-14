@@ -41,7 +41,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("location");
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -69,7 +69,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("privateEndpoint");
                 writer.WriteObjectValue(PrivateEndpoint);
             }
-            if (Optional.IsDefined(IpConfigurations))
+            if (Optional.IsCollectionDefined(IpConfigurations))
             {
                 writer.WritePropertyName("ipConfigurations");
                 writer.WriteStartArray();
@@ -79,7 +79,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TapConfigurations))
+            if (Optional.IsCollectionDefined(TapConfigurations))
             {
                 writer.WritePropertyName("tapConfigurations");
                 writer.WriteStartArray();
@@ -114,7 +114,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("enableIPForwarding");
                 writer.WriteBooleanValue(EnableIPForwarding.Value);
             }
-            if (Optional.IsDefined(HostedWorkloads))
+            if (Optional.IsCollectionDefined(HostedWorkloads))
             {
                 writer.WritePropertyName("hostedWorkloads");
                 writer.WriteStartArray();
@@ -191,14 +191,7 @@ namespace Azure.Network.Management.Interface.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -227,14 +220,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
-                                }
+                                array.Add(NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(item));
                             }
                             ipConfigurations = array;
                             continue;
@@ -244,14 +230,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterfaceTapConfiguration> array = new List<NetworkInterfaceTapConfiguration>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
-                                }
+                                array.Add(NetworkInterfaceTapConfiguration.DeserializeNetworkInterfaceTapConfiguration(item));
                             }
                             tapConfigurations = array;
                             continue;
@@ -286,14 +265,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(item.GetString());
                             }
                             hostedWorkloads = array;
                             continue;
@@ -312,7 +284,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterface(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, location.HasValue ? location.Value : null, new ChangeTrackingDictionary<string, string>(tags), etag.HasValue ? etag.Value : null, virtualMachine.HasValue ? virtualMachine.Value : null, networkSecurityGroup.HasValue ? networkSecurityGroup.Value : null, privateEndpoint.HasValue ? privateEndpoint.Value : null, new ChangeTrackingList<NetworkInterfaceIPConfiguration>(ipConfigurations), new ChangeTrackingList<NetworkInterfaceTapConfiguration>(tapConfigurations), dnsSettings.HasValue ? dnsSettings.Value : null, macAddress.HasValue ? macAddress.Value : null, primary.HasValue ? primary.Value : (bool?)null, enableAcceleratedNetworking.HasValue ? enableAcceleratedNetworking.Value : (bool?)null, enableIPForwarding.HasValue ? enableIPForwarding.Value : (bool?)null, new ChangeTrackingList<string>(hostedWorkloads), resourceGuid.HasValue ? resourceGuid.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new NetworkInterface(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, virtualMachine.Value, networkSecurityGroup.Value, privateEndpoint.Value, Optional.ToList(ipConfigurations), Optional.ToList(tapConfigurations), dnsSettings.Value, macAddress.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), Optional.ToNullable(enableIPForwarding), Optional.ToList(hostedWorkloads), resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("service");
                 writer.WriteStringValue(Service);
             }
-            if (Optional.IsDefined(Locations))
+            if (Optional.IsCollectionDefined(Locations))
             {
                 writer.WritePropertyName("locations");
                 writer.WriteStartArray();
@@ -56,14 +56,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     locations = array;
                     continue;
@@ -74,7 +67,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPropertiesFormat(service.HasValue ? service.Value : null, new ChangeTrackingList<string>(locations), provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new ServiceEndpointPropertiesFormat(service.Value, Optional.ToList(locations), Optional.ToNullable(provisioningState));
         }
     }
 }

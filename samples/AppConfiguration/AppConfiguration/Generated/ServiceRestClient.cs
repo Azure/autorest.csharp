@@ -94,14 +94,7 @@ namespace AppConfiguration
                     {
                         KeyListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                        }
+                        value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -125,14 +118,7 @@ namespace AppConfiguration
                     {
                         KeyListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                        }
+                        value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -262,14 +248,7 @@ namespace AppConfiguration
                     {
                         KeyValueListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        }
+                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -295,14 +274,7 @@ namespace AppConfiguration
                     {
                         KeyValueListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        }
+                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -451,14 +423,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -490,14 +455,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -565,14 +523,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -603,14 +554,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -665,14 +609,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 case 204:
@@ -703,14 +640,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 case 204:
@@ -862,14 +792,7 @@ namespace AppConfiguration
                     {
                         LabelListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                        }
+                        value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -894,14 +817,7 @@ namespace AppConfiguration
                     {
                         LabelListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                        }
+                        value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1034,14 +950,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1071,14 +980,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1138,14 +1040,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1175,14 +1070,7 @@ namespace AppConfiguration
                     {
                         KeyValue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        }
+                        value = KeyValue.DeserializeKeyValue(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1245,14 +1133,7 @@ namespace AppConfiguration
                     {
                         KeyValueListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        }
+                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1278,14 +1159,7 @@ namespace AppConfiguration
                     {
                         KeyValueListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        }
+                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1414,14 +1288,7 @@ namespace AppConfiguration
                     {
                         KeyListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                        }
+                        value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1451,14 +1318,7 @@ namespace AppConfiguration
                     {
                         KeyListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                        }
+                        value = KeyListResult.DeserializeKeyListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1510,14 +1370,7 @@ namespace AppConfiguration
                     {
                         KeyValueListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        }
+                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1549,14 +1402,7 @@ namespace AppConfiguration
                     {
                         KeyValueListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        }
+                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1607,14 +1453,7 @@ namespace AppConfiguration
                     {
                         LabelListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                        }
+                        value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1645,14 +1484,7 @@ namespace AppConfiguration
                     {
                         LabelListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                        }
+                        value = LabelListResult.DeserializeLabelListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1704,14 +1536,7 @@ namespace AppConfiguration
                     {
                         KeyValueListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        }
+                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -1743,14 +1568,7 @@ namespace AppConfiguration
                     {
                         KeyValueListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        }
+                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:

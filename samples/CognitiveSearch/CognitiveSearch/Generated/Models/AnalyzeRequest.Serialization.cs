@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("tokenizer");
                 writer.WriteStringValue(Tokenizer.Value.ToString());
             }
-            if (Optional.IsDefined(TokenFilters))
+            if (Optional.IsCollectionDefined(TokenFilters))
             {
                 writer.WritePropertyName("tokenFilters");
                 writer.WriteStartArray();
@@ -37,13 +37,13 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(CharFilters))
+            if (Optional.IsCollectionDefined(CharFilters))
             {
                 writer.WritePropertyName("charFilters");
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
-                    writer.WriteStringValue(item);
+                    writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();
             }

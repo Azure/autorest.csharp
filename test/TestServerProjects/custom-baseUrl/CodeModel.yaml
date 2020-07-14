@@ -160,6 +160,14 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            paths_getEmpty:
+              parameters:
+                accountName: testaccount
+              responses:
+                '200':
+                  body: ''
         language: !<!Languages> 
           default:
             name: GetEmpty

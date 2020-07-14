@@ -24,14 +24,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<NetworkInterface> array = new List<NetworkInterface>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(NetworkInterface.DeserializeNetworkInterface(item));
-                        }
+                        array.Add(NetworkInterface.DeserializeNetworkInterface(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceListResult(new ChangeTrackingList<NetworkInterface>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new NetworkInterfaceListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

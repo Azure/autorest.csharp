@@ -36,7 +36,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DotFish(fishType, species.HasValue ? species.Value : null);
+            return new DotFish(fishType, species.Value);
         }
     }
 }

@@ -38,26 +38,12 @@ namespace CognitiveSearch.Models
                     Dictionary<string, IList<FacetResult>> dictionary = new Dictionary<string, IList<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        List<FacetResult> array = new List<FacetResult>();
+                        foreach (var item in property0.Value.EnumerateArray())
                         {
-                            dictionary.Add(property0.Name, null);
+                            array.Add(FacetResult.DeserializeFacetResult(item));
                         }
-                        else
-                        {
-                            List<FacetResult> array = new List<FacetResult>();
-                            foreach (var item in property0.Value.EnumerateArray())
-                            {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(FacetResult.DeserializeFacetResult(item));
-                                }
-                            }
-                            dictionary.Add(property0.Name, array);
-                        }
+                        dictionary.Add(property0.Name, array);
                     }
                     searchFacets = dictionary;
                     continue;
@@ -72,14 +58,7 @@ namespace CognitiveSearch.Models
                     List<SearchResult> array = new List<SearchResult>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(SearchResult.DeserializeSearchResult(item));
-                        }
+                        array.Add(SearchResult.DeserializeSearchResult(item));
                     }
                     value = array;
                     continue;
@@ -90,7 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchDocumentsResult(odataCount.HasValue ? odataCount.Value : (long?)null, searchCoverage.HasValue ? searchCoverage.Value : (double?)null, new ChangeTrackingDictionary<string, IList<FacetResult>>(searchFacets), searchNextPageParameters.HasValue ? searchNextPageParameters.Value : null, value, odataNextLink.HasValue ? odataNextLink.Value : null);
+            return new SearchDocumentsResult(Optional.ToNullable(odataCount), Optional.ToNullable(searchCoverage), Optional.ToDictionary(searchFacets), searchNextPageParameters.Value, value, odataNextLink.Value);
         }
     }
 }

@@ -67,14 +67,7 @@ namespace xms_error_responses
                     {
                         Pet value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Pet.DeserializePet(document.RootElement);
-                        }
+                        value = Pet.DeserializePet(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 202:
@@ -102,14 +95,7 @@ namespace xms_error_responses
                     {
                         Pet value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = Pet.DeserializePet(document.RootElement);
-                        }
+                        value = Pet.DeserializePet(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 202:
@@ -150,14 +136,7 @@ namespace xms_error_responses
                     {
                         PetAction value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAction.DeserializePetAction(document.RootElement);
-                        }
+                        value = PetAction.DeserializePetAction(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -183,14 +162,7 @@ namespace xms_error_responses
                     {
                         PetAction value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAction.DeserializePetAction(document.RootElement);
-                        }
+                        value = PetAction.DeserializePetAction(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

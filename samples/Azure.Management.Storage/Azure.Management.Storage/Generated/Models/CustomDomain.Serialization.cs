@@ -42,7 +42,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new CustomDomain(name, useSubDomainName.HasValue ? useSubDomainName.Value : (bool?)null);
+            return new CustomDomain(name, Optional.ToNullable(useSubDomainName));
         }
     }
 }

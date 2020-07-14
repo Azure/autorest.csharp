@@ -24,7 +24,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return new StorageError(message.HasValue ? message.Value : null);
+            return new StorageError(message.Value);
         }
 
         internal static StorageError DeserializeStorageError(XElement element)

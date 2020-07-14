@@ -35,7 +35,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DurationWrapper(field.HasValue ? field.Value : (TimeSpan?)null);
+            return new DurationWrapper(Optional.ToNullable(field));
         }
     }
 }

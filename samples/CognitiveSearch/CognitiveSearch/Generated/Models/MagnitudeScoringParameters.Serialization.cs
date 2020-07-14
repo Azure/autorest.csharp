@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new MagnitudeScoringParameters(boostingRangeStart, boostingRangeEnd, constantBoostBeyondRange.HasValue ? constantBoostBeyondRange.Value : (bool?)null);
+            return new MagnitudeScoringParameters(boostingRangeStart, boostingRangeEnd, Optional.ToNullable(constantBoostBeyondRange));
         }
     }
 }

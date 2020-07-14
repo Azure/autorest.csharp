@@ -44,7 +44,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("lastModifiedTime");
                 writer.WriteStringValue(LastModifiedTime.Value, "O");
             }
-            if (Optional.IsDefined(Metadata))
+            if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata");
                 writer.WriteStartObject();
@@ -169,14 +169,7 @@ namespace Azure.Management.Storage.Models
                             Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
-                                if (property1.Value.ValueKind == JsonValueKind.Null)
-                                {
-                                    dictionary.Add(property1.Name, null);
-                                }
-                                else
-                                {
-                                    dictionary.Add(property1.Name, property1.Value.GetString());
-                                }
+                                dictionary.Add(property1.Name, property1.Value.GetString());
                             }
                             metadata = dictionary;
                             continue;
@@ -240,7 +233,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new FileShareItem(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, etag.HasValue ? etag.Value : null, lastModifiedTime.HasValue ? lastModifiedTime.Value : (DateTimeOffset?)null, new ChangeTrackingDictionary<string, string>(metadata), shareQuota.HasValue ? shareQuota.Value : (int?)null, enabledProtocols.HasValue ? enabledProtocols.Value : (EnabledProtocols?)null, rootSquash.HasValue ? rootSquash.Value : (RootSquashType?)null, version.HasValue ? version.Value : null, deleted.HasValue ? deleted.Value : (bool?)null, deletedTime.HasValue ? deletedTime.Value : (DateTimeOffset?)null, remainingRetentionDays.HasValue ? remainingRetentionDays.Value : (int?)null, accessTier.HasValue ? accessTier.Value : (ShareAccessTier?)null, accessTierChangeTime.HasValue ? accessTierChangeTime.Value : (DateTimeOffset?)null, accessTierStatus.HasValue ? accessTierStatus.Value : null, shareUsageBytes.HasValue ? shareUsageBytes.Value : (int?)null);
+            return new FileShareItem(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(lastModifiedTime), Optional.ToDictionary(metadata), Optional.ToNullable(shareQuota), Optional.ToNullable(enabledProtocols), Optional.ToNullable(rootSquash), version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), Optional.ToNullable(accessTier), Optional.ToNullable(accessTierChangeTime), accessTierStatus.Value, Optional.ToNullable(shareUsageBytes));
         }
     }
 }

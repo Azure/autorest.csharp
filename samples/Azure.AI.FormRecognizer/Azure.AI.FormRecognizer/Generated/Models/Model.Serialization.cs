@@ -35,7 +35,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new Model(modelInfo, keys.HasValue ? keys.Value : null, trainResult.HasValue ? trainResult.Value : null);
+            return new Model(modelInfo, keys.Value, trainResult.Value);
         }
     }
 }

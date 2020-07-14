@@ -273,7 +273,11 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task HeaderParameterEnumValid() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamEnumAsync( scenario: "valid", GreyscaleColors.Grey));
+        public Task HeaderParameterEnumValid() => TestStatus(async (host, pipeline) =>
+        {
+            // TODO: https://github.com/Azure/autorest.modelerfour/issues/320
+            return await new HeaderClient(ClientDiagnostics, pipeline, host).ParamEnumAsync(scenario: "valid", Enum0.Grey);
+        });
 
         [Test]
         public Task HeaderParameterEnumNull() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamEnumAsync( scenario: "null", null));

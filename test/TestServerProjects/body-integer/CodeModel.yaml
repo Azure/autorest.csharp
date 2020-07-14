@@ -149,6 +149,7 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_4
+            nullable: true
             language: !<!Languages> 
               default:
                 name: ''
@@ -947,6 +948,7 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_12
+            nullable: true
             language: !<!Languages> 
               default:
                 name: ''

@@ -24,14 +24,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<LoadBalancer> array = new List<LoadBalancer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(LoadBalancer.DeserializeLoadBalancer(item));
-                        }
+                        array.Add(LoadBalancer.DeserializeLoadBalancer(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceLoadBalancerListResult(new ChangeTrackingList<LoadBalancer>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new NetworkInterfaceLoadBalancerListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }

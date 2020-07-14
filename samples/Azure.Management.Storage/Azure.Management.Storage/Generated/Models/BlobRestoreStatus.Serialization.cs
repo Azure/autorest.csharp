@@ -67,7 +67,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new BlobRestoreStatus(status.HasValue ? status.Value : (BlobRestoreProgressStatus?)null, failureReason.HasValue ? failureReason.Value : null, restoreId.HasValue ? restoreId.Value : null, parameters.HasValue ? parameters.Value : null);
+            return new BlobRestoreStatus(Optional.ToNullable(status), failureReason.Value, restoreId.Value, parameters.Value);
         }
     }
 }

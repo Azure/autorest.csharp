@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new UaxUrlEmailTokenizer(odataType, name, maxTokenLength.HasValue ? maxTokenLength.Value : (int?)null);
+            return new UaxUrlEmailTokenizer(odataType, name, Optional.ToNullable(maxTokenLength));
         }
     }
 }

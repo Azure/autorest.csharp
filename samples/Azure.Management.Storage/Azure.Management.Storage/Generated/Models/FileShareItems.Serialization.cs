@@ -24,14 +24,7 @@ namespace Azure.Management.Storage.Models
                     List<FileShareItem> array = new List<FileShareItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(FileShareItem.DeserializeFileShareItem(item));
-                        }
+                        array.Add(FileShareItem.DeserializeFileShareItem(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new FileShareItems(new ChangeTrackingList<FileShareItem>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new FileShareItems(Optional.ToList(value), nextLink.Value);
         }
     }
 }

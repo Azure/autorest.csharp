@@ -34,7 +34,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ChangeFeed(enabled.HasValue ? enabled.Value : (bool?)null);
+            return new ChangeFeed(Optional.ToNullable(enabled));
         }
     }
 }

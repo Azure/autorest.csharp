@@ -57,14 +57,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     sourcePortRanges = array;
                     continue;
@@ -74,14 +67,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     destinationPortRanges = array;
                     continue;
@@ -101,14 +87,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     sourceAddressPrefixes = array;
                     continue;
@@ -118,14 +97,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     destinationAddressPrefixes = array;
                     continue;
@@ -135,14 +107,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     expandedSourceAddressPrefix = array;
                     continue;
@@ -152,14 +117,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     expandedDestinationAddressPrefix = array;
                     continue;
@@ -180,7 +138,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveNetworkSecurityRule(name.HasValue ? name.Value : null, protocol.HasValue ? protocol.Value : (EffectiveSecurityRuleProtocol?)null, sourcePortRange.HasValue ? sourcePortRange.Value : null, destinationPortRange.HasValue ? destinationPortRange.Value : null, new ChangeTrackingList<string>(sourcePortRanges), new ChangeTrackingList<string>(destinationPortRanges), sourceAddressPrefix.HasValue ? sourceAddressPrefix.Value : null, destinationAddressPrefix.HasValue ? destinationAddressPrefix.Value : null, new ChangeTrackingList<string>(sourceAddressPrefixes), new ChangeTrackingList<string>(destinationAddressPrefixes), new ChangeTrackingList<string>(expandedSourceAddressPrefix), new ChangeTrackingList<string>(expandedDestinationAddressPrefix), access.HasValue ? access.Value : (SecurityRuleAccess?)null, priority.HasValue ? priority.Value : (int?)null, direction.HasValue ? direction.Value : (SecurityRuleDirection?)null);
+            return new EffectiveNetworkSecurityRule(name.Value, Optional.ToNullable(protocol), sourcePortRange.Value, destinationPortRange.Value, Optional.ToList(sourcePortRanges), Optional.ToList(destinationPortRanges), sourceAddressPrefix.Value, destinationAddressPrefix.Value, Optional.ToList(sourceAddressPrefixes), Optional.ToList(destinationAddressPrefixes), Optional.ToList(expandedSourceAddressPrefix), Optional.ToList(expandedDestinationAddressPrefix), Optional.ToNullable(access), Optional.ToNullable(priority), Optional.ToNullable(direction));
         }
     }
 }

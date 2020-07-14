@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataSourceCredentials(connectionString.HasValue ? connectionString.Value : null);
+            return new DataSourceCredentials(connectionString.Value);
         }
     }
 }

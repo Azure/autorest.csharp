@@ -26,14 +26,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<DocumentSentiment> array = new List<DocumentSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DocumentSentiment.DeserializeDocumentSentiment(item));
-                        }
+                        array.Add(DocumentSentiment.DeserializeDocumentSentiment(item));
                     }
                     documents = array;
                     continue;
@@ -43,14 +36,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     List<DocumentError> array = new List<DocumentError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DocumentError.DeserializeDocumentError(item));
-                        }
+                        array.Add(DocumentError.DeserializeDocumentError(item));
                     }
                     errors = array;
                     continue;
@@ -66,7 +52,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new SentimentResponse(documents, errors, statistics.HasValue ? statistics.Value : null, modelVersion);
+            return new SentimentResponse(documents, errors, statistics.Value, modelVersion);
         }
     }
 }

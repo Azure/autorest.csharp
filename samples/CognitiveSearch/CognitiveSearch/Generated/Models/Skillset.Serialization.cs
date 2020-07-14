@@ -64,14 +64,7 @@ namespace CognitiveSearch.Models
                     List<Skill> array = new List<Skill>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Skill.DeserializeSkill(item));
-                        }
+                        array.Add(Skill.DeserializeSkill(item));
                     }
                     skills = array;
                     continue;
@@ -87,7 +80,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Skillset(name, description, skills, cognitiveServices.HasValue ? cognitiveServices.Value : null, odataEtag.HasValue ? odataEtag.Value : null);
+            return new Skillset(name, description, skills, cognitiveServices.Value, odataEtag.Value);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("service");
                 writer.WriteStringValue(Service);
             }
-            if (Optional.IsDefined(ServiceResources))
+            if (Optional.IsCollectionDefined(ServiceResources))
             {
                 writer.WritePropertyName("serviceResources");
                 writer.WriteStartArray();
@@ -107,14 +107,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(item.GetString());
                             }
                             serviceResources = array;
                             continue;
@@ -128,7 +121,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new ServiceEndpointPolicyDefinition(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, description.HasValue ? description.Value : null, service.HasValue ? service.Value : null, new ChangeTrackingList<string>(serviceResources), provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new ServiceEndpointPolicyDefinition(id.Value, name.Value, etag.Value, description.Value, service.Value, Optional.ToList(serviceResources), Optional.ToNullable(provisioningState));
         }
     }
 }

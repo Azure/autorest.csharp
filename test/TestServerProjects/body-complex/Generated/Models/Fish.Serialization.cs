@@ -25,7 +25,7 @@ namespace body_complex.Models
             }
             writer.WritePropertyName("length");
             writer.WriteNumberValue(Length);
-            if (Optional.IsDefined(Siblings))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
@@ -78,20 +78,13 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeFish(item));
-                        }
+                        array.Add(DeserializeFish(item));
                     }
                     siblings = array;
                     continue;
                 }
             }
-            return new Fish(fishtype, species.HasValue ? species.Value : null, length, new ChangeTrackingList<Fish>(siblings));
+            return new Fish(fishtype, species.Value, length, Optional.ToList(siblings));
         }
     }
 }

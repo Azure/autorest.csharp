@@ -338,6 +338,7 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_6
+            nullable: true
             language: !<!Languages> 
               default:
                 name: ''
@@ -393,6 +394,7 @@ operationGroups:
               - !<!Parameter> &ref_9
                 schema: *ref_6
                 implementation: Method
+                nullable: true
                 required: false
                 language: !<!Languages> 
                   default:
@@ -1082,6 +1084,7 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_17
+            nullable: true
             language: !<!Languages> 
               default:
                 name: ''

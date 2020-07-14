@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ResourceCounter(usage, quota.HasValue ? quota.Value : null);
+            return new ResourceCounter(usage, Optional.ToNullable(quota));
         }
     }
 }

@@ -62,15 +62,39 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
-                        using (writer.WriteDefinedCheck(property.Property))
+                        var objectProperty = property.Property;
+                        if (objectProperty == null)
                         {
-                            var ifScope = writer.WritePropertyNullCheckIf(property.Property);
+                            // Flattened property
+                            writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
+                            writer.ToSerializeCall(property.ValueSerialization, w => { });
+                            continue;
+                        }
+
+                        using (writer.WriteDefinedCheck(objectProperty))
+                        {
+                            var ifScope = writer.WritePropertyNullCheckIf(objectProperty);
                             using (ifScope)
                             {
+                                var propertyType = objectProperty.Declaration.Type;
+                                var declarationName = objectProperty.Declaration.Name;
+
                                 writer.Line($"{writerName}.WritePropertyName({property.Name:L});");
+                                CodeWriterDelegate valueCallback;
+
+                                if (objectProperty.OptionalViaNullability)
+                                {
+                                    valueCallback = w => w.Append($"{declarationName}").AppendNullableValue(propertyType);
+                                }
+                                else
+                                {
+                                    valueCallback = w => w.Append($"{declarationName}");
+                                }
+
                                 writer.ToSerializeCall(
                                     property.ValueSerialization,
-                                    w => w.Append($"{property.Property?.Declaration.Name}"));
+                                    valueCallback
+                                    );
                             }
                             if (ifScope != null)
                             {
@@ -232,14 +256,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
-                        CSharpType? type = property.Property?.ValueType;
-
-                        bool hasNullableType = type != null && type.IsNullable;
-
                         writer.Append($"if({itemVariable.ActualName}.NameEquals({property.Name:L}))");
                         using (writer.Scope())
                         {
-                            if (hasNullableType)
+                            if (property.ValueSerialization.IsNullable)
                             {
                                 using (writer.Scope($"if ({itemVariable.ActualName}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
                                 {
@@ -310,16 +330,27 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             var sourceType = variable.Type;
             if (sourceType.IsFrameworkType && sourceType.FrameworkType == typeof(Optional<>))
             {
-                if (TypeFactory.IsCollectionType(targetType))
+                if (TypeFactory.IsList(targetType))
                 {
-                    var impl = TypeFactory.GetPropertyImplementationType(targetType);
-                    writer.Append($"new {impl}({variable.Declaration})");
+                    writer.Append($"{typeof(Optional)}.ToList({variable.Declaration})");
+                    return;
+                }
+
+                if (TypeFactory.IsDictionary(targetType))
+                {
+                    writer.Append($"{typeof(Optional)}.ToDictionary({variable.Declaration})");
+                    return;
+                }
+
+                if (targetType.IsValueType && targetType.IsNullable)
+                {
+                    writer.Append($"{typeof(Optional)}.ToNullable({variable.Declaration})");
                     return;
                 }
 
                 if (targetType.IsNullable)
                 {
-                    writer.Append($"{variable.Declaration}.HasValue ? {variable.Declaration}.Value : ({targetType})null");
+                    writer.Append($"{variable.Declaration}.Value");
                     return;
                 }
             }
@@ -339,7 +370,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.Name.ToVariableName());
 
                     var type = objectProperty.ValueType;
-                    if (!objectProperty.IsRequired)
+                    if (!jsonProperty.IsRequired)
                     {
                         type = new CSharpType(typeof(Optional<>), type);
                     }
@@ -362,21 +393,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static void DeserializeIntoVariableWithNullHandling(this CodeWriter writer, JsonSerialization serialization, Action<CodeWriter, CodeWriterDelegate> valueCallback, CodeWriterDelegate element)
         {
-            CSharpType? type = null;
-            switch (serialization)
-            {
-                case JsonArraySerialization array:
-                    type = array.Type;
-                    break;
-                case JsonDictionarySerialization dictionary:
-                    type = dictionary.Type;
-                    break;
-                case JsonValueSerialization valueSerialization:
-                    type = valueSerialization.Type;
-                    break;
-            }
-
-            if (type != null && (type.IsNullable || !type.IsValueType))
+            if (serialization.IsNullable)
             {
                 using (writer.Scope($"if ({element}.ValueKind == {typeof(JsonValueKind)}.Null)"))
                 {
@@ -399,7 +416,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 case JsonArraySerialization array:
                     var arrayVariable = new CodeWriterDeclaration("array");
-                    writer.Line($"{array.Type} {arrayVariable:D} = new {array.Type}();");
+                    writer.Line($"{array.ImplementationType} {arrayVariable:D} = new {array.ImplementationType}();");
 
                     var collectionItemVariable = new CodeWriterDeclaration("item");
                     using (writer.Scope($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())"))

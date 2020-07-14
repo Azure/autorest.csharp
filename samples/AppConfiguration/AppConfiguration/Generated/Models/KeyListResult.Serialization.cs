@@ -24,14 +24,7 @@ namespace AppConfiguration.Models
                     List<Key> array = new List<Key>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Key.DeserializeKey(item));
-                        }
+                        array.Add(Key.DeserializeKey(item));
                     }
                     items = array;
                     continue;
@@ -42,7 +35,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyListResult(new ChangeTrackingList<Key>(items), nextLink.HasValue ? nextLink.Value : null);
+            return new KeyListResult(Optional.ToList(items), nextLink.Value);
         }
     }
 }

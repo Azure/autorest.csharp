@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("uri");
             writer.WriteStringValue(Uri);
-            if (Optional.IsDefined(HttpHeaders))
+            if (Optional.IsCollectionDefined(HttpHeaders))
             {
                 writer.WritePropertyName("httpHeaders");
                 writer.WriteStartObject();
@@ -124,14 +124,7 @@ namespace CognitiveSearch.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     httpHeaders = dictionary;
                     continue;
@@ -191,14 +184,7 @@ namespace CognitiveSearch.Models
                     List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
-                        }
+                        array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
                     }
                     inputs = array;
                     continue;
@@ -208,20 +194,13 @@ namespace CognitiveSearch.Models
                     List<OutputFieldMappingEntry> array = new List<OutputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
-                        }
+                        array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
                     }
                     outputs = array;
                     continue;
                 }
             }
-            return new WebApiSkill(odataType, name.HasValue ? name.Value : null, description.HasValue ? description.Value : null, context.HasValue ? context.Value : null, inputs, outputs, uri, new ChangeTrackingDictionary<string, string>(httpHeaders), httpMethod.HasValue ? httpMethod.Value : null, timeout.HasValue ? timeout.Value : (TimeSpan?)null, batchSize.HasValue ? batchSize.Value : null, degreeOfParallelism.HasValue ? degreeOfParallelism.Value : null);
+            return new WebApiSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, uri, Optional.ToDictionary(httpHeaders), httpMethod.Value, Optional.ToNullable(timeout), Optional.ToNullable(batchSize), Optional.ToNullable(degreeOfParallelism));
         }
     }
 }

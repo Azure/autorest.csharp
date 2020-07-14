@@ -23,7 +23,7 @@ namespace xml_service.Models
                     continue;
                 }
             }
-            return new JsonOutput(id.HasValue ? id.Value : (int?)null);
+            return new JsonOutput(Optional.ToNullable(id));
         }
     }
 }

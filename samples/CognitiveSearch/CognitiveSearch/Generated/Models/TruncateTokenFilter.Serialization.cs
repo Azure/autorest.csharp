@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new TruncateTokenFilter(odataType, name, length.HasValue ? length.Value : (int?)null);
+            return new TruncateTokenFilter(odataType, name, Optional.ToNullable(length));
         }
     }
 }

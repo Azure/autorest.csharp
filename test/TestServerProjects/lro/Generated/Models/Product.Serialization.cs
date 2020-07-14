@@ -26,7 +26,7 @@ namespace lro.Models
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -89,14 +89,7 @@ namespace lro.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -129,7 +122,7 @@ namespace lro.Models
                     continue;
                 }
             }
-            return new Product(id.HasValue ? id.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingDictionary<string, string>(tags), location.HasValue ? location.Value : null, name.HasValue ? name.Value : null, provisioningState.HasValue ? provisioningState.Value : null, provisioningStateValues.HasValue ? provisioningStateValues.Value : (ProductPropertiesProvisioningStateValues?)null);
+            return new Product(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, provisioningState.Value, Optional.ToNullable(provisioningStateValues));
         }
     }
 }

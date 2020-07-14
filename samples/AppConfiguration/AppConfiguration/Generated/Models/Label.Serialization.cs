@@ -23,7 +23,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new Label(name.HasValue ? name.Value : null);
+            return new Label(name.Value);
         }
     }
 }

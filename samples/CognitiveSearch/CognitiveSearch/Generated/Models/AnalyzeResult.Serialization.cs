@@ -23,14 +23,7 @@ namespace CognitiveSearch.Models
                     List<TokenInfo> array = new List<TokenInfo>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(TokenInfo.DeserializeTokenInfo(item));
-                        }
+                        array.Add(TokenInfo.DeserializeTokenInfo(item));
                     }
                     tokens = array;
                     continue;

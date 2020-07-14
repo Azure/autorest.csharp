@@ -69,7 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SynonymMap(name, format, synonyms, encryptionKey.HasValue ? encryptionKey.Value : null, odataEtag.HasValue ? odataEtag.Value : null);
+            return new SynonymMap(name, format, synonyms, encryptionKey.Value, odataEtag.Value);
         }
     }
 }

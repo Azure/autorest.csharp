@@ -243,7 +243,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_32
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -252,7 +251,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_33
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -261,7 +259,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_34
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -270,7 +267,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_35
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -279,7 +275,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_36
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -288,7 +283,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_37
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -798,6 +792,7 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_1
+      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfString
@@ -1029,6 +1024,7 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_24
+      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfProduct
@@ -1051,6 +1047,7 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_24
+      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfProduct
@@ -1150,6 +1147,7 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_27
+      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfString
@@ -1227,6 +1225,7 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_32
+      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfDictionaryOfString
@@ -1249,6 +1248,7 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_34
+      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfDictionaryOfString

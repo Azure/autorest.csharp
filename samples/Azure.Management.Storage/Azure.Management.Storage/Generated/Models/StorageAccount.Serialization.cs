@@ -32,7 +32,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("identity");
                 writer.WriteObjectValue(Identity);
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -157,7 +157,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("largeFileSharesState");
                 writer.WriteStringValue(LargeFileSharesState.Value.ToString());
             }
-            if (Optional.IsDefined(PrivateEndpointConnections))
+            if (Optional.IsCollectionDefined(PrivateEndpointConnections))
             {
                 writer.WritePropertyName("privateEndpointConnections");
                 writer.WriteStartArray();
@@ -235,14 +235,7 @@ namespace Azure.Management.Storage.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -371,14 +364,7 @@ namespace Azure.Management.Storage.Models
                             List<PrivateEndpointConnection> array = new List<PrivateEndpointConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(PrivateEndpointConnection.DeserializePrivateEndpointConnection(item));
-                                }
+                                array.Add(PrivateEndpointConnection.DeserializePrivateEndpointConnection(item));
                             }
                             privateEndpointConnections = array;
                             continue;
@@ -397,7 +383,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new StorageAccount(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingDictionary<string, string>(tags), location, sku.HasValue ? sku.Value : null, kind.HasValue ? kind.Value : (Kind?)null, identity.HasValue ? identity.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null, primaryEndpoints.HasValue ? primaryEndpoints.Value : null, primaryLocation.HasValue ? primaryLocation.Value : null, statusOfPrimary.HasValue ? statusOfPrimary.Value : (AccountStatus?)null, lastGeoFailoverTime.HasValue ? lastGeoFailoverTime.Value : (DateTimeOffset?)null, secondaryLocation.HasValue ? secondaryLocation.Value : null, statusOfSecondary.HasValue ? statusOfSecondary.Value : (AccountStatus?)null, creationTime.HasValue ? creationTime.Value : (DateTimeOffset?)null, customDomain.HasValue ? customDomain.Value : null, secondaryEndpoints.HasValue ? secondaryEndpoints.Value : null, encryption.HasValue ? encryption.Value : null, accessTier.HasValue ? accessTier.Value : (AccessTier?)null, azureFilesIdentityBasedAuthentication.HasValue ? azureFilesIdentityBasedAuthentication.Value : null, supportsHttpsTrafficOnly.HasValue ? supportsHttpsTrafficOnly.Value : (bool?)null, networkAcls.HasValue ? networkAcls.Value : null, isHnsEnabled.HasValue ? isHnsEnabled.Value : (bool?)null, geoReplicationStats.HasValue ? geoReplicationStats.Value : null, failoverInProgress.HasValue ? failoverInProgress.Value : (bool?)null, largeFileSharesState.HasValue ? largeFileSharesState.Value : (LargeFileSharesState?)null, new ChangeTrackingList<PrivateEndpointConnection>(privateEndpointConnections), routingPreference.HasValue ? routingPreference.Value : null, blobRestoreStatus.HasValue ? blobRestoreStatus.Value : null);
+            return new StorageAccount(id.Value, name.Value, type.Value, Optional.ToDictionary(tags), location, sku.Value, Optional.ToNullable(kind), identity.Value, Optional.ToNullable(provisioningState), primaryEndpoints.Value, primaryLocation.Value, Optional.ToNullable(statusOfPrimary), Optional.ToNullable(lastGeoFailoverTime), secondaryLocation.Value, Optional.ToNullable(statusOfSecondary), Optional.ToNullable(creationTime), customDomain.Value, secondaryEndpoints.Value, encryption.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), networkAcls.Value, Optional.ToNullable(isHnsEnabled), geoReplicationStats.Value, Optional.ToNullable(failoverInProgress), Optional.ToNullable(largeFileSharesState), Optional.ToList(privateEndpointConnections), routingPreference.Value, blobRestoreStatus.Value);
         }
     }
 }

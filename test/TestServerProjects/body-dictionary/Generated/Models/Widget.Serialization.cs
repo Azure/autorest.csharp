@@ -45,7 +45,7 @@ namespace body_dictionary.Models
                     continue;
                 }
             }
-            return new Widget(integer.HasValue ? integer.Value : (int?)null, @string.HasValue ? @string.Value : null);
+            return new Widget(Optional.ToNullable(integer), @string.Value);
         }
     }
 }

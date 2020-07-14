@@ -36,14 +36,7 @@ namespace Azure.AI.FormRecognizer.Models
                     List<KeyValuePair> array = new List<KeyValuePair>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(KeyValuePair.DeserializeKeyValuePair(item));
-                        }
+                        array.Add(KeyValuePair.DeserializeKeyValuePair(item));
                     }
                     keyValuePairs = array;
                     continue;
@@ -53,20 +46,13 @@ namespace Azure.AI.FormRecognizer.Models
                     List<DataTable> array = new List<DataTable>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DataTable.DeserializeDataTable(item));
-                        }
+                        array.Add(DataTable.DeserializeDataTable(item));
                     }
                     tables = array;
                     continue;
                 }
             }
-            return new PageResult(page, clusterId.HasValue ? clusterId.Value : (int?)null, new ChangeTrackingList<KeyValuePair>(keyValuePairs), new ChangeTrackingList<DataTable>(tables));
+            return new PageResult(page, Optional.ToNullable(clusterId), Optional.ToList(keyValuePairs), Optional.ToList(tables));
         }
     }
 }

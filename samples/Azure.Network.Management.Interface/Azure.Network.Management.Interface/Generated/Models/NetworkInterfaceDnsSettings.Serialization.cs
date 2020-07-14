@@ -16,7 +16,7 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(DnsServers))
+            if (Optional.IsCollectionDefined(DnsServers))
             {
                 writer.WritePropertyName("dnsServers");
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(AppliedDnsServers))
+            if (Optional.IsCollectionDefined(AppliedDnsServers))
             {
                 writer.WritePropertyName("appliedDnsServers");
                 writer.WriteStartArray();
@@ -68,14 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     dnsServers = array;
                     continue;
@@ -85,14 +78,7 @@ namespace Azure.Network.Management.Interface.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     appliedDnsServers = array;
                     continue;
@@ -113,7 +99,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new NetworkInterfaceDnsSettings(new ChangeTrackingList<string>(dnsServers), new ChangeTrackingList<string>(appliedDnsServers), internalDnsNameLabel.HasValue ? internalDnsNameLabel.Value : null, internalFqdn.HasValue ? internalFqdn.Value : null, internalDomainNameSuffix.HasValue ? internalDomainNameSuffix.Value : null);
+            return new NetworkInterfaceDnsSettings(Optional.ToList(dnsServers), Optional.ToList(appliedDnsServers), internalDnsNameLabel.Value, internalFqdn.Value, internalDomainNameSuffix.Value);
         }
     }
 }

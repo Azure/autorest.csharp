@@ -46,20 +46,13 @@ namespace Azure.AI.FormRecognizer.Models
                     List<TextWord> array = new List<TextWord>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(TextWord.DeserializeTextWord(item));
-                        }
+                        array.Add(TextWord.DeserializeTextWord(item));
                     }
                     words = array;
                     continue;
                 }
             }
-            return new TextLine(text, boundingBox, language.HasValue ? language.Value : (Language?)null, words);
+            return new TextLine(text, boundingBox, Optional.ToNullable(language), words);
         }
     }
 }

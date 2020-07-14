@@ -72,17 +72,10 @@ namespace additionalProperties.Models
                     continue;
                 }
                 additionalPropertiesDictionary ??= new Dictionary<string, object>();
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    additionalPropertiesDictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
-                }
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new CatAPTrue(id, name.HasValue ? name.Value : null, status.HasValue ? status.Value : (bool?)null, additionalProperties, friendly.HasValue ? friendly.Value : (bool?)null);
+            return new CatAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties, Optional.ToNullable(friendly));
         }
     }
 }

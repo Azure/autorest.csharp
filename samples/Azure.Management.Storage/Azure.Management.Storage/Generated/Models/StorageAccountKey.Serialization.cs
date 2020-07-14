@@ -35,7 +35,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new StorageAccountKey(keyName.HasValue ? keyName.Value : null, value.HasValue ? value.Value : null, permissions.HasValue ? permissions.Value : (KeyPermission?)null);
+            return new StorageAccountKey(keyName.Value, value.Value, Optional.ToNullable(permissions));
         }
     }
 }

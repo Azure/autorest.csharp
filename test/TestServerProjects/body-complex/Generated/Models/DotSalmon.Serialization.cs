@@ -41,7 +41,7 @@ namespace body_complex.Models
                     continue;
                 }
             }
-            return new DotSalmon(fishType, species.HasValue ? species.Value : null, location.HasValue ? location.Value : null, iswild.HasValue ? iswild.Value : (bool?)null);
+            return new DotSalmon(fishType, species.Value, location.Value, Optional.ToNullable(iswild));
         }
     }
 }

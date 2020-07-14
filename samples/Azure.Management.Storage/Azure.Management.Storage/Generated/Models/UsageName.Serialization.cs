@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new UsageName(value.HasValue ? value.Value : null, localizedValue.HasValue ? localizedValue.Value : null);
+            return new UsageName(value.Value, localizedValue.Value);
         }
     }
 }

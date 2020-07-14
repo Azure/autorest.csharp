@@ -36,7 +36,7 @@ namespace body_integer
 
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<int?>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IntClient.GetNull");
             scope.Start();
@@ -53,7 +53,7 @@ namespace body_integer
 
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<int> GetNull(CancellationToken cancellationToken = default)
+        public virtual Response<int?> GetNull(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IntClient.GetNull");
             scope.Start();
@@ -488,7 +488,7 @@ namespace body_integer
 
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DateTimeOffset?>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IntClient.GetNullUnixTime");
             scope.Start();
@@ -505,7 +505,7 @@ namespace body_integer
 
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DateTimeOffset> GetNullUnixTime(CancellationToken cancellationToken = default)
+        public virtual Response<DateTimeOffset?> GetNullUnixTime(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IntClient.GetNullUnixTime");
             scope.Start();

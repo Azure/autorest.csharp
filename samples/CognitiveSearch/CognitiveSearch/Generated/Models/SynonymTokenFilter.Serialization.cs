@@ -54,14 +54,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     synonyms = array;
                     continue;
@@ -87,7 +80,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SynonymTokenFilter(odataType, name, synonyms, ignoreCase.HasValue ? ignoreCase.Value : (bool?)null, expand.HasValue ? expand.Value : (bool?)null);
+            return new SynonymTokenFilter(odataType, name, synonyms, Optional.ToNullable(ignoreCase), Optional.ToNullable(expand));
         }
     }
 }

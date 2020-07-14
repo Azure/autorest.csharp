@@ -21,7 +21,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("hasLegalHold");
                 writer.WriteBooleanValue(HasLegalHold.Value);
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartArray();
@@ -50,20 +50,13 @@ namespace Azure.Management.Storage.Models
                     List<TagProperty> array = new List<TagProperty>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(TagProperty.DeserializeTagProperty(item));
-                        }
+                        array.Add(TagProperty.DeserializeTagProperty(item));
                     }
                     tags = array;
                     continue;
                 }
             }
-            return new LegalHoldProperties(hasLegalHold.HasValue ? hasLegalHold.Value : (bool?)null, new ChangeTrackingList<TagProperty>(tags));
+            return new LegalHoldProperties(Optional.ToNullable(hasLegalHold), Optional.ToList(tags));
         }
     }
 }

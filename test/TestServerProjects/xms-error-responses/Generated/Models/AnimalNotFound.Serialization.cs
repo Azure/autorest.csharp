@@ -41,7 +41,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new AnimalNotFound(someBaseProp.HasValue ? someBaseProp.Value : null, reason.HasValue ? reason.Value : null, whatNotFound, name.HasValue ? name.Value : null);
+            return new AnimalNotFound(someBaseProp.Value, reason.Value, whatNotFound, name.Value);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new NGramTokenFilterV2(odataType, name, minGram.HasValue ? minGram.Value : (int?)null, maxGram.HasValue ? maxGram.Value : (int?)null);
+            return new NGramTokenFilterV2(odataType, name, Optional.ToNullable(minGram), Optional.ToNullable(maxGram));
         }
     }
 }

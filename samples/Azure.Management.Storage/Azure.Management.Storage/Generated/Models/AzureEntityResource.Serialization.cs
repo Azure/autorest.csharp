@@ -67,7 +67,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new AzureEntityResource(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, etag.HasValue ? etag.Value : null);
+            return new AzureEntityResource(id.Value, name.Value, type.Value, etag.Value);
         }
     }
 }

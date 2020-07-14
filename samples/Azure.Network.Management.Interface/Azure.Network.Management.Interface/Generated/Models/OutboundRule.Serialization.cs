@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("allocatedOutboundPorts");
                 writer.WriteNumberValue(AllocatedOutboundPorts.Value);
             }
-            if (Optional.IsDefined(FrontendIPConfigurations))
+            if (Optional.IsCollectionDefined(FrontendIPConfigurations))
             {
                 writer.WritePropertyName("frontendIPConfigurations");
                 writer.WriteStartArray();
@@ -131,14 +131,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(DeserializeSubResource(item));
-                                }
+                                array.Add(DeserializeSubResource(item));
                             }
                             frontendIPConfigurations = array;
                             continue;
@@ -172,7 +165,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new OutboundRule(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, etag.HasValue ? etag.Value : null, type.HasValue ? type.Value : null, allocatedOutboundPorts.HasValue ? allocatedOutboundPorts.Value : (int?)null, new ChangeTrackingList<SubResource>(frontendIPConfigurations), backendAddressPool.HasValue ? backendAddressPool.Value : null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null, protocol.HasValue ? protocol.Value : (LoadBalancerOutboundRuleProtocol?)null, enableTcpReset.HasValue ? enableTcpReset.Value : (bool?)null, idleTimeoutInMinutes.HasValue ? idleTimeoutInMinutes.Value : (int?)null);
+            return new OutboundRule(id.Value, name.Value, etag.Value, type.Value, Optional.ToNullable(allocatedOutboundPorts), Optional.ToList(frontendIPConfigurations), backendAddressPool.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(protocol), Optional.ToNullable(enableTcpReset), Optional.ToNullable(idleTimeoutInMinutes));
         }
     }
 }

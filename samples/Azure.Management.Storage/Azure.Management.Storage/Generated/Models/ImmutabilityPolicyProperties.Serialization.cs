@@ -21,7 +21,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("etag");
                 writer.WriteStringValue(Etag);
             }
-            if (Optional.IsDefined(UpdateHistory))
+            if (Optional.IsCollectionDefined(UpdateHistory))
             {
                 writer.WritePropertyName("updateHistory");
                 writer.WriteStartArray();
@@ -71,14 +71,7 @@ namespace Azure.Management.Storage.Models
                     List<UpdateHistoryProperty> array = new List<UpdateHistoryProperty>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(UpdateHistoryProperty.DeserializeUpdateHistoryProperty(item));
-                        }
+                        array.Add(UpdateHistoryProperty.DeserializeUpdateHistoryProperty(item));
                     }
                     updateHistory = array;
                     continue;
@@ -106,7 +99,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ImmutabilityPolicyProperties(etag.HasValue ? etag.Value : null, new ChangeTrackingList<UpdateHistoryProperty>(updateHistory), immutabilityPeriodSinceCreationInDays.HasValue ? immutabilityPeriodSinceCreationInDays.Value : (int?)null, state.HasValue ? state.Value : (ImmutabilityPolicyState?)null, allowProtectedAppendWrites.HasValue ? allowProtectedAppendWrites.Value : (bool?)null);
+            return new ImmutabilityPolicyProperties(etag.Value, Optional.ToList(updateHistory), Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites));
         }
     }
 }

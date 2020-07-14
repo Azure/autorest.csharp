@@ -53,7 +53,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new BM25Similarity(odataType, k1.HasValue ? k1.Value : (double?)null, b.HasValue ? b.Value : (double?)null);
+            return new BM25Similarity(odataType, Optional.ToNullable(k1), Optional.ToNullable(b));
         }
     }
 }

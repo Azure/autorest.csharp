@@ -35,20 +35,13 @@ namespace CognitiveSearch.Models
                     List<SearchServiceError> array = new List<SearchServiceError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeSearchServiceError(item));
-                        }
+                        array.Add(DeserializeSearchServiceError(item));
                     }
                     details = array;
                     continue;
                 }
             }
-            return new SearchServiceError(code.HasValue ? code.Value : null, message, new ChangeTrackingList<SearchServiceError>(details));
+            return new SearchServiceError(code.Value, message, Optional.ToList(details));
         }
     }
 }

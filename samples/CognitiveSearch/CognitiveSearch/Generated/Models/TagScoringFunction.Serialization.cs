@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new TagScoringFunction(type, fieldName, boost, interpolation.HasValue ? interpolation.Value : (ScoringFunctionInterpolation?)null, tag);
+            return new TagScoringFunction(type, fieldName, boost, Optional.ToNullable(interpolation), tag);
         }
     }
 }

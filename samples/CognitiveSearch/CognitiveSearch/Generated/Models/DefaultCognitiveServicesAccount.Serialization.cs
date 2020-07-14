@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DefaultCognitiveServicesAccount(odataType, description.HasValue ? description.Value : null);
+            return new DefaultCognitiveServicesAccount(odataType, description.Value);
         }
     }
 }

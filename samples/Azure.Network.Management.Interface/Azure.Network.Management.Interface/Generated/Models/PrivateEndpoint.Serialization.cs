@@ -41,7 +41,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("location");
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -59,7 +59,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("subnet");
                 writer.WriteObjectValue(Subnet);
             }
-            if (Optional.IsDefined(NetworkInterfaces))
+            if (Optional.IsCollectionDefined(NetworkInterfaces))
             {
                 writer.WritePropertyName("networkInterfaces");
                 writer.WriteStartArray();
@@ -74,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("provisioningState");
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
-            if (Optional.IsDefined(PrivateLinkServiceConnections))
+            if (Optional.IsCollectionDefined(PrivateLinkServiceConnections))
             {
                 writer.WritePropertyName("privateLinkServiceConnections");
                 writer.WriteStartArray();
@@ -84,7 +84,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ManualPrivateLinkServiceConnections))
+            if (Optional.IsCollectionDefined(ManualPrivateLinkServiceConnections))
             {
                 writer.WritePropertyName("manualPrivateLinkServiceConnections");
                 writer.WriteStartArray();
@@ -143,14 +143,7 @@ namespace Azure.Network.Management.Interface.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -169,14 +162,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<NetworkInterface> array = new List<NetworkInterface>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(NetworkInterface.DeserializeNetworkInterface(item));
-                                }
+                                array.Add(NetworkInterface.DeserializeNetworkInterface(item));
                             }
                             networkInterfaces = array;
                             continue;
@@ -191,14 +177,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateLinkServiceConnection> array = new List<PrivateLinkServiceConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
-                                }
+                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
                             }
                             privateLinkServiceConnections = array;
                             continue;
@@ -208,14 +187,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<PrivateLinkServiceConnection> array = new List<PrivateLinkServiceConnection>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
-                                }
+                                array.Add(PrivateLinkServiceConnection.DeserializePrivateLinkServiceConnection(item));
                             }
                             manualPrivateLinkServiceConnections = array;
                             continue;
@@ -224,7 +196,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PrivateEndpoint(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, location.HasValue ? location.Value : null, new ChangeTrackingDictionary<string, string>(tags), etag.HasValue ? etag.Value : null, subnet.HasValue ? subnet.Value : null, new ChangeTrackingList<NetworkInterface>(networkInterfaces), provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null, new ChangeTrackingList<PrivateLinkServiceConnection>(privateLinkServiceConnections), new ChangeTrackingList<PrivateLinkServiceConnection>(manualPrivateLinkServiceConnections));
+            return new PrivateEndpoint(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, subnet.Value, Optional.ToList(networkInterfaces), Optional.ToNullable(provisioningState), Optional.ToList(privateLinkServiceConnections), Optional.ToList(manualPrivateLinkServiceConnections));
         }
     }
 }

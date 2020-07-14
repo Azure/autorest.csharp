@@ -34,7 +34,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PublicIPAddressSku(name.HasValue ? name.Value : (PublicIPAddressSkuName?)null);
+            return new PublicIPAddressSku(Optional.ToNullable(name));
         }
     }
 }

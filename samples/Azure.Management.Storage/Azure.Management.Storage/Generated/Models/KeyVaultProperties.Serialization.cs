@@ -79,7 +79,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new KeyVaultProperties(keyname.HasValue ? keyname.Value : null, keyversion.HasValue ? keyversion.Value : null, keyvaulturi.HasValue ? keyvaulturi.Value : null, currentVersionedKeyIdentifier.HasValue ? currentVersionedKeyIdentifier.Value : null, lastKeyRotationTimestamp.HasValue ? lastKeyRotationTimestamp.Value : (DateTimeOffset?)null);
+            return new KeyVaultProperties(keyname.Value, keyversion.Value, keyvaulturi.Value, currentVersionedKeyIdentifier.Value, Optional.ToNullable(lastKeyRotationTimestamp));
         }
     }
 }

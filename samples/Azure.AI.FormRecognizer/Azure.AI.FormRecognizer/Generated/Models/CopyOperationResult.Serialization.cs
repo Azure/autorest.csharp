@@ -42,7 +42,7 @@ namespace Azure.AI.FormRecognizer.Models
                     continue;
                 }
             }
-            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult.HasValue ? copyResult.Value : null);
+            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult.Value);
         }
     }
 }

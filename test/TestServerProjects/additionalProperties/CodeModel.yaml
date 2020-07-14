@@ -156,7 +156,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_13
       type: dictionary
       elementType: *ref_2
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: PetAPString
@@ -165,7 +164,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_16
       type: dictionary
       elementType: *ref_3
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: PetAPInPropertiesAdditionalProperties
@@ -174,7 +172,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_17
       type: dictionary
       elementType: *ref_2
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: PetAPInPropertiesWithAPString
@@ -183,7 +180,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_20
       type: dictionary
       elementType: *ref_3
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: PetAPInPropertiesWithAPStringAdditionalProperties

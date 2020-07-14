@@ -42,7 +42,7 @@ namespace AppConfiguration.Models
                 writer.WritePropertyName("last_modified");
                 writer.WriteStringValue(LastModified.Value, "O");
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -108,14 +108,7 @@ namespace AppConfiguration.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -131,7 +124,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new KeyValue(key.HasValue ? key.Value : null, label.HasValue ? label.Value : null, contentType.HasValue ? contentType.Value : null, value.HasValue ? value.Value : null, lastModified.HasValue ? lastModified.Value : (DateTimeOffset?)null, new ChangeTrackingDictionary<string, string>(tags), locked.HasValue ? locked.Value : (bool?)null, etag.HasValue ? etag.Value : null);
+            return new KeyValue(key.Value, label.Value, contentType.Value, value.Value, Optional.ToNullable(lastModified), Optional.ToDictionary(tags), Optional.ToNullable(locked), etag.Value);
         }
     }
 }

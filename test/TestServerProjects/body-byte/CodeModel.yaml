@@ -197,6 +197,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            byte_getNull:
+              parameters: {}
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: GetNull

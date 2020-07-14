@@ -18,7 +18,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: String
+          name: RenamedHeader
           description: ''
           header: originalHeader
       protocol: !<!Protocols> {}
@@ -48,7 +48,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_2
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: RenamedProperty

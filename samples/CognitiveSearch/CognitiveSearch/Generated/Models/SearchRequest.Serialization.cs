@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("count");
                 writer.WriteBooleanValue(IncludeTotalResultCount.Value);
             }
-            if (Optional.IsDefined(Facets))
+            if (Optional.IsCollectionDefined(Facets))
             {
                 writer.WritePropertyName("facets");
                 writer.WriteStartArray();
@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("queryType");
                 writer.WriteStringValue(QueryType.Value.ToSerialString());
             }
-            if (Optional.IsDefined(ScoringParameters))
+            if (Optional.IsCollectionDefined(ScoringParameters))
             {
                 writer.WritePropertyName("scoringParameters");
                 writer.WriteStartArray();
@@ -145,14 +145,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     facets = array;
                     continue;
@@ -197,14 +190,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     scoringParameters = array;
                     continue;
@@ -245,7 +231,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new SearchRequest(count.HasValue ? count.Value : (bool?)null, new ChangeTrackingList<string>(facets), filter.HasValue ? filter.Value : null, highlight.HasValue ? highlight.Value : null, highlightPostTag.HasValue ? highlightPostTag.Value : null, highlightPreTag.HasValue ? highlightPreTag.Value : null, minimumCoverage.HasValue ? minimumCoverage.Value : (double?)null, orderby.HasValue ? orderby.Value : null, queryType.HasValue ? queryType.Value : (QueryType?)null, new ChangeTrackingList<string>(scoringParameters), scoringProfile.HasValue ? scoringProfile.Value : null, search.HasValue ? search.Value : null, searchFields.HasValue ? searchFields.Value : null, searchMode.HasValue ? searchMode.Value : (SearchMode?)null, select.HasValue ? select.Value : null, skip.HasValue ? skip.Value : (int?)null, top.HasValue ? top.Value : (int?)null);
+            return new SearchRequest(Optional.ToNullable(count), Optional.ToList(facets), filter.Value, highlight.Value, highlightPostTag.Value, highlightPreTag.Value, Optional.ToNullable(minimumCoverage), orderby.Value, Optional.ToNullable(queryType), Optional.ToList(scoringParameters), scoringProfile.Value, search.Value, searchFields.Value, Optional.ToNullable(searchMode), select.Value, Optional.ToNullable(skip), Optional.ToNullable(top));
         }
     }
 }

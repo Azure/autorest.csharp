@@ -41,7 +41,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("location");
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -54,7 +54,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(Routes))
+            if (Optional.IsCollectionDefined(Routes))
             {
                 writer.WritePropertyName("routes");
                 writer.WriteStartArray();
@@ -64,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Subnets))
+            if (Optional.IsCollectionDefined(Subnets))
             {
                 writer.WritePropertyName("subnets");
                 writer.WriteStartArray();
@@ -132,14 +132,7 @@ namespace Azure.Network.Management.Interface.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -153,14 +146,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<Route> array = new List<Route>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Route.DeserializeRoute(item));
-                                }
+                                array.Add(Route.DeserializeRoute(item));
                             }
                             routes = array;
                             continue;
@@ -170,14 +156,7 @@ namespace Azure.Network.Management.Interface.Models
                             List<Subnet> array = new List<Subnet>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(Subnet.DeserializeSubnet(item));
-                                }
+                                array.Add(Subnet.DeserializeSubnet(item));
                             }
                             subnets = array;
                             continue;
@@ -196,7 +175,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new RouteTable(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, location.HasValue ? location.Value : null, new ChangeTrackingDictionary<string, string>(tags), etag.HasValue ? etag.Value : null, new ChangeTrackingList<Route>(routes), new ChangeTrackingList<Subnet>(subnets), disableBgpRoutePropagation.HasValue ? disableBgpRoutePropagation.Value : (bool?)null, provisioningState.HasValue ? provisioningState.Value : (ProvisioningState?)null);
+            return new RouteTable(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), etag.Value, Optional.ToList(routes), Optional.ToList(subnets), Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(provisioningState));
         }
     }
 }

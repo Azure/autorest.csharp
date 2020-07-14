@@ -47,20 +47,13 @@ namespace Azure.Management.Storage.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     tags = array;
                     continue;
                 }
             }
-            return new LegalHold(hasLegalHold.HasValue ? hasLegalHold.Value : (bool?)null, tags);
+            return new LegalHold(Optional.ToNullable(hasLegalHold), tags);
         }
     }
 }

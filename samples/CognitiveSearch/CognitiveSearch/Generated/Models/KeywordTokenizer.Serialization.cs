@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new KeywordTokenizer(odataType, name, bufferSize.HasValue ? bufferSize.Value : (int?)null);
+            return new KeywordTokenizer(odataType, name, Optional.ToNullable(bufferSize));
         }
     }
 }

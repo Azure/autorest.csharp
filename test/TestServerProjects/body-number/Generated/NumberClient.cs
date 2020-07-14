@@ -36,7 +36,7 @@ namespace body_number
 
         /// <summary> Get null Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<float>> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<float?>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("NumberClient.GetNull");
             scope.Start();
@@ -53,7 +53,7 @@ namespace body_number
 
         /// <summary> Get null Number value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<float> GetNull(CancellationToken cancellationToken = default)
+        public virtual Response<float?> GetNull(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("NumberClient.GetNull");
             scope.Start();

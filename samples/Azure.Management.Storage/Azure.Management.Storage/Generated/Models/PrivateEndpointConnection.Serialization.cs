@@ -99,7 +99,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new PrivateEndpointConnection(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, privateEndpoint.HasValue ? privateEndpoint.Value : null, privateLinkServiceConnectionState.HasValue ? privateLinkServiceConnectionState.Value : null, provisioningState.HasValue ? provisioningState.Value : (PrivateEndpointConnectionProvisioningState?)null);
+            return new PrivateEndpointConnection(id.Value, name.Value, type.Value, privateEndpoint.Value, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState));
         }
     }
 }

@@ -92,6 +92,11 @@ namespace AutoRest.CSharp.V3.Input
         public bool IsRequired => Required ?? false;
     }
 
+    internal partial class SchemaResponse
+    {
+        public bool IsNullable => Nullable ?? false;
+    }
+
     internal partial class Property
     {
         public bool IsReadOnly => ReadOnly ?? false;

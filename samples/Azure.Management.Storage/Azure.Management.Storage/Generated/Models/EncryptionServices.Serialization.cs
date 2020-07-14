@@ -67,7 +67,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new EncryptionServices(blob.HasValue ? blob.Value : null, file.HasValue ? file.Value : null, table.HasValue ? table.Value : null, queue.HasValue ? queue.Value : null);
+            return new EncryptionServices(blob.Value, file.Value, table.Value, queue.Value);
         }
     }
 }

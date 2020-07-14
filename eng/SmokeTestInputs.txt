@@ -1,5 +1,5 @@
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/addons/resource-manager/readme.md
-https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/adhybridhealthservice/resource-manager/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/adhybridhealthservice/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/319
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/advisor/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/alertsmanagement/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/analysisservices/resource-manager/readme.md

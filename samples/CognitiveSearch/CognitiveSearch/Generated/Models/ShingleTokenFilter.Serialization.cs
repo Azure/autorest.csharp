@@ -105,7 +105,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new ShingleTokenFilter(odataType, name, maxShingleSize.HasValue ? maxShingleSize.Value : (int?)null, minShingleSize.HasValue ? minShingleSize.Value : (int?)null, outputUnigrams.HasValue ? outputUnigrams.Value : (bool?)null, outputUnigramsIfNoShingles.HasValue ? outputUnigramsIfNoShingles.Value : (bool?)null, tokenSeparator.HasValue ? tokenSeparator.Value : null, filterToken.HasValue ? filterToken.Value : null);
+            return new ShingleTokenFilter(odataType, name, Optional.ToNullable(maxShingleSize), Optional.ToNullable(minShingleSize), Optional.ToNullable(outputUnigrams), Optional.ToNullable(outputUnigramsIfNoShingles), tokenSeparator.Value, filterToken.Value);
         }
     }
 }

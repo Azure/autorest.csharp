@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -61,14 +61,7 @@ namespace Azure.Management.Storage.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -94,7 +87,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new TrackedResource(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingDictionary<string, string>(tags), location);
+            return new TrackedResource(id.Value, name.Value, type.Value, Optional.ToDictionary(tags), location);
         }
     }
 }

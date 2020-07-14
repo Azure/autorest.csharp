@@ -16,7 +16,7 @@ namespace TypeSchemaMapping.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ArrayOfEnum))
+            if (Optional.IsCollectionDefined(ArrayOfEnum))
             {
                 writer.WritePropertyName("ArrayOfEnum");
                 writer.WriteStartArray();
@@ -26,7 +26,7 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ArrayOfEnumCustomizedToNullable))
+            if (Optional.IsCollectionDefined(ArrayOfEnumCustomizedToNullable))
             {
                 writer.WritePropertyName("ArrayOfEnumCustomizedToNullable");
                 writer.WriteStartArray();
@@ -73,7 +73,7 @@ namespace TypeSchemaMapping.Models
                     continue;
                 }
             }
-            return new ModelWithArrayOfEnum(new ChangeTrackingList<EnumForModelWithArrayOfEnum>(arrayOfEnum), new ChangeTrackingList<EnumForModelWithArrayOfEnum?>(arrayOfEnumCustomizedToNullable));
+            return new ModelWithArrayOfEnum(Optional.ToList(arrayOfEnum), Optional.ToList(arrayOfEnumCustomizedToNullable));
         }
     }
 }

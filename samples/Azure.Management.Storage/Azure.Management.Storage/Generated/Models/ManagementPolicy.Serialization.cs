@@ -89,7 +89,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicy(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, lastModifiedTime.HasValue ? lastModifiedTime.Value : (DateTimeOffset?)null, policy.HasValue ? policy.Value : null);
+            return new ManagementPolicy(id.Value, name.Value, type.Value, Optional.ToNullable(lastModifiedTime), policy.Value);
         }
     }
 }

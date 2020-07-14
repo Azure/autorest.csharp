@@ -34,7 +34,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new WrappedProduct(value.HasValue ? value.Value : null);
+            return new WrappedProduct(value.Value);
         }
     }
 }

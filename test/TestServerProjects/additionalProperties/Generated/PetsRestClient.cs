@@ -69,14 +69,7 @@ namespace additionalProperties
                     {
                         PetAPTrue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
-                        }
+                        value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -102,14 +95,7 @@ namespace additionalProperties
                     {
                         PetAPTrue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
-                        }
+                        value = PetAPTrue.DeserializePetAPTrue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -151,14 +137,7 @@ namespace additionalProperties
                     {
                         CatAPTrue value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
-                        }
+                        value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -184,14 +163,7 @@ namespace additionalProperties
                     {
                         CatAPTrue value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
-                        }
+                        value = CatAPTrue.DeserializeCatAPTrue(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -233,14 +205,7 @@ namespace additionalProperties
                     {
                         PetAPObject value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPObject.DeserializePetAPObject(document.RootElement);
-                        }
+                        value = PetAPObject.DeserializePetAPObject(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -266,14 +231,7 @@ namespace additionalProperties
                     {
                         PetAPObject value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPObject.DeserializePetAPObject(document.RootElement);
-                        }
+                        value = PetAPObject.DeserializePetAPObject(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -315,14 +273,7 @@ namespace additionalProperties
                     {
                         PetAPString value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPString.DeserializePetAPString(document.RootElement);
-                        }
+                        value = PetAPString.DeserializePetAPString(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -348,14 +299,7 @@ namespace additionalProperties
                     {
                         PetAPString value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPString.DeserializePetAPString(document.RootElement);
-                        }
+                        value = PetAPString.DeserializePetAPString(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -397,14 +341,7 @@ namespace additionalProperties
                     {
                         PetAPInProperties value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
-                        }
+                        value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -430,14 +367,7 @@ namespace additionalProperties
                     {
                         PetAPInProperties value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
-                        }
+                        value = PetAPInProperties.DeserializePetAPInProperties(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -479,14 +409,7 @@ namespace additionalProperties
                     {
                         PetAPInPropertiesWithAPString value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
-                        }
+                        value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -512,14 +435,7 @@ namespace additionalProperties
                     {
                         PetAPInPropertiesWithAPString value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        if (document.RootElement.ValueKind == JsonValueKind.Null)
-                        {
-                            value = null;
-                        }
-                        else
-                        {
-                            value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
-                        }
+                        value = PetAPInPropertiesWithAPString.DeserializePetAPInPropertiesWithAPString(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

@@ -56,7 +56,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new PublicIPAddressDnsSettings(domainNameLabel.HasValue ? domainNameLabel.Value : null, fqdn.HasValue ? fqdn.Value : null, reverseFqdn.HasValue ? reverseFqdn.Value : null);
+            return new PublicIPAddressDnsSettings(domainNameLabel.Value, fqdn.Value, reverseFqdn.Value);
         }
     }
 }

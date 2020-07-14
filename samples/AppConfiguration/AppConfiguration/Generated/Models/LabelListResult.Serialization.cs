@@ -24,14 +24,7 @@ namespace AppConfiguration.Models
                     List<Label> array = new List<Label>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Label.DeserializeLabel(item));
-                        }
+                        array.Add(Label.DeserializeLabel(item));
                     }
                     items = array;
                     continue;
@@ -42,7 +35,7 @@ namespace AppConfiguration.Models
                     continue;
                 }
             }
-            return new LabelListResult(new ChangeTrackingList<Label>(items), nextLink.HasValue ? nextLink.Value : null);
+            return new LabelListResult(Optional.ToList(items), nextLink.Value);
         }
     }
 }

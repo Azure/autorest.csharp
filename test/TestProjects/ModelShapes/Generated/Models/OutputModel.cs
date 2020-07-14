@@ -49,6 +49,8 @@ namespace ModelShapes.Models
             RequiredNullableInt = requiredNullableInt;
             RequiredNullableStringList = requiredNullableStringList?.ToList();
             RequiredNullableIntList = requiredNullableIntList?.ToList();
+            NonRequiredNullableStringList = new ChangeTrackingList<string>();
+            NonRequiredNullableIntList = new ChangeTrackingList<int>();
         }
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
@@ -64,7 +66,11 @@ namespace ModelShapes.Models
         /// <param name="requiredNullableInt"> . </param>
         /// <param name="requiredNullableStringList"> . </param>
         /// <param name="requiredNullableIntList"> . </param>
-        internal OutputModel(string requiredString, int requiredInt, IReadOnlyList<string> requiredStringList, IReadOnlyList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IReadOnlyList<string> nonRequiredStringList, IReadOnlyList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IReadOnlyList<string> requiredNullableStringList, IReadOnlyList<int> requiredNullableIntList)
+        /// <param name="nonRequiredNullableString"> . </param>
+        /// <param name="nonRequiredNullableInt"> . </param>
+        /// <param name="nonRequiredNullableStringList"> . </param>
+        /// <param name="nonRequiredNullableIntList"> . </param>
+        internal OutputModel(string requiredString, int requiredInt, IReadOnlyList<string> requiredStringList, IReadOnlyList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IReadOnlyList<string> nonRequiredStringList, IReadOnlyList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IReadOnlyList<string> requiredNullableStringList, IReadOnlyList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IReadOnlyList<string> nonRequiredNullableStringList, IReadOnlyList<int> nonRequiredNullableIntList)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -78,6 +84,10 @@ namespace ModelShapes.Models
             RequiredNullableInt = requiredNullableInt;
             RequiredNullableStringList = requiredNullableStringList;
             RequiredNullableIntList = requiredNullableIntList;
+            NonRequiredNullableString = nonRequiredNullableString;
+            NonRequiredNullableInt = nonRequiredNullableInt;
+            NonRequiredNullableStringList = nonRequiredNullableStringList;
+            NonRequiredNullableIntList = nonRequiredNullableIntList;
         }
 
         public string RequiredString { get; }
@@ -92,5 +102,9 @@ namespace ModelShapes.Models
         public int? RequiredNullableInt { get; }
         public IReadOnlyList<string> RequiredNullableStringList { get; }
         public IReadOnlyList<int> RequiredNullableIntList { get; }
+        public string NonRequiredNullableString { get; }
+        public int? NonRequiredNullableInt { get; }
+        public IReadOnlyList<string> NonRequiredNullableStringList { get; }
+        public IReadOnlyList<int> NonRequiredNullableIntList { get; }
     }
 }

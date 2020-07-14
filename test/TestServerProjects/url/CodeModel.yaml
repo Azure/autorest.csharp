@@ -562,8 +562,19 @@ schemas: !<!Schemas>
           name: ArrayOfString
           description: Array of String
       protocol: !<!Protocols> {}
+    - !<!ArraySchema> &ref_80
+      type: array
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      elementType: *ref_11
+      language: !<!Languages> 
+        default:
+          name: ArrayOfString
+          description: Array of String
+      protocol: !<!Protocols> {}
 globalParameters:
-  - !<!Parameter> &ref_80
+  - !<!Parameter> &ref_82
     schema: *ref_11
     implementation: Client
     required: true
@@ -577,7 +588,7 @@ globalParameters:
     protocol: !<!Protocols> 
       http: !<!HttpParameter> 
         in: path
-  - !<!Parameter> &ref_81
+  - !<!Parameter> &ref_83
     schema: *ref_11
     implementation: Client
     extensions:
@@ -4069,6 +4080,66 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: arrayQuery
+                description: 'Array-typed query parameter. Pass in [''hello'', ''nihao'', ''bonjour''].'
+                serializedName: arrayQuery
+            protocol: !<!Protocols> 
+              http: !<!HttpParameter> 
+                in: query
+                style: form
+        requests:
+          - !<!Request> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpRequest> 
+                path: /queries/array/none/string/empty
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_75
+        responses:
+          - !<!Response> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !<!SchemaResponse> 
+            schema: *ref_14
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !<!Languages> 
+          default:
+            name: ArrayStringNoCollectionFormatEmpty
+            description: 'Array query has no defined collection format, should default to csv. Pass in [''hello'', ''nihao'', ''bonjour''] for the ''arrayQuery'' parameter to the service'
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_12
+          - !<!Parameter> &ref_77
+            schema: *ref_76
+            implementation: Method
+            language: !<!Languages> 
+              default:
+                name: arrayQuery
                 description: 'an array of string [''ArrayQuery1'', ''begin!*''();:@ &=+$,/?#[]end'' , null, ''''] using the ssv-array format'
                 serializedName: arrayQuery
             protocol: !<!Protocols> 
@@ -4087,7 +4158,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_75
+          - *ref_77
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -4123,8 +4194,8 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_12
-          - !<!Parameter> &ref_77
-            schema: *ref_76
+          - !<!Parameter> &ref_79
+            schema: *ref_78
             implementation: Method
             language: !<!Languages> 
               default:
@@ -4147,7 +4218,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_77
+          - *ref_79
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -4183,8 +4254,8 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_12
-          - !<!Parameter> &ref_79
-            schema: *ref_78
+          - !<!Parameter> &ref_81
+            schema: *ref_80
             implementation: Method
             language: !<!Languages> 
               default:
@@ -4207,7 +4278,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_79
+          - *ref_81
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -4251,7 +4322,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_12
-          - !<!Parameter> &ref_82
+          - !<!Parameter> &ref_84
             schema: *ref_11
             implementation: Method
             required: true
@@ -4263,7 +4334,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_83
+          - !<!Parameter> &ref_85
             schema: *ref_11
             implementation: Method
             language: !<!Languages> 
@@ -4274,9 +4345,9 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - *ref_80
-          - *ref_81
-          - !<!Parameter> &ref_84
+          - *ref_82
+          - *ref_83
+          - !<!Parameter> &ref_86
             schema: *ref_11
             implementation: Method
             required: true
@@ -4288,7 +4359,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_85
+          - !<!Parameter> &ref_87
             schema: *ref_11
             implementation: Method
             language: !<!Languages> 
@@ -4311,10 +4382,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_82
-          - *ref_83
           - *ref_84
           - *ref_85
+          - *ref_86
+          - *ref_87
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -4352,7 +4423,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_12
-          - !<!Parameter> &ref_86
+          - !<!Parameter> &ref_88
             schema: *ref_11
             implementation: Method
             required: true
@@ -4364,7 +4435,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_87
+          - !<!Parameter> &ref_89
             schema: *ref_11
             implementation: Method
             language: !<!Languages> 
@@ -4375,9 +4446,9 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - *ref_80
-          - *ref_81
-          - !<!Parameter> &ref_88
+          - *ref_82
+          - *ref_83
+          - !<!Parameter> &ref_90
             schema: *ref_11
             implementation: Method
             required: true
@@ -4389,7 +4460,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_89
+          - !<!Parameter> &ref_91
             schema: *ref_11
             implementation: Method
             language: !<!Languages> 
@@ -4412,10 +4483,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_86
-          - *ref_87
           - *ref_88
           - *ref_89
+          - *ref_90
+          - *ref_91
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -4451,7 +4522,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_12
-          - !<!Parameter> &ref_90
+          - !<!Parameter> &ref_92
             schema: *ref_11
             implementation: Method
             required: true
@@ -4463,7 +4534,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_91
+          - !<!Parameter> &ref_93
             schema: *ref_11
             implementation: Method
             language: !<!Languages> 
@@ -4474,9 +4545,9 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - *ref_80
-          - *ref_81
-          - !<!Parameter> &ref_92
+          - *ref_82
+          - *ref_83
+          - !<!Parameter> &ref_94
             schema: *ref_11
             implementation: Method
             required: true
@@ -4488,7 +4559,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_93
+          - !<!Parameter> &ref_95
             schema: *ref_11
             implementation: Method
             language: !<!Languages> 
@@ -4511,10 +4582,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_90
-          - *ref_91
           - *ref_92
           - *ref_93
+          - *ref_94
+          - *ref_95
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -4550,7 +4621,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_12
-          - !<!Parameter> &ref_94
+          - !<!Parameter> &ref_96
             schema: *ref_11
             implementation: Method
             required: true
@@ -4562,7 +4633,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_95
+          - !<!Parameter> &ref_97
             schema: *ref_11
             implementation: Method
             language: !<!Languages> 
@@ -4573,9 +4644,9 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - *ref_80
-          - *ref_81
-          - !<!Parameter> &ref_96
+          - *ref_82
+          - *ref_83
+          - !<!Parameter> &ref_98
             schema: *ref_11
             implementation: Method
             required: true
@@ -4587,7 +4658,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_97
+          - !<!Parameter> &ref_99
             schema: *ref_11
             implementation: Method
             language: !<!Languages> 
@@ -4610,10 +4681,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_94
-          - *ref_95
           - *ref_96
           - *ref_97
+          - *ref_98
+          - *ref_99
         responses:
           - !<!Response> 
             language: !<!Languages> 

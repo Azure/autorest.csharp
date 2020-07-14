@@ -3453,6 +3453,24 @@ schemas: !<!Schemas>
           name: TokenFilterName
           description: Defines the names of all token filters supported by Azure Cognitive Search.
       protocol: !<!Protocols> {}
+    - !<!ChoiceSchema> &ref_292
+      choices:
+        - !<!ChoiceValue> 
+          value: html_strip
+          language:
+            default:
+              name: HtmlStrip
+              description: 'A character filter that attempts to strip out HTML constructs. See https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/HTMLStripCharFilter.html'
+      type: choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 2019-05-06-Preview
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: CharFilterName
+          description: Defines the names of all character filters supported by Azure Cognitive Search.
+      protocol: !<!Protocols> {}
     - !<!ChoiceSchema> &ref_295
       choices:
         - !<!ChoiceValue> 
@@ -6416,7 +6434,7 @@ schemas: !<!Schemas>
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Constant37
+          name: Constant38
           description: ''
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_242
@@ -6431,19 +6449,6 @@ schemas: !<!Schemas>
         default:
           name: SynonymMapFormat
           description: The format of the synonym map. Only the 'solr' format is currently supported.
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_292
-      type: constant
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 2019-05-06-Preview
-      value: !<!ConstantValue> 
-        value: html_strip
-      valueType: *ref_0
-      language: !<!Languages> 
-        default:
-          name: CharFilterName
-          description: Defines the names of all character filters supported by Azure Cognitive Search.
       protocol: !<!Protocols> {}
   dictionaries:
     - !<!DictionarySchema> &ref_1
@@ -6502,7 +6507,6 @@ schemas: !<!Schemas>
             name: ArrayOfFacetResult
             description: Array of FacetResult
         protocol: !<!Protocols> {}
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: Facets
@@ -6529,7 +6533,6 @@ schemas: !<!Schemas>
             name: ArrayOfSearchResultSearchHighlightsItemsItem
             description: Array of SearchResultSearchHighlightsItemsItem
         protocol: !<!Protocols> {}
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: Highlights
@@ -6570,7 +6573,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_265
       type: dictionary
       elementType: *ref_5
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: TextWeights
@@ -6579,7 +6581,6 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_204
       type: dictionary
       elementType: *ref_6
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: WebApiHttpHeaders
@@ -7586,6 +7587,7 @@ schemas: !<!Schemas>
                   serializedName: facet
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
+                  explode: true
                   in: query
                   style: form
           serializedName: Facets
@@ -7640,6 +7642,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
+                  style: form
           serializedName: HighlightFields
           language: !<!Languages> 
             default:
@@ -7741,6 +7744,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
+                  style: form
           serializedName: OrderBy
           language: !<!Languages> 
             default:
@@ -7797,6 +7801,7 @@ schemas: !<!Schemas>
                   serializedName: scoringParameter
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
+                  explode: true
                   in: query
                   style: form
           serializedName: ScoringParameters
@@ -7855,6 +7860,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
+                  style: form
           serializedName: searchFields
           language: !<!Languages> 
             default:
@@ -7909,6 +7915,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
+                  style: form
           serializedName: $select
           language: !<!Languages> 
             default:
@@ -8123,6 +8130,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
+                  style: form
           serializedName: OrderBy
           language: !<!Languages> 
             default:
@@ -8157,6 +8165,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
+                  style: form
           serializedName: searchFields
           language: !<!Languages> 
             default:
@@ -8188,6 +8197,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
+                  style: form
           serializedName: $select
           language: !<!Languages> 
             default:
@@ -8391,6 +8401,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
+                  style: form
           serializedName: searchFields
           language: !<!Languages> 
             default:
@@ -16610,6 +16621,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
+                style: form
           - *ref_534
           - *ref_562
         requests:

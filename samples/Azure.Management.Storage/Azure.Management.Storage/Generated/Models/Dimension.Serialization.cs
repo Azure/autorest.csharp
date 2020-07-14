@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new Dimension(name.HasValue ? name.Value : null, displayName.HasValue ? displayName.Value : null);
+            return new Dimension(name.Value, displayName.Value);
         }
     }
 }

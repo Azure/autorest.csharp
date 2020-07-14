@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("sourceContext");
                 writer.WriteStringValue(SourceContext);
             }
-            if (Optional.IsDefined(Inputs))
+            if (Optional.IsCollectionDefined(Inputs))
             {
                 writer.WritePropertyName("inputs");
                 writer.WriteStartArray();
@@ -69,20 +69,13 @@ namespace CognitiveSearch.Models
                     List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeInputFieldMappingEntry(item));
-                        }
+                        array.Add(DeserializeInputFieldMappingEntry(item));
                     }
                     inputs = array;
                     continue;
                 }
             }
-            return new InputFieldMappingEntry(name, source.HasValue ? source.Value : null, sourceContext.HasValue ? sourceContext.Value : null, new ChangeTrackingList<InputFieldMappingEntry>(inputs));
+            return new InputFieldMappingEntry(name, source.Value, sourceContext.Value, Optional.ToList(inputs));
         }
     }
 }

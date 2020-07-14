@@ -52,27 +52,13 @@ namespace CustomNamespace
         CustomizedModel IOperationSource<CustomizedModel>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            else
-            {
-                return CustomizedModel.DeserializeCustomizedModel(document.RootElement);
-            }
+            return CustomizedModel.DeserializeCustomizedModel(document.RootElement);
         }
 
         async ValueTask<CustomizedModel> IOperationSource<CustomizedModel>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            if (document.RootElement.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            else
-            {
-                return CustomizedModel.DeserializeCustomizedModel(document.RootElement);
-            }
+            return CustomizedModel.DeserializeCustomizedModel(document.RootElement);
         }
     }
 }

@@ -67,7 +67,7 @@ namespace CustomNamespace
                     continue;
                 }
             }
-            return new RenamedModelStruct(modelProperty.HasValue ? modelProperty.Value : null, fruit.HasValue ? fruit.Value : (CustomFruitEnum?)null, daysOfWeek.HasValue ? daysOfWeek.Value : (CustomDaysOfWeek?)null);
+            return new RenamedModelStruct(modelProperty.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek));
         }
     }
 }

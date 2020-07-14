@@ -37,7 +37,7 @@ namespace xms_error_responses.Models
                     continue;
                 }
             }
-            return new PetActionError(errorType, errorMessage.HasValue ? errorMessage.Value : null);
+            return new PetActionError(errorType, errorMessage.Value);
         }
     }
 }

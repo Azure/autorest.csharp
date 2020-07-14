@@ -38,7 +38,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("groupId");
                 writer.WriteStringValue(GroupId);
             }
-            if (Optional.IsDefined(RequiredMembers))
+            if (Optional.IsCollectionDefined(RequiredMembers))
             {
                 writer.WritePropertyName("requiredMembers");
                 writer.WriteStartArray();
@@ -48,7 +48,7 @@ namespace Azure.Management.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(RequiredZoneNames))
+            if (Optional.IsCollectionDefined(RequiredZoneNames))
             {
                 writer.WritePropertyName("requiredZoneNames");
                 writer.WriteStartArray();
@@ -101,14 +101,7 @@ namespace Azure.Management.Storage.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(item.GetString());
                             }
                             requiredMembers = array;
                             continue;
@@ -118,14 +111,7 @@ namespace Azure.Management.Storage.Models
                             List<string> array = new List<string>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                if (item.ValueKind == JsonValueKind.Null)
-                                {
-                                    array.Add(null);
-                                }
-                                else
-                                {
-                                    array.Add(item.GetString());
-                                }
+                                array.Add(item.GetString());
                             }
                             requiredZoneNames = array;
                             continue;
@@ -134,7 +120,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new PrivateLinkResource(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, groupId.HasValue ? groupId.Value : null, new ChangeTrackingList<string>(requiredMembers), new ChangeTrackingList<string>(requiredZoneNames));
+            return new PrivateLinkResource(id.Value, name.Value, type.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
         }
     }
 }

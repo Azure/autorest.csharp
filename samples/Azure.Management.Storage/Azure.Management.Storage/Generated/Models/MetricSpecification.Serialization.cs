@@ -51,14 +51,7 @@ namespace Azure.Management.Storage.Models
                     List<Dimension> array = new List<Dimension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Dimension.DeserializeDimension(item));
-                        }
+                        array.Add(Dimension.DeserializeDimension(item));
                     }
                     dimensions = array;
                     continue;
@@ -84,7 +77,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new MetricSpecification(name.HasValue ? name.Value : null, displayName.HasValue ? displayName.Value : null, displayDescription.HasValue ? displayDescription.Value : null, unit.HasValue ? unit.Value : null, new ChangeTrackingList<Dimension>(dimensions), aggregationType.HasValue ? aggregationType.Value : null, fillGapWithZero.HasValue ? fillGapWithZero.Value : (bool?)null, category.HasValue ? category.Value : null, resourceIdDimensionNameOverride.HasValue ? resourceIdDimensionNameOverride.Value : null);
+            return new MetricSpecification(name.Value, displayName.Value, displayDescription.Value, unit.Value, Optional.ToList(dimensions), aggregationType.Value, Optional.ToNullable(fillGapWithZero), category.Value, resourceIdDimensionNameOverride.Value);
         }
     }
 }

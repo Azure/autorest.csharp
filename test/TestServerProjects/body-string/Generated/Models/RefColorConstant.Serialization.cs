@@ -42,7 +42,7 @@ namespace body_string.Models
                     continue;
                 }
             }
-            return new RefColorConstant(colorConstant, field1.HasValue ? field1.Value : null);
+            return new RefColorConstant(colorConstant, field1.Value);
         }
     }
 }

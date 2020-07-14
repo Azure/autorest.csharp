@@ -99,7 +99,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new DataSource(name, description.HasValue ? description.Value : null, type, credentials, container, dataChangeDetectionPolicy.HasValue ? dataChangeDetectionPolicy.Value : null, dataDeletionDetectionPolicy.HasValue ? dataDeletionDetectionPolicy.Value : null, odataEtag.HasValue ? odataEtag.Value : null);
+            return new DataSource(name, description.Value, type, credentials, container, dataChangeDetectionPolicy.Value, dataDeletionDetectionPolicy.Value, odataEtag.Value);
         }
     }
 }

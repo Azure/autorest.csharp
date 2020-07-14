@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PhoneticTokenFilter(odataType, name, encoder.HasValue ? encoder.Value : (PhoneticEncoder?)null, replace.HasValue ? replace.Value : (bool?)null);
+            return new PhoneticTokenFilter(odataType, name, Optional.ToNullable(encoder), Optional.ToNullable(replace));
         }
     }
 }

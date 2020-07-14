@@ -42,7 +42,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new IPRule(value, action.HasValue ? action.Value : null);
+            return new IPRule(value, action.Value);
         }
     }
 }

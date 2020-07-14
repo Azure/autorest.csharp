@@ -67,7 +67,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new StorageAccountInternetEndpoints(blob.HasValue ? blob.Value : null, file.HasValue ? file.Value : null, web.HasValue ? web.Value : null, dfs.HasValue ? dfs.Value : null);
+            return new StorageAccountInternetEndpoints(blob.Value, file.Value, web.Value, dfs.Value);
         }
     }
 }

@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternTokenizer(odataType, name, pattern.HasValue ? pattern.Value : null, flags.HasValue ? flags.Value : (RegexFlags?)null, group.HasValue ? group.Value : (int?)null);
+            return new PatternTokenizer(odataType, name, pattern.Value, Optional.ToNullable(flags), Optional.ToNullable(group));
         }
     }
 }

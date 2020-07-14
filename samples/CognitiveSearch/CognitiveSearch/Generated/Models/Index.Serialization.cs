@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(ScoringProfiles))
+            if (Optional.IsCollectionDefined(ScoringProfiles))
             {
                 writer.WritePropertyName("scoringProfiles");
                 writer.WriteStartArray();
@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("corsOptions");
                 writer.WriteObjectValue(CorsOptions);
             }
-            if (Optional.IsDefined(Suggesters))
+            if (Optional.IsCollectionDefined(Suggesters))
             {
                 writer.WritePropertyName("suggesters");
                 writer.WriteStartArray();
@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Analyzers))
+            if (Optional.IsCollectionDefined(Analyzers))
             {
                 writer.WritePropertyName("analyzers");
                 writer.WriteStartArray();
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(Tokenizers))
+            if (Optional.IsCollectionDefined(Tokenizers))
             {
                 writer.WritePropertyName("tokenizers");
                 writer.WriteStartArray();
@@ -75,7 +75,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TokenFilters))
+            if (Optional.IsCollectionDefined(TokenFilters))
             {
                 writer.WritePropertyName("tokenFilters");
                 writer.WriteStartArray();
@@ -85,7 +85,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(CharFilters))
+            if (Optional.IsCollectionDefined(CharFilters))
             {
                 writer.WritePropertyName("charFilters");
                 writer.WriteStartArray();
@@ -140,14 +140,7 @@ namespace CognitiveSearch.Models
                     List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Field.DeserializeField(item));
-                        }
+                        array.Add(Field.DeserializeField(item));
                     }
                     fields = array;
                     continue;
@@ -157,14 +150,7 @@ namespace CognitiveSearch.Models
                     List<ScoringProfile> array = new List<ScoringProfile>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(ScoringProfile.DeserializeScoringProfile(item));
-                        }
+                        array.Add(ScoringProfile.DeserializeScoringProfile(item));
                     }
                     scoringProfiles = array;
                     continue;
@@ -184,14 +170,7 @@ namespace CognitiveSearch.Models
                     List<Suggester> array = new List<Suggester>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Suggester.DeserializeSuggester(item));
-                        }
+                        array.Add(Suggester.DeserializeSuggester(item));
                     }
                     suggesters = array;
                     continue;
@@ -201,14 +180,7 @@ namespace CognitiveSearch.Models
                     List<Analyzer> array = new List<Analyzer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Analyzer.DeserializeAnalyzer(item));
-                        }
+                        array.Add(Analyzer.DeserializeAnalyzer(item));
                     }
                     analyzers = array;
                     continue;
@@ -218,14 +190,7 @@ namespace CognitiveSearch.Models
                     List<Tokenizer> array = new List<Tokenizer>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Tokenizer.DeserializeTokenizer(item));
-                        }
+                        array.Add(Tokenizer.DeserializeTokenizer(item));
                     }
                     tokenizers = array;
                     continue;
@@ -235,14 +200,7 @@ namespace CognitiveSearch.Models
                     List<TokenFilter> array = new List<TokenFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(TokenFilter.DeserializeTokenFilter(item));
-                        }
+                        array.Add(TokenFilter.DeserializeTokenFilter(item));
                     }
                     tokenFilters = array;
                     continue;
@@ -252,14 +210,7 @@ namespace CognitiveSearch.Models
                     List<CharFilter> array = new List<CharFilter>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(CharFilter.DeserializeCharFilter(item));
-                        }
+                        array.Add(CharFilter.DeserializeCharFilter(item));
                     }
                     charFilters = array;
                     continue;
@@ -280,7 +231,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new Index(name, fields, new ChangeTrackingList<ScoringProfile>(scoringProfiles), defaultScoringProfile.HasValue ? defaultScoringProfile.Value : null, corsOptions.HasValue ? corsOptions.Value : null, new ChangeTrackingList<Suggester>(suggesters), new ChangeTrackingList<Analyzer>(analyzers), new ChangeTrackingList<Tokenizer>(tokenizers), new ChangeTrackingList<TokenFilter>(tokenFilters), new ChangeTrackingList<CharFilter>(charFilters), encryptionKey.HasValue ? encryptionKey.Value : null, similarity.HasValue ? similarity.Value : null, odataEtag.HasValue ? odataEtag.Value : null);
+            return new Index(name, fields, Optional.ToList(scoringProfiles), defaultScoringProfile.Value, corsOptions.Value, Optional.ToList(suggesters), Optional.ToList(analyzers), Optional.ToList(tokenizers), Optional.ToList(tokenFilters), Optional.ToList(charFilters), encryptionKey.Value, similarity.Value, odataEtag.Value);
         }
     }
 }

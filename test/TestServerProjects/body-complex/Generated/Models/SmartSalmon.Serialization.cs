@@ -40,7 +40,7 @@ namespace body_complex.Models
             }
             writer.WritePropertyName("length");
             writer.WriteNumberValue(Length);
-            if (Optional.IsDefined(Siblings))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
@@ -106,30 +106,16 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeFish(item));
-                        }
+                        array.Add(DeserializeFish(item));
                     }
                     siblings = array;
                     continue;
                 }
                 additionalPropertiesDictionary ??= new Dictionary<string, object>();
-                if (property.Value.ValueKind == JsonValueKind.Null)
-                {
-                    additionalPropertiesDictionary.Add(property.Name, null);
-                }
-                else
-                {
-                    additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
-                }
+                additionalPropertiesDictionary.Add(property.Name, property.Value.GetObject());
             }
             additionalProperties = additionalPropertiesDictionary;
-            return new SmartSalmon(fishtype, species.HasValue ? species.Value : null, length, new ChangeTrackingList<Fish>(siblings), location.HasValue ? location.Value : null, iswild.HasValue ? iswild.Value : (bool?)null, collegeDegree.HasValue ? collegeDegree.Value : null, additionalProperties);
+            return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace multiple_inheritance.Models
                     continue;
                 }
             }
-            return new Cat(name, likesMilk.HasValue ? likesMilk.Value : (bool?)null, meows.HasValue ? meows.Value : (bool?)null, hisses.HasValue ? hisses.Value : (bool?)null);
+            return new Cat(name, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses));
         }
     }
 }

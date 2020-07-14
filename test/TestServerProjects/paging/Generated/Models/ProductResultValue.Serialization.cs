@@ -24,14 +24,7 @@ namespace paging.Models
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(Product.DeserializeProduct(item));
-                        }
+                        array.Add(Product.DeserializeProduct(item));
                     }
                     value = array;
                     continue;
@@ -42,7 +35,7 @@ namespace paging.Models
                     continue;
                 }
             }
-            return new ProductResultValue(new ChangeTrackingList<Product>(value), nextLink.HasValue ? nextLink.Value : null);
+            return new ProductResultValue(Optional.ToList(value), nextLink.Value);
         }
     }
 }

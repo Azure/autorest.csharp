@@ -74,7 +74,7 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("leaseDuration");
                 writer.WriteStringValue(LeaseDuration.Value.ToString());
             }
-            if (Optional.IsDefined(Metadata))
+            if (Optional.IsCollectionDefined(Metadata))
             {
                 writer.WritePropertyName("metadata");
                 writer.WriteStartObject();
@@ -193,14 +193,7 @@ namespace Azure.Management.Storage.Models
                             Dictionary<string, string> dictionary = new Dictionary<string, string>();
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
-                                if (property1.Value.ValueKind == JsonValueKind.Null)
-                                {
-                                    dictionary.Add(property1.Name, null);
-                                }
-                                else
-                                {
-                                    dictionary.Add(property1.Name, property1.Value.GetString());
-                                }
+                                dictionary.Add(property1.Name, property1.Value.GetString());
                             }
                             metadata = dictionary;
                             continue;
@@ -229,7 +222,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new BlobContainer(id.HasValue ? id.Value : null, name.HasValue ? name.Value : null, type.HasValue ? type.Value : null, etag.HasValue ? etag.Value : null, defaultEncryptionScope.HasValue ? defaultEncryptionScope.Value : null, denyEncryptionScopeOverride.HasValue ? denyEncryptionScopeOverride.Value : (bool?)null, publicAccess.HasValue ? publicAccess.Value : (PublicAccess?)null, lastModifiedTime.HasValue ? lastModifiedTime.Value : (DateTimeOffset?)null, leaseStatus.HasValue ? leaseStatus.Value : (LeaseStatus?)null, leaseState.HasValue ? leaseState.Value : (LeaseState?)null, leaseDuration.HasValue ? leaseDuration.Value : (LeaseDuration?)null, new ChangeTrackingDictionary<string, string>(metadata), immutabilityPolicy.HasValue ? immutabilityPolicy.Value : null, legalHold.HasValue ? legalHold.Value : null, hasLegalHold.HasValue ? hasLegalHold.Value : (bool?)null, hasImmutabilityPolicy.HasValue ? hasImmutabilityPolicy.Value : (bool?)null);
+            return new BlobContainer(id.Value, name.Value, type.Value, etag.Value, defaultEncryptionScope.Value, Optional.ToNullable(denyEncryptionScopeOverride), Optional.ToNullable(publicAccess), Optional.ToNullable(lastModifiedTime), Optional.ToNullable(leaseStatus), Optional.ToNullable(leaseState), Optional.ToNullable(leaseDuration), Optional.ToDictionary(metadata), immutabilityPolicy.Value, legalHold.Value, Optional.ToNullable(hasLegalHold), Optional.ToNullable(hasImmutabilityPolicy));
         }
     }
 }

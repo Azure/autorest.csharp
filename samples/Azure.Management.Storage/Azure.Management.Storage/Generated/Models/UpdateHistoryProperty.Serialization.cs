@@ -90,7 +90,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new UpdateHistoryProperty(update.HasValue ? update.Value : (ImmutabilityPolicyUpdateType?)null, immutabilityPeriodSinceCreationInDays.HasValue ? immutabilityPeriodSinceCreationInDays.Value : (int?)null, timestamp.HasValue ? timestamp.Value : (DateTimeOffset?)null, objectIdentifier.HasValue ? objectIdentifier.Value : null, tenantId.HasValue ? tenantId.Value : null, upn.HasValue ? upn.Value : null);
+            return new UpdateHistoryProperty(Optional.ToNullable(update), Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(timestamp), objectIdentifier.Value, tenantId.Value, upn.Value);
         }
     }
 }

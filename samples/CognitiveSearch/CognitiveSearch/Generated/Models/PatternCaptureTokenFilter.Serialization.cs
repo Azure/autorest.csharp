@@ -48,14 +48,7 @@ namespace CognitiveSearch.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     patterns = array;
                     continue;
@@ -76,7 +69,7 @@ namespace CognitiveSearch.Models
                     continue;
                 }
             }
-            return new PatternCaptureTokenFilter(odataType, name, patterns, preserveOriginal.HasValue ? preserveOriginal.Value : (bool?)null);
+            return new PatternCaptureTokenFilter(odataType, name, patterns, Optional.ToNullable(preserveOriginal));
         }
     }
 }

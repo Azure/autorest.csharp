@@ -43,7 +43,7 @@ namespace body_complex.Models
             }
             writer.WritePropertyName("length");
             writer.WriteNumberValue(Length);
-            if (Optional.IsDefined(Siblings))
+            if (Optional.IsCollectionDefined(Siblings))
             {
                 writer.WritePropertyName("siblings");
                 writer.WriteStartArray();
@@ -108,20 +108,13 @@ namespace body_complex.Models
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DeserializeFish(item));
-                        }
+                        array.Add(DeserializeFish(item));
                     }
                     siblings = array;
                     continue;
                 }
             }
-            return new Goblinshark(fishtype, species.HasValue ? species.Value : null, length, new ChangeTrackingList<Fish>(siblings), age.HasValue ? age.Value : (int?)null, birthday, jawsize.HasValue ? jawsize.Value : (int?)null, color.HasValue ? color.Value : (GoblinSharkColor?)null);
+            return new Goblinshark(fishtype, species.Value, length, Optional.ToList(siblings), Optional.ToNullable(age), birthday, Optional.ToNullable(jawsize), Optional.ToNullable(color));
         }
     }
 }

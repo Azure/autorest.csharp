@@ -29,7 +29,7 @@ namespace Azure.Network.Management.Interface.Models
                     continue;
                 }
             }
-            return new EffectiveNetworkSecurityGroupAssociation(subnet.HasValue ? subnet.Value : null, networkInterface.HasValue ? networkInterface.Value : null);
+            return new EffectiveNetworkSecurityGroupAssociation(subnet.Value, networkInterface.Value);
         }
     }
 }

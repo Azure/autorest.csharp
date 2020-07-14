@@ -30,14 +30,7 @@ namespace Azure.Management.Storage.Models
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(item.GetString());
-                        }
+                        array.Add(item.GetString());
                     }
                     values = array;
                     continue;
@@ -48,7 +41,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new Restriction(type.HasValue ? type.Value : null, new ChangeTrackingList<string>(values), reasonCode.HasValue ? reasonCode.Value : (ReasonCode?)null);
+            return new Restriction(type.Value, Optional.ToList(values), Optional.ToNullable(reasonCode));
         }
     }
 }

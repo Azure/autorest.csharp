@@ -35,7 +35,7 @@ namespace azure_special_properties.Models
                     continue;
                 }
             }
-            return new Error(status.HasValue ? status.Value : (int?)null, constantId, message.HasValue ? message.Value : null);
+            return new Error(Optional.ToNullable(status), constantId, message.Value);
         }
     }
 }

@@ -19,14 +19,14 @@ namespace body_complex.Models
         /// <param name="kind"> . </param>
         /// <param name="propB1"> . </param>
         /// <param name="propBH1"> . </param>
-        internal MyBaseType(string kind, string propB1, string propBH1)
+        internal MyBaseType(MyKind kind, string propB1, string propBH1)
         {
             Kind = kind;
             PropB1 = propB1;
             PropBH1 = propBH1;
         }
 
-        internal string Kind { get; set; }
+        internal MyKind Kind { get; set; }
         public string PropB1 { get; }
         public string PropBH1 { get; }
     }

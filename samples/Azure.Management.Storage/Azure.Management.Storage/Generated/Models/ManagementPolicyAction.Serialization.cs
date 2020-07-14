@@ -45,7 +45,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ManagementPolicyAction(baseBlob.HasValue ? baseBlob.Value : null, snapshot.HasValue ? snapshot.Value : null);
+            return new ManagementPolicyAction(baseBlob.Value, snapshot.Value);
         }
     }
 }

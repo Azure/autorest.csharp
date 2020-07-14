@@ -317,6 +317,24 @@ schemas: !<!Schemas>
           name: CMYKColors
           description: ''
       protocol: !<!Protocols> {}
+    - !<!ChoiceSchema> &ref_59
+      choices:
+        - !<!ChoiceValue> 
+          value: Kind1
+          language:
+            default:
+              name: Kind1
+              description: ''
+      type: choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2016-02-29'
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: MyKind
+          description: ''
+      protocol: !<!Protocols> {}
     - !<!ChoiceSchema> &ref_42
       choices:
         - !<!ChoiceValue> 
@@ -381,24 +399,10 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_59
-      type: constant
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2016-02-29'
-      value: !<!ConstantValue> 
-        value: Kind1
-      valueType: *ref_0
-      language: !<!Languages> 
-        default:
-          name: MyKind
-          description: ''
-      protocol: !<!Protocols> {}
   dictionaries:
     - !<!DictionarySchema> &ref_24
       type: dictionary
       elementType: *ref_1
-      nullableItems: false
       language: !<!Languages> 
         default:
           name: DictionaryWrapperDefaultProgram
@@ -540,6 +544,7 @@ schemas: !<!Schemas>
       properties:
         - !<!Property> 
           schema: *ref_3
+          nullable: true
           serializedName: id
           language: !<!Languages> 
             default:
@@ -1003,6 +1008,7 @@ schemas: !<!Schemas>
       properties:
         - !<!Property> 
           schema: *ref_24
+          nullable: true
           serializedName: defaultProgram
           language: !<!Languages> 
             default:

@@ -34,7 +34,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new GenericUrl(genericValue.HasValue ? genericValue.Value : null);
+            return new GenericUrl(genericValue.Value);
         }
     }
 }

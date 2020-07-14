@@ -48,7 +48,7 @@ namespace body_integer
 
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<int>> GetNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<int?>> GetNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -56,9 +56,16 @@ namespace body_integer
             {
                 case 200:
                     {
-                        int value = default;
+                        int? value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetInt32();
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = document.RootElement.GetInt32();
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -68,7 +75,7 @@ namespace body_integer
 
         /// <summary> Get null Int value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<int> GetNull(CancellationToken cancellationToken = default)
+        public Response<int?> GetNull(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullRequest();
             _pipeline.Send(message, cancellationToken);
@@ -76,9 +83,16 @@ namespace body_integer
             {
                 case 200:
                     {
-                        int value = default;
+                        int? value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetInt32();
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = document.RootElement.GetInt32();
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -704,7 +718,7 @@ namespace body_integer
 
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<DateTimeOffset>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<DateTimeOffset?>> GetNullUnixTimeAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullUnixTimeRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -712,9 +726,16 @@ namespace body_integer
             {
                 case 200:
                     {
-                        DateTimeOffset value = default;
+                        DateTimeOffset? value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetDateTimeOffset("U");
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = document.RootElement.GetDateTimeOffset("U");
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -724,7 +745,7 @@ namespace body_integer
 
         /// <summary> Get null Unix time value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<DateTimeOffset> GetNullUnixTime(CancellationToken cancellationToken = default)
+        public Response<DateTimeOffset?> GetNullUnixTime(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetNullUnixTimeRequest();
             _pipeline.Send(message, cancellationToken);
@@ -732,9 +753,16 @@ namespace body_integer
             {
                 case 200:
                     {
-                        DateTimeOffset value = default;
+                        DateTimeOffset? value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetDateTimeOffset("U");
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
+                        {
+                            value = null;
+                        }
+                        else
+                        {
+                            value = document.RootElement.GetDateTimeOffset("U");
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:

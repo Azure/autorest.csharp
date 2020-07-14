@@ -31,14 +31,7 @@ namespace body_complex.Models
                     List<DotSalmon> array = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DotSalmon.DeserializeDotSalmon(item));
-                        }
+                        array.Add(DotSalmon.DeserializeDotSalmon(item));
                     }
                     salmons = array;
                     continue;
@@ -53,20 +46,13 @@ namespace body_complex.Models
                     List<DotFish> array = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(DotFish.DeserializeDotFish(item));
-                        }
+                        array.Add(DotFish.DeserializeDotFish(item));
                     }
                     fishes = array;
                     continue;
                 }
             }
-            return new DotFishMarket(sampleSalmon.HasValue ? sampleSalmon.Value : null, new ChangeTrackingList<DotSalmon>(salmons), sampleFish.HasValue ? sampleFish.Value : null, new ChangeTrackingList<DotFish>(fishes));
+            return new DotFishMarket(sampleSalmon.Value, Optional.ToList(salmons), sampleFish.Value, Optional.ToList(fishes));
         }
     }
 }

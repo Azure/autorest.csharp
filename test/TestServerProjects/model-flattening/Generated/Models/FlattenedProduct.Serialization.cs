@@ -26,7 +26,7 @@ namespace model_flattening.Models
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
-            if (Optional.IsDefined(Tags))
+            if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
                 writer.WriteStartObject();
@@ -101,14 +101,7 @@ namespace model_flattening.Models
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, property0.Value.GetString());
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
                     continue;
@@ -151,7 +144,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new FlattenedProduct(id.HasValue ? id.Value : null, type.HasValue ? type.Value : null, new ChangeTrackingDictionary<string, string>(tags), location.HasValue ? location.Value : null, name.HasValue ? name.Value : null, pName.HasValue ? pName.Value : null, type0.HasValue ? type0.Value : null, provisioningStateValues.HasValue ? provisioningStateValues.Value : (FlattenedProductPropertiesProvisioningStateValues?)null, provisioningState.HasValue ? provisioningState.Value : null);
+            return new FlattenedProduct(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, pName.Value, type0.Value, Optional.ToNullable(provisioningStateValues), provisioningState.Value);
         }
     }
 }

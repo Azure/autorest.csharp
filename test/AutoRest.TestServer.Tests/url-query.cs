@@ -108,6 +108,10 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringCsvValidAsync( new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}));
 
         [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
+        public Task UrlQueriesArrayNoCollectionFormatValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringNoCollectionFormatEmptyAsync( new[] {"hello", "nihao", "bonjour"}));
+
+        [Test]
         public Task UrlQueriesArrayCsvNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringCsvNullAsync( null));
 
         [Test]
