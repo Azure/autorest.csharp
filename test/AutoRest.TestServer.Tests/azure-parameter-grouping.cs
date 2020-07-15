@@ -49,10 +49,10 @@ namespace AutoRest.TestServer.Tests
         public Task PostParameterGroupingRequiredParameters() => TestStatus(async (host, pipeline) =>
         {
             return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostRequiredAsync(
-                new ParameterGroupingPostRequiredParameters("header", 21)
+                new ParameterGroupingPostRequiredParameters("path", 1234)
                 {
-                    CustomHeader = "path",
-                    Query = 1234
+                    CustomHeader = "header",
+                    Query = 21
                 }
             );
         });
