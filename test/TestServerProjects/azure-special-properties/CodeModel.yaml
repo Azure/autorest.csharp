@@ -39,7 +39,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Gets the foo-request-id.
+          description: ''
           header: foo-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_5
@@ -60,7 +60,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Gets the foo-request-id.
+          description: ''
           header: foo-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_34
@@ -71,7 +71,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Gets the foo-request-id.
+          description: ''
           header: foo-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> 
@@ -1938,6 +1938,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_7
                     header: foo-request-id
+                    language:
+                      default:
+                        name: FooRequestId
+                        description: Gets the foo-request-id.
                 statusCodes:
                   - '200'
         exceptions:
@@ -1996,6 +2000,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_2
                     header: foo-request-id
+                    language:
+                      default:
+                        name: FooRequestId
+                        description: Gets the foo-request-id.
                 statusCodes:
                   - '200'
         exceptions:
@@ -2064,6 +2072,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_34
                     header: foo-request-id
+                    language:
+                      default:
+                        name: FooRequestId
+                        description: Gets the foo-request-id.
                 statusCodes:
                   - '200'
           - !<!Response> 

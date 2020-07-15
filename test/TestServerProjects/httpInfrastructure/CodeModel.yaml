@@ -357,7 +357,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant20
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_30
@@ -371,7 +371,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant21
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_31
@@ -385,7 +385,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant22
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_32
@@ -399,7 +399,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant23
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_33
@@ -426,7 +426,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant25
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_35
@@ -440,7 +440,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant26
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_36
@@ -454,7 +454,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant27
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_37
@@ -481,7 +481,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant29
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_39
@@ -508,7 +508,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant31
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_41
@@ -522,7 +522,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant32
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_42
@@ -536,7 +536,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant33
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_43
@@ -550,7 +550,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant34
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_44
@@ -577,7 +577,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant36
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_46
@@ -604,7 +604,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant38
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_48
@@ -631,7 +631,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant40
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_50
@@ -658,7 +658,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: Constant42
-          description: The redirect location for this request
+          description: ''
           header: Location
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_52
@@ -2631,6 +2631,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_28
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '300'
         exceptions:
@@ -2692,6 +2696,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_30
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 knownMediaType: json
                 mediaTypes:
                   - application/json
@@ -2755,6 +2763,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_31
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '301'
         exceptions:
@@ -2815,6 +2827,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_32
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '301'
         exceptions:
@@ -2896,6 +2912,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_34
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '301'
         exceptions:
@@ -2956,6 +2976,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_35
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '302'
         exceptions:
@@ -3016,6 +3040,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_36
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '302'
         exceptions:
@@ -3097,6 +3125,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_38
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '302'
         exceptions:
@@ -3187,6 +3219,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_40
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '303'
         exceptions:
@@ -3247,6 +3283,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_41
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '307'
         exceptions:
@@ -3307,6 +3347,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_42
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '307'
         exceptions:
@@ -3367,6 +3411,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_43
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '307'
         exceptions:
@@ -3457,6 +3505,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_45
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '307'
         exceptions:
@@ -3547,6 +3599,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_47
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '307'
         exceptions:
@@ -3637,6 +3693,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_49
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '307'
         exceptions:
@@ -3727,6 +3787,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_51
                     header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: The redirect location for this request
                 statusCodes:
                   - '307'
         exceptions:

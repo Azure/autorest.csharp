@@ -18,7 +18,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: RenamedHeader
+          name: String
           description: ''
           header: originalHeader
       protocol: !<!Protocols> {}
@@ -198,6 +198,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_1
                     header: originalHeader
+                    language:
+                      default:
+                        name: RenamedHeader
+                        description: ''
                 knownMediaType: json
                 mediaTypes:
                   - application/json

@@ -28,6 +28,12 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void ResponseHeadersAreRenamed()
+        {
+            TypeAsserts.HasProperty(typeof(ServiceRenamedOperationHeaders), "RenamedHeader", BindingFlags.Instance | BindingFlags.Public);
+        }
+
+        [Test]
         public void HeaderTypesAreRenamed()
         {
             Assert.AreEqual("ServiceRenamedOperationHeaders", typeof(ServiceRenamedOperationHeaders).Name);

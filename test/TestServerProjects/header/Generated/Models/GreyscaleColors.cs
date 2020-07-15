@@ -7,8 +7,8 @@
 
 namespace header.Models
 {
-    /// <summary> response with header values &quot;GREY&quot; or null. </summary>
-    public enum Enum0
+    /// <summary> The GreyscaleColors. </summary>
+    public enum GreyscaleColors
     {
         /// <summary> White. </summary>
         White,
