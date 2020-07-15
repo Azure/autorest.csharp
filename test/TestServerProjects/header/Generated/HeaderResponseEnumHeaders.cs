@@ -18,6 +18,7 @@ namespace header
         {
             _response = response;
         }
+        /// <summary> response with header values &quot;GREY&quot; or null. </summary>
         public GreyscaleColors? Value => _response.Headers.TryGetValue("value", out GreyscaleColors? value) ? value : null;
     }
 }

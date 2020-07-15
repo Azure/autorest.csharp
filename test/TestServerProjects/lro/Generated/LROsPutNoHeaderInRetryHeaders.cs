@@ -17,6 +17,7 @@ namespace lro
         {
             _response = response;
         }
+        /// <summary> Location to poll for result status: will be set to /lro/putasync/noheader/202/200/operationResults. </summary>
         public string Location => _response.Headers.TryGetValue("location", out string value) ? value : null;
     }
 }

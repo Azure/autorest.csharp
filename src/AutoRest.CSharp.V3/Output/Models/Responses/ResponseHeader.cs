@@ -8,13 +8,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
 {
     internal class ResponseHeader
     {
-        public ResponseHeader(string name, string serializedName, CSharpType type)
+        public ResponseHeader(string name, string serializedName, CSharpType type, string description)
         {
             Name = name;
             SerializedName = serializedName;
             Type = type;
+            Description = description;
         }
 
+        public string Description { get; }
         public string Name { get; }
         public string SerializedName { get; }
         public CSharpType Type { get; }

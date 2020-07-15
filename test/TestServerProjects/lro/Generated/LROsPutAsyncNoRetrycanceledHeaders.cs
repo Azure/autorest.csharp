@@ -17,7 +17,9 @@ namespace lro
         {
             _response = response;
         }
+        /// <summary> Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200. </summary>
         public string AzureAsyncOperation => _response.Headers.TryGetValue("Azure-AsyncOperation", out string value) ? value : null;
+        /// <summary> Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200. </summary>
         public string Location => _response.Headers.TryGetValue("Location", out string value) ? value : null;
     }
 }

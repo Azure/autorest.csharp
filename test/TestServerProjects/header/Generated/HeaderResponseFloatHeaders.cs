@@ -17,6 +17,7 @@ namespace header
         {
             _response = response;
         }
+        /// <summary> response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         public float? Value => _response.Headers.TryGetValue("value", out float? value) ? value : null;
     }
 }

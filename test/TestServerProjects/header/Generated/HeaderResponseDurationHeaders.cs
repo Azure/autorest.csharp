@@ -18,6 +18,7 @@ namespace header
         {
             _response = response;
         }
+        /// <summary> response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         public TimeSpan? Value => _response.Headers.TryGetValue("value", out TimeSpan? value) ? value : null;
     }
 }
