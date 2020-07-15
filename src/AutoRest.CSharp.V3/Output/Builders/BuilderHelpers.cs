@@ -80,6 +80,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
         public static string CSharpName(this Schema operation) =>
             operation.Language.Default.Name.ToCleanName();
+        public static string CSharpName(this HttpResponseHeader header) =>
+            header.Language!.Default.Name.ToCleanName();
 
         public static TypeDeclarationOptions CreateTypeAttributes(string defaultName, string defaultNamespace, string defaultAccessibility, INamedTypeSymbol? existingType = null, bool existingTypeOverrides = false)
         {

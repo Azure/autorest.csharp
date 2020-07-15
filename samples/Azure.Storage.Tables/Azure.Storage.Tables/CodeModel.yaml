@@ -91,8 +91,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_61
@@ -102,8 +102,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_62
@@ -113,8 +113,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_64
@@ -125,7 +125,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: This header contains the continuation token value.
+          description: ''
           header: x-ms-continuation-NextTableName
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_9
@@ -195,8 +195,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_72
@@ -206,8 +206,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_73
@@ -217,8 +217,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_11
@@ -238,8 +238,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_76
@@ -249,8 +249,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_77
@@ -260,8 +260,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_80
@@ -271,7 +271,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -292,8 +292,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_84
@@ -303,8 +303,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_85
@@ -314,8 +314,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_87
@@ -325,7 +325,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -336,8 +336,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_97
@@ -347,8 +347,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_98
@@ -358,8 +358,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_100
@@ -370,7 +370,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: This header contains the continuation token value for partition key.
+          description: ''
           header: x-ms-continuation-NextPartitionKey
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_101
@@ -381,7 +381,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: This header contains the continuation token value for row key.
+          description: ''
           header: x-ms-continuation-NextRowKey
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_19
@@ -401,7 +401,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -412,8 +412,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_112
@@ -423,8 +423,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_113
@@ -434,8 +434,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_115
@@ -446,7 +446,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: This header contains the continuation token value for partition key.
+          description: ''
           header: x-ms-continuation-NextPartitionKey
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_116
@@ -457,7 +457,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: This header contains the continuation token value for row key.
+          description: ''
           header: x-ms-continuation-NextRowKey
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_117
@@ -467,7 +467,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -478,8 +478,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_127
@@ -489,8 +489,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_128
@@ -500,8 +500,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_130
@@ -511,7 +511,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -522,8 +522,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_139
@@ -533,8 +533,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_140
@@ -544,8 +544,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_142
@@ -555,7 +555,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -566,8 +566,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_150
@@ -577,8 +577,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_151
@@ -588,8 +588,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_153
@@ -599,7 +599,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -610,8 +610,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_160
@@ -621,8 +621,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_161
@@ -632,8 +632,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_21
@@ -663,7 +663,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -674,8 +674,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_170
@@ -685,8 +685,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_171
@@ -696,8 +696,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_173
@@ -707,7 +707,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -780,8 +780,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_181
@@ -791,8 +791,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_182
@@ -802,8 +802,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_183
@@ -813,7 +813,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -824,8 +824,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_187
@@ -835,8 +835,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_188
@@ -846,8 +846,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_189
@@ -857,7 +857,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -868,8 +868,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ClientRequestId
-          description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
+          name: String
+          description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_195
@@ -879,8 +879,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: RequestId
-          description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
+          name: String
+          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_196
@@ -890,8 +890,8 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: Version
-          description: Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_198
@@ -901,7 +901,7 @@ schemas: !<!Schemas>
           version: '2018-10-10'
       language: !<!Languages> 
         default:
-          name: ErrorCode
+          name: String
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
@@ -1084,7 +1084,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_74
@@ -1096,7 +1096,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_78
@@ -1108,7 +1108,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_86
@@ -1120,7 +1120,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_99
@@ -1132,7 +1132,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_114
@@ -1144,7 +1144,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_129
@@ -1156,7 +1156,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_141
@@ -1168,7 +1168,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_152
@@ -1180,7 +1180,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_162
@@ -1192,7 +1192,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_22
@@ -1226,7 +1226,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_197
@@ -1238,7 +1238,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: DateTime
-          description: UTC date/time value generated by the service that indicates the time at which the response was initiated
+          description: ''
           header: Date
       protocol: !<!Protocols> {}
     - !<!DateTimeSchema> &ref_45
@@ -2284,18 +2284,38 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_7
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_61
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_62
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_63
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                   - !<!HttpHeader> 
                     schema: *ref_64
                     header: x-ms-continuation-NextTableName
+                    language:
+                      default:
+                        name: XMsContinuationNextTableName
+                        description: This header contains the continuation token value.
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -2413,15 +2433,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_71
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_72
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_73
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_74
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -2438,15 +2474,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_75
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_76
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_77
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_78
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 statusCodes:
                   - '204'
         exceptions:
@@ -2462,6 +2514,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_80
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -2546,15 +2602,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_81
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_84
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_85
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_86
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 statusCodes:
                   - '204'
         exceptions:
@@ -2570,6 +2642,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_87
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -2680,21 +2756,45 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_96
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_97
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_98
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_99
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                   - !<!HttpHeader> 
                     schema: *ref_100
                     header: x-ms-continuation-NextPartitionKey
+                    language:
+                      default:
+                        name: XMsContinuationNextPartitionKey
+                        description: This header contains the continuation token value for partition key.
                   - !<!HttpHeader> 
                     schema: *ref_101
                     header: x-ms-continuation-NextRowKey
+                    language:
+                      default:
+                        name: XMsContinuationNextRowKey
+                        description: This header contains the continuation token value for row key.
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -2713,6 +2813,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_102
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -2863,21 +2967,45 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_106
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_112
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_113
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_114
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                   - !<!HttpHeader> 
                     schema: *ref_115
                     header: x-ms-continuation-NextPartitionKey
+                    language:
+                      default:
+                        name: XMsContinuationNextPartitionKey
+                        description: This header contains the continuation token value for partition key.
                   - !<!HttpHeader> 
                     schema: *ref_116
                     header: x-ms-continuation-NextRowKey
+                    language:
+                      default:
+                        name: XMsContinuationNextRowKey
+                        description: This header contains the continuation token value for row key.
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -2896,6 +3024,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_117
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -3073,15 +3205,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_126
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_127
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_128
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_129
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 statusCodes:
                   - '204'
         exceptions:
@@ -3097,6 +3245,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_130
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -3245,15 +3397,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_138
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_139
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_140
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_141
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 statusCodes:
                   - '204'
         exceptions:
@@ -3269,6 +3437,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_142
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -3408,15 +3580,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_149
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_150
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_151
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_152
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -3435,6 +3623,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_153
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: json
                 mediaTypes:
                   - application/json;odata=nometadata
@@ -3571,15 +3763,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_159
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_160
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_161
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_162
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
@@ -3598,6 +3806,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_163
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
@@ -3721,15 +3933,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_169
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_170
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_171
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_172
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 statusCodes:
                   - '204'
         exceptions:
@@ -3745,6 +3973,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_173
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
@@ -3875,12 +4107,24 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_180
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_181
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_182
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                 statusCodes:
                   - '202'
         exceptions:
@@ -3896,6 +4140,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_183
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
@@ -3988,12 +4236,24 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_186
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_187
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_188
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
@@ -4012,6 +4272,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_189
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
@@ -4104,15 +4368,31 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_194
                     header: x-ms-client-request-id
+                    language:
+                      default:
+                        name: ClientRequestId
+                        description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
                     schema: *ref_195
                     header: x-ms-request-id
+                    language:
+                      default:
+                        name: RequestId
+                        description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
                     schema: *ref_196
                     header: x-ms-version
+                    language:
+                      default:
+                        name: Version
+                        description: Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
                     schema: *ref_197
                     header: Date
+                    language:
+                      default:
+                        name: Date
+                        description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml
@@ -4131,6 +4411,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_198
                     header: x-ms-error-code
+                    language:
+                      default:
+                        name: ErrorCode
+                        description: ''
                 knownMediaType: xml
                 mediaTypes:
                   - application/xml

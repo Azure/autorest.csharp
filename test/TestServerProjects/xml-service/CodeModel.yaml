@@ -273,7 +273,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: A custom response header.
+          description: ''
           header: Custom-Header
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_19
@@ -3268,6 +3268,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_116
                     header: Custom-Header
+                    language:
+                      default:
+                        name: CustomHeader
+                        description: A custom response header.
                 statusCodes:
                   - '200'
         language: !<!Languages> 

@@ -35,7 +35,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_2
@@ -106,7 +106,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_48
@@ -117,7 +117,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_10
@@ -168,7 +168,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_17
@@ -199,7 +199,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_70
@@ -210,7 +210,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: An identifier representing the returned state of the resource.
+          description: ''
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_71
@@ -221,7 +221,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: A UTC datetime that specifies the last time the resource was modified.
+          description: ''
           header: Last-Modified
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_72
@@ -232,7 +232,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_79
@@ -243,7 +243,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: An identifier representing the returned state of the resource.
+          description: ''
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_80
@@ -254,7 +254,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_84
@@ -265,7 +265,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: An identifier representing the returned state of the resource.
+          description: ''
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_85
@@ -276,7 +276,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_86
@@ -287,7 +287,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_94
@@ -298,7 +298,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: An identifier representing the returned state of the resource.
+          description: ''
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_95
@@ -309,7 +309,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: A UTC datetime that specifies the last time the resource was modified.
+          description: ''
           header: Last-Modified
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_96
@@ -320,7 +320,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_20
@@ -351,7 +351,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_109
@@ -362,7 +362,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_114
@@ -373,7 +373,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: An identifier representing the returned state of the resource.
+          description: ''
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_115
@@ -384,7 +384,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_120
@@ -395,7 +395,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: An identifier representing the returned state of the resource.
+          description: ''
           header: ETag
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_121
@@ -406,7 +406,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_128
@@ -417,7 +417,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: String
-          description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
+          description: ''
           header: Sync-Token
       protocol: !<!Protocols> {}
     - !<!StringSchema> 
@@ -1384,6 +1384,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_34
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.keyset+json
@@ -1501,6 +1505,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_44
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 statusCodes:
                   - '200'
         exceptions:
@@ -1623,6 +1631,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_48
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kvset+json
@@ -1795,6 +1807,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_1
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 statusCodes:
                   - '200'
         exceptions:
@@ -1930,12 +1946,24 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_62
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !<!HttpHeader> 
                     schema: *ref_70
                     header: ETag
+                    language:
+                      default:
+                        name: ETag
+                        description: An identifier representing the returned state of the resource.
                   - !<!HttpHeader> 
                     schema: *ref_71
                     header: Last-Modified
+                    language:
+                      default:
+                        name: LastModified
+                        description: A UTC datetime that specifies the last time the resource was modified.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -2150,9 +2178,17 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_72
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !<!HttpHeader> 
                     schema: *ref_79
                     header: ETag
+                    language:
+                      default:
+                        name: ETag
+                        description: An identifier representing the returned state of the resource.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -2297,9 +2333,17 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_80
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !<!HttpHeader> 
                     schema: *ref_84
                     header: ETag
+                    language:
+                      default:
+                        name: ETag
+                        description: An identifier representing the returned state of the resource.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -2318,6 +2362,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_85
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 statusCodes:
                   - '204'
         exceptions:
@@ -2495,12 +2543,24 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_86
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !<!HttpHeader> 
                     schema: *ref_94
                     header: ETag
+                    language:
+                      default:
+                        name: ETag
+                        description: An identifier representing the returned state of the resource.
                   - !<!HttpHeader> 
                     schema: *ref_95
                     header: Last-Modified
+                    language:
+                      default:
+                        name: LastModified
+                        description: A UTC datetime that specifies the last time the resource was modified.
                 statusCodes:
                   - '200'
         exceptions:
@@ -2641,6 +2701,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_96
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.labelset+json
@@ -2774,6 +2838,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_103
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 statusCodes:
                   - '200'
         exceptions:
@@ -2884,9 +2952,17 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_109
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !<!HttpHeader> 
                     schema: *ref_114
                     header: ETag
+                    language:
+                      default:
+                        name: ETag
+                        description: An identifier representing the returned state of the resource.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -3043,9 +3119,17 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_115
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                   - !<!HttpHeader> 
                     schema: *ref_120
                     header: ETag
+                    language:
+                      default:
+                        name: ETag
+                        description: An identifier representing the returned state of the resource.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -3214,6 +3298,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_121
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kvset+json
@@ -3378,6 +3466,10 @@ operationGroups:
                   - !<!HttpHeader> 
                     schema: *ref_128
                     header: Sync-Token
+                    language:
+                      default:
+                        name: SyncToken
+                        description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
                 statusCodes:
                   - '200'
         exceptions:

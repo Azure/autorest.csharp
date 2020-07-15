@@ -24,7 +24,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Responses
         public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext context) : base(context)
         {
             ResponseHeader CreateResponseHeader(HttpResponseHeader header) =>
-                new ResponseHeader(header.Header.ToCleanName(), header.Header, context.TypeFactory.CreateType(header.Schema, true));
+                new ResponseHeader(
+                    header.CSharpName(),
+                    header.Header,
+                    context.TypeFactory.CreateType(header.Schema, true),
+                    BuilderHelpers.EscapeXmlDescription(header.Language!.Default.Description));
 
             string operationName = operation.CSharpName();
             var clientName = context.Library.FindRestClient(operationGroup).ClientPrefix;

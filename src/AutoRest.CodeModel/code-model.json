@@ -2875,6 +2875,9 @@
         "schema": {
           "$ref": "#/definitions/Schema"
         },
+        "language": {
+          "$ref": "#/definitions/Languages"
+        },
         "extensions": {
           "$ref": "#/definitions/Dictionary<any>",
           "description": "additional metadata extensions dictionary"
@@ -2884,6 +2887,7 @@
       "additionalProperties": false,
       "required": [
         "header",
+        "language",
         "schema"
       ]
     },

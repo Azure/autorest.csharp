@@ -17,6 +17,7 @@ namespace azure_special_properties
         {
             _response = response;
         }
+        /// <summary> Gets the foo-request-id. </summary>
         public string FooRequestId => _response.Headers.TryGetValue("foo-request-id", out string value) ? value : null;
     }
 }

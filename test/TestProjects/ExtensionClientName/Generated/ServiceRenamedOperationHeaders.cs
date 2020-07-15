@@ -17,6 +17,6 @@ namespace ExtensionClientName
         {
             _response = response;
         }
-        public string OriginalHeader => _response.Headers.TryGetValue("originalHeader", out string value) ? value : null;
+        public string RenamedHeader => _response.Headers.TryGetValue("originalHeader", out string value) ? value : null;
     }
 }

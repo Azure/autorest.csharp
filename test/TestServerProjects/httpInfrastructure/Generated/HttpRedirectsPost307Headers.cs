@@ -17,6 +17,7 @@ namespace httpInfrastructure
         {
             _response = response;
         }
+        /// <summary> The redirect location for this request. </summary>
         public string Location => _response.Headers.TryGetValue("Location", out string value) ? value : null;
     }
 }

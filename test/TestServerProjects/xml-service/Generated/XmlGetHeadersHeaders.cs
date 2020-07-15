@@ -17,6 +17,7 @@ namespace xml_service
         {
             _response = response;
         }
+        /// <summary> A custom response header. </summary>
         public string CustomHeader => _response.Headers.TryGetValue("Custom-Header", out string value) ? value : null;
     }
 }

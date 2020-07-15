@@ -17,6 +17,7 @@ namespace header
         {
             _response = response;
         }
+        /// <summary> response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         public string UserAgent => _response.Headers.TryGetValue("User-Agent", out string value) ? value : null;
     }
 }

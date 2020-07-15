@@ -1511,7 +1511,7 @@ namespace header
             }
         }
 
-        internal HttpMessage CreateParamEnumRequest(string scenario, Enum0? value)
+        internal HttpMessage CreateParamEnumRequest(string scenario, GreyscaleColors? value)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1532,7 +1532,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> ParamEnumAsync(string scenario, Enum0? value = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ParamEnumAsync(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
@@ -1554,7 +1554,7 @@ namespace header
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ParamEnum(string scenario, Enum0? value = null, CancellationToken cancellationToken = default)
+        public Response ParamEnum(string scenario, GreyscaleColors? value = null, CancellationToken cancellationToken = default)
         {
             if (scenario == null)
             {
