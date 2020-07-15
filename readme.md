@@ -33,6 +33,7 @@
 - [Rename a client](#rename-a-client)
 - [Replace any generated member](#replace-any-generated-member)
 - [Remove any generated member](#remove-any-generated-member)
+- [Change model namespace or accessability in bulk](#change-model-namespace-or-accessability-in-bulk)
 
 <!-- /TOC -->
 
@@ -769,6 +770,48 @@ namespace Azure.Service.Models
 -            Property = property;
 -        }
     }
+}
+```
+
+### Change model namespace or accessability in bulk
+
+**Generated code before:**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model1 {}
+    public partial class Model2 {}
+    public partial class Model3 {}
+    public partial class Model4 {}
+}
+```
+
+**Add autorest.md transformation**
+
+``` yaml
+directive:
+  from: swagger-document
+  where: $.definitions.*
+  transform: >
+    $["x-namespace"] = "Azure.Search.Documents.Indexes.Models"
+    $["x-accessibility"] = "internal"
+```
+
+**Generated code after:**
+
+``` diff
+-namespace Azure.Service
++namespace Azure.Service.Models
+{
+-    public partial class Model1 {}
++    internal partial class Model1 {}
+-    public partial class Model2 {}
++    internal partial class Model2 {}
+-    public partial class Model3 {}
++    internal partial class Model3 {}
+-    public partial class Model4 {}
++    internal partial class Model4 {}
 }
 ```
 
