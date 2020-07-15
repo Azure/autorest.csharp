@@ -2356,7 +2356,8 @@ namespace AutoRest.CSharp.V3.Input
         public Schema Schema { get; set; } = new Schema();
 
         [YamlDotNet.Serialization.YamlMember(Alias = "language")]
-        public Languages? Language { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public Languages Language { get; set; } = new Languages();
 
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
