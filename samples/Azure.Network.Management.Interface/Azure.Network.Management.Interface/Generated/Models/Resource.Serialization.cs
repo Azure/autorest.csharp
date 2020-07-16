@@ -21,16 +21,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
             }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location");

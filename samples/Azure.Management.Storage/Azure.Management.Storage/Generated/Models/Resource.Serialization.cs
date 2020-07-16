@@ -15,21 +15,6 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             writer.WriteEndObject();
         }
 

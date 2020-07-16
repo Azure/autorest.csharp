@@ -20,8 +20,16 @@ namespace AutoRest.TestServer.Tests
         public Task PostParameterGroupingMultipleParameterGroups() => TestStatus(async (host, pipeline) =>
         {
             return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostMultiParamGroupsAsync(
-                new FirstParameterGroup("header", 21),
-                new ParameterGroupingPostMultiParamGroupsSecondParamGroup("header2", 42)
+                new FirstParameterGroup()
+                    {
+                        HeaderOne = "header",
+                        QueryOne = 21
+                    },
+                new ParameterGroupingPostMultiParamGroupsSecondParamGroup()
+                {
+                    HeaderTwo = "header2",
+                    QueryTwo = 42
+                }
             );
         });
 
@@ -29,7 +37,11 @@ namespace AutoRest.TestServer.Tests
         public Task PostParameterGroupingOptionalParameters() => TestStatus(async (host, pipeline) =>
         {
             return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostOptionalAsync(
-                new ParameterGroupingPostOptionalParameters("header", 21)
+                new ParameterGroupingPostOptionalParameters()
+                {
+                    Query = 21,
+                    CustomHeader = "header"
+                }
             );
         });
 
@@ -37,7 +49,11 @@ namespace AutoRest.TestServer.Tests
         public Task PostParameterGroupingRequiredParameters() => TestStatus(async (host, pipeline) =>
         {
             return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostRequiredAsync(
-                new ParameterGroupingPostRequiredParameters("header", 21, "path", 1234)
+                new ParameterGroupingPostRequiredParameters("path", 1234)
+                {
+                    CustomHeader = "header",
+                    Query = 21
+                }
             );
         });
 
@@ -46,7 +62,10 @@ namespace AutoRest.TestServer.Tests
         public Task PostParameterGroupingSharedParameterGroupObject() => TestStatus(async (host, pipeline) =>
         {
             return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostSharedParameterGroupObjectAsync(
-                new FirstParameterGroup("header", null)
+                new FirstParameterGroup()
+                {
+                    HeaderOne = "header"
+                }
             );
         });
 

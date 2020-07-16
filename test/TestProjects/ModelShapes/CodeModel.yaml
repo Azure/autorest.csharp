@@ -724,6 +724,26 @@ schemas: !<!Schemas>
               name: nonRequiredNullableIntList
               description: ''
           protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          readOnly: true
+          required: true
+          serializedName: RequiredReadonlyInt
+          language: !<!Languages> 
+            default:
+              name: requiredReadonlyInt
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          readOnly: true
+          required: false
+          serializedName: NonRequiredReadonlyInt
+          language: !<!Languages> 
+            default:
+              name: nonRequiredReadonlyInt
+              description: ''
+          protocol: !<!Protocols> {}
       serializationFormats:
         - json
       usage:
@@ -931,6 +951,26 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: nonRequiredNullableIntList
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          readOnly: true
+          required: true
+          serializedName: RequiredReadonlyInt
+          language: !<!Languages> 
+            default:
+              name: requiredReadonlyInt
+              description: ''
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_2
+          readOnly: true
+          required: false
+          serializedName: NonRequiredReadonlyInt
+          language: !<!Languages> 
+            default:
+              name: nonRequiredReadonlyInt
               description: ''
           protocol: !<!Protocols> {}
       serializationFormats:

@@ -15,15 +15,6 @@ namespace azure_parameter_grouping.Models
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterGroupingPostOptionalParameters. </summary>
-        /// <param name="customHeader"> . </param>
-        /// <param name="query"> Query parameter with default. </param>
-        internal ParameterGroupingPostOptionalParameters(string customHeader, int? query)
-        {
-            CustomHeader = customHeader;
-            Query = query;
-        }
-
         public string CustomHeader { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? Query { get; set; }

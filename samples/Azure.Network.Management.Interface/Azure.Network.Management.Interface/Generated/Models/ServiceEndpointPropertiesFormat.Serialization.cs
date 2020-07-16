@@ -31,11 +31,6 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
-            }
             writer.WriteEndObject();
         }
 

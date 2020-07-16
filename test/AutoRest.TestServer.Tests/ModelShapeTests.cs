@@ -22,6 +22,11 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void InputModelsHaveOnlyOnePublicCtor()
+        {
+            Assert.AreEqual(1, typeof(InputModel).GetConstructors().Length);
+        }
+        [Test]
         public void RequiredPropertiesAreSetableInMixedModels()
         {
             var requiredInt = TypeAsserts.HasProperty(typeof(MixedModel), "RequiredInt", BindingFlags.Public | BindingFlags.Instance);
@@ -341,6 +346,25 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("RequiredNullableStringList").ValueKind);
         }
 
+        [Test]
+        public void ReadonlyPropertiesAreReadonly()
+        {
+            var required = TypeAsserts.HasProperty(typeof(MixedModel), "RequiredReadonlyInt", BindingFlags.Public | BindingFlags.Instance);
+            var nonRequired = TypeAsserts.HasProperty(typeof(MixedModel), "NonRequiredReadonlyInt", BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.AreEqual(typeof(int), required.PropertyType);
+            Assert.AreEqual(typeof(int?), nonRequired.PropertyType);
+            Assert.Null(required.SetMethod);
+            Assert.Null(nonRequired.SetMethod);
+        }
+
+        [Test]
+        public void ReadonlyPropertiesAreDeserialized()
+        {
+            var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2}").RootElement);
+            Assert.AreEqual(1, model.RequiredReadonlyInt);
+            Assert.AreEqual(2, model.NonRequiredReadonlyInt);
+        }
 
         private static InputModel CreateInputModel()
         {

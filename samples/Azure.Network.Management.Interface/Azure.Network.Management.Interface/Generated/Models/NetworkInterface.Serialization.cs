@@ -16,25 +16,10 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -54,20 +39,10 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(VirtualMachine))
-            {
-                writer.WritePropertyName("virtualMachine");
-                writer.WriteObjectValue(VirtualMachine);
-            }
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup");
                 writer.WriteObjectValue(NetworkSecurityGroup);
-            }
-            if (Optional.IsDefined(PrivateEndpoint))
-            {
-                writer.WritePropertyName("privateEndpoint");
-                writer.WriteObjectValue(PrivateEndpoint);
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -79,30 +54,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(TapConfigurations))
-            {
-                writer.WritePropertyName("tapConfigurations");
-                writer.WriteStartArray();
-                foreach (var item in TapConfigurations)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings");
                 writer.WriteObjectValue(DnsSettings);
-            }
-            if (Optional.IsDefined(MacAddress))
-            {
-                writer.WritePropertyName("macAddress");
-                writer.WriteStringValue(MacAddress);
-            }
-            if (Optional.IsDefined(Primary))
-            {
-                writer.WritePropertyName("primary");
-                writer.WriteBooleanValue(Primary.Value);
             }
             if (Optional.IsDefined(EnableAcceleratedNetworking))
             {
@@ -113,26 +68,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 writer.WritePropertyName("enableIPForwarding");
                 writer.WriteBooleanValue(EnableIPForwarding.Value);
-            }
-            if (Optional.IsCollectionDefined(HostedWorkloads))
-            {
-                writer.WritePropertyName("hostedWorkloads");
-                writer.WriteStartArray();
-                foreach (var item in HostedWorkloads)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(ResourceGuid))
-            {
-                writer.WritePropertyName("resourceGuid");
-                writer.WriteStringValue(ResourceGuid);
-            }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

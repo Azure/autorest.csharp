@@ -94,6 +94,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             yield return InitializationConstructor;
 
+            if (_objectSchema.IsInputOnly)
+            {
+                yield break;
+            }
+
             // Skip serialization ctor if they are the same
             if (!InitializationConstructor.Parameters
                 .Select(p => p.Type)

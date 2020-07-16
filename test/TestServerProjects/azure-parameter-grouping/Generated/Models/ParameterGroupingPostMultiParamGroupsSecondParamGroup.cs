@@ -15,15 +15,6 @@ namespace azure_parameter_grouping.Models
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup. </summary>
-        /// <param name="headerTwo"> . </param>
-        /// <param name="queryTwo"> Query parameter with default. </param>
-        internal ParameterGroupingPostMultiParamGroupsSecondParamGroup(string headerTwo, int? queryTwo)
-        {
-            HeaderTwo = headerTwo;
-            QueryTwo = queryTwo;
-        }
-
         public string HeaderTwo { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? QueryTwo { get; set; }

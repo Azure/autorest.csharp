@@ -15,15 +15,6 @@ namespace azure_parameter_grouping.Models
         {
         }
 
-        /// <summary> Initializes a new instance of FirstParameterGroup. </summary>
-        /// <param name="headerOne"> . </param>
-        /// <param name="queryOne"> Query parameter with default. </param>
-        internal FirstParameterGroup(string headerOne, int? queryOne)
-        {
-            HeaderOne = headerOne;
-            QueryOne = queryOne;
-        }
-
         public string HeaderOne { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? QueryOne { get; set; }

@@ -26,19 +26,6 @@ namespace azure_parameter_grouping.Models
             Body = body;
         }
 
-        /// <summary> Initializes a new instance of ParameterGroupingPostRequiredParameters. </summary>
-        /// <param name="customHeader"> . </param>
-        /// <param name="query"> Query parameter with default. </param>
-        /// <param name="path"> Path parameter. </param>
-        /// <param name="body"> . </param>
-        internal ParameterGroupingPostRequiredParameters(string customHeader, int? query, string path, int body)
-        {
-            CustomHeader = customHeader;
-            Query = query;
-            Path = path;
-            Body = body;
-        }
-
         public string CustomHeader { get; set; }
         /// <summary> Query parameter with default. </summary>
         public int? Query { get; set; }

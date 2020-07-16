@@ -23,11 +23,6 @@ namespace Azure.Management.Storage.Models
                 writer.WritePropertyName("days");
                 writer.WriteNumberValue(Days.Value);
             }
-            if (Optional.IsDefined(LastEnabledTime))
-            {
-                writer.WritePropertyName("lastEnabledTime");
-                writer.WriteStringValue(LastEnabledTime.Value, "O");
-            }
             writer.WriteEndObject();
         }
 

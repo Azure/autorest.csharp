@@ -16,26 +16,6 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(GroupId))
-            {
-                writer.WritePropertyName("groupId");
-                writer.WriteStringValue(GroupId);
-            }
-            if (Optional.IsDefined(RequiredMemberName))
-            {
-                writer.WritePropertyName("requiredMemberName");
-                writer.WriteStringValue(RequiredMemberName);
-            }
-            if (Optional.IsCollectionDefined(Fqdns))
-            {
-                writer.WritePropertyName("fqdns");
-                writer.WriteStartArray();
-                foreach (var item in Fqdns)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
             writer.WriteEndObject();
         }
 

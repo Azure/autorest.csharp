@@ -16,16 +16,6 @@ namespace lro.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");
@@ -42,22 +32,12 @@ namespace lro.Models
                 writer.WritePropertyName("location");
                 writer.WriteStringValue(Location);
             }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(ProvisioningState))
             {
                 writer.WritePropertyName("provisioningState");
                 writer.WriteStringValue(ProvisioningState);
-            }
-            if (Optional.IsDefined(ProvisioningStateValues))
-            {
-                writer.WritePropertyName("provisioningStateValues");
-                writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

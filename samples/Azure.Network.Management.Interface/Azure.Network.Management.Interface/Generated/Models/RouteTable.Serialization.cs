@@ -16,25 +16,10 @@ namespace Azure.Network.Management.Interface.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
                 writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -64,25 +49,10 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(Subnets))
-            {
-                writer.WritePropertyName("subnets");
-                writer.WriteStartArray();
-                foreach (var item in Subnets)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsDefined(DisableBgpRoutePropagation))
             {
                 writer.WritePropertyName("disableBgpRoutePropagation");
                 writer.WriteBooleanValue(DisableBgpRoutePropagation.Value);
-            }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

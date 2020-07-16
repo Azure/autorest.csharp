@@ -15,13 +15,6 @@ namespace required_optional.Models
         {
         }
 
-        /// <summary> Initializes a new instance of ClassOptionalWrapper. </summary>
-        /// <param name="value"> . </param>
-        internal ClassOptionalWrapper(Product value)
-        {
-            Value = value;
-        }
-
         public Product Value { get; set; }
     }
 }

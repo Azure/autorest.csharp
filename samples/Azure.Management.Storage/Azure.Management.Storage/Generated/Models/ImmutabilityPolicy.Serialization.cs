@@ -15,37 +15,12 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
             {
                 writer.WritePropertyName("immutabilityPeriodSinceCreationInDays");
                 writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
-            }
-            if (Optional.IsDefined(State))
-            {
-                writer.WritePropertyName("state");
-                writer.WriteStringValue(State.Value.ToString());
             }
             if (Optional.IsDefined(AllowProtectedAppendWrites))
             {

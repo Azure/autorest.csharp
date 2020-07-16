@@ -16,11 +16,6 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(HasLegalHold))
-            {
-                writer.WritePropertyName("hasLegalHold");
-                writer.WriteBooleanValue(HasLegalHold.Value);
-            }
             if (Optional.IsCollectionDefined(Tags))
             {
                 writer.WritePropertyName("tags");

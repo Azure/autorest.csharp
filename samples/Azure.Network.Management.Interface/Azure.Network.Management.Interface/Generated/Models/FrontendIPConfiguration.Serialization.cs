@@ -21,16 +21,6 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag");
-                writer.WriteStringValue(Etag);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones");
@@ -48,46 +38,6 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(InboundNatRules))
-            {
-                writer.WritePropertyName("inboundNatRules");
-                writer.WriteStartArray();
-                foreach (var item in InboundNatRules)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(InboundNatPools))
-            {
-                writer.WritePropertyName("inboundNatPools");
-                writer.WriteStartArray();
-                foreach (var item in InboundNatPools)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(OutboundRules))
-            {
-                writer.WritePropertyName("outboundRules");
-                writer.WriteStartArray();
-                foreach (var item in OutboundRules)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsCollectionDefined(LoadBalancingRules))
-            {
-                writer.WritePropertyName("loadBalancingRules");
-                writer.WriteStartArray();
-                foreach (var item in LoadBalancingRules)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
             if (Optional.IsDefined(PrivateIPAddress))
             {
                 writer.WritePropertyName("privateIPAddress");
@@ -117,11 +67,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 writer.WritePropertyName("publicIPPrefix");
                 writer.WriteObjectValue(PublicIPPrefix);
-            }
-            if (Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState");
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
