@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="sentenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
         /// <param name="offset"> The sentence offset from the start of the document. </param>
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="sentenceScores"/> is null. </exception>
         internal SentenceSentiment(SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel sentenceScores, int offset, int length)
         {
             if (sentenceScores == null)

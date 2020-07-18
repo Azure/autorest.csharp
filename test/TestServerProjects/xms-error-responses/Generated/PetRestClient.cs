@@ -52,7 +52,7 @@ namespace xms_error_responses
         /// <summary> Gets pets by id. </summary>
         /// <param name="petId"> pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         public async Task<Response<Pet>> GetPetByIdAsync(string petId, CancellationToken cancellationToken = default)
         {
             if (petId == null)
@@ -81,7 +81,7 @@ namespace xms_error_responses
         /// <summary> Gets pets by id. </summary>
         /// <param name="petId"> pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         public Response<Pet> GetPetById(string petId, CancellationToken cancellationToken = default)
         {
             if (petId == null)
@@ -123,7 +123,7 @@ namespace xms_error_responses
         /// <summary> Asks pet to do something. </summary>
         /// <param name="whatAction"> what action the pet should do. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="whatAction"/> is null. </exception>
         public async Task<Response<PetAction>> DoSomethingAsync(string whatAction, CancellationToken cancellationToken = default)
         {
             if (whatAction == null)
@@ -150,7 +150,7 @@ namespace xms_error_responses
         /// <summary> Asks pet to do something. </summary>
         /// <param name="whatAction"> what action the pet should do. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="whatAction"/> is null. </exception>
         public Response<PetAction> DoSomething(string whatAction, CancellationToken cancellationToken = default)
         {
             if (whatAction == null)

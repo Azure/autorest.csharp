@@ -101,10 +101,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                     writer.WriteXmlDocumentationParameter(TokenCredentialVariable, "The OAuth token for making client requests.");
                     writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
-                    if (allParameters.Values.HasAnyNullCheck())
-                    {
-                        writer.WriteXmlDocumentationException(typeof(ArgumentNullException), "This occurs when one of the required arguments is null.");
-                    }
+                    writer.WriteXmlDocumentationRequiredParametersException(allParameters.Values);
 
                     writer.Append($"public {title}ManagementClient(");
                     foreach (Parameter parameter in allParameters.Values)

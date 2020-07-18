@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         /// <summary> Initializes a new instance of MultiLanguageBatchInput. </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="documents"/> is null. </exception>
         public MultiLanguageBatchInput(IEnumerable<MultiLanguageInput> documents)
         {
             if (documents == null)

@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of CorsOptions. </summary>
         /// <param name="allowedOrigins"> The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single &apos;*&apos; to allow all origins (not recommended). </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="allowedOrigins"/> is null. </exception>
         public CorsOptions(IEnumerable<string> allowedOrigins)
         {
             if (allowedOrigins == null)

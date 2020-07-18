@@ -14,7 +14,7 @@ namespace required_optional.Models
     {
         /// <summary> Initializes a new instance of StringWrapper. </summary>
         /// <param name="value"> . </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public StringWrapper(string value)
         {
             if (value == null)

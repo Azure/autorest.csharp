@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of InputFieldMappingEntry. </summary>
         /// <param name="name"> The name of the input. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public InputFieldMappingEntry(string name)
         {
             if (name == null)

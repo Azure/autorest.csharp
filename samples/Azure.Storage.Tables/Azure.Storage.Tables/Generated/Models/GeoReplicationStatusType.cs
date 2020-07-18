@@ -16,7 +16,7 @@ namespace Azure.Storage.Tables.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="GeoReplicationStatusType"/> values are the same. </summary>
-        /// <exception cref="ArgumentNullException"> This occurs when <paramref name="value"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public GeoReplicationStatusType(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

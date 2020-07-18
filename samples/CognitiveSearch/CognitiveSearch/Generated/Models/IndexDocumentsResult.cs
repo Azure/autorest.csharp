@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of IndexDocumentsResult. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="results"/> is null. </exception>
         internal IndexDocumentsResult(IEnumerable<IndexingResult> results)
         {
             if (results == null)

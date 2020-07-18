@@ -14,7 +14,7 @@ namespace Azure.Management.Storage.Models
     {
         /// <summary> Initializes a new instance of ManagementPolicyDefinition. </summary>
         /// <param name="actions"> An object that defines the action set. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="actions"/> is null. </exception>
         public ManagementPolicyDefinition(ManagementPolicyAction actions)
         {
             if (actions == null)

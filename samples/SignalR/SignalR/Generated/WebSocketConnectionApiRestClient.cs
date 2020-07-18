@@ -57,7 +57,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public async Task<Response> PostDefaultHubBroadcastAsync(Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
@@ -81,7 +81,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public Response PostDefaultHubBroadcast(Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
@@ -123,7 +123,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public async Task<Response> PostDefaultHubBroadcastAsync(string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
@@ -147,7 +147,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public Response PostDefaultHubBroadcast(string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
@@ -191,7 +191,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostBroadcastAsync(string hub, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -220,7 +220,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="data"/> is null. </exception>
         public Response PostBroadcast(string hub, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -268,7 +268,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostBroadcastAsync(string hub, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -297,7 +297,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="data"/> is null. </exception>
         public Response PostBroadcast(string hub, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -340,7 +340,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostSendToDefaultHubUserAsync(string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -368,7 +368,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="data"/> is null. </exception>
         public Response PostSendToDefaultHubUser(string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -411,7 +411,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostSendToDefaultHubUserAsync(string id, string data, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -439,7 +439,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="data"/> is null. </exception>
         public Response PostSendToDefaultHubUser(string id, string data, CancellationToken cancellationToken = default)
         {
             if (id == null)
@@ -485,7 +485,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="id"/>, or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostSendToUserAsync(string hub, string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -518,7 +518,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="id"/>, or <paramref name="data"/> is null. </exception>
         public Response PostSendToUser(string hub, string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -568,7 +568,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="id"/>, or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostSendToUserAsync(string hub, string id, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -601,7 +601,7 @@ namespace SignalR
         /// <param name="id"> The user Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="id"/>, or <paramref name="data"/> is null. </exception>
         public Response PostSendToUser(string hub, string id, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -648,7 +648,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostSendToDefaultHubConnectionAsync(string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -676,7 +676,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> or <paramref name="data"/> is null. </exception>
         public Response PostSendToDefaultHubConnection(string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -719,7 +719,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostSendToDefaultHubConnectionAsync(string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -747,7 +747,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> or <paramref name="data"/> is null. </exception>
         public Response PostSendToDefaultHubConnection(string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -787,7 +787,7 @@ namespace SignalR
         /// <summary> Check if the connection with the given connectionId exists. </summary>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> GetCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -811,7 +811,7 @@ namespace SignalR
         /// <summary> Check if the connection with the given connectionId exists. </summary>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
         public Response GetCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -848,7 +848,7 @@ namespace SignalR
         /// <summary> Check if the connection with the given connectionId exists. </summary>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -872,7 +872,7 @@ namespace SignalR
         /// <summary> Check if the connection with the given connectionId exists. </summary>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
         public Response HeadCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -914,7 +914,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> DeleteCloseDefaultHubClientConnectionAsync(string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -938,7 +938,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
         public Response DeleteCloseDefaultHubClientConnection(string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
@@ -980,7 +980,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="connectionId"/>, or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostSendToConnectionAsync(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1013,7 +1013,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="connectionId"/>, or <paramref name="data"/> is null. </exception>
         public Response PostSendToConnection(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1063,7 +1063,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="connectionId"/>, or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostSendToConnectionAsync(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1096,7 +1096,7 @@ namespace SignalR
         /// <param name="connectionId"> The connection Id. </param>
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="connectionId"/>, or <paramref name="data"/> is null. </exception>
         public Response PostSendToConnection(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1143,7 +1143,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> GetCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1172,7 +1172,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
         public Response GetCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1216,7 +1216,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1245,7 +1245,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
         public Response HeadCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1294,7 +1294,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> DeleteCloseClientConnectionAsync(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1323,7 +1323,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
         public Response DeleteCloseClientConnection(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1371,7 +1371,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostDefaultHubGroupBroadcastAsync(string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -1400,7 +1400,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="data"/> is null. </exception>
         public Response PostDefaultHubGroupBroadcast(string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -1448,7 +1448,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostDefaultHubGroupBroadcastAsync(string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -1477,7 +1477,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="data"/> is null. </exception>
         public Response PostDefaultHubGroupBroadcast(string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -1517,7 +1517,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections inside the given group. </summary>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
         public async Task<Response> GetCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -1541,7 +1541,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections inside the given group. </summary>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
         public Response GetCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -1578,7 +1578,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections inside the given group. </summary>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
         public async Task<Response> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -1602,7 +1602,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections inside the given group. </summary>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
         public Response HeadCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -1650,7 +1650,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostGroupBroadcastAsync(string hub, string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1684,7 +1684,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="data"/> is null. </exception>
         public Response PostGroupBroadcast(string hub, string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1739,7 +1739,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="data"/> is null. </exception>
         public async Task<Response> PostGroupBroadcastAsync(string hub, string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1773,7 +1773,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="data"/> is null. </exception>
         public Response PostGroupBroadcast(string hub, string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1820,7 +1820,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
         public async Task<Response> GetCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1849,7 +1849,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
         public Response GetCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1893,7 +1893,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
         public async Task<Response> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1922,7 +1922,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
         public Response HeadCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -1963,7 +1963,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections connected for the given user. </summary>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
         public async Task<Response> GetCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
@@ -1987,7 +1987,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections connected for the given user. </summary>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
         public Response GetCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
@@ -2024,7 +2024,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections connected for the given user. </summary>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
         public async Task<Response> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
@@ -2048,7 +2048,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections connected for the given user. </summary>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
         public Response HeadCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
@@ -2088,7 +2088,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> PutAddConnectionToDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2117,7 +2117,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="connectionId"/> is null. </exception>
         public Response PutAddConnectionToDefaultHubGroup(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2161,7 +2161,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> DeleteRemoveConnectionFromDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2190,7 +2190,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="connectionId"/> is null. </exception>
         public Response DeleteRemoveConnectionFromDefaultHubGroup(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2234,7 +2234,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
         public async Task<Response> GetCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2263,7 +2263,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
         public Response GetCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2307,7 +2307,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
         public async Task<Response> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2336,7 +2336,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
         public Response HeadCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2385,7 +2385,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
         public async Task<Response> PutAddUserToDefaultHubGroupAsync(string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2414,7 +2414,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
         public Response PutAddUserToDefaultHubGroup(string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2457,7 +2457,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
         public async Task<Response> DeleteRemoveUserFromDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2485,7 +2485,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
         public Response DeleteRemoveUserFromDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
@@ -2526,7 +2526,7 @@ namespace SignalR
         /// <summary> Remove a user from all groups. </summary>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
         public async Task<Response> DeleteRemoveUserFromAllDefaultHubGroupsAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
@@ -2550,7 +2550,7 @@ namespace SignalR
         /// <summary> Remove a user from all groups. </summary>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
         public Response DeleteRemoveUserFromAllDefaultHubGroups(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
@@ -2590,7 +2590,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
         public async Task<Response> GetCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2619,7 +2619,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
         public Response GetCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2663,7 +2663,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
         public async Task<Response> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2692,7 +2692,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
         public Response HeadCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2739,7 +2739,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> PutAddConnectionToGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2773,7 +2773,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="connectionId"/> is null. </exception>
         public Response PutAddConnectionToGroup(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2824,7 +2824,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="connectionId"/> is null. </exception>
         public async Task<Response> DeleteRemoveConnectionFromGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2858,7 +2858,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="connectionId"/> is null. </exception>
         public Response DeleteRemoveConnectionFromGroup(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2909,7 +2909,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
         public async Task<Response> GetCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2943,7 +2943,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
         public Response GetCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -2994,7 +2994,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
         public async Task<Response> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -3028,7 +3028,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
         public Response HeadCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -3084,7 +3084,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
         public async Task<Response> PutAddUserToGroupAsync(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -3118,7 +3118,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
         public Response PutAddUserToGroup(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -3168,7 +3168,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
         public async Task<Response> DeleteRemoveUserFromGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -3201,7 +3201,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
         public Response DeleteRemoveUserFromGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -3249,7 +3249,7 @@ namespace SignalR
         /// <param name="hub"> Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
         public async Task<Response> DeleteRemoveUserFromAllGroupsAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
@@ -3278,7 +3278,7 @@ namespace SignalR
         /// <param name="hub"> Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
         public Response DeleteRemoveUserFromAllGroups(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)

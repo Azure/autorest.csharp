@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="documentScores"> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </param>
         /// <param name="sentences"> Sentence level sentiment analysis. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="documentScores"/>, or <paramref name="sentences"/> is null. </exception>
         internal DocumentSentiment(string id, DocumentSentimentValue sentiment, SentimentConfidenceScorePerLabel documentScores, IEnumerable<SentenceSentiment> sentences)
         {
             if (id == null)

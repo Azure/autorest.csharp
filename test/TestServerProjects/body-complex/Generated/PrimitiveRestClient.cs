@@ -106,7 +106,7 @@ namespace body_complex
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="complexBody"> Please put -1 and 2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutIntAsync(IntWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -128,7 +128,7 @@ namespace body_complex
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="complexBody"> Please put -1 and 2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutInt(IntWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -218,7 +218,7 @@ namespace body_complex
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="complexBody"> Please put 1099511627775 and -999511627788. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutLongAsync(LongWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -240,7 +240,7 @@ namespace body_complex
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="complexBody"> Please put 1099511627775 and -999511627788. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutLong(LongWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -330,7 +330,7 @@ namespace body_complex
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="complexBody"> Please put 1.05 and -0.003. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutFloatAsync(FloatWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -352,7 +352,7 @@ namespace body_complex
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="complexBody"> Please put 1.05 and -0.003. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutFloat(FloatWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -442,7 +442,7 @@ namespace body_complex
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="complexBody"> Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutDoubleAsync(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -464,7 +464,7 @@ namespace body_complex
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="complexBody"> Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutDouble(DoubleWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -554,7 +554,7 @@ namespace body_complex
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="complexBody"> Please put true and false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutBoolAsync(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -576,7 +576,7 @@ namespace body_complex
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="complexBody"> Please put true and false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutBool(BooleanWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -666,7 +666,7 @@ namespace body_complex
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="complexBody"> Please put &apos;goodrequest&apos;, &apos;&apos;, and null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutStringAsync(StringWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -688,7 +688,7 @@ namespace body_complex
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="complexBody"> Please put &apos;goodrequest&apos;, &apos;&apos;, and null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutString(StringWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -778,7 +778,7 @@ namespace body_complex
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutDateAsync(DateWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -800,7 +800,7 @@ namespace body_complex
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01&apos; and &apos;2016-02-29&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutDate(DateWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -890,7 +890,7 @@ namespace body_complex
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01T12:00:00-04:00&apos; and &apos;2015-05-18T11:38:00-08:00&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutDateTimeAsync(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -912,7 +912,7 @@ namespace body_complex
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="complexBody"> Please put &apos;0001-01-01T12:00:00-04:00&apos; and &apos;2015-05-18T11:38:00-08:00&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutDateTime(DatetimeWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -1002,7 +1002,7 @@ namespace body_complex
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="complexBody"> Please put &apos;Mon, 01 Jan 0001 12:00:00 GMT&apos; and &apos;Mon, 18 May 2015 11:38:00 GMT&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -1024,7 +1024,7 @@ namespace body_complex
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="complexBody"> Please put &apos;Mon, 01 Jan 0001 12:00:00 GMT&apos; and &apos;Mon, 18 May 2015 11:38:00 GMT&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutDateTimeRfc1123(Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -1114,7 +1114,7 @@ namespace body_complex
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="complexBody"> Please put &apos;P123DT22H14M12.011S&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutDurationAsync(DurationWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -1136,7 +1136,7 @@ namespace body_complex
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="complexBody"> Please put &apos;P123DT22H14M12.011S&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutDuration(DurationWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -1226,7 +1226,7 @@ namespace body_complex
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="complexBody"> Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutByteAsync(ByteWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -1248,7 +1248,7 @@ namespace body_complex
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="complexBody"> Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutByte(ByteWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)

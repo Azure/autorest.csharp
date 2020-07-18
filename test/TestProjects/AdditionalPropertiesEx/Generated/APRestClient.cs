@@ -54,7 +54,7 @@ namespace AdditionalPropertiesEx
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response> WriteOnlyAsync(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -76,7 +76,7 @@ namespace AdditionalPropertiesEx
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response WriteOnly(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)

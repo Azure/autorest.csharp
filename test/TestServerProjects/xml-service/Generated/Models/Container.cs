@@ -17,7 +17,7 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of Container. </summary>
         /// <param name="name"> . </param>
         /// <param name="properties"> Properties of a container. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="properties"/> is null. </exception>
         internal Container(string name, ContainerProperties properties)
         {
             if (name == null)

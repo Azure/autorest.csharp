@@ -653,7 +653,7 @@ namespace url
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         public async Task<Response> StringNullAsync(string stringPath, CancellationToken cancellationToken = default)
         {
             if (stringPath == null)
@@ -675,7 +675,7 @@ namespace url
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
         public Response StringNull(string stringPath, CancellationToken cancellationToken = default)
         {
             if (stringPath == null)
@@ -800,7 +800,7 @@ namespace url
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         public async Task<Response> ByteMultiByteAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
@@ -822,7 +822,7 @@ namespace url
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         public Response ByteMultiByte(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
@@ -900,7 +900,7 @@ namespace url
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         public async Task<Response> ByteNullAsync(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
@@ -922,7 +922,7 @@ namespace url
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         public Response ByteNull(byte[] bytePath, CancellationToken cancellationToken = default)
         {
             if (bytePath == null)
@@ -1133,7 +1133,7 @@ namespace url
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         public async Task<Response> Base64UrlAsync(byte[] base64UrlPath, CancellationToken cancellationToken = default)
         {
             if (base64UrlPath == null)
@@ -1155,7 +1155,7 @@ namespace url
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         public Response Base64Url(byte[] base64UrlPath, CancellationToken cancellationToken = default)
         {
             if (base64UrlPath == null)
@@ -1190,7 +1190,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         public async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
         {
             if (arrayPath == null)
@@ -1212,7 +1212,7 @@ namespace url
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         public Response ArrayCsvInPath(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
         {
             if (arrayPath == null)

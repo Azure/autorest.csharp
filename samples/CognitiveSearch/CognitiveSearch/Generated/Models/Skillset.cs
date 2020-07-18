@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills"> A list of skills in the skillset. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="description"/>, or <paramref name="skills"/> is null. </exception>
         public Skillset(string name, string description, IEnumerable<Skill> skills)
         {
             if (name == null)

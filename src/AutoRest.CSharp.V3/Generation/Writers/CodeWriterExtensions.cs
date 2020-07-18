@@ -15,6 +15,7 @@ using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis.Options;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -84,8 +85,25 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && (parameter.Type.IsNullable || !parameter.Type.IsValueType);
 
-        public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p =>
-            !(p.DefaultValue != null && !CanBeInitializedInline(p)) && CanWriteNullCheck(p));
+        private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !CanBeInitializedInline(parameter)) && CanWriteNullCheck(parameter);
+
+        public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
+
+        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [NotNullWhen(true)] out IReadOnlyCollection<Parameter>? requiredParameters)
+        {
+            var required = parameters
+                .Where(p => HasNullCheck(p))
+                .ToArray();
+
+            if (required.Length > 0)
+            {
+                requiredParameters = required;
+                return true;
+            }
+
+            requiredParameters = null;
+            return false;
+        }
 
         public static void WriteConstant(this CodeWriter writer, Constant constant)
         {

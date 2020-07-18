@@ -49,7 +49,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="unencodedPathParam"> Unencoded path parameter with value &apos;path1/path2/path3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="unencodedPathParam"/> is null. </exception>
         public async Task<Response> GetMethodPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
             if (unencodedPathParam == null)
@@ -71,7 +71,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="unencodedPathParam"> Unencoded path parameter with value &apos;path1/path2/path3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="unencodedPathParam"/> is null. </exception>
         public Response GetMethodPathValid(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
             if (unencodedPathParam == null)
@@ -106,7 +106,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="unencodedPathParam"> Unencoded path parameter with value &apos;path1/path2/path3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="unencodedPathParam"/> is null. </exception>
         public async Task<Response> GetPathValidAsync(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
             if (unencodedPathParam == null)
@@ -128,7 +128,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded path parameter with value &apos;path1/path2/path3&apos;. </summary>
         /// <param name="unencodedPathParam"> Unencoded path parameter with value &apos;path1/path2/path3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="unencodedPathParam"/> is null. </exception>
         public Response GetPathValid(string unencodedPathParam, CancellationToken cancellationToken = default)
         {
             if (unencodedPathParam == null)
@@ -206,7 +206,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="q1"> Unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="q1"/> is null. </exception>
         public async Task<Response> GetMethodQueryValidAsync(string q1, CancellationToken cancellationToken = default)
         {
             if (q1 == null)
@@ -228,7 +228,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="q1"> Unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="q1"/> is null. </exception>
         public Response GetMethodQueryValid(string q1, CancellationToken cancellationToken = default)
         {
             if (q1 == null)
@@ -311,7 +311,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="q1"> Unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="q1"/> is null. </exception>
         public async Task<Response> GetPathQueryValidAsync(string q1, CancellationToken cancellationToken = default)
         {
             if (q1 == null)
@@ -333,7 +333,7 @@ namespace azure_special_properties
         /// <summary> Get method with unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </summary>
         /// <param name="q1"> Unencoded query parameter with value &apos;value1&amp;q2=value2&amp;q3=value3&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="q1"/> is null. </exception>
         public Response GetPathQueryValid(string q1, CancellationToken cancellationToken = default)
         {
             if (q1 == null)

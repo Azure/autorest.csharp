@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
         /// <param name="status"> Overall indexer status. </param>
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
         /// <param name="limits"> The execution limits for the indexer. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="executionHistory"/> or <paramref name="limits"/> is null. </exception>
         internal IndexerExecutionInfo(IndexerStatus status, IEnumerable<IndexerExecutionResult> executionHistory, IndexerLimits limits)
         {
             if (executionHistory == null)

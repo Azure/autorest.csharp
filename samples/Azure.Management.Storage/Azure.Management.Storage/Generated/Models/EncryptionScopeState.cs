@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="EncryptionScopeState"/> values are the same. </summary>
-        /// <exception cref="ArgumentNullException"> This occurs when <paramref name="value"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public EncryptionScopeState(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

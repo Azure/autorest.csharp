@@ -54,7 +54,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -81,7 +81,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response<PetAPTrue> CreateAPTrue(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -124,7 +124,7 @@ namespace additionalProperties
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -151,7 +151,7 @@ namespace additionalProperties
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The CatAPTrue to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response<CatAPTrue> CreateCatAPTrue(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -194,7 +194,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -221,7 +221,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPObject to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response<PetAPObject> CreateAPObject(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -264,7 +264,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -291,7 +291,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response<PetAPString> CreateAPString(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -334,7 +334,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -361,7 +361,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response<PetAPInProperties> CreateAPInProperties(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -404,7 +404,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)
@@ -431,7 +431,7 @@ namespace additionalProperties
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
         /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response<PetAPInPropertiesWithAPString> CreateAPInPropertiesWithAPString(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
             if (createParameters == null)

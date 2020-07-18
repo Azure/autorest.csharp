@@ -62,7 +62,7 @@ namespace azure_parameter_grouping
         /// <summary> Post a bunch of required parameters grouped. </summary>
         /// <param name="parameterGroupingPostRequiredParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameterGroupingPostRequiredParameters"/> is null. </exception>
         public async Task<Response> PostRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default)
         {
             if (parameterGroupingPostRequiredParameters == null)
@@ -84,7 +84,7 @@ namespace azure_parameter_grouping
         /// <summary> Post a bunch of required parameters grouped. </summary>
         /// <param name="parameterGroupingPostRequiredParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameterGroupingPostRequiredParameters"/> is null. </exception>
         public Response PostRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, CancellationToken cancellationToken = default)
         {
             if (parameterGroupingPostRequiredParameters == null)

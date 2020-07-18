@@ -30,7 +30,7 @@ namespace subscriptionId_apiVersion
         /// <param name="subscriptionId"> Subscription Id. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
         public GroupRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2014-04-01-preview")
         {
             if (subscriptionId == null)
@@ -69,7 +69,7 @@ namespace subscriptionId_apiVersion
         /// <summary> Provides a resouce group with name &apos;testgroup101&apos; and location &apos;West US&apos;. </summary>
         /// <param name="resourceGroupName"> Resource Group name &apos;testgroup101&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public async Task<Response<SampleResourceGroup>> GetSampleResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -96,7 +96,7 @@ namespace subscriptionId_apiVersion
         /// <summary> Provides a resouce group with name &apos;testgroup101&apos; and location &apos;West US&apos;. </summary>
         /// <param name="resourceGroupName"> Resource Group name &apos;testgroup101&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public Response<SampleResourceGroup> GetSampleResourceGroup(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)

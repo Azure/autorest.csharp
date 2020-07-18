@@ -17,7 +17,7 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of BlobRestoreParameters. </summary>
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="blobRanges"/> is null. </exception>
         public BlobRestoreParameters(DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges)
         {
             if (blobRanges == null)

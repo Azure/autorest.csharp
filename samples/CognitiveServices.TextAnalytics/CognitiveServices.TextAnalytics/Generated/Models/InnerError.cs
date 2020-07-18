@@ -17,7 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of InnerError. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal InnerError(InnerErrorCodeValue code, string message)
         {
             if (message == null)

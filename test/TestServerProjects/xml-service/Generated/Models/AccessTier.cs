@@ -16,7 +16,7 @@ namespace xml_service.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="AccessTier"/> values are the same. </summary>
-        /// <exception cref="ArgumentNullException"> This occurs when <paramref name="value"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public AccessTier(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

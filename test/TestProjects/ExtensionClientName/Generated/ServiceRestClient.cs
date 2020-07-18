@@ -56,7 +56,7 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="renamedPathParameter"/>, <paramref name="renamedQueryParameter"/>, or <paramref name="renamedBodyParameter"/> is null. </exception>
         public async Task<ResponseWithHeaders<RenamedSchema, ServiceRenamedOperationHeaders>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)
@@ -93,7 +93,7 @@ namespace ExtensionClientName
         /// <param name="renamedQueryParameter"> The String to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="renamedPathParameter"/>, <paramref name="renamedQueryParameter"/>, or <paramref name="renamedBodyParameter"/> is null. </exception>
         public ResponseWithHeaders<RenamedSchema, ServiceRenamedOperationHeaders> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
         {
             if (renamedPathParameter == null)

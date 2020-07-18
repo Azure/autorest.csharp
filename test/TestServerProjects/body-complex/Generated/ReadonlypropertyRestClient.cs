@@ -106,7 +106,7 @@ namespace body_complex
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <param name="complexBody"> The ReadonlyObj to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutValidAsync(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -128,7 +128,7 @@ namespace body_complex
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <param name="complexBody"> The ReadonlyObj to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutValid(ReadonlyObj complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)

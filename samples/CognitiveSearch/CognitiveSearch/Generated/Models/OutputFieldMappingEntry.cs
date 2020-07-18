@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of OutputFieldMappingEntry. </summary>
         /// <param name="name"> The name of the output defined by the skill. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public OutputFieldMappingEntry(string name)
         {
             if (name == null)

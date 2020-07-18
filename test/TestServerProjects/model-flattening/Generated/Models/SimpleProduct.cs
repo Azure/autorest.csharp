@@ -14,7 +14,7 @@ namespace model_flattening.Models
     {
         /// <summary> Initializes a new instance of SimpleProduct. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
         public SimpleProduct(string productId) : base(productId)
         {
             if (productId == null)

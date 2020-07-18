@@ -14,7 +14,7 @@ namespace Azure.AI.FormRecognizer.Models
     {
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="modelInfo"> Basic custom model information. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelInfo"/> is null. </exception>
         internal Model(ModelInfo modelInfo)
         {
             if (modelInfo == null)

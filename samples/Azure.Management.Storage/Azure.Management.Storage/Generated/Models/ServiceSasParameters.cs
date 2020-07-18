@@ -14,7 +14,7 @@ namespace Azure.Management.Storage.Models
     {
         /// <summary> Initializes a new instance of ServiceSasParameters. </summary>
         /// <param name="canonicalizedResource"> The canonical path to the signed resource. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="canonicalizedResource"/> is null. </exception>
         public ServiceSasParameters(string canonicalizedResource)
         {
             if (canonicalizedResource == null)

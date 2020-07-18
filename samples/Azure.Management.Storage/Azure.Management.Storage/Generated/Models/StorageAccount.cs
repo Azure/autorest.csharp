@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
     {
         /// <summary> Initializes a new instance of StorageAccount. </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public StorageAccount(string location) : base(location)
         {
             if (location == null)

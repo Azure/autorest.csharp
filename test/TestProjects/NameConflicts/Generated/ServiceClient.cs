@@ -187,7 +187,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
         public virtual async Task<ServiceAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
@@ -212,7 +212,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
         public virtual ServiceAnalyzeBodyOperation StartAnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)

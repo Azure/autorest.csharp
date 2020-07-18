@@ -25,7 +25,7 @@ namespace ModelShapes.Models
         /// <param name="requiredNullableStringList"> . </param>
         /// <param name="requiredNullableIntList"> . </param>
         /// <param name="requiredReadonlyInt"> . </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredStringList"/>, or <paramref name="requiredIntList"/> is null. </exception>
         public MixedModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList, int requiredReadonlyInt)
         {
             if (requiredString == null)

@@ -49,7 +49,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="subscriptionId"> This should appear as a method parameter, use value &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public async Task<Response> PostMethodLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -71,7 +71,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="subscriptionId"> This should appear as a method parameter, use value &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public Response PostMethodLocalValid(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -106,7 +106,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call. </summary>
         /// <param name="subscriptionId"> This should appear as a method parameter, use value null, client-side validation should prvenet the call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public async Task<Response> PostMethodLocalNullAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -128,7 +128,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call. </summary>
         /// <param name="subscriptionId"> This should appear as a method parameter, use value null, client-side validation should prvenet the call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public Response PostMethodLocalNull(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -163,7 +163,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="subscriptionId"> Should appear as a method parameter -use value &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public async Task<Response> PostPathLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -185,7 +185,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="subscriptionId"> Should appear as a method parameter -use value &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public Response PostPathLocalValid(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -220,7 +220,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="subscriptionId"> The subscriptionId, which appears in the path, the value is always &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public async Task<Response> PostSwaggerLocalValidAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -242,7 +242,7 @@ namespace azure_special_properties
         /// <summary> POST method with subscriptionId modeled in the method.  pass in subscription id = &apos;1234-5678-9012-3456&apos; to succeed. </summary>
         /// <param name="subscriptionId"> The subscriptionId, which appears in the path, the value is always &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         public Response PostSwaggerLocalValid(string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

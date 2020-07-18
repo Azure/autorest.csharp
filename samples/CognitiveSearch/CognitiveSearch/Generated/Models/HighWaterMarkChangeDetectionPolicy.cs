@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of HighWaterMarkChangeDetectionPolicy. </summary>
         /// <param name="highWaterMarkColumnName"> The name of the high water mark column. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="highWaterMarkColumnName"/> is null. </exception>
         public HighWaterMarkChangeDetectionPolicy(string highWaterMarkColumnName)
         {
             if (highWaterMarkColumnName == null)

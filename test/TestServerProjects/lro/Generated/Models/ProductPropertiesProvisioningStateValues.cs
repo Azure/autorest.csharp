@@ -16,7 +16,7 @@ namespace lro.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="ProductPropertiesProvisioningStateValues"/> values are the same. </summary>
-        /// <exception cref="ArgumentNullException"> This occurs when <paramref name="value"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ProductPropertiesProvisioningStateValues(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

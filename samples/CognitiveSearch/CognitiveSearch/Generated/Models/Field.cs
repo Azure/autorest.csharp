@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of Field. </summary>
         /// <param name="name"> The name of the field, which must be unique within the fields collection of the index or parent field. </param>
         /// <param name="type"> The data type of the field. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Field(string name, DataType type)
         {
             if (name == null)

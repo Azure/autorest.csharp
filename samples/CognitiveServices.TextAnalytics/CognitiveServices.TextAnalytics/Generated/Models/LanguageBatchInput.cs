@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         /// <summary> Initializes a new instance of LanguageBatchInput. </summary>
         /// <param name="documents"> . </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="documents"/> is null. </exception>
         public LanguageBatchInput(IEnumerable<LanguageInput> documents)
         {
             if (documents == null)

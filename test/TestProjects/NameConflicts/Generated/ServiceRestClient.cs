@@ -66,7 +66,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="request"/>, <paramref name="message"/>, <paramref name="scope"/>, <paramref name="uri"/>, <paramref name="pipeline"/>, <paramref name="clientDiagnostics"/>, or <paramref name="class"/> is null. </exception>
         public async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
@@ -122,7 +122,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="request"/>, <paramref name="message"/>, <paramref name="scope"/>, <paramref name="uri"/>, <paramref name="pipeline"/>, <paramref name="clientDiagnostics"/>, or <paramref name="class"/> is null. </exception>
         public Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             if (request == null)
@@ -187,7 +187,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
         public async Task<Azure.Response> AnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)
@@ -209,7 +209,7 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
         public Azure.Response AnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
         {
             if (stringBody == null)

@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of SuggestDocumentsResult. </summary>
         /// <param name="results"> The sequence of results returned by the query. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="results"/> is null. </exception>
         internal SuggestDocumentsResult(IEnumerable<SuggestResult> results)
         {
             if (results == null)

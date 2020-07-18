@@ -105,7 +105,7 @@ namespace object_type
         /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
         /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="putObject"/> is null. </exception>
         public async Task<Response> PutAsync(object putObject, CancellationToken cancellationToken = default)
         {
             if (putObject == null)
@@ -127,7 +127,7 @@ namespace object_type
         /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
         /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="putObject"/> is null. </exception>
         public Response Put(object putObject, CancellationToken cancellationToken = default)
         {
             if (putObject == null)

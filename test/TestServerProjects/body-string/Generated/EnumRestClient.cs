@@ -306,7 +306,7 @@ namespace body_string
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="enumStringBody"> The RefColorConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumStringBody"/> is null. </exception>
         public async Task<Response> PutReferencedConstantAsync(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             if (enumStringBody == null)
@@ -328,7 +328,7 @@ namespace body_string
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
         /// <param name="enumStringBody"> The RefColorConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="enumStringBody"/> is null. </exception>
         public Response PutReferencedConstant(RefColorConstant enumStringBody, CancellationToken cancellationToken = default)
         {
             if (enumStringBody == null)

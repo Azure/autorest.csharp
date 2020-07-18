@@ -16,7 +16,7 @@ namespace body_complex.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="MyKind"/> values are the same. </summary>
-        /// <exception cref="ArgumentNullException"> This occurs when <paramref name="value"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public MyKind(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

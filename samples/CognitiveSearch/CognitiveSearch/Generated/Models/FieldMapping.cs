@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of FieldMapping. </summary>
         /// <param name="sourceFieldName"> The name of the field in the data source. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="sourceFieldName"/> is null. </exception>
         public FieldMapping(string sourceFieldName)
         {
             if (sourceFieldName == null)

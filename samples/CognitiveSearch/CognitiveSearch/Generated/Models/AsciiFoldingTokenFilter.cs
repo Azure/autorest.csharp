@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of AsciiFoldingTokenFilter. </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public AsciiFoldingTokenFilter(string name) : base(name)
         {
             if (name == null)

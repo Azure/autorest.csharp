@@ -21,7 +21,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <param name="text"> Text content of the cell. </param>
         /// <param name="boundingBox"> Bounding box of the cell. </param>
         /// <param name="confidence"> Confidence value. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="boundingBox"/> is null. </exception>
         internal DataTableCell(int rowIndex, int columnIndex, string text, IEnumerable<float> boundingBox, float confidence)
         {
             if (text == null)

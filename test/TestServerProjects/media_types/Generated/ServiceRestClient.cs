@@ -54,7 +54,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public async Task<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -82,7 +82,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public Response<string> AnalyzeBody(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -184,7 +184,7 @@ namespace media_types
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public async Task<Response<string>> ContentTypeWithEncodingAsync(string input, CancellationToken cancellationToken = default)
         {
             if (input == null)
@@ -211,7 +211,7 @@ namespace media_types
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public Response<string> ContentTypeWithEncoding(string input, CancellationToken cancellationToken = default)
         {
             if (input == null)
