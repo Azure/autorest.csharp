@@ -14,6 +14,7 @@ namespace Azure.Management.Storage.Models
     {
         /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
         /// <param name="virtualNetworkResourceId"> Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public VirtualNetworkRule(string virtualNetworkResourceId)
         {
             if (virtualNetworkResourceId == null)

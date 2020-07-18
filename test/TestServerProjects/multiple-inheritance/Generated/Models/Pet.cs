@@ -14,6 +14,7 @@ namespace multiple_inheritance.Models
     {
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"> . </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Pet(string name)
         {
             if (name == null)

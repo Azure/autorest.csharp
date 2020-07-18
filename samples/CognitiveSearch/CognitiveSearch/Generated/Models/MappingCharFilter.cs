@@ -17,6 +17,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of MappingCharFilter. </summary>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="mappings"> A list of mappings of the following format: &quot;a=&gt;b&quot; (all occurrences of the character &quot;a&quot; will be replaced with character &quot;b&quot;). </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public MappingCharFilter(string name, IEnumerable<string> mappings) : base(name)
         {
             if (name == null)

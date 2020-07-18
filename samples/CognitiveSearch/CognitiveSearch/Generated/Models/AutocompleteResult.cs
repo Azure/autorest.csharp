@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of AutocompleteResult. </summary>
         /// <param name="results"> The list of returned Autocompleted items. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         internal AutocompleteResult(IEnumerable<AutocompleteItem> results)
         {
             if (results == null)

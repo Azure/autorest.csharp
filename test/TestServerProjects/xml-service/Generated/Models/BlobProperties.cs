@@ -15,6 +15,7 @@ namespace xml_service.Models
         /// <summary> Initializes a new instance of BlobProperties. </summary>
         /// <param name="lastModified"> . </param>
         /// <param name="etag"> . </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         internal BlobProperties(DateTimeOffset lastModified, string etag)
         {
             if (etag == null)

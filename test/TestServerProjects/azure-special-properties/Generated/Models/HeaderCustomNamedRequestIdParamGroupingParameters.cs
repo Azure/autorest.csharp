@@ -14,6 +14,7 @@ namespace azure_special_properties.Models
     {
         /// <summary> Initializes a new instance of HeaderCustomNamedRequestIdParamGroupingParameters. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public HeaderCustomNamedRequestIdParamGroupingParameters(string fooClientRequestId)
         {
             if (fooClientRequestId == null)

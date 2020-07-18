@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of AutocompleteRequest. </summary>
         /// <param name="searchText"> The search text on which to base autocomplete results. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public AutocompleteRequest(string searchText, string suggesterName)
         {
             if (searchText == null)

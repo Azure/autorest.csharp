@@ -16,6 +16,7 @@ namespace required_optional.Models
     {
         /// <summary> Initializes a new instance of ArrayWrapper. </summary>
         /// <param name="value"> . </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public ArrayWrapper(IEnumerable<string> value)
         {
             if (value == null)

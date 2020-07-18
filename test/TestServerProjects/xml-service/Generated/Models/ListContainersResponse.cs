@@ -19,6 +19,7 @@ namespace xml_service.Models
         /// <param name="prefix"> . </param>
         /// <param name="maxResults"> . </param>
         /// <param name="nextMarker"> . </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         internal ListContainersResponse(string serviceEndpoint, string prefix, int maxResults, string nextMarker)
         {
             if (serviceEndpoint == null)

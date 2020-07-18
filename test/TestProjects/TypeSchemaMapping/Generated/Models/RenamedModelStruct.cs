@@ -17,6 +17,7 @@ namespace CustomNamespace
         /// <param name="customizedFlattenedStringProperty"> . </param>
         /// <param name="fruit"> Fruit. </param>
         /// <param name="daysOfWeek"> Day of week. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public RenamedModelStruct(string customizedFlattenedStringProperty, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)
         {
             if (customizedFlattenedStringProperty == null)

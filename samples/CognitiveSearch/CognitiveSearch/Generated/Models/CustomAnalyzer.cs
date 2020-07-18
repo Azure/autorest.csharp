@@ -17,6 +17,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of CustomAnalyzer. </summary>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="tokenizer"> The name of the tokenizer to use to divide continuous text into a sequence of tokens, such as breaking a sentence into words. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public CustomAnalyzer(string name, TokenizerName tokenizer) : base(name)
         {
             if (name == null)

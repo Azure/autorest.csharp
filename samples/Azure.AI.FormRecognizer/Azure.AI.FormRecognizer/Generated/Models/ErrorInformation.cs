@@ -15,6 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of ErrorInformation. </summary>
         /// <param name="code"> . </param>
         /// <param name="message"> . </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         internal ErrorInformation(string code, string message)
         {
             if (code == null)

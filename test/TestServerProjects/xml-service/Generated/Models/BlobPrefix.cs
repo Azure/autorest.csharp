@@ -14,6 +14,7 @@ namespace xml_service.Models
     {
         /// <summary> Initializes a new instance of BlobPrefix. </summary>
         /// <param name="name"> . </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         internal BlobPrefix(string name)
         {
             if (name == null)

@@ -17,6 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of TextWord. </summary>
         /// <param name="text"> The text content of the word. </param>
         /// <param name="boundingBox"> Bounding box of an extracted word. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         internal TextWord(string text, IEnumerable<float> boundingBox)
         {
             if (text == null)

@@ -50,6 +50,7 @@ namespace extensible_enums_swagger
 
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public async Task<Response<Pet>> GetByPetIdAsync(string petId, CancellationToken cancellationToken = default)
         {
             if (petId == null)
@@ -75,6 +76,7 @@ namespace extensible_enums_swagger
 
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Response<Pet> GetByPetId(string petId, CancellationToken cancellationToken = default)
         {
             if (petId == null)

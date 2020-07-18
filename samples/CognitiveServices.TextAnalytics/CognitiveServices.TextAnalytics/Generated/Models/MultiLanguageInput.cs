@@ -15,6 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of MultiLanguageInput. </summary>
         /// <param name="id"> A unique, non-empty document identifier. </param>
         /// <param name="text"> The input text to process. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public MultiLanguageInput(string id, string text)
         {
             if (id == null)

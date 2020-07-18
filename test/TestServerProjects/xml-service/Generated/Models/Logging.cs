@@ -18,6 +18,7 @@ namespace xml_service.Models
         /// <param name="read"> Indicates whether all read requests should be logged. </param>
         /// <param name="write"> Indicates whether all write requests should be logged. </param>
         /// <param name="retentionPolicy"> the retention policy. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Logging(string version, bool delete, bool read, bool write, RetentionPolicy retentionPolicy)
         {
             if (version == null)

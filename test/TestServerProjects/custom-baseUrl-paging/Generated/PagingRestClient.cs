@@ -56,6 +56,7 @@ namespace custom_baseUrl_paging
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public async Task<Response<ProductResult>> GetPagesPartialUrlAsync(string accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
@@ -82,6 +83,7 @@ namespace custom_baseUrl_paging
         /// <summary> A paging operation that combines custom url, paging and partial URL and expect to concat after host. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Response<ProductResult> GetPagesPartialUrl(string accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
@@ -122,6 +124,7 @@ namespace custom_baseUrl_paging
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public async Task<Response<ProductResult>> GetPagesPartialUrlOperationAsync(string accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
@@ -148,6 +151,7 @@ namespace custom_baseUrl_paging
         /// <summary> A paging operation that combines custom url, paging and partial URL with next operation. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Response<ProductResult> GetPagesPartialUrlOperation(string accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
@@ -190,6 +194,7 @@ namespace custom_baseUrl_paging
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public async Task<Response<ProductResult>> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
@@ -221,6 +226,7 @@ namespace custom_baseUrl_paging
         /// <param name="accountName"> Account Name. </param>
         /// <param name="nextLink"> Next link for the list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Response<ProductResult> GetPagesPartialUrlOperationNext(string accountName, string nextLink, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
@@ -266,6 +272,7 @@ namespace custom_baseUrl_paging
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public async Task<Response<ProductResult>> GetPagesPartialUrlNextPageAsync(string nextLink, string accountName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -297,6 +304,7 @@ namespace custom_baseUrl_paging
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Response<ProductResult> GetPagesPartialUrlNextPage(string nextLink, string accountName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -342,6 +350,7 @@ namespace custom_baseUrl_paging
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public async Task<Response<ProductResult>> GetPagesPartialUrlOperationNextNextPageAsync(string nextLink, string accountName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -373,6 +382,7 @@ namespace custom_baseUrl_paging
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Response<ProductResult> GetPagesPartialUrlOperationNextNextPage(string nextLink, string accountName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

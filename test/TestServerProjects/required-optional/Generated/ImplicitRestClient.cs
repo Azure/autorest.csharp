@@ -67,6 +67,7 @@ namespace required_optional
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="pathParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public async Task<Response> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default)
         {
             if (pathParameter == null)
@@ -88,6 +89,7 @@ namespace required_optional
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="pathParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public Response GetRequiredPath(string pathParameter, CancellationToken cancellationToken = default)
         {
             if (pathParameter == null)

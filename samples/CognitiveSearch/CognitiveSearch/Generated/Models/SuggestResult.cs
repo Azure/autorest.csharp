@@ -17,6 +17,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of SuggestResult. </summary>
         /// <param name="text"> The text of the suggestion result. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         internal SuggestResult(string text)
         {
             if (text == null)

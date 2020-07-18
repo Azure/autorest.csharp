@@ -17,6 +17,7 @@ namespace AdditionalPropertiesEx.Models
         /// <summary> Initializes a new instance of InputAdditionalPropertiesModelStruct. </summary>
         /// <param name="id"> . </param>
         /// <param name="additionalProperties"> . </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         public InputAdditionalPropertiesModelStruct(int id, IDictionary<string, object> additionalProperties)
         {
             if (additionalProperties == null)

@@ -19,6 +19,7 @@ namespace xml_service.Models
         /// <param name="deleted"> . </param>
         /// <param name="snapshot"> . </param>
         /// <param name="properties"> Properties of a blob. </param>
+        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
         internal Blob(string name, bool deleted, string snapshot, BlobProperties properties)
         {
             if (name == null)

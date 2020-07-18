@@ -187,6 +187,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            if (parameters.HasAnyNullCheck())
+            {
+                writer.WriteXmlDocumentationException(typeof(ArgumentNullException), "This occurs when one of the required arguments is null.");
+            }
 
             writer.Append($"public virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
@@ -288,6 +292,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            if (parameters.HasAnyNullCheck())
+            {
+                writer.WriteXmlDocumentationException(typeof(ArgumentNullException), "This occurs when one of the required arguments is null.");
+            }
 
             string asyncText = async ? "async " : string.Empty;
             writer.Append($"public virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
