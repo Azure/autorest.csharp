@@ -49,6 +49,7 @@ namespace azure_special_properties
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderCustomNamedRequestIdHeaders>> CustomNamedRequestIdAsync(string fooClientRequestId, CancellationToken cancellationToken = default)
         {
             if (fooClientRequestId == null)
@@ -71,6 +72,7 @@ namespace azure_special_properties
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
         public ResponseWithHeaders<HeaderCustomNamedRequestIdHeaders> CustomNamedRequestId(string fooClientRequestId, CancellationToken cancellationToken = default)
         {
             if (fooClientRequestId == null)
@@ -106,6 +108,7 @@ namespace azure_special_properties
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group. </summary>
         /// <param name="headerCustomNamedRequestIdParamGroupingParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headerCustomNamedRequestIdParamGroupingParameters"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderCustomNamedRequestIdParamGroupingHeaders>> CustomNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, CancellationToken cancellationToken = default)
         {
             if (headerCustomNamedRequestIdParamGroupingParameters == null)
@@ -128,6 +131,7 @@ namespace azure_special_properties
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group. </summary>
         /// <param name="headerCustomNamedRequestIdParamGroupingParameters"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="headerCustomNamedRequestIdParamGroupingParameters"/> is null. </exception>
         public ResponseWithHeaders<HeaderCustomNamedRequestIdParamGroupingHeaders> CustomNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, CancellationToken cancellationToken = default)
         {
             if (headerCustomNamedRequestIdParamGroupingParameters == null)
@@ -163,6 +167,7 @@ namespace azure_special_properties
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
         public async Task<ResponseWithHeaders<HeaderCustomNamedRequestIdHeadHeaders>> CustomNamedRequestIdHeadAsync(string fooClientRequestId, CancellationToken cancellationToken = default)
         {
             if (fooClientRequestId == null)
@@ -186,6 +191,7 @@ namespace azure_special_properties
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
         public ResponseWithHeaders<HeaderCustomNamedRequestIdHeadHeaders> CustomNamedRequestIdHead(string fooClientRequestId, CancellationToken cancellationToken = default)
         {
             if (fooClientRequestId == null)

@@ -91,6 +91,7 @@ namespace azure_special_properties
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
         /// <param name="xMsClientRequestId"> This should appear as a method parameter, use value &apos;9C4D50EE-2D56-4CD3-8152-34347DC9F2B0&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="xMsClientRequestId"/> is null. </exception>
         public async Task<Response> ParamGetAsync(string xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (xMsClientRequestId == null)
@@ -112,6 +113,7 @@ namespace azure_special_properties
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
         /// <param name="xMsClientRequestId"> This should appear as a method parameter, use value &apos;9C4D50EE-2D56-4CD3-8152-34347DC9F2B0&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="xMsClientRequestId"/> is null. </exception>
         public Response ParamGet(string xMsClientRequestId, CancellationToken cancellationToken = default)
         {
             if (xMsClientRequestId == null)

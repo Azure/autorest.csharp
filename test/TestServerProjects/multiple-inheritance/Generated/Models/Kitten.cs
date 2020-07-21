@@ -14,6 +14,7 @@ namespace multiple_inheritance.Models
     {
         /// <summary> Initializes a new instance of Kitten. </summary>
         /// <param name="name"> . </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Kitten(string name) : base(name)
         {
             if (name == null)
@@ -28,6 +29,7 @@ namespace multiple_inheritance.Models
         /// <param name="meows"> . </param>
         /// <param name="hisses"> . </param>
         /// <param name="eatsMiceYet"> . </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Kitten(string name, bool? likesMilk, bool? meows, bool? hisses, bool? eatsMiceYet) : base(name, likesMilk, meows, hisses)
         {
             if (name == null)

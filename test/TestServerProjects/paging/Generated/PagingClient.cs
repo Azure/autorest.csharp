@@ -508,6 +508,7 @@ namespace paging
         /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pagingGetMultiplePagesWithOffsetOptions"/> is null. </exception>
         public virtual AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
         {
             if (pagingGetMultiplePagesWithOffsetOptions == null)
@@ -552,6 +553,7 @@ namespace paging
         /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pagingGetMultiplePagesWithOffsetOptions"/> is null. </exception>
         public virtual Pageable<Product> GetMultiplePagesWithOffset(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
         {
             if (pagingGetMultiplePagesWithOffsetOptions == null)
@@ -966,6 +968,7 @@ namespace paging
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         public virtual AsyncPageable<Product> GetMultiplePagesFragmentNextLinkAsync(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
@@ -1014,6 +1017,7 @@ namespace paging
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
         public virtual Pageable<Product> GetMultiplePagesFragmentNextLink(string apiVersion, string tenant, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
@@ -1061,6 +1065,7 @@ namespace paging
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customParameterGroup"/> is null. </exception>
         public virtual AsyncPageable<Product> GetMultiplePagesFragmentWithGroupingNextLinkAsync(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (customParameterGroup == null)
@@ -1104,6 +1109,7 @@ namespace paging
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customParameterGroup"/> is null. </exception>
         public virtual Pageable<Product> GetMultiplePagesFragmentWithGroupingNextLink(CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (customParameterGroup == null)
@@ -1149,6 +1155,7 @@ namespace paging
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
         public virtual AsyncPageable<Product> NextFragmentAsync(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
@@ -1202,6 +1209,7 @@ namespace paging
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/>, <paramref name="tenant"/>, or <paramref name="nextLink"/> is null. </exception>
         public virtual Pageable<Product> NextFragment(string apiVersion, string tenant, string nextLink, CancellationToken cancellationToken = default)
         {
             if (apiVersion == null)
@@ -1254,6 +1262,7 @@ namespace paging
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="customParameterGroup"/> is null. </exception>
         public virtual AsyncPageable<Product> NextFragmentWithGroupingAsync(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -1302,6 +1311,7 @@ namespace paging
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="customParameterGroup"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="customParameterGroup"/> is null. </exception>
         public virtual Pageable<Product> NextFragmentWithGrouping(string nextLink, CustomParameterGroup customParameterGroup, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

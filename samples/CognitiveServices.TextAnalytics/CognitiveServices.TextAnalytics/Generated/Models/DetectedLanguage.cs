@@ -16,6 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
         /// <param name="score"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="iso6391Name"/> is null. </exception>
         internal DetectedLanguage(string name, string iso6391Name, double score)
         {
             if (name == null)

@@ -16,6 +16,7 @@ namespace extensible_enums_swagger.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="DaysOfWeekExtensibleEnum"/> values are the same. </summary>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public DaysOfWeekExtensibleEnum(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

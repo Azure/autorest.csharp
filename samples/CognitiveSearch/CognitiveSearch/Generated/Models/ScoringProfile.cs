@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of ScoringProfile. </summary>
         /// <param name="name"> The name of the scoring profile. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ScoringProfile(string name)
         {
             if (name == null)

@@ -14,6 +14,7 @@ namespace multiple_inheritance.Models
     {
         /// <summary> Initializes a new instance of Horse. </summary>
         /// <param name="name"> . </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Horse(string name) : base(name)
         {
             if (name == null)
@@ -25,6 +26,7 @@ namespace multiple_inheritance.Models
         /// <summary> Initializes a new instance of Horse. </summary>
         /// <param name="name"> . </param>
         /// <param name="isAShowHorse"> . </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Horse(string name, bool? isAShowHorse) : base(name)
         {
             if (name == null)

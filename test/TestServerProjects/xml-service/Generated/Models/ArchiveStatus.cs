@@ -16,6 +16,7 @@ namespace xml_service.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="ArchiveStatus"/> values are the same. </summary>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ArchiveStatus(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

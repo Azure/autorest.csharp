@@ -2,6 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using AutoRest.CSharp.V3.Output.Models.Shared;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -32,6 +37,38 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         public static CodeWriter WriteXmlDocumentationException(this CodeWriter writer, Type exception, string? description)
         {
             return writer.WriteDocumentationLines($"<exception cref=\"{exception.FullName}\">", "</exception>", description, skipWhenEmpty: false);
+        }
+
+        public static CodeWriter WriteXmlDocumentationRequiredParametersException(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        {
+            if (parameters.TryGetRequiredParameters(out var requiredParameters))
+            {
+                static string FormatParameters(IReadOnlyCollection<Parameter> parameters)
+                {
+                    var sb = new StringBuilder();
+
+                    var i = 0;
+                    for (; i < parameters.Count - 1; ++i)
+                    {
+                        sb.Append($"<paramref name=\"{{{i}}}\"/>, ");
+                    }
+
+                    sb.Append($"or <paramref name=\"{{{i}}}\"/> is null.");
+                    return sb.ToString();
+                }
+
+                var delimitedParameters = requiredParameters.Count switch
+                {
+                    1 => "<paramref name=\"{0}\"/> is null.",
+                    2 => "<paramref name=\"{0}\"/> or <paramref name=\"{1}\"/> is null.",
+                    _ => FormatParameters(requiredParameters),
+                };
+
+                var description = string.Format(delimitedParameters, requiredParameters.Select(p => p.Name).ToArray());
+                return writer.WriteXmlDocumentationException(typeof(ArgumentNullException), description);
+            }
+
+            return writer;
         }
 
         private static CodeWriter WriteDocumentationLines(this CodeWriter writer, string prefix, string suffix, string? text, bool skipWhenEmpty = true)

@@ -16,6 +16,7 @@ namespace Azure.Storage.Tables
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="ResponseFormat"/> values are the same. </summary>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ResponseFormat(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

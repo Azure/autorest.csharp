@@ -17,6 +17,7 @@ namespace CognitiveSearch.Models
         /// <param name="type"> The type of the datasource. </param>
         /// <param name="credentials"> Credentials for the datasource. </param>
         /// <param name="container"> The data container for the datasource. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="credentials"/>, or <paramref name="container"/> is null. </exception>
         public DataSource(string name, DataSourceType type, DataSourceCredentials credentials, DataContainer container)
         {
             if (name == null)

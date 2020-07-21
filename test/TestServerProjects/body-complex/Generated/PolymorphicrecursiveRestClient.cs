@@ -160,6 +160,7 @@ namespace body_complex
         /// }.
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -235,6 +236,7 @@ namespace body_complex
         /// }.
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutValid(Fish complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)

@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of ServiceStatistics. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="counters"/> or <paramref name="limits"/> is null. </exception>
         internal ServiceStatistics(ServiceCounters counters, ServiceLimits limits)
         {
             if (counters == null)

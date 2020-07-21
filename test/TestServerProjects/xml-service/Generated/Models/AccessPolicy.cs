@@ -16,6 +16,7 @@ namespace xml_service.Models
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
         /// <param name="permission"> the permissions for the acl policy. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="permission"/> is null. </exception>
         public AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission)
         {
             if (permission == null)

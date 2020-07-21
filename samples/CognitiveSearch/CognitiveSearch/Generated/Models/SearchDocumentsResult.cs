@@ -17,6 +17,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of SearchDocumentsResult. </summary>
         /// <param name="results"> The sequence of results returned by the query. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="results"/> is null. </exception>
         internal SearchDocumentsResult(IEnumerable<SearchResult> results)
         {
             if (results == null)

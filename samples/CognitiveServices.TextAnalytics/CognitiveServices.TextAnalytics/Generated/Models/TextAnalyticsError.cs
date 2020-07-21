@@ -17,6 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of TextAnalyticsError. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal TextAnalyticsError(ErrorCodeValue code, string message)
         {
             if (message == null)

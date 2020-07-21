@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="RegexFlags"/> values are the same. </summary>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public RegexFlags(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

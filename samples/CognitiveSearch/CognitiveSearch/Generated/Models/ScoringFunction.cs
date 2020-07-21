@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of ScoringFunction. </summary>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
         public ScoringFunction(string fieldName, double boost)
         {
             if (fieldName == null)

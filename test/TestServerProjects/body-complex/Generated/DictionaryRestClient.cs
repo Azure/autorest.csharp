@@ -106,6 +106,7 @@ namespace body_complex
         /// <summary> Put complex types with dictionary property. </summary>
         /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutValidAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -127,6 +128,7 @@ namespace body_complex
         /// <summary> Put complex types with dictionary property. </summary>
         /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutValid(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -216,6 +218,7 @@ namespace body_complex
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <param name="complexBody"> Please put an empty dictionary. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutEmptyAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)
@@ -237,6 +240,7 @@ namespace body_complex
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <param name="complexBody"> Please put an empty dictionary. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutEmpty(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             if (complexBody == null)

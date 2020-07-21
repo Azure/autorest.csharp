@@ -18,6 +18,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="offset"> Start position (in Unicode characters) for the entity text. </param>
         /// <param name="length"> Length (in Unicode characters) for the entity text. </param>
         /// <param name="score"> Confidence score between 0 and 1 of the extracted entity. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="type"/> is null. </exception>
         internal Entity(string text, string type, int offset, int length, double score)
         {
             if (text == null)

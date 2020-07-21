@@ -16,6 +16,7 @@ namespace body_array.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="Enum1"/> values are the same. </summary>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Enum1(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

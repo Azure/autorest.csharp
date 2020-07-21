@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of AnalyzeResult. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tokens"/> is null. </exception>
         internal AnalyzeResult(IEnumerable<TokenInfo> tokens)
         {
             if (tokens == null)

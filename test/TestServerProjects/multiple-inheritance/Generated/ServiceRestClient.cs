@@ -106,6 +106,7 @@ namespace multiple_inheritance
         /// <summary> Put a horse with name &apos;General&apos; and isAShowHorse false. </summary>
         /// <param name="horse"> Put a horse with name &apos;General&apos; and isAShowHorse false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="horse"/> is null. </exception>
         public async Task<Response<string>> PutHorseAsync(Horse horse, CancellationToken cancellationToken = default)
         {
             if (horse == null)
@@ -132,6 +133,7 @@ namespace multiple_inheritance
         /// <summary> Put a horse with name &apos;General&apos; and isAShowHorse false. </summary>
         /// <param name="horse"> Put a horse with name &apos;General&apos; and isAShowHorse false. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="horse"/> is null. </exception>
         public Response<string> PutHorse(Horse horse, CancellationToken cancellationToken = default)
         {
             if (horse == null)
@@ -226,6 +228,7 @@ namespace multiple_inheritance
         /// <summary> Put a pet with name &apos;Butter&apos;. </summary>
         /// <param name="pet"> Put a pet with name &apos;Butter&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
         public async Task<Response<string>> PutPetAsync(Pet pet, CancellationToken cancellationToken = default)
         {
             if (pet == null)
@@ -252,6 +255,7 @@ namespace multiple_inheritance
         /// <summary> Put a pet with name &apos;Butter&apos;. </summary>
         /// <param name="pet"> Put a pet with name &apos;Butter&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
         public Response<string> PutPet(Pet pet, CancellationToken cancellationToken = default)
         {
             if (pet == null)
@@ -346,6 +350,7 @@ namespace multiple_inheritance
         /// <summary> Put a feline who hisses and doesn&apos;t meow. </summary>
         /// <param name="feline"> Put a feline who hisses and doesn&apos;t meow. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="feline"/> is null. </exception>
         public async Task<Response<string>> PutFelineAsync(Feline feline, CancellationToken cancellationToken = default)
         {
             if (feline == null)
@@ -372,6 +377,7 @@ namespace multiple_inheritance
         /// <summary> Put a feline who hisses and doesn&apos;t meow. </summary>
         /// <param name="feline"> Put a feline who hisses and doesn&apos;t meow. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="feline"/> is null. </exception>
         public Response<string> PutFeline(Feline feline, CancellationToken cancellationToken = default)
         {
             if (feline == null)
@@ -466,6 +472,7 @@ namespace multiple_inheritance
         /// <summary> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </summary>
         /// <param name="cat"> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="cat"/> is null. </exception>
         public async Task<Response<string>> PutCatAsync(Cat cat, CancellationToken cancellationToken = default)
         {
             if (cat == null)
@@ -492,6 +499,7 @@ namespace multiple_inheritance
         /// <summary> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </summary>
         /// <param name="cat"> Put a cat with name &apos;Boots&apos; where likesMilk and hisses is false, meows is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="cat"/> is null. </exception>
         public Response<string> PutCat(Cat cat, CancellationToken cancellationToken = default)
         {
             if (cat == null)
@@ -586,6 +594,7 @@ namespace multiple_inheritance
         /// <summary> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </summary>
         /// <param name="kitten"> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="kitten"/> is null. </exception>
         public async Task<Response<string>> PutKittenAsync(Kitten kitten, CancellationToken cancellationToken = default)
         {
             if (kitten == null)
@@ -612,6 +621,7 @@ namespace multiple_inheritance
         /// <summary> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </summary>
         /// <param name="kitten"> Put a kitten with name &apos;Kitty&apos; where likesMilk and hisses is false, meows and eatsMiceYet is true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="kitten"/> is null. </exception>
         public Response<string> PutKitten(Kitten kitten, CancellationToken cancellationToken = default)
         {
             if (kitten == null)

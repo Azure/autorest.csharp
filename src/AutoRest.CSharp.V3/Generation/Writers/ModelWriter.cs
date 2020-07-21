@@ -170,6 +170,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
                 }
 
+                writer.WriteXmlDocumentationRequiredParametersException(constructor.Parameters);
+
                 writer.Append($"{constructor.Declaration.Accessibility} {schema.Declaration.Name}(");
                 foreach (var parameter in constructor.Parameters)
                 {
@@ -254,6 +256,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
+
+                    if (isString)
+                    {
+                        writer.WriteXmlDocumentationException(typeof(ArgumentNullException), $"<paramref name=\"value\"/> is null.");
+                    }
+
                     using (writer.Scope($"public {name}({schema.BaseType} value)"))
                     {
                         writer.Append($"_value = value");

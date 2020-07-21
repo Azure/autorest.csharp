@@ -17,6 +17,7 @@ namespace AdditionalPropertiesEx.Models
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModelStruct. </summary>
         /// <param name="id"> . </param>
         /// <param name="additionalProperties"> . </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
         internal OutputAdditionalPropertiesModelStruct(int id, IReadOnlyDictionary<string, string> additionalProperties)
         {
             if (additionalProperties == null)

@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of ItemWarning. </summary>
         /// <param name="message"> The message describing the warning that occurred while processing the item. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal ItemWarning(string message)
         {
             if (message == null)

@@ -15,6 +15,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <summary> Initializes a new instance of FormFieldsReport. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
         internal FormFieldsReport(string fieldName, float accuracy)
         {
             if (fieldName == null)

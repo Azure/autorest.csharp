@@ -20,6 +20,7 @@ namespace xml_service.Models
         /// <param name="delimiter"> . </param>
         /// <param name="blobs"> . </param>
         /// <param name="nextMarker"> . </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/>, <paramref name="prefix"/>, <paramref name="marker"/>, <paramref name="delimiter"/>, <paramref name="blobs"/>, or <paramref name="nextMarker"/> is null. </exception>
         internal ListBlobsResponse(string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
         {
             if (containerName == null)

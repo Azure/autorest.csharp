@@ -16,6 +16,7 @@ namespace AppConfiguration.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="Enum4"/> values are the same. </summary>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Enum4(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

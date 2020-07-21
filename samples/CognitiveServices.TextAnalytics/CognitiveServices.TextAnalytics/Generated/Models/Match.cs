@@ -17,6 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>
         /// <param name="length"> Length (in Unicode characters) for the entity match text. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal Match(double score, string text, int offset, int length)
         {
             if (text == null)

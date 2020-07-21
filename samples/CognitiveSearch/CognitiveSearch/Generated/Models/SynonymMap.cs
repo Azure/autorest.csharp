@@ -15,6 +15,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of SynonymMap. </summary>
         /// <param name="name"> The name of the synonym map. </param>
         /// <param name="synonyms"> A series of synonym rules in the specified synonym map format. The rules must be separated by newlines. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="synonyms"/> is null. </exception>
         public SynonymMap(string name, string synonyms)
         {
             if (name == null)

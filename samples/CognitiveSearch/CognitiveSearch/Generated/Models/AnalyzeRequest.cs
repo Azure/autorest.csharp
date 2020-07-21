@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of AnalyzeRequest. </summary>
         /// <param name="text"> The text to break into tokens. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         public AnalyzeRequest(string text)
         {
             if (text == null)

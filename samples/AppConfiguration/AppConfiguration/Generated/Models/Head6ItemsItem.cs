@@ -16,6 +16,7 @@ namespace AppConfiguration.Models
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="Head6ItemsItem"/> values are the same. </summary>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Head6ItemsItem(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

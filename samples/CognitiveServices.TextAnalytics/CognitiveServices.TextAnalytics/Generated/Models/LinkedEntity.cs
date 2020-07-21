@@ -20,6 +20,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="language"> Language used in the data source. </param>
         /// <param name="url"> URL for the entity&apos;s page from the data source. </param>
         /// <param name="dataSource"> Data source used to extract entity linking, such as Wiki/Bing etc. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="matches"/>, <paramref name="language"/>, <paramref name="url"/>, or <paramref name="dataSource"/> is null. </exception>
         internal LinkedEntity(string name, IEnumerable<Match> matches, string language, string url, string dataSource)
         {
             if (name == null)

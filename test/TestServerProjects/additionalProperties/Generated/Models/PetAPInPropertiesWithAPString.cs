@@ -18,6 +18,7 @@ namespace additionalProperties.Models
         /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
         /// <param name="id"> . </param>
         /// <param name="odataLocation"> . </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="odataLocation"/> is null. </exception>
         public PetAPInPropertiesWithAPString(int id, string odataLocation)
         {
             if (odataLocation == null)

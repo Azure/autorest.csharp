@@ -16,6 +16,7 @@ namespace Very.Custom.Namespace.From.Swagger
         private readonly string _value;
 
         /// <summary> Determines if two <see cref="EnumWithCustomNamespace"/> values are the same. </summary>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public EnumWithCustomNamespace(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));

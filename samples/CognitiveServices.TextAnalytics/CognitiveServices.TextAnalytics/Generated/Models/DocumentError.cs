@@ -15,6 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentError. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="error"/> is null. </exception>
         internal DocumentError(string id, TextAnalyticsError error)
         {
             if (id == null)

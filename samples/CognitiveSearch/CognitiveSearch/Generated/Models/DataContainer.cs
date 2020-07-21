@@ -14,6 +14,7 @@ namespace CognitiveSearch.Models
     {
         /// <summary> Initializes a new instance of DataContainer. </summary>
         /// <param name="name"> The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public DataContainer(string name)
         {
             if (name == null)

@@ -30,7 +30,7 @@ namespace required_optional
         /// <param name="requiredGlobalQuery"> number of items to skip. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="optionalGlobalQuery"> number of items to skip. </param>
-        /// <exception cref="ArgumentNullException"> This occurs when one of the required arguments is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredGlobalPath"/> or <paramref name="requiredGlobalQuery"/> is null. </exception>
         public ImplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
             if (requiredGlobalPath == null)
@@ -67,6 +67,7 @@ namespace required_optional
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="pathParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pathParameter"/> is null. </exception>
         public async Task<Response> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default)
         {
             if (pathParameter == null)
@@ -88,6 +89,7 @@ namespace required_optional
         /// <summary> Test implicitly required path parameter. </summary>
         /// <param name="pathParameter"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="pathParameter"/> is null. </exception>
         public Response GetRequiredPath(string pathParameter, CancellationToken cancellationToken = default)
         {
             if (pathParameter == null)

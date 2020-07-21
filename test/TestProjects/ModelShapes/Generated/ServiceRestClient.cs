@@ -53,6 +53,7 @@ namespace ModelShapes
 
         /// <param name="value"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response> InputAsync(InputModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
@@ -73,6 +74,7 @@ namespace ModelShapes
 
         /// <param name="value"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response Input(InputModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
@@ -109,6 +111,7 @@ namespace ModelShapes
 
         /// <param name="value"> The MixedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response<MixedModel>> MixedAsync(MixedModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
@@ -134,6 +137,7 @@ namespace ModelShapes
 
         /// <param name="value"> The MixedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response<MixedModel> Mixed(MixedModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)

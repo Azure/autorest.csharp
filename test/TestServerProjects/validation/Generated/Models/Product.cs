@@ -17,6 +17,7 @@ namespace validation.Models
         /// <summary> Initializes a new instance of Product. </summary>
         /// <param name="child"> The product documentation. </param>
         /// <param name="constChild"> The product documentation. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="child"/> or <paramref name="constChild"/> is null. </exception>
         public Product(ChildProduct child, ConstantProduct constChild)
         {
             if (child == null)

@@ -16,6 +16,7 @@ namespace CognitiveSearch.Models
         /// <param name="keyVaultKeyName"> The name of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultKeyVersion"> The version of your Azure Key Vault key to be used to encrypt your data at rest. </param>
         /// <param name="keyVaultUri"> The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="keyVaultKeyName"/>, <paramref name="keyVaultKeyVersion"/>, or <paramref name="keyVaultUri"/> is null. </exception>
         public EncryptionKey(string keyVaultKeyName, string keyVaultKeyVersion, string keyVaultUri)
         {
             if (keyVaultKeyName == null)

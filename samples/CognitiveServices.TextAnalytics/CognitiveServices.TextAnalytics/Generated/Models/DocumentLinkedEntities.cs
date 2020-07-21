@@ -17,6 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentLinkedEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized well-known entities in the document. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="entities"/> is null. </exception>
         internal DocumentLinkedEntities(string id, IEnumerable<LinkedEntity> entities)
         {
             if (id == null)

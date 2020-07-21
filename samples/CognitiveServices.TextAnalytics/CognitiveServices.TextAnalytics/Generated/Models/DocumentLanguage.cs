@@ -17,6 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="detectedLanguages"> A list of extracted languages. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="detectedLanguages"/> is null. </exception>
         internal DocumentLanguage(string id, IEnumerable<DetectedLanguage> detectedLanguages)
         {
             if (id == null)

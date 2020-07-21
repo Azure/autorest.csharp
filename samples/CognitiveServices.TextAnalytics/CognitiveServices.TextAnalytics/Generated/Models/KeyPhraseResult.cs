@@ -18,6 +18,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="documents"/>, <paramref name="errors"/>, or <paramref name="modelVersion"/> is null. </exception>
         internal KeyPhraseResult(IEnumerable<DocumentKeyPhrases> documents, IEnumerable<DocumentError> errors, string modelVersion)
         {
             if (documents == null)

@@ -73,10 +73,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
-            if (restClient.Parameters.HasAnyNullCheck())
-            {
-                writer.WriteXmlDocumentationException(typeof(ArgumentNullException), "This occurs when one of the required arguments is null.");
-            }
+
+            writer.WriteXmlDocumentationRequiredParametersException(restClient.Parameters);
 
             writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} {ClientDiagnosticsVariable}, {typeof(HttpPipeline)} {PipelineVariable},");
             foreach (Parameter clientParameter in restClient.Parameters)
@@ -279,6 +277,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
             var methodName = CreateMethodName(operation.Name, async);
             var asyncText = async ? "async" : string.Empty;

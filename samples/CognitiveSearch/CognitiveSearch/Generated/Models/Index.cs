@@ -18,6 +18,7 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of Index. </summary>
         /// <param name="name"> The name of the index. </param>
         /// <param name="fields"> The fields of the index. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="fields"/> is null. </exception>
         public Index(string name, IEnumerable<Field> fields)
         {
             if (name == null)

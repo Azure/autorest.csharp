@@ -14,6 +14,7 @@ namespace required_optional.Models
     {
         /// <summary> Initializes a new instance of ClassWrapper. </summary>
         /// <param name="value"> . </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ClassWrapper(Product value)
         {
             if (value == null)
