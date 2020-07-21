@@ -773,6 +773,8 @@ namespace Azure.Service.Models
 }
 ```
 
+</details>
+
 ### Change model namespace or accessability in bulk
 
 **Generated code before:**
