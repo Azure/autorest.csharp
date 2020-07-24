@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
         /// <param name="deletedShareVersion"> Required. Identify the version of the deleted share that will be restored. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deletedShareName"/> or <paramref name="deletedShareVersion"/> is null. </exception>
-        internal DeletedShare(string deletedShareName, string deletedShareVersion)
+        public DeletedShare(string deletedShareName, string deletedShareVersion)
         {
             if (deletedShareName == null)
             {
