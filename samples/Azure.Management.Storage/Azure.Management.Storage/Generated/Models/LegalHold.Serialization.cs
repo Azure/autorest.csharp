@@ -29,7 +29,7 @@ namespace Azure.Management.Storage.Models
         internal static LegalHold DeserializeLegalHold(JsonElement element)
         {
             Optional<bool> hasLegalHold = default;
-            IList<string> tags = default;
+            IReadOnlyList<string> tags = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hasLegalHold"))

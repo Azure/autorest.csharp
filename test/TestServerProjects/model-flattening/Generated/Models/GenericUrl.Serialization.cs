@@ -5,36 +5,9 @@
 
 #nullable disable
 
-using System.Text.Json;
-using Azure.Core;
-
 namespace model_flattening.Models
 {
-    public partial class GenericUrl : IUtf8JsonSerializable
+    internal partial class GenericUrl
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Optional.IsDefined(GenericValue))
-            {
-                writer.WritePropertyName("generic_value");
-                writer.WriteStringValue(GenericValue);
-            }
-            writer.WriteEndObject();
-        }
-
-        internal static GenericUrl DeserializeGenericUrl(JsonElement element)
-        {
-            Optional<string> genericValue = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("generic_value"))
-                {
-                    genericValue = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new GenericUrl(genericValue.Value);
-        }
     }
 }

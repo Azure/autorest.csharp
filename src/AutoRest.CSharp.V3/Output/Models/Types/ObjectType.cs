@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _serializationBuilder = new SerializationBuilder();
             _usage = context.SchemaUsageProvider.GetUsage(_objectSchema);
 
-            var hasUsage = _usage != SchemaTypeUsage.None;
+            var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             yield return InitializationConstructor;
 
-            if (_usage == SchemaTypeUsage.Input)
+            if (!IncludeDeserializer)
             {
                 yield break;
             }
@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     Type.Name,
                     Type,
                     // inputs have public ctor by default
-                    "public",
+                    _usage.HasFlag(SchemaTypeUsage.Input) ? "public" : "internal",
                     null,
                     _typeFactory),
                 defaultCtorParameters.ToArray(),
@@ -272,7 +272,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
 
         public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
-        public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output) || _usage.HasFlag(SchemaTypeUsage.Error);
+        public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
 
         public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
@@ -452,8 +452,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     }
                     else
                     {
+                        // In mixed models required properties are not readonly
                         isReadOnly |= property.IsRequired &&
-                                      _usage == SchemaTypeUsage.Input;
+                                      _usage.HasFlag(SchemaTypeUsage.Input) &&
+                                     !_usage.HasFlag(SchemaTypeUsage.Output);
                     }
 
                     if (property.IsDiscriminator == true)

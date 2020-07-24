@@ -18,12 +18,12 @@ namespace AutoRest.CSharp.V3.Input
                 {
                     foreach (var operationResponse in operation.Responses)
                     {
-                        Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Output);
+                        Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
                     }
 
                     foreach (var operationResponse in operation.Exceptions)
                     {
-                        Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Error);
+                        Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Error | SchemaTypeUsage.Output);
                     }
 
                     foreach (var serviceRequest in operation.Requests)
@@ -32,11 +32,11 @@ namespace AutoRest.CSharp.V3.Input
                         {
                             if (parameter.Flattened == true)
                             {
-                                Apply(parameter.Schema, SchemaTypeUsage.FattenedParameters);
+                                Apply(parameter.Schema, SchemaTypeUsage.FattenedParameters | SchemaTypeUsage.Input, recurse: false);
                             }
                             else
                             {
-                                Apply(parameter.Schema, SchemaTypeUsage.Input);
+                                Apply(parameter.Schema, SchemaTypeUsage.Model | SchemaTypeUsage.Input);
                             }
                         }
                     }
@@ -44,9 +44,9 @@ namespace AutoRest.CSharp.V3.Input
             }
         }
 
-        private void Apply(Schema? schema, SchemaTypeUsage usage)
+        private void Apply(Schema? schema, SchemaTypeUsage usage, bool recurse = true)
         {
-            if (!(schema is ObjectSchema objectSchema))
+            if (schema == null)
             {
                 return;
             }
@@ -61,25 +61,41 @@ namespace AutoRest.CSharp.V3.Input
 
             _usages[schema] = newUsage;
 
-            foreach (var parent in objectSchema.Parents!.All)
+            if (!recurse)
             {
-                Apply(parent, usage);
+                return;
             }
 
-            foreach (var child in objectSchema.Children!.All)
+            if (schema is ObjectSchema objectSchema)
             {
-                Apply(child, usage);
-            }
-
-            foreach (var schemaProperty in objectSchema.Properties)
-            {
-                if (schemaProperty.IsReadOnly &&
-                    usage == SchemaTypeUsage.Input)
+                foreach (var parent in objectSchema.Parents!.All)
                 {
-                    continue;
+                    Apply(parent, usage);
                 }
 
-                Apply(schemaProperty.Schema, usage);
+                foreach (var child in objectSchema.Children!.All)
+                {
+                    Apply(child, usage);
+                }
+
+                foreach (var schemaProperty in objectSchema.Properties)
+                {
+                    if (schemaProperty.IsReadOnly &&
+                        usage.HasFlag(SchemaTypeUsage.Input))
+                    {
+                        continue;
+                    }
+
+                    Apply(schemaProperty.Schema, usage);
+                }
+            }
+            else if (schema is DictionarySchema dictionarySchema)
+            {
+                Apply(dictionarySchema.ElementType, usage);
+            }
+            else if (schema is ArraySchema arraySchema)
+            {
+                Apply(arraySchema.ElementType, usage);
             }
         }
 
@@ -96,7 +112,9 @@ namespace AutoRest.CSharp.V3.Input
         None = 0,
         Input = 1,
         Output = Input << 1,
-        Error = Output << 2,
-        FattenedParameters = Error << 2,
+
+        Model = Output << 1,
+        Error =  Model << 1,
+        FattenedParameters = Error << 1,
     }
 }

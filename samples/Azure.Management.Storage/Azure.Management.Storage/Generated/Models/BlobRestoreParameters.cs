@@ -18,7 +18,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobRanges"/> is null. </exception>
-        public BlobRestoreParameters(DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges)
+        internal BlobRestoreParameters(DateTimeOffset timeToRestore, IEnumerable<BlobRestoreRange> blobRanges)
         {
             if (blobRanges == null)
             {
@@ -32,15 +32,15 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of BlobRestoreParameters. </summary>
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
-        internal BlobRestoreParameters(DateTimeOffset timeToRestore, IList<BlobRestoreRange> blobRanges)
+        internal BlobRestoreParameters(DateTimeOffset timeToRestore, IReadOnlyList<BlobRestoreRange> blobRanges)
         {
             TimeToRestore = timeToRestore;
             BlobRanges = blobRanges;
         }
 
         /// <summary> Restore blob to the specified time. </summary>
-        public DateTimeOffset TimeToRestore { get; set; }
+        public DateTimeOffset TimeToRestore { get; }
         /// <summary> Blob ranges to restore. </summary>
-        public IList<BlobRestoreRange> BlobRanges { get; }
+        public IReadOnlyList<BlobRestoreRange> BlobRanges { get; }
     }
 }

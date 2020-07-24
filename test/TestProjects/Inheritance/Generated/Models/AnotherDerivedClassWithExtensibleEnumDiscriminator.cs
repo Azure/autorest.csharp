@@ -15,12 +15,5 @@ namespace Inheritance.Models
         {
             DiscriminatorProperty = new BaseClassWithEntensibleEnumDiscriminatorEnum("random value");
         }
-
-        /// <summary> Initializes a new instance of AnotherDerivedClassWithExtensibleEnumDiscriminator. </summary>
-        /// <param name="discriminatorProperty"> . </param>
-        internal AnotherDerivedClassWithExtensibleEnumDiscriminator(BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty) : base(discriminatorProperty)
-        {
-            DiscriminatorProperty = discriminatorProperty;
-        }
     }
 }

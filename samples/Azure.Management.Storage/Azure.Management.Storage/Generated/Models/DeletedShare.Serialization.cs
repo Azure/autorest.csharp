@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class DeletedShare : IUtf8JsonSerializable
+    internal partial class DeletedShare : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

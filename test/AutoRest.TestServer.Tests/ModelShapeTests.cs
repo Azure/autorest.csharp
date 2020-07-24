@@ -398,5 +398,28 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual(1, inputModel.RequiredIntList.Count);
         }
+
+        [Test]
+        public void ErrorModelsAreInternalWithDeserializers()
+        {
+            Assert.False(typeof(ErrorModel).IsPublic);
+            Assert.NotNull(typeof(ErrorModel).GetMethod("DeserializeErrorModel", BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+        [Test]
+        public void ReadOnlyPropertyOfMixedModelIsOutputOnly()
+        {
+            Assert.True(typeof(ReadonlyModel).IsPublic);
+            Assert.False(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
+            Assert.NotNull(typeof(ReadonlyModel).GetMethod("DeserializeReadonlyModel", BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+        [Test]
+        public void ModelsFlattenedIntoParametersAreInternal()
+        {
+            Assert.False(typeof(ReadonlyModel).IsPublic);
+            Assert.True(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
+            Assert.Null(typeof(ReadonlyModel).GetMethod("DeserializeReadonlyModel", BindingFlags.Static | BindingFlags.NonPublic));
+        }
     }
 }

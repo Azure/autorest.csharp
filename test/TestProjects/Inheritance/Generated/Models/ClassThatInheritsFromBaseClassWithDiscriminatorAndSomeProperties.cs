@@ -8,10 +8,10 @@
 namespace Inheritance.Models
 {
     /// <summary> The ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties. </summary>
-    internal partial class ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties : BaseClassWithDiscriminator
+    public partial class ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties : BaseClassWithDiscriminator
     {
         /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties. </summary>
-        internal ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties()
+        public ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties()
         {
             DiscriminatorProperty = "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties";
         }
@@ -28,7 +28,7 @@ namespace Inheritance.Models
             DiscriminatorProperty = discriminatorProperty ?? "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties";
         }
 
-        public string SomeProperty { get; }
-        public string SomeOtherProperty { get; }
+        public string SomeProperty { get; set; }
+        public string SomeOtherProperty { get; set; }
     }
 }
