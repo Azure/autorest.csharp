@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private readonly ObjectSchema _objectSchema;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
+        private readonly SchemaTypeUsage _usage;
 
         private ObjectTypeProperty[]? _properties;
         private ObjectTypeDiscriminator? _discriminator;
@@ -40,8 +41,10 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _objectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
+            _usage = context.SchemaUsageProvider.GetUsage(_objectSchema);
 
-            var hasUsage = objectSchema.Usage.Any() && !objectSchema.IsExceptionOnly;
+            var hasUsage = _usage != SchemaTypeUsage.None;
+
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
             DefaultName = objectSchema.CSharpName();
@@ -94,7 +97,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             yield return InitializationConstructor;
 
-            if (_objectSchema.IsInputOnly)
+            if (_usage == SchemaTypeUsage.Input)
             {
                 yield break;
             }
@@ -255,7 +258,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     Type.Name,
                     Type,
                     // inputs have public ctor by default
-                    _objectSchema.IsInput ? "public" : "internal",
+                    "public",
                     null,
                     _typeFactory),
                 defaultCtorParameters.ToArray(),
@@ -268,8 +271,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
 
 
-        public bool IncludeSerializer => _objectSchema.IsInput;
-        public bool IncludeDeserializer => _objectSchema.IsOutput || _objectSchema.IsException;
+        public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
+        public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output) || _usage.HasFlag(SchemaTypeUsage.Error);
 
         public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
@@ -440,7 +443,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     bool isCollection = TypeFactory.IsCollectionType(type);
 
                     bool isReadOnly = IsStruct ||
-                                      !objectSchema.IsInput ||
+                                      !_usage.HasFlag(SchemaTypeUsage.Input) ||
                                       property.IsReadOnly;
 
                     if (isCollection)
@@ -449,7 +452,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     }
                     else
                     {
-                        isReadOnly |= property.IsRequired && objectSchema.IsInputOnly;
+                        isReadOnly |= property.IsRequired &&
+                                      _usage == SchemaTypeUsage.Input;
                     }
 
                     if (property.IsDiscriminator == true)
@@ -478,7 +482,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable);
 
-            if (!_objectSchema.IsInput)
+            if (!_usage.HasFlag(SchemaTypeUsage.Input))
             {
                 valueType = TypeFactory.GetOutputType(valueType);
             }
@@ -543,7 +547,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 if (complexSchema is DictionarySchema dictionarySchema)
                 {
                     return new CSharpType(
-                        _objectSchema.IsInput ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
+                        _usage.HasFlag(SchemaTypeUsage.Input) ? typeof(IDictionary<,>) : typeof(IReadOnlyDictionary<,>),
                         typeof(string),
                         _typeFactory.CreateType(dictionarySchema.ElementType, false));
                 };
