@@ -429,9 +429,9 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelsFlattenedIntoParametersAreInternal()
         {
-            Assert.False(typeof(ReadonlyModel).IsPublic);
-            Assert.True(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
-            Assert.Null(typeof(ReadonlyModel).GetMethod("DeserializeReadonlyModel", BindingFlags.Static | BindingFlags.NonPublic));
+            Assert.False(typeof(ParametersModel).IsPublic);
+            Assert.False(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
+            Assert.Null(typeof(ReadonlyModel).GetMethod("DeserializeParametersModel", BindingFlags.Static | BindingFlags.NonPublic));
         }
     }
 }
