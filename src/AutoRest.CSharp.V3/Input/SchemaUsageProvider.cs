@@ -80,13 +80,14 @@ namespace AutoRest.CSharp.V3.Input
 
                 foreach (var schemaProperty in objectSchema.Properties)
                 {
-                    if (schemaProperty.IsReadOnly &&
-                        usage.HasFlag(SchemaTypeUsage.Input))
+                    var propertyUsage = usage;
+
+                    if (schemaProperty.IsReadOnly)
                     {
-                        continue;
+                        propertyUsage &= ~SchemaTypeUsage.Input;
                     }
 
-                    Apply(schemaProperty.Schema, usage);
+                    Apply(schemaProperty.Schema, propertyUsage);
                 }
             }
             else if (schema is DictionarySchema dictionarySchema)
