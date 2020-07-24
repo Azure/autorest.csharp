@@ -329,7 +329,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_51
+    - !<!ConstantSchema> &ref_52
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -340,7 +340,7 @@ schemas: !<!Schemas>
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_52
+    - !<!ObjectSchema> &ref_53
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -576,7 +576,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_54
+    - !<!ObjectSchema> &ref_55
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -608,7 +608,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_55
+    - !<!ObjectSchema> &ref_56
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -837,7 +837,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_57
+    - !<!ObjectSchema> &ref_58
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1065,7 +1065,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_58
+    - !<!ObjectSchema> &ref_59
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1104,6 +1104,25 @@ schemas: !<!Schemas>
               name: readonlyProperty
               description: ''
           protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: !<!ArraySchema> &ref_50
+            type: array
+            apiVersions:
+              - !<!ApiVersion> 
+                version: 1.0.0
+            elementType: *ref_34
+            language: !<!Languages> 
+              default:
+                name: MixedModelWithReadonlyPropertyReadonlyListProperty
+                description: Array of ReadonlyModel
+            protocol: !<!Protocols> {}
+          readOnly: true
+          serializedName: ReadonlyListProperty
+          language: !<!Languages> 
+            default:
+              name: readonlyListProperty
+              description: ''
+          protocol: !<!Protocols> {}
       serializationFormats:
         - json
       usage:
@@ -1116,13 +1135,13 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_34
-    - !<!ObjectSchema> &ref_60
+    - !<!ObjectSchema> &ref_61
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
-        - !<!Property> &ref_62
+        - !<!Property> &ref_63
           schema: *ref_35
           serializedName: Code
           language: !<!Languages> 
@@ -1130,7 +1149,7 @@ schemas: !<!Schemas>
               name: code
               description: ''
           protocol: !<!Protocols> {}
-        - !<!Property> &ref_63
+        - !<!Property> &ref_64
           schema: *ref_36
           serializedName: Status
           language: !<!Languages> 
@@ -1185,8 +1204,9 @@ schemas: !<!Schemas>
     - *ref_47
     - *ref_48
     - *ref_49
+    - *ref_50
 globalParameters:
-  - !<!Parameter> &ref_50
+  - !<!Parameter> &ref_51
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -1211,12 +1231,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_50
+          - *ref_51
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_51
+                schema: *ref_52
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -1228,8 +1248,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_53
-                schema: *ref_52
+              - !<!Parameter> &ref_54
+                schema: *ref_53
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -1241,7 +1261,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_53
+              - *ref_54
             language: !<!Languages> 
               default:
                 name: ''
@@ -1267,7 +1287,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_54
+            schema: *ref_55
             language: !<!Languages> 
               default:
                 name: ''
@@ -1289,12 +1309,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_50
+          - *ref_51
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_51
+                schema: *ref_52
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -1306,8 +1326,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_56
-                schema: *ref_55
+              - !<!Parameter> &ref_57
+                schema: *ref_56
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -1319,7 +1339,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_56
+              - *ref_57
             language: !<!Languages> 
               default:
                 name: ''
@@ -1335,7 +1355,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_55
+            schema: *ref_56
             language: !<!Languages> 
               default:
                 name: ''
@@ -1357,7 +1377,7 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_50
+          - *ref_51
         requests:
           - !<!Request> 
             language: !<!Languages> 
@@ -1372,7 +1392,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_57
+            schema: *ref_58
             language: !<!Languages> 
               default:
                 name: ''
@@ -1394,12 +1414,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_50
+          - *ref_51
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_51
+                schema: *ref_52
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -1411,8 +1431,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_59
-                schema: *ref_58
+              - !<!Parameter> &ref_60
+                schema: *ref_59
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -1424,7 +1444,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_59
+              - *ref_60
             language: !<!Languages> 
               default:
                 name: ''
@@ -1440,7 +1460,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_58
+            schema: *ref_59
             language: !<!Languages> 
               default:
                 name: ''
@@ -1462,12 +1482,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_50
+          - *ref_51
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_51
+                schema: *ref_52
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -1479,8 +1499,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_61
-                schema: *ref_60
+              - !<!Parameter> &ref_62
+                schema: *ref_61
                 flattened: true
                 implementation: Method
                 required: true
@@ -1494,31 +1514,31 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
-              - !<!VirtualParameter> &ref_64
+              - !<!VirtualParameter> &ref_65
                 schema: *ref_35
                 implementation: Method
-                originalParameter: *ref_61
+                originalParameter: *ref_62
                 pathToProperty: []
-                targetProperty: *ref_62
+                targetProperty: *ref_63
                 language: !<!Languages> 
                   default:
                     name: code
                     description: ''
                 protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_65
+              - !<!VirtualParameter> &ref_66
                 schema: *ref_36
                 implementation: Method
-                originalParameter: *ref_61
+                originalParameter: *ref_62
                 pathToProperty: []
-                targetProperty: *ref_63
+                targetProperty: *ref_64
                 language: !<!Languages> 
                   default:
                     name: status
                     description: ''
                 protocol: !<!Protocols> {}
             signatureParameters:
-              - *ref_64
               - *ref_65
+              - *ref_66
             language: !<!Languages> 
               default:
                 name: ''

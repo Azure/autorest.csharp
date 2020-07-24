@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -21,6 +22,7 @@ namespace ModelShapes.Models
         internal static MixedModelWithReadonlyProperty DeserializeMixedModelWithReadonlyProperty(JsonElement element)
         {
             Optional<ReadonlyModel> readonlyProperty = default;
+            Optional<IReadOnlyList<ReadonlyModel>> readonlyListProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ReadonlyProperty"))
@@ -28,8 +30,18 @@ namespace ModelShapes.Models
                     readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value);
                     continue;
                 }
+                if (property.NameEquals("ReadonlyListProperty"))
+                {
+                    List<ReadonlyModel> array = new List<ReadonlyModel>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(ReadonlyModel.DeserializeReadonlyModel(item));
+                    }
+                    readonlyListProperty = array;
+                    continue;
+                }
             }
-            return new MixedModelWithReadonlyProperty(readonlyProperty.Value);
+            return new MixedModelWithReadonlyProperty(readonlyProperty.Value, Optional.ToList(readonlyListProperty));
         }
     }
 }

@@ -246,6 +246,11 @@
         "ReadonlyProperty": {
           "$ref": "#/definitions/ReadonlyModel",
           "readOnly": true
+        },
+        "ReadonlyListProperty": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ReadonlyModel" },
+          "readOnly": true
         }
       }
     },

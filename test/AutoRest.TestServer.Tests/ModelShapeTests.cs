@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
@@ -407,11 +408,22 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void ReadOnlyPropertyOfMixedModelIsOutputOnly()
+        public void ReadOnlyPropertyTypesOfMixedModelIsOutputOnly()
         {
             Assert.True(typeof(ReadonlyModel).IsPublic);
             Assert.False(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
             Assert.NotNull(typeof(ReadonlyModel).GetMethod("DeserializeReadonlyModel", BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+        [Test]
+        public void ReadlyPropertiesOfAreReadOnly()
+        {
+            var property = TypeAsserts.HasProperty(typeof(MixedModelWithReadonlyProperty), "ReadonlyProperty", BindingFlags.Public | BindingFlags.Instance);
+            var listProperty = TypeAsserts.HasProperty(typeof(MixedModelWithReadonlyProperty), "ReadonlyListProperty", BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.Null(property.SetMethod);
+            Assert.Null(listProperty.SetMethod);
+            Assert.AreEqual(typeof(IReadOnlyList<ReadonlyModel>), listProperty.PropertyType);
         }
 
         [Test]

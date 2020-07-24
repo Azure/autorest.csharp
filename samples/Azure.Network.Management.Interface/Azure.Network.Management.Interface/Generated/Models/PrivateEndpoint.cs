@@ -33,7 +33,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="provisioningState"> The provisioning state of the private endpoint resource. </param>
         /// <param name="privateLinkServiceConnections"> A grouping of information about the connection to the remote resource. </param>
         /// <param name="manualPrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </param>
-        internal PrivateEndpoint(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, Subnet subnet, IList<NetworkInterface> networkInterfaces, ProvisioningState? provisioningState, IList<PrivateLinkServiceConnection> privateLinkServiceConnections, IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections) : base(id, name, type, location, tags)
+        internal PrivateEndpoint(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, Subnet subnet, IReadOnlyList<NetworkInterface> networkInterfaces, ProvisioningState? provisioningState, IList<PrivateLinkServiceConnection> privateLinkServiceConnections, IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections) : base(id, name, type, location, tags)
         {
             Etag = etag;
             Subnet = subnet;
@@ -48,7 +48,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> The ID of the subnet from which the private IP will be allocated. </summary>
         public Subnet Subnet { get; set; }
         /// <summary> An array of references to the network interfaces created for this private endpoint. </summary>
-        public IList<NetworkInterface> NetworkInterfaces { get; }
+        public IReadOnlyList<NetworkInterface> NetworkInterfaces { get; }
         /// <summary> The provisioning state of the private endpoint resource. </summary>
         public ProvisioningState? ProvisioningState { get; }
         /// <summary> A grouping of information about the connection to the remote resource. </summary>

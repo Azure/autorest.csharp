@@ -484,7 +484,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         {
             var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable);
 
-            if (!_usage.HasFlag(SchemaTypeUsage.Input))
+            if (!_usage.HasFlag(SchemaTypeUsage.Input) ||
+                property.IsReadOnly)
             {
                 valueType = TypeFactory.GetOutputType(valueType);
             }
