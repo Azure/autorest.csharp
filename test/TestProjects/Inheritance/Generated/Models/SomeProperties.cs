@@ -8,10 +8,10 @@
 namespace Inheritance.Models
 {
     /// <summary> The SomeProperties. </summary>
-    internal partial class SomeProperties
+    public partial class SomeProperties
     {
         /// <summary> Initializes a new instance of SomeProperties. </summary>
-        internal SomeProperties()
+        public SomeProperties()
         {
         }
 
@@ -24,7 +24,7 @@ namespace Inheritance.Models
             SomeOtherProperty = someOtherProperty;
         }
 
-        public string SomeProperty { get; }
-        public string SomeOtherProperty { get; }
+        public string SomeProperty { get; set; }
+        public string SomeOtherProperty { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace Inheritance.Models
     internal partial class ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride : SomeProperties
     {
         /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride. </summary>
-        internal ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride()
+        public ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride()
         {
         }
 
@@ -24,6 +24,6 @@ namespace Inheritance.Models
             BaseClassProperty = baseClassProperty;
         }
 
-        public string BaseClassProperty { get; }
+        public string BaseClassProperty { get; set; }
     }
 }

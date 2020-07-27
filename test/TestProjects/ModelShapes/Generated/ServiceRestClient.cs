@@ -210,5 +210,126 @@ namespace ModelShapes
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateMixedreadonlyRequest(MixedModelWithReadonlyProperty value)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/op2", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(value);
+            request.Content = content;
+            return message;
+        }
+
+        /// <param name="value"> The MixedModelWithReadonlyProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
+        public async Task<Response<MixedModelWithReadonlyProperty>> MixedreadonlyAsync(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            using var message = CreateMixedreadonlyRequest(value);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        MixedModelWithReadonlyProperty value0 = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value0 = MixedModelWithReadonlyProperty.DeserializeMixedModelWithReadonlyProperty(document.RootElement);
+                        return Response.FromValue(value0, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="value"> The MixedModelWithReadonlyProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
+        public Response<MixedModelWithReadonlyProperty> Mixedreadonly(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            using var message = CreateMixedreadonlyRequest(value);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        MixedModelWithReadonlyProperty value0 = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value0 = MixedModelWithReadonlyProperty.DeserializeMixedModelWithReadonlyProperty(document.RootElement);
+                        return Response.FromValue(value0, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateFlattenedParameterOperationRequest(string code, string status)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/op3", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var model = new ParametersModel()
+            {
+                Code = code,
+                Status = status
+            };
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(model);
+            request.Content = content;
+            return message;
+        }
+
+        /// <param name="code"> The ParametersModelCode to use. </param>
+        /// <param name="status"> The ParametersModelStatus to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> FlattenedParameterOperationAsync(string code = null, string status = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateFlattenedParameterOperationRequest(code, status);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="code"> The ParametersModelCode to use. </param>
+        /// <param name="status"> The ParametersModelStatus to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response FlattenedParameterOperation(string code = null, string status = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateFlattenedParameterOperationRequest(code, status);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }

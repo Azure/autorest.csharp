@@ -10,7 +10,7 @@ using System;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The parameters used to check the availability of the storage account name. </summary>
-    public partial class StorageAccountCheckNameAvailabilityParameters
+    internal partial class StorageAccountCheckNameAvailabilityParameters
     {
         /// <summary> Initializes a new instance of StorageAccountCheckNameAvailabilityParameters. </summary>
         /// <param name="name"> The storage account name. </param>

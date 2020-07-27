@@ -4,6 +4,13 @@ info: !<!Info>
   title: Schema mapping
 schemas: !<!Schemas> 
   strings:
+    - !<!StringSchema> &ref_0
+      type: string
+      language: !<!Languages> 
+        default:
+          name: String
+          description: simple string
+      protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_16
       type: string
       apiVersions:
@@ -74,13 +81,6 @@ schemas: !<!Schemas>
           name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAPropertyBaseClassProperty
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_0
-      type: string
-      language: !<!Languages> 
-        default:
-          name: String
-          description: simple string
-      protocol: !<!Protocols> {}
   choices:
     - !<!ChoiceSchema> &ref_25
       choices:
@@ -131,6 +131,17 @@ schemas: !<!Schemas>
           name: BaseClassWithEnumDiscriminatorEnum
           description: ''
       protocol: !<!Protocols> {}
+  constants:
+    - !<!ConstantSchema> &ref_28
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !<!Protocols> {}
   objects:
     - !<!ObjectSchema> &ref_2
       type: object
@@ -158,6 +169,11 @@ schemas: !<!Schemas>
                       - *ref_2
                     immediate:
                       - *ref_1
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
                   language: !<!Languages> 
                     default:
                       name: ClassThatInheritsFromBaseClassWithDiscriminator
@@ -192,6 +208,11 @@ schemas: !<!Schemas>
                                 immediate:
                                   - *ref_2
                                   - *ref_3
+                              serializationFormats:
+                                - json
+                              usage:
+                                - input
+                                - output
                               language: !<!Languages> 
                                 default:
                                   name: ClassThatInheritsFromBaseClassAndSomeProperties
@@ -210,6 +231,11 @@ schemas: !<!Schemas>
                                 immediate:
                                   - *ref_2
                                   - *ref_3
+                              serializationFormats:
+                                - json
+                              usage:
+                                - input
+                                - output
                               language: !<!Languages> 
                                 default:
                                   name: ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride
@@ -236,6 +262,11 @@ schemas: !<!Schemas>
                                         - *ref_2
                                       immediate:
                                         - *ref_5
+                                    serializationFormats:
+                                      - json
+                                    usage:
+                                      - input
+                                      - output
                                     language: !<!Languages> 
                                       default:
                                         name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAProperty
@@ -251,6 +282,11 @@ schemas: !<!Schemas>
                                 immediate:
                                   - *ref_3
                                   - *ref_2
+                              serializationFormats:
+                                - json
+                              usage:
+                                - input
+                                - output
                               language: !<!Languages> 
                                 default:
                                   name: ClassThatInheritsFromSomePropertiesAndBaseClass
@@ -280,6 +316,11 @@ schemas: !<!Schemas>
                                 name: someOtherProperty
                                 description: ''
                             protocol: !<!Protocols> {}
+                        serializationFormats:
+                          - json
+                        usage:
+                          - input
+                          - output
                         language: !<!Languages> 
                           default:
                             name: SomeProperties
@@ -290,6 +331,11 @@ schemas: !<!Schemas>
                     immediate:
                       - *ref_1
                       - *ref_3
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
                   language: !<!Languages> 
                     default:
                       name: ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties
@@ -324,6 +370,11 @@ schemas: !<!Schemas>
                 - *ref_2
             properties:
               - *ref_13
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
             language: !<!Languages> 
               default:
                 name: BaseClassWithDiscriminator
@@ -342,6 +393,11 @@ schemas: !<!Schemas>
                 - *ref_2
               immediate:
                 - *ref_2
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
             language: !<!Languages> 
               default:
                 name: ClassThatInheritsFromBaseClass
@@ -360,6 +416,11 @@ schemas: !<!Schemas>
                 - *ref_2
               immediate:
                 - *ref_2
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
             language: !<!Languages> 
               default:
                 name: ClassThatInheritsFromBaseClassAndRedefinesAProperty
@@ -384,6 +445,11 @@ schemas: !<!Schemas>
               name: baseClassProperty
               description: ''
           protocol: !<!Protocols> {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
       language: !<!Languages> 
         default:
           name: BaseClass
@@ -547,7 +613,100 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     - *ref_23
     - *ref_24
-operationGroups: []
+globalParameters:
+  - !<!Parameter> &ref_27
+    schema: *ref_0
+    clientDefaultValue: 'http://localhost:3000'
+    implementation: Client
+    origin: 'modelerfour:synthesized/host'
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !<!Languages> 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !<!Protocols> 
+      http: !<!HttpParameter> 
+        in: uri
+operationGroups:
+  - !<!OperationGroup> 
+    $key: ''
+    operations:
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_27
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_28
+                implementation: Method
+                origin: 'modelerfour:synthesized/content-type'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!Parameter> &ref_29
+                schema: *ref_2
+                implementation: Method
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: value
+                    description: ''
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_29
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpWithBodyRequest> 
+                path: /op
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!SchemaResponse> 
+            schema: *ref_2
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !<!Languages> 
+          default:
+            name: Mixed
+            description: ''
+        protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: ''
+        description: ''
+    protocol: !<!Protocols> {}
 security: !<!Security> 
   authenticationRequired: false
 language: !<!Languages> 

@@ -15,13 +15,6 @@ namespace Inheritance.Models
         {
         }
 
-        /// <summary> Initializes a new instance of ClassThatAlsoDefinesBaseClassProperty. </summary>
-        /// <param name="baseClassProperty"> . </param>
-        internal ClassThatAlsoDefinesBaseClassProperty(string baseClassProperty)
-        {
-            BaseClassProperty = baseClassProperty;
-        }
-
         public string BaseClassProperty { get; }
     }
 }

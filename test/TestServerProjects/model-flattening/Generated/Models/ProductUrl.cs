@@ -8,22 +8,14 @@
 namespace model_flattening.Models
 {
     /// <summary> The product URL. </summary>
-    public partial class ProductUrl : GenericUrl
+    internal partial class ProductUrl : GenericUrl
     {
         /// <summary> Initializes a new instance of ProductUrl. </summary>
-        public ProductUrl()
+        internal ProductUrl()
         {
-        }
-
-        /// <summary> Initializes a new instance of ProductUrl. </summary>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
-        internal ProductUrl(string genericValue, string odataValue) : base(genericValue)
-        {
-            OdataValue = odataValue;
         }
 
         /// <summary> URL value. </summary>
-        public string OdataValue { get; set; }
+        public string OdataValue { get; }
     }
 }
