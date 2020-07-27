@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -263,6 +264,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 double d => SyntaxFactory.Literal(d).ToString(),
                 float f => SyntaxFactory.Literal(f).ToString(),
                 bool b => b ? "true" : "false",
+                EnumTypeValue enumTypeValue => enumTypeValue.Declaration.Type.Name + "." + enumTypeValue.Declaration.Name,
                 _ => throw new NotImplementedException()
             });
         }

@@ -86,7 +86,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks(restClient.Parameters);
+                foreach (var parameter in restClient.Parameters)
+                {
+                    writer.WriteParameterNullChecks(parameter);
+                }
+                writer.Line();
 
                 foreach (Parameter clientParameter in restClient.Parameters)
                 {
@@ -291,7 +295,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks(parameters);
+                foreach (var parameter in parameters)
+                {
+                    writer.WriteParameterNullChecks(parameter);
+                }
+                writer.Line();
 
                 var messageVariable = new CodeWriterDeclaration("message");
                 var requestMethodName = CreateRequestMethodName(operation.Name);

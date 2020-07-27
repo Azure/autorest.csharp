@@ -32,7 +32,13 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             var isRequired = requestParameter.Required == true;
             var defaultValue = ParseConstant(requestParameter);
-            if (!isRequired && defaultValue == null)
+
+            if (defaultValue != null && TypeFactory.IsStruct(type))
+            {
+                type = type.WithNullable(true);
+            }
+
+            if (!isRequired && defaultValue == null && !TypeFactory.IsStruct(type))
             {
                 defaultValue = Constant.Default(type);
             }

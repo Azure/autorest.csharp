@@ -78,6 +78,13 @@ namespace AutoRest.CSharp.V3.Generation.Types
             return type;
         }
 
+        public static bool IsStruct(CSharpType type)
+        {
+            return !type.IsFrameworkType && type.IsValueType &&
+                type.Implementation is EnumType enumType &&
+                enumType.IsExtendable;
+        }
+
         public static CSharpType GetElementType(CSharpType type)
         {
             if (type.IsFrameworkType)

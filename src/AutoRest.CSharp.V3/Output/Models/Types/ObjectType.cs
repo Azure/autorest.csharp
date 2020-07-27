@@ -195,6 +195,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 ReferenceOrConstant? initializationValue;
 
+                // For structs all properties become required
+                Constant? defaultParameterValue = null;
+
                 var propertyType = property.Declaration.Type;
                 if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
                 {
@@ -205,17 +208,21 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 }
                 else if (IsStruct || property.SchemaProperty?.IsRequired == true)
                 {
-                    // For structs all properties become required
-                    Constant? defaultParameterValue = null;
                     if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
                     {
                         defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
                     }
 
+                    var inputType = TypeFactory.GetInputType(propertyType);
+                    if (defaultParameterValue != null && TypeFactory.IsStruct(property.ValueType))
+                    {
+                        inputType = inputType.WithNullable(true);
+                    }
+
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
                         property.Description,
-                        TypeFactory.GetInputType(propertyType),
+                        inputType,
                         defaultParameterValue,
                         property.SchemaProperty?.Nullable != true
                     );
@@ -235,7 +242,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 if (initializationValue != null)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultParameterValue));
                 }
             }
 

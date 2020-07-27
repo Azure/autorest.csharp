@@ -14,8 +14,7 @@ using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
-using Microsoft.CodeAnalysis.Options;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -51,13 +50,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.AppendRaw(",");
         }
 
-        public static void WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        public static void WriteParameterNullChecks(this CodeWriter writer, Parameter parameter)
         {
-            foreach (Parameter parameter in parameters)
-            {
                 if (parameter.DefaultValue != null && !CanBeInitializedInline(parameter))
                 {
-                    writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
+                    if (TypeFactory.IsStruct(parameter.Type))
+                    {
+                        writer.Line($"{parameter.Name} = {parameter.Name} ?? {parameter.DefaultValue.Value.Value:L};");
+                    }
+                    else
+                    {
+                        writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
+                    }
                 }
                 else if (CanWriteNullCheck(parameter))
                 {
@@ -66,10 +70,34 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
                     }
                 }
-            }
-
-            writer.Line();
         }
+
+        //public static void WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        //{
+        //    foreach (Parameter parameter in parameters)
+        //    {
+        //        if (parameter.DefaultValue != null && !CanBeInitializedInline(parameter))
+        //        {
+        //            if (parameter.Type.IsValueType && parameter.Type.Implementation is EnumType enumType && enumType.IsExtendable)
+        //            {
+        //                   writer.Line($"{parameter.Name} = {parameter.Name} ?? {parameter.DefaultValue.Value.Value:L};");
+        //            }
+        //            else
+        //            {
+        //                writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
+        //            }
+        //        }
+        //        else if (CanWriteNullCheck(parameter))
+        //        {
+        //            using (writer.Scope($"if ({parameter.Name:I} == null)"))
+        //            {
+        //                writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
+        //            }
+        //        }
+        //    }
+
+        //    writer.Line();
+        //}
 
         private static bool CanBeInitializedInline(Parameter parameter)
         {
@@ -78,6 +106,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (parameter.Type.IsFrameworkType && parameter.Type.FrameworkType == typeof(string))
             {
                 return true;
+            }
+
+            if (TypeFactory.IsStruct(parameter.Type))
+            {
+                return false;
             }
 
             return parameter.Type.IsValueType || parameter.DefaultValue.Value.Value == null;
@@ -89,7 +122,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
 
-        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [NotNullWhen(true)] out IReadOnlyCollection<Parameter>? requiredParameters)
+        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out IReadOnlyCollection<Parameter>? requiredParameters)
         {
             var required = parameters
                 .Where(p => HasNullCheck(p))
@@ -135,13 +168,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             Type frameworkType = constant.Type.FrameworkType;
             if (frameworkType == typeof(DateTimeOffset))
             {
-                var d = (DateTimeOffset) constant.Value;
+                var d = (DateTimeOffset)constant.Value;
                 d = d.ToUniversalTime();
                 writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
             }
             else if (frameworkType == typeof(byte[]))
             {
-                var value = (byte[]) constant.Value;
+                var value = (byte[])constant.Value;
                 writer.Append($"new byte[] {{");
                 foreach (byte b in value)
                 {
@@ -229,7 +262,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 foreach (var constructorParameter in constructor.Parameters)
                 {
                     var objectPropertyInitializer = FindInitializerForParameter(constructor, constructorParameter);
-                    if (objectPropertyInitializer == null) return null;
+                    if (objectPropertyInitializer == null)
+                        return null;
 
                     constructorInitializers.Add(objectPropertyInitializer.Value);
                 }
@@ -372,7 +406,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 property.SchemaProperty != null &&
                 !property.SchemaProperty.IsRequired)
             {
-                var method = TypeFactory.IsCollectionType(property.Declaration.Type) ? nameof(Optional.IsCollectionDefined): nameof(Optional.IsDefined);
+                var method = TypeFactory.IsCollectionType(property.Declaration.Type) ? nameof(Optional.IsCollectionDefined) : nameof(Optional.IsDefined);
 
                 var propertyName = property!.Declaration.Name;
                 return writer.Scope($"if ({typeof(Optional)}.{method}({propertyName:I}))");
