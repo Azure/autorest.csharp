@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using AppConfiguration.Models;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -18,1579 +20,1227 @@ namespace AppConfiguration
 {
     internal partial class ServiceRestClient
     {
-        private string endpoint;
-        private string syncToken;
-        private string apiVersion;
+        private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The endpoint of the App Configuration instance to send requests to. </param>
-        /// <param name="syncToken"> Used to guarantee real-time consistency between requests. </param>
-        /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string syncToken = null, string apiVersion = "1.0")
+        /// <param name="endpoint"> server parameter. </param>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
+            endpoint ??= new Uri("");
 
             this.endpoint = endpoint;
-            this.syncToken = syncToken;
-            this.apiVersion = apiVersion;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateGetKeysRequest(string name, string after, string acceptDatetime)
+        internal HttpMessage CreateAddPetRequest(Pet body)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/keys", false);
-            if (name != null)
-            {
-                uri.AppendQuery("name", name, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (after != null)
-            {
-                uri.AppendQuery("After", after, true);
-            }
+            uri.Reset(endpoint);
+            uri.AppendPath("/pet", false);
             request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(body);
+            request.Content = content;
             return message;
         }
 
-        /// <summary> Gets a list of keys. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <summary> Add a new pet to the store. </summary>
+        /// <param name="body"> Pet object that needs to be added to the store. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders>> GetKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public async Task<Response> AddPetAsync(Pet body, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetKeysRequest(name, after, acceptDatetime);
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreateAddPetRequest(body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetKeysHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
-                    {
-                        KeyListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
+                case 405:
+                    return message.Response;
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
-        /// <summary> Gets a list of keys. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <summary> Add a new pet to the store. </summary>
+        /// <param name="body"> Pet object that needs to be added to the store. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders> GetKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public Response AddPet(Pet body, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetKeysRequest(name, after, acceptDatetime);
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreateAddPetRequest(body);
             _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetKeysHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
-                    {
-                        KeyListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
+                case 405:
+                    return message.Response;
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCheckKeysRequest(string name, string after, string acceptDatetime)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Head;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/keys", false);
-            if (name != null)
-            {
-                uri.AppendQuery("name", name, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (after != null)
-            {
-                uri.AppendQuery("After", after, true);
-            }
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<ServiceCheckKeysHeaders>> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceCheckKeysHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ServiceCheckKeysHeaders> CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceCheckKeysHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/kv", false);
-            if (key != null)
-            {
-                uri.AppendQuery("key", key, true);
-            }
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (after != null)
-            {
-                uri.AppendQuery("After", after, true);
-            }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Gets a list of key-values. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders>> GetKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetKeyValuesHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValueListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a list of key-values. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders> GetKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateGetKeyValuesRequest(key, label, after, acceptDatetime, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetKeyValuesHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValueListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateCheckKeyValuesRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Head6ItemsItem> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Head;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/kv", false);
-            if (key != null)
-            {
-                uri.AppendQuery("key", key, true);
-            }
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (after != null)
-            {
-                uri.AppendQuery("After", after, true);
-            }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<ServiceCheckKeyValuesHeaders>> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceCheckKeyValuesHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ServiceCheckKeyValuesHeaders> CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceCheckKeyValuesHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Get7ItemsItem> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/kv/", false);
-            uri.AppendPath(key, true);
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            if (ifMatch != null)
-            {
-                request.Headers.Add("If-Match", ifMatch);
-            }
-            if (ifNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
-            }
-            return message;
-        }
-
-        /// <summary> Gets a single key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> The label of the key-value to retrieve. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, ServiceGetKeyValueHeaders>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetKeyValueHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a single key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> The label of the key-value to retrieve. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, ServiceGetKeyValueHeaders> GetKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var message = CreateGetKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetKeyValueHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreatePutKeyValueRequest(string key, string label, string ifMatch, string ifNoneMatch, KeyValue entity)
+        internal HttpMessage CreateUpdatePetRequest(Pet body)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/kv/", false);
-            uri.AppendPath(key, true);
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.Reset(endpoint);
+            uri.AppendPath("/pet", false);
             request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (ifMatch != null)
-            {
-                request.Headers.Add("If-Match", ifMatch);
-            }
-            if (ifNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
-            }
-            request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
-            if (entity != null)
-            {
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(entity);
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(body);
+            request.Content = content;
             return message;
         }
 
-        /// <summary> Creates a key-value. </summary>
-        /// <param name="key"> The key of the key-value to create. </param>
-        /// <param name="label"> The label of the key-value to create. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="entity"> The key-value to create. </param>
+        /// <summary> Update an existing pet. </summary>
+        /// <param name="body"> Pet object that needs to be added to the store. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, ServicePutKeyValueHeaders>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public async Task<Response> UpdatePetAsync(Pet body, CancellationToken cancellationToken = default)
         {
-            if (key == null)
+            if (body == null)
             {
-                throw new ArgumentNullException(nameof(key));
+                throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
+            using var message = CreateUpdatePetRequest(body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServicePutKeyValueHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
+                case 400:
+                case 404:
+                case 405:
+                    return message.Response;
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
-        /// <summary> Creates a key-value. </summary>
-        /// <param name="key"> The key of the key-value to create. </param>
-        /// <param name="label"> The label of the key-value to create. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="entity"> The key-value to create. </param>
+        /// <summary> Update an existing pet. </summary>
+        /// <param name="body"> Pet object that needs to be added to the store. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, ServicePutKeyValueHeaders> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public Response UpdatePet(Pet body, CancellationToken cancellationToken = default)
         {
-            if (key == null)
+            if (body == null)
             {
-                throw new ArgumentNullException(nameof(key));
+                throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreatePutKeyValueRequest(key, label, ifMatch, ifNoneMatch, entity);
+            using var message = CreateUpdatePetRequest(body);
             _pipeline.Send(message, cancellationToken);
-            var headers = new ServicePutKeyValueHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
+                case 400:
+                case 404:
+                case 405:
+                    return message.Response;
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateDeleteKeyValueRequest(string key, string label, string ifMatch)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Delete;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/kv/", false);
-            uri.AppendPath(key, true);
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (ifMatch != null)
-            {
-                request.Headers.Add("If-Match", ifMatch);
-            }
-            return message;
-        }
-
-        /// <summary> Deletes a key-value. </summary>
-        /// <param name="key"> The key of the key-value to delete. </param>
-        /// <param name="label"> The label of the key-value to delete. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, ServiceDeleteKeyValueHeaders>> DeleteKeyValueAsync(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceDeleteKeyValueHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                case 204:
-                    return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Deletes a key-value. </summary>
-        /// <param name="key"> The key of the key-value to delete. </param>
-        /// <param name="label"> The label of the key-value to delete. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, ServiceDeleteKeyValueHeaders> DeleteKeyValue(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var message = CreateDeleteKeyValueRequest(key, label, ifMatch);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceDeleteKeyValueHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                case 204:
-                    return ResponseWithHeaders.FromValue<KeyValue, ServiceDeleteKeyValueHeaders>(null, headers, message.Response);
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateCheckKeyValueRequest(string key, string label, string acceptDatetime, string ifMatch, string ifNoneMatch, IEnumerable<Head7ItemsItem> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Head;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/kv/", false);
-            uri.AppendPath(key, true);
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            if (ifMatch != null)
-            {
-                request.Headers.Add("If-Match", ifMatch);
-            }
-            if (ifNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
-            }
-            return message;
-        }
-
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> The label of the key-value to retrieve. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<ServiceCheckKeyValueHeaders>> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceCheckKeyValueHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> The label of the key-value to retrieve. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<ServiceCheckKeyValueHeaders> CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var message = CreateCheckKeyValueRequest(key, label, acceptDatetime, ifMatch, ifNoneMatch, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceCheckKeyValueHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
+        internal HttpMessage CreateFindPetsByStatusRequest(IEnumerable<Get0ItemsItem> status)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/labels", false);
-            if (name != null)
-            {
-                uri.AppendQuery("name", name, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (after != null)
-            {
-                uri.AppendQuery("After", after, true);
-            }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.Reset(endpoint);
+            uri.AppendPath("/pet/findByStatus", false);
+            uri.AppendQueryDelimited("status", status, ",", true);
             request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
             return message;
         }
 
-        /// <summary> Gets a list of labels. </summary>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Multiple status values can be provided with comma separated strings. </summary>
+        /// <param name="status"> Status values that need to be considered for filter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders>> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="status"/> is null. </exception>
+        public async Task<Response<object>> FindPetsByStatusAsync(IEnumerable<Get0ItemsItem> status, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
+            if (status == null)
+            {
+                throw new ArgumentNullException(nameof(status));
+            }
+
+            using var message = CreateFindPetsByStatusRequest(status);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetLabelsHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        LabelListResult value = default;
+                        IReadOnlyList<Pet> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        List<Pet> array = new List<Pet>();
+                        foreach (var item in document.RootElement.EnumerateArray())
+                        {
+                            array.Add(Pet.DeserializePet(item));
+                        }
+                        value = array;
+                        return Response.FromValue<object>(value, message.Response);
                     }
+                case 200:
+                    {
+                        IReadOnlyList<Pet> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("ArrayOfPet") is XElement arrayOfPetElement)
+                        {
+                            var array = new List<Pet>();
+                            foreach (var e in arrayOfPetElement.Elements("Pet"))
+                            {
+                                array.Add(Pet.DeserializePet(e));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 400:
+                    return Response.FromValue<object>(null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
-        /// <summary> Gets a list of labels. </summary>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Multiple status values can be provided with comma separated strings. </summary>
+        /// <param name="status"> Status values that need to be considered for filter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="status"/> is null. </exception>
+        public Response<object> FindPetsByStatus(IEnumerable<Get0ItemsItem> status, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetLabelsRequest(name, after, acceptDatetime, select);
+            if (status == null)
+            {
+                throw new ArgumentNullException(nameof(status));
+            }
+
+            using var message = CreateFindPetsByStatusRequest(status);
             _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetLabelsHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        LabelListResult value = default;
+                        IReadOnlyList<Pet> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                        List<Pet> array = new List<Pet>();
+                        foreach (var item in document.RootElement.EnumerateArray())
+                        {
+                            array.Add(Pet.DeserializePet(item));
+                        }
+                        value = array;
+                        return Response.FromValue<object>(value, message.Response);
                     }
+                case 200:
+                    {
+                        IReadOnlyList<Pet> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("ArrayOfPet") is XElement arrayOfPetElement)
+                        {
+                            var array = new List<Pet>();
+                            foreach (var e in arrayOfPetElement.Elements("Pet"))
+                            {
+                                array.Add(Pet.DeserializePet(e));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 400:
+                    return Response.FromValue<object>(null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCheckLabelsRequest(string name, string after, string acceptDatetime, IEnumerable<string> select)
+        internal HttpMessage CreateFindPetsByTagsRequest(IEnumerable<string> tags)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Head;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/labels", false);
-            if (name != null)
-            {
-                uri.AppendQuery("name", name, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (after != null)
-            {
-                uri.AppendQuery("After", after, true);
-            }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
+            uri.Reset(endpoint);
+            uri.AppendPath("/pet/findByTags", false);
+            uri.AppendQueryDelimited("tags", tags, ",", true);
             request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
             return message;
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Muliple tags can be provided with comma separated strings. Use\ \ tag1, tag2, tag3 for testing. </summary>
+        /// <param name="tags"> Tags to filter by. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<ServiceCheckLabelsHeaders>> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
+        public async Task<Response<object>> FindPetsByTagsAsync(IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
+
+            using var message = CreateFindPetsByTagsRequest(tags);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceCheckLabelsHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    {
+                        IReadOnlyList<Pet> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        List<Pet> array = new List<Pet>();
+                        foreach (var item in document.RootElement.EnumerateArray())
+                        {
+                            array.Add(Pet.DeserializePet(item));
+                        }
+                        value = array;
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 200:
+                    {
+                        IReadOnlyList<Pet> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("ArrayOfPet") is XElement arrayOfPetElement)
+                        {
+                            var array = new List<Pet>();
+                            foreach (var e in arrayOfPetElement.Elements("Pet"))
+                            {
+                                array.Add(Pet.DeserializePet(e));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 400:
+                    return Response.FromValue<object>(null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Muliple tags can be provided with comma separated strings. Use\ \ tag1, tag2, tag3 for testing. </summary>
+        /// <param name="tags"> Tags to filter by. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ServiceCheckLabelsHeaders> CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
+        public Response<object> FindPetsByTags(IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
+
+            using var message = CreateFindPetsByTagsRequest(tags);
             _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceCheckLabelsHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    {
+                        IReadOnlyList<Pet> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        List<Pet> array = new List<Pet>();
+                        foreach (var item in document.RootElement.EnumerateArray())
+                        {
+                            array.Add(Pet.DeserializePet(item));
+                        }
+                        value = array;
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 200:
+                    {
+                        IReadOnlyList<Pet> value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("ArrayOfPet") is XElement arrayOfPetElement)
+                        {
+                            var array = new List<Pet>();
+                            foreach (var e in arrayOfPetElement.Elements("Pet"))
+                            {
+                                array.Add(Pet.DeserializePet(e));
+                            }
+                            value = array;
+                        }
+                        return Response.FromValue<object>(value, message.Response);
+                    }
+                case 400:
+                    return Response.FromValue<object>(null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreatePutLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateGetPetByIdRequest(long petId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/pet/", false);
+            uri.AppendPath(petId, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Returns a single pet. </summary>
+        /// <param name="petId"> ID of pet to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<Pet>> GetPetByIdAsync(long petId, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetPetByIdRequest(petId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Pet value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = Pet.DeserializePet(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 400:
+                case 404:
+                    return Response.FromValue<Pet>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Returns a single pet. </summary>
+        /// <param name="petId"> ID of pet to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<Pet> GetPetById(long petId, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetPetByIdRequest(petId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Pet value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = Pet.DeserializePet(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 400:
+                case 404:
+                    return Response.FromValue<Pet>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateDeletePetRequest(long petId, string apiKey)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/pet/", false);
+            uri.AppendPath(petId, true);
+            request.Uri = uri;
+            if (apiKey != null)
+            {
+                request.Headers.Add("api_key", apiKey);
+            }
+            return message;
+        }
+
+        /// <summary> Deletes a pet. </summary>
+        /// <param name="petId"> Pet id to delete. </param>
+        /// <param name="apiKey"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> DeletePetAsync(long petId, string apiKey = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateDeletePetRequest(petId, apiKey);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Deletes a pet. </summary>
+        /// <param name="petId"> Pet id to delete. </param>
+        /// <param name="apiKey"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response DeletePet(long petId, string apiKey = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateDeletePetRequest(petId, apiKey);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateGetInventoryRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/store/inventory", false);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Returns a map of status codes to quantities. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<IReadOnlyDictionary<string, int>>> GetInventoryAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetInventoryRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                        foreach (var property in document.RootElement.EnumerateObject())
+                        {
+                            dictionary.Add(property.Name, property.Value.GetInt32());
+                        }
+                        value = dictionary;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Returns a map of status codes to quantities. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<IReadOnlyDictionary<string, int>> GetInventory(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetInventoryRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        IReadOnlyDictionary<string, int> value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        Dictionary<string, int> dictionary = new Dictionary<string, int>();
+                        foreach (var property in document.RootElement.EnumerateObject())
+                        {
+                            dictionary.Add(property.Name, property.Value.GetInt32());
+                        }
+                        value = dictionary;
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePlaceOrderRequest(Order body)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/store/order", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(body);
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Place an order for a pet. </summary>
+        /// <param name="body"> order placed for purchasing the pet. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public async Task<Response<Order>> PlaceOrderAsync(Order body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreatePlaceOrderRequest(body);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Order value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = Order.DeserializeOrder(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 400:
+                    return Response.FromValue<Order>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Place an order for a pet. </summary>
+        /// <param name="body"> order placed for purchasing the pet. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public Response<Order> PlaceOrder(Order body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreatePlaceOrderRequest(body);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Order value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = Order.DeserializeOrder(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 400:
+                    return Response.FromValue<Order>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateGetOrderByIdRequest(long orderId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/store/order/", false);
+            uri.AppendPath(orderId, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> For valid response try integer IDs with value &gt;= 1 and &lt;= 10.\ \ Other values will generated exceptions. </summary>
+        /// <param name="orderId"> ID of pet that needs to be fetched. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<Order>> GetOrderByIdAsync(long orderId, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetOrderByIdRequest(orderId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Order value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = Order.DeserializeOrder(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 400:
+                case 404:
+                    return Response.FromValue<Order>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> For valid response try integer IDs with value &gt;= 1 and &lt;= 10.\ \ Other values will generated exceptions. </summary>
+        /// <param name="orderId"> ID of pet that needs to be fetched. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<Order> GetOrderById(long orderId, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetOrderByIdRequest(orderId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Order value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = Order.DeserializeOrder(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 400:
+                case 404:
+                    return Response.FromValue<Order>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateDeleteOrderRequest(long orderId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/store/order/", false);
+            uri.AppendPath(orderId, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> For valid response try integer IDs with positive integer value.\ \ Negative or non-integer values will generate API errors. </summary>
+        /// <param name="orderId"> ID of the order that needs to be deleted. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> DeleteOrderAsync(long orderId, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateDeleteOrderRequest(orderId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> For valid response try integer IDs with positive integer value.\ \ Negative or non-integer values will generate API errors. </summary>
+        /// <param name="orderId"> ID of the order that needs to be deleted. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response DeleteOrder(long orderId, CancellationToken cancellationToken = default)
+        {
+            using var message = CreateDeleteOrderRequest(orderId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 400:
+                case 404:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateCreateUserRequest(User body)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/user", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(body);
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="body"> Created user object. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public async Task<Response> CreateUserAsync(User body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreateCreateUserRequest(body);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="body"> Created user object. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public Response CreateUser(User body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreateCreateUserRequest(body);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateCreateUsersWithArrayInputRequest(IEnumerable<User> body)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/user/createWithArray", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in body)
+            {
+                content.JsonWriter.WriteObjectValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Creates list of users with given input array. </summary>
+        /// <param name="body"> List of user object. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public async Task<Response> CreateUsersWithArrayInputAsync(IEnumerable<User> body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreateCreateUsersWithArrayInputRequest(body);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Creates list of users with given input array. </summary>
+        /// <param name="body"> List of user object. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public Response CreateUsersWithArrayInput(IEnumerable<User> body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreateCreateUsersWithArrayInputRequest(body);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateCreateUsersWithListInputRequest(IEnumerable<User> body)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/user/createWithList", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in body)
+            {
+                content.JsonWriter.WriteObjectValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Creates list of users with given input array. </summary>
+        /// <param name="body"> List of user object. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public async Task<Response> CreateUsersWithListInputAsync(IEnumerable<User> body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreateCreateUsersWithListInputRequest(body);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Creates list of users with given input array. </summary>
+        /// <param name="body"> List of user object. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public Response CreateUsersWithListInput(IEnumerable<User> body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var message = CreateCreateUsersWithListInputRequest(body);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateLoginUserRequest(string username, string password)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/user/login", false);
+            uri.AppendQuery("username", username, true);
+            uri.AppendQuery("password", password, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Logs user into the system. </summary>
+        /// <param name="username"> The user name for login. </param>
+        /// <param name="password"> The password for login in clear text. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> or <paramref name="password"/> is null. </exception>
+        public async Task<ResponseWithHeaders<string, ServiceLoginUserHeaders>> LoginUserAsync(string username, string password, CancellationToken cancellationToken = default)
+        {
+            if (username == null)
+            {
+                throw new ArgumentNullException(nameof(username));
+            }
+            if (password == null)
+            {
+                throw new ArgumentNullException(nameof(password));
+            }
+
+            using var message = CreateLoginUserRequest(username, password);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new ServiceLoginUserHeaders(message.Response);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        string value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = document.RootElement.GetString();
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                case 400:
+                    return ResponseWithHeaders.FromValue<string, ServiceLoginUserHeaders>(null, headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Logs user into the system. </summary>
+        /// <param name="username"> The user name for login. </param>
+        /// <param name="password"> The password for login in clear text. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> or <paramref name="password"/> is null. </exception>
+        public ResponseWithHeaders<string, ServiceLoginUserHeaders> LoginUser(string username, string password, CancellationToken cancellationToken = default)
+        {
+            if (username == null)
+            {
+                throw new ArgumentNullException(nameof(username));
+            }
+            if (password == null)
+            {
+                throw new ArgumentNullException(nameof(password));
+            }
+
+            using var message = CreateLoginUserRequest(username, password);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new ServiceLoginUserHeaders(message.Response);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        string value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = document.RootElement.GetString();
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
+                case 400:
+                    return ResponseWithHeaders.FromValue<string, ServiceLoginUserHeaders>(null, headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateLogoutUserRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/user/logout", false);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Logs out current logged in user session. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> LogoutUserAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateLogoutUserRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Logs out current logged in user session. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response LogoutUser(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateLogoutUserRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateGetUserByNameRequest(string username)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/user/", false);
+            uri.AppendPath(username, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Get user by user name. </summary>
+        /// <param name="username"> The name that needs to be fetched. Use user1 for testing. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> is null. </exception>
+        public async Task<Response<User>> GetUserByNameAsync(string username, CancellationToken cancellationToken = default)
+        {
+            if (username == null)
+            {
+                throw new ArgumentNullException(nameof(username));
+            }
+
+            using var message = CreateGetUserByNameRequest(username);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        User value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = User.DeserializeUser(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 400:
+                case 404:
+                    return Response.FromValue<User>(null, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Get user by user name. </summary>
+        /// <param name="username"> The name that needs to be fetched. Use user1 for testing. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> is null. </exception>
+        public Response<User> GetUserByName(string username, CancellationToken cancellationToken = default)
+        {
+            if (username == null)
+            {
+                throw new ArgumentNullException(nameof(username));
+            }
+
+            using var message = CreateGetUserByNameRequest(username);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        User value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = User.DeserializeUser(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                case 400:
+                case 404:
+                    return Response.FromValue<User>(null, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateUpdateUserRequest(string username, User body)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/locks/", false);
-            uri.AppendPath(key, true);
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.Reset(endpoint);
+            uri.AppendPath("/user/", false);
+            uri.AppendPath(username, true);
             request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (ifMatch != null)
-            {
-                request.Headers.Add("If-Match", ifMatch);
-            }
-            if (ifNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(body);
+            request.Content = content;
             return message;
         }
 
-        /// <summary> Locks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to lock. </param>
-        /// <param name="label"> The label, if any, of the key-value to lock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="username"> name that need to be updated. </param>
+        /// <param name="body"> Updated user object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, ServicePutLockHeaders>> PutLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> or <paramref name="body"/> is null. </exception>
+        public async Task<Response> UpdateUserAsync(string username, User body, CancellationToken cancellationToken = default)
         {
-            if (key == null)
+            if (username == null)
             {
-                throw new ArgumentNullException(nameof(key));
+                throw new ArgumentNullException(nameof(username));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
+            using var message = CreateUpdateUserRequest(username, body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServicePutLockHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
+                case 400:
+                case 404:
+                    return message.Response;
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
-        /// <summary> Locks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to lock. </param>
-        /// <param name="label"> The label, if any, of the key-value to lock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="username"> name that need to be updated. </param>
+        /// <param name="body"> Updated user object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, ServicePutLockHeaders> PutLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> or <paramref name="body"/> is null. </exception>
+        public Response UpdateUser(string username, User body, CancellationToken cancellationToken = default)
         {
-            if (key == null)
+            if (username == null)
             {
-                throw new ArgumentNullException(nameof(key));
+                throw new ArgumentNullException(nameof(username));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreatePutLockRequest(key, label, ifMatch, ifNoneMatch);
+            using var message = CreateUpdateUserRequest(username, body);
             _pipeline.Send(message, cancellationToken);
-            var headers = new ServicePutLockHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
+                case 400:
+                case 404:
+                    return message.Response;
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateDeleteLockRequest(string key, string label, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateDeleteUserRequest(string username)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/locks/", false);
-            uri.AppendPath(key, true);
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.Reset(endpoint);
+            uri.AppendPath("/user/", false);
+            uri.AppendPath(username, true);
             request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (ifMatch != null)
-            {
-                request.Headers.Add("If-Match", ifMatch);
-            }
-            if (ifNoneMatch != null)
-            {
-                request.Headers.Add("If-None-Match", ifNoneMatch);
-            }
             return message;
         }
 
-        /// <summary> Unlocks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to unlock. </param>
-        /// <param name="label"> The label, if any, of the key-value to unlock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="username"> The name that needs to be deleted. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValue, ServiceDeleteLockHeaders>> DeleteLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> is null. </exception>
+        public async Task<Response> DeleteUserAsync(string username, CancellationToken cancellationToken = default)
         {
-            if (key == null)
+            if (username == null)
             {
-                throw new ArgumentNullException(nameof(key));
+                throw new ArgumentNullException(nameof(username));
             }
 
-            using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
+            using var message = CreateDeleteUserRequest(username);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceDeleteLockHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
+                case 400:
+                case 404:
+                    return message.Response;
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
-        /// <summary> Unlocks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to unlock. </param>
-        /// <param name="label"> The label, if any, of the key-value to unlock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="username"> The name that needs to be deleted. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<KeyValue, ServiceDeleteLockHeaders> DeleteLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="username"/> is null. </exception>
+        public Response DeleteUser(string username, CancellationToken cancellationToken = default)
         {
-            if (key == null)
+            if (username == null)
             {
-                throw new ArgumentNullException(nameof(key));
+                throw new ArgumentNullException(nameof(username));
             }
 
-            using var message = CreateDeleteLockRequest(key, label, ifMatch, ifNoneMatch);
+            using var message = CreateDeleteUserRequest(username);
             _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceDeleteLockHeaders(message.Response);
             switch (message.Response.Status)
             {
-                case 200:
-                    {
-                        KeyValue value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValue.DeserializeKeyValue(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/revisions", false);
-            if (key != null)
-            {
-                uri.AppendQuery("key", key, true);
-            }
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (after != null)
-            {
-                uri.AppendQuery("After", after, true);
-            }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders>> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetRevisionsHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValueListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateGetRevisionsRequest(key, label, after, acceptDatetime, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetRevisionsHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValueListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateCheckRevisionsRequest(string key, string label, string after, string acceptDatetime, IEnumerable<Enum5> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Head;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendPath("/revisions", false);
-            if (key != null)
-            {
-                uri.AppendQuery("key", key, true);
-            }
-            if (label != null)
-            {
-                uri.AppendQuery("label", label, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (after != null)
-            {
-                uri.AppendQuery("After", after, true);
-            }
-            if (select != null)
-            {
-                uri.AppendQueryDelimited("$Select", select, ",", true);
-            }
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<ServiceCheckRevisionsHeaders>> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceCheckRevisionsHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ServiceCheckRevisionsHeaders> CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceCheckRevisionsHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetKeysNextPageRequest(string nextLink, string name, string after, string acceptDatetime)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Gets a list of keys. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders>> GetKeysNextPageAsync(string nextLink, string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetKeysHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a list of keys. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public ResponseWithHeaders<KeyListResult, ServiceGetKeysHeaders> GetKeysNextPage(string nextLink, string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateGetKeysNextPageRequest(nextLink, name, after, acceptDatetime);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetKeysHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyListResult.DeserializeKeyListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetKeyValuesNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Get6ItemsItem> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Gets a list of key-values. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders>> GetKeyValuesNextPageAsync(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetKeyValuesHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValueListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a list of key-values. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public ResponseWithHeaders<KeyValueListResult, ServiceGetKeyValuesHeaders> GetKeyValuesNextPage(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateGetKeyValuesNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetKeyValuesHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValueListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetLabelsNextPageRequest(string nextLink, string name, string after, string acceptDatetime, IEnumerable<string> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Gets a list of labels. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders>> GetLabelsNextPageAsync(string nextLink, string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetLabelsHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        LabelListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a list of labels. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public ResponseWithHeaders<LabelListResult, ServiceGetLabelsHeaders> GetLabelsNextPage(string nextLink, string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateGetLabelsNextPageRequest(nextLink, name, after, acceptDatetime, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetLabelsHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        LabelListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = LabelListResult.DeserializeLabelListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetRevisionsNextPageRequest(string nextLink, string key, string label, string after, string acceptDatetime, IEnumerable<Enum4> select)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            if (syncToken != null)
-            {
-                request.Headers.Add("Sync-Token", syncToken);
-            }
-            if (acceptDatetime != null)
-            {
-                request.Headers.Add("Accept-Datetime", acceptDatetime);
-            }
-            return message;
-        }
-
-        /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders>> GetRevisionsNextPageAsync(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new ServiceGetRevisionsHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValueListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public ResponseWithHeaders<KeyValueListResult, ServiceGetRevisionsHeaders> GetRevisionsNextPage(string nextLink, string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateGetRevisionsNextPageRequest(nextLink, key, label, after, acceptDatetime, select);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new ServiceGetRevisionsHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        KeyValueListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = KeyValueListResult.DeserializeKeyValueListResult(document.RootElement);
-                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
-                    }
+                case 400:
+                case 404:
+                    return message.Response;
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

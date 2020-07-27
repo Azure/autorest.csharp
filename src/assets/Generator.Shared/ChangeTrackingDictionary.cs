@@ -160,7 +160,9 @@ namespace Azure.Core
                 value = default!;
                 return false;
             }
+#pragma warning disable CS8601 // Possible null reference assignment.
             return EnsureDictionary().TryGetValue(key, out value);
+#pragma warning restore CS8601 // Possible null reference assignment.
         }
 
         public TValue this[TKey key]

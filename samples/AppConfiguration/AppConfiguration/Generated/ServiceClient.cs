@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AppConfiguration.Models;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 
 namespace AppConfiguration
@@ -29,28 +28,24 @@ namespace AppConfiguration
         /// <summary> Initializes a new instance of ServiceClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The endpoint of the App Configuration instance to send requests to. </param>
-        /// <param name="syncToken"> Used to guarantee real-time consistency between requests. </param>
-        /// <param name="apiVersion"> Api Version. </param>
-        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string syncToken = null, string apiVersion = "1.0")
+        /// <param name="endpoint"> server parameter. </param>
+        internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, endpoint, syncToken, apiVersion);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <summary> Add a new pet to the store. </summary>
+        /// <param name="body"> Pet object that needs to be added to the store. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> AddPetAsync(Pet body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddPet");
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.AddPetAsync(body, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -59,18 +54,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <summary> Add a new pet to the store. </summary>
+        /// <param name="body"> Pet object that needs to be added to the store. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
+        public virtual Response AddPet(Pet body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeys");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.AddPet");
             scope.Start();
             try
             {
-                return RestClient.CheckKeys(name, after, acceptDatetime, cancellationToken).GetRawResponse();
+                return RestClient.AddPet(body, cancellationToken);
             }
             catch (Exception e)
             {
@@ -79,20 +72,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Update an existing pet. </summary>
+        /// <param name="body"> Pet object that needs to be added to the store. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> UpdatePetAsync(Pet body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.UpdatePet");
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.UpdatePetAsync(body, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -101,20 +90,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Update an existing pet. </summary>
+        /// <param name="body"> Pet object that needs to be added to the store. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual Response UpdatePet(Pet body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValues");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.UpdatePet");
             scope.Start();
             try
             {
-                return RestClient.CheckKeyValues(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.UpdatePet(body, cancellationToken);
             }
             catch (Exception e)
             {
@@ -123,21 +108,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Gets a single key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> The label of the key-value to retrieve. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Multiple status values can be provided with comma separated strings. </summary>
+        /// <param name="status"> Status values that need to be considered for filter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> GetKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> FindPetsByStatusAsync(IEnumerable<Get0ItemsItem> status, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.FindPetsByStatus");
             scope.Start();
             try
             {
-                return await RestClient.GetKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false);
+                return await RestClient.FindPetsByStatusAsync(status, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -146,21 +126,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Gets a single key-value. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> The label of the key-value to retrieve. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Multiple status values can be provided with comma separated strings. </summary>
+        /// <param name="status"> Status values that need to be considered for filter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> GetKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Get7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual Response<object> FindPetsByStatus(IEnumerable<Get0ItemsItem> status, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.FindPetsByStatus");
             scope.Start();
             try
             {
-                return RestClient.GetKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken);
+                return RestClient.FindPetsByStatus(status, cancellationToken);
             }
             catch (Exception e)
             {
@@ -169,20 +144,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Creates a key-value. </summary>
-        /// <param name="key"> The key of the key-value to create. </param>
-        /// <param name="label"> The label of the key-value to create. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="entity"> The key-value to create. </param>
+        /// <summary> Muliple tags can be provided with comma separated strings. Use\ \ tag1, tag2, tag3 for testing. </summary>
+        /// <param name="tags"> Tags to filter by. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> PutKeyValueAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> FindPetsByTagsAsync(IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.FindPetsByTags");
             scope.Start();
             try
             {
-                return await RestClient.PutKeyValueAsync(key, label, ifMatch, ifNoneMatch, entity, cancellationToken).ConfigureAwait(false);
+                return await RestClient.FindPetsByTagsAsync(tags, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -191,20 +162,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Creates a key-value. </summary>
-        /// <param name="key"> The key of the key-value to create. </param>
-        /// <param name="label"> The label of the key-value to create. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="entity"> The key-value to create. </param>
+        /// <summary> Muliple tags can be provided with comma separated strings. Use\ \ tag1, tag2, tag3 for testing. </summary>
+        /// <param name="tags"> Tags to filter by. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> PutKeyValue(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, KeyValue entity = null, CancellationToken cancellationToken = default)
+        public virtual Response<object> FindPetsByTags(IEnumerable<string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.FindPetsByTags");
             scope.Start();
             try
             {
-                return RestClient.PutKeyValue(key, label, ifMatch, ifNoneMatch, entity, cancellationToken);
+                return RestClient.FindPetsByTags(tags, cancellationToken);
             }
             catch (Exception e)
             {
@@ -213,18 +180,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Deletes a key-value. </summary>
-        /// <param name="key"> The key of the key-value to delete. </param>
-        /// <param name="label"> The label of the key-value to delete. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <summary> Returns a single pet. </summary>
+        /// <param name="petId"> ID of pet to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> DeleteKeyValueAsync(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> GetPetByIdAsync(long petId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetPetById");
             scope.Start();
             try
             {
-                return await RestClient.DeleteKeyValueAsync(key, label, ifMatch, cancellationToken).ConfigureAwait(false);
+                return await RestClient.GetPetByIdAsync(petId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -233,18 +198,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Deletes a key-value. </summary>
-        /// <param name="key"> The key of the key-value to delete. </param>
-        /// <param name="label"> The label of the key-value to delete. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
+        /// <summary> Returns a single pet. </summary>
+        /// <param name="petId"> ID of pet to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> DeleteKeyValue(string key, string label = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> GetPetById(long petId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetPetById");
             scope.Start();
             try
             {
-                return RestClient.DeleteKeyValue(key, label, ifMatch, cancellationToken);
+                return RestClient.GetPetById(petId, cancellationToken);
             }
             catch (Exception e)
             {
@@ -253,21 +216,17 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> The label of the key-value to retrieve. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Deletes a pet. </summary>
+        /// <param name="petId"> Pet id to delete. </param>
+        /// <param name="apiKey"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeletePetAsync(long petId, string apiKey = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeletePet");
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.DeletePetAsync(petId, apiKey, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -276,21 +235,17 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> The key of the key-value to retrieve. </param>
-        /// <param name="label"> The label of the key-value to retrieve. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Deletes a pet. </summary>
+        /// <param name="petId"> Pet id to delete. </param>
+        /// <param name="apiKey"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual Response DeletePet(long petId, string apiKey = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckKeyValue");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeletePet");
             scope.Start();
             try
             {
-                return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).GetRawResponse();
+                return RestClient.DeletePet(petId, apiKey, cancellationToken);
             }
             catch (Exception e)
             {
@@ -299,19 +254,15 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Returns a map of status codes to quantities. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, int>>> GetInventoryAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetInventory");
             scope.Start();
             try
             {
-                return (await RestClient.CheckLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.GetInventoryAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -320,19 +271,15 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Returns a map of status codes to quantities. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, int>> GetInventory(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckLabels");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetInventory");
             scope.Start();
             try
             {
-                return RestClient.CheckLabels(name, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.GetInventory(cancellationToken);
             }
             catch (Exception e)
             {
@@ -341,19 +288,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Locks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to lock. </param>
-        /// <param name="label"> The label, if any, of the key-value to lock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <summary> Place an order for a pet. </summary>
+        /// <param name="body"> order placed for purchasing the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> PutLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Order>> PlaceOrderAsync(Order body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutLock");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PlaceOrder");
             scope.Start();
             try
             {
-                return await RestClient.PutLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PlaceOrderAsync(body, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -362,19 +306,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Locks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to lock. </param>
-        /// <param name="label"> The label, if any, of the key-value to lock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <summary> Place an order for a pet. </summary>
+        /// <param name="body"> order placed for purchasing the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> PutLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<Order> PlaceOrder(Order body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PutLock");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.PlaceOrder");
             scope.Start();
             try
             {
-                return RestClient.PutLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
+                return RestClient.PlaceOrder(body, cancellationToken);
             }
             catch (Exception e)
             {
@@ -383,19 +324,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Unlocks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to unlock. </param>
-        /// <param name="label"> The label, if any, of the key-value to unlock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <summary> For valid response try integer IDs with value &gt;= 1 and &lt;= 10.\ \ Other values will generated exceptions. </summary>
+        /// <param name="orderId"> ID of pet that needs to be fetched. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<KeyValue>> DeleteLockAsync(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Order>> GetOrderByIdAsync(long orderId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetOrderById");
             scope.Start();
             try
             {
-                return await RestClient.DeleteLockAsync(key, label, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                return await RestClient.GetOrderByIdAsync(orderId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -404,19 +342,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Unlocks a key-value. </summary>
-        /// <param name="key"> The key of the key-value to unlock. </param>
-        /// <param name="label"> The label, if any, of the key-value to unlock. </param>
-        /// <param name="ifMatch"> Used to perform an operation only if the targeted resource&apos;s etag matches the value provided. </param>
-        /// <param name="ifNoneMatch"> Used to perform an operation only if the targeted resource&apos;s etag does not match the value provided. </param>
+        /// <summary> For valid response try integer IDs with value &gt;= 1 and &lt;= 10.\ \ Other values will generated exceptions. </summary>
+        /// <param name="orderId"> ID of pet that needs to be fetched. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<KeyValue> DeleteLock(string key, string label = null, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<Order> GetOrderById(long orderId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteLock");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetOrderById");
             scope.Start();
             try
             {
-                return RestClient.DeleteLock(key, label, ifMatch, ifNoneMatch, cancellationToken);
+                return RestClient.GetOrderById(orderId, cancellationToken);
             }
             catch (Exception e)
             {
@@ -425,20 +360,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> For valid response try integer IDs with positive integer value.\ \ Negative or non-integer values will generate API errors. </summary>
+        /// <param name="orderId"> ID of the order that needs to be deleted. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteOrderAsync(long orderId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteOrder");
             scope.Start();
             try
             {
-                return (await RestClient.CheckRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.DeleteOrderAsync(orderId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -447,20 +378,16 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Requests the headers and status of the given resource. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> For valid response try integer IDs with positive integer value.\ \ Negative or non-integer values will generate API errors. </summary>
+        /// <param name="orderId"> ID of the order that needs to be deleted. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
+        public virtual Response DeleteOrder(long orderId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CheckRevisions");
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteOrder");
             scope.Start();
             try
             {
-                return RestClient.CheckRevisions(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.DeleteOrder(orderId, cancellationToken);
             }
             catch (Exception e)
             {
@@ -469,334 +396,294 @@ namespace AppConfiguration
             }
         }
 
-        /// <summary> Gets a list of keys. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="body"> Created user object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Key> GetKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CreateUserAsync(User body, CancellationToken cancellationToken = default)
         {
-            async Task<Page<Key>> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CreateUser");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.GetKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return await RestClient.CreateUserAsync(body, cancellationToken).ConfigureAwait(false);
             }
-            async Task<Page<Key>> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.GetKeysNextPageAsync(nextLink, name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Gets a list of keys. </summary>
-        /// <param name="name"> A filter for the name of the returned keys. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="body"> Created user object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Key> GetKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
+        public virtual Response CreateUser(User body, CancellationToken cancellationToken = default)
         {
-            Page<Key> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CreateUser");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.GetKeys(name, after, acceptDatetime, cancellationToken);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return RestClient.CreateUser(body, cancellationToken);
             }
-            Page<Key> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeys");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.GetKeysNextPage(nextLink, name, after, acceptDatetime, cancellationToken);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Gets a list of key-values. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Creates list of users with given input array. </summary>
+        /// <param name="body"> List of user object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<KeyValue> GetKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CreateUsersWithArrayInputAsync(IEnumerable<User> body, CancellationToken cancellationToken = default)
         {
-            async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CreateUsersWithArrayInput");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.GetKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return await RestClient.CreateUsersWithArrayInputAsync(body, cancellationToken).ConfigureAwait(false);
             }
-            async Task<Page<KeyValue>> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.GetKeyValuesNextPageAsync(nextLink, key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Gets a list of key-values. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Creates list of users with given input array. </summary>
+        /// <param name="body"> List of user object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<KeyValue> GetKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Get6ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public virtual Response CreateUsersWithArrayInput(IEnumerable<User> body, CancellationToken cancellationToken = default)
         {
-            Page<KeyValue> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CreateUsersWithArrayInput");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.GetKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return RestClient.CreateUsersWithArrayInput(body, cancellationToken);
             }
-            Page<KeyValue> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetKeyValues");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.GetKeyValuesNextPage(nextLink, key, label, after, acceptDatetime, select, cancellationToken);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Gets a list of labels. </summary>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Creates list of users with given input array. </summary>
+        /// <param name="body"> List of user object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<Label> GetLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CreateUsersWithListInputAsync(IEnumerable<User> body, CancellationToken cancellationToken = default)
         {
-            async Task<Page<Label>> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CreateUsersWithListInput");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.GetLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return await RestClient.CreateUsersWithListInputAsync(body, cancellationToken).ConfigureAwait(false);
             }
-            async Task<Page<Label>> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.GetLabelsNextPageAsync(nextLink, name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Gets a list of labels. </summary>
-        /// <param name="name"> A filter for the name of the returned labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Creates list of users with given input array. </summary>
+        /// <param name="body"> List of user object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<Label> GetLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public virtual Response CreateUsersWithListInput(IEnumerable<User> body, CancellationToken cancellationToken = default)
         {
-            Page<Label> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.CreateUsersWithListInput");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.GetLabels(name, after, acceptDatetime, select, cancellationToken);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return RestClient.CreateUsersWithListInput(body, cancellationToken);
             }
-            Page<Label> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetLabels");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.GetLabelsNextPage(nextLink, name, after, acceptDatetime, select, cancellationToken);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Logs user into the system. </summary>
+        /// <param name="username"> The user name for login. </param>
+        /// <param name="password"> The password for login in clear text. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<KeyValue> GetRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> LoginUserAsync(string username, string password, CancellationToken cancellationToken = default)
         {
-            async Task<Page<KeyValue>> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.LoginUser");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.GetRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return await RestClient.LoginUserAsync(username, password, cancellationToken).ConfigureAwait(false);
             }
-            async Task<Page<KeyValue>> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
-                scope.Start();
-                try
-                {
-                    var response = await RestClient.GetRevisionsNextPageAsync(nextLink, key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Gets a list of key-value revisions. </summary>
-        /// <param name="key"> A filter used to match keys. </param>
-        /// <param name="label"> A filter used to match labels. </param>
-        /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
-        /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
-        /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
+        /// <summary> Logs user into the system. </summary>
+        /// <param name="username"> The user name for login. </param>
+        /// <param name="password"> The password for login in clear text. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<KeyValue> GetRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum4> select = null, CancellationToken cancellationToken = default)
+        public virtual Response<string> LoginUser(string username, string password, CancellationToken cancellationToken = default)
         {
-            Page<KeyValue> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.LoginUser");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.GetRevisions(key, label, after, acceptDatetime, select, cancellationToken);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return RestClient.LoginUser(username, password, cancellationToken);
             }
-            Page<KeyValue> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetRevisions");
-                scope.Start();
-                try
-                {
-                    var response = RestClient.GetRevisionsNextPage(nextLink, key, label, after, acceptDatetime, select, cancellationToken);
-                    return Page.FromValues(response.Value.Items, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Logs out current logged in user session. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> LogoutUserAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.LogoutUser");
+            scope.Start();
+            try
+            {
+                return await RestClient.LogoutUserAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Logs out current logged in user session. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response LogoutUser(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.LogoutUser");
+            scope.Start();
+            try
+            {
+                return RestClient.LogoutUser(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get user by user name. </summary>
+        /// <param name="username"> The name that needs to be fetched. Use user1 for testing. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<User>> GetUserByNameAsync(string username, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetUserByName");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUserByNameAsync(username, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get user by user name. </summary>
+        /// <param name="username"> The name that needs to be fetched. Use user1 for testing. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<User> GetUserByName(string username, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetUserByName");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUserByName(username, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="username"> name that need to be updated. </param>
+        /// <param name="body"> Updated user object. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> UpdateUserAsync(string username, User body, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.UpdateUser");
+            scope.Start();
+            try
+            {
+                return await RestClient.UpdateUserAsync(username, body, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="username"> name that need to be updated. </param>
+        /// <param name="body"> Updated user object. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response UpdateUser(string username, User body, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.UpdateUser");
+            scope.Start();
+            try
+            {
+                return RestClient.UpdateUser(username, body, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="username"> The name that needs to be deleted. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> DeleteUserAsync(string username, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteUser");
+            scope.Start();
+            try
+            {
+                return await RestClient.DeleteUserAsync(username, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This can only be done by the logged in user. </summary>
+        /// <param name="username"> The name that needs to be deleted. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response DeleteUser(string username, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.DeleteUser");
+            scope.Start();
+            try
+            {
+                return RestClient.DeleteUser(username, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

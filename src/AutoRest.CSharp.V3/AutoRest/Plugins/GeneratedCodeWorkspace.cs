@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var processed = await task;
                 var text = await processed.GetSyntaxTreeAsync();
 
-                yield return (processed.Name, text.ToString());
+                yield return (processed.Name, text!.ToString());
             }
         }
 
