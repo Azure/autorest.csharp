@@ -416,7 +416,7 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void ReadlyPropertiesOfAreReadOnly()
+        public void ReadOnlyPropertiesAreReadOnly()
         {
             var property = TypeAsserts.HasProperty(typeof(MixedModelWithReadonlyProperty), "ReadonlyProperty", BindingFlags.Public | BindingFlags.Instance);
             var listProperty = TypeAsserts.HasProperty(typeof(MixedModelWithReadonlyProperty), "ReadonlyListProperty", BindingFlags.Public | BindingFlags.Instance);
