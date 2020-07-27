@@ -180,8 +180,16 @@ namespace AutoRest.TestServer.Tests
             Assert.True(typeof(IUtf8JsonSerializable).IsAssignableFrom(type));
             Assert.True(typeof(IXmlSerializable).IsAssignableFrom(type));
 
-            Assert.NotNull(type.GetMethod("Deserialize" + type.Name, new[] { typeof(JsonElement) }));
-            Assert.NotNull(type.GetMethod("Deserialize" + type.Name, new[] { typeof(XElement) }));
+            Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
+                BindingFlags.Static | BindingFlags.NonPublic,
+                null,
+                new[] { typeof(JsonElement) },
+                null));
+            Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
+                BindingFlags.Static | BindingFlags.NonPublic,
+                null,
+                new[] { typeof(XElement) },
+                null));
         }
     }
 }
