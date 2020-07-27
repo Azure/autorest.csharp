@@ -12,6 +12,15 @@ namespace AutoRest.CSharp.V3.Input
 
         public SchemaUsageProvider(CodeModel codeModel)
         {
+            foreach (var objectSchema in codeModel.Schemas.Objects)
+            {
+                var usage = objectSchema?.Extensions?.Usage;
+
+                if (usage != null)
+                {
+                    Apply(objectSchema, (SchemaTypeUsage) Enum.Parse(typeof(SchemaTypeUsage), usage, true));
+                }
+            }
             foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)

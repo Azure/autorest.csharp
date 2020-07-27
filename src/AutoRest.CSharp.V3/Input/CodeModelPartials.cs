@@ -64,8 +64,24 @@ namespace AutoRest.CSharp.V3.Input
 
     internal partial class DictionaryOfAny
     {
+        private static char[] _formatSplitChar = new[] {',', ' '};
+
         public string? Accessibility => TryGetValue("x-accessibility", out object? value) ? value?.ToString() : null;
         public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
+        public string? Usage => TryGetValue("x-csharp-usage", out object? value) ? value?.ToString() : null;
+
+        public string[] Formats
+        {
+            get
+            {
+                if (TryGetValue("x-csharp-formats", out object? value) && value?.ToString() is string s)
+                {
+                    return s.Split(_formatSplitChar, StringSplitOptions.RemoveEmptyEntries);
+                }
+
+                return Array.Empty<string>();
+            }
+        }
     }
 
     internal partial class ServiceResponse

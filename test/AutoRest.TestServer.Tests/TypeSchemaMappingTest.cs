@@ -5,8 +5,10 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
+using System.Xml.Linq;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
+using Azure.Core;
 using CustomNamespace;
 using NamespaceForEnums;
 using NUnit.Framework;
@@ -168,6 +170,18 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.AreEqual("Very.Custom.Namespace.From.Swagger", typeof(EnumWithCustomNamespace).Namespace);
             Assert.False(typeof(EnumWithCustomNamespace).IsPublic);
+        }
+
+        [Theory]
+        [TestCase(typeof(ModelWithCustomUsage))]
+        [TestCase(typeof(ModelWithCustomUsageViaAttribute))]
+        public void TypesWithCustomUsageGeneratedCorrectly(Type type)
+        {
+            Assert.True(typeof(IUtf8JsonSerializable).IsAssignableFrom(type));
+            Assert.True(typeof(IXmlSerializable).IsAssignableFrom(type));
+
+            Assert.NotNull(type.GetMethod("Deserialize" + type.Name, new[] { typeof(JsonElement) }));
+            Assert.NotNull(type.GetMethod("Deserialize" + type.Name, new[] { typeof(XElement) }));
         }
     }
 }
