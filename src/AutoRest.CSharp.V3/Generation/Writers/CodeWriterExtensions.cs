@@ -14,7 +14,8 @@ using AutoRest.CSharp.V3.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
-using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Options;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -95,7 +96,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
 
-        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [System.Diagnostics.CodeAnalysis.NotNullWhen(true)] out IReadOnlyCollection<Parameter>? requiredParameters)
+        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [NotNullWhen(true)] out IReadOnlyCollection<Parameter>? requiredParameters)
         {
             var required = parameters
                 .Where(p => HasNullCheck(p))
