@@ -54,7 +54,8 @@ $testNames =
     'url-multi-collectionFormat',
     'validation',
     'xml-service',
-    'xms-error-responses';
+    'xms-error-responses',
+    'constants';
 
 if (!($Exclude -contains "TestServer"))
 {

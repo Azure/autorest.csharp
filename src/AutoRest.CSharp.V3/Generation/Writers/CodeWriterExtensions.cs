@@ -72,33 +72,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 }
         }
 
-        //public static void WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
-        //{
-        //    foreach (Parameter parameter in parameters)
-        //    {
-        //        if (parameter.DefaultValue != null && !CanBeInitializedInline(parameter))
-        //        {
-        //            if (parameter.Type.IsValueType && parameter.Type.Implementation is EnumType enumType && enumType.IsExtendable)
-        //            {
-        //                   writer.Line($"{parameter.Name} = {parameter.Name} ?? {parameter.DefaultValue.Value.Value:L};");
-        //            }
-        //            else
-        //            {
-        //                writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
-        //            }
-        //        }
-        //        else if (CanWriteNullCheck(parameter))
-        //        {
-        //            using (writer.Scope($"if ({parameter.Name:I} == null)"))
-        //            {
-        //                writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
-        //            }
-        //        }
-        //    }
-
-        //    writer.Line();
-        //}
-
         private static bool CanBeInitializedInline(Parameter parameter)
         {
             Debug.Assert(parameter.DefaultValue.HasValue);
