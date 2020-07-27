@@ -149,8 +149,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 {
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
-
-                    serializationInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, Discriminator.Value));
+                    ReferenceOrConstant? defaultValue = null;
+                    if (!TypeFactory.IsStruct(discriminatorParameter.Type))
+                    {
+                        defaultValue = Discriminator.Value;
+                    }
+                    serializationInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorParameter, defaultValue));
                 }
             }
 
@@ -194,9 +198,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 }
 
                 ReferenceOrConstant? initializationValue;
-
-                // For structs all properties become required
-                Constant? defaultParameterValue = null;
+                Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
                 if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
@@ -208,15 +210,19 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 }
                 else if (IsStruct || property.SchemaProperty?.IsRequired == true)
                 {
+                    // For structs all properties become required
+                    Constant? defaultParameterValue = null;
                     if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
                     {
                         defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
                     }
 
+                    defaultInitializationValue = defaultParameterValue;
                     var inputType = TypeFactory.GetInputType(propertyType);
                     if (defaultParameterValue != null && TypeFactory.IsStruct(property.ValueType))
                     {
                         inputType = inputType.WithNullable(true);
+                        defaultParameterValue = Constant.Default(inputType);
                     }
 
                     var defaultCtorParameter = new Parameter(
@@ -242,7 +248,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
                 if (initializationValue != null)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultParameterValue));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultInitializationValue));
                 }
             }
 

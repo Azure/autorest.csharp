@@ -86,11 +86,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
-                foreach (var parameter in restClient.Parameters)
-                {
-                    writer.WriteParameterNullChecks(parameter);
-                }
-                writer.Line();
+                writer.WriteParameterNullChecks(restClient.Parameters);
 
                 foreach (Parameter clientParameter in restClient.Parameters)
                 {
@@ -230,29 +226,29 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             switch (bodySerialization)
             {
                 case JsonSerialization jsonSerialization:
-                {
-                    var content = new CodeWriterDeclaration("content");
+                    {
+                        var content = new CodeWriterDeclaration("content");
 
-                    writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
-                    writer.ToSerializeCall(
-                        jsonSerialization,
-                        valueDelegate,
-                        writerName: w => w.Append($"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
-                    writer.Line($"{request}.Content = {content};");
-                    break;
-                }
+                        writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
+                        writer.ToSerializeCall(
+                            jsonSerialization,
+                            valueDelegate,
+                            writerName: w => w.Append($"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}"));
+                        writer.Line($"{request}.Content = {content};");
+                        break;
+                    }
                 case XmlElementSerialization xmlSerialization:
-                {
-                    var content = new CodeWriterDeclaration("content");
+                    {
+                        var content = new CodeWriterDeclaration("content");
 
-                    writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
-                    writer.ToSerializeCall(
-                        xmlSerialization,
-                        valueDelegate,
-                        writerName: w => w.Append($"{content}.{nameof(XmlWriterContent.XmlWriter)}"));
-                    writer.Line($"{request}.Content = {content};");
-                    break;
-                }
+                        writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
+                        writer.ToSerializeCall(
+                            xmlSerialization,
+                            valueDelegate,
+                            writerName: w => w.Append($"{content}.{nameof(XmlWriterContent.XmlWriter)}"));
+                        writer.Line($"{request}.Content = {content};");
+                        break;
+                    }
                 default:
                     throw new NotImplementedException(bodySerialization.ToString());
             }
@@ -295,11 +291,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Scope())
             {
-                foreach (var parameter in parameters)
-                {
-                    writer.WriteParameterNullChecks(parameter);
-                }
-                writer.Line();
+                writer.WriteParameterNullChecks(parameters);
 
                 var messageVariable = new CodeWriterDeclaration("message");
                 var requestMethodName = CreateRequestMethodName(operation.Name);

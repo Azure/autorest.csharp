@@ -51,8 +51,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.AppendRaw(",");
         }
 
-        public static void WriteParameterNullChecks(this CodeWriter writer, Parameter parameter)
+        public static void WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
         {
+            foreach (Parameter parameter in parameters)
+            {
                 if (parameter.DefaultValue != null && !CanBeInitializedInline(parameter))
                 {
                     if (TypeFactory.IsStruct(parameter.Type))
@@ -71,6 +73,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
                     }
                 }
+            }
+
+            writer.Line();
         }
 
         private static bool CanBeInitializedInline(Parameter parameter)
@@ -82,7 +87,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 return true;
             }
 
-            if (TypeFactory.IsStruct(parameter.Type))
+            if (TypeFactory.IsStruct(parameter.Type) && parameter.DefaultValue.Value.Value != null)
             {
                 return false;
             }
@@ -90,7 +95,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return parameter.Type.IsValueType || parameter.DefaultValue.Value.Value == null;
         }
 
-        private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && (parameter.Type.IsNullable || !parameter.Type.IsValueType);
+        private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && (parameter.Type.IsNullable || !parameter.Type.IsValueType) && parameter.DefaultValue == null;
 
         private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !CanBeInitializedInline(parameter)) && CanWriteNullCheck(parameter);
 

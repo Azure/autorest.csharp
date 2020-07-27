@@ -113,11 +113,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     using (writer.Scope())
                     {
-                        foreach (var parameter in allParameters.Values)
-                        {
-                            writer.WriteParameterNullChecks(parameter);
-                        }
-                        writer.Line();
+                        writer.WriteParameterNullChecks(allParameters.Values);
 
                         writer.Line($"{OptionsVariable} ??= new {title}ManagementClientOptions();");
                         writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");

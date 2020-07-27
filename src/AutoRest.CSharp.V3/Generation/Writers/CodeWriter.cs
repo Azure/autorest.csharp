@@ -119,7 +119,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     default:
                         if (isLiteral)
                         {
-                            Literal(argument);
+                            if (argument is EnumTypeValue enumTypeValue)
+                            {
+                                AppendRaw($"{enumTypeValue.Declaration.Type.Name}.{enumTypeValue.Declaration.Name}");
+                            }
+                            else
+                            {
+                                Literal(argument);
+                            }
                             continue;
                         }
 
@@ -264,7 +271,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 double d => SyntaxFactory.Literal(d).ToString(),
                 float f => SyntaxFactory.Literal(f).ToString(),
                 bool b => b ? "true" : "false",
-                EnumTypeValue enumTypeValue => enumTypeValue.Declaration.Type.Name + "." + enumTypeValue.Declaration.Name,
                 _ => throw new NotImplementedException()
             });
         }

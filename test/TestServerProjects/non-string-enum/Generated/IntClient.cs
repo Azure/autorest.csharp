@@ -38,7 +38,7 @@ namespace non_string_enum
         /// <summary> Put an int enum. </summary>
         /// <param name="input"> Input int enum. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> PutAsync(IntEnum? input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> PutAsync(IntEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IntClient.Put");
             scope.Start();
@@ -56,7 +56,7 @@ namespace non_string_enum
         /// <summary> Put an int enum. </summary>
         /// <param name="input"> Input int enum. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> Put(IntEnum? input, CancellationToken cancellationToken = default)
+        public virtual Response<string> Put(IntEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IntClient.Put");
             scope.Start();

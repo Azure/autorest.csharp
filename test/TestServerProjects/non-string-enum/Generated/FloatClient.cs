@@ -38,7 +38,7 @@ namespace non_string_enum
         /// <summary> Put a float enum. </summary>
         /// <param name="input"> Input float enum. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> PutAsync(FloatEnum? input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> PutAsync(FloatEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FloatClient.Put");
             scope.Start();
@@ -56,7 +56,7 @@ namespace non_string_enum
         /// <summary> Put a float enum. </summary>
         /// <param name="input"> Input float enum. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> Put(FloatEnum? input, CancellationToken cancellationToken = default)
+        public virtual Response<string> Put(FloatEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FloatClient.Put");
             scope.Start();

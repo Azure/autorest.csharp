@@ -195,23 +195,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 using (writer.Scope())
                 {
-                    foreach (var parameter in constructor.Parameters)
-                    {
-                        if (parameter.DefaultValue == null)
-                        {
-                            writer.WriteParameterNullChecks(parameter);
-                        }
-                    }
-                    writer.Line();
+                    writer.WriteParameterNullChecks(constructor.Parameters);
 
                     foreach (var initializer in constructor.Initializers)
                     {
                         writer.Append($"{initializer.Property.Declaration.Name} = ")
                             .WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type, w => w.WriteReferenceOrConstant(initializer.Value));
 
-                        if (initializer.DefaultValue != null &&
-                        (!initializer.Value.Type.IsValueType ||
-                        TypeFactory.IsStruct(initializer.Value.Type) && initializer.Property.SchemaProperty != null && initializer.Property.SchemaProperty.IsDiscriminator != true))
+                        if (initializer.DefaultValue != null && (!initializer.Value.Type.IsValueType || TypeFactory.IsStruct(initializer.Value.Type)))
                         {
                             writer.Append($"?? ").WriteReferenceOrConstant(initializer.DefaultValue.Value);
                         }

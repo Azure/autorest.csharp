@@ -199,11 +199,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Scope())
             {
-                foreach (var parameter in parameters)
-                {
-                    writer.WriteParameterNullChecks(parameter);
-                }
-                writer.Line();
+                writer.WriteParameterNullChecks(parameters);
 
                 var pageWrappedType = new CSharpType(typeof(Page<>), pageType);
                 var funcType = async ? new CSharpType(typeof(Task<>), pageWrappedType) : pageWrappedType;
@@ -305,11 +301,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             using (writer.Scope())
             {
-                foreach (var parameter in parameters)
-                {
-                    writer.WriteParameterNullChecks(parameter);
-                }
-                writer.Line();
+                writer.WriteParameterNullChecks(parameters);
 
                 WriteDiagnosticScope(writer, lroMethod.Diagnostics, writer =>
                 {

@@ -57,7 +57,7 @@ namespace non_string_enum
         /// <summary> Put a float enum. </summary>
         /// <param name="input"> Input float enum. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<string>> PutAsync(FloatEnum? input, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutAsync(FloatEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -78,7 +78,7 @@ namespace non_string_enum
         /// <summary> Put a float enum. </summary>
         /// <param name="input"> Input float enum. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<string> Put(FloatEnum? input, CancellationToken cancellationToken = default)
+        public Response<string> Put(FloatEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutRequest(input);
             _pipeline.Send(message, cancellationToken);

@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                 type = type.WithNullable(true);
             }
 
-            if (!isRequired && defaultValue == null && !TypeFactory.IsStruct(type))
+            if (!isRequired && defaultValue == null)
             {
                 defaultValue = Constant.Default(type);
             }
