@@ -16,6 +16,9 @@ using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis.Options;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Azure.WebJobs;
+using System.Net;
+using Microsoft.Azure.WebJobs.Extensions.Http;
 
 namespace AutoRest.CSharp.V3.Generation.Writers
 {
@@ -31,15 +34,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             return writer;
         }
 
-        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool includeDefaultValue = true)
+        public static void WriteFunctionParameter(this CodeWriter writer, Parameter serverParameter, string method, string route)
         {
-            writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
+            // TODO: Support sinle operation with multiple methods
+            writer.Append($"[{new CSharpType(typeof(HttpTriggerAttribute))}({typeof(AuthorizationLevel)}.Anonymous, \"{method}\", Route = {route})] ");
+            writer.WriteParameter(serverParameter);
+        }
+
+        public static void WriteParameter(this CodeWriter writer, Parameter serverParameter, bool includeDefaultValue = true)
+        {
+            writer.Append($"{serverParameter.Type} {serverParameter.Name:D}");
             if (includeDefaultValue &&
-                clientParameter.DefaultValue != null)
+                serverParameter.DefaultValue != null)
             {
-                if (CanBeInitializedInline(clientParameter))
+                if (CanBeInitializedInline(serverParameter))
                 {
-                    writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
+                    writer.Append($" = {serverParameter.DefaultValue.Value.Value:L}");
                 }
                 else
                 {

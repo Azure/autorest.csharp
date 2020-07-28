@@ -13,6 +13,9 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs" Version="3.0.16" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Http" Version="3.0.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.6.0-2.final" />
     <PackageReference Include="YamlDotNet" Version="8.0.0-emit-default-values0565" />
   </ItemGroup>
@@ -24,6 +27,10 @@
   <ItemGroup>
     <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Generation\Static\" />
   </ItemGroup>
 
 </Project>

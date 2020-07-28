@@ -28,9 +28,10 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
+
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel, Configuration configuration)
         {
-            Directory.CreateDirectory(configuration.OutputFolder);
+            var directory = Directory.CreateDirectory(configuration.OutputFolder);
             var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
@@ -39,23 +40,71 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var modelWriter = new ModelWriter();
             var clientWriter = new ClientWriter();
             var restClientWriter = new RestClientWriter();
+            var restServerWriter = new RestServerWriter();
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new ResponseHeaderGroupWriter();
+
+            // Generate the landing zone for the files.
+            var x = new ProcessStartInfo("func");
+            x.WorkingDirectory = Path.Combine(configuration.OutputFolder, "Generated");
+            x.ArgumentList.Add("init");
+            x.ArgumentList.Add("--worker-runtime");
+            x.ArgumentList.Add("dotnet");
+            x.ArgumentList.Add("--force");
+            Process.Start(x).WaitForExit();
 
             foreach (var model in context.Library.Models)
             {
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
 
-                var serializerCodeWriter = new CodeWriter();
-                serializeWriter.WriteSerialization(serializerCodeWriter, model);
+                //var serializerCodeWriter = new CodeWriter();
+                //serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
                 var name = model.Type.Name;
                 project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
-                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                //project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
             foreach (var client in context.Library.RestClients)
+            {
+                var apiGroups = client.Methods.GroupBy(m =>
+                {
+                    var pathSegment = m.Request.PathSegments.First(s => {
+                        var segementValue = s.Value.IsConstant ? s.Value.Constant.Value : null;
+                        if (segementValue != null)
+                        {
+                            return (segementValue.ToString() ?? string.Empty).StartsWith("/");
+                        }
+                        return false;
+                    });
+
+                    if (pathSegment != null)
+                    {
+                        var pathString = pathSegment.Value.Constant.Value?.ToString();
+
+                        if (!string.IsNullOrWhiteSpace(pathString) && pathString.Contains('/'))
+                        {
+                            return pathString.Split('/', StringSplitOptions.RemoveEmptyEntries).First().ToLower();
+                        }
+                    }
+
+                    return string.Empty;
+                });
+
+                foreach (var apiGroup in apiGroups)
+                {
+                    var codeWriter = new CodeWriter();
+                    var className = $"{apiGroup.Key.ToCleanName()}Api";
+                    restServerWriter.WriteServer(codeWriter, client.Type.Namespace, className, apiGroup);
+
+                    project.AddGeneratedFile($"{className}.cs", codeWriter.ToString());
+                }
+
+
+            }
+
+            /*foreach (var client in context.Library.RestClients)
             {
                 var restCodeWriter = new CodeWriter();
                 restClientWriter.WriteClient(restCodeWriter, client);
@@ -97,7 +146,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
                 project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClient.cs", clientCodeWriter.ToString());
 
-            }
+            }*/
 
             return project;
         }

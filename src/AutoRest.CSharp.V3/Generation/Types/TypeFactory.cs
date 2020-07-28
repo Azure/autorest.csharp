@@ -66,12 +66,12 @@ namespace AutoRest.CSharp.V3.Generation.Types
             {
                 if (IsList(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingList<>), type.Arguments);
+                    return new CSharpType(typeof(List<>), type.Arguments);
                 }
 
                 if (IsDictionary(type))
                 {
-                    return new CSharpType(typeof(ChangeTrackingDictionary<,>), type.Arguments);
+                    return new CSharpType(typeof(Dictionary<,>), type.Arguments);
                 }
             }
 
