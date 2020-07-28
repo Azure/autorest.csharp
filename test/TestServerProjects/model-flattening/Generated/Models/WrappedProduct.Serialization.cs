@@ -22,19 +22,5 @@ namespace model_flattening.Models
             }
             writer.WriteEndObject();
         }
-
-        internal static WrappedProduct DeserializeWrappedProduct(JsonElement element)
-        {
-            Optional<string> value = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("value"))
-                {
-                    value = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new WrappedProduct(value.Value);
-        }
     }
 }

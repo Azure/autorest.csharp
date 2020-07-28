@@ -33,6 +33,12 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default":{
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
           }
         }
       },
@@ -67,6 +73,52 @@
             "schema": {
               "$ref": "#/definitions/OutputModel"
             }
+          }
+        }
+      }
+    },
+    "/op2": {
+      "put": {
+        "operationId": "mixedreadonly",
+        "description": "",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MixedModelWithReadonlyProperty"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/MixedModelWithReadonlyProperty"
+            }
+          }
+        }
+      }
+    },
+    "/op3": {
+      "put": {
+        "operationId": "flattenedParameterOperation",
+        "description": "",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/ParametersModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
           }
         }
       }
@@ -187,6 +239,39 @@
       "type": "object",
       "properties": {
         "UnusedString": { "type": "string" }
+      }
+    },
+    "MixedModelWithReadonlyProperty": {
+      "properties": {
+        "ReadonlyProperty": {
+          "$ref": "#/definitions/ReadonlyModel",
+          "readOnly": true
+        },
+        "ReadonlyListProperty": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ReadonlyModel" },
+          "readOnly": true
+        }
+      }
+    },
+    "ReadonlyModel": {
+      "type": "object",
+      "properties": {
+        "Name": { "type": "string" }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "Code": { "type": "string" },
+        "Status": { "type": "string" }
+      }
+    },
+    "ParametersModel": {
+      "type": "object",
+      "properties": {
+        "Code": { "type": "string" },
+        "Status": { "type": "string" }
       }
     }
   }

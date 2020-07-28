@@ -109,13 +109,6 @@ namespace AutoRest.CSharp.V3.Input
             Parents = new Relations();
             Children = new Relations();
         }
-
-        public bool IsInput => Usage.Contains(SchemaContext.Input);
-        public bool IsOutput => Usage.Contains(SchemaContext.Output);
-        public bool IsException => Usage.Contains(SchemaContext.Exception);
-        public bool IsInputOnly => IsInput && !IsOutput && !IsException;
-        public bool IsOutputOnly => IsOutput && !IsInput && !IsException;
-        public bool IsExceptionOnly => IsException && !IsInput && !IsOutput;
     }
 
     // redefined manually to inherit from ObjectSchema

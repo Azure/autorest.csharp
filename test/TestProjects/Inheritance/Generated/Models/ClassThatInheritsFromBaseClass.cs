@@ -8,10 +8,10 @@
 namespace Inheritance.Models
 {
     /// <summary> The ClassThatInheritsFromBaseClass. </summary>
-    internal partial class ClassThatInheritsFromBaseClass : BaseClass
+    public partial class ClassThatInheritsFromBaseClass : BaseClass
     {
         /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClass. </summary>
-        internal ClassThatInheritsFromBaseClass()
+        public ClassThatInheritsFromBaseClass()
         {
         }
 

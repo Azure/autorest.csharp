@@ -15,7 +15,32 @@
   "consumes": [
     "application/json"
   ],
-  "paths": {},
+  "paths": {
+    "/op": {
+      "put": {
+        "operationId": "mixed",
+        "description": "",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BaseClass"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BaseClass"
+            }
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "BaseClass": {
       "type": "object",

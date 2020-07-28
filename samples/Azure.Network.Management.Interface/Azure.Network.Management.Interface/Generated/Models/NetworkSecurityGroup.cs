@@ -35,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="resourceGuid"> The resource GUID property of the network security group resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network security group resource. </param>
-        internal NetworkSecurityGroup(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<SecurityRule> securityRules, IList<SecurityRule> defaultSecurityRules, IList<NetworkInterface> networkInterfaces, IList<Subnet> subnets, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
+        internal NetworkSecurityGroup(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<SecurityRule> securityRules, IReadOnlyList<SecurityRule> defaultSecurityRules, IReadOnlyList<NetworkInterface> networkInterfaces, IReadOnlyList<Subnet> subnets, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
         {
             Etag = etag;
             SecurityRules = securityRules;
@@ -51,11 +51,11 @@ namespace Azure.Network.Management.Interface.Models
         /// <summary> A collection of security rules of the network security group. </summary>
         public IList<SecurityRule> SecurityRules { get; }
         /// <summary> The default security rules of network security group. </summary>
-        public IList<SecurityRule> DefaultSecurityRules { get; }
+        public IReadOnlyList<SecurityRule> DefaultSecurityRules { get; }
         /// <summary> A collection of references to network interfaces. </summary>
-        public IList<NetworkInterface> NetworkInterfaces { get; }
+        public IReadOnlyList<NetworkInterface> NetworkInterfaces { get; }
         /// <summary> A collection of references to subnets. </summary>
-        public IList<Subnet> Subnets { get; }
+        public IReadOnlyList<Subnet> Subnets { get; }
         /// <summary> The resource GUID property of the network security group resource. </summary>
         public string ResourceGuid { get; }
         /// <summary> The provisioning state of the network security group resource. </summary>

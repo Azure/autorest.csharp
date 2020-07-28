@@ -16,11 +16,13 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel sourceInputModel)
         {
             CodeModel = codeModel;
+            SchemaUsageProvider = new SchemaUsageProvider(codeModel);
             Configuration = configuration;
             SourceInputModel = sourceInputModel;
         }
 
         public CodeModel CodeModel { get; }
+        public SchemaUsageProvider SchemaUsageProvider { get; }
         public OutputLibrary Library => _library ??= new OutputLibrary(CodeModel, this);
         public string DefaultNamespace => Configuration.Namespace;
         public TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);

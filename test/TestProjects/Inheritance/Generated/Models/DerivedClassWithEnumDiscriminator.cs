@@ -15,12 +15,5 @@ namespace Inheritance.Models
         {
             DiscriminatorProperty = BaseClassWithEnumDiscriminatorEnum.Derived;
         }
-
-        /// <summary> Initializes a new instance of DerivedClassWithEnumDiscriminator. </summary>
-        /// <param name="discriminatorProperty"> . </param>
-        internal DerivedClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty) : base(discriminatorProperty)
-        {
-            DiscriminatorProperty = discriminatorProperty;
-        }
     }
 }

@@ -134,5 +134,75 @@ namespace ModelShapes
                 throw;
             }
         }
+
+        /// <param name="value"> The MixedModelWithReadonlyProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<MixedModelWithReadonlyProperty>> MixedreadonlyAsync(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Mixedreadonly");
+            scope.Start();
+            try
+            {
+                return await RestClient.MixedreadonlyAsync(value, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="value"> The MixedModelWithReadonlyProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<MixedModelWithReadonlyProperty> Mixedreadonly(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.Mixedreadonly");
+            scope.Start();
+            try
+            {
+                return RestClient.Mixedreadonly(value, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="code"> The ParametersModelCode to use. </param>
+        /// <param name="status"> The ParametersModelStatus to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> FlattenedParameterOperationAsync(string code = null, string status = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.FlattenedParameterOperation");
+            scope.Start();
+            try
+            {
+                return await RestClient.FlattenedParameterOperationAsync(code, status, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="code"> The ParametersModelCode to use. </param>
+        /// <param name="status"> The ParametersModelStatus to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response FlattenedParameterOperation(string code = null, string status = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ServiceClient.FlattenedParameterOperation");
+            scope.Start();
+            try
+            {
+                return RestClient.FlattenedParameterOperation(code, status, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

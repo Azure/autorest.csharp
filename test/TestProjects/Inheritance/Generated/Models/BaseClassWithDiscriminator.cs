@@ -8,10 +8,10 @@
 namespace Inheritance.Models
 {
     /// <summary> The BaseClassWithDiscriminator. </summary>
-    internal partial class BaseClassWithDiscriminator : BaseClass
+    public partial class BaseClassWithDiscriminator : BaseClass
     {
         /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>
-        internal BaseClassWithDiscriminator()
+        public BaseClassWithDiscriminator()
         {
             DiscriminatorProperty = "BaseClassWithDiscriminator";
         }
