@@ -194,6 +194,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            queries_ArrayStringMultiNull:
+              parameters: {}
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: ArrayStringMultiNull
@@ -255,6 +261,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            queries_ArrayStringMultiEmpty:
+              parameters:
+                arrayQuery: ''
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: ArrayStringMultiEmpty
@@ -316,6 +329,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            queries_ArrayStringMultiValid:
+              parameters:
+                arrayQuery: 'ArrayQuery1,begin!*''();:@ &=+$,/?#[]end,,'
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: ArrayStringMultiValid

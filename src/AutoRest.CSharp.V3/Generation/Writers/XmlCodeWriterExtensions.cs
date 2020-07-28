@@ -102,6 +102,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                     }
 
+                    if (objectSerialization.ContentSerialization is XmlObjectContentSerialization contentSerialization)
+                    {
+                        writer.ToSerializeValueCall(
+                            w => w.Append($"{contentSerialization.Property.Declaration.Name}"),
+                            writerName,
+                            contentSerialization.ValueSerialization);
+                    }
+
                     writer.Line($"{writerName}.WriteEndElement();");
                     return;
 
@@ -291,6 +299,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             element);
                     }
 
+                    if (elementSerialization.ContentSerialization is XmlObjectContentSerialization contentSerialization)
+                    {
+                        writer.Append($"{propertyVariables[contentSerialization.Property]} = ");
+                        writer.ToDeserializeValueCall(contentSerialization.ValueSerialization, w => w.Append($"{element}.Value"));
+                        writer.Line($";");
+                    }
+
                     var initializers = new List<PropertyInitializer>();
                     foreach (var variable in propertyVariables)
                     {
@@ -413,6 +428,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             foreach (var attribute in element.EmbeddedArrays)
             {
                 propertyVariables.Add(attribute.Property, new CodeWriterDeclaration(attribute.Property.Declaration.Name.ToVariableName()));
+            }
+
+            if (element.ContentSerialization != null)
+            {
+                propertyVariables.Add(
+                    element.ContentSerialization.Property,
+                    new CodeWriterDeclaration(element.ContentSerialization.Property.Declaration.Name.ToVariableName()));
             }
         }
     }

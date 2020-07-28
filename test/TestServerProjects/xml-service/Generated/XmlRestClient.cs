@@ -1795,5 +1795,63 @@ namespace xml_service
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateGetXMsTextRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/xml/x-ms-text", false);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Get back an XML object with an x-ms-text property, which should translate to the returned object&apos;s &apos;language&apos; property being &apos;english&apos; and its &apos;content&apos; property being &apos;I am text&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<ObjectWithXMsTextProperty>> GetXMsTextAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetXMsTextRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ObjectWithXMsTextProperty value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("Data") is XElement dataElement)
+                        {
+                            value = ObjectWithXMsTextProperty.DeserializeObjectWithXMsTextProperty(dataElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Get back an XML object with an x-ms-text property, which should translate to the returned object&apos;s &apos;language&apos; property being &apos;english&apos; and its &apos;content&apos; property being &apos;I am text&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ObjectWithXMsTextProperty> GetXMsText(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetXMsTextRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ObjectWithXMsTextProperty value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("Data") is XElement dataElement)
+                        {
+                            value = ObjectWithXMsTextProperty.DeserializeObjectWithXMsTextProperty(dataElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }

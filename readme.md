@@ -791,7 +791,7 @@ namespace Azure.Service.Models
 
 **Add autorest.md transformation**
 
-``` yaml
+```
 directive:
   from: swagger-document
   where: $.definitions.*
@@ -822,7 +822,7 @@ directive:
 ## Configuration
 ```yaml
 # autorest-core version
-version: 3.0.6289
+version: 3.0.6304
 shared-source-folder: $(this-folder)/src/assets
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/

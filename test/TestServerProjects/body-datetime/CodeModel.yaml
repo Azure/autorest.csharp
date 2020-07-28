@@ -83,7 +83,7 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       value: !<!ConstantValue> 
-        value: '0001-01-01t00:00:00+14:00'
+        value: '0001-01-01t00:00:00-14:00'
       valueType: *ref_1
       language: !<!Languages> 
         default:
@@ -193,6 +193,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getNull:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !<!Languages> 
           default:
             name: GetNull
@@ -380,7 +387,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: datetimeBody
-                    description: ''
+                    description: datetime body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -424,6 +431,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_putUtcMaxDateTime:
+              parameters:
+                datetimeBody: '9999-12-31T23:59:59.999Z'
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutUtcMaxDateTime
@@ -458,7 +472,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: datetimeBody
-                    description: ''
+                    description: datetime body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -554,6 +568,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getUtcLowercaseMaxDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '9999-12-31t23:59:59.999z'
         language: !<!Languages> 
           default:
             name: GetUtcLowercaseMaxDateTime
@@ -605,6 +626,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getUtcUppercaseMaxDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '9999-12-31T23:59:59.999Z'
         language: !<!Languages> 
           default:
             name: GetUtcUppercaseMaxDateTime
@@ -691,7 +719,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: datetimeBody
-                    description: ''
+                    description: datetime body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -735,6 +763,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_putLocalPositiveOffsetMaxDateTime:
+              parameters:
+                datetimeBody: '9999-12-31T23:59:59.999+14:00'
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutLocalPositiveOffsetMaxDateTime
@@ -786,6 +821,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getLocalPositiveOffsetLowercaseMaxDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '9999-12-31t23:59:59.999+14:00'
         language: !<!Languages> 
           default:
             name: GetLocalPositiveOffsetLowercaseMaxDateTime
@@ -837,6 +879,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getLocalPositiveOffsetUppercaseMaxDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '9999-12-31T23:59:59.999+14:00'
         language: !<!Languages> 
           default:
             name: GetLocalPositiveOffsetUppercaseMaxDateTime
@@ -871,7 +920,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: datetimeBody
-                    description: ''
+                    description: datetime body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1051,7 +1100,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: datetimeBody
-                    description: ''
+                    description: datetime body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1095,6 +1144,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_putUtcMinDateTime:
+              parameters:
+                datetimeBody: '0001-01-01T00:00:00Z'
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutUtcMinDateTime
@@ -1146,6 +1202,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getUtcMinDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '0001-01-01T00:00:00Z'
         language: !<!Languages> 
           default:
             name: GetUtcMinDateTime
@@ -1180,7 +1243,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: datetimeBody
-                    description: ''
+                    description: datetime body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1309,7 +1372,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: datetimeBody
-                    description: ''
+                    description: datetime body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1353,6 +1416,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_putLocalNegativeOffsetMinDateTime:
+              parameters:
+                datetimeBody: '0001-01-01T00:00:00-14:00'
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutLocalNegativeOffsetMinDateTime
@@ -1404,6 +1474,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getLocalNegativeOffsetMinDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '0001-01-01T00:00:00-14:00'
         language: !<!Languages> 
           default:
             name: GetLocalNegativeOffsetMinDateTime
@@ -1455,6 +1532,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            datetime_getLocalNoOffsetMinDateTime:
+              parameters: {}
+              responses:
+                '200':
+                  body: '0001-01-01T00:00:00'
         language: !<!Languages> 
           default:
             name: GetLocalNoOffsetMinDateTime

@@ -69,7 +69,7 @@ namespace body_duration
         }
 
         /// <summary> Put a positive duration value. </summary>
-        /// <param name="durationBody"> The Duration to use. </param>
+        /// <param name="durationBody"> duration body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutPositiveDurationAsync(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {
@@ -87,7 +87,7 @@ namespace body_duration
         }
 
         /// <summary> Put a positive duration value. </summary>
-        /// <param name="durationBody"> The Duration to use. </param>
+        /// <param name="durationBody"> duration body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutPositiveDuration(TimeSpan durationBody, CancellationToken cancellationToken = default)
         {

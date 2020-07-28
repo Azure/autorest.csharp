@@ -224,6 +224,14 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Int_put:
+              parameters:
+                input: 200
+              responses:
+                '200':
+                  body: Nice job posting an int enum
         language: !<!Languages> 
           default:
             name: Put
@@ -261,6 +269,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Int_get:
+              parameters: {}
+              responses:
+                '200':
+                  body: 429
         language: !<!Languages> 
           default:
             name: Get
@@ -337,6 +352,14 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Float_put:
+              parameters:
+                input: 200.4
+              responses:
+                '200':
+                  body: Nice job posting a float enum
         language: !<!Languages> 
           default:
             name: Put
@@ -374,6 +397,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Float_Get:
+              parameters: {}
+              responses:
+                '200':
+                  body: 429.1
         language: !<!Languages> 
           default:
             name: Get

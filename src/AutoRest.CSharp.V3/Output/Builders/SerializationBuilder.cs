@@ -113,6 +113,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
             List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
             List<XmlObjectAttributeSerialization> attributes = new List<XmlObjectAttributeSerialization>();
             List<XmlObjectArraySerialization> embeddedArrays = new List<XmlObjectArraySerialization>();
+            XmlObjectContentSerialization? contentSerialization = null;
+
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
                 foreach (ObjectTypeProperty objectProperty in objectTypeLevel.Properties)
@@ -125,8 +127,15 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
                     var name = property.SerializedName;
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
+                    var isContent = property.Schema.Serialization?.Xml?.Extensions?.XmlText == true;
 
-                    if (isAttribute)
+                    if (isContent)
+                    {
+                        contentSerialization = new XmlObjectContentSerialization(
+                            objectProperty,
+                            BuildXmlValueSerialization(property.Schema, objectProperty.Declaration.Type));
+                    }
+                    else if (isAttribute)
                     {
                         attributes.Add(
                             new XmlObjectAttributeSerialization(
@@ -159,7 +168,8 @@ namespace AutoRest.CSharp.V3.Output.Builders
 
             return new XmlObjectSerialization(
                 objectSchema.Serialization?.Xml?.Name ?? objectSchema.Language.Default.Name,
-                objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray()
+                objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
+                contentSerialization
                 );
         }
 
