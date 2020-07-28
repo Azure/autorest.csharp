@@ -100,6 +100,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
         {
             return type.IsFrameworkType &&
                    (type.FrameworkType == typeof(IDictionary<,>) ||
+                   type.FrameworkType == typeof(Dictionary<,>) ||
                    type.FrameworkType == typeof(IReadOnlyDictionary<,>));
         }
 
@@ -109,6 +110,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                    (type.FrameworkType == typeof(IEnumerable<>) ||
                    type.FrameworkType == typeof(IReadOnlyList<>) ||
                    type.FrameworkType == typeof(IList<>) ||
+                   type.FrameworkType == typeof(List<>) ||
                    type.FrameworkType == typeof(ICollection<>));
         }
 
@@ -155,7 +157,7 @@ namespace AutoRest.CSharp.V3.Generation.Types
                 if (IsList(type))
                 {
                     return new CSharpType(
-                        typeof(IEnumerable<>),
+                        typeof(List<>),
                         isNullable: type.IsNullable,
                         type.Arguments);
                 }

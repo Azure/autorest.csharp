@@ -273,6 +273,19 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
             var httpRequestParameter = new Parameter("req", "Raw HTTP Request", new CSharpType(typeof(Microsoft.AspNetCore.Http.HttpRequest)), null, false);
             var parameters = operation.Parameters.ToList();
+
+            // If we have parameters that are not in the route, then we can't have them in this list.
+            var routeSegments = new HashSet<string>();
+            foreach (var pathSegement in operation.Request.PathSegments)
+            {
+                if (!pathSegement.Value.IsConstant)
+                {
+                    routeSegments.Add(pathSegement.Value.Reference.Name);
+                }
+            }
+            routeSegments.Add("body");
+            parameters.RemoveAll(p => !routeSegments.Contains(p.Name));
+
             var indexOfFirstOptional = parameters.FindIndex(p => p.DefaultValue.HasValue);
             if (!bodyIsTrigger)
             {

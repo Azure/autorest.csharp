@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AppConfiguration.Models
 {
@@ -18,7 +17,7 @@ namespace AppConfiguration.Models
         /// <param name="name"> . </param>
         /// <param name="photoUrls"> . </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="photoUrls"/> is null. </exception>
-        public Pet(string name, IEnumerable<string> photoUrls)
+        public Pet(string name, List<string> photoUrls)
         {
             if (name == null)
             {
@@ -30,7 +29,7 @@ namespace AppConfiguration.Models
             }
 
             Name = name;
-            PhotoUrls = photoUrls.ToList();
+            PhotoUrls = photoUrls;
             Tags = new List<Tag>();
         }
 

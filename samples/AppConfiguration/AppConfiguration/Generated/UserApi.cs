@@ -43,7 +43,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token provided on Function shutdown. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         [FunctionName("CreateUsersWithArrayInputAsync_post")]
-        public async Task<IActionResult> CreateUsersWithArrayInputAsync([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user/createWithArray")] IEnumerable<User> body, HttpRequest req, ILogger log, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> CreateUsersWithArrayInputAsync([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user/createWithArray")] List<User> body, HttpRequest req, ILogger log, CancellationToken cancellationToken = default)
         {
             log.LogInformation("HTTP Trigger function processed a request.");
 
@@ -59,7 +59,7 @@ namespace AppConfiguration
         /// <param name="cancellationToken"> The cancellation token provided on Function shutdown. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         [FunctionName("CreateUsersWithListInputAsync_post")]
-        public async Task<IActionResult> CreateUsersWithListInputAsync([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user/createWithList")] IEnumerable<User> body, HttpRequest req, ILogger log, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> CreateUsersWithListInputAsync([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user/createWithList")] List<User> body, HttpRequest req, ILogger log, CancellationToken cancellationToken = default)
         {
             log.LogInformation("HTTP Trigger function processed a request.");
 
@@ -70,13 +70,10 @@ namespace AppConfiguration
 
         /// <summary> Logs user into the system. </summary>
         /// <param name="req"> Raw HTTP Request. </param>
-        /// <param name="username"> The user name for login. </param>
-        /// <param name="password"> The password for login in clear text. </param>
         /// <param name="log"> function logger. </param>
         /// <param name="cancellationToken"> The cancellation token provided on Function shutdown. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="username"/> or <paramref name="password"/> is null. </exception>
         [FunctionName("LoginUserAsync_get")]
-        public async Task<IActionResult> LoginUserAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user/login")] HttpRequest req, string username, string password, ILogger log, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> LoginUserAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user/login")] HttpRequest req, ILogger log, CancellationToken cancellationToken = default)
         {
             log.LogInformation("HTTP Trigger function processed a request.");
 

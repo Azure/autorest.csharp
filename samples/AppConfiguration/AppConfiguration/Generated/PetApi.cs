@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AppConfiguration.Models;
@@ -58,12 +57,10 @@ namespace AppConfiguration
 
         /// <summary> Multiple status values can be provided with comma separated strings. </summary>
         /// <param name="req"> Raw HTTP Request. </param>
-        /// <param name="status"> Status values that need to be considered for filter. </param>
         /// <param name="log"> function logger. </param>
         /// <param name="cancellationToken"> The cancellation token provided on Function shutdown. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="status"/> is null. </exception>
         [FunctionName("FindPetsByStatusAsync_get")]
-        public async Task<IActionResult> FindPetsByStatusAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "pet/findByStatus")] HttpRequest req, IEnumerable<Get0ItemsItem> status, ILogger log, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> FindPetsByStatusAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "pet/findByStatus")] HttpRequest req, ILogger log, CancellationToken cancellationToken = default)
         {
             log.LogInformation("HTTP Trigger function processed a request.");
 
@@ -77,12 +74,10 @@ namespace AppConfiguration
 
         /// <summary> Muliple tags can be provided with comma separated strings. Use\ \ tag1, tag2, tag3 for testing. </summary>
         /// <param name="req"> Raw HTTP Request. </param>
-        /// <param name="tags"> Tags to filter by. </param>
         /// <param name="log"> function logger. </param>
         /// <param name="cancellationToken"> The cancellation token provided on Function shutdown. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         [FunctionName("FindPetsByTagsAsync_get")]
-        public async Task<IActionResult> FindPetsByTagsAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "pet/findByTags")] HttpRequest req, IEnumerable<string> tags, ILogger log, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> FindPetsByTagsAsync([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "pet/findByTags")] HttpRequest req, ILogger log, CancellationToken cancellationToken = default)
         {
             log.LogInformation("HTTP Trigger function processed a request.");
 
@@ -116,10 +111,9 @@ namespace AppConfiguration
         /// <param name="req"> Raw HTTP Request. </param>
         /// <param name="petId"> Pet id to delete. </param>
         /// <param name="log"> function logger. </param>
-        /// <param name="apiKey"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token provided on Function shutdown. </param>
         [FunctionName("DeletePetAsync_delete")]
-        public async Task<IActionResult> DeletePetAsync([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "pet/{petId}")] HttpRequest req, long petId, ILogger log, string apiKey = null, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> DeletePetAsync([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "pet/{petId}")] HttpRequest req, long petId, ILogger log, CancellationToken cancellationToken = default)
         {
             log.LogInformation("HTTP Trigger function processed a request.");
 
