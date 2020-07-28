@@ -218,9 +218,9 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     if (property.SchemaProperty?.ClientDefaultValue is object defaultValueObject)
                     {
                         defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
+                        defaultInitializationValue = defaultParameterValue;
                     }
 
-                    defaultInitializationValue = defaultParameterValue;
                     var inputType = TypeFactory.GetInputType(propertyType);
                     if (defaultParameterValue != null && TypeFactory.IsStruct(property.ValueType))
                     {
