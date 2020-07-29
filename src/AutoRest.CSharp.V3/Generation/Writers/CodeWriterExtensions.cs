@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (includeDefaultValue &&
                 clientParameter.DefaultValue != null)
             {
-                if (CanBeInitializedInline(clientParameter))
+                if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
                 {
                     writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
                 }
@@ -55,16 +55,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             foreach (Parameter parameter in parameters)
             {
-                if (parameter.DefaultValue != null && !CanBeInitializedInline(parameter))
+                if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
                 {
                     if (TypeFactory.IsStruct(parameter.Type))
                     {
-                        writer.Line($"{parameter.Name} = {parameter.Name} ?? {parameter.DefaultValue.Value.Value:L};");
+                        writer.Append($"{parameter.Name} ??= ");
+                        WriteConstant(writer, parameter.DefaultValue.Value);
                     }
                     else
                     {
-                        writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
+                        writer.Append($"{parameter.Name} ??= new {parameter.Type}(");
+                        WriteConstant(writer, parameter.DefaultValue.Value);
+                        writer.Append($")");
                     }
+                    writer.Line($";");
                 }
                 else if (CanWriteNullCheck(parameter))
                 {
@@ -78,26 +82,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private static bool CanBeInitializedInline(Parameter parameter)
-        {
-            Debug.Assert(parameter.DefaultValue.HasValue);
-
-            if (parameter.Type.IsFrameworkType && parameter.Type.FrameworkType == typeof(string))
-            {
-                return true;
-            }
-
-            if (TypeFactory.IsStruct(parameter.Type) && parameter.DefaultValue.Value.Value != null)
-            {
-                return false;
-            }
-
-            return parameter.Type.IsValueType || parameter.DefaultValue.Value.Value == null;
-        }
-
         private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && (parameter.Type.IsNullable || !parameter.Type.IsValueType) && parameter.DefaultValue == null;
 
-        private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !CanBeInitializedInline(parameter)) && CanWriteNullCheck(parameter);
+        private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
 

@@ -461,7 +461,7 @@ namespace constants
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutModelAsStringNoRequiredTwoValueDefaultAsync(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            input = input ?? ModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1;
+            input ??= ModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1;
 
             using var message = CreatePutModelAsStringNoRequiredTwoValueDefaultRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -479,7 +479,7 @@ namespace constants
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutModelAsStringNoRequiredTwoValueDefault(ModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            input = input ?? ModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1;
+            input ??= ModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1;
 
             using var message = CreatePutModelAsStringNoRequiredTwoValueDefaultRequest(input);
             _pipeline.Send(message, cancellationToken);
@@ -561,7 +561,7 @@ namespace constants
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutModelAsStringNoRequiredOneValueDefaultAsync(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            input = input ?? ModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
+            input ??= ModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
 
             using var message = CreatePutModelAsStringNoRequiredOneValueDefaultRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -579,7 +579,7 @@ namespace constants
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutModelAsStringNoRequiredOneValueDefault(ModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            input = input ?? ModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
+            input ??= ModelAsStringNoRequiredOneValueDefaultOpEnum.Value1;
 
             using var message = CreatePutModelAsStringNoRequiredOneValueDefaultRequest(input);
             _pipeline.Send(message, cancellationToken);
@@ -658,7 +658,7 @@ namespace constants
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutModelAsStringRequiredTwoValueDefaultAsync(ModelAsStringRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            input = input ?? ModelAsStringRequiredTwoValueDefaultOpEnum.Value1;
+            input ??= ModelAsStringRequiredTwoValueDefaultOpEnum.Value1;
 
             using var message = CreatePutModelAsStringRequiredTwoValueDefaultRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -676,7 +676,7 @@ namespace constants
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            input = input ?? ModelAsStringRequiredTwoValueDefaultOpEnum.Value1;
+            input ??= ModelAsStringRequiredTwoValueDefaultOpEnum.Value1;
 
             using var message = CreatePutModelAsStringRequiredTwoValueDefaultRequest(input);
             _pipeline.Send(message, cancellationToken);
@@ -755,7 +755,7 @@ namespace constants
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutModelAsStringRequiredOneValueDefaultAsync(ModelAsStringRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            input = input ?? ModelAsStringRequiredOneValueDefaultOpEnum.Value1;
+            input ??= ModelAsStringRequiredOneValueDefaultOpEnum.Value1;
 
             using var message = CreatePutModelAsStringRequiredOneValueDefaultRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -773,7 +773,7 @@ namespace constants
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            input = input ?? ModelAsStringRequiredOneValueDefaultOpEnum.Value1;
+            input ??= ModelAsStringRequiredOneValueDefaultOpEnum.Value1;
 
             using var message = CreatePutModelAsStringRequiredOneValueDefaultRequest(input);
             _pipeline.Send(message, cancellationToken);

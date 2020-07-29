@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     var discriminatorParameter = baseSerializationCtor.FindParameterByInitializedProperty(Discriminator.Property);
                     Debug.Assert(discriminatorParameter != null);
                     ReferenceOrConstant? defaultValue = null;
-                    if (!TypeFactory.IsStruct(discriminatorParameter.Type))
+                    if (TypeFactory.CanBeInitializedInline(discriminatorParameter.Type, Discriminator.Value))
                     {
                         defaultValue = Discriminator.Value;
                     }
@@ -222,7 +222,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                     }
 
                     var inputType = TypeFactory.GetInputType(propertyType);
-                    if (defaultParameterValue != null && TypeFactory.IsStruct(property.ValueType))
+                    if (defaultParameterValue != null && !TypeFactory.CanBeInitializedInline(property.ValueType, defaultParameterValue))
                     {
                         inputType = inputType.WithNullable(true);
                         defaultParameterValue = Constant.Default(inputType);
