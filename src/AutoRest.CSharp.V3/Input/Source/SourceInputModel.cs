@@ -14,14 +14,17 @@ namespace AutoRest.CSharp.V3.Input.Source
     {
         private readonly Compilation _compilation;
         private readonly INamedTypeSymbol _clientAttribute;
+        private readonly INamedTypeSymbol _modelAttribute;
         private readonly INamedTypeSymbol _schemaMemberNameAttribute;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
+
 
         public SourceInputModel(Compilation compilation)
         {
             _compilation = compilation;
             _schemaMemberNameAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenMemberAttribute).FullName!)!;
             _clientAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenTypeAttribute).FullName!)!;
+            _modelAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenModelAttribute).FullName!)!;
 
             IAssemblySymbol assembly = _compilation.Assembly;
 
@@ -39,7 +42,7 @@ namespace AutoRest.CSharp.V3.Input.Source
 
         public ModelTypeMapping CreateForModel(INamedTypeSymbol? symbol)
         {
-            return new ModelTypeMapping(_schemaMemberNameAttribute, symbol);
+            return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, symbol);
         }
 
         public INamedTypeSymbol? FindForType(string ns, string name)
