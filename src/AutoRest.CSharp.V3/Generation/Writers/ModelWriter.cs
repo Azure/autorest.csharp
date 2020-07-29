@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         writer.Append($"{initializer.Property.Declaration.Name} = ")
                             .WriteConversion(initializer.Value.Type, initializer.Property.Declaration.Type, w => w.WriteReferenceOrConstant(initializer.Value));
 
-                        if (initializer.DefaultValue != null && (!initializer.Value.Type.IsValueType || !TypeFactory.CanBeInitializedInline(initializer.Value.Type, initializer.DefaultValue.Value.Constant)))
+                        if (initializer.DefaultValue != null && (!initializer.Value.Type.IsValueType || initializer.Value.Type.IsNullable))
                         {
                             writer.Append($"?? ").WriteReferenceOrConstant(initializer.DefaultValue.Value);
                         }

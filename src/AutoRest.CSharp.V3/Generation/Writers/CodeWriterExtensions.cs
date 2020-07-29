@@ -39,7 +39,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
                 {
-                    writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
+                    writer.Append($" = ");
+                    CodeWriterExtensions.WriteConstant(writer, clientParameter.DefaultValue.Value);
                 }
                 else
                 {

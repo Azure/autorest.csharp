@@ -9,8 +9,6 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
-using AutoRest.CSharp.V3.Output.Models.Shared;
-using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -120,15 +118,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     default:
                         if (isLiteral)
                         {
-                            if (argument is EnumTypeValue enumTypeValue)
-                            {
-                                Constant constant = new Constant(argument, enumTypeValue.Declaration.Type);
-                                CodeWriterExtensions.WriteConstant(this, constant);
-                            }
-                            else
-                            {
-                                Literal(argument);
-                            }
+                            Literal(argument);
                             continue;
                         }
 
