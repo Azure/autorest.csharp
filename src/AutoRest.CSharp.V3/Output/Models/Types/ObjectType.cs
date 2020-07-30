@@ -404,7 +404,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
                 }
             }
 
-            return formats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
+            return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
