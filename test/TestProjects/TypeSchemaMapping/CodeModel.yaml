@@ -512,7 +512,7 @@ schemas: !<!Schemas>
               description: .
           protocol: !<!Protocols> {}
       extensions:
-        x-csharp-formats: 'xml, json'
+        x-csharp-formats: 'xml, json, json'
         x-csharp-usage: 'model,input,output'
       language: !<!Languages> 
         default:
