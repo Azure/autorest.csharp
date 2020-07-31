@@ -51,6 +51,15 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             DefaultNamespace = objectSchema.Extensions?.Namespace ?? $"{context.DefaultNamespace}.Models";
 
             _sourceTypeMapping = context.SourceInputModel.CreateForModel(ExistingType);
+
+            // Update usage from code attribute
+            if (_sourceTypeMapping.Usage != null)
+            {
+                foreach (var usage in _sourceTypeMapping.Usage)
+                {
+                    _usage |= Enum.Parse<SchemaTypeUsage>(usage, true);
+                }
+            }
         }
 
         public bool IsStruct => ExistingType?.IsValueType == true;
@@ -390,7 +399,25 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 
         private ObjectSerialization[] BuildSerializations()
         {
-            return _objectSchema.SerializationFormats.Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
+            var formats = _objectSchema.SerializationFormats;
+
+            if (_objectSchema.Extensions != null)
+            {
+                foreach (var format in _objectSchema.Extensions.Formats)
+                {
+                    formats.Add(Enum.Parse<KnownMediaType>(format, true));
+                }
+            }
+
+            if (_sourceTypeMapping?.Formats is {} formatsDefinedInSource)
+            {
+                foreach (var format in formatsDefinedInSource)
+                {
+                    formats.Add(Enum.Parse<KnownMediaType>(format, true));
+                }
+            }
+
+            return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
