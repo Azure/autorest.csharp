@@ -152,6 +152,7 @@ schemas: !<!Schemas>
       serialization:
         xml:
           attribute: true
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -166,6 +167,7 @@ schemas: !<!Schemas>
       serialization:
         xml:
           attribute: true
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -180,6 +182,7 @@ schemas: !<!Schemas>
       serialization:
         xml:
           attribute: true
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -194,6 +197,7 @@ schemas: !<!Schemas>
       serialization:
         xml:
           attribute: true
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -219,6 +223,7 @@ schemas: !<!Schemas>
         xml:
           name: item
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -244,6 +249,7 @@ schemas: !<!Schemas>
         xml:
           name: Apple
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -259,6 +265,7 @@ schemas: !<!Schemas>
         xml:
           name: Apple
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -285,6 +292,7 @@ schemas: !<!Schemas>
         xml:
           name: name
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -300,6 +308,7 @@ schemas: !<!Schemas>
         xml:
           name: flavor
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -314,6 +323,7 @@ schemas: !<!Schemas>
       serialization:
         xml:
           attribute: true
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -480,6 +490,7 @@ schemas: !<!Schemas>
       serialization:
         xml:
           attribute: true
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -494,6 +505,7 @@ schemas: !<!Schemas>
       serialization:
         xml:
           attribute: true
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -1059,6 +1071,7 @@ schemas: !<!Schemas>
         xml:
           name: expiration
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -1215,6 +1228,7 @@ schemas: !<!Schemas>
               xml:
                 name: XMLComplexTypeWithMeta
                 attribute: false
+                text: false
                 wrapped: false
             serializationFormats:
               - xml
@@ -1333,6 +1347,7 @@ schemas: !<!Schemas>
                 xml:
                   name: slide
                   attribute: false
+                  text: false
                   wrapped: false
               serializationFormats:
                 - xml
@@ -1360,6 +1375,7 @@ schemas: !<!Schemas>
         xml:
           name: slideshow
           attribute: false
+          text: false
           wrapped: false
       serializationFormats:
         - xml
@@ -1421,6 +1437,7 @@ schemas: !<!Schemas>
             serialization:
               xml:
                 attribute: false
+                text: false
                 wrapped: true
             language: !<!Languages> 
               default:
@@ -1443,6 +1460,7 @@ schemas: !<!Schemas>
             serialization:
               xml:
                 attribute: false
+                text: false
                 wrapped: true
             language: !<!Languages> 
               default:
@@ -1500,6 +1518,7 @@ schemas: !<!Schemas>
         xml:
           name: banana
           attribute: false
+          text: false
           wrapped: false
       serializationFormats:
         - xml
@@ -1675,6 +1694,7 @@ schemas: !<!Schemas>
             serialization:
               xml:
                 attribute: false
+                text: false
                 wrapped: true
             language: !<!Languages> 
               default:
@@ -1701,6 +1721,7 @@ schemas: !<!Schemas>
         xml:
           name: EnumerationResults
           attribute: false
+          text: false
           wrapped: false
       serializationFormats:
         - xml
@@ -1954,6 +1975,7 @@ schemas: !<!Schemas>
                 xml:
                   name: CorsRule
                   attribute: false
+                  text: false
                   wrapped: false
               serializationFormats:
                 - xml
@@ -1971,6 +1993,7 @@ schemas: !<!Schemas>
             serialization:
               xml:
                 attribute: false
+                text: false
                 wrapped: true
             language: !<!Languages> 
               default:
@@ -2085,6 +2108,7 @@ schemas: !<!Schemas>
         xml:
           name: SignedIdentifier
           attribute: false
+          text: false
           wrapped: false
       serializationFormats:
         - xml
@@ -2535,6 +2559,7 @@ schemas: !<!Schemas>
                       xml:
                         name: Blob
                         attribute: false
+                        text: false
                         wrapped: false
                     serializationFormats:
                       - xml
@@ -2587,6 +2612,7 @@ schemas: !<!Schemas>
         xml:
           name: EnumerationResults
           attribute: false
+          text: false
           wrapped: false
       serializationFormats:
         - xml
@@ -2665,6 +2691,7 @@ schemas: !<!Schemas>
         xml:
           name: bananas
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -2681,6 +2708,7 @@ schemas: !<!Schemas>
         xml:
           name: bananas
           attribute: false
+          text: false
           wrapped: true
       language: !<!Languages> 
         default:
@@ -2697,6 +2725,7 @@ schemas: !<!Schemas>
         xml:
           name: bananas
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -2713,6 +2742,7 @@ schemas: !<!Schemas>
         xml:
           name: bananas
           attribute: false
+          text: false
           wrapped: true
       language: !<!Languages> 
         default:
@@ -2729,6 +2759,7 @@ schemas: !<!Schemas>
         xml:
           name: bananas
           attribute: false
+          text: false
           wrapped: false
       language: !<!Languages> 
         default:
@@ -2745,6 +2776,7 @@ schemas: !<!Schemas>
         xml:
           name: bananas
           attribute: false
+          text: false
           wrapped: true
       language: !<!Languages> 
         default:
@@ -2763,6 +2795,7 @@ schemas: !<!Schemas>
         xml:
           name: SignedIdentifiers
           attribute: false
+          text: false
           wrapped: true
       language: !<!Languages> 
         default:

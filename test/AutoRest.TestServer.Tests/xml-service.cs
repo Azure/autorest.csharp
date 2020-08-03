@@ -36,6 +36,15 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task GetWithXMsText() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetXMsTextAsync();
+            Assert.AreEqual("I am text", result.Value.Content);
+            Assert.AreEqual("english", result.Value.Language);
+        });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutSimpleXML() => TestStatus(async (host, pipeline) =>
         {
             var slideshow = new Slideshow
