@@ -37,9 +37,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (includeDefaultValue &&
                 clientParameter.DefaultValue != null)
             {
-                if (CanBeInitializedInline(clientParameter))
+                if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
                 {
-                    writer.Append($" = {clientParameter.DefaultValue.Value.Value:L}");
+                    writer.Append($" = ");
+                    CodeWriterExtensions.WriteConstant(writer, clientParameter.DefaultValue.Value);
                 }
                 else
                 {
@@ -55,9 +56,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         {
             foreach (Parameter parameter in parameters)
             {
-                if (parameter.DefaultValue != null && !CanBeInitializedInline(parameter))
+                if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
                 {
-                    writer.Line($"{parameter.Name} ??= new {parameter.Type}({parameter.DefaultValue.Value.Value:L});");
+                    if (TypeFactory.IsStruct(parameter.Type))
+                    {
+                        writer.Append($"{parameter.Name} ??= ");
+                        WriteConstant(writer, parameter.DefaultValue.Value);
+                    }
+                    else
+                    {
+                        writer.Append($"{parameter.Name} ??= new {parameter.Type}(");
+                        WriteConstant(writer, parameter.DefaultValue.Value);
+                        writer.Append($")");
+                    }
+                    writer.Line($";");
                 }
                 else if (CanWriteNullCheck(parameter))
                 {
@@ -71,21 +83,9 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private static bool CanBeInitializedInline(Parameter parameter)
-        {
-            Debug.Assert(parameter.DefaultValue.HasValue);
+        private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && (parameter.Type.IsNullable || !parameter.Type.IsValueType) && parameter.DefaultValue == null;
 
-            if (parameter.Type.IsFrameworkType && parameter.Type.FrameworkType == typeof(string))
-            {
-                return true;
-            }
-
-            return parameter.Type.IsValueType || parameter.DefaultValue.Value.Value == null;
-        }
-
-        private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && (parameter.Type.IsNullable || !parameter.Type.IsValueType);
-
-        private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !CanBeInitializedInline(parameter)) && CanWriteNullCheck(parameter);
+        private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
 
@@ -135,13 +135,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             Type frameworkType = constant.Type.FrameworkType;
             if (frameworkType == typeof(DateTimeOffset))
             {
-                var d = (DateTimeOffset) constant.Value;
+                var d = (DateTimeOffset)constant.Value;
                 d = d.ToUniversalTime();
                 writer.Append($"new {typeof(DateTimeOffset)}({d.Year:L}, {d.Month:L}, {d.Day:L} ,{d.Hour:L}, {d.Minute:L}, {d.Second:L}, {d.Millisecond:L}, {typeof(TimeSpan)}.{nameof(TimeSpan.Zero)})");
             }
             else if (frameworkType == typeof(byte[]))
             {
-                var value = (byte[]) constant.Value;
+                var value = (byte[])constant.Value;
                 writer.Append($"new byte[] {{");
                 foreach (byte b in value)
                 {
@@ -229,7 +229,8 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 foreach (var constructorParameter in constructor.Parameters)
                 {
                     var objectPropertyInitializer = FindInitializerForParameter(constructor, constructorParameter);
-                    if (objectPropertyInitializer == null) return null;
+                    if (objectPropertyInitializer == null)
+                        return null;
 
                     constructorInitializers.Add(objectPropertyInitializer.Value);
                 }
@@ -372,7 +373,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 property.SchemaProperty != null &&
                 !property.SchemaProperty.IsRequired)
             {
-                var method = TypeFactory.IsCollectionType(property.Declaration.Type) ? nameof(Optional.IsCollectionDefined): nameof(Optional.IsDefined);
+                var method = TypeFactory.IsCollectionType(property.Declaration.Type) ? nameof(Optional.IsCollectionDefined) : nameof(Optional.IsDefined);
 
                 var propertyName = property!.Declaration.Name;
                 return writer.Scope($"if ({typeof(Optional)}.{method}({propertyName:I}))");

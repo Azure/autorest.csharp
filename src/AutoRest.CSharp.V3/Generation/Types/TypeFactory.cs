@@ -3,11 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.V3.Input;
+using AutoRest.CSharp.V3.Output.Models.Shared;
 using AutoRest.CSharp.V3.Output.Models.Types;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
@@ -76,6 +78,30 @@ namespace AutoRest.CSharp.V3.Generation.Types
             }
 
             return type;
+        }
+
+        public static bool CanBeInitializedInline(CSharpType type, Constant? defaultValue)
+        {
+             Debug.Assert(defaultValue.HasValue);
+
+            if (type.IsFrameworkType && type.FrameworkType == typeof(string))
+            {
+                return true;
+            }
+
+            if (TypeFactory.IsStruct(type) && defaultValue.Value.Value != null)
+            {
+                return false;
+            }
+
+            return type.IsValueType || defaultValue.Value.Value == null;
+        }
+
+        public static bool IsStruct(CSharpType type)
+        {
+            return !type.IsFrameworkType && type.IsValueType &&
+                type.Implementation is EnumType enumType &&
+                enumType.IsExtendable;
         }
 
         public static CSharpType GetElementType(CSharpType type)
