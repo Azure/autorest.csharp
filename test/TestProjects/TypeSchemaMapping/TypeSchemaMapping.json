@@ -282,6 +282,26 @@
           }
         }
       }
+    },
+    "ModelWithCustomUsage": {
+      "type": "object",
+      "properties": {
+        "ModelProperty": {
+          "type": "string",
+          "description": "."
+        }
+      },
+      "x-csharp-usage": "model,input,output",
+      "x-csharp-formats": "xml, json, json"
+    },
+    "ModelWithCustomUsageViaAttribute": {
+      "type": "object",
+      "properties": {
+        "ModelProperty": {
+          "type": "string",
+          "description": "."
+        }
+      }
     }
   }
 }

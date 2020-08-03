@@ -23,6 +23,9 @@
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
     <Compile Include="../TestProjects/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
+    <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs">
+      <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs</Link>
+    </Compile>
   </ItemGroup>
 
 </Project>
