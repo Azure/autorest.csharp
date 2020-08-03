@@ -2075,6 +2075,7 @@ schemas: !<!Schemas>
             serialization:
               xml:
                 attribute: false
+                text: false
                 wrapped: true
             language: !<!Languages> 
               default:
@@ -2175,6 +2176,7 @@ schemas: !<!Schemas>
         xml:
           name: SignedIdentifiers
           attribute: false
+          text: false
           wrapped: true
       language: !<!Languages> 
         default:

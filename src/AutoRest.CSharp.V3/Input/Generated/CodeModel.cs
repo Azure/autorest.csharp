@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.V3.Input
         public Language Default { get; set; } = new Language();
 
         [YamlDotNet.Serialization.YamlMember(Alias = "csharp")]
-        public CSharpLanguage? CSharp { get; set; }
+        public Language? CSharp { get; set; }
 
         [YamlDotNet.Serialization.YamlMember(Alias = "python")]
         public Language? Python { get; set; }
@@ -584,6 +584,9 @@ namespace AutoRest.CSharp.V3.Input
 
         [YamlDotNet.Serialization.YamlMember(Alias = "wrapped")]
         public bool? Wrapped { get; set; }
+
+        [YamlDotNet.Serialization.YamlMember(Alias = "text")]
+        public bool? Text { get; set; }
     }
 
     /// <summary>custom extensible metadata for individual serialization formats</summary>

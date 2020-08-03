@@ -69,19 +69,6 @@ namespace AutoRest.CSharp.V3.Input
         public string? Accessibility => TryGetValue("x-accessibility", out object? value) ? value?.ToString() : null;
         public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
         public string? Usage => TryGetValue("x-csharp-usage", out object? value) ? value?.ToString() : null;
-        public bool? XmlText
-        {
-            get
-            {
-                if (TryGetValue("x-ms-text", out object? value) &&
-                    Convert.ToString(value) is string stringValue)
-                {
-                    return bool.Parse(stringValue);
-                }
-
-                return null;
-            }
-        }
 
         public string[] Formats
         {
