@@ -160,7 +160,7 @@
           "$ref": "#/definitions/Language"
         },
         "csharp": {
-          "$ref": "#/definitions/CSharpLanguage"
+          "$ref": "#/definitions/Language"
         },
         "python": {
           "$ref": "#/definitions/Language"
@@ -430,12 +430,16 @@
         },
         "wrapped": {
           "type": "boolean"
+        },
+        "text": {
+          "type": "boolean"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
         "attribute",
+        "text",
         "wrapped"
       ],
       "allOf": [

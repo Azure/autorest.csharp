@@ -153,7 +153,7 @@ globalParameters:
         in: path
   - !<!Parameter> &ref_7
     schema: *ref_0
-    clientDefaultValue: 'https://management.azure.com'
+    clientDefaultValue: 'http://localhost:3000'
     implementation: Client
     origin: 'modelerfour:synthesized/host'
     required: true

@@ -37,7 +37,7 @@ namespace subscriptionId_apiVersion
             {
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
-            endpoint ??= new Uri("https://management.azure.com");
+            endpoint ??= new Uri("http://localhost:3000");
             if (apiVersion == null)
             {
                 throw new ArgumentNullException(nameof(apiVersion));

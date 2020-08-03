@@ -153,6 +153,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            duration_getNull:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !<!Languages> 
           default:
             name: GetNull
@@ -187,7 +194,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: durationBody
-                    description: ''
+                    description: duration body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -231,6 +238,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            duration_putPositiveDuration:
+              parameters:
+                durationBody: P123DT22H14M12.011S
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutPositiveDuration
