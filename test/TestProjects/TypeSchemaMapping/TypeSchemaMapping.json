@@ -302,6 +302,15 @@
           "description": "."
         }
       }
+    },
+    "NonExtensibleEnum": {
+      "description": "More Letters",
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
     }
-  }
+  } 
 }
