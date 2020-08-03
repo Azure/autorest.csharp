@@ -239,7 +239,7 @@ namespace body_integer
         }
 
         /// <summary> Put max int32 value. </summary>
-        /// <param name="intBody"> The Integer to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMax32Async(int intBody, CancellationToken cancellationToken = default)
         {
@@ -257,7 +257,7 @@ namespace body_integer
         }
 
         /// <summary> Put max int32 value. </summary>
-        /// <param name="intBody"> The Integer to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMax32(int intBody, CancellationToken cancellationToken = default)
         {
@@ -275,7 +275,7 @@ namespace body_integer
         }
 
         /// <summary> Put max int64 value. </summary>
-        /// <param name="intBody"> The Integer to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMax64Async(long intBody, CancellationToken cancellationToken = default)
         {
@@ -293,7 +293,7 @@ namespace body_integer
         }
 
         /// <summary> Put max int64 value. </summary>
-        /// <param name="intBody"> The Integer to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMax64(long intBody, CancellationToken cancellationToken = default)
         {
@@ -311,7 +311,7 @@ namespace body_integer
         }
 
         /// <summary> Put min int32 value. </summary>
-        /// <param name="intBody"> The Integer to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMin32Async(int intBody, CancellationToken cancellationToken = default)
         {
@@ -329,7 +329,7 @@ namespace body_integer
         }
 
         /// <summary> Put min int32 value. </summary>
-        /// <param name="intBody"> The Integer to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMin32(int intBody, CancellationToken cancellationToken = default)
         {
@@ -347,7 +347,7 @@ namespace body_integer
         }
 
         /// <summary> Put min int64 value. </summary>
-        /// <param name="intBody"> The Integer to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMin64Async(long intBody, CancellationToken cancellationToken = default)
         {
@@ -365,7 +365,7 @@ namespace body_integer
         }
 
         /// <summary> Put min int64 value. </summary>
-        /// <param name="intBody"> The Integer to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMin64(long intBody, CancellationToken cancellationToken = default)
         {
@@ -417,7 +417,7 @@ namespace body_integer
         }
 
         /// <summary> Put datetime encoded as Unix time. </summary>
-        /// <param name="intBody"> The Unixtime to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutUnixTimeDateAsync(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {
@@ -435,7 +435,7 @@ namespace body_integer
         }
 
         /// <summary> Put datetime encoded as Unix time. </summary>
-        /// <param name="intBody"> The Unixtime to use. </param>
+        /// <param name="intBody"> int body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutUnixTimeDate(DateTimeOffset intBody, CancellationToken cancellationToken = default)
         {

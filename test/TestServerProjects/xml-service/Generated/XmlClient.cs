@@ -1047,5 +1047,39 @@ namespace xml_service
                 throw;
             }
         }
+
+        /// <summary> Get back an XML object with an x-ms-text property, which should translate to the returned object&apos;s &apos;language&apos; property being &apos;english&apos; and its &apos;content&apos; property being &apos;I am text&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ObjectWithXMsTextProperty>> GetXMsTextAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetXMsText");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetXMsTextAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get back an XML object with an x-ms-text property, which should translate to the returned object&apos;s &apos;language&apos; property being &apos;english&apos; and its &apos;content&apos; property being &apos;I am text&apos;. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ObjectWithXMsTextProperty> GetXMsText(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetXMsText");
+            scope.Start();
+            try
+            {
+                return RestClient.GetXMsText(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

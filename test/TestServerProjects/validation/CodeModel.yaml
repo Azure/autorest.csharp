@@ -79,7 +79,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       maxLength: 10
       minLength: 3
-      pattern: '[a-zA-Z0-9]+'
+      pattern: '[a-zA-Z0-9'']+'
       language: !<!Languages> 
         default:
           name: String
@@ -124,6 +124,19 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: ErrorFields
+          description: ''
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_29
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      maxLength: 10
+      minLength: 3
+      pattern: '[a-zA-Z0-9]+'
+      language: !<!Languages> 
+        default:
+          name: String
           description: ''
       protocol: !<!Protocols> {}
     - !<!StringSchema> 
@@ -223,7 +236,7 @@ schemas: !<!Schemas>
           name: EnumConst
           description: Constant string as Enum
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_29
+    - !<!ConstantSchema> &ref_30
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -233,7 +246,7 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_33
+    - !<!ConstantSchema> &ref_34
       type: constant
       value: !<!ConstantValue> 
         value: constant
@@ -592,8 +605,8 @@ operationGroups:
         parameters:
           - *ref_20
           - *ref_21
-          - !<!Parameter> &ref_31
-            schema: *ref_22
+          - !<!Parameter> &ref_32
+            schema: *ref_29
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -604,7 +617,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_32
+          - !<!Parameter> &ref_33
             schema: *ref_23
             implementation: Method
             required: true
@@ -621,7 +634,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_29
+                schema: *ref_30
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -633,7 +646,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_30
+              - !<!Parameter> &ref_31
                 schema: *ref_27
                 implementation: Method
                 required: false
@@ -646,7 +659,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_30
+              - *ref_31
             language: !<!Languages> 
               default:
                 name: ''
@@ -660,8 +673,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_31
           - *ref_32
+          - *ref_33
         responses:
           - !<!SchemaResponse> 
             schema: *ref_27
@@ -703,7 +716,7 @@ operationGroups:
         parameters:
           - *ref_20
           - !<!Parameter> 
-            schema: *ref_33
+            schema: *ref_34
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -748,7 +761,7 @@ operationGroups:
         parameters:
           - *ref_20
           - !<!Parameter> 
-            schema: *ref_33
+            schema: *ref_34
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -763,7 +776,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_29
+                schema: *ref_30
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -775,7 +788,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_34
+              - !<!Parameter> &ref_35
                 schema: *ref_27
                 implementation: Method
                 required: false
@@ -788,7 +801,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_34
+              - *ref_35
             language: !<!Languages> 
               default:
                 name: ''
