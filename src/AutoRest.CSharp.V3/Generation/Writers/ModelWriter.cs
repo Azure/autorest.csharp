@@ -272,30 +272,20 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                     writer.Line();
 
+                    int index = 1;
                     foreach (var choice in schema.Values)
                     {
-                        if (name == $"{choice.Declaration.Name}Value")
-                        {
-                            writer.Line($"private const {schema.BaseType} {choice.Declaration.Name}_Value = {choice.Value.Value:L};");
-                        }
-                        else
-                        {
-                            writer.Line($"private const {schema.BaseType} {choice.Declaration.Name}Value = {choice.Value.Value:L};");
-                        }
+                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, index++);
+                        writer.Line($"private const {schema.BaseType} {fieldName} = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
+                    index = 1;
                     foreach (var choice in schema.Values)
                     {
                         writer.WriteXmlDocumentationSummary(choice.Description);
-                        if (name == $"{choice.Declaration.Name}Value")
-                        {
-                            writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}_Value);").Line();
-                        }
-                        else
-                        {
-                            writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}Value);").Line();
-                        }
+                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, index++);
+                        writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({fieldName});").Line();
                     }
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
@@ -349,6 +339,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                 }
             }
+        }
+
+        private string GetValueFieldName(string enumName, string enumValue, int index)
+        {
+            return enumName == $"{enumValue}Value" ? $"{enumValue}Value{index}" : $"{enumValue}Value";
         }
 
         private void WriteEditorBrowsableFalse(CodeWriter writer)

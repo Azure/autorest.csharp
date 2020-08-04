@@ -305,20 +305,20 @@
             "modelAsString": true
           }
         },
-        "EnumValue": {
-          "type": "string",
-          "enum": [
-            "MyEnum",
-            "SecondEnumValue"
-          ],
-          "x-ms-enum": {
-            "name": "MyEnumValue",
-            "modelAsString": true
-          }
-        },
         "ToString": { "type": "string" },
         "Equals": { "type": "string" },
         "GetHashCode": { "type": "string" }
+      }
+    },
+    "EnumValue": {
+      "type": "string",
+      "enum": [
+        "ItemValue1",
+        "Item"
+      ],
+      "x-ms-enum": {
+        "name": "ItemValue",
+        "modelAsString": true
       }
     },
     "HttpMessage": {
