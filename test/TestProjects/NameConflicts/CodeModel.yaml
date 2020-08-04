@@ -1170,6 +1170,12 @@ schemas: !<!Schemas>
             default:
               name: Item
               description: ''
+        - !<!ChoiceValue> 
+          value: ItemValue2
+          language:
+            default:
+              name: ItemValue2
+              description: ''
       type: choice
       apiVersions:
         - !<!ApiVersion> 

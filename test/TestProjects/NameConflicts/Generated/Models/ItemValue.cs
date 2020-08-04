@@ -23,12 +23,15 @@ namespace NameConflicts.Models
         }
 
         private const string ItemValue1Value = "ItemValue1";
-        private const string ItemValue2 = "Item";
+        private const string ItemValue3 = "Item";
+        private const string ItemValue2Value = "ItemValue2";
 
         /// <summary> ItemValue1. </summary>
         public static ItemValue ItemValue1 { get; } = new ItemValue(ItemValue1Value);
         /// <summary> Item. </summary>
-        public static ItemValue Item { get; } = new ItemValue(ItemValue2);
+        public static ItemValue Item { get; } = new ItemValue(ItemValue3);
+        /// <summary> ItemValue2. </summary>
+        public static ItemValue ItemValue2 { get; } = new ItemValue(ItemValue2Value);
         /// <summary> Determines if two <see cref="ItemValue"/> values are the same. </summary>
         public static bool operator ==(ItemValue left, ItemValue right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ItemValue"/> values are not the same. </summary>

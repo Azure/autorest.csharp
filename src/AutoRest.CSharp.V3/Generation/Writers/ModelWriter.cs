@@ -272,19 +272,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     }
                     writer.Line();
 
-                    int index = 1;
                     foreach (var choice in schema.Values)
                     {
-                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, index++);
+                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, schema.Values);
                         writer.Line($"private const {schema.BaseType} {fieldName} = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
-                    index = 1;
                     foreach (var choice in schema.Values)
                     {
                         writer.WriteXmlDocumentationSummary(choice.Description);
-                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, index++);
+                        var fieldName = GetValueFieldName(name, choice.Declaration.Name, schema.Values);
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({fieldName});").Line();
                     }
 
@@ -341,9 +339,22 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             }
         }
 
-        private string GetValueFieldName(string enumName, string enumValue, int index)
+        private string GetValueFieldName(string enumName, string enumValue, IList<EnumTypeValue> enumValues)
         {
-            return enumName == $"{enumValue}Value" ? $"{enumValue}Value{index}" : $"{enumValue}Value";
+            if (enumName != $"{enumValue}Value")
+            {
+                return $"{enumValue}Value";
+            }
+
+            int index = 1;
+            foreach (var value in enumValues)
+            {
+                if (value.Declaration.Name == $"{enumValue}Value{index}")
+                {
+                    index++;
+                }
+            }
+            return $"{enumValue}Value{index}";
         }
 
         private void WriteEditorBrowsableFalse(CodeWriter writer)
