@@ -274,14 +274,28 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var choice in schema.Values)
                     {
-                        writer.Line($"private const {schema.BaseType} {choice.Declaration.Name}Value = {choice.Value.Value:L};");
+                        if (name == $"{choice.Declaration.Name}Value")
+                        {
+                            writer.Line($"private const {schema.BaseType} {choice.Declaration.Name}_Value = {choice.Value.Value:L};");
+                        }
+                        else
+                        {
+                            writer.Line($"private const {schema.BaseType} {choice.Declaration.Name}Value = {choice.Value.Value:L};");
+                        }
                     }
                     writer.Line();
 
                     foreach (var choice in schema.Values)
                     {
                         writer.WriteXmlDocumentationSummary(choice.Description);
-                        writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}Value);").Line();
+                        if (name == $"{choice.Declaration.Name}Value")
+                        {
+                            writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}_Value);").Line();
+                        }
+                        else
+                        {
+                            writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({choice.Declaration.Name}Value);").Line();
+                        }
                     }
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
