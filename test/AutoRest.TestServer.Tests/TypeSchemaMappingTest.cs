@@ -172,6 +172,13 @@ namespace AutoRest.TestServer.Tests
             Assert.False(typeof(EnumWithCustomNamespace).IsPublic);
         }
 
+        [Test]
+        public void CanChangeEnumKindToExtensible()
+        {
+            var type = typeof(NonExtensibleEnumTurnedExtensible);
+            Assert.True(type.IsValueType && !type.IsEnum);
+        }
+
         [Theory]
         [TestCase(typeof(ModelWithCustomUsage))]
         [TestCase(typeof(ModelWithCustomUsageViaAttribute))]

@@ -302,6 +302,19 @@
           "description": "."
         }
       }
+    },
+    "NonExtensibleEnum": {
+      "description": "More Letters",
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ],
+      "x-ms-enum":{
+        "name": "NonExtensibleEnum",
+        "modelAsString": false
+      }
     }
   }
 }
