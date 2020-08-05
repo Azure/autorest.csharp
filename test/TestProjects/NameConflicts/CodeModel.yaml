@@ -1156,6 +1156,36 @@ schemas: !<!Schemas>
           name: SystemEnum
           description: ''
       protocol: !<!Protocols> {}
+    - !<!ChoiceSchema> 
+      choices:
+        - !<!ChoiceValue> 
+          value: ItemValue1
+          language:
+            default:
+              name: ItemValue1
+              description: ''
+        - !<!ChoiceValue> 
+          value: Item
+          language:
+            default:
+              name: Item
+              description: ''
+        - !<!ChoiceValue> 
+          value: ItemValue2
+          language:
+            default:
+              name: ItemValue2
+              description: ''
+      type: choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ItemValue
+          description: ''
+      protocol: !<!Protocols> {}
   constants:
     - !<!ConstantSchema> &ref_117
       type: constant

@@ -310,6 +310,18 @@
         "GetHashCode": { "type": "string" }
       }
     },
+    "EnumValue": {
+      "type": "string",
+      "enum": [
+        "ItemValue1",
+        "Item",
+        "ItemValue2"
+      ],
+      "x-ms-enum": {
+        "name": "ItemValue",
+        "modelAsString": true
+      }
+    },
     "HttpMessage": {
       "type":  "object",
       "properties": {
