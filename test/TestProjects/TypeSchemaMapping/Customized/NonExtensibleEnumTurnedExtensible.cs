@@ -5,7 +5,7 @@ using Azure.Core;
 
 namespace NamespaceForEnums
 {
-    [CodeGenModel("NonExtensibleEnum2")]
+    [CodeGenModel("NonExtensibleEnum")]
     internal partial struct NonExtensibleEnumTurnedExtensible
     {
     }
