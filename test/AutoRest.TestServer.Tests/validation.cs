@@ -35,5 +35,11 @@ namespace AutoRest.TestServer.Tests
             Assert.Throws<ArgumentNullException>(() => new Product(null, new ConstantProduct()));
             Assert.Throws<ArgumentNullException>(() => new Product(new ChildProduct(), null));
         }
+
+        [Test]
+        public Task ThrowsIfApiVersionIsNull() => Test((host, pipeline) =>
+        {
+            Assert.Throws<ArgumentNullException>(() => new ServiceClient(ClientDiagnostics, pipeline, string.Empty, host, null));
+        });
     }
 }

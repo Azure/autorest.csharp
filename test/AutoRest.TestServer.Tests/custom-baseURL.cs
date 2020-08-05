@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
@@ -18,5 +19,11 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task CustomBaseUriMoreOptions() => TestStatus(async (host, pipeline) =>
             await new custom_baseUrl_more_options.PathsClient(ClientDiagnostics, pipeline, "test12", dnsSuffix: host.ToString()).GetEmptyAsync( string.Empty, string.Empty, "key1",  "v1"));
+
+        [Test]
+        public Task ThrowsIfHostIsNull() => Test((host, pipeline) =>
+        {
+            Assert.Throws<ArgumentNullException>(() => new custom_baseUrl.PathsClient(ClientDiagnostics, pipeline , null));
+        });
     }
 }

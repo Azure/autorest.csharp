@@ -98,6 +98,14 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void NullableParamsAsNull()
+        {
+            var model = new RenamedModelStruct("test", null, null);
+            Assert.Null(model.DaysOfWeek);
+            Assert.Null(model.Fruit);
+        }
+
+        [Test]
         public void ObjectTypePropertiesSerializedAsValues()
         {
             DateTime date = DateTime.UtcNow;
