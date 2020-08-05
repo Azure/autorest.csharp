@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
         public PrivateLinkResourcesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
             if (subscriptionId == null)
@@ -38,6 +38,10 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
             endpoint ??= new Uri("https://management.azure.com");
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             this.subscriptionId = subscriptionId;
             this.endpoint = endpoint;

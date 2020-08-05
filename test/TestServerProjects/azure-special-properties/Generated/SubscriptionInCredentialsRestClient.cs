@@ -28,7 +28,7 @@ namespace azure_special_properties
         /// <param name="subscriptionId"> The subscription id, which appears in the path, always modeled in credentials. The value is always &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
         public SubscriptionInCredentialsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
             if (subscriptionId == null)
@@ -36,6 +36,10 @@ namespace azure_special_properties
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
             endpoint ??= new Uri("http://localhost:3000");
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             this.subscriptionId = subscriptionId;
             this.endpoint = endpoint;

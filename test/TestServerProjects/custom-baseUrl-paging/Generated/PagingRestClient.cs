@@ -26,8 +26,14 @@ namespace custom_baseUrl_paging
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="host"/> is null. </exception>
         public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
+            if (host == null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             this.host = host;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;

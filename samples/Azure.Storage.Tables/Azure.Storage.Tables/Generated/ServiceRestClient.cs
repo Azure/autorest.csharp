@@ -27,12 +27,16 @@ namespace Azure.Storage.Tables
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="url"> The URL of the service account or table that is the targe of the desired operation. </param>
         /// <param name="version"> Specifies the version of the operation to use for this request. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="url"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="url"/> or <paramref name="version"/> is null. </exception>
         public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, string version = "2018-10-10")
         {
             if (url == null)
             {
                 throw new ArgumentNullException(nameof(url));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
             }
 
             this.url = url;
