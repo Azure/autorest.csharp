@@ -584,6 +584,67 @@ namespace Azure.Service.Models
 
 </details>
 
+### Changing an enum to an extensible enum
+
+Redefine an enum into an extensible enum by creating an empty struct with the same name as original enum.
+
+<details>
+
+**Generated code before (Generated/Models/Colors.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public enum Colors
+    {
+        Red,
+        Green
+    }
+}
+```
+
+**Add customized model (Colors.cs)**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial struct Colors
+    {
+    }
+}
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` diff
+namespace Azure.Service.Models
+{
+-    public enum Colors
+-    {
+-        Red,
+-        Green
+-    }
++    public readonly partial struct Colors : IEquatable<Colors>
++    {
++        private readonly string _value;
+
++        public Colors(string value)
++        {
++            _value = value ?? throw new ArgumentNullException(nameof(value));
++        }
+
++        private const string Red = "red";
++        private const string Green = "green";
+
++        public static Colors Red { get; } = new Colors(Red);
++        public static Colors Green { get; } = new Colors(Green);
++        public static bool operator ==(Colors left, Colors right) => left.Equals(right);
+         ...
+}
+```
+
+</details>
+
 ### Make a client internal
 
 Define a class with the same namespace and name as generated client and use the desired accessibility.
@@ -803,8 +864,8 @@ directive:
 **Generated code after:**
 
 ``` diff
--namespace Azure.Service
-+namespace Azure.Service.Models
+-namespace Azure.Service.Models
++namespace Azure.Search.Documents.Indexes.Models
 {
 -    public partial class Model1 {}
 +    internal partial class Model1 {}
