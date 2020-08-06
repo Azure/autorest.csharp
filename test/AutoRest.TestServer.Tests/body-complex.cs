@@ -58,10 +58,10 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task ThrowsIfApiVersionIsNull() => Test((host, pipeline) =>
+        public void ThrowsIfApiVersionIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new BasicClient(ClientDiagnostics, pipeline, host, null));
-        });
+            Assert.Throws<ArgumentNullException>(() => new BasicClient(ClientDiagnostics, null, null, null));
+        }
 
         [Test]
         public Task GetComplexBasicNull() => Test(async (host, pipeline) =>

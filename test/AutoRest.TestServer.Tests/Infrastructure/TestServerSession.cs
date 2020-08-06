@@ -104,7 +104,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 {
                     foreach (var expectedStub in _expectedCoverage)
                     {
-                        if (matched.Length > 0 && !matched.Contains(expectedStub, StringComparer.InvariantCultureIgnoreCase))
+                        if (!matched.Contains(expectedStub, StringComparer.InvariantCultureIgnoreCase))
                         {
                             throw new InvalidOperationException($"Expected stub {expectedStub} was not matched, matched: {string.Join(Environment.NewLine, matched)}");
                         }

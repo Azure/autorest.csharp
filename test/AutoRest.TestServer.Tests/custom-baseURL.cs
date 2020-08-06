@@ -21,9 +21,9 @@ namespace AutoRest.TestServer.Tests
             await new custom_baseUrl_more_options.PathsClient(ClientDiagnostics, pipeline, "test12", dnsSuffix: host.ToString()).GetEmptyAsync( string.Empty, string.Empty, "key1",  "v1"));
 
         [Test]
-        public Task ThrowsIfHostIsNull() => Test((host, pipeline) =>
+        public void ThrowsIfHostIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new custom_baseUrl.PathsClient(ClientDiagnostics, pipeline , null));
-        });
+            Assert.Throws<ArgumentNullException>(() => new custom_baseUrl.PathsClient(ClientDiagnostics, null , null));
+        }
     }
 }
