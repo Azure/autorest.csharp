@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure.Core.Pipeline;
 using body_complex;
 using body_complex.Models;
 using NUnit.Framework;
@@ -60,7 +61,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ThrowsIfApiVersionIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new BasicClient(ClientDiagnostics, null, null, null));
+            Assert.Throws<ArgumentNullException>(() => new BasicClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), new Uri("http://test"), null));
         }
 
         [Test]

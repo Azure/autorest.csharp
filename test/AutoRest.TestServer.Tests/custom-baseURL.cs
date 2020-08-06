@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure.Core.Pipeline;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -23,7 +24,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ThrowsIfHostIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new custom_baseUrl.PathsClient(ClientDiagnostics, null , null));
+            Assert.Throws<ArgumentNullException>(() => new custom_baseUrl.PathsClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), null));
         }
     }
 }
