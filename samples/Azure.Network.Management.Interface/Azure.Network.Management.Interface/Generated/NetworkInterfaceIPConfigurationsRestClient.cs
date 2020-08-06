@@ -30,7 +30,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="subscriptionId"> The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
         public NetworkInterfaceIPConfigurationsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-11-01")
         {
             if (subscriptionId == null)
@@ -38,6 +38,10 @@ namespace Azure.Network.Management.Interface
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
             endpoint ??= new Uri("https://management.azure.com");
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             this.subscriptionId = subscriptionId;
             this.endpoint = endpoint;

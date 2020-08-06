@@ -31,7 +31,7 @@ namespace CognitiveSearch
         /// <param name="endpoint"> The endpoint URL of the search service. </param>
         /// <param name="indexName"> The name of the index. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="indexName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="indexName"/>, or <paramref name="apiVersion"/> is null. </exception>
         public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
             if (endpoint == null)
@@ -41,6 +41,10 @@ namespace CognitiveSearch
             if (indexName == null)
             {
                 throw new ArgumentNullException(nameof(indexName));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
             }
 
             this.endpoint = endpoint;

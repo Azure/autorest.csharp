@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             writer.Line();
         }
 
-        private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && (parameter.Type.IsNullable || !parameter.Type.IsValueType) && parameter.DefaultValue == null;
+        private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && !parameter.Type.IsValueType;
 
         private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
 

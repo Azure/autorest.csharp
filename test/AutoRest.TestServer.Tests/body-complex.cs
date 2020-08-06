@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure.Core.Pipeline;
 using body_complex;
 using body_complex.Models;
 using NUnit.Framework;
@@ -56,6 +57,12 @@ namespace AutoRest.TestServer.Tests
             // Empty response body
             Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await new BasicClient(ClientDiagnostics, pipeline, host).GetNotProvidedAsync());
         });
+
+        [Test]
+        public void ThrowsIfApiVersionIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => new BasicClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), new Uri("http://test"), null));
+        }
 
         [Test]
         public Task GetComplexBasicNull() => Test(async (host, pipeline) =>

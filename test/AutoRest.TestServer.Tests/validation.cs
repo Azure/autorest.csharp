@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure.Core.Pipeline;
 using NUnit.Framework;
 using validation;
 using validation.Models;
@@ -34,6 +35,12 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new Product(null, new ConstantProduct()));
             Assert.Throws<ArgumentNullException>(() => new Product(new ChildProduct(), null));
+        }
+
+        [Test]
+        public void ThrowsIfApiVersionIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => new ServiceClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), string.Empty, new Uri("http://test"), null));
         }
     }
 }

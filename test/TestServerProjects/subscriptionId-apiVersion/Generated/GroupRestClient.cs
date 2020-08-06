@@ -30,7 +30,7 @@ namespace subscriptionId_apiVersion
         /// <param name="subscriptionId"> Subscription Id. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
         public GroupRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2014-04-01-preview")
         {
             if (subscriptionId == null)
@@ -38,6 +38,10 @@ namespace subscriptionId_apiVersion
                 throw new ArgumentNullException(nameof(subscriptionId));
             }
             endpoint ??= new Uri("http://localhost:3000");
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             this.subscriptionId = subscriptionId;
             this.endpoint = endpoint;
