@@ -1,4 +1,4 @@
-﻿@using System.Globalization
+@using System.Globalization
 @using System.Linq;
 @using System
 @using AutoRest.Core.Model
@@ -214,6 +214,20 @@ else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormDa
 @:if (@(parameter.Name) != null)
 @:{
     @{ string localParam = "_"+ @parameter.Name.Value.Replace("this.", ""); }
+    
+    if (parameter.ModelType is SequenceType sequenceType)
+    {
+    <text>
+    foreach(var item in @(parameter.Name))
+    {
+        System.Net.Http.StringContent _itemContent = new System.Net.Http.StringContent(@(sequenceType.ElementType.ToString(Model.ClientReference, "item")), System.Text.Encoding.UTF8);
+        _multiPartContent.Add(_itemContent, "@(parameter.SerializedName)");
+    }
+    </text>
+@:}
+        continue;
+    }
+
     if (parameter.ModelType.IsPrimaryType(KnownPrimaryType.Stream))
     {
     <text>        
