@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 var objAdditionalProperties = obj.AdditionalProperties;
                 if (objAdditionalProperties != null)
                 {
-                    writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = default;");
+                    writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = new {objAdditionalProperties.Type}();");
                 }
 
                 using (writer.Scope($"foreach (var {itemVariable:D} in {element}.EnumerateObject())"))
@@ -297,7 +297,6 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     if (objAdditionalProperties != null)
                     {
-                        writer.Line($"{dictionaryVariable} ??= new {objAdditionalProperties.Type}();");
                         writer.DeserializeValue(
                             objAdditionalProperties.ValueSerialization,
                             w => w.Append($"{itemVariable}.Value"),

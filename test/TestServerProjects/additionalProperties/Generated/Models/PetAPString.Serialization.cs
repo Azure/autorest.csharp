@@ -37,7 +37,7 @@ namespace additionalProperties.Models
             Optional<string> name = default;
             Optional<bool> status = default;
             IDictionary<string, string> additionalProperties = default;
-            Dictionary<string, string> additionalPropertiesDictionary = default;
+            Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -55,7 +55,6 @@ namespace additionalProperties.Models
                     status = property.Value.GetBoolean();
                     continue;
                 }
-                additionalPropertiesDictionary ??= new Dictionary<string, string>();
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             additionalProperties = additionalPropertiesDictionary;

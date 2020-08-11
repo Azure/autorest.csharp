@@ -52,7 +52,7 @@ namespace additionalProperties.Models
             string odataLocation = default;
             Optional<IDictionary<string, float>> additionalProperties = default;
             IDictionary<string, string> moreAdditionalProperties = default;
-            Dictionary<string, string> additionalPropertiesDictionary = default;
+            Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -85,7 +85,6 @@ namespace additionalProperties.Models
                     additionalProperties = dictionary;
                     continue;
                 }
-                additionalPropertiesDictionary ??= new Dictionary<string, string>();
                 additionalPropertiesDictionary.Add(property.Name, property.Value.GetString());
             }
             moreAdditionalProperties = additionalPropertiesDictionary;
