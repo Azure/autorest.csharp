@@ -43,6 +43,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/customNamedRequestId", false);
             request.Uri = uri;
             request.Headers.Add("foo-client-request-id", fooClientRequestId);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -102,6 +103,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/customNamedRequestIdParamGrouping", false);
             request.Uri = uri;
             request.Headers.Add("foo-client-request-id", headerCustomNamedRequestIdParamGroupingParameters.FooClientRequestId);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -161,6 +163,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/customNamedRequestIdHead", false);
             request.Uri = uri;
             request.Headers.Add("foo-client-request-id", fooClientRequestId);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

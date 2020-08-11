@@ -4,7 +4,7 @@ info: !<!Info>
   title: XMS Error Response Extensions
 schemas: !<!Schemas> 
   numbers:
-    - !<!NumberSchema> &ref_27
+    - !<!NumberSchema> &ref_28
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -16,7 +16,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   strings:
-    - !<!StringSchema> &ref_23
+    - !<!StringSchema> &ref_0
       type: string
       language: !<!Languages> 
         default:
@@ -33,7 +33,7 @@ schemas: !<!Schemas>
           name: String
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_3
+    - !<!StringSchema> &ref_4
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -43,7 +43,7 @@ schemas: !<!Schemas>
           name: PetName
           description: Gets the Pet by id.
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+    - !<!StringSchema> &ref_2
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -53,7 +53,7 @@ schemas: !<!Schemas>
           name: AnimalAniType
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_12
+    - !<!StringSchema> &ref_13
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -63,7 +63,7 @@ schemas: !<!Schemas>
           name: NotFoundErrorBaseReason
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_11
+    - !<!StringSchema> &ref_12
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -73,7 +73,7 @@ schemas: !<!Schemas>
           name: NotFoundErrorBaseWhatNotFound
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_8
+    - !<!StringSchema> &ref_9
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -83,7 +83,7 @@ schemas: !<!Schemas>
           name: BaseErrorSomeBaseProp
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_14
+    - !<!StringSchema> &ref_15
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -93,7 +93,7 @@ schemas: !<!Schemas>
           name: PetActionResponse
           description: action feedback
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_19
+    - !<!StringSchema> &ref_20
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -103,7 +103,7 @@ schemas: !<!Schemas>
           name: PetActionErrorType
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_22
+    - !<!StringSchema> &ref_23
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -113,7 +113,7 @@ schemas: !<!Schemas>
           name: PetActionErrorMessage
           description: the error message
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_9
+    - !<!StringSchema> &ref_10
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -123,7 +123,7 @@ schemas: !<!Schemas>
           name: LinkNotFoundWhatSubAddress
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_7
+    - !<!StringSchema> &ref_8
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -133,7 +133,7 @@ schemas: !<!Schemas>
           name: AnimalNotFoundName
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_20
+    - !<!StringSchema> &ref_21
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -143,7 +143,7 @@ schemas: !<!Schemas>
           name: PetSadErrorReason
           description: why is the pet sad
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_17
+    - !<!StringSchema> &ref_18
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -153,27 +153,38 @@ schemas: !<!Schemas>
           name: PetHungryOrThirstyErrorHungryOrThirsty
           description: is the pet hungry or thirsty or both
       protocol: !<!Protocols> {}
+  constants:
+    - !<!ConstantSchema> &ref_26
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_0
+    - !<!ObjectSchema> &ref_1
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 0.0.0
       parents: !<!Relations> 
         all:
-          - !<!ObjectSchema> &ref_2
+          - !<!ObjectSchema> &ref_3
             type: object
             apiVersions:
               - !<!ApiVersion> 
                 version: 0.0.0
             children: !<!Relations> 
               all:
-                - *ref_0
+                - *ref_1
               immediate:
-                - *ref_0
+                - *ref_1
             properties:
               - !<!Property> 
-                schema: *ref_1
+                schema: *ref_2
                 serializedName: aniType
                 language: !<!Languages> 
                   default:
@@ -191,10 +202,10 @@ schemas: !<!Schemas>
                 namespace: ''
             protocol: !<!Protocols> {}
         immediate:
-          - *ref_2
+          - *ref_3
       properties:
         - !<!Property> 
-          schema: *ref_3
+          schema: *ref_4
           readOnly: true
           serializedName: name
           language: !<!Languages> 
@@ -212,15 +223,15 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - *ref_2
-    - !<!ObjectSchema> &ref_4
+    - *ref_3
+    - !<!ObjectSchema> &ref_5
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 0.0.0
       children: !<!Relations> 
         all:
-          - !<!ObjectSchema> &ref_5
+          - !<!ObjectSchema> &ref_6
             type: object
             apiVersions:
               - !<!ApiVersion> 
@@ -228,17 +239,17 @@ schemas: !<!Schemas>
             discriminatorValue: InvalidResourceLink
             parents: !<!Relations> 
               all:
-                - *ref_4
-                - !<!ObjectSchema> &ref_6
+                - *ref_5
+                - !<!ObjectSchema> &ref_7
                   type: object
                   apiVersions:
                     - !<!ApiVersion> 
                       version: 0.0.0
                   children: !<!Relations> 
                     all:
-                      - *ref_4
                       - *ref_5
-                      - !<!ObjectSchema> &ref_10
+                      - *ref_6
+                      - !<!ObjectSchema> &ref_11
                         type: object
                         apiVersions:
                           - !<!ApiVersion> 
@@ -246,13 +257,13 @@ schemas: !<!Schemas>
                         discriminatorValue: AnimalNotFound
                         parents: !<!Relations> 
                           all:
-                            - *ref_4
-                            - *ref_6
+                            - *ref_5
+                            - *ref_7
                           immediate:
-                            - *ref_4
+                            - *ref_5
                         properties:
                           - !<!Property> 
-                            schema: *ref_7
+                            schema: *ref_8
                             serializedName: name
                             language: !<!Languages> 
                               default:
@@ -270,10 +281,10 @@ schemas: !<!Schemas>
                             namespace: ''
                         protocol: !<!Protocols> {}
                     immediate:
-                      - *ref_4
+                      - *ref_5
                   properties:
                     - !<!Property> 
-                      schema: *ref_8
+                      schema: *ref_9
                       serializedName: someBaseProp
                       language: !<!Languages> 
                         default:
@@ -291,10 +302,10 @@ schemas: !<!Schemas>
                       namespace: ''
                   protocol: !<!Protocols> {}
               immediate:
-                - *ref_4
+                - *ref_5
             properties:
               - !<!Property> 
-                schema: *ref_9
+                schema: *ref_10
                 serializedName: whatSubAddress
                 language: !<!Languages> 
                   default:
@@ -313,19 +324,19 @@ schemas: !<!Schemas>
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          - *ref_10
+          - *ref_11
         immediate:
-          - *ref_5
-          - *ref_10
+          - *ref_6
+          - *ref_11
       discriminator: !<!Discriminator> 
         all:
-          AnimalNotFound: *ref_10
-          InvalidResourceLink: *ref_5
+          AnimalNotFound: *ref_11
+          InvalidResourceLink: *ref_6
         immediate:
-          AnimalNotFound: *ref_10
-          InvalidResourceLink: *ref_5
-        property: !<!Property> &ref_13
-          schema: *ref_11
+          AnimalNotFound: *ref_11
+          InvalidResourceLink: *ref_6
+        property: !<!Property> &ref_14
+          schema: *ref_12
           isDiscriminator: true
           required: true
           serializedName: whatNotFound
@@ -337,12 +348,12 @@ schemas: !<!Schemas>
       discriminatorValue: NotFoundErrorBase
       parents: !<!Relations> 
         all:
-          - *ref_6
+          - *ref_7
         immediate:
-          - *ref_6
+          - *ref_7
       properties:
         - !<!Property> 
-          schema: *ref_12
+          schema: *ref_13
           required: false
           serializedName: reason
           language: !<!Languages> 
@@ -350,7 +361,7 @@ schemas: !<!Schemas>
               name: reason
               description: ''
           protocol: !<!Protocols> {}
-        - *ref_13
+        - *ref_14
       serializationFormats:
         - json
       usage:
@@ -361,15 +372,15 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - *ref_6
-    - !<!ObjectSchema> &ref_29
+    - *ref_7
+    - !<!ObjectSchema> &ref_30
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 0.0.0
       properties:
         - !<!Property> 
-          schema: *ref_14
+          schema: *ref_15
           serializedName: actionResponse
           language: !<!Languages> 
             default:
@@ -386,21 +397,21 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_16
+    - !<!ObjectSchema> &ref_17
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 0.0.0
       children: !<!Relations> 
         all:
-          - !<!ObjectSchema> &ref_15
+          - !<!ObjectSchema> &ref_16
             type: object
             apiVersions:
               - !<!ApiVersion> 
                 version: 0.0.0
             children: !<!Relations> 
               all:
-                - !<!ObjectSchema> &ref_18
+                - !<!ObjectSchema> &ref_19
                   type: object
                   apiVersions:
                     - !<!ApiVersion> 
@@ -408,13 +419,13 @@ schemas: !<!Schemas>
                   discriminatorValue: PetHungryOrThirstyError
                   parents: !<!Relations> 
                     all:
-                      - *ref_15
                       - *ref_16
+                      - *ref_17
                     immediate:
-                      - *ref_15
+                      - *ref_16
                   properties:
                     - !<!Property> 
-                      schema: *ref_17
+                      schema: *ref_18
                       serializedName: hungryOrThirsty
                       language: !<!Languages> 
                         default:
@@ -432,14 +443,14 @@ schemas: !<!Schemas>
                       namespace: ''
                   protocol: !<!Protocols> {}
               immediate:
-                - *ref_18
+                - *ref_19
             discriminator: !<!Discriminator> 
               all:
-                PetHungryOrThirstyError: *ref_18
+                PetHungryOrThirstyError: *ref_19
               immediate:
-                PetHungryOrThirstyError: *ref_18
-              property: !<!Property> &ref_21
-                schema: *ref_19
+                PetHungryOrThirstyError: *ref_19
+              property: !<!Property> &ref_22
+                schema: *ref_20
                 isDiscriminator: true
                 required: true
                 serializedName: errorType
@@ -451,12 +462,12 @@ schemas: !<!Schemas>
             discriminatorValue: PetSadError
             parents: !<!Relations> 
               all:
-                - *ref_16
+                - *ref_17
               immediate:
-                - *ref_16
+                - *ref_17
             properties:
               - !<!Property> 
-                schema: *ref_20
+                schema: *ref_21
                 serializedName: reason
                 language: !<!Languages> 
                   default:
@@ -473,20 +484,20 @@ schemas: !<!Schemas>
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
-          - *ref_18
+          - *ref_19
         immediate:
-          - *ref_15
+          - *ref_16
       discriminator: !<!Discriminator> 
         all:
-          PetHungryOrThirstyError: *ref_18
-          PetSadError: *ref_15
+          PetHungryOrThirstyError: *ref_19
+          PetSadError: *ref_16
         immediate:
-          PetSadError: *ref_15
-        property: *ref_21
+          PetSadError: *ref_16
+        property: *ref_22
       properties:
-        - *ref_21
+        - *ref_22
         - !<!Property> 
-          schema: *ref_22
+          schema: *ref_23
           required: false
           serializedName: errorMessage
           language: !<!Languages> 
@@ -504,13 +515,13 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - *ref_5
-    - *ref_10
-    - *ref_15
-    - *ref_18
+    - *ref_6
+    - *ref_11
+    - *ref_16
+    - *ref_19
 globalParameters:
   - !<!Parameter> &ref_24
-    schema: *ref_23
+    schema: *ref_0
     clientDefaultValue: 'http://localhost'
     implementation: Client
     origin: 'modelerfour:synthesized/host'
@@ -535,7 +546,7 @@ operationGroups:
             version: 0.0.0
         parameters:
           - *ref_24
-          - !<!Parameter> &ref_26
+          - !<!Parameter> &ref_27
             schema: *ref_25
             implementation: Method
             required: true
@@ -549,6 +560,21 @@ operationGroups:
                 in: path
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_26
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -559,10 +585,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_26
+          - *ref_27
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_0
+            schema: *ref_1
             language: !<!Languages> 
               default:
                 name: ''
@@ -600,7 +626,7 @@ operationGroups:
                 statusCodes:
                   - '400'
           - !<!SchemaResponse> 
-            schema: *ref_4
+            schema: *ref_5
             extensions:
               x-ms-error-response: true
             language: !<!Languages> 
@@ -615,7 +641,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !<!SchemaResponse> 
-            schema: *ref_27
+            schema: *ref_28
             extensions:
               x-ms-error-response: true
             language: !<!Languages> 
@@ -649,7 +675,7 @@ operationGroups:
             version: 0.0.0
         parameters:
           - *ref_24
-          - !<!Parameter> &ref_28
+          - !<!Parameter> &ref_29
             schema: *ref_25
             implementation: Method
             required: true
@@ -663,6 +689,21 @@ operationGroups:
                 in: path
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_26
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -673,10 +714,10 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_28
+          - *ref_29
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_29
+            schema: *ref_30
             language: !<!Languages> 
               default:
                 name: ''
@@ -690,7 +731,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_16
+            schema: *ref_17
             extensions:
               x-ms-error-response: true
             language: !<!Languages> 
@@ -705,7 +746,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !<!SchemaResponse> 
-            schema: *ref_16
+            schema: *ref_17
             language: !<!Languages> 
               default:
                 name: ''

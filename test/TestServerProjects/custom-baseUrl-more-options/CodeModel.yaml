@@ -4,7 +4,7 @@ info: !<!Info>
   title: AutoRest Parameterized Custom Host Test Client
 schemas: !<!Schemas> 
   numbers:
-    - !<!NumberSchema> &ref_0
+    - !<!NumberSchema> &ref_1
       type: integer
       precision: 32
       language: !<!Languages> 
@@ -13,14 +13,14 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   strings:
-    - !<!StringSchema> &ref_3
+    - !<!StringSchema> &ref_0
       type: string
       language: !<!Languages> 
         default:
           name: String
           description: simple string
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_2
+    - !<!StringSchema> &ref_3
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -41,7 +41,7 @@ schemas: !<!Schemas>
           name: String
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+    - !<!StringSchema> &ref_2
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -62,15 +62,26 @@ schemas: !<!Schemas>
           name: String
           description: ''
       protocol: !<!Protocols> {}
+  constants:
+    - !<!ConstantSchema> &ref_7
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_11
+    - !<!ObjectSchema> &ref_12
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: *ref_0
+          schema: *ref_1
           serializedName: status
           language: !<!Languages> 
             default:
@@ -78,7 +89,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_1
+          schema: *ref_2
           serializedName: message
           language: !<!Languages> 
             default:
@@ -97,7 +108,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
 globalParameters:
   - !<!Parameter> &ref_5
-    schema: *ref_2
+    schema: *ref_3
     implementation: Client
     required: true
     extensions:
@@ -111,7 +122,7 @@ globalParameters:
       http: !<!HttpParameter> 
         in: path
   - !<!Parameter> &ref_4
-    schema: *ref_3
+    schema: *ref_0
     clientDefaultValue: host
     implementation: Client
     required: true
@@ -139,8 +150,8 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - !<!Parameter> &ref_7
-            schema: *ref_3
+          - !<!Parameter> &ref_8
+            schema: *ref_0
             implementation: Method
             required: true
             extensions:
@@ -157,8 +168,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: uri
-          - !<!Parameter> &ref_8
-            schema: *ref_3
+          - !<!Parameter> &ref_9
+            schema: *ref_0
             implementation: Method
             required: true
             extensions:
@@ -176,8 +187,8 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: uri
           - *ref_4
-          - !<!Parameter> &ref_9
-            schema: *ref_2
+          - !<!Parameter> &ref_10
+            schema: *ref_3
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -189,7 +200,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: path
           - *ref_5
-          - !<!Parameter> &ref_10
+          - !<!Parameter> &ref_11
             schema: *ref_6
             implementation: Method
             language: !<!Languages> 
@@ -202,6 +213,21 @@ operationGroups:
                 in: query
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_7
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -212,10 +238,10 @@ operationGroups:
                 method: get
                 uri: '{vault}{secret}{dnsSuffix}'
         signatureParameters:
-          - *ref_7
           - *ref_8
           - *ref_9
           - *ref_10
+          - *ref_11
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -228,7 +254,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_11
+            schema: *ref_12
             language: !<!Languages> 
               default:
                 name: ''

@@ -60,6 +60,7 @@ namespace CognitiveSearch
             {
                 request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
             }
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
