@@ -1088,5 +1088,12 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.NotNull(typeof(Error).GetMethods(BindingFlags.Static | BindingFlags.NonPublic).Single(mi => mi.Name == "DeserializeError"));
         }
+
+        [Test]
+        public void InitializeAdditionalPropertiesDuringDeserialization()
+        {
+            SmartSalmon model = SmartSalmon.DeserializeSmartSalmon(JsonDocument.Parse("{}").RootElement);
+            Assert.AreEqual(new Dictionary<string, object>(), model.AdditionalProperties);
+        }
     }
 }
