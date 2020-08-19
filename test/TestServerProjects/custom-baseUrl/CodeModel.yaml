@@ -4,7 +4,7 @@ info: !<!Info>
   title: AutoRest Parameterized Host Test Client
 schemas: !<!Schemas> 
   numbers:
-    - !<!NumberSchema> &ref_0
+    - !<!NumberSchema> &ref_1
       type: integer
       precision: 32
       language: !<!Languages> 
@@ -13,14 +13,14 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   strings:
-    - !<!StringSchema> &ref_2
+    - !<!StringSchema> &ref_0
       type: string
       language: !<!Languages> 
         default:
           name: String
           description: simple string
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+    - !<!StringSchema> &ref_2
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -41,15 +41,26 @@ schemas: !<!Schemas>
           name: String
           description: ''
       protocol: !<!Protocols> {}
+  constants:
+    - !<!ConstantSchema> &ref_4
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_5
+    - !<!ObjectSchema> &ref_6
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: *ref_0
+          schema: *ref_1
           serializedName: status
           language: !<!Languages> 
             default:
@@ -57,7 +68,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_1
+          schema: *ref_2
           serializedName: message
           language: !<!Languages> 
             default:
@@ -76,7 +87,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
 globalParameters:
   - !<!Parameter> &ref_3
-    schema: *ref_2
+    schema: *ref_0
     clientDefaultValue: host
     implementation: Client
     required: true
@@ -104,8 +115,8 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - !<!Parameter> &ref_4
-            schema: *ref_2
+          - !<!Parameter> &ref_5
+            schema: *ref_0
             implementation: Method
             required: true
             extensions:
@@ -125,6 +136,21 @@ operationGroups:
           - *ref_3
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_4
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -135,7 +161,7 @@ operationGroups:
                 method: get
                 uri: 'http://{accountName}{host}'
         signatureParameters:
-          - *ref_4
+          - *ref_5
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -148,7 +174,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_5
+            schema: *ref_6
             language: !<!Languages> 
               default:
                 name: ''

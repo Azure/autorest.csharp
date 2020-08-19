@@ -61,6 +61,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/implicit/required/path/", false);
             uri.AppendPath(pathParameter, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -121,6 +122,7 @@ namespace required_optional
                 uri.AppendQuery("queryParameter", queryParameter, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -169,6 +171,7 @@ namespace required_optional
             {
                 request.Headers.Add("queryParameter", queryParameter);
             }
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -214,6 +217,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/implicit/optional/body", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (bodyParameter != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -265,6 +269,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/global/required/path/", false);
             uri.AppendPath(requiredGlobalPath, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -308,6 +313,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/global/required/query", false);
             uri.AppendQuery("required-global-query", requiredGlobalQuery, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -354,6 +360,7 @@ namespace required_optional
                 uri.AppendQuery("optional-global-query", optionalGlobalQuery.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

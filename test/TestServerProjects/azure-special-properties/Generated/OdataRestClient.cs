@@ -54,6 +54,7 @@ namespace azure_special_properties
                 uri.AppendQuery("$orderby", orderby, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

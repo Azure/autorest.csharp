@@ -43,6 +43,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/skipUrlEncoding/method/path/valid/", false);
             uri.AppendPath(unencodedPathParam, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -100,6 +101,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/skipUrlEncoding/path/path/valid/", false);
             uri.AppendPath(unencodedPathParam, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -157,6 +159,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/skipUrlEncoding/swagger/path/valid/", false);
             uri.AppendPath("path1/path2/path3", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -200,6 +203,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/skipUrlEncoding/method/query/valid", false);
             uri.AppendQuery("q1", q1, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -260,6 +264,7 @@ namespace azure_special_properties
                 uri.AppendQuery("q1", q1, false);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -305,6 +310,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/skipUrlEncoding/path/query/valid", false);
             uri.AppendQuery("q1", q1, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -362,6 +368,7 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/skipUrlEncoding/swagger/query/valid", false);
             uri.AppendQuery("q1", "value1&q2=value2&q3=value3", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

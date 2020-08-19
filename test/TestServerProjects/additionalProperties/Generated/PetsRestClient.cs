@@ -45,6 +45,7 @@ namespace additionalProperties
             uri.AppendPath("/additionalProperties/true", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(createParameters);
             request.Content = content;
@@ -115,6 +116,7 @@ namespace additionalProperties
             uri.AppendPath("/additionalProperties/true-subclass", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(createParameters);
             request.Content = content;
@@ -185,6 +187,7 @@ namespace additionalProperties
             uri.AppendPath("/additionalProperties/type/object", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(createParameters);
             request.Content = content;
@@ -255,6 +258,7 @@ namespace additionalProperties
             uri.AppendPath("/additionalProperties/type/string", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(createParameters);
             request.Content = content;
@@ -325,6 +329,7 @@ namespace additionalProperties
             uri.AppendPath("/additionalProperties/in/properties", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(createParameters);
             request.Content = content;
@@ -395,6 +400,7 @@ namespace additionalProperties
             uri.AppendPath("/additionalProperties/in/properties/with/additionalProperties/string", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(createParameters);
             request.Content = content;

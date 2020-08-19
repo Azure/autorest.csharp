@@ -45,6 +45,7 @@ namespace ModelShapes
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(value);
             request.Content = content;
@@ -103,6 +104,7 @@ namespace ModelShapes
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(value);
             request.Content = content;
@@ -170,6 +172,7 @@ namespace ModelShapes
             uri.Reset(endpoint);
             uri.AppendPath("/op", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -221,6 +224,7 @@ namespace ModelShapes
             uri.AppendPath("/op2", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(value);
             request.Content = content;

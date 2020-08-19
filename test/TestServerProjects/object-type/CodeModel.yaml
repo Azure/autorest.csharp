@@ -12,7 +12,17 @@ schemas: !<!Schemas>
           description: simple string
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_3
+    - !<!ConstantSchema> &ref_2
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_4
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -23,7 +33,7 @@ schemas: !<!Schemas>
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
   any:
-    - !<!AnySchema> &ref_2
+    - !<!AnySchema> &ref_3
       type: any
       language: !<!Languages> 
         default:
@@ -59,6 +69,21 @@ operationGroups:
           - *ref_1
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_2
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -71,7 +96,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_2
+            schema: *ref_3
             language: !<!Languages> 
               default:
                 name: ''
@@ -85,7 +110,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_2
+            schema: *ref_3
             language: !<!Languages> 
               default:
                 name: ''
@@ -112,7 +137,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_3
+                schema: *ref_4
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -124,8 +149,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_4
-                schema: *ref_2
+              - !<!Parameter> &ref_5
+                schema: *ref_3
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -136,8 +161,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_2
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_4
+              - *ref_5
             language: !<!Languages> 
               default:
                 name: ''
@@ -163,7 +201,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_2
+            schema: *ref_3
             language: !<!Languages> 
               default:
                 name: ''

@@ -62,6 +62,7 @@ namespace custom_baseUrl_more_options
                 uri.AppendQuery("keyVersion", keyVersion, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

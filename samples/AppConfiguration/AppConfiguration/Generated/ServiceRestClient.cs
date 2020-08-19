@@ -75,6 +75,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.keyset+json, application/json, application/problem+json");
             return message;
         }
 
@@ -227,6 +228,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json");
             return message;
         }
 
@@ -396,6 +398,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             return message;
         }
 
@@ -493,6 +496,7 @@ namespace AppConfiguration
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
             request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             if (entity != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -589,6 +593,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("If-Match", ifMatch);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             return message;
         }
 
@@ -780,6 +785,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.labelset+json, application/json, application/problem+json");
             return message;
         }
 
@@ -933,6 +939,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             return message;
         }
 
@@ -1025,6 +1032,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             return message;
         }
 
@@ -1124,6 +1132,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json");
             return message;
         }
 
@@ -1275,6 +1284,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.keyset+json, application/json, application/problem+json");
             return message;
         }
 
@@ -1357,6 +1367,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json");
             return message;
         }
 
@@ -1443,6 +1454,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.labelset+json, application/json, application/problem+json");
             return message;
         }
 
@@ -1527,6 +1539,7 @@ namespace AppConfiguration
             {
                 request.Headers.Add("Accept-Datetime", acceptDatetime);
             }
+            request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json");
             return message;
         }
 

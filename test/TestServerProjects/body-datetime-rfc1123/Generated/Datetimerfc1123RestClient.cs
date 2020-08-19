@@ -43,6 +43,7 @@ namespace body_datetime_rfc1123
             uri.Reset(endpoint);
             uri.AppendPath("/datetimerfc1123/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -109,6 +110,7 @@ namespace body_datetime_rfc1123
             uri.Reset(endpoint);
             uri.AppendPath("/datetimerfc1123/invalid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -161,6 +163,7 @@ namespace body_datetime_rfc1123
             uri.Reset(endpoint);
             uri.AppendPath("/datetimerfc1123/overflow", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -213,6 +216,7 @@ namespace body_datetime_rfc1123
             uri.Reset(endpoint);
             uri.AppendPath("/datetimerfc1123/underflow", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -266,6 +270,7 @@ namespace body_datetime_rfc1123
             uri.AppendPath("/datetimerfc1123/max", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "R");
             request.Content = content;
@@ -313,6 +318,7 @@ namespace body_datetime_rfc1123
             uri.Reset(endpoint);
             uri.AppendPath("/datetimerfc1123/max/lowercase", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -365,6 +371,7 @@ namespace body_datetime_rfc1123
             uri.Reset(endpoint);
             uri.AppendPath("/datetimerfc1123/max/uppercase", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -418,6 +425,7 @@ namespace body_datetime_rfc1123
             uri.AppendPath("/datetimerfc1123/min", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "R");
             request.Content = content;
@@ -465,6 +473,7 @@ namespace body_datetime_rfc1123
             uri.Reset(endpoint);
             uri.AppendPath("/datetimerfc1123/min", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

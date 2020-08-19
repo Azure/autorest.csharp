@@ -20,7 +20,7 @@ schemas: !<!Schemas>
           name: Boolean
           description: Use label file for training a model.
       protocol: !<!Protocols> {}
-    - !<!BooleanSchema> &ref_122
+    - !<!BooleanSchema> &ref_123
       type: boolean
       apiVersions:
         - !<!ApiVersion> 
@@ -287,7 +287,7 @@ schemas: !<!Schemas>
           name: TrainSourceFilterPrefix
           description: 'A case-sensitive prefix string to filter documents in the source path for training. For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for training.'
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_119
+    - !<!StringSchema> &ref_120
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -359,7 +359,7 @@ schemas: !<!Schemas>
           name: SourcePathSource
           description: File source path.
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_135
+    - !<!StringSchema> &ref_136
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -527,7 +527,7 @@ schemas: !<!Schemas>
           name: CopyAuthorizationResultAccessToken
           description: Token claim used to authorize the request.
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_142
+    - !<!StringSchema> &ref_143
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -538,7 +538,7 @@ schemas: !<!Schemas>
           description: ''
           header: Operation-Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_146
+    - !<!StringSchema> &ref_147
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -549,7 +549,7 @@ schemas: !<!Schemas>
           description: ''
           header: Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_152
+    - !<!StringSchema> &ref_153
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -560,7 +560,7 @@ schemas: !<!Schemas>
           description: ''
           header: Operation-Location
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_158
+    - !<!StringSchema> &ref_159
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -677,7 +677,7 @@ schemas: !<!Schemas>
           name: TrainStatus
           description: Status of the training operation.
       protocol: !<!Protocols> {}
-    - !<!SealedChoiceSchema> &ref_127
+    - !<!SealedChoiceSchema> &ref_128
       choices:
         - !<!ChoiceValue> 
           value: application/pdf
@@ -841,24 +841,34 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_160
+    - !<!ConstantSchema> &ref_118
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_161
       type: constant
       value: !<!ConstantValue> 
         value: full
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Constant8
+          name: Constant9
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_162
+    - !<!ConstantSchema> &ref_163
       type: constant
       value: !<!ConstantValue> 
         value: summary
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Constant9
+          name: Constant10
           description: ''
       protocol: !<!Protocols> {}
   dictionaries:
@@ -1099,7 +1109,7 @@ schemas: !<!Schemas>
           description: Dictionary of named field values.
       protocol: !<!Protocols> {}
   binaries:
-    - !<!BinarySchema> &ref_128
+    - !<!BinarySchema> &ref_129
       type: binary
       apiVersions:
         - !<!ApiVersion> 
@@ -1109,7 +1119,7 @@ schemas: !<!Schemas>
           name: binary
           description: Uri or local path to source data.
       protocol: !<!Protocols> {}
-    - !<!BinarySchema> &ref_147
+    - !<!BinarySchema> &ref_148
       type: binary
       apiVersions:
         - !<!ApiVersion> 
@@ -1119,7 +1129,7 @@ schemas: !<!Schemas>
           name: binary
           description: Uri or local path to source data.
       protocol: !<!Protocols> {}
-    - !<!BinarySchema> &ref_154
+    - !<!BinarySchema> &ref_155
       type: binary
       apiVersions:
         - !<!ApiVersion> 
@@ -1212,7 +1222,7 @@ schemas: !<!Schemas>
   times:
     - *ref_15
   uuids:
-    - !<!UuidSchema> &ref_121
+    - !<!UuidSchema> &ref_122
       type: uuid
       apiVersions:
         - !<!ApiVersion> 
@@ -1319,7 +1329,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_20
-    - !<!ObjectSchema> &ref_120
+    - !<!ObjectSchema> &ref_121
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1379,7 +1389,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_23
-    - !<!ObjectSchema> &ref_125
+    - !<!ObjectSchema> &ref_126
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1685,7 +1695,7 @@ schemas: !<!Schemas>
     - *ref_37
     - *ref_38
     - *ref_39
-    - !<!ObjectSchema> &ref_131
+    - !<!ObjectSchema> &ref_132
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1709,7 +1719,7 @@ schemas: !<!Schemas>
           description: Uri or local path to source data.
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_138
+    - !<!ObjectSchema> &ref_139
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2485,7 +2495,7 @@ schemas: !<!Schemas>
     - *ref_77
     - *ref_78
     - *ref_7
-    - !<!ObjectSchema> &ref_139
+    - !<!ObjectSchema> &ref_140
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2572,7 +2582,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_84
-    - !<!ObjectSchema> &ref_145
+    - !<!ObjectSchema> &ref_146
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2671,7 +2681,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_88
-    - !<!ObjectSchema> &ref_161
+    - !<!ObjectSchema> &ref_162
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2839,7 +2849,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_118
+              - !<!Parameter> &ref_119
                 schema: *ref_117
                 implementation: Method
                 required: true
@@ -2851,8 +2861,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_118
+              - *ref_119
             language: !<!Languages> 
               default:
                 name: ''
@@ -2876,7 +2899,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_119
+                    schema: *ref_120
                     header: Location
                     language:
                       default:
@@ -2886,7 +2909,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -2944,8 +2967,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_123
-            schema: *ref_121
+          - !<!Parameter> &ref_124
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2956,8 +2979,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_124
-            schema: *ref_122
+          - !<!Parameter> &ref_125
+            schema: *ref_123
             implementation: Method
             language: !<!Languages> 
               default:
@@ -2969,6 +2992,21 @@ operationGroups:
                 in: query
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -2979,11 +3017,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_123
           - *ref_124
+          - *ref_125
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_125
+            schema: *ref_126
             language: !<!Languages> 
               default:
                 name: ''
@@ -2997,7 +3035,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3051,8 +3089,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_126
-            schema: *ref_121
+          - !<!Parameter> &ref_127
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3065,6 +3103,21 @@ operationGroups:
                 in: path
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -3075,7 +3128,7 @@ operationGroups:
                 method: delete
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_126
+          - *ref_127
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -3088,7 +3141,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3123,8 +3176,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_133
-            schema: *ref_121
+          - !<!Parameter> &ref_134
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3135,8 +3188,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_134
-            schema: *ref_122
+          - !<!Parameter> &ref_135
+            schema: *ref_123
             implementation: Method
             language: !<!Languages> 
               default:
@@ -3149,8 +3202,8 @@ operationGroups:
         requests:
           - !<!Request> 
             parameters:
-              - !<!Parameter> &ref_129
-                schema: *ref_127
+              - !<!Parameter> &ref_130
+                schema: *ref_128
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3162,8 +3215,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_130
-                schema: *ref_128
+              - !<!Parameter> &ref_131
+                schema: *ref_129
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3174,9 +3227,22 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: binary
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_129
               - *ref_130
+              - *ref_131
             language: !<!Languages> 
               default:
                 name: ''
@@ -3208,8 +3274,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_132
-                schema: *ref_131
+              - !<!Parameter> &ref_133
+                schema: *ref_132
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -3220,8 +3286,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_132
+              - *ref_133
             language: !<!Languages> 
               default:
                 name: ''
@@ -3235,8 +3314,8 @@ operationGroups:
                   - application/json
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_133
           - *ref_134
+          - *ref_135
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -3247,7 +3326,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_135
+                    schema: *ref_136
                     header: Operation-Location
                     language:
                       default:
@@ -3257,7 +3336,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3297,8 +3376,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_136
-            schema: *ref_121
+          - !<!Parameter> &ref_137
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3309,8 +3388,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_137
-            schema: *ref_121
+          - !<!Parameter> &ref_138
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3323,6 +3402,21 @@ operationGroups:
                 in: path
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -3333,11 +3427,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_136
           - *ref_137
+          - *ref_138
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_138
+            schema: *ref_139
             language: !<!Languages> 
               default:
                 name: ''
@@ -3351,7 +3445,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3397,8 +3491,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_141
-            schema: *ref_121
+          - !<!Parameter> &ref_142
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3425,8 +3519,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_140
-                schema: *ref_139
+              - !<!Parameter> &ref_141
+                schema: *ref_140
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3437,8 +3531,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_140
+              - *ref_141
             language: !<!Languages> 
               default:
                 name: ''
@@ -3452,7 +3559,7 @@ operationGroups:
                   - application/json
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_141
+          - *ref_142
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -3463,7 +3570,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_142
+                    schema: *ref_143
                     header: Operation-Location
                     language:
                       default:
@@ -3473,7 +3580,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3518,8 +3625,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_143
-            schema: *ref_121
+          - !<!Parameter> &ref_144
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3530,8 +3637,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_144
-            schema: *ref_121
+          - !<!Parameter> &ref_145
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3544,6 +3651,21 @@ operationGroups:
                 in: path
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -3554,11 +3676,11 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_143
           - *ref_144
+          - *ref_145
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_145
+            schema: *ref_146
             language: !<!Languages> 
               default:
                 name: ''
@@ -3572,7 +3694,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3636,6 +3758,21 @@ operationGroups:
           - *ref_115
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -3657,7 +3794,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_146
+                    schema: *ref_147
                     header: Location
                     language:
                       default:
@@ -3670,7 +3807,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3710,8 +3847,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_151
-            schema: *ref_122
+          - !<!Parameter> &ref_152
+            schema: *ref_123
             implementation: Method
             language: !<!Languages> 
               default:
@@ -3724,8 +3861,8 @@ operationGroups:
         requests:
           - !<!Request> 
             parameters:
-              - !<!Parameter> &ref_148
-                schema: *ref_127
+              - !<!Parameter> &ref_149
+                schema: *ref_128
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3737,8 +3874,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_149
-                schema: *ref_147
+              - !<!Parameter> &ref_150
+                schema: *ref_148
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3749,9 +3886,22 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: binary
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_148
               - *ref_149
+              - *ref_150
             language: !<!Languages> 
               default:
                 name: ''
@@ -3783,8 +3933,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_150
-                schema: *ref_131
+              - !<!Parameter> &ref_151
+                schema: *ref_132
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -3795,8 +3945,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_150
+              - *ref_151
             language: !<!Languages> 
               default:
                 name: ''
@@ -3810,7 +3973,7 @@ operationGroups:
                   - application/json
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_151
+          - *ref_152
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -3821,7 +3984,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_152
+                    schema: *ref_153
                     header: Operation-Location
                     language:
                       default:
@@ -3831,7 +3994,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3870,8 +4033,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_153
-            schema: *ref_121
+          - !<!Parameter> &ref_154
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3884,6 +4047,21 @@ operationGroups:
                 in: path
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -3894,10 +4072,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_153
+          - *ref_154
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_138
+            schema: *ref_139
             language: !<!Languages> 
               default:
                 name: ''
@@ -3911,7 +4089,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3960,8 +4138,8 @@ operationGroups:
         requests:
           - !<!Request> 
             parameters:
-              - !<!Parameter> &ref_155
-                schema: *ref_127
+              - !<!Parameter> &ref_156
+                schema: *ref_128
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3973,8 +4151,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_156
-                schema: *ref_154
+              - !<!Parameter> &ref_157
+                schema: *ref_155
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3985,9 +4163,22 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: binary
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_155
               - *ref_156
+              - *ref_157
             language: !<!Languages> 
               default:
                 name: ''
@@ -4019,8 +4210,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_157
-                schema: *ref_131
+              - !<!Parameter> &ref_158
+                schema: *ref_132
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -4031,8 +4222,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_157
+              - *ref_158
             language: !<!Languages> 
               default:
                 name: ''
@@ -4056,7 +4260,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_158
+                    schema: *ref_159
                     header: Operation-Location
                     language:
                       default:
@@ -4066,7 +4270,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -4106,8 +4310,8 @@ operationGroups:
             version: 2.0-preview
         parameters:
           - *ref_115
-          - !<!Parameter> &ref_159
-            schema: *ref_121
+          - !<!Parameter> &ref_160
+            schema: *ref_122
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4120,6 +4324,21 @@ operationGroups:
                 in: path
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -4130,10 +4349,10 @@ operationGroups:
                 method: get
                 uri: '{endpoint}/formrecognizer/v2.0-preview'
         signatureParameters:
-          - *ref_159
+          - *ref_160
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_138
+            schema: *ref_139
             language: !<!Languages> 
               default:
                 name: ''
@@ -4147,7 +4366,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -4192,7 +4411,7 @@ operationGroups:
         parameters:
           - *ref_115
           - !<!Parameter> 
-            schema: *ref_160
+            schema: *ref_161
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4205,6 +4424,21 @@ operationGroups:
                 in: query
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -4217,7 +4451,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_161
+            schema: *ref_162
             language: !<!Languages> 
               default:
                 name: ''
@@ -4231,7 +4465,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -4284,7 +4518,7 @@ operationGroups:
         parameters:
           - *ref_115
           - !<!Parameter> 
-            schema: *ref_162
+            schema: *ref_163
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4297,6 +4531,21 @@ operationGroups:
                 in: query
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_118
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -4309,7 +4558,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_161
+            schema: *ref_162
             language: !<!Languages> 
               default:
                 name: ''
@@ -4323,7 +4572,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_120
+            schema: *ref_121
             language: !<!Languages> 
               default:
                 name: ''

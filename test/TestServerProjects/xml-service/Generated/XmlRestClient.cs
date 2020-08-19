@@ -46,6 +46,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/complex-type-ref-no-meta", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -164,6 +165,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/complex-type-ref-with-meta", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -282,6 +284,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/simple", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -341,6 +344,7 @@ namespace xml_service
             uri.AppendPath("/xml/simple", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
+            request.Headers.Add("Accept", "application/xml");
             var content = new XmlWriterContent();
             content.XmlWriter.WriteObjectValue(slideshow, "slideshow");
             request.Content = content;
@@ -400,6 +404,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/wrapped-lists", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -459,6 +464,7 @@ namespace xml_service
             uri.AppendPath("/xml/wrapped-lists", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/xml");
+            request.Headers.Add("Accept", "application/xml");
             var content = new XmlWriterContent();
             content.XmlWriter.WriteObjectValue(wrappedLists, "AppleBarrel");
             request.Content = content;
@@ -562,6 +568,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-list", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -680,6 +687,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-wrapped-lists", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -798,6 +806,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/root-list", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -931,6 +940,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/root-list-single-item", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -1064,6 +1074,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-root-list", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -1197,6 +1208,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/empty-child-element", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -1316,6 +1328,7 @@ namespace xml_service
             uri.AppendPath("/xml/", false);
             uri.AppendQuery("comp", "list", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -1376,6 +1389,7 @@ namespace xml_service
             uri.AppendQuery("comp", "properties", true);
             uri.AppendQuery("restype", "service", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -1498,6 +1512,7 @@ namespace xml_service
             uri.AppendQuery("comp", "acl", true);
             uri.AppendQuery("restype", "container", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -1635,6 +1650,7 @@ namespace xml_service
             uri.AppendQuery("comp", "list", true);
             uri.AppendQuery("restype", "container", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -1753,6 +1769,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/jsonoutput", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1805,6 +1822,7 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/x-ms-text", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 

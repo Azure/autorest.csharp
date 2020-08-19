@@ -43,6 +43,7 @@ namespace body_file
             uri.Reset(endpoint);
             uri.AppendPath("/files/stream/nonempty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "image/png, application/json");
             return message;
         }
 
@@ -91,6 +92,7 @@ namespace body_file
             uri.Reset(endpoint);
             uri.AppendPath("/files/stream/verylarge", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "image/png, application/json");
             return message;
         }
 
@@ -139,6 +141,7 @@ namespace body_file
             uri.Reset(endpoint);
             uri.AppendPath("/files/stream/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "image/png, application/json");
             return message;
         }
 

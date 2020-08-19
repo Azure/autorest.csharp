@@ -45,6 +45,7 @@ namespace url
             uri.AppendPath("/paths/bool/true/", false);
             uri.AppendPath(true, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -88,6 +89,7 @@ namespace url
             uri.AppendPath("/paths/bool/false/", false);
             uri.AppendPath(false, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -131,6 +133,7 @@ namespace url
             uri.AppendPath("/paths/int/1000000/", false);
             uri.AppendPath(1000000, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -174,6 +177,7 @@ namespace url
             uri.AppendPath("/paths/int/-1000000/", false);
             uri.AppendPath(-1000000, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -217,6 +221,7 @@ namespace url
             uri.AppendPath("/paths/long/10000000000/", false);
             uri.AppendPath(10000000000L, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -260,6 +265,7 @@ namespace url
             uri.AppendPath("/paths/long/-10000000000/", false);
             uri.AppendPath(-10000000000L, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -303,6 +309,7 @@ namespace url
             uri.AppendPath("/paths/float/1.034E+20/", false);
             uri.AppendPath(1.034E+20F, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -346,6 +353,7 @@ namespace url
             uri.AppendPath("/paths/float/-1.034E-20/", false);
             uri.AppendPath(-1.034E-20F, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -389,6 +397,7 @@ namespace url
             uri.AppendPath("/paths/double/9999999.999/", false);
             uri.AppendPath(9999999.999, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -432,6 +441,7 @@ namespace url
             uri.AppendPath("/paths/double/-9999999.999/", false);
             uri.AppendPath(-9999999.999, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -475,6 +485,7 @@ namespace url
             uri.AppendPath("/paths/string/unicode/", false);
             uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -518,6 +529,7 @@ namespace url
             uri.AppendPath("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/", false);
             uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -561,6 +573,7 @@ namespace url
             uri.AppendPath("/paths/string/begin!*'();:@&=+$,end/", false);
             uri.AppendPath("begin!*'();:@&=+$,end", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -604,6 +617,7 @@ namespace url
             uri.AppendPath("/paths/string/empty/", false);
             uri.AppendPath("", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -647,6 +661,7 @@ namespace url
             uri.AppendPath("/paths/string/null/", false);
             uri.AppendPath(stringPath, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -704,6 +719,7 @@ namespace url
             uri.AppendPath("/paths/enum/green%20color/", false);
             uri.AppendPath(enumPath.ToSerialString(), true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -749,6 +765,7 @@ namespace url
             uri.AppendPath("/paths/string/null/", false);
             uri.AppendPath(enumPath.ToSerialString(), true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -794,6 +811,7 @@ namespace url
             uri.AppendPath("/paths/byte/multibyte/", false);
             uri.AppendPath(bytePath, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -851,6 +869,7 @@ namespace url
             uri.AppendPath("/paths/byte/empty/", false);
             uri.AppendPath(new byte[] { }, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -894,6 +913,7 @@ namespace url
             uri.AppendPath("/paths/byte/null/", false);
             uri.AppendPath(bytePath, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -951,6 +971,7 @@ namespace url
             uri.AppendPath("/paths/date/2012-01-01/", false);
             uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -994,6 +1015,7 @@ namespace url
             uri.AppendPath("/paths/date/null/", false);
             uri.AppendPath(datePath, "D", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1039,6 +1061,7 @@ namespace url
             uri.AppendPath("/paths/datetime/2012-01-01T01%3A01%3A01Z/", false);
             uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1082,6 +1105,7 @@ namespace url
             uri.AppendPath("/paths/datetime/null/", false);
             uri.AppendPath(dateTimePath, "O", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1127,6 +1151,7 @@ namespace url
             uri.AppendPath("/paths/string/bG9yZW0/", false);
             uri.AppendPath(base64UrlPath, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1184,6 +1209,7 @@ namespace url
             uri.AppendPath("/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/", false);
             uri.AppendPath(arrayPath, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1241,6 +1267,7 @@ namespace url
             uri.AppendPath("/paths/int/1460505600/", false);
             uri.AppendPath(unixTimeUrlPath, "U", true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
