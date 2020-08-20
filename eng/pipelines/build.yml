@@ -21,6 +21,7 @@ resources:
 
 jobs:
   - job: Build
+    timeoutInMinutes: 120
     variables:
       DotNetCoreSDKVersion: 3.0.100
     pool:
