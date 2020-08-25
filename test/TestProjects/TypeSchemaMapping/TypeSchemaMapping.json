@@ -315,6 +315,17 @@
         "name": "NonExtensibleEnum",
         "modelAsString": false
       }
+    },
+    "ModelWithUriProperty": {
+      "type": "object",
+      "properties": {
+        "Uri": {
+          "type": "string",
+          "description": "."
+        }
+      },
+      "x-csharp-usage": "model,input,output",
+      "x-csharp-formats": "json"
     }
   }
 }
