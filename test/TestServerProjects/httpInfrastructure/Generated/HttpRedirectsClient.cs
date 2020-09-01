@@ -37,13 +37,13 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head300Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> Head300Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
             scope.Start();
             try
             {
-                return (await RestClient.Head300Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Head300Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -54,13 +54,13 @@ namespace httpInfrastructure
 
         /// <summary> Return 300 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Head300(CancellationToken cancellationToken = default)
+        public virtual Response<bool> Head300(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
             scope.Start();
             try
             {
-                return RestClient.Head300(cancellationToken).GetRawResponse();
+                return RestClient.Head300(cancellationToken);
             }
             catch (Exception e)
             {
@@ -105,13 +105,13 @@ namespace httpInfrastructure
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head301Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> Head301Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
             scope.Start();
             try
             {
-                return (await RestClient.Head301Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Head301Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -122,13 +122,13 @@ namespace httpInfrastructure
 
         /// <summary> Return 301 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Head301(CancellationToken cancellationToken = default)
+        public virtual Response<bool> Head301(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
             scope.Start();
             try
             {
-                return RestClient.Head301(cancellationToken).GetRawResponse();
+                return RestClient.Head301(cancellationToken);
             }
             catch (Exception e)
             {
@@ -207,13 +207,13 @@ namespace httpInfrastructure
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head302Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> Head302Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
             scope.Start();
             try
             {
-                return (await RestClient.Head302Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Head302Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -224,13 +224,13 @@ namespace httpInfrastructure
 
         /// <summary> Return 302 status code and redirect to /http/success/200. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Head302(CancellationToken cancellationToken = default)
+        public virtual Response<bool> Head302(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
             scope.Start();
             try
             {
-                return RestClient.Head302(cancellationToken).GetRawResponse();
+                return RestClient.Head302(cancellationToken);
             }
             catch (Exception e)
             {
@@ -343,13 +343,13 @@ namespace httpInfrastructure
 
         /// <summary> Redirect with 307, resulting in a 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> Head307Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
             scope.Start();
             try
             {
-                return (await RestClient.Head307Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.Head307Async(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -360,13 +360,13 @@ namespace httpInfrastructure
 
         /// <summary> Redirect with 307, resulting in a 200 success. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Head307(CancellationToken cancellationToken = default)
+        public virtual Response<bool> Head307(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
             scope.Start();
             try
             {
-                return RestClient.Head307(cancellationToken).GetRawResponse();
+                return RestClient.Head307(cancellationToken);
             }
             catch (Exception e)
             {

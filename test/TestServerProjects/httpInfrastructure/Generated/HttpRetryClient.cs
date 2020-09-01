@@ -36,7 +36,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head408Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> Head408Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
@@ -53,7 +53,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Head408(CancellationToken cancellationToken = default)
+        public virtual Response<bool> Head408(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();

@@ -49,14 +49,15 @@ namespace httpInfrastructure
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Head200Async(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> Head200Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -64,14 +65,15 @@ namespace httpInfrastructure
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Head200(CancellationToken cancellationToken = default)
+        public Response<bool> Head200(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead200Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -668,14 +670,15 @@ namespace httpInfrastructure
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Head204Async(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> Head204Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 204:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -683,14 +686,15 @@ namespace httpInfrastructure
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Head204(CancellationToken cancellationToken = default)
+        public Response<bool> Head204(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead204Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 204:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -899,7 +903,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 404 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Head404Async(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> Head404Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead404Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -907,7 +911,8 @@ namespace httpInfrastructure
             {
                 case 204:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -915,7 +920,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 404 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Head404(CancellationToken cancellationToken = default)
+        public Response<bool> Head404(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead404Request();
             _pipeline.Send(message, cancellationToken);
@@ -923,7 +928,8 @@ namespace httpInfrastructure
             {
                 case 204:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

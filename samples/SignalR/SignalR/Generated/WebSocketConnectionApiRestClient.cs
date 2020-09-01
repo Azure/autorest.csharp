@@ -849,7 +849,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -863,7 +863,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -873,7 +874,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
-        public Response HeadCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
+        public Response<bool> HeadCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -887,7 +888,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1217,7 +1219,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1235,7 +1237,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1246,7 +1249,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
-        public Response HeadCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public Response<bool> HeadCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1264,7 +1267,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1579,7 +1583,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
-        public async Task<Response> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1593,7 +1597,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1603,7 +1608,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
-        public Response HeadCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
+        public Response<bool> HeadCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1617,7 +1622,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1894,7 +1900,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
-        public async Task<Response> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1912,7 +1918,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1923,7 +1930,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
-        public Response HeadCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
+        public Response<bool> HeadCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1941,7 +1948,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2025,7 +2033,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
-        public async Task<Response> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2039,7 +2047,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2049,7 +2058,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
-        public Response HeadCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
+        public Response<bool> HeadCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2063,7 +2072,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2308,7 +2318,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2326,7 +2336,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2337,7 +2348,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public Response HeadCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
+        public Response<bool> HeadCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2355,7 +2366,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2664,7 +2676,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2682,7 +2694,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2693,7 +2706,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
-        public Response HeadCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
+        public Response<bool> HeadCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2711,7 +2724,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2995,7 +3009,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public async Task<Response> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3017,7 +3031,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -3029,7 +3044,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public Response HeadCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public Response<bool> HeadCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3051,7 +3066,8 @@ namespace SignalR
                 case 200:
                 case 400:
                 case 404:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

@@ -463,7 +463,7 @@ namespace SignalR
         /// <summary> Check if the connection with the given connectionId exists. </summary>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubConnectionExistence");
             scope.Start();
@@ -481,7 +481,7 @@ namespace SignalR
         /// <summary> Check if the connection with the given connectionId exists. </summary>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubConnectionExistence");
             scope.Start();
@@ -656,7 +656,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckConnectionExistence");
             scope.Start();
@@ -675,7 +675,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckConnectionExistence");
             scope.Start();
@@ -849,7 +849,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections inside the given group. </summary>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubGroupExistence");
             scope.Start();
@@ -867,7 +867,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections inside the given group. </summary>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubGroupExistence");
             scope.Start();
@@ -1008,7 +1008,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckGroupExistence");
             scope.Start();
@@ -1027,7 +1027,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckGroupExistence");
             scope.Start();
@@ -1081,7 +1081,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections connected for the given user. </summary>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubUserExistence");
             scope.Start();
@@ -1099,7 +1099,7 @@ namespace SignalR
         /// <summary> Check if there are any client connections connected for the given user. </summary>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckDefaultHubUserExistence");
             scope.Start();
@@ -1232,7 +1232,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistenceInDefaultHubGroup");
             scope.Start();
@@ -1251,7 +1251,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistenceInDefaultHubGroup");
             scope.Start();
@@ -1422,7 +1422,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistence");
             scope.Start();
@@ -1441,7 +1441,7 @@ namespace SignalR
         /// <param name="hub"> The String to use. </param>
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistence");
             scope.Start();
@@ -1581,7 +1581,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistenceInGroup");
             scope.Start();
@@ -1601,7 +1601,7 @@ namespace SignalR
         /// <param name="group"> Target group name, which length should be greater than 0 and less than 1025. </param>
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WebSocketConnectionApiClient.HeadCheckUserExistenceInGroup");
             scope.Start();

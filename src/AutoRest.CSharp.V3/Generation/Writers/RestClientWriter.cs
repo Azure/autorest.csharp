@@ -523,7 +523,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         else if (returnType != null)
                         {
-                            value = Constant.Default(returnType.WithNullable(true));
+                            if (operation.Request.HttpMethod == RequestMethod.Head &&
+                                returnType.IsFrameworkType &&
+                                returnType.FrameworkType == typeof(bool))
+                            {
+                                writer.Line($"{returnType} {valueVariable:D} = {responseVariable}.Status >= 200 && {responseVariable}.Status < 300;");
+                                value = new Reference(valueVariable.ActualName, returnType);
+                            }
+                            else
+                            {
+                                value = Constant.Default(returnType.WithNullable(true));
+                            }
                         }
 
                         switch (kind)

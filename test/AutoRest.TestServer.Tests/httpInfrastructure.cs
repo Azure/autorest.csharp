@@ -186,7 +186,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "404 error")]
-        public Task HttpRedirect300Head() => TestStatus(async (host, pipeline) =>
+        public Task HttpRedirect300Head() => TestHeadStatus(async (host, pipeline) =>
             await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Head300Async());
 
         [Test]
@@ -206,7 +206,7 @@ namespace AutoRest.TestServer.Tests
             await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Get302Async());
 
         [Test]
-        public Task HttpRedirect302Head() => TestStatus(async (host, pipeline) =>
+        public Task HttpRedirect302Head() => TestHeadStatus(async (host, pipeline) =>
             await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Head302Async());
 
         [Test]
@@ -230,7 +230,7 @@ namespace AutoRest.TestServer.Tests
             await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Get307Async());
 
         [Test]
-        public Task HttpRedirect307Head() => TestStatus(async (host, pipeline) =>
+        public Task HttpRedirect307Head() => TestHeadStatus(async (host, pipeline) =>
             await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Head307Async());
 
         [Test]
@@ -251,7 +251,7 @@ namespace AutoRest.TestServer.Tests
             await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Put307Async());
 
         [Test]
-        public Task HttpRetry408Head() => TestStatus(async (host, pipeline) =>
+        public Task HttpRetry408Head() => TestHeadStatus(async (host, pipeline) =>
             await new HttpRetryClient(ClientDiagnostics, pipeline, host).Head408Async());
 
         [Test]
@@ -326,7 +326,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task HttpSuccess200Head() => TestStatus(async (host, pipeline) =>
+        public Task HttpSuccess200Head() => TestHeadStatus(async (host, pipeline) =>
             await new HttpSuccessClient(ClientDiagnostics, pipeline, host).Head200Async());
 
         [Test]
@@ -378,7 +378,7 @@ namespace AutoRest.TestServer.Tests
             await new HttpSuccessClient(ClientDiagnostics, pipeline, host).Delete204Async());
 
         [Test]
-        public Task HttpSuccess204Head() => TestStatus(async (host, pipeline) =>
+        public Task HttpSuccess204Head() => TestHeadStatus(async (host, pipeline) =>
             await new HttpSuccessClient(ClientDiagnostics, pipeline, host).Head204Async());
 
         [Test]
@@ -399,7 +399,8 @@ namespace AutoRest.TestServer.Tests
             var response = await new HttpSuccessClient(ClientDiagnostics, pipeline, host).Head404Async();
 
             // 404 is considered success in this test
-            Assert.AreEqual(404, response.Status);
+            Assert.IsFalse(response.Value);
+            Assert.AreEqual(404, response.GetRawResponse().Status);
         });
 
         [Test]

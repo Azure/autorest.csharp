@@ -171,7 +171,7 @@ namespace azure_special_properties
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
-        public async Task<ResponseWithHeaders<HeaderCustomNamedRequestIdHeadHeaders>> CustomNamedRequestIdHeadAsync(string fooClientRequestId, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<bool, HeaderCustomNamedRequestIdHeadHeaders>> CustomNamedRequestIdHeadAsync(string fooClientRequestId, CancellationToken cancellationToken = default)
         {
             if (fooClientRequestId == null)
             {
@@ -185,7 +185,8 @@ namespace azure_special_properties
             {
                 case 200:
                 case 404:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, HeaderCustomNamedRequestIdHeadHeaders>(value, headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -195,7 +196,7 @@ namespace azure_special_properties
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
-        public ResponseWithHeaders<HeaderCustomNamedRequestIdHeadHeaders> CustomNamedRequestIdHead(string fooClientRequestId, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<bool, HeaderCustomNamedRequestIdHeadHeaders> CustomNamedRequestIdHead(string fooClientRequestId, CancellationToken cancellationToken = default)
         {
             if (fooClientRequestId == null)
             {
@@ -209,7 +210,8 @@ namespace azure_special_properties
             {
                 case 200:
                 case 404:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, HeaderCustomNamedRequestIdHeadHeaders>(value, headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

@@ -73,10 +73,23 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             return TestStatus(GetScenarioName(), test, ignoreScenario, useSimplePipeline);
         }
 
+        public Task TestHeadStatus(Func<Uri, HttpPipeline, Task<Response<bool>>> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        {
+            return TestHeadStatus(GetScenarioName(), test, ignoreScenario, useSimplePipeline);
+        }
+
         private Task TestStatus(string scenario, Func<Uri, HttpPipeline, Task<Response>> test, bool ignoreScenario = false, bool useSimplePipeline = false) => Test(scenario, async (host, pipeline) =>
         {
             var response = await test(host, pipeline);
             Assert.That(response.Status, Is.EqualTo(200).Or.EqualTo(201).Or.EqualTo(202).Or.EqualTo(204), "Unexpected response " + response.ReasonPhrase);
+        }, ignoreScenario, useSimplePipeline);
+
+        private Task TestHeadStatus(string scenario, Func<Uri, HttpPipeline, Task<Response<bool>>> test, bool ignoreScenario = false, bool useSimplePipeline = false) => Test(scenario, async (host, pipeline) =>
+        {
+            var response = await test(host, pipeline);
+            Assert.That(response.Value, Is.True, "Unexpected response value");
+            var rawResponse = response.GetRawResponse();
+            Assert.That(rawResponse.Status, Is.EqualTo(200).Or.EqualTo(201).Or.EqualTo(202).Or.EqualTo(204), "Unexpected response " + rawResponse.ReasonPhrase);
         }, ignoreScenario, useSimplePipeline);
 
         public Task Test(Action<Uri, HttpPipeline> test, bool ignoreScenario = false, bool useSimplePipeline = false)

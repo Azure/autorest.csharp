@@ -49,14 +49,15 @@ namespace httpInfrastructure
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Head408Async(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> Head408Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead408Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -64,14 +65,15 @@ namespace httpInfrastructure
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Head408(CancellationToken cancellationToken = default)
+        public Response<bool> Head408(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead408Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

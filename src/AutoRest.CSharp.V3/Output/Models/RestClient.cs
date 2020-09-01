@@ -304,6 +304,12 @@ namespace AutoRest.CSharp.V3.Output.Models
             }
 
             var responseType = ReduceResponses(clientResponse);
+            if (responseType == null &&
+                request.HttpMethod == RequestMethod.Head &&
+                clientResponse.Count == 1)
+            {
+                responseType = new CSharpType(typeof(bool));
+            }
 
             return new RestClientMethod(
                 operationName,

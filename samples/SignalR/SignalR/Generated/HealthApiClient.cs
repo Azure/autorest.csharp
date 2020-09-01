@@ -36,7 +36,7 @@ namespace SignalR
 
         /// <summary> Get service health status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> HeadIndexAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> HeadIndexAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HealthApiClient.HeadIndex");
             scope.Start();
@@ -53,7 +53,7 @@ namespace SignalR
 
         /// <summary> Get service health status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response HeadIndex(CancellationToken cancellationToken = default)
+        public virtual Response<bool> HeadIndex(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HealthApiClient.HeadIndex");
             scope.Start();

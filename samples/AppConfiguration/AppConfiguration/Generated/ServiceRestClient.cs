@@ -161,7 +161,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<ServiceCheckKeysHeaders>> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<bool, ServiceCheckKeysHeaders>> CheckKeysAsync(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -169,7 +169,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckKeysHeaders>(value, headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -180,7 +181,7 @@ namespace AppConfiguration
         /// <param name="after"> Instructs the server to return elements that appear after the element referred to by the specified token. </param>
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ServiceCheckKeysHeaders> CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<bool, ServiceCheckKeysHeaders> CheckKeys(string name = null, string after = null, string acceptDatetime = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckKeysRequest(name, after, acceptDatetime);
             _pipeline.Send(message, cancellationToken);
@@ -188,7 +189,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckKeysHeaders>(value, headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -328,7 +330,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<ServiceCheckKeyValuesHeaders>> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<bool, ServiceCheckKeyValuesHeaders>> CheckKeyValuesAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -336,7 +338,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckKeyValuesHeaders>(value, headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -349,7 +352,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ServiceCheckKeyValuesHeaders> CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<bool, ServiceCheckKeyValuesHeaders> CheckKeyValues(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Head6ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckKeyValuesRequest(key, label, after, acceptDatetime, select);
             _pipeline.Send(message, cancellationToken);
@@ -357,7 +360,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckKeyValuesHeaders>(value, headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -708,7 +712,7 @@ namespace AppConfiguration
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async Task<ResponseWithHeaders<ServiceCheckKeyValueHeaders>> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<bool, ServiceCheckKeyValueHeaders>> CheckKeyValueAsync(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -721,7 +725,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckKeyValueHeaders>(value, headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -736,7 +741,7 @@ namespace AppConfiguration
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public ResponseWithHeaders<ServiceCheckKeyValueHeaders> CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<bool, ServiceCheckKeyValueHeaders> CheckKeyValue(string key, string label = null, string acceptDatetime = null, string ifMatch = null, string ifNoneMatch = null, IEnumerable<Head7ItemsItem> select = null, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
@@ -749,7 +754,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckKeyValueHeaders>(value, headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -878,7 +884,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<ServiceCheckLabelsHeaders>> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<bool, ServiceCheckLabelsHeaders>> CheckLabelsAsync(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -886,7 +892,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckLabelsHeaders>(value, headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -898,7 +905,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ServiceCheckLabelsHeaders> CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<bool, ServiceCheckLabelsHeaders> CheckLabels(string name = null, string after = null, string acceptDatetime = null, IEnumerable<string> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckLabelsRequest(name, after, acceptDatetime, select);
             _pipeline.Send(message, cancellationToken);
@@ -906,7 +913,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckLabelsHeaders>(value, headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1232,7 +1240,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<ServiceCheckRevisionsHeaders>> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<bool, ServiceCheckRevisionsHeaders>> CheckRevisionsAsync(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1240,7 +1248,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckRevisionsHeaders>(value, headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1253,7 +1262,7 @@ namespace AppConfiguration
         /// <param name="acceptDatetime"> Requests the server to respond with the state of the resource at the specified time. </param>
         /// <param name="select"> Used to select what fields are present in the returned resource(s). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<ServiceCheckRevisionsHeaders> CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<bool, ServiceCheckRevisionsHeaders> CheckRevisions(string key = null, string label = null, string after = null, string acceptDatetime = null, IEnumerable<Enum5> select = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCheckRevisionsRequest(key, label, after, acceptDatetime, select);
             _pipeline.Send(message, cancellationToken);
@@ -1261,7 +1270,8 @@ namespace AppConfiguration
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return ResponseWithHeaders.FromValue<bool, ServiceCheckRevisionsHeaders>(value, headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

@@ -36,7 +36,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head200Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> Head200Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
@@ -53,7 +53,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Head200(CancellationToken cancellationToken = default)
+        public virtual Response<bool> Head200(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
@@ -478,7 +478,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head204Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> Head204Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
@@ -495,7 +495,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Head204(CancellationToken cancellationToken = default)
+        public virtual Response<bool> Head204(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
@@ -648,7 +648,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 404 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Head404Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> Head404Async(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
@@ -665,7 +665,7 @@ namespace httpInfrastructure
 
         /// <summary> Return 404 status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Head404(CancellationToken cancellationToken = default)
+        public virtual Response<bool> Head404(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();

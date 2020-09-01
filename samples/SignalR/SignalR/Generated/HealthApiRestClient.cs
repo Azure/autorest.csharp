@@ -47,7 +47,7 @@ namespace SignalR
 
         /// <summary> Get service health status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> HeadIndexAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<bool>> HeadIndexAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateHeadIndexRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -55,7 +55,8 @@ namespace SignalR
             {
                 case 200:
                 case 503:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -63,7 +64,7 @@ namespace SignalR
 
         /// <summary> Get service health status. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response HeadIndex(CancellationToken cancellationToken = default)
+        public Response<bool> HeadIndex(CancellationToken cancellationToken = default)
         {
             using var message = CreateHeadIndexRequest();
             _pipeline.Send(message, cancellationToken);
@@ -71,7 +72,8 @@ namespace SignalR
             {
                 case 200:
                 case 503:
-                    return message.Response;
+                    bool value = message.Response.Status >= 200 && message.Response.Status < 300;
+                    return Response.FromValue(value, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
