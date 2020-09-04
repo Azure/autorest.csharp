@@ -45,6 +45,8 @@ namespace media_types
             uri.Reset(endpoint);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", contentType.ToSerialString());
+            request.Headers.Add("Accept", "application/json");
             request.Content = RequestContent.Create(input);
             return message;
         }
@@ -114,6 +116,8 @@ namespace media_types
             uri.Reset(endpoint);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (input != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -174,6 +178,8 @@ namespace media_types
             uri.Reset(endpoint);
             uri.AppendPath("/mediatypes/contentTypeWithEncoding", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "application/json");
             request.Content = new StringRequestContent(input);
             return message;
         }

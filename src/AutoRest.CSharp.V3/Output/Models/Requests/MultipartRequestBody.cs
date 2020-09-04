@@ -8,14 +8,11 @@ namespace AutoRest.CSharp.V3.Output.Models.Requests
 {
     internal class MultipartRequestBody : RequestBody
     {
-        public ReferenceOrConstant Value { get; }
+        public ReferenceOrConstant[] Value { get; }
 
-        public ReferenceOrConstant? Name { get; }
-
-        public MultipartRequestBody(ReferenceOrConstant value, ReferenceOrConstant? name)
+        public MultipartRequestBody(ReferenceOrConstant[] value)
         {
             Value = value;
-            Name = name;
         }
 
     }

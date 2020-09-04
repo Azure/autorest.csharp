@@ -43,6 +43,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -109,6 +110,8 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (stringBody != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -159,6 +162,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -211,6 +215,8 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("");
             request.Content = content;
@@ -256,6 +262,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -308,6 +315,8 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€");
             request.Content = content;
@@ -353,6 +362,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -405,6 +415,8 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue("    Now is the time for all good men to come to the aid of their country    ");
             request.Content = content;
@@ -450,6 +462,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/notProvided", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -502,6 +515,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/base64Encoding", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -554,6 +568,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -606,6 +621,8 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBase64StringValue(stringBody, "U");
             request.Content = content;
@@ -665,6 +682,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/nullBase64UrlEncoding", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

@@ -44,6 +44,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/polymorphicrecursive/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -96,6 +97,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/polymorphicrecursive/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;

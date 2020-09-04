@@ -43,6 +43,8 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/customheader/putasync/retry/succeeded", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -95,6 +97,8 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/customheader/put/201/creating/succeeded/200", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -147,6 +151,8 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/customheader/post/202/retry/200", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -199,6 +205,8 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/customheader/postasync/retry/succeeded", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();

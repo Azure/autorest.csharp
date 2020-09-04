@@ -43,6 +43,7 @@ namespace body_duration
             uri.Reset(endpoint);
             uri.AppendPath("/duration/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -109,6 +110,8 @@ namespace body_duration
             uri.Reset(endpoint);
             uri.AppendPath("/duration/positiveduration", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(durationBody, "P");
             request.Content = content;
@@ -156,6 +159,7 @@ namespace body_duration
             uri.Reset(endpoint);
             uri.AppendPath("/duration/positiveduration", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -208,6 +212,7 @@ namespace body_duration
             uri.Reset(endpoint);
             uri.AppendPath("/duration/invalid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

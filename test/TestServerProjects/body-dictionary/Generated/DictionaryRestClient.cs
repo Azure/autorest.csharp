@@ -45,6 +45,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -107,6 +108,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -169,6 +171,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -234,6 +238,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/nullvalue", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -296,6 +301,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/nullkey", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -358,6 +364,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/keyemptystring", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -420,6 +427,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/invalid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -482,6 +490,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/boolean/tfft", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -544,6 +553,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/boolean/tfft", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -609,6 +620,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/boolean/true.null.false", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -671,6 +683,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/boolean/true.boolean.false", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -733,6 +746,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -795,6 +809,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -860,6 +876,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/integer/1.null.zero", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -922,6 +939,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/integer/1.integer.0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -984,6 +1002,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1046,6 +1065,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1111,6 +1132,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/long/1.null.zero", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1173,6 +1195,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/long/1.integer.0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1235,6 +1258,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1297,6 +1321,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1362,6 +1388,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/float/0.0-null-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1424,6 +1451,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/float/1.number.0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1486,6 +1514,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1548,6 +1577,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1613,6 +1644,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/double/0.0-null-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1675,6 +1707,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/double/1.number.0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1737,6 +1770,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1799,6 +1833,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1864,6 +1900,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/string/foo.null.foo2", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1926,6 +1963,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/string/foo.123.foo2", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1988,6 +2026,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2050,6 +2089,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2115,6 +2156,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date/invalidnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2177,6 +2219,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date/invalidchars", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2239,6 +2282,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2301,6 +2345,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2366,6 +2412,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time/invalidnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2428,6 +2475,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time/invalidchars", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2490,6 +2538,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2552,6 +2601,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2617,6 +2668,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/duration/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2679,6 +2731,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/duration/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2744,6 +2798,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/byte/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2806,6 +2861,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/byte/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2871,6 +2928,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/byte/invalidnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2933,6 +2991,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/base64url/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2995,6 +3054,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/complex/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3057,6 +3117,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/complex/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3119,6 +3180,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/complex/itemnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3195,6 +3257,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/complex/itemempty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3257,6 +3320,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/complex/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3319,6 +3383,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/complex/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -3384,6 +3450,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/array/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3456,6 +3523,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/array/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3528,6 +3596,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/array/itemnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3614,6 +3683,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/array/itemempty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3686,6 +3756,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/array/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3758,6 +3829,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/array/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -3828,6 +3901,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/dictionary/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3890,6 +3964,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/dictionary/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3952,6 +4027,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/dictionary/itemnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4014,6 +4090,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/dictionary/itemempty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4076,6 +4153,7 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/dictionary/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4138,6 +4216,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/dictionary/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)

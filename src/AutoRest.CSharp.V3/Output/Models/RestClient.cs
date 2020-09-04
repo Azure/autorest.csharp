@@ -237,38 +237,29 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             if (bodyParameters.Count > 0)
             {
-                var (bodyRequestParameter, bodyParameterValue) = bodyParameters.FirstOrDefault();
-
                 Debug.Assert(httpRequestWithBody != null);
                 if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
                 {
+                    Debug.Assert(bodyParameters.Count == 1);
+                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.FirstOrDefault();
                     body = new BinaryRequestBody(bodyParameterValue);
                 }
                 else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
                 {
+                    Debug.Assert(bodyParameters.Count == 1);
+                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.FirstOrDefault();
                     body = new TextRequestBody(bodyParameterValue);
                 }
                 else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Multipart)
                 {
-                    ReferenceOrConstant value = new ReferenceOrConstant();
-                    ReferenceOrConstant? name = null;
-
-                    foreach (var parameter in bodyParameters)
-                    {
-                        (bodyRequestParameter, bodyParameterValue) = parameter;
-                        if (bodyParameterValue.Type.Name == typeof(string).Name)
-                        {
-                            name = bodyParameterValue;
-                        }
-                        else
-                        {
-                            value = bodyParameterValue;
-                        }
-                    }
-                    body = new MultipartRequestBody(value, name);
+                    List<ReferenceOrConstant> value = new List<ReferenceOrConstant>();
+                    value.AddRange(bodyParameters.Values);
+                    body = new MultipartRequestBody(value.ToArray());
                 }
                 else
                 {
+                    Debug.Assert(bodyParameters.Count == 1);
+                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.FirstOrDefault();
                     var serialization = _serializationBuilder.Build(
                         httpRequestWithBody.KnownMediaType,
                         bodyRequestParameter.Schema,

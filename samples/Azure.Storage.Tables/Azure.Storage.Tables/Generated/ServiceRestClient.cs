@@ -60,6 +60,13 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("Content-Type", "application/xml");
+            request.Headers.Add("Accept", "application/xml");
             var content = new XmlWriterContent();
             content.XmlWriter.WriteObjectValue(storageServiceProperties, "StorageServiceProperties");
             request.Content = content;
@@ -131,6 +138,12 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -201,6 +214,12 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 

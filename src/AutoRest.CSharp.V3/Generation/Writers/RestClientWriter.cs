@@ -159,12 +159,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 foreach (var header in clientMethod.Request.Headers)
                 {
-                    if (clientMethod.Request.Body != null
-                        && clientMethod.Request.Body.GetType() == typeof(MultipartRequestBody)
-                        && header.Name != "Content-Type")
-                    {
-                        WriteHeader(writer, request, header);
-                    }
+                    WriteHeader(writer, request, header);
                 }
 
                 switch (clientMethod.Request.Body)
@@ -198,37 +193,40 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         break;
                     case MultipartRequestBody multipartRequestBody:
                         var multipartContent = new CodeWriterDeclaration("content");
-                        using (WriteValueNullCheck(writer, multipartRequestBody.Value))
+                        writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
+
+                        foreach (var bodyParameter in multipartRequestBody.Value)
                         {
-                            writer.Line($"var {multipartContent:D} = new MultipartFormDataContent();");
-                            writer.Line($"{multipartContent}.ApplyToRequest({request});");
-                            if (multipartRequestBody.Value.Type.Name == "IEnumerable")
+                            using (WriteValueNullCheck(writer, bodyParameter))
                             {
-                                var collectionItemVariable = new CodeWriterDeclaration("value");
-                                using (writer.Scope($"foreach (var {collectionItemVariable:D} in {multipartRequestBody.Value.Reference.Name})"))
+                                if (bodyParameter.Type.Name == "IEnumerable")
                                 {
-                                    writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}");
-                                    writer.Append($"), \"{multipartRequestBody.Value.Reference.Name}\"");
-                                    writer.Line($", null);");
+                                    var collectionItemVariable = new CodeWriterDeclaration("value");
+                                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {bodyParameter.Reference.Name})"))
+                                    {
+                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), \"");
+                                        WriteConstantOrParameter(writer, bodyParameter);
+                                        writer.Line($"\", null);");
+                                    }
+                                }
+                                else
+                                {
+                                    if (bodyParameter.Type.Name == typeof(string).Name)
+                                    {
+                                        writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
+                                    }
+                                    else
+                                    {
+                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
+                                    }
+                                    WriteConstantOrParameter(writer, bodyParameter);
+                                    writer.Append($"), \"");
+                                    WriteConstantOrParameter(writer, bodyParameter);
+                                    writer.Line($"\", null);");
                                 }
                             }
-                            else
-                            {
-                                writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
-                                WriteConstantOrParameter(writer, multipartRequestBody.Value);
-                                writer.Append($"), \"{multipartRequestBody.Value.Reference.Name}\"");
-                                writer.Line($", null);");
-                            }
                         }
-
-                            if (multipartRequestBody.Name != null)
-                            {
-                                writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
-                                writer.AppendRaw($"{multipartRequestBody.Name?.Reference.Name}");
-                                writer.Append($"), \"{multipartRequestBody.Name?.Reference.Name}\"");
-                                writer.Line($", null);");
-                            }
-                            writer.Line($"{request}.Content = {multipartContent};");
+                        writer.Line($"{multipartContent}.ApplyToRequest({request});");
                         break;
                     case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
                         var initializers = new List<PropertyInitializer>();

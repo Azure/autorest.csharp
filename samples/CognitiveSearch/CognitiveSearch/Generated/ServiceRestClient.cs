@@ -56,6 +56,11 @@ namespace CognitiveSearch
             uri.AppendPath("/servicestats", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
+            if (requestOptions?.XMsClientRequestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestOptions.XMsClientRequestId.Value);
+            }
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

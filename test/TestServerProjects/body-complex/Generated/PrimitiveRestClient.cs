@@ -44,6 +44,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/integer", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -96,6 +97,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/integer", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -155,6 +158,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/long", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -207,6 +211,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/long", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -266,6 +272,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/float", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -318,6 +325,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/float", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -377,6 +386,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/double", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -429,6 +439,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/double", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -488,6 +500,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/bool", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -540,6 +553,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/bool", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -599,6 +614,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/string", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -651,6 +667,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/string", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -710,6 +728,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/date", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -762,6 +781,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/date", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -821,6 +842,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/datetime", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -873,6 +895,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/datetime", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -932,6 +956,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/datetimerfc1123", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -984,6 +1009,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/datetimerfc1123", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -1043,6 +1070,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/duration", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1095,6 +1123,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/duration", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -1154,6 +1184,7 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/byte", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1206,6 +1237,8 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/primitive/byte", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;

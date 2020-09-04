@@ -43,6 +43,7 @@ namespace body_boolean
             uri.Reset(endpoint);
             uri.AppendPath("/bool/true", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -95,6 +96,8 @@ namespace body_boolean
             uri.Reset(endpoint);
             uri.AppendPath("/bool/true", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -140,6 +143,7 @@ namespace body_boolean
             uri.Reset(endpoint);
             uri.AppendPath("/bool/false", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -192,6 +196,8 @@ namespace body_boolean
             uri.Reset(endpoint);
             uri.AppendPath("/bool/false", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(false);
             request.Content = content;
@@ -237,6 +243,7 @@ namespace body_boolean
             uri.Reset(endpoint);
             uri.AppendPath("/bool/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -303,6 +310,7 @@ namespace body_boolean
             uri.Reset(endpoint);
             uri.AppendPath("/bool/invalid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

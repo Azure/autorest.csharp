@@ -72,6 +72,13 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", queryOptions.Filter, true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -134,6 +141,14 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(tableProperties);
             request.Content = content;
@@ -215,6 +230,12 @@ namespace Azure.Storage.Tables
             uri.AppendPath(table, true);
             uri.AppendPath("')", false);
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -297,6 +318,13 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", queryOptions.Filter, true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -393,6 +421,13 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$filter", queryOptions.Filter, true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -501,6 +536,14 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -613,6 +656,13 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -706,6 +756,14 @@ namespace Azure.Storage.Tables
                 uri.AppendQuery("$format", queryOptions.Format.Value.ToString(), true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -810,6 +868,12 @@ namespace Azure.Storage.Tables
             }
             uri.AppendQuery("comp", "acl", true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -904,6 +968,13 @@ namespace Azure.Storage.Tables
             }
             uri.AppendQuery("comp", "acl", true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-version", version);
+            if (requestId != null)
+            {
+                request.Headers.Add("x-ms-client-request-id", requestId);
+            }
+            request.Headers.Add("Content-Type", "application/xml");
+            request.Headers.Add("Accept", "application/xml");
             if (tableAcl != null)
             {
                 var content = new XmlWriterContent();

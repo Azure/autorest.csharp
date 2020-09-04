@@ -43,6 +43,7 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -85,6 +86,7 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -137,6 +139,7 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -189,6 +192,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -234,6 +239,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -279,6 +286,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -324,6 +333,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -369,6 +380,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/201", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -414,6 +427,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/201", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -459,6 +474,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -504,6 +521,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -549,6 +568,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -594,6 +615,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -639,6 +662,7 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -681,6 +705,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -726,6 +752,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -771,6 +799,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -816,6 +846,8 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBooleanValue(true);
             request.Content = content;
@@ -861,6 +893,7 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/success/404", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

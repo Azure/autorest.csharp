@@ -51,6 +51,8 @@ namespace NameConflicts
             uri0.AppendQuery("pipeline", pipeline, true);
             uri0.AppendQuery("clientDiagnostics", clientDiagnostics, true);
             request0.Uri = uri0;
+            request0.Headers.Add("Content-Type", "application/json");
+            request0.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(@class);
             request0.Content = content;
@@ -178,6 +180,7 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/conflictingLROOverloads", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/pdf");
             request.Content = RequestContent.Create(stringBody);
             return message;
         }
@@ -235,6 +238,7 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/conflictingLROOverloads", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
             if (stringBody != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -285,6 +289,8 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/HttpMessage", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (httpMessage != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -343,6 +349,8 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/Request", false);
             request0.Uri = uri;
+            request0.Headers.Add("Content-Type", "application/json");
+            request0.Headers.Add("Accept", "application/json");
             if (request != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -401,6 +409,8 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/Response", false);
             request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (response != null)
             {
                 var content = new Utf8JsonRequestContent();
