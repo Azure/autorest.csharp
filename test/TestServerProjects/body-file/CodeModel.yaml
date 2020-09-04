@@ -4,7 +4,7 @@ info: !<!Info>
   title: AutoRest Swagger BAT File Service
 schemas: !<!Schemas> 
   numbers:
-    - !<!NumberSchema> &ref_0
+    - !<!NumberSchema> &ref_1
       type: integer
       precision: 32
       language: !<!Languages> 
@@ -13,14 +13,14 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   strings:
-    - !<!StringSchema> &ref_2
+    - !<!StringSchema> &ref_0
       type: string
       language: !<!Languages> 
         default:
           name: String
           description: simple string
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+    - !<!StringSchema> &ref_2
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -30,15 +30,26 @@ schemas: !<!Schemas>
           name: ErrorMessage
           description: ''
       protocol: !<!Protocols> {}
+  constants:
+    - !<!ConstantSchema> &ref_4
+      type: constant
+      value: !<!ConstantValue> 
+        value: 'image/png, application/json'
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: image/png, application/json'
+      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_4
+    - !<!ObjectSchema> &ref_5
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: *ref_0
+          schema: *ref_1
           serializedName: status
           language: !<!Languages> 
             default:
@@ -46,7 +57,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_1
+          schema: *ref_2
           serializedName: message
           language: !<!Languages> 
             default:
@@ -65,7 +76,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
 globalParameters:
   - !<!Parameter> &ref_3
-    schema: *ref_2
+    schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
     origin: 'modelerfour:synthesized/host'
@@ -92,6 +103,21 @@ operationGroups:
           - *ref_3
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_4
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -119,7 +145,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_4
+            schema: *ref_5
             language: !<!Languages> 
               default:
                 name: ''
@@ -144,6 +170,21 @@ operationGroups:
           - *ref_3
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_4
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -171,7 +212,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_4
+            schema: *ref_5
             language: !<!Languages> 
               default:
                 name: ''
@@ -196,6 +237,21 @@ operationGroups:
           - *ref_3
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_4
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -223,7 +279,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_4
+            schema: *ref_5
             language: !<!Languages> 
               default:
                 name: ''

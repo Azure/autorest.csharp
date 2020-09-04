@@ -43,6 +43,7 @@ namespace body_time
             uri.Reset(endpoint);
             uri.AppendPath("/time/get", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -96,6 +97,7 @@ namespace body_time
             uri.AppendPath("/time/put", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(timeBody, "T");
             request.Content = content;

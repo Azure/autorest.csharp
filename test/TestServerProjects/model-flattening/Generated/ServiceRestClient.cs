@@ -46,6 +46,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/array", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (resourceArray != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -101,6 +102,7 @@ namespace model_flattening
             uri.Reset(endpoint);
             uri.AppendPath("/model-flatten/array", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -164,6 +166,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/wrappedarray", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (resourceArray != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -219,6 +222,7 @@ namespace model_flattening
             uri.Reset(endpoint);
             uri.AppendPath("/model-flatten/wrappedarray", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -282,6 +286,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/dictionary", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (resourceDictionary != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -338,6 +343,7 @@ namespace model_flattening
             uri.Reset(endpoint);
             uri.AppendPath("/model-flatten/dictionary", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -401,6 +407,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/resourcecollection", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (resourceComplexObject != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -451,6 +458,7 @@ namespace model_flattening
             uri.Reset(endpoint);
             uri.AppendPath("/model-flatten/resourcecollection", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -504,6 +512,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (simpleBodyProduct != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -565,6 +574,7 @@ namespace model_flattening
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var model = new SimpleProduct(productId)
             {
                 Description = description,
@@ -652,6 +662,7 @@ namespace model_flattening
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var model = new SimpleProduct(flattenParameterGroup.ProductId)
             {
                 Description = flattenParameterGroup.Description,

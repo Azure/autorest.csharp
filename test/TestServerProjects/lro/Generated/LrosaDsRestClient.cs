@@ -44,6 +44,7 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/put/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -97,6 +98,7 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/put/201/creating/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -150,6 +152,7 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/put/201/creating/400/invalidjson", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -203,6 +206,7 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/putasync/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -255,6 +259,7 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/nonretryerror/delete/400", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -299,6 +304,7 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/nonretryerror/delete/202/retry/400", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -343,6 +349,7 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/nonretryerror/deleteasync/retry/400", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -388,6 +395,7 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/post/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -441,6 +449,7 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/post/202/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -494,6 +503,7 @@ namespace lro
             uri.AppendPath("/lro/nonretryerror/postasync/retry/400", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -547,6 +557,7 @@ namespace lro
             uri.AppendPath("/lro/error/put/201/noprovisioningstatepayload", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -600,6 +611,7 @@ namespace lro
             uri.AppendPath("/lro/error/putasync/retry/nostatus", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -653,6 +665,7 @@ namespace lro
             uri.AppendPath("/lro/error/putasync/retry/nostatuspayload", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -705,6 +718,7 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/error/delete/204/nolocation", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -747,6 +761,7 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/error/deleteasync/retry/nostatus", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -792,6 +807,7 @@ namespace lro
             uri.AppendPath("/lro/error/post/202/nolocation", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -845,6 +861,7 @@ namespace lro
             uri.AppendPath("/lro/error/postasync/retry/nopayload", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -898,6 +915,7 @@ namespace lro
             uri.AppendPath("/lro/error/put/200/invalidjson", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -951,6 +969,7 @@ namespace lro
             uri.AppendPath("/lro/error/putasync/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -1004,6 +1023,7 @@ namespace lro
             uri.AppendPath("/lro/error/putasync/retry/invalidjsonpolling", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -1056,6 +1076,7 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/error/delete/202/retry/invalidheader", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1100,6 +1121,7 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/error/deleteasync/retry/invalidheader", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1144,6 +1166,7 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/error/deleteasync/retry/invalidjsonpolling", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1189,6 +1212,7 @@ namespace lro
             uri.AppendPath("/lro/error/post/202/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -1242,6 +1266,7 @@ namespace lro
             uri.AppendPath("/lro/error/postasync/retry/invalidheader", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -1295,6 +1320,7 @@ namespace lro
             uri.AppendPath("/lro/error/postasync/retry/invalidjsonpolling", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();

@@ -206,5 +206,26 @@ namespace AutoRest.TestServer.Tests
                 new[] { typeof(XElement) },
                 null));
         }
+
+        [Test]
+        public void UriPropertyDeserializedCorrectly()
+        {
+            DateTime date = DateTime.UtcNow;
+            ModelWithUriProperty model = ModelWithUriProperty.DeserializeModelWithUriProperty(JsonDocument.Parse("{\"Uri\":\"http://localhost\"}").RootElement);
+
+            Assert.AreEqual("http://localhost/", model.Uri.AbsoluteUri);
+        }
+
+        [Test]
+        public void UriPropertySerializedCorrectly()
+        {
+            var inputModel = new ModelWithUriProperty();
+            inputModel.Uri = new Uri("http://localhost");
+
+            JsonAsserts.AssertSerialization(
+                @"{""Uri"":""http://localhost/""}",
+                inputModel);
+        }
+
     }
 }

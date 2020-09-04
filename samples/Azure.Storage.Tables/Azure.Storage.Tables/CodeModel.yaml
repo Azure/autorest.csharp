@@ -95,7 +95,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_61
+    - !<!StringSchema> &ref_62
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -106,7 +106,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_62
+    - !<!StringSchema> &ref_63
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -117,7 +117,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_64
+    - !<!StringSchema> &ref_65
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -188,7 +188,7 @@ schemas: !<!Schemas>
           name: TablePropertiesTableName
           description: The name of the table to create.
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_71
+    - !<!StringSchema> &ref_72
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -199,7 +199,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_72
+    - !<!StringSchema> &ref_73
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -210,7 +210,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_73
+    - !<!StringSchema> &ref_74
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -231,7 +231,7 @@ schemas: !<!Schemas>
           name: TableResponseOdataMetadata
           description: The metadata response of the table.
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_75
+    - !<!StringSchema> &ref_76
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -242,7 +242,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_76
+    - !<!StringSchema> &ref_77
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -253,7 +253,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_77
+    - !<!StringSchema> &ref_78
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -264,7 +264,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_80
+    - !<!StringSchema> &ref_81
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -285,7 +285,7 @@ schemas: !<!Schemas>
           name: StorageErrorMessage
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_81
+    - !<!StringSchema> &ref_82
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -295,17 +295,6 @@ schemas: !<!Schemas>
           name: String
           description: ''
           header: x-ms-client-request-id
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_84
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_85
       type: string
@@ -316,9 +305,20 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
+          header: x-ms-request-id
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_86
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_87
+    - !<!StringSchema> &ref_88
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -329,7 +329,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_96
+    - !<!StringSchema> &ref_97
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -340,7 +340,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_97
+    - !<!StringSchema> &ref_98
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -351,7 +351,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_98
+    - !<!StringSchema> &ref_99
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -362,7 +362,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_100
+    - !<!StringSchema> &ref_101
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -373,7 +373,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-continuation-NextPartitionKey
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_101
+    - !<!StringSchema> &ref_102
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -394,7 +394,7 @@ schemas: !<!Schemas>
           name: TableEntityQueryResponseOdataMetadata
           description: The metadata response of the table.
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_102
+    - !<!StringSchema> &ref_103
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -405,7 +405,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_106
+    - !<!StringSchema> &ref_107
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -415,17 +415,6 @@ schemas: !<!Schemas>
           name: String
           description: ''
           header: x-ms-client-request-id
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_112
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: x-ms-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_113
       type: string
@@ -436,9 +425,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-version
+          header: x-ms-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_115
+    - !<!StringSchema> &ref_114
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -447,7 +436,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-continuation-NextPartitionKey
+          header: x-ms-version
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_116
       type: string
@@ -458,7 +447,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-continuation-NextRowKey
+          header: x-ms-continuation-NextPartitionKey
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_117
       type: string
@@ -469,9 +458,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-error-code
+          header: x-ms-continuation-NextRowKey
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_126
+    - !<!StringSchema> &ref_118
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -480,7 +469,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-client-request-id
+          header: x-ms-error-code
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_127
       type: string
@@ -491,7 +480,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-request-id
+          header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_128
       type: string
@@ -502,9 +491,20 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
+          header: x-ms-request-id
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_129
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_130
+    - !<!StringSchema> &ref_131
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -514,17 +514,6 @@ schemas: !<!Schemas>
           name: String
           description: ''
           header: x-ms-error-code
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_138
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_139
       type: string
@@ -535,7 +524,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-request-id
+          header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_140
       type: string
@@ -546,9 +535,20 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
+          header: x-ms-request-id
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_141
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_142
+    - !<!StringSchema> &ref_143
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -558,17 +558,6 @@ schemas: !<!Schemas>
           name: String
           description: ''
           header: x-ms-error-code
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_149
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_150
       type: string
@@ -579,7 +568,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-request-id
+          header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_151
       type: string
@@ -590,9 +579,20 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
+          header: x-ms-request-id
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_152
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_153
+    - !<!StringSchema> &ref_154
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -603,7 +603,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_159
+    - !<!StringSchema> &ref_161
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -614,7 +614,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_160
+    - !<!StringSchema> &ref_162
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -625,7 +625,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_161
+    - !<!StringSchema> &ref_163
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -656,7 +656,7 @@ schemas: !<!Schemas>
           name: AccessPolicyPermission
           description: the permissions for the acl policy
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_163
+    - !<!StringSchema> &ref_165
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -667,7 +667,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-error-code
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_169
+    - !<!StringSchema> &ref_171
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -678,7 +678,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-client-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_170
+    - !<!StringSchema> &ref_172
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -689,7 +689,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_171
+    - !<!StringSchema> &ref_173
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -700,7 +700,7 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_173
+    - !<!StringSchema> &ref_175
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -773,28 +773,6 @@ schemas: !<!Schemas>
           name: CorsRuleExposedHeaders
           description: The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_180
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: x-ms-client-request-id
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_181
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: x-ms-request-id
-      protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_182
       type: string
       apiVersions:
@@ -804,7 +782,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-version
+          header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_183
       type: string
@@ -815,29 +793,29 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-error-code
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_186
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: x-ms-client-request-id
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_187
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
           header: x-ms-request-id
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_184
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: x-ms-version
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_185
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_188
       type: string
@@ -848,7 +826,7 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-version
+          header: x-ms-client-request-id
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_189
       type: string
@@ -859,31 +837,9 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-error-code
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_194
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
-          header: x-ms-client-request-id
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_195
-      type: string
-      apiVersions:
-        - !<!ApiVersion> 
-          version: '2018-10-10'
-      language: !<!Languages> 
-        default:
-          name: String
-          description: ''
           header: x-ms-request-id
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_196
+    - !<!StringSchema> &ref_190
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -894,7 +850,51 @@ schemas: !<!Schemas>
           description: ''
           header: x-ms-version
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_191
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: x-ms-error-code
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_196
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: x-ms-client-request-id
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_197
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: x-ms-request-id
+      protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_198
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2018-10-10'
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+          header: x-ms-version
+      protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_200
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -997,7 +997,17 @@ schemas: !<!Schemas>
           name: Constant3
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_66
+    - !<!ConstantSchema> &ref_59
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json;odata=nometadata
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json;odata=nometadata'
+      protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_67
       type: constant
       value: !<!ConstantValue> 
         value: application/json;odata=nometadata
@@ -1007,17 +1017,27 @@ schemas: !<!Schemas>
           name: ApplicationJsonOdataNometadata
           description: Content Type 'application/json;odata=nometadata'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_154
+    - !<!ConstantSchema> &ref_155
       type: constant
       value: !<!ConstantValue> 
         value: acl
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Constant5
+          name: Constant6
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_164
+    - !<!ConstantSchema> &ref_156
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/xml
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/xml'
+      protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_166
       type: constant
       value: !<!ConstantValue> 
         value: application/xml
@@ -1027,34 +1047,34 @@ schemas: !<!Schemas>
           name: ApplicationXml
           description: Content Type 'application/xml'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_174
+    - !<!ConstantSchema> &ref_176
       type: constant
       value: !<!ConstantValue> 
         value: service
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Constant7
+          name: Constant9
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_175
+    - !<!ConstantSchema> &ref_177
       type: constant
       value: !<!ConstantValue> 
         value: properties
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Constant8
+          name: Constant10
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_190
+    - !<!ConstantSchema> &ref_192
       type: constant
       value: !<!ConstantValue> 
         value: stats
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Constant9
+          name: Constant11
           description: ''
       protocol: !<!Protocols> {}
   dictionaries:
@@ -1075,7 +1095,7 @@ schemas: !<!Schemas>
   any:
     - *ref_1
   dateTimes:
-    - !<!DateTimeSchema> &ref_63
+    - !<!DateTimeSchema> &ref_64
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1087,7 +1107,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_74
+    - !<!DateTimeSchema> &ref_75
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1099,7 +1119,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_78
+    - !<!DateTimeSchema> &ref_79
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1111,7 +1131,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_86
+    - !<!DateTimeSchema> &ref_87
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1123,7 +1143,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_99
+    - !<!DateTimeSchema> &ref_100
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1135,7 +1155,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_114
+    - !<!DateTimeSchema> &ref_115
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1147,7 +1167,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_129
+    - !<!DateTimeSchema> &ref_130
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1159,7 +1179,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_141
+    - !<!DateTimeSchema> &ref_142
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1171,7 +1191,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_152
+    - !<!DateTimeSchema> &ref_153
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1183,7 +1203,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_162
+    - !<!DateTimeSchema> &ref_164
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1217,7 +1237,7 @@ schemas: !<!Schemas>
           name: AccessPolicyExpiry
           description: the date-time the policy expires
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_172
+    - !<!DateTimeSchema> &ref_174
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1229,7 +1249,7 @@ schemas: !<!Schemas>
           description: ''
           header: Date
       protocol: !<!Protocols> {}
-    - !<!DateTimeSchema> &ref_197
+    - !<!DateTimeSchema> &ref_199
       type: date-time
       format: date-time-rfc1123
       apiVersions:
@@ -1278,9 +1298,9 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_65
+            - !<!Parameter> &ref_66
               schema: *ref_2
-              groupedBy: !<!Parameter> &ref_68
+              groupedBy: !<!Parameter> &ref_69
                 schema: *ref_3
                 implementation: Method
                 language: !<!Languages> 
@@ -1297,7 +1317,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_88
+            - !<!Parameter> &ref_89
               schema: *ref_2
               groupedBy: !<!Parameter> &ref_6
                 schema: *ref_3
@@ -1316,7 +1336,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_103
+            - !<!Parameter> &ref_104
               schema: *ref_2
               groupedBy: !<!Parameter> &ref_8
                 schema: *ref_3
@@ -1335,9 +1355,9 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_118
+            - !<!Parameter> &ref_119
               schema: *ref_2
-              groupedBy: !<!Parameter> &ref_119
+              groupedBy: !<!Parameter> &ref_120
                 schema: *ref_3
                 implementation: Method
                 language: !<!Languages> 
@@ -1354,9 +1374,9 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_131
+            - !<!Parameter> &ref_132
               schema: *ref_2
-              groupedBy: !<!Parameter> &ref_132
+              groupedBy: !<!Parameter> &ref_133
                 schema: *ref_3
                 implementation: Method
                 language: !<!Languages> 
@@ -1373,9 +1393,9 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_143
+            - !<!Parameter> &ref_144
               schema: *ref_2
-              groupedBy: !<!Parameter> &ref_144
+              groupedBy: !<!Parameter> &ref_145
                 schema: *ref_3
                 implementation: Method
                 language: !<!Languages> 
@@ -1413,7 +1433,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_89
+            - !<!Parameter> &ref_90
               schema: *ref_4
               groupedBy: *ref_6
               implementation: Method
@@ -1446,7 +1466,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_90
+            - !<!Parameter> &ref_91
               schema: *ref_7
               groupedBy: *ref_6
               implementation: Method
@@ -1458,7 +1478,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_104
+            - !<!Parameter> &ref_105
               schema: *ref_7
               groupedBy: *ref_8
               implementation: Method
@@ -1491,7 +1511,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_91
+            - !<!Parameter> &ref_92
               schema: *ref_7
               groupedBy: *ref_6
               implementation: Method
@@ -1503,7 +1523,7 @@ schemas: !<!Schemas>
               protocol: !<!Protocols> 
                 http: !<!HttpParameter> 
                   in: query
-            - !<!Parameter> &ref_105
+            - !<!Parameter> &ref_106
               schema: *ref_7
               groupedBy: *ref_8
               implementation: Method
@@ -1529,7 +1549,7 @@ schemas: !<!Schemas>
           description: Parameter group
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_60
+    - !<!ObjectSchema> &ref_61
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1652,7 +1672,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_10
-    - !<!ObjectSchema> &ref_67
+    - !<!ObjectSchema> &ref_68
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1677,7 +1697,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_12
-    - !<!ObjectSchema> &ref_79
+    - !<!ObjectSchema> &ref_80
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1702,7 +1722,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_95
+    - !<!ObjectSchema> &ref_96
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1823,7 +1843,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_25
-    - !<!ObjectSchema> &ref_176
+    - !<!ObjectSchema> &ref_178
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2103,7 +2123,7 @@ schemas: !<!Schemas>
     - *ref_35
     - *ref_36
     - *ref_43
-    - !<!ObjectSchema> &ref_193
+    - !<!ObjectSchema> &ref_195
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2166,7 +2186,7 @@ schemas: !<!Schemas>
   arrays:
     - *ref_47
     - *ref_48
-    - !<!ArraySchema> &ref_158
+    - !<!ArraySchema> &ref_160
       type: array
       apiVersions:
         - !<!ApiVersion> 
@@ -2229,7 +2249,7 @@ operationGroups:
         parameters:
           - *ref_52
           - *ref_53
-          - !<!Parameter> &ref_59
+          - !<!Parameter> &ref_60
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -2259,6 +2279,19 @@ operationGroups:
         requests:
           - !<!Request> 
             parameters:
+              - !<!Parameter> 
+                schema: *ref_59
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
               - *ref_5
             signatureParameters:
               - *ref_5
@@ -2272,10 +2305,10 @@ operationGroups:
                 method: get
                 uri: '{url}'
         signatureParameters:
-          - *ref_59
+          - *ref_60
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_60
+            schema: *ref_61
             language: !<!Languages> 
               default:
                 name: ''
@@ -2291,28 +2324,28 @@ operationGroups:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_61
+                    schema: *ref_62
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_62
+                    schema: *ref_63
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_63
+                    schema: *ref_64
                     header: Date
                     language:
                       default:
                         name: Date
                         description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                   - !<!HttpHeader> 
-                    schema: *ref_64
+                    schema: *ref_65
                     header: x-ms-continuation-NextTableName
                     language:
                       default:
@@ -2352,7 +2385,7 @@ operationGroups:
         parameters:
           - *ref_52
           - *ref_53
-          - !<!Parameter> &ref_70
+          - !<!Parameter> &ref_71
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -2375,12 +2408,12 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - *ref_65
+          - *ref_66
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_66
+                schema: *ref_67
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -2392,8 +2425,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_69
-                schema: *ref_67
+              - !<!Parameter> &ref_70
+                schema: *ref_68
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -2404,10 +2437,23 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
-              - *ref_68
-            signatureParameters:
+              - !<!Parameter> 
+                schema: *ref_59
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
               - *ref_69
-              - *ref_68
+            signatureParameters:
+              - *ref_70
+              - *ref_69
             language: !<!Languages> 
               default:
                 name: ''
@@ -2421,7 +2467,7 @@ operationGroups:
                   - application/json;odata=nometadata
                 uri: '{url}'
         signatureParameters:
-          - *ref_70
+          - *ref_71
         responses:
           - !<!SchemaResponse> 
             schema: *ref_12
@@ -2433,28 +2479,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_71
+                    schema: *ref_72
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_72
+                    schema: *ref_73
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_73
+                    schema: *ref_74
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_74
+                    schema: *ref_75
                     header: Date
                     language:
                       default:
@@ -2474,28 +2520,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_75
+                    schema: *ref_76
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_76
+                    schema: *ref_77
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_77
+                    schema: *ref_78
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_78
+                    schema: *ref_79
                     header: Date
                     language:
                       default:
@@ -2505,7 +2551,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -2514,7 +2560,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_80
+                    schema: *ref_81
                     header: x-ms-error-code
                     language:
                       default:
@@ -2555,7 +2601,7 @@ operationGroups:
         parameters:
           - *ref_52
           - *ref_53
-          - !<!Parameter> &ref_82
+          - !<!Parameter> &ref_83
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -2566,8 +2612,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - !<!Parameter> &ref_83
-            schema: *ref_81
+          - !<!Parameter> &ref_84
+            schema: *ref_82
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2580,6 +2626,21 @@ operationGroups:
                 in: path
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_59
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -2590,8 +2651,8 @@ operationGroups:
                 method: delete
                 uri: '{url}'
         signatureParameters:
-          - *ref_82
           - *ref_83
+          - *ref_84
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -2602,28 +2663,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_81
+                    schema: *ref_82
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_84
+                    schema: *ref_85
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_85
+                    schema: *ref_86
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_86
+                    schema: *ref_87
                     header: Date
                     language:
                       default:
@@ -2633,7 +2694,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -2642,7 +2703,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_87
+                    schema: *ref_88
                     header: x-ms-error-code
                     language:
                       default:
@@ -2673,7 +2734,7 @@ operationGroups:
             version: '2018-10-10'
         parameters:
           - *ref_52
-          - !<!Parameter> &ref_92
+          - !<!Parameter> &ref_93
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -2687,7 +2748,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_93
+          - !<!Parameter> &ref_94
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -2710,12 +2771,12 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - *ref_88
           - *ref_89
           - *ref_90
           - *ref_91
-          - !<!Parameter> &ref_94
-            schema: *ref_81
+          - *ref_92
+          - !<!Parameter> &ref_95
+            schema: *ref_82
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2729,6 +2790,19 @@ operationGroups:
         requests:
           - !<!Request> 
             parameters:
+              - !<!Parameter> 
+                schema: *ref_59
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
               - *ref_6
             signatureParameters:
               - *ref_6
@@ -2742,12 +2816,12 @@ operationGroups:
                 method: get
                 uri: '{url}'
         signatureParameters:
-          - *ref_92
           - *ref_93
           - *ref_94
+          - *ref_95
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_95
+            schema: *ref_96
             language: !<!Languages> 
               default:
                 name: ''
@@ -2756,42 +2830,42 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_96
+                    schema: *ref_97
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_97
+                    schema: *ref_98
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_98
+                    schema: *ref_99
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_99
+                    schema: *ref_100
                     header: Date
                     language:
                       default:
                         name: Date
                         description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                   - !<!HttpHeader> 
-                    schema: *ref_100
+                    schema: *ref_101
                     header: x-ms-continuation-NextPartitionKey
                     language:
                       default:
                         name: XMsContinuationNextPartitionKey
                         description: This header contains the continuation token value for partition key.
                   - !<!HttpHeader> 
-                    schema: *ref_101
+                    schema: *ref_102
                     header: x-ms-continuation-NextRowKey
                     language:
                       default:
@@ -2804,7 +2878,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -2813,7 +2887,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_102
+                    schema: *ref_103
                     header: x-ms-error-code
                     language:
                       default:
@@ -2859,7 +2933,7 @@ operationGroups:
             version: '2018-10-10'
         parameters:
           - *ref_52
-          - !<!Parameter> &ref_107
+          - !<!Parameter> &ref_108
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -2873,7 +2947,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_108
+          - !<!Parameter> &ref_109
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -2896,11 +2970,11 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - *ref_103
           - *ref_104
           - *ref_105
-          - !<!Parameter> &ref_109
-            schema: *ref_81
+          - *ref_106
+          - !<!Parameter> &ref_110
+            schema: *ref_82
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2911,8 +2985,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_110
-            schema: *ref_106
+          - !<!Parameter> &ref_111
+            schema: *ref_107
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2923,8 +2997,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_111
-            schema: *ref_106
+          - !<!Parameter> &ref_112
+            schema: *ref_107
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -2938,6 +3012,19 @@ operationGroups:
         requests:
           - !<!Request> 
             parameters:
+              - !<!Parameter> 
+                schema: *ref_59
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
               - *ref_8
             signatureParameters:
               - *ref_8
@@ -2951,14 +3038,14 @@ operationGroups:
                 method: get
                 uri: '{url}'
         signatureParameters:
-          - *ref_107
           - *ref_108
           - *ref_109
           - *ref_110
           - *ref_111
+          - *ref_112
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_95
+            schema: *ref_96
             language: !<!Languages> 
               default:
                 name: ''
@@ -2967,42 +3054,42 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_106
+                    schema: *ref_107
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_112
+                    schema: *ref_113
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_113
+                    schema: *ref_114
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_114
+                    schema: *ref_115
                     header: Date
                     language:
                       default:
                         name: Date
                         description: UTC date/time value generated by the service that indicates the time at which the response was initiated
                   - !<!HttpHeader> 
-                    schema: *ref_115
+                    schema: *ref_116
                     header: x-ms-continuation-NextPartitionKey
                     language:
                       default:
                         name: XMsContinuationNextPartitionKey
                         description: This header contains the continuation token value for partition key.
                   - !<!HttpHeader> 
-                    schema: *ref_116
+                    schema: *ref_117
                     header: x-ms-continuation-NextRowKey
                     language:
                       default:
@@ -3015,7 +3102,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -3024,7 +3111,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_117
+                    schema: *ref_118
                     header: x-ms-error-code
                     language:
                       default:
@@ -3071,7 +3158,7 @@ operationGroups:
             version: '2018-10-10'
         parameters:
           - *ref_52
-          - !<!Parameter> &ref_121
+          - !<!Parameter> &ref_122
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -3085,7 +3172,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_122
+          - !<!Parameter> &ref_123
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -3108,9 +3195,9 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - *ref_118
-          - !<!Parameter> &ref_123
-            schema: *ref_81
+          - *ref_119
+          - !<!Parameter> &ref_124
+            schema: *ref_82
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3121,8 +3208,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_124
-            schema: *ref_106
+          - !<!Parameter> &ref_125
+            schema: *ref_107
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3133,8 +3220,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_125
-            schema: *ref_106
+          - !<!Parameter> &ref_126
+            schema: *ref_107
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3149,7 +3236,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_66
+                schema: *ref_67
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3161,7 +3248,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_120
+              - !<!Parameter> &ref_121
                 schema: *ref_20
                 implementation: Method
                 required: false
@@ -3173,10 +3260,23 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
-              - *ref_119
-            signatureParameters:
+              - !<!Parameter> 
+                schema: *ref_59
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
               - *ref_120
-              - *ref_119
+            signatureParameters:
+              - *ref_121
+              - *ref_120
             language: !<!Languages> 
               default:
                 name: ''
@@ -3190,11 +3290,11 @@ operationGroups:
                   - application/json;odata=nometadata
                 uri: '{url}'
         signatureParameters:
-          - *ref_121
           - *ref_122
           - *ref_123
           - *ref_124
           - *ref_125
+          - *ref_126
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -3205,28 +3305,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_126
+                    schema: *ref_127
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_127
+                    schema: *ref_128
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_128
+                    schema: *ref_129
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_129
+                    schema: *ref_130
                     header: Date
                     language:
                       default:
@@ -3236,7 +3336,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -3245,7 +3345,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_130
+                    schema: *ref_131
                     header: x-ms-error-code
                     language:
                       default:
@@ -3292,7 +3392,7 @@ operationGroups:
             version: '2018-10-10'
         parameters:
           - *ref_52
-          - !<!Parameter> &ref_133
+          - !<!Parameter> &ref_134
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -3306,7 +3406,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_134
+          - !<!Parameter> &ref_135
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -3329,9 +3429,9 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - *ref_131
-          - !<!Parameter> &ref_135
-            schema: *ref_81
+          - *ref_132
+          - !<!Parameter> &ref_136
+            schema: *ref_82
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3342,8 +3442,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_136
-            schema: *ref_106
+          - !<!Parameter> &ref_137
+            schema: *ref_107
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3354,8 +3454,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_137
-            schema: *ref_106
+          - !<!Parameter> &ref_138
+            schema: *ref_107
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3369,9 +3469,22 @@ operationGroups:
         requests:
           - !<!Request> 
             parameters:
-              - *ref_132
+              - !<!Parameter> 
+                schema: *ref_59
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - *ref_133
             signatureParameters:
-              - *ref_132
+              - *ref_133
             language: !<!Languages> 
               default:
                 name: ''
@@ -3382,11 +3495,11 @@ operationGroups:
                 method: delete
                 uri: '{url}'
         signatureParameters:
-          - *ref_133
           - *ref_134
           - *ref_135
           - *ref_136
           - *ref_137
+          - *ref_138
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -3397,28 +3510,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_138
+                    schema: *ref_139
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_139
+                    schema: *ref_140
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_140
+                    schema: *ref_141
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_141
+                    schema: *ref_142
                     header: Date
                     language:
                       default:
@@ -3428,7 +3541,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -3437,7 +3550,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_142
+                    schema: *ref_143
                     header: x-ms-error-code
                     language:
                       default:
@@ -3471,7 +3584,7 @@ operationGroups:
             version: '2018-10-10'
         parameters:
           - *ref_52
-          - !<!Parameter> &ref_146
+          - !<!Parameter> &ref_147
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -3485,7 +3598,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_147
+          - !<!Parameter> &ref_148
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -3508,9 +3621,9 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - *ref_143
-          - !<!Parameter> &ref_148
-            schema: *ref_81
+          - *ref_144
+          - !<!Parameter> &ref_149
+            schema: *ref_82
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3525,7 +3638,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_66
+                schema: *ref_67
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3537,7 +3650,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_145
+              - !<!Parameter> &ref_146
                 schema: *ref_20
                 implementation: Method
                 required: false
@@ -3549,10 +3662,23 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
-              - *ref_144
-            signatureParameters:
+              - !<!Parameter> 
+                schema: *ref_59
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
               - *ref_145
-              - *ref_144
+            signatureParameters:
+              - *ref_146
+              - *ref_145
             language: !<!Languages> 
               default:
                 name: ''
@@ -3566,9 +3692,9 @@ operationGroups:
                   - application/json;odata=nometadata
                 uri: '{url}'
         signatureParameters:
-          - *ref_146
           - *ref_147
           - *ref_148
+          - *ref_149
         responses:
           - !<!SchemaResponse> 
             schema: *ref_20
@@ -3580,28 +3706,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_149
+                    schema: *ref_150
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_150
+                    schema: *ref_151
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_151
+                    schema: *ref_152
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_152
+                    schema: *ref_153
                     header: Date
                     language:
                       default:
@@ -3614,7 +3740,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -3623,7 +3749,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_153
+                    schema: *ref_154
                     header: x-ms-error-code
                     language:
                       default:
@@ -3688,7 +3814,7 @@ operationGroups:
             version: '2018-10-10'
         parameters:
           - *ref_52
-          - !<!Parameter> &ref_155
+          - !<!Parameter> &ref_157
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -3702,7 +3828,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_156
+          - !<!Parameter> &ref_158
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -3713,8 +3839,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - !<!Parameter> &ref_157
-            schema: *ref_81
+          - !<!Parameter> &ref_159
+            schema: *ref_82
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3726,7 +3852,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: path
           - !<!Parameter> 
-            schema: *ref_154
+            schema: *ref_155
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3739,6 +3865,21 @@ operationGroups:
                 in: query
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_156
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -3749,12 +3890,12 @@ operationGroups:
                 method: get
                 uri: '{url}'
         signatureParameters:
-          - *ref_155
-          - *ref_156
           - *ref_157
+          - *ref_158
+          - *ref_159
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_158
+            schema: *ref_160
             language: !<!Languages> 
               default:
                 name: ''
@@ -3763,28 +3904,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_159
+                    schema: *ref_161
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_160
+                    schema: *ref_162
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_161
+                    schema: *ref_163
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_162
+                    schema: *ref_164
                     header: Date
                     language:
                       default:
@@ -3797,7 +3938,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -3806,7 +3947,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_163
+                    schema: *ref_165
                     header: x-ms-error-code
                     language:
                       default:
@@ -3828,7 +3969,7 @@ operationGroups:
             version: '2018-10-10'
         parameters:
           - *ref_52
-          - !<!Parameter> &ref_166
+          - !<!Parameter> &ref_168
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -3842,7 +3983,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_167
+          - !<!Parameter> &ref_169
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -3853,8 +3994,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: header
-          - !<!Parameter> &ref_168
-            schema: *ref_81
+          - !<!Parameter> &ref_170
+            schema: *ref_82
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3866,7 +4007,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: path
           - !<!Parameter> 
-            schema: *ref_154
+            schema: *ref_155
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -3881,7 +4022,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_164
+                schema: *ref_166
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3893,8 +4034,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_165
-                schema: *ref_158
+              - !<!Parameter> &ref_167
+                schema: *ref_160
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -3905,8 +4046,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: xml
+              - !<!Parameter> 
+                schema: *ref_156
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_165
+              - *ref_167
             language: !<!Languages> 
               default:
                 name: ''
@@ -3920,9 +4074,9 @@ operationGroups:
                   - application/xml
                 uri: '{url}'
         signatureParameters:
-          - *ref_166
-          - *ref_167
           - *ref_168
+          - *ref_169
+          - *ref_170
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -3933,28 +4087,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_169
+                    schema: *ref_171
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_170
+                    schema: *ref_172
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_171
+                    schema: *ref_173
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_172
+                    schema: *ref_174
                     header: Date
                     language:
                       default:
@@ -3964,7 +4118,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -3973,7 +4127,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_173
+                    schema: *ref_175
                     header: x-ms-error-code
                     language:
                       default:
@@ -4004,7 +4158,7 @@ operationGroups:
         parameters:
           - *ref_52
           - !<!Parameter> 
-            schema: *ref_174
+            schema: *ref_176
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4016,7 +4170,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - !<!Parameter> 
-            schema: *ref_175
+            schema: *ref_177
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4027,7 +4181,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_178
+          - !<!Parameter> &ref_180
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -4041,7 +4195,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_179
+          - !<!Parameter> &ref_181
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -4056,7 +4210,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_164
+                schema: *ref_166
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -4068,8 +4222,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_177
-                schema: *ref_176
+              - !<!Parameter> &ref_179
+                schema: *ref_178
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -4080,8 +4234,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: xml
+              - !<!Parameter> 
+                schema: *ref_156
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_177
+              - *ref_179
             language: !<!Languages> 
               default:
                 name: ''
@@ -4095,8 +4262,8 @@ operationGroups:
                   - application/xml
                 uri: '{url}'
         signatureParameters:
-          - *ref_178
-          - *ref_179
+          - *ref_180
+          - *ref_181
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -4107,21 +4274,21 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_180
+                    schema: *ref_182
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_181
+                    schema: *ref_183
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_182
+                    schema: *ref_184
                     header: x-ms-version
                     language:
                       default:
@@ -4131,7 +4298,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -4140,7 +4307,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_183
+                    schema: *ref_185
                     header: x-ms-error-code
                     language:
                       default:
@@ -4163,7 +4330,7 @@ operationGroups:
         parameters:
           - *ref_52
           - !<!Parameter> 
-            schema: *ref_174
+            schema: *ref_176
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4175,7 +4342,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - !<!Parameter> 
-            schema: *ref_175
+            schema: *ref_177
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4186,7 +4353,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_184
+          - !<!Parameter> &ref_186
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -4200,7 +4367,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_185
+          - !<!Parameter> &ref_187
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -4213,6 +4380,21 @@ operationGroups:
                 in: header
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_156
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -4223,11 +4405,11 @@ operationGroups:
                 method: get
                 uri: '{url}'
         signatureParameters:
-          - *ref_184
-          - *ref_185
+          - *ref_186
+          - *ref_187
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_176
+            schema: *ref_178
             language: !<!Languages> 
               default:
                 name: ''
@@ -4236,21 +4418,21 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_186
+                    schema: *ref_188
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_187
+                    schema: *ref_189
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_188
+                    schema: *ref_190
                     header: x-ms-version
                     language:
                       default:
@@ -4263,7 +4445,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -4272,7 +4454,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_189
+                    schema: *ref_191
                     header: x-ms-error-code
                     language:
                       default:
@@ -4295,7 +4477,7 @@ operationGroups:
         parameters:
           - *ref_52
           - !<!Parameter> 
-            schema: *ref_174
+            schema: *ref_176
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4307,7 +4489,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - !<!Parameter> 
-            schema: *ref_190
+            schema: *ref_192
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4318,7 +4500,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_191
+          - !<!Parameter> &ref_193
             schema: *ref_4
             implementation: Method
             language: !<!Languages> 
@@ -4332,7 +4514,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - *ref_53
-          - !<!Parameter> &ref_192
+          - !<!Parameter> &ref_194
             schema: *ref_7
             implementation: Method
             language: !<!Languages> 
@@ -4345,6 +4527,21 @@ operationGroups:
                 in: header
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_156
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -4355,11 +4552,11 @@ operationGroups:
                 method: get
                 uri: '{url}'
         signatureParameters:
-          - *ref_191
-          - *ref_192
+          - *ref_193
+          - *ref_194
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_193
+            schema: *ref_195
             language: !<!Languages> 
               default:
                 name: ''
@@ -4368,28 +4565,28 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_194
+                    schema: *ref_196
                     header: x-ms-client-request-id
                     language:
                       default:
                         name: ClientRequestId
                         description: 'If a client request id header is sent in the request, this header will be present in the response with the same value.'
                   - !<!HttpHeader> 
-                    schema: *ref_195
+                    schema: *ref_197
                     header: x-ms-request-id
                     language:
                       default:
                         name: RequestId
                         description: This header uniquely identifies the request that was made and can be used for troubleshooting the request.
                   - !<!HttpHeader> 
-                    schema: *ref_196
+                    schema: *ref_198
                     header: x-ms-version
                     language:
                       default:
                         name: Version
                         description: Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.
                   - !<!HttpHeader> 
-                    schema: *ref_197
+                    schema: *ref_199
                     header: Date
                     language:
                       default:
@@ -4402,7 +4599,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_79
+            schema: *ref_80
             language: !<!Languages> 
               default:
                 name: ''
@@ -4411,7 +4608,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_198
+                    schema: *ref_200
                     header: x-ms-error-code
                     language:
                       default:

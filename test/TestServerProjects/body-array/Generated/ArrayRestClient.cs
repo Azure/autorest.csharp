@@ -45,6 +45,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -107,6 +108,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/invalid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -169,6 +171,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -232,6 +235,7 @@ namespace body_array
             uri.AppendPath("/array/empty", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -296,6 +300,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/boolean/tfft", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -359,6 +364,7 @@ namespace body_array
             uri.AppendPath("/array/prim/boolean/tfft", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -423,6 +429,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/boolean/true.null.false", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -485,6 +492,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/boolean/true.boolean.false", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -547,6 +555,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -610,6 +619,7 @@ namespace body_array
             uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -674,6 +684,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/integer/1.null.zero", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -736,6 +747,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/integer/1.integer.0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -798,6 +810,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/long/1.-1.3.300", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -861,6 +874,7 @@ namespace body_array
             uri.AppendPath("/array/prim/long/1.-1.3.300", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -925,6 +939,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/long/1.null.zero", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -987,6 +1002,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/long/1.integer.0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1049,6 +1065,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1112,6 +1129,7 @@ namespace body_array
             uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -1176,6 +1194,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/float/0.0-null-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1238,6 +1257,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/float/1.number.0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1300,6 +1320,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1363,6 +1384,7 @@ namespace body_array
             uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -1427,6 +1449,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/double/0.0-null-1.2e20", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1489,6 +1512,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/double/1.number.0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1551,6 +1575,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1614,6 +1639,7 @@ namespace body_array
             uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -1678,6 +1704,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1741,6 +1768,7 @@ namespace body_array
             uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -1805,6 +1833,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1868,6 +1897,7 @@ namespace body_array
             uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -1932,6 +1962,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/string/foo.null.foo2", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2008,6 +2039,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/string/foo.123.foo2", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2070,6 +2102,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/uuid/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2133,6 +2166,7 @@ namespace body_array
             uri.AppendPath("/array/prim/uuid/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -2197,6 +2231,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/uuid/invalidchars", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2259,6 +2294,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/date/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2322,6 +2358,7 @@ namespace body_array
             uri.AppendPath("/array/prim/date/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -2386,6 +2423,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/date/invalidnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2448,6 +2486,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/date/invalidchars", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2510,6 +2549,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/date-time/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2573,6 +2613,7 @@ namespace body_array
             uri.AppendPath("/array/prim/date-time/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -2637,6 +2678,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/date-time/invalidnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2699,6 +2741,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/date-time/invalidchars", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2761,6 +2804,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2824,6 +2868,7 @@ namespace body_array
             uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -2888,6 +2933,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/duration/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2951,6 +2997,7 @@ namespace body_array
             uri.AppendPath("/array/prim/duration/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -3015,6 +3062,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/byte/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3078,6 +3126,7 @@ namespace body_array
             uri.AppendPath("/array/prim/byte/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -3142,6 +3191,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/byte/invalidnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3204,6 +3254,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/prim/base64url/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3266,6 +3317,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/complex/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3342,6 +3394,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/complex/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3404,6 +3457,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/complex/itemnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3480,6 +3534,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/complex/itemempty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3542,6 +3597,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/complex/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3605,6 +3661,7 @@ namespace body_array
             uri.AppendPath("/array/complex/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -3669,6 +3726,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/array/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3741,6 +3799,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/array/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3813,6 +3872,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/array/itemnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3899,6 +3959,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/array/itemempty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -3971,6 +4032,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/array/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4044,6 +4106,7 @@ namespace body_array
             uri.AppendPath("/array/array/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
@@ -4113,6 +4176,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/dictionary/null", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4199,6 +4263,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/dictionary/empty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4271,6 +4336,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/dictionary/itemnull", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4357,6 +4423,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/dictionary/itemempty", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4429,6 +4496,7 @@ namespace body_array
             uri.Reset(endpoint);
             uri.AppendPath("/array/dictionary/valid", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -4502,6 +4570,7 @@ namespace body_array
             uri.AppendPath("/array/dictionary/valid", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)

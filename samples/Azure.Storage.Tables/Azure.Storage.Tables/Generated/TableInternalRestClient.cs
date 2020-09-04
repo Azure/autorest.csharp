@@ -78,6 +78,7 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -147,6 +148,7 @@ namespace Azure.Storage.Tables
             }
             request.Headers.Add("DataServiceVersion", "3.0");
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(tableProperties);
             request.Content = content;
@@ -233,6 +235,7 @@ namespace Azure.Storage.Tables
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -321,6 +324,7 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -423,6 +427,7 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -538,6 +543,7 @@ namespace Azure.Storage.Tables
             }
             request.Headers.Add("DataServiceVersion", "3.0");
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -656,6 +662,7 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("DataServiceVersion", "3.0");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
 
@@ -756,6 +763,7 @@ namespace Azure.Storage.Tables
             }
             request.Headers.Add("DataServiceVersion", "3.0");
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
+            request.Headers.Add("Accept", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -865,6 +873,7 @@ namespace Azure.Storage.Tables
             {
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
+            request.Headers.Add("Accept", "application/xml");
             return message;
         }
 
@@ -965,6 +974,7 @@ namespace Azure.Storage.Tables
                 request.Headers.Add("x-ms-client-request-id", requestId);
             }
             request.Headers.Add("Content-Type", "application/xml");
+            request.Headers.Add("Accept", "application/xml");
             if (tableAcl != null)
             {
                 var content = new XmlWriterContent();

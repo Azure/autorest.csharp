@@ -21,6 +21,7 @@ resources:
 
 jobs:
   - job: Build
+    timeoutInMinutes: 120
     variables:
       DotNetCoreSDKVersion: 3.0.100
     pool:
@@ -84,6 +85,7 @@ jobs:
             RepoName: azure-sdk-for-net
             PRBranchName: auto-update-autorest
             CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
+            PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
             PRTitle:  Update AutoRest C# version
             PushArgs: -f
             WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net

@@ -50,6 +50,7 @@ namespace custom_baseUrl_paging
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/customurl/partialnextlink", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -118,6 +119,7 @@ namespace custom_baseUrl_paging
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/customurl/partialnextlinkop", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -187,6 +189,7 @@ namespace custom_baseUrl_paging
             uri.AppendPath("/paging/customurl/", false);
             uri.AppendRaw(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -265,6 +268,7 @@ namespace custom_baseUrl_paging
             uri.AppendRaw(host, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -343,6 +347,7 @@ namespace custom_baseUrl_paging
             uri.AppendRaw(host, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

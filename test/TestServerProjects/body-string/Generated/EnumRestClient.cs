@@ -44,6 +44,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/enum/notExpandable", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -97,6 +98,7 @@ namespace body_string
             uri.AppendPath("/string/enum/notExpandable", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(stringBody.ToSerialString());
             request.Content = content;
@@ -144,6 +146,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/enum/Referenced", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -197,6 +200,7 @@ namespace body_string
             uri.AppendPath("/string/enum/Referenced", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(enumStringBody.ToSerialString());
             request.Content = content;
@@ -244,6 +248,7 @@ namespace body_string
             uri.Reset(endpoint);
             uri.AppendPath("/string/enum/ReferencedConstant", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -297,6 +302,7 @@ namespace body_string
             uri.AppendPath("/string/enum/ReferencedConstant", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(enumStringBody);
             request.Content = content;

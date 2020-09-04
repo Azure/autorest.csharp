@@ -67,6 +67,7 @@ namespace Azure.Network.Management.Interface
             uri.AppendPath(tapConfigurationName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -155,6 +156,7 @@ namespace Azure.Network.Management.Interface
             uri.AppendPath(tapConfigurationName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -250,6 +252,7 @@ namespace Azure.Network.Management.Interface
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
+            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(tapConfigurationParameters);
             request.Content = content;
@@ -348,6 +351,7 @@ namespace Azure.Network.Management.Interface
             uri.AppendPath("/tapConfigurations", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -424,6 +428,7 @@ namespace Azure.Network.Management.Interface
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

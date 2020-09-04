@@ -260,6 +260,16 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_42
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_19
       type: constant
       apiVersions:
@@ -282,7 +292,7 @@ schemas: !<!Schemas>
           name: ResourceTags
           description: Dictionary of <string>
       protocol: !<!Protocols> {}
-    - !<!DictionarySchema> &ref_47
+    - !<!DictionarySchema> &ref_48
       type: dictionary
       elementType: !<!ObjectSchema> &ref_2
         type: object
@@ -420,7 +430,7 @@ schemas: !<!Schemas>
           name: DictionaryOfFlattenedProduct
           description: Dictionary of <FlattenedProduct>
       protocol: !<!Protocols> {}
-    - !<!DictionarySchema> &ref_49
+    - !<!DictionarySchema> &ref_50
       type: dictionary
       elementType: *ref_2
       language: !<!Languages> 
@@ -443,7 +453,7 @@ schemas: !<!Schemas>
         - !<!GroupProperty> 
           schema: *ref_1
           originalParameter:
-            - !<!Parameter> &ref_60
+            - !<!Parameter> &ref_61
               schema: *ref_1
               groupedBy: !<!Parameter> &ref_22
                 schema: *ref_13
@@ -533,7 +543,7 @@ schemas: !<!Schemas>
                     name: maxProductDisplayName
                     description: Display name of product.
                 protocol: !<!Protocols> {}
-              - !<!Property> &ref_54
+              - !<!Property> &ref_55
                 schema: *ref_19
                 flattenedNames:
                   - details
@@ -606,7 +616,7 @@ schemas: !<!Schemas>
         - !<!GroupProperty> 
           schema: *ref_15
           originalParameter:
-            - !<!VirtualParameter> &ref_61
+            - !<!VirtualParameter> &ref_62
               schema: *ref_15
               groupedBy: *ref_22
               implementation: Method
@@ -629,7 +639,7 @@ schemas: !<!Schemas>
         - !<!GroupProperty> 
           schema: *ref_16
           originalParameter:
-            - !<!VirtualParameter> &ref_62
+            - !<!VirtualParameter> &ref_63
               schema: *ref_16
               groupedBy: *ref_22
               implementation: Method
@@ -652,7 +662,7 @@ schemas: !<!Schemas>
         - !<!GroupProperty> 
           schema: *ref_18
           originalParameter:
-            - !<!VirtualParameter> &ref_63
+            - !<!VirtualParameter> &ref_64
               schema: *ref_18
               groupedBy: *ref_22
               implementation: Method
@@ -673,7 +683,7 @@ schemas: !<!Schemas>
         - !<!GroupProperty> 
           schema: *ref_20
           originalParameter:
-            - !<!VirtualParameter> &ref_64
+            - !<!VirtualParameter> &ref_65
               schema: *ref_20
               groupedBy: *ref_22
               implementation: Method
@@ -694,7 +704,7 @@ schemas: !<!Schemas>
         - !<!GroupProperty> 
           schema: *ref_21
           originalParameter:
-            - !<!VirtualParameter> &ref_65
+            - !<!VirtualParameter> &ref_66
               schema: *ref_21
               groupedBy: *ref_22
               implementation: Method
@@ -816,7 +826,7 @@ schemas: !<!Schemas>
           description: The wrapped produc.
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_50
+    - !<!ObjectSchema> &ref_51
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -943,7 +953,7 @@ schemas: !<!Schemas>
           name: ArrayOfResource
           description: Array of Resource
       protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_43
+    - !<!ArraySchema> &ref_44
       type: array
       apiVersions:
         - !<!ApiVersion> 
@@ -954,7 +964,7 @@ schemas: !<!Schemas>
           name: ArrayOfFlattenedProduct
           description: Array of FlattenedProduct
       protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_44
+    - !<!ArraySchema> &ref_45
       type: array
       apiVersions:
         - !<!ApiVersion> 
@@ -965,7 +975,7 @@ schemas: !<!Schemas>
           name: ArrayOfWrappedProduct
           description: Array of WrappedProduct
       protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_46
+    - !<!ArraySchema> &ref_47
       type: array
       apiVersions:
         - !<!ApiVersion> 
@@ -1020,7 +1030,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_42
+              - !<!Parameter> &ref_43
                 schema: *ref_41
                 implementation: Method
                 required: false
@@ -1032,8 +1042,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_42
+              - *ref_43
             language: !<!Languages> 
               default:
                 name: ''
@@ -1084,6 +1107,21 @@ operationGroups:
           - *ref_39
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -1096,7 +1134,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_43
+            schema: *ref_44
             language: !<!Languages> 
               default:
                 name: ''
@@ -1149,8 +1187,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_45
-                schema: *ref_44
+              - !<!Parameter> &ref_46
+                schema: *ref_45
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -1161,8 +1199,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_45
+              - *ref_46
             language: !<!Languages> 
               default:
                 name: ''
@@ -1213,6 +1264,21 @@ operationGroups:
           - *ref_39
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -1225,7 +1291,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_46
+            schema: *ref_47
             language: !<!Languages> 
               default:
                 name: ''
@@ -1278,8 +1344,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_48
-                schema: *ref_47
+              - !<!Parameter> &ref_49
+                schema: *ref_48
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -1290,8 +1356,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_48
+              - *ref_49
             language: !<!Languages> 
               default:
                 name: ''
@@ -1342,6 +1421,21 @@ operationGroups:
           - *ref_39
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -1354,7 +1448,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_49
+            schema: *ref_50
             language: !<!Languages> 
               default:
                 name: ''
@@ -1407,8 +1501,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_51
-                schema: *ref_50
+              - !<!Parameter> &ref_52
+                schema: *ref_51
                 implementation: Method
                 required: false
                 language: !<!Languages> 
@@ -1419,8 +1513,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_51
+              - *ref_52
             language: !<!Languages> 
               default:
                 name: ''
@@ -1471,6 +1578,21 @@ operationGroups:
           - *ref_39
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -1483,7 +1605,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_50
+            schema: *ref_51
             language: !<!Languages> 
               default:
                 name: ''
@@ -1536,7 +1658,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_52
+              - !<!Parameter> &ref_53
                 schema: *ref_14
                 implementation: Method
                 required: false
@@ -1548,8 +1670,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_52
+              - *ref_53
             language: !<!Languages> 
               default:
                 name: ''
@@ -1618,7 +1753,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_53
+              - !<!Parameter> &ref_54
                 schema: *ref_14
                 flattened: true
                 implementation: Method
@@ -1633,10 +1768,23 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
-              - !<!VirtualParameter> &ref_55
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+              - !<!VirtualParameter> &ref_56
                 schema: *ref_15
                 implementation: Method
-                originalParameter: *ref_53
+                originalParameter: *ref_54
                 pathToProperty: []
                 required: true
                 targetProperty: *ref_24
@@ -1645,10 +1793,10 @@ operationGroups:
                     name: productId
                     description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
                 protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_56
+              - !<!VirtualParameter> &ref_57
                 schema: *ref_16
                 implementation: Method
-                originalParameter: *ref_53
+                originalParameter: *ref_54
                 pathToProperty: []
                 required: false
                 targetProperty: *ref_25
@@ -1657,10 +1805,10 @@ operationGroups:
                     name: description
                     description: Description of product.
                 protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_57
+              - !<!VirtualParameter> &ref_58
                 schema: *ref_18
                 implementation: Method
-                originalParameter: *ref_53
+                originalParameter: *ref_54
                 pathToProperty: []
                 targetProperty: *ref_26
                 language: !<!Languages> 
@@ -1671,18 +1819,18 @@ operationGroups:
               - !<!VirtualParameter> 
                 schema: *ref_19
                 implementation: Method
-                originalParameter: *ref_53
+                originalParameter: *ref_54
                 pathToProperty: []
-                targetProperty: *ref_54
+                targetProperty: *ref_55
                 language: !<!Languages> 
                   default:
                     name: capacity
                     description: 'Capacity of product. For example, 4 people.'
                 protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_58
+              - !<!VirtualParameter> &ref_59
                 schema: *ref_20
                 implementation: Method
-                originalParameter: *ref_53
+                originalParameter: *ref_54
                 pathToProperty: []
                 targetProperty: *ref_27
                 language: !<!Languages> 
@@ -1690,10 +1838,10 @@ operationGroups:
                     name: genericValue
                     description: Generic URL value.
                 protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_59
+              - !<!VirtualParameter> &ref_60
                 schema: *ref_21
                 implementation: Method
-                originalParameter: *ref_53
+                originalParameter: *ref_54
                 pathToProperty: []
                 targetProperty: *ref_28
                 language: !<!Languages> 
@@ -1702,11 +1850,11 @@ operationGroups:
                     description: URL value.
                 protocol: !<!Protocols> {}
             signatureParameters:
-              - *ref_55
               - *ref_56
               - *ref_57
               - *ref_58
               - *ref_59
+              - *ref_60
             language: !<!Languages> 
               default:
                 name: ''
@@ -1759,7 +1907,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_39
-          - *ref_60
+          - *ref_61
         requests:
           - !<!Request> 
             parameters:
@@ -1777,15 +1925,28 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
               - *ref_23
-              - *ref_61
+              - !<!Parameter> 
+                schema: *ref_42
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
               - *ref_62
               - *ref_63
+              - *ref_64
               - !<!VirtualParameter> 
                 schema: *ref_19
                 implementation: Method
                 originalParameter: *ref_23
                 pathToProperty: []
-                targetProperty: *ref_54
+                targetProperty: *ref_55
                 extensions:
                   x-ms-parameter-grouping:
                     name: flatten-parameter-group
@@ -1794,8 +1955,8 @@ operationGroups:
                     name: capacity
                     description: 'Capacity of product. For example, 4 people.'
                 protocol: !<!Protocols> {}
-              - *ref_64
               - *ref_65
+              - *ref_66
               - *ref_22
             signatureParameters:
               - *ref_22

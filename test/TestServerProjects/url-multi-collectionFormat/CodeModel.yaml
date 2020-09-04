@@ -4,7 +4,7 @@ info: !<!Info>
   title: AutoRest Url Mutli Collection Format Test Service
 schemas: !<!Schemas> 
   numbers:
-    - !<!NumberSchema> &ref_0
+    - !<!NumberSchema> &ref_1
       type: integer
       precision: 32
       language: !<!Languages> 
@@ -13,14 +13,14 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   strings:
-    - !<!StringSchema> &ref_4
+    - !<!StringSchema> &ref_0
       type: string
       language: !<!Languages> 
         default:
           name: String
           description: simple string
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_2
+    - !<!StringSchema> &ref_3
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -30,7 +30,7 @@ schemas: !<!Schemas>
           name: Get0ItemsItem
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+    - !<!StringSchema> &ref_2
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -40,7 +40,7 @@ schemas: !<!Schemas>
           name: ErrorMessage
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_3
+    - !<!StringSchema> &ref_4
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -50,15 +50,26 @@ schemas: !<!Schemas>
           name: String
           description: ''
       protocol: !<!Protocols> {}
+  constants:
+    - !<!ConstantSchema> &ref_7
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_8
+    - !<!ObjectSchema> &ref_9
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: *ref_0
+          schema: *ref_1
           serializedName: status
           language: !<!Languages> 
             default:
@@ -66,7 +77,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: *ref_1
+          schema: *ref_2
           serializedName: message
           language: !<!Languages> 
             default:
@@ -89,29 +100,29 @@ schemas: !<!Schemas>
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-      elementType: *ref_2
+      elementType: *ref_3
       language: !<!Languages> 
         default:
           name: ArrayOfGet0ItemsItem
           description: Array of Get0ItemsItem
       protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_9
+    - !<!ArraySchema> &ref_10
       type: array
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-      elementType: *ref_3
+      elementType: *ref_4
       language: !<!Languages> 
         default:
           name: ArrayOfString
           description: Array of String
       protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_11
+    - !<!ArraySchema> &ref_12
       type: array
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-      elementType: *ref_3
+      elementType: *ref_4
       language: !<!Languages> 
         default:
           name: ArrayOfString
@@ -119,7 +130,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
 globalParameters:
   - !<!Parameter> &ref_5
-    schema: *ref_4
+    schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
     origin: 'modelerfour:synthesized/host'
@@ -144,7 +155,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_5
-          - !<!Parameter> &ref_7
+          - !<!Parameter> &ref_8
             schema: *ref_6
             implementation: Method
             language: !<!Languages> 
@@ -159,6 +170,21 @@ operationGroups:
                 style: form
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_7
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -169,7 +195,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_7
+          - *ref_8
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -182,7 +208,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_8
+            schema: *ref_9
             language: !<!Languages> 
               default:
                 name: ''
@@ -211,8 +237,8 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_5
-          - !<!Parameter> &ref_10
-            schema: *ref_9
+          - !<!Parameter> &ref_11
+            schema: *ref_10
             implementation: Method
             language: !<!Languages> 
               default:
@@ -226,6 +252,21 @@ operationGroups:
                 style: form
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_7
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -236,7 +277,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_10
+          - *ref_11
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -249,7 +290,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_8
+            schema: *ref_9
             language: !<!Languages> 
               default:
                 name: ''
@@ -279,8 +320,8 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_5
-          - !<!Parameter> &ref_12
-            schema: *ref_11
+          - !<!Parameter> &ref_13
+            schema: *ref_12
             implementation: Method
             language: !<!Languages> 
               default:
@@ -294,6 +335,21 @@ operationGroups:
                 style: form
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_7
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -304,7 +360,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_12
+          - *ref_13
         responses:
           - !<!Response> 
             language: !<!Languages> 
@@ -317,7 +373,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_8
+            schema: *ref_9
             language: !<!Languages> 
               default:
                 name: ''

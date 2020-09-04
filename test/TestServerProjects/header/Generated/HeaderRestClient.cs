@@ -44,6 +44,7 @@ namespace header
             uri.AppendPath("/header/param/existingkey", false);
             request.Uri = uri;
             request.Headers.Add("User-Agent", userAgent);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -100,6 +101,7 @@ namespace header
             uri.Reset(endpoint);
             uri.AppendPath("/header/response/existingkey", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -145,6 +147,7 @@ namespace header
             uri.AppendPath("/header/param/protectedkey", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", contentType);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -201,6 +204,7 @@ namespace header
             uri.Reset(endpoint);
             uri.AppendPath("/header/response/protectedkey", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -247,6 +251,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -306,6 +311,7 @@ namespace header
             uri.AppendPath("/header/response/prim/integer", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -366,6 +372,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -425,6 +432,7 @@ namespace header
             uri.AppendPath("/header/response/prim/long", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -485,6 +493,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -544,6 +553,7 @@ namespace header
             uri.AppendPath("/header/response/prim/float", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -604,6 +614,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -663,6 +674,7 @@ namespace header
             uri.AppendPath("/header/response/prim/double", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -723,6 +735,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -782,6 +795,7 @@ namespace header
             uri.AppendPath("/header/response/prim/bool", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -845,6 +859,7 @@ namespace header
             {
                 request.Headers.Add("value", value);
             }
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -904,6 +919,7 @@ namespace header
             uri.AppendPath("/header/response/prim/string", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -964,6 +980,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "D");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1023,6 +1040,7 @@ namespace header
             uri.AppendPath("/header/response/prim/date", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1083,6 +1101,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "O");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1142,6 +1161,7 @@ namespace header
             uri.AppendPath("/header/response/prim/datetime", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1205,6 +1225,7 @@ namespace header
             {
                 request.Headers.Add("value", value.Value, "R");
             }
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1264,6 +1285,7 @@ namespace header
             uri.AppendPath("/header/response/prim/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1324,6 +1346,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "P");
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1383,6 +1406,7 @@ namespace header
             uri.AppendPath("/header/response/prim/duration", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1443,6 +1467,7 @@ namespace header
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1510,6 +1535,7 @@ namespace header
             uri.AppendPath("/header/response/prim/byte", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1573,6 +1599,7 @@ namespace header
             {
                 request.Headers.Add("value", value.Value.ToSerialString());
             }
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1632,6 +1659,7 @@ namespace header
             uri.AppendPath("/header/response/prim/enum", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1690,6 +1718,7 @@ namespace header
             uri.Reset(endpoint);
             uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

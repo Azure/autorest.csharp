@@ -71,8 +71,18 @@ schemas: !<!Schemas>
           name: ApiVersion20140401Preview
           description: Api Version (2014-04-01-preview)
       protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_10
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_11
+    - !<!ObjectSchema> &ref_12
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -104,7 +114,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_12
+    - !<!ObjectSchema> &ref_13
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -191,7 +201,7 @@ operationGroups:
         parameters:
           - *ref_7
           - *ref_8
-          - !<!Parameter> &ref_10
+          - !<!Parameter> &ref_11
             schema: *ref_5
             implementation: Method
             required: true
@@ -206,6 +216,21 @@ operationGroups:
           - *ref_9
         requests:
           - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_10
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
             language: !<!Languages> 
               default:
                 name: ''
@@ -216,10 +241,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_10
+          - *ref_11
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_11
+            schema: *ref_12
             language: !<!Languages> 
               default:
                 name: ''
@@ -233,7 +258,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_12
+            schema: *ref_13
             language: !<!Languages> 
               default:
                 name: ''

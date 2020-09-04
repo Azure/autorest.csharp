@@ -26,6 +26,9 @@
     <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs">
       <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs</Link>
     </Compile>
+    <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithUriProperty.cs">
+      <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithUriProperty.cs</Link>
+    </Compile>
   </ItemGroup>
 
 </Project>

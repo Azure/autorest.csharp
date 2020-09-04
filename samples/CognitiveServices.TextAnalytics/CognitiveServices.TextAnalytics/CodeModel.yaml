@@ -688,6 +688,16 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_99
+      type: constant
+      value: !<!ConstantValue> 
+        value: 'application/json, text/json'
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json, text/json'
+      protocol: !<!Protocols> {}
   dictionaries:
     - !<!DictionarySchema> &ref_21
       type: dictionary
@@ -776,7 +786,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_5
-    - !<!ObjectSchema> &ref_102
+    - !<!ObjectSchema> &ref_103
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1225,7 +1235,7 @@ schemas: !<!Schemas>
     - *ref_24
     - *ref_23
     - *ref_34
-    - !<!ObjectSchema> &ref_109
+    - !<!ObjectSchema> &ref_110
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1482,7 +1492,7 @@ schemas: !<!Schemas>
     - *ref_46
     - *ref_47
     - *ref_48
-    - !<!ObjectSchema> &ref_113
+    - !<!ObjectSchema> &ref_114
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1607,7 +1617,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_52
-    - !<!ObjectSchema> &ref_114
+    - !<!ObjectSchema> &ref_115
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1685,7 +1695,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_56
-    - !<!ObjectSchema> &ref_118
+    - !<!ObjectSchema> &ref_119
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1853,7 +1863,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     - *ref_62
     - *ref_63
-    - !<!ObjectSchema> &ref_122
+    - !<!ObjectSchema> &ref_123
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2161,7 +2171,7 @@ operationGroups:
             version: v3.0-preview.1
         parameters:
           - *ref_95
-          - !<!Parameter> &ref_100
+          - !<!Parameter> &ref_101
             schema: *ref_1
             implementation: Method
             language: !<!Languages> 
@@ -2172,7 +2182,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_101
+          - !<!Parameter> &ref_102
             schema: *ref_96
             implementation: Method
             language: !<!Languages> 
@@ -2199,7 +2209,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_99
+              - !<!Parameter> &ref_100
                 schema: *ref_98
                 implementation: Method
                 required: true
@@ -2211,8 +2221,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_99
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_99
+              - *ref_100
             language: !<!Languages> 
               default:
                 name: ''
@@ -2227,11 +2250,11 @@ operationGroups:
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0-preview.1'
         signatureParameters:
-          - *ref_100
           - *ref_101
+          - *ref_102
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_102
+            schema: *ref_103
             language: !<!Languages> 
               default:
                 name: ''
@@ -2330,7 +2353,7 @@ operationGroups:
             version: v3.0-preview.1
         parameters:
           - *ref_95
-          - !<!Parameter> &ref_104
+          - !<!Parameter> &ref_105
             schema: *ref_1
             implementation: Method
             language: !<!Languages> 
@@ -2341,7 +2364,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_105
+          - !<!Parameter> &ref_106
             schema: *ref_96
             implementation: Method
             language: !<!Languages> 
@@ -2368,7 +2391,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_103
+              - !<!Parameter> &ref_104
                 schema: *ref_98
                 implementation: Method
                 required: true
@@ -2380,8 +2403,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_99
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_103
+              - *ref_104
             language: !<!Languages> 
               default:
                 name: ''
@@ -2396,11 +2432,11 @@ operationGroups:
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0-preview.1'
         signatureParameters:
-          - *ref_104
           - *ref_105
+          - *ref_106
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_102
+            schema: *ref_103
             language: !<!Languages> 
               default:
                 name: ''
@@ -2490,7 +2526,7 @@ operationGroups:
             version: v3.0-preview.1
         parameters:
           - *ref_95
-          - !<!Parameter> &ref_107
+          - !<!Parameter> &ref_108
             schema: *ref_1
             implementation: Method
             language: !<!Languages> 
@@ -2501,7 +2537,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_108
+          - !<!Parameter> &ref_109
             schema: *ref_96
             implementation: Method
             language: !<!Languages> 
@@ -2528,7 +2564,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_106
+              - !<!Parameter> &ref_107
                 schema: *ref_98
                 implementation: Method
                 required: true
@@ -2540,8 +2576,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_99
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_106
+              - *ref_107
             language: !<!Languages> 
               default:
                 name: ''
@@ -2556,11 +2605,11 @@ operationGroups:
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0-preview.1'
         signatureParameters:
-          - *ref_107
           - *ref_108
+          - *ref_109
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_109
+            schema: *ref_110
             language: !<!Languages> 
               default:
                 name: ''
@@ -2660,7 +2709,7 @@ operationGroups:
             version: v3.0-preview.1
         parameters:
           - *ref_95
-          - !<!Parameter> &ref_111
+          - !<!Parameter> &ref_112
             schema: *ref_1
             implementation: Method
             language: !<!Languages> 
@@ -2671,7 +2720,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_112
+          - !<!Parameter> &ref_113
             schema: *ref_96
             implementation: Method
             language: !<!Languages> 
@@ -2698,7 +2747,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_110
+              - !<!Parameter> &ref_111
                 schema: *ref_98
                 implementation: Method
                 required: true
@@ -2710,8 +2759,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_99
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_110
+              - *ref_111
             language: !<!Languages> 
               default:
                 name: ''
@@ -2726,11 +2788,11 @@ operationGroups:
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0-preview.1'
         signatureParameters:
-          - *ref_111
           - *ref_112
+          - *ref_113
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_113
+            schema: *ref_114
             language: !<!Languages> 
               default:
                 name: ''
@@ -2806,7 +2868,7 @@ operationGroups:
             version: v3.0-preview.1
         parameters:
           - *ref_95
-          - !<!Parameter> &ref_116
+          - !<!Parameter> &ref_117
             schema: *ref_1
             implementation: Method
             language: !<!Languages> 
@@ -2817,7 +2879,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_117
+          - !<!Parameter> &ref_118
             schema: *ref_96
             implementation: Method
             language: !<!Languages> 
@@ -2844,8 +2906,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_115
-                schema: *ref_114
+              - !<!Parameter> &ref_116
+                schema: *ref_115
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -2856,8 +2918,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_99
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_115
+              - *ref_116
             language: !<!Languages> 
               default:
                 name: ''
@@ -2872,11 +2947,11 @@ operationGroups:
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0-preview.1'
         signatureParameters:
-          - *ref_116
           - *ref_117
+          - *ref_118
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_118
+            schema: *ref_119
             language: !<!Languages> 
               default:
                 name: ''
@@ -2955,7 +3030,7 @@ operationGroups:
             version: v3.0-preview.1
         parameters:
           - *ref_95
-          - !<!Parameter> &ref_120
+          - !<!Parameter> &ref_121
             schema: *ref_1
             implementation: Method
             language: !<!Languages> 
@@ -2966,7 +3041,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: query
-          - !<!Parameter> &ref_121
+          - !<!Parameter> &ref_122
             schema: *ref_96
             implementation: Method
             language: !<!Languages> 
@@ -2993,7 +3068,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_119
+              - !<!Parameter> &ref_120
                 schema: *ref_98
                 implementation: Method
                 required: true
@@ -3005,8 +3080,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_99
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_119
+              - *ref_120
             language: !<!Languages> 
               default:
                 name: ''
@@ -3021,11 +3109,11 @@ operationGroups:
                   - text/json
                 uri: '{Endpoint}/text/analytics/v3.0-preview.1'
         signatureParameters:
-          - *ref_120
           - *ref_121
+          - *ref_122
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_122
+            schema: *ref_123
             language: !<!Languages> 
               default:
                 name: ''

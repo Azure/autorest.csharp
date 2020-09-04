@@ -44,6 +44,16 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_7
+      type: constant
+      value: !<!ConstantValue> 
+        value: application/json
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !<!Protocols> {}
   dictionaries:
     - !<!DictionarySchema> &ref_2
       type: dictionary
@@ -116,7 +126,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_4
-          - !<!Parameter> &ref_8
+          - !<!Parameter> &ref_9
             schema: *ref_1
             implementation: Method
             required: true
@@ -128,7 +138,7 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_9
+          - !<!Parameter> &ref_10
             schema: *ref_1
             implementation: Method
             required: true
@@ -156,7 +166,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_7
+              - !<!Parameter> &ref_8
                 schema: *ref_6
                 implementation: Method
                 required: true
@@ -168,8 +178,21 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
                     style: json
+              - !<!Parameter> 
+                schema: *ref_7
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
             signatureParameters:
-              - *ref_7
+              - *ref_8
             language: !<!Languages> 
               default:
                 name: ''
@@ -183,8 +206,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_8
           - *ref_9
+          - *ref_10
         responses:
           - !<!SchemaResponse> 
             schema: *ref_6
