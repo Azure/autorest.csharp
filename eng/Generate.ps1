@@ -30,7 +30,7 @@ $testNames =
     'body-dictionary',
     'body-duration',
     'body-file',
-    #'body-formdata',
+    'body-formdata',
     'body-integer',
     'body-number',
     'body-string',
