@@ -29,6 +29,7 @@
 - [Customize serialization/deserialization methods](#customize-serializationdeserialization-methods)
 - [Renaming an enum](#renaming-an-enum)
 - [Renaming an enum member](#renaming-an-enum-member)
+- [Changing an enum to an extensible enum](#changing-an-enum-to-an-extensible-enum)
 - [Make a client internal](#make-a-client-internal)
 - [Rename a client](#rename-a-client)
 - [Replace any generated member](#replace-any-generated-member)
@@ -248,8 +249,9 @@ namespace Azure.Service.Models
 Scenarios that would work:
 
 1. String <-> TimeSpan (both represented as string in JSON)
-1. Float <-> Int (both are numbers)
-1. String <-> Enums (both strings) 
+2. Float <-> Int (both are numbers)
+3. String <-> Enums (both strings) 
+4. String -> Uri
 
 Won't work:
 
