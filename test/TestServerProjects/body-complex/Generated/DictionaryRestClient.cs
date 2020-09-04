@@ -44,7 +44,6 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/dictionary/typed/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -97,8 +96,6 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/dictionary/typed/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -158,7 +155,6 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/dictionary/typed/empty", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -211,8 +207,6 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/dictionary/typed/empty", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(complexBody);
             request.Content = content;
@@ -272,7 +266,6 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/dictionary/typed/null", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -325,7 +318,6 @@ namespace body_complex
             uri.Reset(endpoint);
             uri.AppendPath("/complex/dictionary/typed/notprovided", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

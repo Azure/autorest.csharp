@@ -44,7 +44,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/200/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -101,7 +100,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/204/none", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -158,7 +156,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/201/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -215,7 +212,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/202/none", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -272,7 +268,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/204/none/default/Error/response/400/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -329,7 +324,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/200/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -396,7 +390,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/201/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -463,7 +456,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/201/B/default/Error/response/400/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -530,7 +522,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -611,7 +602,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -692,7 +682,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -773,7 +762,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -854,7 +842,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/202/none", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -899,7 +886,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/204/none", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -944,7 +930,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/202/none/204/none/default/Error/response/400/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1165,7 +1150,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/default/A/response/200/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1218,7 +1202,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/default/A/response/200/none", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1271,7 +1254,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/default/A/response/400/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1314,7 +1296,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/default/A/response/400/none", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1525,7 +1506,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/response/200/none", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1578,7 +1558,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/response/200/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1631,7 +1610,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/response/200/invalid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1684,7 +1662,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/response/400/none", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1737,7 +1714,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/response/400/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1790,7 +1766,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/response/400/invalid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1843,7 +1818,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/payloads/200/A/response/202/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

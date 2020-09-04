@@ -67,7 +67,6 @@ namespace Azure.Management.Storage
             uri.AppendPath(managementPolicyName.ToString(), true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -154,8 +153,6 @@ namespace Azure.Management.Storage
             uri.AppendPath(managementPolicyName.ToString(), true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var model = new ManagementPolicy()
             {
                 Policy = policy

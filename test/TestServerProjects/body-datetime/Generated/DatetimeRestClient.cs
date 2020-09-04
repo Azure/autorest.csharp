@@ -43,7 +43,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/null", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -110,7 +109,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/invalid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -163,7 +161,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/overflow", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -216,7 +213,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/underflow", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -269,8 +265,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/utc", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
@@ -318,8 +312,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/utc7ms", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
@@ -367,7 +359,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/utc/lowercase", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -420,7 +411,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/utc/uppercase", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -473,7 +463,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/utc7ms/uppercase", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -526,8 +515,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/localpositiveoffset", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
@@ -575,7 +562,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/localpositiveoffset/lowercase", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -628,7 +614,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/localpositiveoffset/uppercase", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -681,8 +666,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/localnegativeoffset", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
@@ -730,7 +713,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/localnegativeoffset/uppercase", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -783,7 +765,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/max/localnegativeoffset/lowercase", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -836,8 +817,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/min/utc", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
@@ -885,7 +864,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/min/utc", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -938,8 +916,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/min/localpositiveoffset", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
@@ -987,7 +963,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/min/localpositiveoffset", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1040,8 +1015,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/min/localnegativeoffset", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(datetimeBody, "O");
             request.Content = content;
@@ -1089,7 +1062,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/min/localnegativeoffset", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1142,7 +1114,6 @@ namespace body_datetime
             uri.Reset(endpoint);
             uri.AppendPath("/datetime/min/localnooffset", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

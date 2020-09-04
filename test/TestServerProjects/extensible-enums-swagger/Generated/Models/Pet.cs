@@ -18,7 +18,7 @@ namespace extensible_enums_swagger.Models
         }
 
         /// <summary> Initializes a new instance of Pet. </summary>
-        /// <param name="name"> . </param>
+        /// <param name="name"> name. </param>
         /// <param name="daysOfWeek"> Type of Pet. </param>
         /// <param name="intEnum"> . </param>
         internal Pet(string name, DaysOfWeekExtensibleEnum? daysOfWeek, IntEnum intEnum)
@@ -28,6 +28,7 @@ namespace extensible_enums_swagger.Models
             IntEnum = intEnum;
         }
 
+        /// <summary> name. </summary>
         public string Name { get; set; }
         /// <summary> Type of Pet. </summary>
         public DaysOfWeekExtensibleEnum? DaysOfWeek { get; set; }

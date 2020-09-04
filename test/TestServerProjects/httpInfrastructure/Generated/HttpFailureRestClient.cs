@@ -43,7 +43,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/failure/emptybody/error", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -96,7 +95,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/failure/nomodel/error", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -149,7 +147,6 @@ namespace httpInfrastructure
             uri.Reset(endpoint);
             uri.AppendPath("/http/failure/nomodel/empty", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

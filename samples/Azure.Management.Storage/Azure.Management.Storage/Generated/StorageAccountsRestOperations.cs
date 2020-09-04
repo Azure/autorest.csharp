@@ -63,8 +63,6 @@ namespace Azure.Management.Storage
             uri.AppendPath("/providers/Microsoft.Storage/checkNameAvailability", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var model = new StorageAccountCheckNameAvailabilityParameters(name);
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
@@ -141,8 +139,6 @@ namespace Azure.Management.Storage
             uri.AppendPath(accountName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
@@ -308,7 +304,6 @@ namespace Azure.Management.Storage
                 uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -393,8 +388,6 @@ namespace Azure.Management.Storage
             uri.AppendPath(accountName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
@@ -487,7 +480,6 @@ namespace Azure.Management.Storage
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -545,7 +537,6 @@ namespace Azure.Management.Storage
             uri.AppendPath("/providers/Microsoft.Storage/storageAccounts", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -620,7 +611,6 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", apiVersion, true);
             uri.AppendQuery("$expand", "kerb", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -704,8 +694,6 @@ namespace Azure.Management.Storage
             uri.AppendPath("/regenerateKey", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var model = new StorageAccountRegenerateKeyParameters(keyName);
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
@@ -803,8 +791,6 @@ namespace Azure.Management.Storage
             uri.AppendPath("/ListAccountSas", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
@@ -901,8 +887,6 @@ namespace Azure.Management.Storage
             uri.AppendPath("/ListServiceSas", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
@@ -1074,8 +1058,6 @@ namespace Azure.Management.Storage
             uri.AppendPath("/restoreBlobRanges", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var model = new BlobRestoreParameters(timeToRestore, blobRanges);
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
@@ -1233,7 +1215,6 @@ namespace Azure.Management.Storage
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

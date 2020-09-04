@@ -43,7 +43,6 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/", false);
             uri.AppendPath(subscriptionId, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -101,7 +100,6 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/subscriptionId/method/string/none/path/local/null/", false);
             uri.AppendPath(subscriptionId, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -159,7 +157,6 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/", false);
             uri.AppendPath(subscriptionId, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -217,7 +214,6 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/", false);
             uri.AppendPath(subscriptionId, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

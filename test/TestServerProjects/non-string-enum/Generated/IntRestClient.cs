@@ -44,8 +44,6 @@ namespace non_string_enum
             uri.Reset(endpoint);
             uri.AppendPath("/nonStringEnums/int/put", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             if (input != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -106,7 +104,6 @@ namespace non_string_enum
             uri.Reset(endpoint);
             uri.AppendPath("/nonStringEnums/int/get", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

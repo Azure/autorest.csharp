@@ -43,7 +43,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/null", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -110,7 +109,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/invalid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -163,7 +161,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/overflowint32", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -216,7 +213,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/underflowint32", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -269,7 +265,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/overflowint64", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -322,7 +317,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/underflowint64", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -375,8 +369,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/max/32", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
@@ -424,8 +416,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/max/64", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
@@ -473,8 +463,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/min/32", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
@@ -522,8 +510,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/min/64", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
@@ -571,7 +557,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/unixtime", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -624,8 +609,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/unixtime", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody, "U");
             request.Content = content;
@@ -673,7 +656,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/invalidunixtime", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -726,7 +708,6 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/nullunixtime", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

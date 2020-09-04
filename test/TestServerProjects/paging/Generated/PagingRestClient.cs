@@ -44,7 +44,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/noitemname", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -97,7 +96,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/nullnextlink", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -150,7 +148,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/single", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -203,19 +200,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (pagingGetMultiplePagesOptions?.Maxresults != null)
-            {
-                request.Headers.Add("maxresults", pagingGetMultiplePagesOptions.Maxresults.Value);
-            }
-            if (pagingGetMultiplePagesOptions?.Timeout != null)
-            {
-                request.Headers.Add("timeout", pagingGetMultiplePagesOptions.Timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -274,7 +258,6 @@ namespace paging
             uri.AppendQuery("requiredQueryParameter", requiredQueryParameter, true);
             uri.AppendQuery("queryConstant", true, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -330,7 +313,6 @@ namespace paging
             uri.AppendPath("/paging/multiple/nextOperationWithQueryParams", false);
             uri.AppendQuery("queryConstant", true, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -383,19 +365,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (pagingGetOdataMultiplePagesOptions?.Maxresults != null)
-            {
-                request.Headers.Add("maxresults", pagingGetOdataMultiplePagesOptions.Maxresults.Value);
-            }
-            if (pagingGetOdataMultiplePagesOptions?.Timeout != null)
-            {
-                request.Headers.Add("timeout", pagingGetOdataMultiplePagesOptions.Timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -453,19 +422,6 @@ namespace paging
             uri.AppendPath("/paging/multiple/withpath/", false);
             uri.AppendPath(pagingGetMultiplePagesWithOffsetOptions.Offset, true);
             request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Maxresults != null)
-            {
-                request.Headers.Add("maxresults", pagingGetMultiplePagesWithOffsetOptions.Maxresults.Value);
-            }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Timeout != null)
-            {
-                request.Headers.Add("timeout", pagingGetMultiplePagesWithOffsetOptions.Timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -534,7 +490,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/retryfirst", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -587,7 +542,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/retrysecond", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -640,7 +594,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/single/failure", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -693,7 +646,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/failure", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -746,7 +698,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/failureuri", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -801,7 +752,6 @@ namespace paging
             uri.AppendPath(tenant, true);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -880,7 +830,6 @@ namespace paging
             uri.AppendPath(customParameterGroup.Tenant, true);
             uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -947,19 +896,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (pagingGetMultiplePagesLroOptions?.Maxresults != null)
-            {
-                request.Headers.Add("maxresults", pagingGetMultiplePagesLroOptions.Maxresults.Value);
-            }
-            if (pagingGetMultiplePagesLroOptions?.Timeout != null)
-            {
-                request.Headers.Add("timeout", pagingGetMultiplePagesLroOptions.Timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1010,7 +946,6 @@ namespace paging
             uri.AppendRaw(nextLink, false);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1101,7 +1036,6 @@ namespace paging
             uri.AppendRaw(nextLink, false);
             uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1178,7 +1112,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendPath("/paging/itemNameWithXMSClientName", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1231,7 +1164,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1298,7 +1230,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1365,19 +1296,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (pagingGetMultiplePagesOptions?.Maxresults != null)
-            {
-                request.Headers.Add("maxresults", pagingGetMultiplePagesOptions.Maxresults.Value);
-            }
-            if (pagingGetMultiplePagesOptions?.Timeout != null)
-            {
-                request.Headers.Add("timeout", pagingGetMultiplePagesOptions.Timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1448,19 +1366,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (pagingGetOdataMultiplePagesOptions?.Maxresults != null)
-            {
-                request.Headers.Add("maxresults", pagingGetOdataMultiplePagesOptions.Maxresults.Value);
-            }
-            if (pagingGetOdataMultiplePagesOptions?.Timeout != null)
-            {
-                request.Headers.Add("timeout", pagingGetOdataMultiplePagesOptions.Timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1531,19 +1436,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Maxresults != null)
-            {
-                request.Headers.Add("maxresults", pagingGetMultiplePagesWithOffsetOptions.Maxresults.Value);
-            }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Timeout != null)
-            {
-                request.Headers.Add("timeout", pagingGetMultiplePagesWithOffsetOptions.Timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1622,7 +1514,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1689,7 +1580,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1756,7 +1646,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1823,7 +1712,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1890,7 +1778,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1957,19 +1844,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
-            if (pagingGetMultiplePagesLroOptions?.Maxresults != null)
-            {
-                request.Headers.Add("maxresults", pagingGetMultiplePagesLroOptions.Maxresults.Value);
-            }
-            if (pagingGetMultiplePagesLroOptions?.Timeout != null)
-            {
-                request.Headers.Add("timeout", pagingGetMultiplePagesLroOptions.Timeout.Value);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2030,7 +1904,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2117,7 +1990,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2194,7 +2066,6 @@ namespace paging
             uri.Reset(endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

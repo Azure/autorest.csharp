@@ -48,7 +48,6 @@ namespace SignalR
                 uri.AppendQueryDelimited("excluded", excluded, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -114,7 +113,6 @@ namespace SignalR
                 uri.AppendQueryDelimited("excluded", excluded, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -181,7 +179,6 @@ namespace SignalR
                 uri.AppendQueryDelimited("excluded", excluded, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -258,7 +255,6 @@ namespace SignalR
                 uri.AppendQueryDelimited("excluded", excluded, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -331,7 +327,6 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -402,7 +397,6 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -475,7 +469,6 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -558,7 +551,6 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -639,7 +631,6 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -710,7 +701,6 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -970,7 +960,6 @@ namespace SignalR
             uri.AppendPath("/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -1053,7 +1042,6 @@ namespace SignalR
             uri.AppendPath("/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -1361,7 +1349,6 @@ namespace SignalR
                 uri.AppendQueryDelimited("excluded", excluded, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -1438,7 +1425,6 @@ namespace SignalR
                 uri.AppendQueryDelimited("excluded", excluded, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -1639,7 +1625,6 @@ namespace SignalR
                 uri.AppendQueryDelimited("excluded", excluded, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -1728,7 +1713,6 @@ namespace SignalR
                 uri.AppendQueryDelimited("excluded", excluded, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }

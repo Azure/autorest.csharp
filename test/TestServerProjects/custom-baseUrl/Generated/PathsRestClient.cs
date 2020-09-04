@@ -48,7 +48,6 @@ namespace custom_baseUrl
             uri.AppendRaw(host, false);
             uri.AppendPath("/customuri", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

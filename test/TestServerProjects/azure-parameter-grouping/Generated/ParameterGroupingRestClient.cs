@@ -48,12 +48,6 @@ namespace azure_parameter_grouping
                 uri.AppendQuery("query", parameterGroupingPostRequiredParameters.Query.Value, true);
             }
             request.Uri = uri;
-            if (parameterGroupingPostRequiredParameters?.CustomHeader != null)
-            {
-                request.Headers.Add("customHeader", parameterGroupingPostRequiredParameters.CustomHeader);
-            }
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(parameterGroupingPostRequiredParameters.Body);
             request.Content = content;
@@ -117,11 +111,6 @@ namespace azure_parameter_grouping
                 uri.AppendQuery("query", parameterGroupingPostOptionalParameters.Query.Value, true);
             }
             request.Uri = uri;
-            if (parameterGroupingPostOptionalParameters?.CustomHeader != null)
-            {
-                request.Headers.Add("customHeader", parameterGroupingPostOptionalParameters.CustomHeader);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -174,15 +163,6 @@ namespace azure_parameter_grouping
                 uri.AppendQuery("query-two", parameterGroupingPostMultiParamGroupsSecondParamGroup.QueryTwo.Value, true);
             }
             request.Uri = uri;
-            if (firstParameterGroup?.HeaderOne != null)
-            {
-                request.Headers.Add("header-one", firstParameterGroup.HeaderOne);
-            }
-            if (parameterGroupingPostMultiParamGroupsSecondParamGroup?.HeaderTwo != null)
-            {
-                request.Headers.Add("header-two", parameterGroupingPostMultiParamGroupsSecondParamGroup.HeaderTwo);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -233,11 +213,6 @@ namespace azure_parameter_grouping
                 uri.AppendQuery("query-one", firstParameterGroup.QueryOne.Value, true);
             }
             request.Uri = uri;
-            if (firstParameterGroup?.HeaderOne != null)
-            {
-                request.Headers.Add("header-one", firstParameterGroup.HeaderOne);
-            }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

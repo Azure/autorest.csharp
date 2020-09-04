@@ -44,7 +44,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/horse", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -97,8 +96,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/horse", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(horse);
             request.Content = content;
@@ -168,7 +165,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/pet", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -221,8 +217,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/pet", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(pet);
             request.Content = content;
@@ -292,7 +286,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/feline", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -345,8 +338,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/feline", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(feline);
             request.Content = content;
@@ -416,7 +407,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/cat", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -469,8 +459,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/cat", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(cat);
             request.Content = content;
@@ -540,7 +528,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/kitten", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -593,8 +580,6 @@ namespace multiple_inheritance
             uri.Reset(endpoint);
             uri.AppendPath("/multipleInheritance/kitten", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(kitten);
             request.Content = content;

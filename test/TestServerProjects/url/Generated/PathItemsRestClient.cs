@@ -71,7 +71,6 @@ namespace url
                 uri.AppendQuery("localStringQuery", localStringQuery, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -160,7 +159,6 @@ namespace url
                 uri.AppendQuery("localStringQuery", localStringQuery, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -249,7 +247,6 @@ namespace url
                 uri.AppendQuery("localStringQuery", localStringQuery, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -338,7 +335,6 @@ namespace url
                 uri.AppendQuery("localStringQuery", localStringQuery, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

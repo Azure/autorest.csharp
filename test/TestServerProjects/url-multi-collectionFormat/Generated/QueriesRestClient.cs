@@ -47,7 +47,6 @@ namespace url_multi_collectionFormat
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -96,7 +95,6 @@ namespace url_multi_collectionFormat
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -145,7 +143,6 @@ namespace url_multi_collectionFormat
                 uri.AppendQueryDelimited("arrayQuery", arrayQuery, ",", true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

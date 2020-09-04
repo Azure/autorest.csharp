@@ -29,7 +29,7 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: PetName
-          description: ''
+          description: name
       protocol: !<!Protocols> {}
   choices:
     - !<!ChoiceSchema> &ref_2
@@ -152,7 +152,7 @@ schemas: !<!Schemas>
           language: !<!Languages> 
             default:
               name: name
-              description: ''
+              description: name
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: *ref_2
@@ -264,10 +264,21 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Pet_GetByPetId:
+              parameters:
+                petId: tommy
+              responses:
+                '200':
+                  body:
+                    name: Retriever
+                    DaysOfWeek: Monday
+                    IntEnum: '1'
         language: !<!Languages> 
           default:
             name: GetByPetId
-            description: ''
+            description: get pet by id
         protocol: !<!Protocols> {}
       - !<!Operation> 
         apiVersions:
@@ -298,7 +309,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: petParam
-                    description: ''
+                    description: pet param
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -345,10 +356,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Pet_AddPet:
+              parameters:
+                petParam:
+                  name: Retriever
+                  DaysOfWeek: Monday
+                  IntEnum: '1'
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: AddPet
-            description: ''
+            description: add pet
         protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:

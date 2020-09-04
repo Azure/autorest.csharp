@@ -43,8 +43,6 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/put/201/creating/succeeded/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -97,8 +95,6 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/putasync/retry/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -151,7 +147,6 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/delete/provisioning/202/accepted/200/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -198,7 +193,6 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/delete/202/retry/200", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -243,7 +237,6 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/deleteasync/retry/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -288,8 +281,6 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/post/202/retry/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -342,8 +333,6 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/retryerror/postasync/retry/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
                 var content = new Utf8JsonRequestContent();

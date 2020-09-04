@@ -43,7 +43,6 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/apiVersion/method/string/none/query/local/2.0", false);
             uri.AppendQuery("api-version", "2.0", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -90,7 +89,6 @@ namespace azure_special_properties
                 uri.AppendQuery("api-version", apiVersion, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -136,7 +134,6 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/apiVersion/path/string/none/query/local/2.0", false);
             uri.AppendQuery("api-version", "2.0", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -180,7 +177,6 @@ namespace azure_special_properties
             uri.AppendPath("/azurespecials/apiVersion/swagger/string/none/query/local/2.0", false);
             uri.AppendQuery("api-version", "2.0", true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

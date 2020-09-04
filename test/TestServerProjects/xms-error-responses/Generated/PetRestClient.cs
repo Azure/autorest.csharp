@@ -46,7 +46,6 @@ namespace xms_error_responses
             uri.AppendPath(petId, true);
             uri.AppendPath("/GetPet", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -118,7 +117,6 @@ namespace xms_error_responses
             uri.AppendPath("/errorStatusCodes/Pets/doSomething/", false);
             uri.AppendPath(whatAction, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

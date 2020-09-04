@@ -63,7 +63,6 @@ namespace subscriptionId_apiVersion
             uri.AppendPath(resourceGroupName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

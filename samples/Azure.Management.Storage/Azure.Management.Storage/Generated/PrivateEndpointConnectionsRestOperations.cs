@@ -67,7 +67,6 @@ namespace Azure.Management.Storage
             uri.AppendPath(privateEndpointConnectionName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -162,8 +161,6 @@ namespace Azure.Management.Storage
             uri.AppendPath(privateEndpointConnectionName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var model = new PrivateEndpointConnection()
             {
                 PrivateEndpoint = privateEndpoint,
@@ -270,7 +267,6 @@ namespace Azure.Management.Storage
             uri.AppendPath(privateEndpointConnectionName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

@@ -57,8 +57,6 @@ namespace CognitiveServices.TextAnalytics
                 uri.AppendQuery("showStats", showStats.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json, text/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
@@ -141,8 +139,6 @@ namespace CognitiveServices.TextAnalytics
                 uri.AppendQuery("showStats", showStats.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json, text/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
@@ -231,8 +227,6 @@ namespace CognitiveServices.TextAnalytics
                 uri.AppendQuery("showStats", showStats.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json, text/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
@@ -315,8 +309,6 @@ namespace CognitiveServices.TextAnalytics
                 uri.AppendQuery("showStats", showStats.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json, text/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
@@ -399,8 +391,6 @@ namespace CognitiveServices.TextAnalytics
                 uri.AppendQuery("showStats", showStats.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json, text/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(input);
             request.Content = content;
@@ -483,8 +473,6 @@ namespace CognitiveServices.TextAnalytics
                 uri.AppendQuery("showStats", showStats.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json, text/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(input);
             request.Content = content;

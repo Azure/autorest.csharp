@@ -43,7 +43,6 @@ namespace body_date
             uri.Reset(endpoint);
             uri.AppendPath("/date/null", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -110,7 +109,6 @@ namespace body_date
             uri.Reset(endpoint);
             uri.AppendPath("/date/invaliddate", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -163,7 +161,6 @@ namespace body_date
             uri.Reset(endpoint);
             uri.AppendPath("/date/overflowdate", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -216,7 +213,6 @@ namespace body_date
             uri.Reset(endpoint);
             uri.AppendPath("/date/underflowdate", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -269,8 +265,6 @@ namespace body_date
             uri.Reset(endpoint);
             uri.AppendPath("/date/max", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(dateBody, "D");
             request.Content = content;
@@ -318,7 +312,6 @@ namespace body_date
             uri.Reset(endpoint);
             uri.AppendPath("/date/max", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -371,8 +364,6 @@ namespace body_date
             uri.Reset(endpoint);
             uri.AppendPath("/date/min", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStringValue(dateBody, "D");
             request.Content = content;
@@ -420,7 +411,6 @@ namespace body_date
             uri.Reset(endpoint);
             uri.AppendPath("/date/min", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

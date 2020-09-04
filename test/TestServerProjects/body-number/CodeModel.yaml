@@ -382,6 +382,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getNull:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !<!Languages> 
           default:
             name: GetNull
@@ -614,7 +621,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: numberBody
-                    description: ''
+                    description: number body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -671,6 +678,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putBigFloat:
+              parameters:
+                numberBody: 340282300000000000000
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutBigFloat
@@ -737,6 +751,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getBigFloat:
+              parameters: {}
+              responses:
+                '200':
+                  body: 340282300000000000000
         language: !<!Languages> 
           default:
             name: GetBigFloat
@@ -771,7 +792,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: numberBody
-                    description: ''
+                    description: number body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -828,6 +849,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putBigDouble:
+              parameters:
+                numberBody: 2.5976931e+101
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutBigDouble
@@ -894,6 +922,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getBigDouble:
+              parameters: {}
+              responses:
+                '200':
+                  body: 2.5976931e+101
         language: !<!Languages> 
           default:
             name: GetBigDouble
@@ -984,6 +1019,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putBigDoublePositiveDecimal:
+              parameters:
+                numberBody: 99999999.99
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutBigDoublePositiveDecimal
@@ -1050,6 +1092,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getBigDoublePositiveDecimal:
+              parameters: {}
+              responses:
+                '200':
+                  body: 99999999.99
         language: !<!Languages> 
           default:
             name: GetBigDoublePositiveDecimal
@@ -1140,6 +1189,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putBigDoubleNegativeDecimal:
+              parameters:
+                numberBody: -99999999.99
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutBigDoubleNegativeDecimal
@@ -1206,6 +1262,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getBigDoubleNegativeDecimal:
+              parameters: {}
+              responses:
+                '200':
+                  body: -99999999.99
         language: !<!Languages> 
           default:
             name: GetBigDoubleNegativeDecimal
@@ -1240,7 +1303,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: numberBody
-                    description: ''
+                    description: number body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1297,6 +1360,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putBigDecimal:
+              parameters:
+                numberBody: 2.5976931e+101
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutBigDecimal
@@ -1363,6 +1433,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getBigDecimal:
+              parameters: {}
+              responses:
+                '200':
+                  body: 2.5976931e+101
         language: !<!Languages> 
           default:
             name: GetBigDecimal
@@ -1453,6 +1530,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putBigDecimalPositiveDecimal:
+              parameters:
+                numberBody: 99999999.99
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutBigDecimalPositiveDecimal
@@ -1519,6 +1603,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getBigDecimalPositiveDecimal:
+              parameters: {}
+              responses:
+                '200':
+                  body: 99999999.99
         language: !<!Languages> 
           default:
             name: GetBigDecimalPositiveDecimal
@@ -1609,6 +1700,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putBigDecimalNegativeDecimal:
+              parameters:
+                numberBody: -99999999.99
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutBigDecimalNegativeDecimal
@@ -1675,6 +1773,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getBigDecimalNegativeDecimal:
+              parameters: {}
+              responses:
+                '200':
+                  body: -99999999.99
         language: !<!Languages> 
           default:
             name: GetBigDecimalNegativeDecimal
@@ -1709,7 +1814,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: numberBody
-                    description: ''
+                    description: number body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1766,6 +1871,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putSmallFloat:
+              parameters:
+                numberBody: 3.402823e-20
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutSmallFloat
@@ -1832,6 +1944,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getSmallFloat:
+              parameters: {}
+              responses:
+                '200':
+                  body: 3.402823e-20
         language: !<!Languages> 
           default:
             name: GetSmallFloat
@@ -1866,7 +1985,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: numberBody
-                    description: ''
+                    description: number body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1923,6 +2042,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putSmallDouble:
+              parameters:
+                numberBody: 2.5976931e-101
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutSmallDouble
@@ -1989,6 +2115,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getSmallDouble:
+              parameters: {}
+              responses:
+                '200':
+                  body: 2.5976931e-101
         language: !<!Languages> 
           default:
             name: GetSmallDouble
@@ -2023,7 +2156,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: numberBody
-                    description: ''
+                    description: number body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -2080,6 +2213,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_putSmallDecimal:
+              parameters:
+                numberBody: 2.5976931e-101
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutSmallDecimal
@@ -2146,6 +2286,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            number_getSmallDecimal:
+              parameters: {}
+              responses:
+                '200':
+                  body: 2.5976931e-101
         language: !<!Languages> 
           default:
             name: GetSmallDecimal

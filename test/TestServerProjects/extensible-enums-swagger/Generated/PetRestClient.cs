@@ -45,10 +45,10 @@ namespace extensible_enums_swagger
             uri.AppendPath("/extensibleenums/pet/", false);
             uri.AppendPath(petId, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
+        /// <summary> get pet by id. </summary>
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
@@ -75,6 +75,7 @@ namespace extensible_enums_swagger
             }
         }
 
+        /// <summary> get pet by id. </summary>
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
@@ -110,8 +111,6 @@ namespace extensible_enums_swagger
             uri.Reset(endpoint);
             uri.AppendPath("/extensibleenums/pet/addPet", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Headers.Add("Accept", "application/json");
             if (petParam != null)
             {
                 var content = new Utf8JsonRequestContent();
@@ -121,7 +120,8 @@ namespace extensible_enums_swagger
             return message;
         }
 
-        /// <param name="petParam"> The Pet to use. </param>
+        /// <summary> add pet. </summary>
+        /// <param name="petParam"> pet param. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Pet>> AddPetAsync(Pet petParam = null, CancellationToken cancellationToken = default)
         {
@@ -141,7 +141,8 @@ namespace extensible_enums_swagger
             }
         }
 
-        /// <param name="petParam"> The Pet to use. </param>
+        /// <summary> add pet. </summary>
+        /// <param name="petParam"> pet param. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet petParam = null, CancellationToken cancellationToken = default)
         {
