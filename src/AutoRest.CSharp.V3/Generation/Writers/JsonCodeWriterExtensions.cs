@@ -191,6 +191,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($"WriteStringValue({name}.ToString());");
                             return;
                         }
+                        else if (frameworkType == typeof(Uri))
+                        {
+                            writer.Line($"WriteStringValue({name}.{nameof(Uri.AbsoluteUri)});");
+                            return;
+                        }
 
                         writer.Append($"({name}")
                             .AppendNullableValue(valueSerialization.Type);
@@ -483,6 +488,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             if (frameworkType == typeof(ETag))
             {
                 writer.Append($"new {typeof(ETag)}({element}.GetString())");
+                return;
+            }
+            else if (frameworkType == typeof(Uri))
+            {
+                writer.Append($"new {typeof(Uri)}({element}.GetString())");
                 return;
             }
             else
