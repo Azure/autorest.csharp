@@ -195,35 +195,38 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         var multipartContent = new CodeWriterDeclaration("content");
                         writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
 
-                        foreach (var bodyParameter in multipartRequestBody.Value)
+                        foreach (var bodyParameter in multipartRequestBody.RequestBodyParts)
                         {
-                            using (WriteValueNullCheck(writer, bodyParameter))
+                            switch (bodyParameter.Content)
                             {
-                                if (bodyParameter.Type.Name == "IEnumerable")
-                                {
-                                    var collectionItemVariable = new CodeWriterDeclaration("value");
-                                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {bodyParameter.Reference.Name})"))
-                                    {
-                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), \"");
-                                        WriteConstantOrParameter(writer, bodyParameter);
-                                        writer.Line($"\", null);");
-                                    }
-                                }
-                                else
-                                {
-                                    if (bodyParameter.Type.Name == typeof(string).Name)
-                                    {
-                                        writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
-                                    }
-                                    else
+                                case BinaryRequestBody binaryBody:
+                                    using (WriteValueNullCheck(writer, binaryBody.Value))
                                     {
                                         writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
+                                        WriteConstantOrParameter(writer, binaryBody.Value);
+                                        writer.Append($"), \"{bodyParameter.Name}");
+                                        writer.Line($"\", null);");
                                     }
-                                    WriteConstantOrParameter(writer, bodyParameter);
-                                    writer.Append($"), \"");
-                                    WriteConstantOrParameter(writer, bodyParameter);
-                                    writer.Line($"\", null);");
-                                }
+                                    break;
+                                case TextRequestBody textBody:
+                                    using (WriteValueNullCheck(writer, textBody.Value))
+                                    {
+                                        writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
+                                        WriteConstantOrParameter(writer, textBody.Value);
+                                        writer.Append($"), \"{bodyParameter.Name}");
+                                        writer.Line($"\", null);");
+                                    }
+                                    break;
+                                case CollectionRequestBody collectionBody:
+                                    var collectionItemVariable = new CodeWriterDeclaration("value");
+                                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {collectionBody.Value.Reference.Name})"))
+                                    {
+                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), \"{bodyParameter.Name}");
+                                        writer.Line($"\", null);");
+                                    }
+                                    break;
+                                default:
+                                    throw new NotImplementedException(bodyParameter.Content?.GetType().FullName);
                             }
                         }
                         writer.Line($"{multipartContent}.ApplyToRequest({request});");

@@ -241,25 +241,48 @@ namespace AutoRest.CSharp.V3.Output.Models
                 if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
                 {
                     Debug.Assert(bodyParameters.Count == 1);
-                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.FirstOrDefault();
+                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
                     body = new BinaryRequestBody(bodyParameterValue);
                 }
                 else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
                 {
                     Debug.Assert(bodyParameters.Count == 1);
-                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.FirstOrDefault();
+                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
                     body = new TextRequestBody(bodyParameterValue);
                 }
                 else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Multipart)
                 {
-                    List<ReferenceOrConstant> value = new List<ReferenceOrConstant>();
-                    value.AddRange(bodyParameters.Values);
+                    List<MultipartRequestBodyPart> value = new List<MultipartRequestBodyPart>();
+                    foreach (var parameter in bodyParameters)
+                    {
+                        var type = parameter.Value.Type;
+                        RequestBody requestBody = new RequestBody();
+
+                        if (type.Name == typeof(string).Name)
+                        {
+                            requestBody = new TextRequestBody(parameter.Value);
+                        }
+                        else if (type.Name == typeof(System.IO.Stream).Name)
+                        {
+                            requestBody = new BinaryRequestBody(parameter.Value);
+                        }
+                        else if (type.Name == "IEnumerable")
+                        {
+                            requestBody = new CollectionRequestBody(parameter.Value);
+                        }
+                        else
+                        {
+                            new NotImplementedException();
+                        }
+
+                        value.Add(new MultipartRequestBodyPart(parameter.Value.Reference.Name, requestBody));
+                    }
                     body = new MultipartRequestBody(value.ToArray());
                 }
                 else
                 {
                     Debug.Assert(bodyParameters.Count == 1);
-                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.FirstOrDefault();
+                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
                     var serialization = _serializationBuilder.Build(
                         httpRequestWithBody.KnownMediaType,
                         bodyRequestParameter.Schema,
