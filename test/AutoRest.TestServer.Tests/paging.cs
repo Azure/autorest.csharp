@@ -198,6 +198,36 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
+        public Task PagingMultiple_Continuation() => Test(async (host, pipeline) =>
+        {
+            var client = new PagingClient(ClientDiagnostics, pipeline, host);
+            var pages = client.GetMultiplePages().AsPages().ToArray();
+
+            for (int i = 1; i < pages.Length; i++)
+            {
+                var expectedPages = pages.Skip(i).ToArray();
+                var actualPages = client.GetMultiplePages().AsPages(pages[i - 1].ContinuationToken).ToArray();
+
+                Assert.That(expectedPages, Is.EquivalentTo(actualPages).Using<Page<Product>>((p1, p2)=>
+                    p1.Values.Count == p2.Values.Count && p1.ContinuationToken == p2.ContinuationToken));
+            }
+
+            for (int i = 1; i < pages.Length; i++)
+            {
+                var expectedPages = pages.Skip(i).ToArray();
+                var actualPages = new List<Page<Product>>();
+                await foreach (var page in client.GetMultiplePagesAsync().AsPages(pages[i - 1].ContinuationToken))
+                {
+                    actualPages.Add(page);
+                }
+
+                Assert.That(expectedPages, Is.EquivalentTo(actualPages).Using<Page<Product>>((p1, p2)=>
+                    p1.Values.Count == p2.Values.Count && p1.ContinuationToken == p2.ContinuationToken));
+            }
+        }, ignoreScenario: true);
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingMultiple() => Test(async (host, pipeline) =>
         {
             var id = 1;
