@@ -204,8 +204,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                     {
                                         writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
                                         WriteConstantOrParameter(writer, binaryBody.Value);
-                                        writer.Append($"), \"{bodyParameter.Name}");
-                                        writer.Line($"\", null);");
+                                        writer.Line($"), {bodyParameter.Name:L}, null);");
                                     }
                                     break;
                                 case TextRequestBody textBody:
@@ -213,16 +212,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                     {
                                         writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
                                         WriteConstantOrParameter(writer, textBody.Value);
-                                        writer.Append($"), \"{bodyParameter.Name}");
-                                        writer.Line($"\", null);");
+                                        writer.Line($"), {bodyParameter.Name:L}, null);");
                                     }
                                     break;
-                                case CollectionRequestBody collectionBody:
+                                case BinaryCollectionRequestBody collectionBody:
                                     var collectionItemVariable = new CodeWriterDeclaration("value");
                                     using (writer.Scope($"foreach (var {collectionItemVariable:D} in {collectionBody.Value.Reference.Name})"))
                                     {
-                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), \"{bodyParameter.Name}");
-                                        writer.Line($"\", null);");
+                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), {bodyParameter.Name:L}, null);");
                                     }
                                     break;
                                 default:

@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                     foreach (var parameter in bodyParameters)
                     {
                         var type = parameter.Value.Type;
-                        RequestBody requestBody = new RequestBody();
+                        RequestBody requestBody;
 
                         if (type.Name == typeof(string).Name)
                         {
@@ -266,13 +266,13 @@ namespace AutoRest.CSharp.V3.Output.Models
                         {
                             requestBody = new BinaryRequestBody(parameter.Value);
                         }
-                        else if (type.Name == "IEnumerable")
+                        else if (TypeFactory.IsList(type))
                         {
-                            requestBody = new CollectionRequestBody(parameter.Value);
+                            requestBody = new BinaryCollectionRequestBody(parameter.Value);
                         }
                         else
                         {
-                            new NotImplementedException();
+                            throw new NotImplementedException();
                         }
 
                         value.Add(new MultipartRequestBodyPart(parameter.Value.Reference.Name, requestBody));
