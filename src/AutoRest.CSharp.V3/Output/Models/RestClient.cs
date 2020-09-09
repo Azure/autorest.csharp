@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -258,11 +259,11 @@ namespace AutoRest.CSharp.V3.Output.Models
                         var type = parameter.Value.Type;
                         RequestBody requestBody;
 
-                        if (type.Name == typeof(string).Name)
+                        if (type.IsFrameworkType && type.FrameworkType == typeof(string))
                         {
                             requestBody = new TextRequestBody(parameter.Value);
                         }
-                        else if (type.Name == typeof(System.IO.Stream).Name)
+                        else if (type.IsFrameworkType && type.FrameworkType == typeof(Stream))
                         {
                             requestBody = new BinaryRequestBody(parameter.Value);
                         }
