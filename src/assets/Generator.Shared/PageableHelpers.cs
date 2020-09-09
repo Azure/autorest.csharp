@@ -11,36 +11,30 @@ namespace Azure.Core
 {
     internal static class PageableHelpers
     {
-        public static Pageable<T> CreateEnumerable<T>(Func<int?, Page<T>> firstPageFunc, Func<string?, int?, Page<T>> nextPageFunc, int? pageSize = default) where T : notnull
+        public static Pageable<T> CreateEnumerable<T>(Func<int?, Page<T>> firstPageFunc, Func<string?, int?, Page<T>>? nextPageFunc, int? pageSize = default) where T : notnull
         {
-            if (firstPageFunc == null) throw new ArgumentNullException(nameof(firstPageFunc));
-            if (nextPageFunc == null) throw new ArgumentNullException(nameof(nextPageFunc));
-
             PageFunc<T> first = (continuationToken, pageSizeHint) => firstPageFunc(pageSizeHint);
-            PageFunc<T> next = new PageFunc<T>(nextPageFunc);
+            PageFunc<T>? next = nextPageFunc != null ? new PageFunc<T>(nextPageFunc) : null;
             return new FuncPageable<T>(first, next, pageSize);
         }
 
-        public static AsyncPageable<T> CreateAsyncEnumerable<T>(Func<int?, Task<Page<T>>> firstPageFunc, Func<string?, int?, Task<Page<T>>> nextPageFunc, int? pageSize = default) where T : notnull
+        public static AsyncPageable<T> CreateAsyncEnumerable<T>(Func<int?, Task<Page<T>>> firstPageFunc, Func<string?, int?, Task<Page<T>>>? nextPageFunc, int? pageSize = default) where T : notnull
         {
-            if (firstPageFunc == null) throw new ArgumentNullException(nameof(firstPageFunc));
-            if (nextPageFunc == null) throw new ArgumentNullException(nameof(nextPageFunc));
-
             AsyncPageFunc<T> first = (continuationToken, pageSizeHint) => firstPageFunc(pageSizeHint);
-            AsyncPageFunc<T> next = new AsyncPageFunc<T>(nextPageFunc);
+            AsyncPageFunc<T>? next = nextPageFunc != null ? new AsyncPageFunc<T>(nextPageFunc) : null;
             return new FuncAsyncPageable<T>(first, next, pageSize);
         }
 
         internal delegate Task<Page<T>> AsyncPageFunc<T>(string? continuationToken = default, int? pageSizeHint = default);
         internal delegate Page<T> PageFunc<T>(string? continuationToken = default, int? pageSizeHint = default);
 
-        private class FuncAsyncPageable<T> : AsyncPageable<T> where T : notnull
+        internal class FuncAsyncPageable<T> : AsyncPageable<T> where T : notnull
         {
             private readonly AsyncPageFunc<T> _firstPageFunc;
-            private readonly AsyncPageFunc<T> _nextPageFunc;
+            private readonly AsyncPageFunc<T>? _nextPageFunc;
             private readonly int? _defaultPageSize;
 
-            public FuncAsyncPageable(AsyncPageFunc<T> firstPageFunc, AsyncPageFunc<T> nextPageFunc, int? defaultPageSize = default)
+            public FuncAsyncPageable(AsyncPageFunc<T> firstPageFunc, AsyncPageFunc<T>? nextPageFunc, int? defaultPageSize = default)
             {
                 _firstPageFunc = firstPageFunc;
                 _nextPageFunc = nextPageFunc;
@@ -49,7 +43,13 @@ namespace Azure.Core
 
             public override async IAsyncEnumerable<Page<T>> AsPages(string? continuationToken = default, int? pageSizeHint = default)
             {
-                AsyncPageFunc<T>? pageFunc = continuationToken == null ? _firstPageFunc : _nextPageFunc;
+                AsyncPageFunc<T>? pageFunc = string.IsNullOrEmpty(continuationToken) ? _firstPageFunc : _nextPageFunc;
+
+                if (pageFunc == null)
+                {
+                    yield break;
+                }
+
                 int? pageSize = pageSizeHint ?? _defaultPageSize;
                 do
                 {
@@ -57,17 +57,17 @@ namespace Azure.Core
                     yield return pageResponse;
                     continuationToken = pageResponse.ContinuationToken;
                     pageFunc = _nextPageFunc;
-                } while (!string.IsNullOrEmpty(continuationToken));
+                } while (!string.IsNullOrEmpty(continuationToken) && pageFunc != null);
             }
         }
 
-        private class FuncPageable<T> : Pageable<T> where T : notnull
+        internal class FuncPageable<T> : Pageable<T> where T : notnull
         {
             private readonly PageFunc<T> _firstPageFunc;
-            private readonly PageFunc<T> _nextPageFunc;
+            private readonly PageFunc<T>? _nextPageFunc;
             private readonly int? _defaultPageSize;
 
-            public FuncPageable(PageFunc<T> firstPageFunc, PageFunc<T> nextPageFunc, int? defaultPageSize = default)
+            public FuncPageable(PageFunc<T> firstPageFunc, PageFunc<T>? nextPageFunc, int? defaultPageSize = default)
             {
                 _firstPageFunc = firstPageFunc;
                 _nextPageFunc = nextPageFunc;
@@ -76,7 +76,13 @@ namespace Azure.Core
 
             public override IEnumerable<Page<T>> AsPages(string? continuationToken = default, int? pageSizeHint = default)
             {
-                PageFunc<T> pageFunc = continuationToken == null ? _firstPageFunc : _nextPageFunc;
+                PageFunc<T>? pageFunc = string.IsNullOrEmpty(continuationToken) ? _firstPageFunc : _nextPageFunc;
+
+                if (pageFunc == null)
+                {
+                    yield break;
+                }
+
                 int? pageSize = pageSizeHint ?? _defaultPageSize;
                 do
                 {
@@ -84,7 +90,7 @@ namespace Azure.Core
                     yield return pageResponse;
                     continuationToken = pageResponse.ContinuationToken;
                     pageFunc = _nextPageFunc;
-                } while (!string.IsNullOrEmpty(continuationToken));
+                } while (!string.IsNullOrEmpty(continuationToken) && pageFunc != null);
             }
         }
     }
