@@ -2297,54 +2297,13 @@ namespace AutoRest.CSharp.V3.Input
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class HttpMultiPartRequest : HttpWithBodyRequest
+    internal partial class HttpMultipartRequest : HttpWithBodyRequest
     {
         /// <summary>indicates that the HTTP Request should be a multipart request
         ///
         /// ie, that it has multiple requests in a single request.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "multipart")]
         public bool? Multipart { get; set; }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class HttpMultipartRequest
-    {
-        /// <summary>indicates that the HTTP Request should be a multipart request
-        ///
-        /// ie, that it has multiple requests in a single request.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "multipart")]
-        public bool? Multipart { get; set; } = true;
-
-        /// <summary>a normalized value for the media type (ie, distills down to a well-known moniker (ie, 'json'))</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "knownMediaType")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public KnownMediaType KnownMediaType { get; set; }
-
-        /// <summary>must contain at least one media type to send for the body</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "mediaTypes")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<string> MediaTypes { get; set; } = new System.Collections.ObjectModel.Collection<string>();
-
-        /// <summary>A relative path to an individual endpoint.
-        ///
-        /// The field name MUST begin with a slash.
-        /// The path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL.
-        /// Path templating is allowed.
-        ///
-        /// When matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "path")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Path { get; set; }
-
-        /// <summary>the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "uri")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Uri { get; set; }
-
-        /// <summary>the HTTP Method used to process this operation</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "method")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public HttpMethod Method { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]

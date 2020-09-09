@@ -2797,7 +2797,7 @@
         }
       ]
     },
-    "HttpMultiPartRequest": {
+    "HttpMultipartRequest": {
       "type": "object",
       "properties": {
         "multipart": {
@@ -2822,52 +2822,6 @@
         {
           "$ref": "#/definitions/HttpWithBodyRequest"
         }
-      ]
-    },
-    "HttpMultipartRequest": {
-      "type": "object",
-      "properties": {
-        "multipart": {
-          "description": "indicates that the HTTP Request should be a multipart request \n\nie, that it has multiple requests in a single request.",
-          "type": "boolean",
-          "enum": [
-            true
-          ],
-          "default": true
-        },
-        "knownMediaType": {
-          "$ref": "#/definitions/KnownMediaType",
-          "description": "a normalized value for the media type (ie, distills down to a well-known moniker (ie, 'json'))"
-        },
-        "mediaTypes": {
-          "description": "must contain at least one media type to send for the body",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "path": {
-          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
-          "type": "string"
-        },
-        "uri": {
-          "description": "the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.",
-          "type": "string"
-        },
-        "method": {
-          "$ref": "#/definitions/HttpMethod",
-          "description": "the HTTP Method used to process this operation"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "knownMediaType",
-        "mediaTypes",
-        "method",
-        "multipart",
-        "path",
-        "uri"
       ]
     },
     "HttpHeader": {
