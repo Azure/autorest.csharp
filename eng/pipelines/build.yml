@@ -30,7 +30,7 @@ stages:
         variables:
           DotNetCoreSDKVersion: 3.0.100
         pool:
-          vmImage: windows-2019
+          vmImage: ubuntu-18.04
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
@@ -45,15 +45,7 @@ stages:
           - script: |
               npm ci
             displayName: "Install packages"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - script: |
-              dotnet build AutoRest.CSharp.V3.sln
-            displayName: "Build"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            env:
-              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-              DOTNET_CLI_TELEMETRY_OPTOUT: 1
-              DOTNET_MULTILEVEL_LOOKUP: 0       
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp   
           - script: 'dotnet pack src/AutoRest.CSharp.V3/AutoRest.CSharp.V3.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror'
             displayName: 'Package'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
@@ -105,11 +97,14 @@ stages:
       #     filter: "^[s-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-blobfeed.yml@azure-sdk-build-tools  
+      parameters:
+        ShouldTag: false
+        ShouldSign: false
     - stage: 'Update_azure_sdk_for_net'
       jobs:
         - job: Update
           pool:
-            vmImage: windows-2019
+            vmImage: ubuntu-18.04
           variables:
             AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
           steps:
