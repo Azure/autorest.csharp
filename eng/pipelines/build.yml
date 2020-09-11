@@ -81,7 +81,7 @@ stages:
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - pwsh: > 
                 ./eng/PublishCoverage.ps1
-                -Version $(AutorestCSharpVersion)
+                -Version $(Package.AutorestCSharpVersion)
                 -CoverageUser $(storage-coverage-user)
                 -CoveragePass $(storage-coverage-pass)
               failOnStderr: false
