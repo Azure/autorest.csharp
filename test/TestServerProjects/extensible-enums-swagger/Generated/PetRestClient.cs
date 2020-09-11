@@ -49,7 +49,6 @@ namespace extensible_enums_swagger
             return message;
         }
 
-        /// <summary> get pet by id. </summary>
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
@@ -76,7 +75,6 @@ namespace extensible_enums_swagger
             }
         }
 
-        /// <summary> get pet by id. </summary>
         /// <param name="petId"> Pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
@@ -123,8 +121,7 @@ namespace extensible_enums_swagger
             return message;
         }
 
-        /// <summary> add pet. </summary>
-        /// <param name="petParam"> pet param. </param>
+        /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Pet>> AddPetAsync(Pet petParam = null, CancellationToken cancellationToken = default)
         {
@@ -144,8 +141,7 @@ namespace extensible_enums_swagger
             }
         }
 
-        /// <summary> add pet. </summary>
-        /// <param name="petParam"> pet param. </param>
+        /// <param name="petParam"> The Pet to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Pet> AddPet(Pet petParam = null, CancellationToken cancellationToken = default)
         {

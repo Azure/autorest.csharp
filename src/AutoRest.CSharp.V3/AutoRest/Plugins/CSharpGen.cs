@@ -112,10 +112,10 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             CodeModel codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
             var configuration = new Configuration(
-                new Uri(GetRequiredOption(autoRest, "output-folder")).LocalPath,
-                GetRequiredOption(autoRest, "namespace"),
+                    TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
+                GetRequiredOption<string>(autoRest, "namespace"),
                 autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
-                GetRequiredOption(autoRest, "shared-source-folders").Split(";"),
+                GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
                 autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false
@@ -136,9 +136,19 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             return true;
         }
 
-        private string GetRequiredOption(IPluginCommunication autoRest, string name)
+        private T GetRequiredOption<T>(IPluginCommunication autoRest, string name)
         {
-            return autoRest.GetValue<string?>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
+            return autoRest.GetValue<T>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
+        }
+
+        private static string TrimFileSuffix(string path)
+        {
+            if (Uri.IsWellFormedUriString(path, UriKind.Absolute))
+            {
+                path = new Uri(path).LocalPath;
+            }
+
+            return path;
         }
     }
 }

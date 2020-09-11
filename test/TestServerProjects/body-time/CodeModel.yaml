@@ -187,13 +187,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            time_get:
-              parameters: {}
-              responses:
-                '200':
-                  body: '11:34:56'
         language: !<!Languages> 
           default:
             name: Get
@@ -289,13 +282,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            time_put:
-              parameters:
-                timeBody: '08:07:56'
-              responses:
-                '200': {}
         language: !<!Languages> 
           default:
             name: Put

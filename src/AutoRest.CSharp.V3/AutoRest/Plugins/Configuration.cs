@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Linq;
 
 namespace AutoRest.CSharp.V3.AutoRest.Plugins
@@ -18,6 +19,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             AzureArm = azureArm;
             PublicClients = publicClients || AzureArm;
         }
+
 
         public string OutputFolder { get; }
         public string Namespace { get; }

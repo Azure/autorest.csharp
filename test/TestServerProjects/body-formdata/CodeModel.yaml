@@ -41,7 +41,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_8
+    - !<!ConstantSchema> &ref_6
       type: constant
       value: !<!ConstantValue> 
         value: multipart/form-data
@@ -51,7 +51,7 @@ schemas: !<!Schemas>
           name: MultipartFormData
           description: Content Type 'multipart/form-data'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_9
+    - !<!ConstantSchema> &ref_7
       type: constant
       value: !<!ConstantValue> 
         value: 'application/octet-stream, application/json'
@@ -61,7 +61,7 @@ schemas: !<!Schemas>
           name: Accept
           description: 'Accept: application/octet-stream, application/json'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_13
+    - !<!ConstantSchema> &ref_11
       type: constant
       value: !<!ConstantValue> 
         value: application/octet-stream
@@ -82,17 +82,7 @@ schemas: !<!Schemas>
           name: binary
           description: File to upload.
       protocol: !<!Protocols> {}
-    - !<!BinarySchema> &ref_14
-      type: binary
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: binary
-          description: ''
-      protocol: !<!Protocols> {}
-    - !<!BinarySchema> &ref_5
+    - !<!BinarySchema> &ref_12
       type: binary
       apiVersions:
         - !<!ApiVersion> 
@@ -103,7 +93,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_12
+    - !<!ObjectSchema> &ref_10
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -165,41 +155,8 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> 
-      type: object
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      properties:
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_6
-            type: array
-            apiVersions:
-              - !<!ApiVersion> 
-                version: 1.0.0
-            elementType: *ref_5
-            language: !<!Languages> 
-              default:
-                name: ArrayOfbinary
-                description: Files to upload.
-            protocol: !<!Protocols> {}
-          required: true
-          serializedName: fileContent
-          language: !<!Languages> 
-            default:
-              name: fileContent
-              description: Files to upload.
-          protocol: !<!Protocols> {}
-      language: !<!Languages> 
-        default:
-          name: Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema
-          description: ''
-          namespace: ''
-      protocol: !<!Protocols> {}
-  arrays:
-    - *ref_6
 globalParameters:
-  - !<!Parameter> &ref_7
+  - !<!Parameter> &ref_5
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -224,12 +181,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_7
+          - *ref_5
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_8
+                schema: *ref_6
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -241,7 +198,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_10
+              - !<!Parameter> &ref_8
                 schema: *ref_3
                 implementation: Method
                 required: true
@@ -253,7 +210,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
-              - !<!Parameter> &ref_11
+              - !<!Parameter> &ref_9
                 schema: *ref_4
                 implementation: Method
                 required: true
@@ -266,7 +223,7 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: body
               - !<!Parameter> 
-                schema: *ref_9
+                schema: *ref_7
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -279,8 +236,8 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
             signatureParameters:
-              - *ref_10
-              - *ref_11
+              - *ref_8
+              - *ref_9
             language: !<!Languages> 
               default:
                 name: ''
@@ -312,7 +269,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_12
+            schema: *ref_10
             language: !<!Languages> 
               default:
                 name: ''
@@ -334,12 +291,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_7
+          - *ref_5
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_13
+                schema: *ref_11
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -351,8 +308,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_15
-                schema: *ref_14
+              - !<!Parameter> &ref_13
+                schema: *ref_12
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -364,7 +321,7 @@ operationGroups:
                     in: body
                     style: binary
               - !<!Parameter> 
-                schema: *ref_9
+                schema: *ref_7
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -377,7 +334,7 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
             signatureParameters:
-              - *ref_15
+              - *ref_13
             language: !<!Languages> 
               default:
                 name: ''
@@ -409,7 +366,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_12
+            schema: *ref_10
             language: !<!Languages> 
               default:
                 name: ''
@@ -425,103 +382,6 @@ operationGroups:
           default:
             name: UploadFileViaBody
             description: Upload file
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
-        apiVersions:
-          - !<!ApiVersion> 
-            version: 1.0.0
-        parameters:
-          - *ref_7
-        requests:
-          - !<!Request> 
-            parameters:
-              - !<!Parameter> 
-                schema: *ref_8
-                implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-              - !<!Parameter> &ref_16
-                schema: *ref_6
-                implementation: Method
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: fileContent
-                    description: Files to upload.
-                    serializedName: fileContent
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: body
-              - !<!Parameter> 
-                schema: *ref_9
-                implementation: Method
-                origin: 'modelerfour:synthesized/accept'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-            signatureParameters:
-              - *ref_16
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpMultipartRequest> 
-                path: /formdata/stream/uploadfiles
-                method: post
-                knownMediaType: multipart
-                mediaTypes:
-                  - multipart/form-data
-                multipart: true
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !<!BinaryResponse> 
-            binary: true
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpBinaryResponse> 
-                knownMediaType: binary
-                mediaTypes:
-                  - application/octet-stream
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !<!SchemaResponse> 
-            schema: *ref_12
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !<!Languages> 
-          default:
-            name: UploadFiles
-            description: Upload multiple files
         protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:

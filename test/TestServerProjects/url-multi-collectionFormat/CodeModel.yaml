@@ -123,7 +123,6 @@ schemas: !<!Schemas>
         - !<!ApiVersion> 
           version: 1.0.0
       elementType: *ref_4
-      nullableItems: true
       language: !<!Languages> 
         default:
           name: ArrayOfString

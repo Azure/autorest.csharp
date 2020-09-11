@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -165,76 +164,6 @@ namespace body_formdata
             }
 
             using var message = CreateUploadFileViaBodyRequest(fileContent);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        var value = message.ExtractResponseContent();
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateUploadFilesRequest(IEnumerable<Stream> fileContent)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/formdata/stream/uploadfiles", false);
-            request.Uri = uri;
-            request.Headers.Add("Content-Type", "multipart/form-data");
-            request.Headers.Add("Accept", "application/octet-stream, application/json");
-            var content = new MultipartFormDataContent();
-            foreach (var value in fileContent)
-            {
-                content.Add(RequestContent.Create(value), "fileContent", null);
-            }
-            content.ApplyToRequest(request);
-            return message;
-        }
-
-        /// <summary> Upload multiple files. </summary>
-        /// <param name="fileContent"> Files to upload. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
-        public async Task<Response<Stream>> UploadFilesAsync(IEnumerable<Stream> fileContent, CancellationToken cancellationToken = default)
-        {
-            if (fileContent == null)
-            {
-                throw new ArgumentNullException(nameof(fileContent));
-            }
-
-            using var message = CreateUploadFilesRequest(fileContent);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        var value = message.ExtractResponseContent();
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Upload multiple files. </summary>
-        /// <param name="fileContent"> Files to upload. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
-        public Response<Stream> UploadFiles(IEnumerable<Stream> fileContent, CancellationToken cancellationToken = default)
-        {
-            if (fileContent == null)
-            {
-                throw new ArgumentNullException(nameof(fileContent));
-            }
-
-            using var message = CreateUploadFilesRequest(fileContent);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

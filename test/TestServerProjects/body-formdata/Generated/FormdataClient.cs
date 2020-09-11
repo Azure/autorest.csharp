@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -102,42 +101,6 @@ namespace body_formdata
             try
             {
                 return RestClient.UploadFileViaBody(fileContent, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Upload multiple files. </summary>
-        /// <param name="fileContent"> Files to upload. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Stream>> UploadFilesAsync(IEnumerable<Stream> fileContent, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FormdataClient.UploadFiles");
-            scope.Start();
-            try
-            {
-                return await RestClient.UploadFilesAsync(fileContent, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Upload multiple files. </summary>
-        /// <param name="fileContent"> Files to upload. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Stream> UploadFiles(IEnumerable<Stream> fileContent, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FormdataClient.UploadFiles");
-            scope.Start();
-            try
-            {
-                return RestClient.UploadFiles(fileContent, cancellationToken);
             }
             catch (Exception e)
             {
