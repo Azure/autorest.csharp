@@ -106,7 +106,7 @@ stages:
           filter: "^[s-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-blobfeed.yml@azure-sdk-build-tools  
-    - stage: 'Update azure-sdk-for-net'
+    - stage: 'Update_azure_sdk_for_net'
       jobs:
         - job: Update
           variables:
