@@ -100,6 +100,7 @@ stages:
       parameters:
         ShouldTag: false
         ShouldSign: false
+        ShouldPublishSymbols: false
     - stage: 'Update_azure_sdk_for_net'
       jobs:
         - job: Update
