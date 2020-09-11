@@ -113,17 +113,17 @@ stages:
             AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
           steps:
             - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-                failOnStderr: false
-                workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-                displayName: 'Update generator version in Azure SDK repo'
-              - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
-                parameters:
-                  BaseBranchName: master
-                  RepoName: azure-sdk-for-net
-                  PRBranchName: auto-update-autorest
-                  CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
-                  PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
-                  PRTitle:  Update AutoRest C# version
-                  PushArgs: -f
-                  WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-                  ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+              failOnStderr: false
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              displayName: 'Update generator version in Azure SDK repo'
+            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+              parameters:
+                BaseBranchName: master
+                RepoName: azure-sdk-for-net
+                PRBranchName: auto-update-autorest
+                CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
+                PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
+                PRTitle:  Update AutoRest C# version
+                PushArgs: -f
+                WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+                ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
