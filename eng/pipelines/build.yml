@@ -18,6 +18,9 @@ resources:
       type: github
       name: Azure/azure-sdk-for-net
       endpoint: azure
+    - repository: azure-sdk-build-tools
+      type: git
+      name: internal/azure-sdk-build-tools
 
 jobs:
   - job: Build
@@ -48,7 +51,13 @@ jobs:
         env:
           DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
-          DOTNET_MULTILEVEL_LOOKUP: 0
+          DOTNET_MULTILEVEL_LOOKUP: 0       
+      - script: 'dotnet pack src\AutoRest.CSharp.V3\AutoRest.CSharp.V3.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror $(VersioningProps)'
+            displayName: 'Package'
+            env:
+              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+              DOTNET_CLI_TELEMETRY_OPTOUT: 1
+              DOTNET_MULTILEVEL_LOOKUP: 0
       - pwsh: ./eng/CodeChecks.ps1
         displayName: "Check if code is up-to-date"
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
@@ -60,7 +69,13 @@ jobs:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
           DOTNET_MULTILEVEL_LOOKUP: 0
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+      - task: PublishBuildArtifacts@1
+        condition: succeededOrFailed()
+        displayName: 'Publish Artifacts'
+        inputs:
+          ArtifactName: packages
       - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
+        - template: pipelines/stages/net-release-blobfeed.yml@azure-sdk-build-tools
         - checkout: azure-sdk-for-net
         - pwsh: > 
             ./eng/PublishRelease.ps1

@@ -27,8 +27,15 @@ namespace AutoRest.CSharp.V3.Utilities
         public static JsonElement[] Unwrap(this JsonElement element) =>
             element.ValueKind == JsonValueKind.Array ? element.EnumerateArray().ToArray() : new[] { element };
 
-        public static string[]? ToStringArray(this JsonElement? element) =>
-            element?.ValueKind == JsonValueKind.Array ? element.Value.EnumerateArray().Select(e => e.GetString()).ToArray() : null;
+        public static string[]? ToStringArray(this JsonElement? element)
+        {
+            if (element?.ValueKind == JsonValueKind.String)
+            {
+                return element.Value.GetString().Split(";");
+            }
+            return element?.ValueKind == JsonValueKind.Array ? element.Value.EnumerateArray().Select(e => e.GetString()).ToArray() : null;
+        }
+
         public static string? ToStringValue(this JsonElement? element) =>
             element?.ValueKind == JsonValueKind.String ? element.Value.GetString() : null;
         public static int? ToNumber(this JsonElement? element) =>
