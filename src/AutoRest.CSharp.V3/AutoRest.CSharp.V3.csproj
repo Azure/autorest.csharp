@@ -63,6 +63,8 @@
       <Content Include="$(_GeneratedPropsFilePath)" PackagePath="build\" />
       <Content Include="$(_GeneratedPropsFilePath)" PackagePath="buildMultiTargeting\" />
     </ItemGroup>
+
+    <Message Text="##vso[task.setvariable variable=AutorestCSharpVersion;isSecret=false]$(Version)" Importance="High"/>
   </Target>
 
 </Project>
