@@ -36,7 +36,6 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - checkout: self
-          - checkout: azure-sdk-tools
           - task: DotNetCoreInstaller@2
             displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
             inputs:
@@ -112,7 +111,9 @@ stages:
           variables:
             AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
           steps:
+            - checkout: self
             - checkout: azure-sdk-for-net
+            - checkout: azure-sdk-tools
             - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
               failOnStderr: false
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
