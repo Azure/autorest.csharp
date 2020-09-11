@@ -64,6 +64,7 @@ stages:
           # - pwsh: ./eng/CodeChecks.ps1
           #   displayName: "Check if code is up-to-date"
           #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            name: Package
           - script: |
               dotnet test AutoRest.CSharp.V3.sln
             displayName: "Test"
@@ -87,21 +88,6 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-              failOnStderr: false
-              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              displayName: 'Update generator version in Azure SDK repo'
-            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
-              parameters:
-                BaseBranchName: master
-                RepoName: azure-sdk-for-net
-                PRBranchName: auto-update-autorest
-                CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRTitle:  Update AutoRest C# version
-                PushArgs: -f
-                WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-                ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
       - template: smoke-test.yml
         parameters:
           name: SmokeTest_A_C
@@ -119,4 +105,24 @@ stages:
           name: SmokeTest_S_Z
           filter: "^[s-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-    - template: pipelines/stages/net-release-blobfeed.yml@azure-sdk-build-tools
+    - template: pipelines/stages/net-release-blobfeed.yml@azure-sdk-build-tools  
+    - stage: 'Update azure-sdk-for-net'
+      jobs:
+        - job: Update
+            AutorestCSharpVersion:
+              Magic: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+          - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+              failOnStderr: false
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              displayName: 'Update generator version in Azure SDK repo'
+            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+              parameters:
+                BaseBranchName: master
+                RepoName: azure-sdk-for-net
+                PRBranchName: auto-update-autorest
+                CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
+                PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
+                PRTitle:  Update AutoRest C# version
+                PushArgs: -f
+                WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+                ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
