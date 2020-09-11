@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel, Configuration configuration)
         {
             Directory.CreateDirectory(configuration.OutputFolder);
-            var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
+            var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var context = new BuildContext(codeModel, configuration, sourceInputModel);
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 new Uri(GetRequiredOption(autoRest, "output-folder")).LocalPath,
                 GetRequiredOption(autoRest, "namespace"),
                 autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
-                new Uri(GetRequiredOption(autoRest, "shared-source-folder")).LocalPath,
+                GetRequiredOption(autoRest, "shared-source-folders").Split(";"),
                 autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false
