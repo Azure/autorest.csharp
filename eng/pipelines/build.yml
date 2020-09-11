@@ -81,7 +81,7 @@ stages:
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - checkout: azure-sdk-for-net
             - pwsh: > 
-                ./eng/PublishRelease.ps1
+                ./eng/PublishCoverage.ps1
                 -Version $(AutorestCSharpVersion)
                 -CoverageUser $(storage-coverage-user)
                 -CoveragePass $(storage-coverage-pass)
