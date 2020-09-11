@@ -36,6 +36,7 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - checkout: self
+          - checkout: azure-sdk-tools
           - task: DotNetCoreInstaller@2
             displayName: "Use .NET Core sdk $(DotNetCoreSDKVersion)"
             inputs:
