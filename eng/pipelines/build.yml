@@ -79,7 +79,6 @@ stages:
             inputs:
               ArtifactName: packages
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-            - checkout: azure-sdk-for-net
             - pwsh: > 
                 ./eng/PublishCoverage.ps1
                 -Version $(AutorestCSharpVersion)
@@ -88,30 +87,33 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-      - template: smoke-test.yml
-        parameters:
-          name: SmokeTest_A_C
-          filter: "^[a-b]"
-      - template: smoke-test.yml
-        parameters:
-          name: SmokeTest_C_I
-          filter: "^[c-i]"
-      - template: smoke-test.yml
-        parameters:
-          name: SmokeTest_J_R
-          filter: "^[j-r]"
-      - template: smoke-test.yml
-        parameters:
-          name: SmokeTest_S_Z
-          filter: "^[s-z]"
+      # - template: smoke-test.yml
+      #   parameters:
+      #     name: SmokeTest_A_C
+      #     filter: "^[a-b]"
+      # - template: smoke-test.yml
+      #   parameters:
+      #     name: SmokeTest_C_I
+      #     filter: "^[c-i]"
+      # - template: smoke-test.yml
+      #   parameters:
+      #     name: SmokeTest_J_R
+      #     filter: "^[j-r]"
+      # - template: smoke-test.yml
+      #   parameters:
+      #     name: SmokeTest_S_Z
+      #     filter: "^[s-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-blobfeed.yml@azure-sdk-build-tools  
     - stage: 'Update_azure_sdk_for_net'
       jobs:
         - job: Update
+          pool:
+            vmImage: windows-2019
           variables:
             AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
           steps:
+            - checkout: azure-sdk-for-net
             - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
               failOnStderr: false
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
