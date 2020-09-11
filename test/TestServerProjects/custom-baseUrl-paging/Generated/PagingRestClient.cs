@@ -187,7 +187,7 @@ namespace custom_baseUrl_paging
             uri.AppendRaw(accountName, false);
             uri.AppendRaw(host, false);
             uri.AppendPath("/paging/customurl/", false);
-            uri.AppendRaw(nextLink, false);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

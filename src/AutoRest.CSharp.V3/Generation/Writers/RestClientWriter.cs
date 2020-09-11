@@ -132,16 +132,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     if (!segment.Value.IsConstant && segment.Value.Reference.Name == "nextLink")
                     {
-                        if (segment.IsRaw)
-                        {
-                            // Artificial nextLink needs additional logic for relative versus absolute links
-                            WritePathSegment(writer, uri, segment, "AppendRawNextLink");
-                        }
-                        else
-                        {
-                            // Natural nextLink parameters need to use a different method to parse path and query elements
-                            WritePathSegment(writer, uri, segment, "AppendRaw");
-                        }
+                        WritePathSegment(writer, uri, segment, "AppendRawNextLink");
                     }
                     else
                     {

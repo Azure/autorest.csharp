@@ -1007,7 +1007,7 @@ namespace paging
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
-            uri.AppendRaw(nextLink, false);
+            uri.AppendRawNextLink(nextLink, false);
             uri.AppendQuery("api_version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1098,7 +1098,7 @@ namespace paging
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(customParameterGroup.Tenant, true);
             uri.AppendPath("/", false);
-            uri.AppendRaw(nextLink, false);
+            uri.AppendRawNextLink(nextLink, false);
             uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
