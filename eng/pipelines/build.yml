@@ -106,6 +106,7 @@ stages:
         ShouldSign: false
         ShouldPublishSymbols: false
     - stage: 'Update_azure_sdk_for_net'
+      dependsOn: Build_and_Test
       jobs:
         - job: Update
           pool:
