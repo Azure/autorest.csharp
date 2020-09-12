@@ -51,6 +51,7 @@ stages:
             displayName: "Install packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp   
           - script: 'dotnet pack src/AutoRest.CSharp.V3/AutoRest.CSharp.V3.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror'
+            name: Package
             displayName: 'Package'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
             env:
@@ -60,7 +61,6 @@ stages:
           # - pwsh: ./eng/CodeChecks.ps1
           #   displayName: "Check if code is up-to-date"
           #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-            name: Package
           # - script: |
           #     dotnet test AutoRest.CSharp.V3.sln
           #   displayName: "Test"
