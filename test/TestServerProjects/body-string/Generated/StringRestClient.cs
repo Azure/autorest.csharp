@@ -122,7 +122,7 @@ namespace body_string
         }
 
         /// <summary> Set string value null. </summary>
-        /// <param name="stringBody"> The String to use. </param>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutNullAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -138,7 +138,7 @@ namespace body_string
         }
 
         /// <summary> Set string value null. </summary>
-        /// <param name="stringBody"> The String to use. </param>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutNull(string stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -630,7 +630,7 @@ namespace body_string
         }
 
         /// <summary> Put value that is base64url encoded. </summary>
-        /// <param name="stringBody"> The ByteArray to use. </param>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
         public async Task<Response> PutBase64UrlEncodedAsync(byte[] stringBody, CancellationToken cancellationToken = default)
@@ -652,7 +652,7 @@ namespace body_string
         }
 
         /// <summary> Put value that is base64url encoded. </summary>
-        /// <param name="stringBody"> The ByteArray to use. </param>
+        /// <param name="stringBody"> string body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
         public Response PutBase64UrlEncoded(byte[] stringBody, CancellationToken cancellationToken = default)

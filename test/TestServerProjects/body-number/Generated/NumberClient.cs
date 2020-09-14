@@ -171,7 +171,7 @@ namespace body_number
         }
 
         /// <summary> Put big float value 3.402823e+20. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutBigFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
@@ -189,7 +189,7 @@ namespace body_number
         }
 
         /// <summary> Put big float value 3.402823e+20. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutBigFloat(float numberBody, CancellationToken cancellationToken = default)
         {
@@ -241,7 +241,7 @@ namespace body_number
         }
 
         /// <summary> Put big double value 2.5976931e+101. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutBigDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
@@ -259,7 +259,7 @@ namespace body_number
         }
 
         /// <summary> Put big double value 2.5976931e+101. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutBigDouble(double numberBody, CancellationToken cancellationToken = default)
         {
@@ -447,7 +447,7 @@ namespace body_number
         }
 
         /// <summary> Put big decimal value 2.5976931e+101. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutBigDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
@@ -465,7 +465,7 @@ namespace body_number
         }
 
         /// <summary> Put big decimal value 2.5976931e+101. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutBigDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {
@@ -653,7 +653,7 @@ namespace body_number
         }
 
         /// <summary> Put small float value 3.402823e-20. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutSmallFloatAsync(float numberBody, CancellationToken cancellationToken = default)
         {
@@ -671,7 +671,7 @@ namespace body_number
         }
 
         /// <summary> Put small float value 3.402823e-20. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutSmallFloat(float numberBody, CancellationToken cancellationToken = default)
         {
@@ -723,7 +723,7 @@ namespace body_number
         }
 
         /// <summary> Put small double value 2.5976931e-101. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutSmallDoubleAsync(double numberBody, CancellationToken cancellationToken = default)
         {
@@ -741,7 +741,7 @@ namespace body_number
         }
 
         /// <summary> Put small double value 2.5976931e-101. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutSmallDouble(double numberBody, CancellationToken cancellationToken = default)
         {
@@ -793,7 +793,7 @@ namespace body_number
         }
 
         /// <summary> Put small decimal value 2.5976931e-101. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutSmallDecimalAsync(decimal numberBody, CancellationToken cancellationToken = default)
         {
@@ -811,7 +811,7 @@ namespace body_number
         }
 
         /// <summary> Put small decimal value 2.5976931e-101. </summary>
-        /// <param name="numberBody"> The Number to use. </param>
+        /// <param name="numberBody"> number body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutSmallDecimal(decimal numberBody, CancellationToken cancellationToken = default)
         {

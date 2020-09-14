@@ -389,6 +389,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getNull:
+              parameters: {}
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: GetNull
@@ -424,7 +430,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: stringBody
-                    description: ''
+                    description: string body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -481,6 +487,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_putNull:
+              parameters: {}
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutNull
@@ -547,6 +559,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getEmpty:
+              parameters: {}
+              responses:
+                '200':
+                  body: ''
         language: !<!Languages> 
           default:
             name: GetEmpty
@@ -581,7 +600,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: stringBody
-                    description: ''
+                    description: string body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -637,6 +656,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_putEmpty:
+              parameters:
+                stringBody: ''
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutEmpty
@@ -703,6 +729,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getMbcs:
+              parameters: {}
+              responses:
+                '200':
+                  body: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
         language: !<!Languages> 
           default:
             name: GetMbcs
@@ -737,7 +770,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: stringBody
-                    description: ''
+                    description: string body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -793,6 +826,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_putMbcs:
+              parameters:
+                stringBody: 啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutMbcs
@@ -859,6 +899,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getWhitespace:
+              parameters: {}
+              responses:
+                '200':
+                  body: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
         language: !<!Languages> 
           default:
             name: GetWhitespace
@@ -893,7 +940,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: stringBody
-                    description: ''
+                    description: string body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -949,6 +996,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_putWhitespace:
+              parameters:
+                stringBody: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutWhitespace
@@ -1015,6 +1069,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            string_getNotProvided:
+              parameters: {}
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: GetNotProvided
@@ -1181,7 +1241,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: stringBody
-                    description: ''
+                    description: string body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1379,6 +1439,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_getNotExpandable:
+              parameters: {}
+              responses:
+                '200':
+                  body: red color
         language: !<!Languages> 
           default:
             name: GetNotExpandable
@@ -1413,7 +1480,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: stringBody
-                    description: ''
+                    description: string body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1470,6 +1537,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_putNotExpandable:
+              parameters:
+                stringBody: red color
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutNotExpandable
@@ -1536,6 +1610,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_getReferenced:
+              parameters: {}
+              responses:
+                '200':
+                  body: red color
         language: !<!Languages> 
           default:
             name: GetReferenced
@@ -1570,7 +1651,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: enumStringBody
-                    description: ''
+                    description: enum string body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1627,6 +1708,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_putReferenced:
+              parameters:
+                enumStringBody: red color
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutReferenced
@@ -1693,6 +1781,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_getReferencedConstant:
+              parameters: {}
+              responses:
+                '200':
+                  body: green-color
         language: !<!Languages> 
           default:
             name: GetReferencedConstant
@@ -1727,7 +1822,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: enumStringBody
-                    description: ''
+                    description: enum string body
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
@@ -1784,6 +1879,13 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            enum_putReferencedConstant:
+              parameters:
+                enumStringBody: green-color
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: PutReferencedConstant
