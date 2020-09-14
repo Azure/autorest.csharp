@@ -370,7 +370,7 @@ namespace AutoRest.CSharp
 
             if (sb.ToString().Trim().Length > 0)
             {
-                if (type.IsValueType())
+                if (type.IsValueType() && sequence != null && !sequence.IsNullable)
                 {
                     return sb.ToString();
                 }
