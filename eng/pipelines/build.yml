@@ -33,8 +33,8 @@ stages:
         timeoutInMinutes: 120
         variables:
           DotNetCoreSDKVersion: 3.0.100
-        pool:
-          vmImage: ubuntu-18.04
+	      pool:
+          vmImage: windows-2019
         steps:
           - checkout: self
           - checkout: azure-sdk-tools

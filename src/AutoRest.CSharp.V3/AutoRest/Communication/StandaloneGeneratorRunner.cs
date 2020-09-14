@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
 
         private static string NormalizePath(Configuration configuration, string sharedSourceFolder)
         {
-            return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder).Replace('/', '\\');
+            return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
         }
 
         private static Configuration LoadConfiguration(string basePath, string json)
