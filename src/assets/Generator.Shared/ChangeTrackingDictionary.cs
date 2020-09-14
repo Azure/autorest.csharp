@@ -160,7 +160,7 @@ namespace Azure.Core
                 value = default!;
                 return false;
             }
-            return EnsureDictionary().TryGetValue(key, out value);
+            return EnsureDictionary().TryGetValue(key, out value!);
         }
 
         public TValue this[TKey key]
