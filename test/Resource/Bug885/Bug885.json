@@ -17,18 +17,7 @@
   "schemes": [
     "http"
   ],
-  "paths": {
-    "/operation0": {
-      "put": {
-        "operationId": "test",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    }
-  },
+  "paths": {},
   "definitions": {
     "DateAfterModification": {
       "properties": {
