@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                     writer.WriteStartArray(nameof(Configuration.SharedSourceFolders));
                     foreach (var sharedSourceFolder in configuration.SharedSourceFolders)
                     {
-                        writer.WriteStringValue(Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder));
+                        writer.WriteStringValue(NormalizePath(configuration, sharedSourceFolder));
                     }
                     writer.WriteEndArray();
                     writer.WriteBoolean(nameof(Configuration.AzureArm), configuration.AzureArm);
@@ -60,6 +60,11 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
 
                 return Encoding.UTF8.GetString(memoryStream.ToArray());
             }
+        }
+
+        private static string NormalizePath(Configuration configuration, string sharedSourceFolder)
+        {
+            return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder).Replace('/', '\\');
         }
 
         private static Configuration LoadConfiguration(string basePath, string json)
