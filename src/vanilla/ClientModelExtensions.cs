@@ -368,9 +368,11 @@ namespace AutoRest.CSharp
                 }
             }
 
+            var IsRequired = sequence != null && sequence.ShouldValidateChain() && !sequence.IsNullable;
+
             if (sb.ToString().Trim().Length > 0)
             {
-                if (type.IsValueType() && sequence != null && !sequence.IsNullable)
+                if (type.IsValueType() && IsRequired)
                 {
                     return sb.ToString();
                 }
