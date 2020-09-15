@@ -886,7 +886,9 @@ directive:
 ```yaml
 # autorest-core version
 version: 3.0.6306
-shared-source-folder: $(this-folder)/src/assets
+shared-source-folders:
+  - $(this-folder)/src/assets/Generator.Shared
+  - $(this-folder)/src/assets/Azure.Core.Shared
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
 clear-output-folder: false

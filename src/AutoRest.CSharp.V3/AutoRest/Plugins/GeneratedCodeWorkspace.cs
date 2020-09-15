@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             return document;
         }
 
-        public static GeneratedCodeWorkspace Create(string projectDirectory, string sharedSourceFolder)
+        public static GeneratedCodeWorkspace Create(string projectDirectory, string[] sharedSourceFolders)
         {
             var workspace = new AdhocWorkspace();
             // TODO: This is not the right way to construct the workspace but it works
@@ -114,9 +114,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 generatedCodeProject = generatedCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
             }
 
-            foreach (string sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))
+            foreach (var sharedSourceFolder in sharedSourceFolders)
             {
-                generatedCodeProject = generatedCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), SharedFolders, sharedSourceFile).Project;
+                foreach (string sharedSourceFile in Directory.GetFiles(sharedSourceFolder, "*.cs", SearchOption.AllDirectories))
+                {
+                    generatedCodeProject = generatedCodeProject.AddDocument(sharedSourceFile, File.ReadAllText(sharedSourceFile), SharedFolders, sharedSourceFile).Project;
+                }
             }
 
             return new GeneratedCodeWorkspace(generatedCodeProject);

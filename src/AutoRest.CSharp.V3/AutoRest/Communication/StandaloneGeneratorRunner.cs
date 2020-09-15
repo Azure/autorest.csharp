@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,7 +47,12 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                     writer.WriteString(nameof(Configuration.OutputFolder), Path.GetRelativePath(configuration.OutputFolder, configuration.OutputFolder));
                     writer.WriteString(nameof(Configuration.Namespace), configuration.Namespace);
                     writer.WriteString(nameof(Configuration.LibraryName), configuration.LibraryName);
-                    writer.WriteString(nameof(Configuration.SharedSourceFolder), Path.GetRelativePath(configuration.OutputFolder,configuration.SharedSourceFolder));
+                    writer.WriteStartArray(nameof(Configuration.SharedSourceFolders));
+                    foreach (var sharedSourceFolder in configuration.SharedSourceFolders)
+                    {
+                        writer.WriteStringValue(NormalizePath(configuration, sharedSourceFolder));
+                    }
+                    writer.WriteEndArray();
                     writer.WriteBoolean(nameof(Configuration.AzureArm), configuration.AzureArm);
                     writer.WriteBoolean(nameof(Configuration.PublicClients), configuration.PublicClients);
                     writer.WriteEndObject();
@@ -56,15 +62,27 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
             }
         }
 
+        private static string NormalizePath(Configuration configuration, string sharedSourceFolder)
+        {
+            return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
+        }
+
         private static Configuration LoadConfiguration(string basePath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
+            var sharedSourceFolders = new List<string>();
+
+            foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
+            {
+                sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
+            }
+
             return new Configuration(
                 Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()),
                 root.GetProperty(nameof(Configuration.Namespace)).GetString(),
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
-                Path.Combine(basePath, root.GetProperty(nameof(Configuration.SharedSourceFolder)).GetString()),
+                sharedSourceFolders.ToArray(),
                 saveInputs: false,
                 root.GetProperty(nameof(Configuration.AzureArm)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean()

@@ -8,4 +8,10 @@
       <Visible>false</Visible>
     </AdditionalFiles>
   </ItemGroup>
+  
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);NU5105</NoWarn>
+  </PropertyGroup>
+  
+  <Import Project="eng\Versioning.targets" />
 </Project>

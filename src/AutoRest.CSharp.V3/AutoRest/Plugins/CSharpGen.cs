@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel, Configuration configuration)
         {
             Directory.CreateDirectory(configuration.OutputFolder);
-            var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolder);
+            var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var context = new BuildContext(codeModel, configuration, sourceInputModel);
@@ -112,10 +112,10 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             CodeModel codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
             var configuration = new Configuration(
-                new Uri(GetRequiredOption(autoRest, "output-folder")).LocalPath,
-                GetRequiredOption(autoRest, "namespace"),
+                    TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
+                GetRequiredOption<string>(autoRest, "namespace"),
                 autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
-                new Uri(GetRequiredOption(autoRest, "shared-source-folder")).LocalPath,
+                GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
                 autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false
@@ -136,9 +136,19 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             return true;
         }
 
-        private string GetRequiredOption(IPluginCommunication autoRest, string name)
+        private T GetRequiredOption<T>(IPluginCommunication autoRest, string name)
         {
-            return autoRest.GetValue<string?>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
+            return autoRest.GetValue<T>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
+        }
+
+        private static string TrimFileSuffix(string path)
+        {
+            if (Uri.IsWellFormedUriString(path, UriKind.Absolute))
+            {
+                path = new Uri(path).LocalPath;
+            }
+
+            return path;
         }
     }
 }
