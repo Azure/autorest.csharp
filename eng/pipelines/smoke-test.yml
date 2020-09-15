@@ -7,10 +7,6 @@ jobs:
   pool:
     vmImage: ubuntu-18.04
   steps:
-    - task: DotNetCoreInstaller@2
-      displayName: "Use .NET Core SDK"
-      inputs:
-        version: 3.0.100
     - task: NodeTool@0
       displayName: "Install Node 13.x"
       inputs:
