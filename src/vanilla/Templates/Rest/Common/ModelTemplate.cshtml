@@ -205,7 +205,7 @@ foreach (PropertyCs property in Model.InstanceProperties.Where(p => p.IsRequired
 foreach (var property in Model.InstanceProperties.Where(p => p.Constraints.Any() || !(p.ModelType is PrimaryType)))
 {
     anythingToValidate = true;
-            @:@property.ModelType.ValidateType(Model, $"this.{property.Name}", property.Constraints)
+            @:@property.ModelType.ValidateType(Model, property, property.Constraints)
 }
 if (!anythingToValidate)
 {

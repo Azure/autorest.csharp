@@ -316,10 +316,10 @@ namespace AutoRest.CSharp
         /// </summary>
         /// <param name="type">The type to validate</param>
         /// <param name="scope">A scope provider for generating variable names as necessary</param>
-        /// <param name="valueReference">A reference to the value being validated</param>
+        /// <param name="variable">A variable to validate the type.</param>
         /// <param name="constraints">Constraints</param>
         /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateType(this IModelType type, IChild scope, string valueReference, 
+        public static string ValidateType(this IModelType type, IChild scope, IVariable variable, 
             Dictionary<Constraint, string> constraints)
         {
             if (scope == null)
@@ -327,6 +327,7 @@ namespace AutoRest.CSharp
                 throw new ArgumentNullException("scope");
             }
 
+            string valueReference = variable.Name;
             var model = type as CompositeTypeCs;
             var sequence = type as SequenceTypeCs;
             var dictionary = type as DictionaryTypeCs;
@@ -346,7 +347,8 @@ namespace AutoRest.CSharp
             if (sequence != null && sequence.ShouldValidateChain())
             {
                 var elementVar = scope.GetUniqueName("element");
-                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, null);
+                variable.Name = elementVar;
+                var innerValidation = sequence.ElementType.ValidateType(scope, variable, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
                     sb.AppendLine("foreach (var {0} in {1})", elementVar, valueReference)
@@ -358,7 +360,8 @@ namespace AutoRest.CSharp
             else if (dictionary != null && dictionary.ShouldValidateChain())
             {
                 var valueVar = scope.GetUniqueName("valueElement");
-                var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar, null);
+                variable.Name = valueVar;
+                var innerValidation = dictionary.ValueType.ValidateType(scope, variable, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
                     sb.AppendLine("foreach (var {0} in {1}.Values)", valueVar, valueReference)
@@ -368,11 +371,9 @@ namespace AutoRest.CSharp
                 }
             }
 
-            var IsRequired = sequence != null && sequence.ShouldValidateChain() && !sequence.IsNullable;
-
             if (sb.ToString().Trim().Length > 0)
             {
-                if (type.IsValueType() && IsRequired)
+                if (type.IsValueType() && !variable.IsNullable())
                 {
                     return sb.ToString();
                 }
