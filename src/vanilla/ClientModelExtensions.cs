@@ -347,7 +347,7 @@ namespace AutoRest.CSharp
             if (sequence != null && sequence.ShouldValidateChain())
             {
                 var elementVar = scope.GetUniqueName("element");
-                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, isNullable, null);
+                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, false, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
                     sb.AppendLine("foreach (var {0} in {1})", elementVar, valueReference)
@@ -359,7 +359,7 @@ namespace AutoRest.CSharp
             else if (dictionary != null && dictionary.ShouldValidateChain())
             {
                 var valueVar = scope.GetUniqueName("valueElement");
-                var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar, isNullable, null);
+                var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar, false, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
                     sb.AppendLine("foreach (var {0} in {1}.Values)", valueVar, valueReference)
