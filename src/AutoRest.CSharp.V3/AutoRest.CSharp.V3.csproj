@@ -9,6 +9,7 @@
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     <PackAsTool>true</PackAsTool>
+    <RollForward>Minor</RollForward>
   </PropertyGroup>
 
   <ItemGroup>
@@ -58,7 +59,7 @@
     </ItemGroup>
 
     <WriteLinesToFile Overwrite="true" File="$(_GeneratedPropsFilePath)" Lines="@(_GeneratedPropsFileLines)" />
-    
+
     <ItemGroup>
       <Content Include="$(_GeneratedPropsFilePath)" PackagePath="build\" />
       <Content Include="$(_GeneratedPropsFilePath)" PackagePath="buildMultiTargeting\" />
