@@ -17,6 +17,11 @@
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
   </ItemGroup>
 
+  <!-- Enable SourceLink  -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
     <Content Include="../../src/assets/" />
@@ -30,11 +35,14 @@
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <Target Name="PreparePropsFile" BeforeTargets="GenerateNuspec;_GetPackageFiles">
+  <Target Name="PreparePropsFile" BeforeTargets="GenerateNuspec;_GetPackageFiles" DependsOnTargets="GenerateSourceLinkFile" Condition="'$(TargetFrameworks)' == '' or '$(IsCrossTargetingBuild)' == 'true'" Outputs="$(_SourcePackagePropsFilePath)">
 
     <PropertyGroup>
       <PackageType></PackageType>
       <_RepoRoot>$(MSBuildThisFileDirectory)../../</_RepoRoot>
+      <_RelativePath>$([MSBuild]::MakeRelative($(_RepoRoot), '$(MSBuildProjectDirectory)/../assets'))</_RelativePath>
+      <_SourceRoot>$([System.String]::Copy('%(SourceRoot.SourceLinkUrl)').Replace('*', ''))</_SourceRoot>
+      <_RawUrl>$(_SourceRoot)$(_RelativePath.Replace('\', '/'))/*</_RawUrl>
       <_ReadmeMdPath>$(_RepoRoot)readme.md</_ReadmeMdPath>
       <_PackageJsonPath>$(_RepoRoot)package.json</_PackageJsonPath>
       <_GeneratedPropsFilePath>$(IntermediateOutputPath)/AutoRest.CSharp.V3.props</_GeneratedPropsFilePath>
@@ -49,13 +57,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <_GeneratedPropsFileLines Include="&lt;Project>" />
+      <_GeneratedPropsFileLines Include="&lt;Project>" />      
+      <_GeneratedPropsFileLines Include="&lt;ItemGroup>" />
+      <_GeneratedPropsFileLines Include="&lt;SourceRoot Include=&quot;%24([System.IO.Path]::GetFullPath('%24(MSBuildThisFileDirectory)..\contentFiles\any\$(TargetFramework)\'))&quot; SourceLinkUrl=&quot;$(_RawUrl)&quot;/>" />
+      <_GeneratedPropsFileLines Include="&lt;/ItemGroup>" />
       <_GeneratedPropsFileLines Include="&lt;PropertyGroup>" />
       <_GeneratedPropsFileLines Include="&lt;AutoRestVersion>$(_AutorestVersion)&lt;/AutoRestVersion>" />
       <_GeneratedPropsFileLines Include="&lt;AutoRestCoreVersion>$(_CoreVersion)&lt;/AutoRestCoreVersion>" />
       <_GeneratedPropsFileLines Include="&lt;/PropertyGroup>" />
       <_GeneratedPropsFileLines Include="&lt;/Project>" />
     </ItemGroup>
+    
 
     <WriteLinesToFile Overwrite="true" File="$(_GeneratedPropsFilePath)" Lines="@(_GeneratedPropsFileLines)" />
     
