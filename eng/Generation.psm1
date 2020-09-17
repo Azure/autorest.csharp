@@ -26,7 +26,7 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
 {
     $outputPath = Join-Path $baseOutput $projectName
     $namespace = $projectName.Replace('-', '_')
-    $command = "$script:autoRestBinary $autoRestArguments --namespace=$namespace --output-folder=$outputPath"
+    $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
 
     if ($fast)
     {

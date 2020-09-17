@@ -20,6 +20,9 @@ namespace AutoRest.CSharp.V3
 
         public static async Task<int> Main(string[] args)
         {
+            // Initialize workspace in the background
+            GeneratedCodeWorkspace.Initialize();
+
             if (args.Contains("--standalone"))
             {
                 await StandaloneGeneratorRunner.RunAsync(args);

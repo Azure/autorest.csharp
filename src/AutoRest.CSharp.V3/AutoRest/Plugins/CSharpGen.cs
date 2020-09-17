@@ -28,13 +28,13 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
-        public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel, Configuration configuration)
+        public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask, Configuration configuration)
         {
             Directory.CreateDirectory(configuration.OutputFolder);
-            var project = GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolders);
+            var project = await GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
-            var context = new BuildContext(codeModel, configuration, sourceInputModel);
+            var context = new BuildContext(await codeModelTask, configuration, sourceInputModel);
 
             var modelWriter = new ModelWriter();
             var clientWriter = new ClientWriter();
@@ -107,10 +107,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
 
-            var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-
-            CodeModel codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-
             var configuration = new Configuration(
                     TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
                 GetRequiredOption<string>(autoRest, "namespace"),
@@ -121,13 +117,21 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false
             );
 
+            string codeModelYaml = string.Empty;
+
+            Task<CodeModel> codeModelTask = Task.Run(async () =>
+            {
+                codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+                return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+            });
+
             if (configuration.SaveInputs)
             {
                 await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }
 
-            var project = await ExecuteAsync(codeModel, configuration);
+            var project = await ExecuteAsync(codeModelTask, configuration);
             await foreach (var file in project.GetGeneratedFilesAsync())
             {
                 await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");

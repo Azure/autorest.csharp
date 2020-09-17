@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -23,10 +24,20 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
 
         private Project _project;
+        private static Task<Project>? _cachedProject;
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
+        }
+
+        /// <summary>
+        /// Creating AdHoc workspace and project takes a while, we'd like to preload this work
+        /// to the generator startup time
+        /// </summary>
+        public static void Initialize()
+        {
+            _cachedProject = Task.Run(CreateGeneratedCodeProject);
         }
 
         public void AddGeneratedFile(string name, string text)
@@ -80,27 +91,10 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             return document;
         }
 
-        public static GeneratedCodeWorkspace Create(string projectDirectory, string[] sharedSourceFolders)
+        public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string[] sharedSourceFolders)
         {
-            var workspace = new AdhocWorkspace();
-            // TODO: This is not the right way to construct the workspace but it works
-            Project generatedCodeProject = workspace.AddProject("GeneratedCode", LanguageNames.CSharp);
-
-            var corlibLocation = typeof(object).Assembly.Location;
-            var references = new List<MetadataReference>();
-
-            references.Add(MetadataReference.CreateFromFile(corlibLocation));
-
-            var trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
-            foreach (var tpl in trustedAssemblies)
-            {
-                references.Add(MetadataReference.CreateFromFile(tpl));
-            }
-
-            generatedCodeProject = generatedCodeProject
-                .AddMetadataReferences(references)
-                .WithCompilationOptions(new CSharpCompilationOptions(
-                OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
+            var projectTask = Interlocked.Exchange(ref _cachedProject, null);
+            var generatedCodeProject = projectTask != null ? await projectTask : CreateGeneratedCodeProject();
 
             var generatedCodeDirectory = Path.Combine(projectDirectory, "Generated");
 
@@ -123,6 +117,30 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             }
 
             return new GeneratedCodeWorkspace(generatedCodeProject);
+        }
+
+        private static Project CreateGeneratedCodeProject()
+        {
+            var workspace = new AdhocWorkspace();
+            // TODO: This is not the right way to construct the workspace but it works
+            Project generatedCodeProject = workspace.AddProject("GeneratedCode", LanguageNames.CSharp);
+
+            var corlibLocation = typeof(object).Assembly.Location;
+            var references = new List<MetadataReference>();
+
+            references.Add(MetadataReference.CreateFromFile(corlibLocation));
+
+            var trustedAssemblies = ((string?) AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
+            foreach (var tpl in trustedAssemblies)
+            {
+                references.Add(MetadataReference.CreateFromFile(tpl));
+            }
+
+            generatedCodeProject = generatedCodeProject
+                .AddMetadataReferences(references)
+                .WithCompilationOptions(new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Disable));
+            return generatedCodeProject;
         }
 
         public async Task<CSharpCompilation> GetCompilationAsync()
