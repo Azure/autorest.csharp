@@ -354,6 +354,13 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                     return;
                 }
 
+                if (frameworkType == typeof(Guid))
+                {
+                    CSharpType nonNullableType = type.WithNullable(false);
+                    writer.Append($"new {nonNullableType}({element}.Value)");
+                    return;
+                }
+
                 writer.Append($"{element}.");
 
                 if (frameworkType == typeof(byte[]))
