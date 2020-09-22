@@ -356,8 +356,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                 if (frameworkType == typeof(Guid))
                 {
-                    CSharpType nonNullableType = type.WithNullable(false);
-                    writer.Append($"new {nonNullableType}({element}.Value)");
+                    writer.Append($"new {typeof(Guid)}({element}.Value)");
                     return;
                 }
 
