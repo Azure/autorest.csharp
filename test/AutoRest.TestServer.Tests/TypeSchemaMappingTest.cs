@@ -208,6 +208,17 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void GuidPropertyDeserializedCorrectly()
+        {
+            Guid guid = Guid.NewGuid();
+            var testel = new XElement("Root");
+            testel.SetElementValue(XName.Get("ModelProperty"), guid);
+            ModelWithGuidProperty model = ModelWithGuidProperty.DeserializeModelWithGuidProperty(testel);
+
+            Assert.AreEqual(guid.ToString(), model.ModelProperty.ToString());
+        }
+
+        [Test]
         public void UriPropertyDeserializedCorrectly()
         {
             DateTime date = DateTime.UtcNow;
