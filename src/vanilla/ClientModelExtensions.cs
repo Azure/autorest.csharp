@@ -317,9 +317,10 @@ namespace AutoRest.CSharp
         /// <param name="type">The type to validate</param>
         /// <param name="scope">A scope provider for generating variable names as necessary</param>
         /// <param name="valueReference">A reference to the value being validated</param>
+        /// <param name="isNullable">Indicates whether the parameter or property is expressed as a nullable type or not</param>
         /// <param name="constraints">Constraints</param>
         /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateType(this IModelType type, IChild scope, string valueReference, 
+        public static string ValidateType(this IModelType type, IChild scope, string valueReference, bool isNullable,
             Dictionary<Constraint, string> constraints)
         {
             if (scope == null)
@@ -346,7 +347,7 @@ namespace AutoRest.CSharp
             if (sequence != null && sequence.ShouldValidateChain())
             {
                 var elementVar = scope.GetUniqueName("element");
-                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, null);
+                var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, false, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
                     sb.AppendLine("foreach (var {0} in {1})", elementVar, valueReference)
@@ -358,7 +359,7 @@ namespace AutoRest.CSharp
             else if (dictionary != null && dictionary.ShouldValidateChain())
             {
                 var valueVar = scope.GetUniqueName("valueElement");
-                var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar, null);
+                var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar, false, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
                     sb.AppendLine("foreach (var {0} in {1}.Values)", valueVar, valueReference)
@@ -370,7 +371,7 @@ namespace AutoRest.CSharp
 
             if (sb.ToString().Trim().Length > 0)
             {
-                if (type.IsValueType())
+                if (type.IsValueType() && !isNullable)
                 {
                     return sb.ToString();
                 }

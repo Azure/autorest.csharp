@@ -20,7 +20,7 @@
     }
     if(parameter.CanBeValidated  && (Model.HttpMethod != HttpMethod.Patch || parameter.Location != ParameterLocation.Body))
     {
-@:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.Constraints))
+@:@(parameter.ModelType.ValidateType(Model, parameter.Name, parameter.IsNullable(), parameter.Constraints))
     }
 }
 
