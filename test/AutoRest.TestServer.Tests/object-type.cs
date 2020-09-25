@@ -20,7 +20,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = "anything goes here";
             var content = "{ \"message\": \"The object you passed was incorrect\" }";
-            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new ServiceClient(ClientDiagnostics, pipeline, host).RestClient.PutAsync(value));
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new ObjectTypeClient(ClientDiagnostics, pipeline, host).RestClient.PutAsync(value));
             Assert.AreEqual(400, exception.Status);
             Assert.IsTrue(exception.Message.Contains(content));
         });
@@ -29,13 +29,13 @@ namespace AutoRest.TestServer.Tests
         public Task ObjectTypePut() => TestStatus(async (host, pipeline) =>
         {
             var value = new Dictionary<string, object> { { "foo", "bar" } };
-            return await new ServiceClient(ClientDiagnostics, pipeline, host).RestClient.PutAsync(value);
+            return await new ObjectTypeClient(ClientDiagnostics, pipeline, host).RestClient.PutAsync(value);
         });
 
         [Test]
         public Task ObjectTypeResponse() => Test(async (host, pipeline) =>
         {
-            var result = await new ServiceClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync();
+            var result = await new ObjectTypeClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync();
             var dictionary = result.Value as Dictionary<string, object>;
             Assert.IsNotNull(dictionary);
             Assert.IsTrue(dictionary.ContainsKey("message"));

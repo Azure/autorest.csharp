@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests
             {
                 Source = "anything"
             };
-            var response = await new ServiceClient(ClientDiagnostics, pipeline, host).AnalyzeBodyAsync(value);
+            var response = await new MediaTypesClient(ClientDiagnostics, pipeline, host).AnalyzeBodyAsync(value);
             Assert.AreEqual("Nice job with JSON", response.Value);
         });
 
@@ -33,7 +33,7 @@ namespace AutoRest.TestServer.Tests
         public Task MediaTypePdf() => Test(async (host, pipeline) =>
         {
             await using var value = new MemoryStream(Encoding.UTF8.GetBytes("PDF"));
-            var response = await new ServiceClient(ClientDiagnostics, pipeline, host).AnalyzeBodyAsync(ContentType.ApplicationPdf, value);
+            var response = await new MediaTypesClient(ClientDiagnostics, pipeline, host).AnalyzeBodyAsync(ContentType.ApplicationPdf, value);
             Assert.AreEqual("Nice job with PDF", response.Value);
         });
 
@@ -41,7 +41,7 @@ namespace AutoRest.TestServer.Tests
         [Ignore("https://github.com/Azure/autorest.csharp/issues/751")]
         public Task MediaTypeWithEncoding() => Test(async (host, pipeline) =>
         {
-            var response = await new ServiceClient(ClientDiagnostics, pipeline, host).ContentTypeWithEncodingAsync("input");
+            var response = await new MediaTypesClient(ClientDiagnostics, pipeline, host).ContentTypeWithEncodingAsync("input");
             Assert.AreEqual("Nice job sending content type with encoding", response.Value);
         });
     }
