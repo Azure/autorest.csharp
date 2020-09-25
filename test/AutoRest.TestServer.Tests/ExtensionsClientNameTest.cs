@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ParametersAreRenamed()
         {
-            var method = TypeAsserts.HasPublicInstanceMethod(typeof(ServiceClient), "RenamedOperationAsync");
+            var method = TypeAsserts.HasPublicInstanceMethod(typeof(AutoRestParameterFlatteningClient), "RenamedOperationAsync");
             // TODO: Add more tests here
             TypeAsserts.HasParameter(method, "renamedBodyParameter");
             TypeAsserts.HasParameter(method, "renamedPathParameter");
@@ -30,13 +30,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ResponseHeadersAreRenamed()
         {
-            TypeAsserts.HasProperty(typeof(ServiceRenamedOperationHeaders), "RenamedHeader", BindingFlags.Instance | BindingFlags.Public);
+            TypeAsserts.HasProperty(typeof(AutoRestParameterFlatteningRenamedOperationHeaders), "RenamedHeader", BindingFlags.Instance | BindingFlags.Public);
         }
 
         [Test]
         public void HeaderTypesAreRenamed()
         {
-            Assert.AreEqual("ServiceRenamedOperationHeaders", typeof(ServiceRenamedOperationHeaders).Name);
+            Assert.AreEqual("AutoRestParameterFlatteningRenamedOperationHeaders", typeof(AutoRestParameterFlatteningRenamedOperationHeaders).Name);
         }
     }
 }

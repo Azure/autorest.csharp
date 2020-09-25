@@ -54,7 +54,7 @@ namespace Azure.CognitiveSearch
         internal HttpPipeline Pipeline { get; }
         internal ClientDiagnostics ClientDiagnostics { get; }
         internal CognitiveSearchClientOptions.ServiceVersion Version { get; }
-        private ServiceClient AllOperations { get; }
+        private CognitiveServicesClient AllOperations { get; }
         private IndexesClient IndexesOperations { get; }
 
         public CognitiveSearchClient(string serviceName, CognitiveSearchCredential credential) : this(serviceName, credential, null) { }
@@ -65,7 +65,7 @@ namespace Azure.CognitiveSearch
             Pipeline = options.Build(credential);
             ClientDiagnostics = new ClientDiagnostics(options);
             Version = options.Version;
-            AllOperations = new ServiceClient(ClientDiagnostics, Pipeline, ServiceName, apiVersion: Version.ToVersionString());
+            AllOperations = new CognitiveServicesClient(ClientDiagnostics, Pipeline, ServiceName, apiVersion: Version.ToVersionString());
             IndexesOperations = new IndexesClient(ClientDiagnostics, Pipeline, ServiceName, apiVersion: Version.ToVersionString());
         }
         public IndexClient GetIndexClient(string indexName) => new IndexClient(this, indexName);

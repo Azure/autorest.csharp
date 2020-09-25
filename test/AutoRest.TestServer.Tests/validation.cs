@@ -19,7 +19,7 @@ namespace AutoRest.TestServer.Tests
         public Task ConstantsInBody() => Test(async (host, pipeline) =>
         {
             var value = new Product(new ChildProduct(), new ConstantProduct());
-            var result = await new ServiceClient(ClientDiagnostics, pipeline, string.Empty, host).PostWithConstantInBodyAsync(value);
+            var result = await new AutoRestValidationTestClient(ClientDiagnostics, pipeline, string.Empty, host).PostWithConstantInBodyAsync(value);
             Assert.AreEqual(value.ConstString, result.Value.ConstString);
             Assert.AreEqual(value.ConstInt, result.Value.ConstInt);
             Assert.AreEqual(value.Child.ConstProperty, result.Value.Child.ConstProperty);
@@ -28,7 +28,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task ConstantsInPath() => TestStatus(async (host, pipeline) => await new ServiceClient(ClientDiagnostics, pipeline, string.Empty, host).GetWithConstantInPathAsync());
+        public Task ConstantsInPath() => TestStatus(async (host, pipeline) => await new AutoRestValidationTestClient(ClientDiagnostics, pipeline, string.Empty, host).GetWithConstantInPathAsync());
 
         [Test]
         public void ConstructorsCheckRequiredProperties()
@@ -40,7 +40,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ThrowsIfApiVersionIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new ServiceClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), string.Empty, new Uri("http://test"), null));
+            Assert.Throws<ArgumentNullException>(() => new AutoRestValidationTestClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), string.Empty, new Uri("http://test"), null));
         }
     }
 }

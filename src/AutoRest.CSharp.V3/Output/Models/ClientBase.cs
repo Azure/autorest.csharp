@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 
         protected string GetClientPrefix(string name)
         {
-            name = string.IsNullOrEmpty(name) ? "Service" : name.ToCleanName();
+            name = string.IsNullOrEmpty(name) ? _context.CodeModel.Language.Default.Name : name.ToCleanName();
 
             if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
             {
