@@ -114,7 +114,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
                 autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false
+                autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
+                autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true
             );
 
             string codeModelYaml = string.Empty;

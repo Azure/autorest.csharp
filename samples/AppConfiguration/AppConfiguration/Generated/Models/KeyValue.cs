@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace AppConfiguration.Models
+namespace AppConfiguration
 {
     /// <summary> The KeyValue. </summary>
     public partial class KeyValue

@@ -54,6 +54,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                     writer.WriteEndArray();
                     writer.WriteBoolean(nameof(Configuration.AzureArm), configuration.AzureArm);
                     writer.WriteBoolean(nameof(Configuration.PublicClients), configuration.PublicClients);
+                    writer.WriteBoolean(nameof(Configuration.ModelNamesapce), configuration.ModelNamesapce);
                     writer.WriteEndObject();
                 }
 
@@ -84,7 +85,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
                 root.GetProperty(nameof(Configuration.AzureArm)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean()
+                root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean(),
+                root.GetProperty(nameof(Configuration.ModelNamesapce)).GetBoolean()
             );
         }
     }

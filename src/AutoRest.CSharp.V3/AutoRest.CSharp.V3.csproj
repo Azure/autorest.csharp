@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
-    <Content Include="../../src/assets/" />
+    <Content Include="../../src/assets" />
 
     <Content Include="build\CodeGeneration.targets" PackagePath="build\AutoRest.CSharp.V3.targets" />
     <Content Include="build\CodeGeneration.targets" PackagePath="buildMultiTargeting\AutoRest.CSharp.V3.targets" />

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace AppConfiguration.Models
+namespace AppConfiguration
 {
     /// <summary> The Key. </summary>
     public partial class Key

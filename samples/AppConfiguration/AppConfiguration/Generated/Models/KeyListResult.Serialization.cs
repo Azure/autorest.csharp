@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace AppConfiguration.Models
+namespace AppConfiguration
 {
     public partial class KeyListResult
     {

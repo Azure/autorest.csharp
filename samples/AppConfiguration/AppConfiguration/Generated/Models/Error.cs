@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace AppConfiguration.Models
+namespace AppConfiguration
 {
     /// <summary> Azure App Configuration error object. </summary>
     internal partial class Error
