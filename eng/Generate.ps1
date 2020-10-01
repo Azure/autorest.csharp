@@ -80,23 +80,21 @@ if (!($Exclude -contains "TestProjects"))
     {
         $testName = $directory.Name
         $readmeConfigurationPath = Join-Path $directory "readme.md"
+        $testArguments = $null
         if (Test-Path $readmeConfigurationPath)
         {
-            $swaggerDefinitions[$testName] = @{
-                'projectName'=$testName;
-                'output'=$testSwaggerPath;
-                'arguments'="--require=$readmeConfigurationPath"
-                }
+            $testArguments = "--require=$readmeConfigurationPath"
         }
         else
         {
             $inputFile = Join-Path $directory "$testName.json"
-            $swaggerDefinitions[$testName] = @{
-                'projectName'=$testName;
-                'output'=$testSwaggerPath;
-                'arguments'="--require=$configurationPath --input-file=$inputFile"
-                }
+            $testArguments ="--require=$configurationPath --input-file=$inputFile"
         }
+        $swaggerDefinitions[$testName] = @{
+            'projectName'=$testName;
+            'output'=$testSwaggerPath;
+            'arguments'=$testArguments
+            }
     }
 }
 # Sample configuration

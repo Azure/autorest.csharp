@@ -11,7 +11,6 @@ namespace AutoRest.TestServer.Tests
             var modelType = typeof(TestModel);
             Assert.AreEqual(false, modelType.IsPublic);
             Assert.AreEqual("ModelNamespace", modelType.Namespace);
-
         }
     }
 }
