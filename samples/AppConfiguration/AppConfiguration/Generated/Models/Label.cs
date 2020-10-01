@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace AppConfiguration
+namespace AppConfiguration.Models
 {
     /// <summary> The Label. </summary>
     public partial class Label

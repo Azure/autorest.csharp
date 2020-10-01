@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace AppConfiguration
+namespace AppConfiguration.Models
 {
     /// <summary> The result of a list request. </summary>
     public partial class LabelListResult

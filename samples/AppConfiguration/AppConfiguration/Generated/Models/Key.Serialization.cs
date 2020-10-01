@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace AppConfiguration
+namespace AppConfiguration.Models
 {
     public partial class Key
     {

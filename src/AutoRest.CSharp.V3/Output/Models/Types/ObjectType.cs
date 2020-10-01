@@ -48,8 +48,12 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
             DefaultName = objectSchema.CSharpName();
-            DefaultNamespace = objectSchema.Extensions?.Namespace ?? (context.Configuration.ModelNamesapce? $"{context.DefaultNamespace}.Models": $"{context.DefaultNamespace}");
+            DefaultNamespace = objectSchema.Extensions?.Namespace ?? $"{context.DefaultNamespace}";
 
+            if (objectSchema.Extensions?.Namespace == null && context.Configuration.ModelNamespace)
+            {
+                DefaultNamespace = $"{DefaultNamespace}.Models";
+            }
             _sourceTypeMapping = context.SourceInputModel.CreateForModel(ExistingType);
 
             // Update usage from code attribute

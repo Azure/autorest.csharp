@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             SaveInputs = saveInputs;
             AzureArm = azureArm;
             PublicClients = publicClients || AzureArm;
-            ModelNamesapce = modelNamespace;
+            ModelNamespace = modelNamespace;
         }
 
 
@@ -29,6 +29,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         public bool SaveInputs { get; }
         public bool AzureArm { get; }
         public bool PublicClients { get; }
-        public bool ModelNamesapce { get; }
+        public bool ModelNamespace { get; }
     }
 }
