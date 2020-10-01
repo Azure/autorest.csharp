@@ -79,12 +79,22 @@ if (!($Exclude -contains "TestProjects"))
     foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
     {
         $testName = $directory.Name
-        $inputFile = Join-Path $directory "$testName.json"
+        $readmeConfigurationPath = Join-Path $directory "readme.md"
+        $testArguments = $null
+        if (Test-Path $readmeConfigurationPath)
+        {
+            $testArguments = "--require=$readmeConfigurationPath"
+        }
+        else
+        {
+            $inputFile = Join-Path $directory "$testName.json"
+            $testArguments ="--require=$configurationPath --input-file=$inputFile"
+        }
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
             'output'=$testSwaggerPath;
-            'arguments'="--require=$configurationPath --input-file=$inputFile"
-        }
+            'arguments'=$testArguments
+            }
     }
 }
 # Sample configuration

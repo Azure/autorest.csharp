@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"body_boolean","LibraryName":"body_boolean","SharedSourceFolders":["..\\..\\..\\src\\assets\\Generator.Shared","..\\..\\..\\src\\assets\\Azure.Core.Shared"],"AzureArm":false,"PublicClients":true}
+{"OutputFolder":".","Namespace":"body_boolean","LibraryName":"body_boolean","SharedSourceFolders":["..\\..\\..\\src\\assets\\Generator.Shared","..\\..\\..\\src\\assets\\Azure.Core.Shared"],"AzureArm":false,"PublicClients":true,"ModelNamespace":true}
