@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
-    <Content Include="../../src/assets/" />
+    <TfmSpecificPackageFile Include="../../src/assets/" PackagePath="content" />
 
     <Content Include="build\CodeGeneration.targets" PackagePath="build\AutoRest.CSharp.V3.targets" />
     <Content Include="build\CodeGeneration.targets" PackagePath="buildMultiTargeting\AutoRest.CSharp.V3.targets" />
@@ -58,7 +58,7 @@
     </ItemGroup>
 
     <WriteLinesToFile Overwrite="true" File="$(_GeneratedPropsFilePath)" Lines="@(_GeneratedPropsFileLines)" />
-    
+
     <ItemGroup>
       <Content Include="$(_GeneratedPropsFilePath)" PackagePath="build\" />
       <Content Include="$(_GeneratedPropsFilePath)" PackagePath="buildMultiTargeting\" />
