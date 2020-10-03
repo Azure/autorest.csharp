@@ -8,7 +8,7 @@
 namespace Inheritance.Models
 {
     /// <summary> The BaseClassWithEnumDiscriminatorEnum. </summary>
-    public enum BaseClassWithEnumDiscriminatorEnum
+    internal enum BaseClassWithEnumDiscriminatorEnum
     {
         /// <summary> derived. </summary>
         Derived,

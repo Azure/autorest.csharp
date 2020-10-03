@@ -340,6 +340,32 @@
       },
       "x-csharp-usage": "model,input,output",
       "x-csharp-formats": "json"
+    },
+    "UnexposedExtensibleEnum": {
+      "description": "More Letters",
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ],
+      "x-ms-enum":{
+        "name": "UnexposedExtensibleEnum",
+        "modelAsString": true
+      }
+    },
+    "UnexposedNonExtensibleEnum": {
+      "description": "More Letters",
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ],
+      "x-ms-enum":{
+        "name": "UnexposedNonExtensibleEnum",
+        "modelAsString": false
+      }
     }
   }
 }

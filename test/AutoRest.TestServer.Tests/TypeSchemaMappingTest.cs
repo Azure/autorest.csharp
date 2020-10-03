@@ -238,5 +238,18 @@ namespace AutoRest.TestServer.Tests
                 inputModel);
         }
 
+        [Test]
+        public void UnexposedExtensibleEnumsAreInternal()
+        {
+            var modelType = typeof(UnexposedExtensibleEnum);
+            Assert.AreEqual(false, modelType.IsPublic);
+        }
+
+        [Test]
+        public void UnexposedNonExtensibleEnumsAreInternal()
+        {
+            var modelType = typeof(UnexposedNonExtensibleEnum);
+            Assert.AreEqual(false, modelType.IsPublic);
+        }
     }
 }
