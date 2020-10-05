@@ -35,8 +35,22 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             _choices = choices;
 
             DefaultName = schema.CSharpName();
-            DefaultAccessibility = schema.Extensions?.Accessibility ?? "public";
-            DefaultNamespace = schema.Extensions?.Namespace ?? $"{_context.DefaultNamespace}.Models";
+            var usage = context.SchemaUsageProvider.GetUsage(schema);
+            var hasUsage = usage.HasFlag(SchemaTypeUsage.Model);
+            DefaultAccessibility = schema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
+
+            if (schema.Extensions?.Namespace is string namespaceExtension)
+            {
+                DefaultNamespace = namespaceExtension;
+            }
+            else if (context.Configuration.ModelNamespace)
+            {
+                DefaultNamespace = $"{context.DefaultNamespace}.Models";
+            }
+            else
+            {
+                DefaultNamespace = context.DefaultNamespace;
+            }
 
             if (ExistingType != null)
             {

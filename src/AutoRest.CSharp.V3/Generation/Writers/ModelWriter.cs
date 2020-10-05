@@ -226,7 +226,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
             {
                 writer.WriteXmlDocumentationSummary(schema.Description);
 
-                using (writer.Scope($"public enum {schema.Declaration.Name}"))
+                using (writer.Scope($"{schema.Declaration.Accessibility} enum {schema.Declaration.Name}"))
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {

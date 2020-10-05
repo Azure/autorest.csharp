@@ -8,7 +8,7 @@
 namespace constants.Models
 {
     /// <summary> The NoModelAsStringNoRequiredTwoValueDefaultEnum. </summary>
-    public enum NoModelAsStringNoRequiredTwoValueDefaultEnum
+    internal enum NoModelAsStringNoRequiredTwoValueDefaultEnum
     {
         /// <summary> value1. </summary>
         Value1,

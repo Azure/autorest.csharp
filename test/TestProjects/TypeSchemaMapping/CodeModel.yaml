@@ -215,6 +215,36 @@ schemas: !<!Schemas>
           name: EnumWithCustomNamespace
           description: Letters
       protocol: !<!Protocols> {}
+    - !<!ChoiceSchema> 
+      choices:
+        - !<!ChoiceValue> 
+          value: A
+          language:
+            default:
+              name: A
+              description: ''
+        - !<!ChoiceValue> 
+          value: B
+          language:
+            default:
+              name: B
+              description: ''
+        - !<!ChoiceValue> 
+          value: C
+          language:
+            default:
+              name: C
+              description: ''
+      type: choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: UnexposedExtensibleEnum
+          description: More Letters
+      protocol: !<!Protocols> {}
   sealedChoices:
     - !<!SealedChoiceSchema> &ref_9
       choices:
@@ -268,6 +298,36 @@ schemas: !<!Schemas>
       language: !<!Languages> 
         default:
           name: NonExtensibleEnum
+          description: More Letters
+      protocol: !<!Protocols> {}
+    - !<!SealedChoiceSchema> 
+      choices:
+        - !<!ChoiceValue> 
+          value: A
+          language:
+            default:
+              name: A
+              description: ''
+        - !<!ChoiceValue> 
+          value: B
+          language:
+            default:
+              name: B
+              description: ''
+        - !<!ChoiceValue> 
+          value: C
+          language:
+            default:
+              name: C
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: UnexposedNonExtensibleEnum
           description: More Letters
       protocol: !<!Protocols> {}
   constants:

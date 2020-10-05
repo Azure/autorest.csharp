@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace paging.Models
 {
     /// <summary> The status of the request. </summary>
-    public readonly partial struct OperationResultStatus : IEquatable<OperationResultStatus>
+    internal readonly partial struct OperationResultStatus : IEquatable<OperationResultStatus>
     {
         private readonly string _value;
 

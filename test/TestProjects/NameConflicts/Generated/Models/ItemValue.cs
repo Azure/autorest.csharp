@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace NameConflicts.Models
 {
     /// <summary> The ItemValue. </summary>
-    public readonly partial struct ItemValue : IEquatable<ItemValue>
+    internal readonly partial struct ItemValue : IEquatable<ItemValue>
     {
         private readonly string _value;
 

@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace constants.Models
 {
     /// <summary> The ModelAsStringNoRequiredOneValueDefaultEnum. </summary>
-    public readonly partial struct ModelAsStringNoRequiredOneValueDefaultEnum : IEquatable<ModelAsStringNoRequiredOneValueDefaultEnum>
+    internal readonly partial struct ModelAsStringNoRequiredOneValueDefaultEnum : IEquatable<ModelAsStringNoRequiredOneValueDefaultEnum>
     {
         private readonly string _value;
 
