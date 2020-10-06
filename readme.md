@@ -35,6 +35,7 @@
 - [Replace any generated member](#replace-any-generated-member)
 - [Remove any generated member](#remove-any-generated-member)
 - [Change model namespace or accessability in bulk](#change-model-namespace-or-accessability-in-bulk)
+- [Exclude models from namespace](#exclude-models-from-namespace)
 
 <!-- /TOC -->
 
@@ -840,6 +841,8 @@ namespace Azure.Service.Models
 
 ### Change model namespace or accessability in bulk
 
+<details>
+
 **Generated code before:**
 
 ``` C#
@@ -880,6 +883,37 @@ directive:
 }
 ```
 
+</details>
+
+### Exclude models from namespace
+
+<details>
+
+**Generated code before (Generated/Models/Model.cs):**
+
+``` C#
+namespace Azure.Service.Models
+{
+    public partial class Model { }
+}
+```
+
+**Add `model-namespace` in autorest.md**
+
+```
+model-namespace: false
+input-file: "swagger-document"
+```
+
+**Generated code after (Generated/Models/Model.cs):**
+
+``` diff
+- namespace Azure.Service.Models
++ namespace Azure.Service
+{
+    public partial class Model { }
+}
+```
 </details>
 
 ## Configuration
