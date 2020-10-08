@@ -24,6 +24,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface"
     },
+    "Azure.Storage.Blobs": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Blobs\\Azure.Storage.Blobs"
+    },
     "Azure.Storage.Tables": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables"

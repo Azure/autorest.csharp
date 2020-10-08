@@ -23,16 +23,17 @@ namespace AutoRest.CSharp.V3
             // Initialize workspace in the background
             GeneratedCodeWorkspace.Initialize();
 
-            if (args.Contains("--standalone"))
-            {
-                await StandaloneGeneratorRunner.RunAsync(args);
-                return 0;
-            }
+            //if (args.Contains("--standalone"))
+            //{
+            //    await StandaloneGeneratorRunner.RunAsync(args);
+            //    return 0;
+            //}
 
-            if (args.Contains("--launch-debugger") && !Debugger.IsAttached)
-            {
-                Debugger.Launch();
-            }
+            //if (args.Contains("--launch-debugger") && !Debugger.IsAttached)
+            //{
+            Debugger.Launch();
+            //}
+            await Task.CompletedTask;
 
             if (!HasServerArgument(args))
             {

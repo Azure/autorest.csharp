@@ -106,7 +106,8 @@ $projectNames =
     'Azure.AI.FormRecognizer',
     'Azure.Storage.Tables',
     'Azure.Management.Storage',
-    'Azure.Network.Management.Interface'
+    'Azure.Network.Management.Interface',
+    'Azure.Storage.Blobs'
 
 if (!($Exclude -contains "Samples"))
 {
@@ -117,7 +118,7 @@ if (!($Exclude -contains "Samples"))
         $swaggerDefinitions[$projectName] = @{
             'projectName'=$projectName;
             'output'=$projectDirectory;
-            'arguments'="--require=$sampleConfigurationPath"
+            'arguments'="--require=$sampleConfigurationPath --launch-debugger"
         }
     }
 }
