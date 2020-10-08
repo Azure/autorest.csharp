@@ -4,7 +4,8 @@
 ## Configuration
 ``` yaml
 # Generate blob storage
-input-file: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/storage-dataplane-preview/specification/storage/data-plane/Microsoft.BlobStorage/preview/2020-02-10/blob.json
+#input-file: https://github.com/Azure/azure-rest-api-specs/blob/de8a4f083b03b2e6f70813a3c5aa95310ce055be/specification/storage/data-plane/Microsoft.BlobStorage/preview/2020-02-10/blob.json
+input-file: $(this-folder)/blob.json
 output-folder: ../src/Generated
 clear-output-folder: false
 
@@ -212,6 +213,7 @@ directive:
     if (def && def["$ref"] && !def["$ref"].endsWith("BlobContainersSegment")) {
         const path = def["$ref"].replace(/[#].*$/, "#/definitions/BlobContainersSegment");
         $.get.responses["200"].schema = { "$ref": path };
+        $.get["x-ms-pageable"].itemName = "BlobContainerItems";
     }
     $.get.operationId = "Service_ListBlobContainersSegment";
 ```
@@ -373,6 +375,7 @@ directive:
     if (def && def["$ref"] && !def["$ref"].endsWith("BlobsFlatSegment")) {
         const path = def["$ref"].replace(/[#].*$/, "#/definitions/BlobsFlatSegment");
         $.get.responses["200"].schema = { "$ref": path };
+        $.get["x-ms-pageable"].itemName = "BlobItems";
     }
 ```
 
@@ -416,6 +419,7 @@ directive:
     if (def && def["$ref"] && !def["$ref"].endsWith("BlobsHierarchySegment")) {
         const path = def["$ref"].replace(/[#].*$/, "#/definitions/BlobsHierarchySegment");
         $.get.responses["200"].schema = { "$ref": path };
+        $.get["x-ms-pageable"].itemName = "BlobItems";
     }
 ```
 

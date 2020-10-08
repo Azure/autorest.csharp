@@ -4,8 +4,6 @@
 #nullable enable
 
 using System;
-using System.Globalization;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace Azure.Core
@@ -25,9 +23,9 @@ namespace Azure.Core
         };
 
         public static TimeSpan GetTimeSpanValue(this XElement element, string format) => TypeFormatters.ParseTimeSpan(element.Value, format);
-        #pragma warning disable CA1801 //Parameter format of method GetObjectValue is never used. Remove the parameter or use it in the method body.
+#pragma warning disable CA1801 //Parameter format of method GetObjectValue is never used. Remove the parameter or use it in the method body.
         public static object GetObjectValue(this XElement element, string format)
-        #pragma warning restore
+#pragma warning restore
         {
             return element.Value;
         }

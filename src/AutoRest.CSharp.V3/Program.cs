@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Communication;
@@ -31,7 +30,7 @@ namespace AutoRest.CSharp.V3
 
             //if (args.Contains("--launch-debugger") && !Debugger.IsAttached)
             //{
-            Debugger.Launch();
+            //Debugger.Launch();
             //}
             await Task.CompletedTask;
 
