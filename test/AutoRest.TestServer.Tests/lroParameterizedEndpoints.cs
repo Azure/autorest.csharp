@@ -9,9 +9,9 @@ using NUnit.Framework;
 namespace AutoRest.TestServer.Tests
 {
     [IgnoreOnTestServer(TestServerVersion.V2, "LRO tests are not supported yet")]
-    public class ParametrizedLroTest: TestServerTestBase
+    public class lroParameterizedEndpoints: TestServerTestBase
     {
-        public ParametrizedLroTest(TestServerVersion version) : base(version, "lroParameterizedEndpoints") { }
+        public lroParameterizedEndpoints(TestServerVersion version) : base(version, "lroParameterizedEndpoints") { }
 
         [Test]
         public Task LROParameterizedEndpoint() => Test(async (host, pipeline) =>
@@ -19,6 +19,8 @@ namespace AutoRest.TestServer.Tests
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var operation = await new LROWithParamaterizedEndpointsClient(ClientDiagnostics, pipeline, "host:" + host.Port).StartPollWithParameterizedEndpointsAsync("local");
             var result = await operation.WaitForCompletionAsync();
+
+            Assert.AreEqual("success", result.Value);
         });
 
     }
