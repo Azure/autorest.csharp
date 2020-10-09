@@ -42,6 +42,7 @@ $testNames =
     'header',
     'httpInfrastructure',
     'lro',
+    'lro-parameterized-endpoints',
     'media_types',
     'model-flattening',
     'multiple-inheritance',
