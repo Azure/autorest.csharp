@@ -36,11 +36,21 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("ipTagType"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     ipTagType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tag"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     tag = property.Value.GetString();
                     continue;
                 }

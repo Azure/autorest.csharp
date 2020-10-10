@@ -19,6 +19,11 @@ namespace httpInfrastructure.Models
             {
                 if (property.NameEquals("httpStatusCode"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     httpStatusCode = property.Value.GetString();
                     continue;
                 }

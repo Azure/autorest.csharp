@@ -678,546 +678,1091 @@ namespace NameConflicts.Models
             {
                 if (property.NameEquals("1"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     _1 = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("abstract"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @abstract = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("add"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @add = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("alias"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @alias = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("as"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @as = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ascending"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @ascending = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("async"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @async = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("await"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @await = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("base"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @base = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("bool"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @bool = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("break"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @break = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("by"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @by = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("byte"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @byte = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("catch"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @catch = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("char"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @char = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("checked"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @checked = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("const"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @const = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("continue"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @continue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("class"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @class = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("decimal"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @decimal = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("default"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @default = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("delegate"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @delegate = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("descending"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @descending = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("do"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @do = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("double"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @double = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("dynamic"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @dynamic = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("else"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @else = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("enum"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @enum = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("event"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @event = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("explicit"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @explicit = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("extern"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @extern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("false"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @false = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("finally"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @finally = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fixed"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @fixed = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("float"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @float = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("for"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @for = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("foreach"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @foreach = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("from"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @from = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("get"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @get = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("global"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @global = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("goto"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @goto = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("group"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     group = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("if"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @if = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("implicit"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @implicit = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("in"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @in = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("int"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @int = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("interface"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @interface = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("internal"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @internal = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("into"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @into = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("is"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @is = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("join"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @join = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("let"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @let = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("lock"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @lock = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("long"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @long = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("nameof"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @nameof = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("namespace"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @namespace = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("new"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @new = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("null"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @null = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("object"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @object = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("on"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @on = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("operator"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @operator = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("orderby"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     orderby = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("out"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @out = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("override"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @override = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("params"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @params = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("partial"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @partial = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("private"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @private = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("protected"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @protected = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("public"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @public = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("readonly"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @readonly = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ref"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @ref = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("remove"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @remove = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("return"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @return = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("sbyte"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @sbyte = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("sealed"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @sealed = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("select"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     select = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("set"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @set = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("short"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @short = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("sizeof"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @sizeof = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("stackalloc"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @stackalloc = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("static"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @static = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("string"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @string = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("struct"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @struct = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("switch"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @switch = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("this"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @this = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("throw"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @throw = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("true"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @true = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("try"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @try = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("typeof"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @typeof = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("uint"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @uint = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ulong"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @ulong = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("unchecked"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @unchecked = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("unmanaged"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @unmanaged = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("unsafe"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @unsafe = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ushort"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @ushort = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("using"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @using = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     value = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("var"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @var = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("virtual"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @virtual = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("void"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @void = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("volatile"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @volatile = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("when"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @when = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("where"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @where = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("while"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @while = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("yield"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @yield = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("System"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     system = new SystemEnum(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("ToString"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     toString = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("Equals"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @equals = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("GetHashCode"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     getHashCode = property.Value.GetString();
                     continue;
                 }

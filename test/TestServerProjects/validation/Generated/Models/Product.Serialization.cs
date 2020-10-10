@@ -66,6 +66,11 @@ namespace validation.Models
             {
                 if (property.NameEquals("display_names"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -76,11 +81,21 @@ namespace validation.Models
                 }
                 if (property.NameEquals("capacity"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     capacity = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("image"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     image = property.Value.GetString();
                     continue;
                 }
@@ -106,6 +121,11 @@ namespace validation.Models
                 }
                 if (property.NameEquals("constStringAsEnum"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     constStringAsEnum = property.Value.GetString();
                     continue;
                 }

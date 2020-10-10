@@ -21,16 +21,31 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("nameAvailable"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     nameAvailable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("reason"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     reason = property.Value.GetString().ToReason();
                     continue;
                 }
                 if (property.NameEquals("message"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     message = property.Value.GetString();
                     continue;
                 }

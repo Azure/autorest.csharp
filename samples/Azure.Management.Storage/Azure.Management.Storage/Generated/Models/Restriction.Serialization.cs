@@ -22,11 +22,21 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("type"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("values"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -37,6 +47,11 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("reasonCode"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     reasonCode = new ReasonCode(property.Value.GetString());
                     continue;
                 }

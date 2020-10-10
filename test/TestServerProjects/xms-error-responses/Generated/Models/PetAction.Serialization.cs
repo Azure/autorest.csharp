@@ -19,6 +19,11 @@ namespace xms_error_responses.Models
             {
                 if (property.NameEquals("actionResponse"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     actionResponse = property.Value.GetString();
                     continue;
                 }

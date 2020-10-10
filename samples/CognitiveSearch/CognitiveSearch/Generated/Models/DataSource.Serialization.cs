@@ -65,6 +65,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("description"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     description = property.Value.GetString();
                     continue;
                 }
@@ -85,16 +90,31 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("dataChangeDetectionPolicy"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     dataChangeDetectionPolicy = DataChangeDetectionPolicy.DeserializeDataChangeDetectionPolicy(property.Value);
                     continue;
                 }
                 if (property.NameEquals("dataDeletionDetectionPolicy"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     dataDeletionDetectionPolicy = DataDeletionDetectionPolicy.DeserializeDataDeletionDetectionPolicy(property.Value);
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     odataEtag = property.Value.GetString();
                     continue;
                 }

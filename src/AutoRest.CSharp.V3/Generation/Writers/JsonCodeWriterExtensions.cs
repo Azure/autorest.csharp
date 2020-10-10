@@ -266,14 +266,23 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 {
                     foreach (JsonPropertySerialization property in obj.Properties)
                     {
-                        writer.Append($"if({itemVariable.ActualName}.NameEquals({property.Name:L}))");
+                        writer.Append($"if({itemVariable}.NameEquals({property.Name:L}))");
                         using (writer.Scope())
                         {
                             if (property.ValueSerialization.IsNullable)
                             {
-                                using (writer.Scope($"if ({itemVariable.ActualName}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
                                 {
                                     writer.Line($"{propertyVariables[property.Property!].Declaration} = null;");
+                                    writer.Append($"continue;");
+                                }
+                            }
+                            else if (!property.IsRequired)
+                            {
+                                using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                                {
+                                    writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
+                                    writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
                                     writer.Append($"continue;");
                                 }
                             }
@@ -284,7 +293,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writer.DeserializeIntoVariable(
                                     property.ValueSerialization,
                                     (w, v) => w.Line($"{propertyVariables[property.Property].Declaration} = {v};"),
-                                    w => w.Append($"{itemVariable.ActualName}.Value"));
+                                    w => w.Append($"{itemVariable}.Value"));
                             }
                             else
                             {
@@ -292,7 +301,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writer.DeserializeIntoVariableMayBeObject(
                                     property.ValueSerialization,
                                     (w, v) => { },
-                                    w => w.Append($"{itemVariable.ActualName}.Value"),
+                                    w => w.Append($"{itemVariable}.Value"),
                                     propertyVariables);
                             }
 

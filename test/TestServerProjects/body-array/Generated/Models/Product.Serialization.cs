@@ -36,11 +36,21 @@ namespace body_array.Models
             {
                 if (property.NameEquals("integer"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     integer = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("string"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     @string = property.Value.GetString();
                     continue;
                 }

@@ -105,6 +105,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("categories"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<EntityCategory> array = new List<EntityCategory>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -115,6 +120,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("defaultLanguageCode"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     defaultLanguageCode = new EntityRecognitionSkillLanguage(property.Value.GetString());
                     continue;
                 }
@@ -145,16 +155,31 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("name"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     context = property.Value.GetString();
                     continue;
                 }

@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
 using System.Xml;
@@ -85,6 +86,13 @@ namespace Azure.Core
             {
                 throw new NotSupportedException($"Cannot convert {element.ValueKind} to a Char");
             }
+        }
+
+        [Conditional("DEBUG")]
+        public static void ThrowNonNullablePropertyIsNull(this JsonProperty property)
+        {
+            throw new JsonException($"A property '{property.Name}' defined as non-nullable but received as null from the service. " +
+                                    $"This exception only happens in DEBUG builds of the library and would be ignored in the release build");
         }
     }
 }

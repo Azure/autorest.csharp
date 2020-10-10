@@ -21,6 +21,11 @@ namespace AppConfiguration.Models
             {
                 if (property.NameEquals("items"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<Label> array = new List<Label>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -31,6 +36,11 @@ namespace AppConfiguration.Models
                 }
                 if (property.NameEquals("@nextLink"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     nextLink = property.Value.GetString();
                     continue;
                 }

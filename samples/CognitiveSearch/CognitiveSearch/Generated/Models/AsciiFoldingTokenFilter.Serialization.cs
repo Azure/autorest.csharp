@@ -36,6 +36,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("preserveOriginal"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     preserveOriginal = property.Value.GetBoolean();
                     continue;
                 }

@@ -43,6 +43,11 @@ namespace ExtensionClientName.Models
             {
                 if (property.NameEquals("originalProperty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -53,6 +58,11 @@ namespace ExtensionClientName.Models
                 }
                 if (property.NameEquals("originalPropertyString"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     originalPropertyString = property.Value.GetString();
                     continue;
                 }

@@ -30,6 +30,11 @@ namespace Inheritance.Models
             {
                 if (property.NameEquals("BaseClassProperty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     baseClassProperty = property.Value.GetString();
                     continue;
                 }

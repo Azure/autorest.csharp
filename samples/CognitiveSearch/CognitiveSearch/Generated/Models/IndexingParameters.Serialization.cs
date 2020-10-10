@@ -55,21 +55,41 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("batchSize"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     batchSize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxFailedItems"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     maxFailedItems = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxFailedItemsPerBatch"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     maxFailedItemsPerBatch = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("configuration"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, object> dictionary = new Dictionary<string, object>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {

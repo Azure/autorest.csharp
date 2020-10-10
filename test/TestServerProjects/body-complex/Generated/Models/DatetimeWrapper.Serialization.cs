@@ -37,11 +37,21 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("field"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     field = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
                 if (property.NameEquals("now"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     now = property.Value.GetDateTimeOffset("O");
                     continue;
                 }

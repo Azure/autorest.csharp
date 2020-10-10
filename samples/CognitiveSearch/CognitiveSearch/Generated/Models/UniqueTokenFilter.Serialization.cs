@@ -36,6 +36,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("onlyOnSamePosition"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     onlyOnSamePosition = property.Value.GetBoolean();
                     continue;
                 }

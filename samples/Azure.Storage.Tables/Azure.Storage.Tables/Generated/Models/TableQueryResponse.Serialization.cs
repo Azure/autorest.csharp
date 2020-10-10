@@ -21,11 +21,21 @@ namespace Azure.Storage.Tables.Models
             {
                 if (property.NameEquals("odata.metadata"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     odataMetadata = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("value"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<TableResponseProperties> array = new List<TableResponseProperties>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

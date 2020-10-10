@@ -21,6 +21,11 @@ namespace custom_baseUrl_paging.Models
             {
                 if (property.NameEquals("values"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -31,6 +36,11 @@ namespace custom_baseUrl_paging.Models
                 }
                 if (property.NameEquals("nextLink"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     nextLink = property.Value.GetString();
                     continue;
                 }

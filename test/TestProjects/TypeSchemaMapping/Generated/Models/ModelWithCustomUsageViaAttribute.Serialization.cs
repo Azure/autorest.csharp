@@ -54,6 +54,11 @@ namespace TypeSchemaMapping.Models
             {
                 if (property.NameEquals("ModelProperty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     modelProperty = property.Value.GetString();
                     continue;
                 }

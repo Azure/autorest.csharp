@@ -46,20 +46,40 @@ namespace CustomNamespace
             {
                 if (property.NameEquals("ModelProperty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         if (property0.NameEquals("ModelProperty"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
                             modelProperty = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("Fruit"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
                             fruit = property0.Value.GetString().ToCustomFruitEnum();
                             continue;
                         }
                         if (property0.NameEquals("DaysOfWeek"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
                             daysOfWeek = new CustomDaysOfWeek(property0.Value.GetString());
                             continue;
                         }

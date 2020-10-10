@@ -39,6 +39,11 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("services"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     services = EncryptionServices.DeserializeEncryptionServices(property.Value);
                     continue;
                 }
@@ -49,6 +54,11 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("keyvaultproperties"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
                     continue;
                 }

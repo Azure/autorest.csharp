@@ -22,6 +22,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("code"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     code = property.Value.GetString();
                     continue;
                 }
@@ -32,6 +37,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("details"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<SearchError> array = new List<SearchError>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

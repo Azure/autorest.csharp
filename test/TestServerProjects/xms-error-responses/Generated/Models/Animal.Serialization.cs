@@ -19,6 +19,11 @@ namespace xms_error_responses.Models
             {
                 if (property.NameEquals("aniType"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     aniType = property.Value.GetString();
                     continue;
                 }

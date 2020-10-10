@@ -61,6 +61,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("tokenFilters"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<TokenFilterName> array = new List<TokenFilterName>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -71,6 +76,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("charFilters"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<CharFilterName> array = new List<CharFilterName>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

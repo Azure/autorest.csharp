@@ -19,6 +19,11 @@ namespace custom_baseUrl_paging.Models
             {
                 if (property.NameEquals("properties"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     properties = ProductProperties.DeserializeProductProperties(property.Value);
                     continue;
                 }

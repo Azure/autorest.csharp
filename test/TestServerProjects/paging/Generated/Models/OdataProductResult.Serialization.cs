@@ -21,6 +21,11 @@ namespace paging.Models
             {
                 if (property.NameEquals("values"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<Product> array = new List<Product>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -31,6 +36,11 @@ namespace paging.Models
                 }
                 if (property.NameEquals("odata.nextLink"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     odataNextLink = property.Value.GetString();
                     continue;
                 }

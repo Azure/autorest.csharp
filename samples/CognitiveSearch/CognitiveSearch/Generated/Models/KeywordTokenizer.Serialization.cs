@@ -36,6 +36,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("bufferSize"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     bufferSize = property.Value.GetInt32();
                     continue;
                 }

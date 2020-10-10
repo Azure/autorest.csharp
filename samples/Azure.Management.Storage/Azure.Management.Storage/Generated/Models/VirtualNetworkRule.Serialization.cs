@@ -44,11 +44,21 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("action"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     action = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("state"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     state = property.Value.GetString().ToState();
                     continue;
                 }
