@@ -64,7 +64,6 @@ namespace AutoRest.TestServer.Tests
             Assert.Throws<ArgumentNullException>(() => new BasicClient(ClientDiagnostics, HttpPipelineBuilder.Build(new TestOptions()), new Uri("http://test"), null));
         }
 
-#if RELEASE // this model doesn't have all nullable annotations applied
         [Test]
         public Task GetComplexBasicNull() => Test(async (host, pipeline) =>
         {
@@ -73,13 +72,6 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(null, result.Value.Id);
             Assert.AreEqual(null, result.Value.Color);
         });
-#else
-        [Test]
-        public Task GetComplexBasicNull() => Test((host, pipeline) =>
-        {
-            Assert.ThrowsAsync<JsonException>(() => new BasicClient(ClientDiagnostics, pipeline, host).GetNullAsync());
-        });
-#endif
 
         [Test]
         public Task GetComplexBasicInvalid() => Test((host, pipeline) =>
@@ -214,7 +206,6 @@ namespace AutoRest.TestServer.Tests
             return await new PrimitiveClient(ClientDiagnostics, pipeline, host).PutBoolAsync( value);
         });
 
-#if RELEASE // this model doesn't have all nullable annotations applied
         [Test]
         public Task GetComplexPrimitiveString() => Test(async (host, pipeline) =>
         {
@@ -223,13 +214,6 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(string.Empty, result.Value.Empty);
             Assert.AreEqual(null, result.Value.NullProperty);
         });
-#else
-        [Test]
-        public Task GetComplexPrimitiveString() => Test((host, pipeline) =>
-        {
-            Assert.ThrowsAsync<JsonException>(() => new PrimitiveClient(ClientDiagnostics, pipeline, host).GetStringAsync());
-        });
-#endif
 
         [Test]
         public Task PutComplexPrimitiveString() => TestStatus(async (host, pipeline) =>

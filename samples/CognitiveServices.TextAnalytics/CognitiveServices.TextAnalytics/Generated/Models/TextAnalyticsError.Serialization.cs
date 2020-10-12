@@ -34,11 +34,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("target"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     target = property.Value.GetString();
                     continue;
                 }

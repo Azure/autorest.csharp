@@ -42,11 +42,6 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("ruleId"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     ruleId = property.Value.GetString();
                     continue;
                 }

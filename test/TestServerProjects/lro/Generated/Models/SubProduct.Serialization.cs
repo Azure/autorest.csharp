@@ -35,11 +35,6 @@ namespace lro.Models
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = property.Value.GetString();
                     continue;
                 }
@@ -54,11 +49,6 @@ namespace lro.Models
                     {
                         if (property0.NameEquals("provisioningState"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
                             provisioningState = property0.Value.GetString();
                             continue;
                         }

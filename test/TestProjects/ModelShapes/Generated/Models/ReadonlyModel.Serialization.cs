@@ -19,11 +19,6 @@ namespace ModelShapes.Models
             {
                 if (property.NameEquals("Name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }

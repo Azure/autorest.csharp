@@ -65,11 +65,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     description = property.Value.GetString();
                     continue;
                 }
@@ -110,11 +105,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("@odata.etag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     odataEtag = property.Value.GetString();
                     continue;
                 }

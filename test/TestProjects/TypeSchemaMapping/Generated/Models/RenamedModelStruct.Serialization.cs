@@ -55,11 +55,6 @@ namespace CustomNamespace
                     {
                         if (property0.NameEquals("ModelProperty"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
                             modelProperty = property0.Value.GetString();
                             continue;
                         }

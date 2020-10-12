@@ -20,21 +20,11 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("leaseId"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     leaseId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("leaseTimeSeconds"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     leaseTimeSeconds = property.Value.GetString();
                     continue;
                 }

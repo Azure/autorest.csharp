@@ -36,21 +36,11 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("fqdn"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     fqdn = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("ipAddress"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     ipAddress = property.Value.GetString();
                     continue;
                 }

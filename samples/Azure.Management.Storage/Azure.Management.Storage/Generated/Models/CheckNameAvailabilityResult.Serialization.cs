@@ -41,11 +41,6 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("message"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     message = property.Value.GetString();
                     continue;
                 }

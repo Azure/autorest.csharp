@@ -48,11 +48,6 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("pattern"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     pattern = property.Value.GetString();
                     continue;
                 }

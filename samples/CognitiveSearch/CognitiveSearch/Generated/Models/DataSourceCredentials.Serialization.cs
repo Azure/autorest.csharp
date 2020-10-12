@@ -30,11 +30,6 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("connectionString"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     connectionString = property.Value.GetString();
                     continue;
                 }

@@ -20,11 +20,6 @@ namespace Azure.Storage.Tables.Models
             {
                 if (property.NameEquals("Message"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     message = property.Value.GetString();
                     continue;
                 }

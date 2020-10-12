@@ -106,21 +106,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("tokenSeparator"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     tokenSeparator = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("filterToken"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     filterToken = property.Value.GetString();
                     continue;
                 }

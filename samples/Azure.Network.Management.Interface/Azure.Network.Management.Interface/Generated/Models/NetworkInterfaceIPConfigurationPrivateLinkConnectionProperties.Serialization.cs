@@ -22,21 +22,11 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("groupId"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     groupId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("requiredMemberName"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     requiredMemberName = property.Value.GetString();
                     continue;
                 }

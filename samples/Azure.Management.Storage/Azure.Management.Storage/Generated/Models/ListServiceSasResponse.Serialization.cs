@@ -19,11 +19,6 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("serviceSasToken"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     serviceSasToken = property.Value.GetString();
                     continue;
                 }

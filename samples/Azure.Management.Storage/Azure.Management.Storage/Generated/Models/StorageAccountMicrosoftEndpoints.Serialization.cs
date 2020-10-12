@@ -24,61 +24,31 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("blob"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     blob = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("queue"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     queue = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("table"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     table = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("file"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     file = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("web"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     web = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("dfs"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     dfs = property.Value.GetString();
                     continue;
                 }

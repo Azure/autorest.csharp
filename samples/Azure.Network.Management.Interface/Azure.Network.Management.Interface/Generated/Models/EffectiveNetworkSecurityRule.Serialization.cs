@@ -34,11 +34,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
@@ -54,21 +49,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("sourcePortRange"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     sourcePortRange = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("destinationPortRange"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     destinationPortRange = property.Value.GetString();
                     continue;
                 }
@@ -104,21 +89,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("sourceAddressPrefix"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     sourceAddressPrefix = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("destinationAddressPrefix"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     destinationAddressPrefix = property.Value.GetString();
                     continue;
                 }

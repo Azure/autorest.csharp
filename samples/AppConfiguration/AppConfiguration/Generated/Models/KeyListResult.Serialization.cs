@@ -36,11 +36,6 @@ namespace AppConfiguration.Models
                 }
                 if (property.NameEquals("@nextLink"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     nextLink = property.Value.GetString();
                     continue;
                 }

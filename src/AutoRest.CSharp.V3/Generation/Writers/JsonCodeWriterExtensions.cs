@@ -277,7 +277,10 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                     writer.Append($"continue;");
                                 }
                             }
-                            else if (!property.IsRequired)
+                            else if (!property.IsRequired &&
+                                     (property.Property?.ValueType.IsFrameworkType != true ||
+                                     property.Property?.ValueType.FrameworkType != typeof(string)) //https://github.com/Azure/autorest.csharp/issues/922
+                            )
                             {
                                 using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
                                 {

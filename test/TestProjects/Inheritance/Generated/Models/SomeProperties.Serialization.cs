@@ -36,21 +36,11 @@ namespace Inheritance.Models
             {
                 if (property.NameEquals("SomeProperty"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     someProperty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("SomeOtherProperty"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     someOtherProperty = property.Value.GetString();
                     continue;
                 }

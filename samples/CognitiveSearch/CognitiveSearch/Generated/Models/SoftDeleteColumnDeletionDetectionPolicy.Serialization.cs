@@ -39,21 +39,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("softDeleteColumnName"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     softDeleteColumnName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("softDeleteMarkerValue"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     softDeleteMarkerValue = property.Value.GetString();
                     continue;
                 }

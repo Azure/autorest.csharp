@@ -58,11 +58,6 @@ namespace ExtensionClientName.Models
                 }
                 if (property.NameEquals("originalPropertyString"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     originalPropertyString = property.Value.GetString();
                     continue;
                 }
