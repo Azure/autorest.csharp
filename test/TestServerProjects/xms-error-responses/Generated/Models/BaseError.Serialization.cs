@@ -19,6 +19,11 @@ namespace xms_error_responses.Models
             {
                 if (property.NameEquals("someBaseProp"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     someBaseProp = property.Value.GetString();
                     continue;
                 }

@@ -80,16 +80,31 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("textExtractionAlgorithm"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     textExtractionAlgorithm = property.Value.GetString().ToTextExtractionAlgorithm();
                     continue;
                 }
                 if (property.NameEquals("defaultLanguageCode"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     defaultLanguageCode = new OcrSkillLanguage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("detectOrientation"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     detectOrientation = property.Value.GetBoolean();
                     continue;
                 }
@@ -100,16 +115,31 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("name"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("description"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     description = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("context"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     context = property.Value.GetString();
                     continue;
                 }

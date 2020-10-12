@@ -60,21 +60,41 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("lowercase"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     lowercase = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("pattern"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     pattern = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("flags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     flags = new RegexFlags(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("stopwords"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

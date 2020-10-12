@@ -45,26 +45,51 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("keyname"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     keyname = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("keyversion"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     keyversion = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("keyvaulturi"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     keyvaulturi = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("currentVersionedKeyIdentifier"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     currentVersionedKeyIdentifier = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("lastKeyRotationTimestamp"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     lastKeyRotationTimestamp = property.Value.GetDateTimeOffset("O");
                     continue;
                 }

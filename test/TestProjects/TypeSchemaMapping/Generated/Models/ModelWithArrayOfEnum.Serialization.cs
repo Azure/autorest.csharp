@@ -47,6 +47,11 @@ namespace TypeSchemaMapping.Models
             {
                 if (property.NameEquals("ArrayOfEnum"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<EnumForModelWithArrayOfEnum> array = new List<EnumForModelWithArrayOfEnum>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -57,6 +62,11 @@ namespace TypeSchemaMapping.Models
                 }
                 if (property.NameEquals("ArrayOfEnumCustomizedToNullable"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<EnumForModelWithArrayOfEnum?> array = new List<EnumForModelWithArrayOfEnum?>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

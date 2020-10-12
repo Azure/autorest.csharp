@@ -50,11 +50,21 @@ namespace TypeSchemaMapping.Models
             {
                 if (property.NameEquals("StringProperty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     stringProperty = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("DictionaryProperty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -65,6 +75,11 @@ namespace TypeSchemaMapping.Models
                 }
                 if (property.NameEquals("DaysOfWeek"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
                     continue;
                 }

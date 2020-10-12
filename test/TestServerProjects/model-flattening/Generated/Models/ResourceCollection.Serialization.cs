@@ -54,11 +54,21 @@ namespace model_flattening.Models
             {
                 if (property.NameEquals("productresource"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
                     continue;
                 }
                 if (property.NameEquals("arrayofresources"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<FlattenedProduct> array = new List<FlattenedProduct>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -69,6 +79,11 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("dictionaryofresources"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {

@@ -38,6 +38,11 @@ namespace body_string.Models
                 }
                 if (property.NameEquals("field1"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     field1 = property.Value.GetString();
                     continue;
                 }

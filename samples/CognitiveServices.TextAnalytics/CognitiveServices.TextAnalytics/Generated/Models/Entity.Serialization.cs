@@ -34,6 +34,11 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("subtype"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     subtype = property.Value.GetString();
                     continue;
                 }

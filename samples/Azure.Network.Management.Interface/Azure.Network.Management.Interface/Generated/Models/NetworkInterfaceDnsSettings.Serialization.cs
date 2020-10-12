@@ -45,6 +45,11 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("dnsServers"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -55,6 +60,11 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("appliedDnsServers"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -65,16 +75,31 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("internalDnsNameLabel"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     internalDnsNameLabel = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("internalFqdn"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     internalFqdn = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("internalDomainNameSuffix"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     internalDomainNameSuffix = property.Value.GetString();
                     continue;
                 }

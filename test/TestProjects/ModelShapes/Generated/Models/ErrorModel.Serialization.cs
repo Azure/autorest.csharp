@@ -20,11 +20,21 @@ namespace ModelShapes.Models
             {
                 if (property.NameEquals("Code"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     code = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("Status"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     status = property.Value.GetString();
                     continue;
                 }

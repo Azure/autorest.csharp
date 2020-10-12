@@ -34,6 +34,11 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("details"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -44,11 +49,21 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("target"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     target = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("innerError"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     innerError = DeserializeInnerError(property.Value);
                     continue;
                 }

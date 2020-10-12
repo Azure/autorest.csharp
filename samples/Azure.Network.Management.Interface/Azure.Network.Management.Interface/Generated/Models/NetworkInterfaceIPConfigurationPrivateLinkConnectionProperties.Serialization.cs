@@ -22,16 +22,31 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("groupId"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     groupId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("requiredMemberName"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     requiredMemberName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fqdns"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

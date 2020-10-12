@@ -68,34 +68,69 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("base_product_description"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     baseProductDescription = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         if (property0.NameEquals("max_product_display_name"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
                             maxProductDisplayName = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("max_product_capacity"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
                             maxProductCapacity = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("max_product_image"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
                                 if (property1.NameEquals("generic_value"))
                                 {
+                                    if (property1.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        property1.ThrowNonNullablePropertyIsNull();
+                                        continue;
+                                    }
                                     genericValue = property1.Value.GetString();
                                     continue;
                                 }
                                 if (property1.NameEquals("@odata.value"))
                                 {
+                                    if (property1.Value.ValueKind == JsonValueKind.Null)
+                                    {
+                                        property1.ThrowNonNullablePropertyIsNull();
+                                        continue;
+                                    }
                                     odataValue = property1.Value.GetString();
                                     continue;
                                 }

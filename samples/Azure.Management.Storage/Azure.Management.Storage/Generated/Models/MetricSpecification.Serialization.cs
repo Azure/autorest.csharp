@@ -28,26 +28,51 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("name"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("displayName"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     displayName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("displayDescription"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     displayDescription = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("unit"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     unit = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("dimensions"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<Dimension> array = new List<Dimension>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -58,21 +83,41 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("aggregationType"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     aggregationType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("fillGapWithZero"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     fillGapWithZero = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("category"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     category = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("resourceIdDimensionNameOverride"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     resourceIdDimensionNameOverride = property.Value.GetString();
                     continue;
                 }

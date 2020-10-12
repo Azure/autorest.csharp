@@ -27,11 +27,21 @@ namespace ModelShapes.Models
             {
                 if (property.NameEquals("ReadonlyProperty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("ReadonlyListProperty"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<ReadonlyModel> array = new List<ReadonlyModel>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

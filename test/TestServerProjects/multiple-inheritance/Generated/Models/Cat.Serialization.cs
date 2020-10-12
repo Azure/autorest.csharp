@@ -45,16 +45,31 @@ namespace multiple_inheritance.Models
             {
                 if (property.NameEquals("likesMilk"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     likesMilk = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("meows"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     meows = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("hisses"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     hisses = property.Value.GetBoolean();
                     continue;
                 }

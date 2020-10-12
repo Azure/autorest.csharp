@@ -36,6 +36,11 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("array"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array0 = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

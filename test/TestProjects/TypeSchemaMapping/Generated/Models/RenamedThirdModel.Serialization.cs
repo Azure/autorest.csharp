@@ -38,11 +38,21 @@ namespace CustomNamespace
             {
                 if (property.NameEquals("ETag"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     eTag = new ETag(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("CreatedAt"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     createdAt = property.Value.GetDateTime();
                     continue;
                 }

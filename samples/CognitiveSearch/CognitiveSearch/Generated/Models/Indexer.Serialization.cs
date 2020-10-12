@@ -97,6 +97,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("description"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     description = property.Value.GetString();
                     continue;
                 }
@@ -107,6 +112,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("skillsetName"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     skillsetName = property.Value.GetString();
                     continue;
                 }
@@ -117,16 +127,31 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("schedule"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     schedule = IndexingSchedule.DeserializeIndexingSchedule(property.Value);
                     continue;
                 }
                 if (property.NameEquals("parameters"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     parameters = IndexingParameters.DeserializeIndexingParameters(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fieldMappings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -137,6 +162,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("outputFieldMappings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<FieldMapping> array = new List<FieldMapping>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -147,11 +177,21 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("disabled"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     disabled = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("@odata.etag"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     odataEtag = property.Value.GetString();
                     continue;
                 }

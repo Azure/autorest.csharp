@@ -21,6 +21,11 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("value"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<ListContainerItem> array = new List<ListContainerItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -31,6 +36,11 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("nextLink"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     nextLink = property.Value.GetString();
                     continue;
                 }

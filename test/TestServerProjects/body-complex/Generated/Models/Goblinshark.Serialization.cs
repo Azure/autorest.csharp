@@ -70,16 +70,31 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("jawsize"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     jawsize = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("color"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     color = new GoblinSharkColor(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("age"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     age = property.Value.GetInt32();
                     continue;
                 }
@@ -95,6 +110,11 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("species"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     species = property.Value.GetString();
                     continue;
                 }
@@ -105,6 +125,11 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("siblings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

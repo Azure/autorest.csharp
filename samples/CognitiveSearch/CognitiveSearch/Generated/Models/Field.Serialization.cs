@@ -117,51 +117,101 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("key"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     key = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("retrievable"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     retrievable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("searchable"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     searchable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("filterable"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     filterable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("sortable"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     sortable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("facetable"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     facetable = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("analyzer"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     analyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("searchAnalyzer"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     searchAnalyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("indexAnalyzer"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     indexAnalyzer = new AnalyzerName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("synonymMaps"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -172,6 +222,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("fields"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<Field> array = new List<Field>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

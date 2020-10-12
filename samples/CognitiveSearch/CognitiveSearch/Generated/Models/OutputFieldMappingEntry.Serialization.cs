@@ -38,6 +38,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("targetName"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     targetName = property.Value.GetString();
                     continue;
                 }

@@ -37,11 +37,21 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("field"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     field = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
                 if (property.NameEquals("leap"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     leap = property.Value.GetDateTimeOffset("D");
                     continue;
                 }

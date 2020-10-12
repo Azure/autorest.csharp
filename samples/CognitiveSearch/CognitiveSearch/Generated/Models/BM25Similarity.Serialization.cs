@@ -39,11 +39,21 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("k1"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     k1 = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("b"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     b = property.Value.GetDouble();
                     continue;
                 }

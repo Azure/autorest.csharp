@@ -22,21 +22,41 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("status"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     status = new BlobRestoreProgressStatus(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("failureReason"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     failureReason = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("restoreId"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     restoreId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("parameters"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     parameters = BlobRestoreParameters.DeserializeBlobRestoreParameters(property.Value);
                     continue;
                 }

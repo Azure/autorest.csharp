@@ -30,6 +30,11 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("keyUri"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     keyUri = property.Value.GetString();
                     continue;
                 }

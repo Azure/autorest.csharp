@@ -44,11 +44,21 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("targetFieldName"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     targetFieldName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("mappingFunction"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     mappingFunction = FieldMappingFunction.DeserializeFieldMappingFunction(property.Value);
                     continue;
                 }

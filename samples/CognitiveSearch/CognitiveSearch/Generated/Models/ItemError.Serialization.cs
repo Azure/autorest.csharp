@@ -24,6 +24,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("key"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     key = property.Value.GetString();
                     continue;
                 }
@@ -39,16 +44,31 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("name"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("details"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     details = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("documentationLink"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     documentationLink = property.Value.GetString();
                     continue;
                 }
