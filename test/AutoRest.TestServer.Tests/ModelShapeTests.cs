@@ -443,7 +443,7 @@ namespace AutoRest.TestServer.Tests
 #else
 
         [Test]
-        public void OptionalPropertyWithWorksInRelease()
+        public void OptionalPropertyWithNullWorksInRelease()
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement);
             Assert.Null(model.NonRequiredInt);
