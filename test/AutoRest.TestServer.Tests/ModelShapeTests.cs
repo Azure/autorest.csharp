@@ -433,5 +433,21 @@ namespace AutoRest.TestServer.Tests
             Assert.False(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
             Assert.Null(typeof(ReadonlyModel).GetMethod("DeserializeParametersModel", BindingFlags.Static | BindingFlags.NonPublic));
         }
+
+#if DEBUG
+        [Test]
+        public void OptionalPropertyWithNullFailsInDebug()
+        {
+            Assert.Throws<JsonException>(() => MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement));
+        }
+#else
+
+        [Test]
+        public void OptionalPropertyWithWorksInRelease()
+        {
+            var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement);
+            Assert.Null(model.NonRequiredInt);
+        }
+#endif
     }
 }
