@@ -162,41 +162,21 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("filter"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     filter = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("highlight"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     highlight = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("highlightPostTag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     highlightPostTag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("highlightPreTag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     highlightPreTag = property.Value.GetString();
                     continue;
                 }
@@ -212,11 +192,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("orderby"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     orderby = property.Value.GetString();
                     continue;
                 }
@@ -247,31 +222,16 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("scoringProfile"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     scoringProfile = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("search"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     search = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("searchFields"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     searchFields = property.Value.GetString();
                     continue;
                 }
@@ -287,11 +247,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("select"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     select = property.Value.GetString();
                     continue;
                 }

@@ -27,11 +27,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("errorMessage"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     errorMessage = property.Value.GetString();
                     continue;
                 }

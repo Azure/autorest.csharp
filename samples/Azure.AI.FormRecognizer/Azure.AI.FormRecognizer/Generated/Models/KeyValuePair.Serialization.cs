@@ -22,11 +22,6 @@ namespace Azure.AI.FormRecognizer.Models
             {
                 if (property.NameEquals("label"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     label = property.Value.GetString();
                     continue;
                 }

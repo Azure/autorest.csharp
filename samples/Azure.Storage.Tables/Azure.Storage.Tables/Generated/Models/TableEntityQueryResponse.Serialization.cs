@@ -21,11 +21,6 @@ namespace Azure.Storage.Tables.Models
             {
                 if (property.NameEquals("odata.metadata"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     odataMetadata = property.Value.GetString();
                     continue;
                 }

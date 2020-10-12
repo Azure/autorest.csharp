@@ -24,11 +24,6 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("etag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     etag = property.Value.GetString();
                     continue;
                 }

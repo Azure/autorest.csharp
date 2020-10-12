@@ -22,21 +22,11 @@ namespace xms_error_responses.Models
             {
                 if (property.NameEquals("whatSubAddress"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     whatSubAddress = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("reason"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     reason = property.Value.GetString();
                     continue;
                 }
@@ -47,11 +37,6 @@ namespace xms_error_responses.Models
                 }
                 if (property.NameEquals("someBaseProp"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     someBaseProp = property.Value.GetString();
                     continue;
                 }

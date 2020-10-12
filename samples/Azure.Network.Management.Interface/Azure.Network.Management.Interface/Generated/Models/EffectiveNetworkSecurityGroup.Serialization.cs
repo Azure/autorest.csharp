@@ -58,11 +58,6 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 if (property.NameEquals("tagMap"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     tagMap = property.Value.GetString();
                     continue;
                 }

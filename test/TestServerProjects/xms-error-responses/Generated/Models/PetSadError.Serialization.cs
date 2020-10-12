@@ -28,11 +28,6 @@ namespace xms_error_responses.Models
             {
                 if (property.NameEquals("reason"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     reason = property.Value.GetString();
                     continue;
                 }
@@ -43,11 +38,6 @@ namespace xms_error_responses.Models
                 }
                 if (property.NameEquals("errorMessage"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     errorMessage = property.Value.GetString();
                     continue;
                 }

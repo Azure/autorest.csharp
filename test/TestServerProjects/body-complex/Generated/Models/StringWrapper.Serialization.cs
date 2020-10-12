@@ -42,31 +42,16 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("field"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     field = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("empty"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     empty = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("null"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     @null = property.Value.GetString();
                     continue;
                 }

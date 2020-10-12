@@ -36,11 +36,6 @@ namespace paging.Models
                 }
                 if (property.NameEquals("odata.nextLink"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     odataNextLink = property.Value.GetString();
                     continue;
                 }

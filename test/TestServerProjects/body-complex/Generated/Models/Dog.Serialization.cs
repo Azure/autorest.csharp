@@ -42,11 +42,6 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("food"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     food = property.Value.GetString();
                     continue;
                 }
@@ -62,11 +57,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }

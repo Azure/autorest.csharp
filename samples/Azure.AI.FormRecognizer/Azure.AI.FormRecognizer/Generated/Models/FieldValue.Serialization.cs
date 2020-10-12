@@ -39,11 +39,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("valueString"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     valueString = property.Value.GetString();
                     continue;
                 }
@@ -69,11 +64,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("valuePhoneNumber"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     valuePhoneNumber = property.Value.GetString();
                     continue;
                 }
@@ -129,11 +119,6 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("text"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     text = property.Value.GetString();
                     continue;
                 }

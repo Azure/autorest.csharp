@@ -225,11 +225,6 @@ namespace ModelShapes.Models
                 }
                 if (property.NameEquals("NonRequiredString"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     nonRequiredString = property.Value.GetString();
                     continue;
                 }

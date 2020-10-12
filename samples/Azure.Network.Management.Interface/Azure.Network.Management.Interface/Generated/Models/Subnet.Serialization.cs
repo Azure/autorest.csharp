@@ -128,31 +128,16 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("etag"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     etag = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = property.Value.GetString();
                     continue;
                 }
@@ -167,11 +152,6 @@ namespace Azure.Network.Management.Interface.Models
                     {
                         if (property0.NameEquals("addressPrefix"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
                             addressPrefix = property0.Value.GetString();
                             continue;
                         }
@@ -342,11 +322,6 @@ namespace Azure.Network.Management.Interface.Models
                         }
                         if (property0.NameEquals("purpose"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
                             purpose = property0.Value.GetString();
                             continue;
                         }
@@ -362,21 +337,11 @@ namespace Azure.Network.Management.Interface.Models
                         }
                         if (property0.NameEquals("privateEndpointNetworkPolicies"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
                             privateEndpointNetworkPolicies = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("privateLinkServiceNetworkPolicies"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
                             privateLinkServiceNetworkPolicies = property0.Value.GetString();
                             continue;
                         }

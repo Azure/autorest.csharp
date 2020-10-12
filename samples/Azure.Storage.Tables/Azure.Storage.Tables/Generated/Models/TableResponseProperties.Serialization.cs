@@ -22,41 +22,21 @@ namespace Azure.Storage.Tables.Models
             {
                 if (property.NameEquals("TableName"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     tableName = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.type"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     odataType = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     odataId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("odata.editLink"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     odataEditLink = property.Value.GetString();
                     continue;
                 }

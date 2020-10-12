@@ -43,11 +43,6 @@ namespace Azure.Network.Management.Interface.Models
             {
                 if (property.NameEquals("service"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     service = property.Value.GetString();
                     continue;
                 }

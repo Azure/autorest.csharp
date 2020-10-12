@@ -38,11 +38,6 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("base_product_description"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     baseProductDescription = property.Value.GetString();
                     continue;
                 }

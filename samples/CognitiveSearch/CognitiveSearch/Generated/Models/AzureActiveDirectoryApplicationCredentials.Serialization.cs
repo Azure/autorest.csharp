@@ -38,11 +38,6 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("applicationSecret"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     applicationSecret = property.Value.GetString();
                     continue;
                 }

@@ -31,11 +31,6 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     id = property.Value.GetString();
                     continue;
                 }

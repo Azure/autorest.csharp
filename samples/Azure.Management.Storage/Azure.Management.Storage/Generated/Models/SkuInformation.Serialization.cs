@@ -41,11 +41,6 @@ namespace Azure.Management.Storage.Models
                 }
                 if (property.NameEquals("resourceType"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     resourceType = property.Value.GetString();
                     continue;
                 }

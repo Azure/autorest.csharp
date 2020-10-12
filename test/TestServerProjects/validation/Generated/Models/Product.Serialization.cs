@@ -91,11 +91,6 @@ namespace validation.Models
                 }
                 if (property.NameEquals("image"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     image = property.Value.GetString();
                     continue;
                 }
@@ -121,11 +116,6 @@ namespace validation.Models
                 }
                 if (property.NameEquals("constStringAsEnum"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     constStringAsEnum = property.Value.GetString();
                     continue;
                 }
