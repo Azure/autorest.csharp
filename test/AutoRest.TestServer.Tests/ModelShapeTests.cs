@@ -11,6 +11,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using ModelShapes.Models;
 using NUnit.Framework;
+using TypeSchemaMapping.Models;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -449,5 +450,50 @@ namespace AutoRest.TestServer.Tests
             Assert.Null(model.NonRequiredInt);
         }
 #endif
+
+        [Test]
+        public void ModelWithCustomizedNullableJsonElementPropertyDeserializesNull()
+        {
+            var model = ModelWithNullableObjectProperty.DeserializeModelWithNullableObjectProperty(
+                JsonDocument.Parse("{\"ModelProperty\":null}").RootElement);
+
+            Assert.AreEqual(JsonValueKind.Null, model.ModelProperty.ValueKind);
+        }
+
+        [Test]
+        public void ModelWithCustomizedNullableJsonElementPropertyDeserializesUndefined()
+        {
+            var model = ModelWithNullableObjectProperty.DeserializeModelWithNullableObjectProperty(
+                JsonDocument.Parse("{}").RootElement);
+
+            Assert.AreEqual(JsonValueKind.Undefined, model.ModelProperty.ValueKind);
+        }
+
+        [Test]
+        public void ModelWithCustomizedNullableJsonElementPropertyDeserializesValue()
+        {
+            var model = ModelWithNullableObjectProperty.DeserializeModelWithNullableObjectProperty(
+                JsonDocument.Parse("{\"ModelProperty\":1}").RootElement);
+
+            Assert.AreEqual(1, model.ModelProperty.GetInt32());
+        }
+
+        [Test]
+        public void ModelWithCustomizedNullableJsonElementPropertySerializesNull()
+        {
+            JsonAsserts.AssertSerialization("{\"ModelProperty\":null}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("null").RootElement});
+        }
+
+        [Test]
+        public void ModelWithCustomizedNullableJsonElementPropertySerializesUndefined()
+        {
+            JsonAsserts.AssertSerialization("{}", new ModelWithNullableObjectProperty() { ModelProperty = default});
+        }
+
+        [Test]
+        public void ModelWithCustomizedNullableJsonElementPropertySerializesValue()
+        {
+            JsonAsserts.AssertSerialization("{\"ModelProperty\":1}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("1").RootElement});
+        }
     }
 }
