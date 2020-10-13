@@ -298,28 +298,28 @@ namespace AutoRest.TestServer.Tests
         public Task LROErrorDelete202RetryInvalidHeader() => Test(async (host, pipeline) =>
         {
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartDelete202RetryInvalidHeaderAsync();
-            Assert.ThrowsAsync<UriFormatException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
         public Task LROErrorDelete202RetryInvalidHeader_Sync() => Test((host, pipeline) =>
         {
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartDelete202RetryInvalidHeader();
-            Assert.Throws<UriFormatException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
         });
 
         [Test]
         public Task LROErrorDeleteAsyncInvalidHeader() => Test(async (host, pipeline) =>
         {
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRelativeRetryInvalidHeaderAsync();
-            Assert.ThrowsAsync<UriFormatException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
         public Task LROErrorDeleteAsyncInvalidHeader_Sync() => Test((host, pipeline) =>
         {
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartDeleteAsyncRelativeRetryInvalidHeader();
-            Assert.Throws<UriFormatException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
         });
 
         [Test]
@@ -369,7 +369,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPost202RetryInvalidHeaderAsync(value);
-            Assert.ThrowsAsync<UriFormatException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
@@ -377,7 +377,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPost202RetryInvalidHeader(value);
-            Assert.Throws<UriFormatException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
         });
 
         [Test]
@@ -385,7 +385,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPostAsyncRelativeRetryInvalidHeaderAsync(value);
-            Assert.ThrowsAsync<UriFormatException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
@@ -393,7 +393,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPostAsyncRelativeRetryInvalidHeader(value);
-            Assert.Throws<UriFormatException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
         });
 
         [Test]
@@ -481,7 +481,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPutAsyncRelativeRetryInvalidHeaderAsync(value);
-            Assert.ThrowsAsync<UriFormatException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
         });
 
         [Test]
@@ -489,7 +489,7 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPutAsyncRelativeRetryInvalidHeader(value);
-            Assert.Throws<UriFormatException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
         });
 
         [Test]

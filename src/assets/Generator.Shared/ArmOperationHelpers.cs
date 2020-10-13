@@ -31,7 +31,7 @@ namespace Azure.Core
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _scopeName;
         private readonly RequestMethod _requestMethod;
-        private readonly string _originalUri;
+        private readonly Uri _originalUri;
         private readonly OperationFinalStateVia _finalStateVia;
         private HeaderFrom _headerFrom;
         private string _pollUri = default!;
@@ -57,7 +57,7 @@ namespace Azure.Core
             _source = source;
             _rawResponse = originalResponse;
             _requestMethod = originalRequest.Method;
-            _originalUri = originalRequest.Uri.ToString();
+            _originalUri = originalRequest.Uri.ToUri();
             _finalStateVia = finalStateVia;
             InitializeScenarioInfo();
 
@@ -173,7 +173,16 @@ namespace Azure.Core
             HttpMessage message = _pipeline.CreateMessage();
             Request request = message.Request;
             request.Method = RequestMethod.Get;
-            request.Uri.Reset(new Uri(link));
+
+            if (Uri.TryCreate(link, UriKind.Absolute, out var nextLink))
+            {
+                request.Uri.Reset(nextLink);
+            }
+            else
+            {
+                request.Uri.Reset(new Uri(_originalUri, link));
+            }
+
             return message;
         }
 
@@ -307,7 +316,7 @@ namespace Azure.Core
                 return;
             }
 
-            _pollUri = _originalUri;
+            _pollUri = _originalUri.ToString();
             _headerFrom = HeaderFrom.None;
         }
 
@@ -344,7 +353,7 @@ namespace Azure.Core
 
                 if (_requestMethod == RequestMethod.Put || (_originalHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri))
                 {
-                    return _originalUri;
+                    return _originalUri.ToString();
                 }
 
                 if (_originalHasLocation && _finalStateVia == OperationFinalStateVia.Location)
