@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace HeadAsBooleanFalse
+namespace head
 {
     internal partial class HttpSuccessRestClient
     {

@@ -128,9 +128,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName"
     },
-    "HeadAsBooleanFalse": {
+    "head": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeadAsBooleanFalse"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\head"
     },
     "HeadAsBooleanTrue": {
       "commandName": "Project",

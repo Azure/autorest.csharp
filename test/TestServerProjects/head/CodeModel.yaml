@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
   description: Test Infrastructure for AutoRest
-  title: HeadAsBooleanFalse
+  title: AutoRest Head Test Service
 schemas: !<!Schemas> 
   strings:
     - !<!StringSchema> &ref_0
@@ -79,6 +79,12 @@ operationGroups:
               http: !<!HttpResponse> 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            httpSuccess_head200:
+              parameters: {}
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: Head200
@@ -131,6 +137,12 @@ operationGroups:
               http: !<!HttpResponse> 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            httpSuccess_head204:
+              parameters: {}
+              responses:
+                '204': {}
         language: !<!Languages> 
           default:
             name: Head204
@@ -183,6 +195,12 @@ operationGroups:
               http: !<!HttpResponse> 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            httpSuccess_head404:
+              parameters: {}
+              responses:
+                '204': {}
         language: !<!Languages> 
           default:
             name: Head404
@@ -197,7 +215,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: HeadAsBooleanFalse
+    name: AutoRestHeadTestService
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

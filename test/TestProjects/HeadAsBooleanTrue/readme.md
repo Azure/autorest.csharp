@@ -6,6 +6,6 @@
 title: HeadAsBooleanTrue
 require: $(this-folder)/../../../readme.md
 head-as-boolean: true
-input-file: ../HeadAsBoolean.json
+input-file: https://github.com/Azure/autorest.testserver/blob/master/swagger/head.json
 namespace: Azure.HeadAsBooleanTrue
 ```

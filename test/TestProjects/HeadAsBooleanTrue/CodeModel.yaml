@@ -79,6 +79,12 @@ operationGroups:
               http: !<!HttpResponse> 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            httpSuccess_head200:
+              parameters: {}
+              responses:
+                '200': {}
         language: !<!Languages> 
           default:
             name: Head200
@@ -131,6 +137,12 @@ operationGroups:
               http: !<!HttpResponse> 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            httpSuccess_head204:
+              parameters: {}
+              responses:
+                '204': {}
         language: !<!Languages> 
           default:
             name: Head204
@@ -183,6 +195,12 @@ operationGroups:
               http: !<!HttpResponse> 
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            httpSuccess_head404:
+              parameters: {}
+              responses:
+                '204': {}
         language: !<!Languages> 
           default:
             name: Head404
