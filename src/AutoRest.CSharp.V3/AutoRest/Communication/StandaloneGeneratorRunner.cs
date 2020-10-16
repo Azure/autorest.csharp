@@ -55,6 +55,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                     writer.WriteBoolean(nameof(Configuration.AzureArm), configuration.AzureArm);
                     writer.WriteBoolean(nameof(Configuration.PublicClients), configuration.PublicClients);
                     writer.WriteBoolean(nameof(Configuration.ModelNamespace), configuration.ModelNamespace);
+                    writer.WriteBoolean(nameof(Configuration.HeadAsBoolean), configuration.HeadAsBoolean);
                     writer.WriteEndObject();
                 }
 
@@ -86,7 +87,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Communication
                 saveInputs: false,
                 root.GetProperty(nameof(Configuration.AzureArm)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean()
+                root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean(),
+                root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean()
             );
         }
     }

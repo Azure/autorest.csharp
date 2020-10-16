@@ -18,6 +18,7 @@ using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
+using StatusCodes = AutoRest.CSharp.V3.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.V3.Output.Models
 {
@@ -334,13 +335,29 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             foreach (var response in operation.Responses)
             {
+                List<StatusCodes> statusCodes = new List<StatusCodes>();
+                Array.ForEach(response.HttpResponse.IntStatusCodes, statusCode => statusCodes.Add(new StatusCodes(statusCode, null)));
                 clientResponse.Add(new Response(
                     operation.IsLongRunning ? null : BuildResponseBody(response),
-                    response.HttpResponse.IntStatusCodes.ToArray()
+                    statusCodes.ToArray()
                 ));
             }
 
             var responseType = ReduceResponses(clientResponse);
+
+            if (request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean)
+            {
+                responseType = new CSharpType(typeof(bool));
+                clientResponse = new List<Response>()
+                {
+                    new Response(
+                        new ConstantResponseBody(new Constant(true, new CSharpType(typeof(bool)))),
+                        new[] { new StatusCodes(null, (int)Family.SUCCESSFUL) }),
+                    new Response(
+                        new ConstantResponseBody(new Constant(false, new CSharpType(typeof(bool)))),
+                        new[] { new StatusCodes(null, (int)Family.CLIENT_ERROR) }),
+                };
+            }
 
             return new RestClientMethod(
                 operationName,
@@ -469,7 +486,7 @@ namespace AutoRest.CSharp.V3.Output.Models
             {
                 responses = new[]
                 {
-                    new Response(null, new[] { 200 })
+                    new Response(null, new[] { new StatusCodes(200, null) })
                 };
             }
 

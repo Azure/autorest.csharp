@@ -517,7 +517,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"var headers = new {headersModelType}({responseVariable});");
             }
 
-            using (writer.Scope($"switch ({responseVariable}.Status)"))
+            string responseStatus;
+            if (returnType != null && returnType.IsFrameworkType && returnType.FrameworkType == typeof(bool)
+                && operation.Request.HttpMethod == RequestMethod.Head)
+            {
+                responseStatus = $"{responseVariable}.Status/100";
+            }
+            else
+            {
+                responseStatus = $"{responseVariable}.Status";
+            }
+            using (writer.Scope($"switch ({responseStatus})"))
             {
                 foreach (var response in operation.Responses)
                 {
@@ -526,7 +536,14 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
                     foreach (var statusCode in statusCodes)
                     {
-                        writer.Line($"case {statusCode}:");
+                        if (statusCode.Code != null)
+                        {
+                           writer.Line($"case {statusCode.Code}:");
+                        }
+                        else
+                        {
+                           writer.Line($"case {statusCode.Family}:");
+                        }
                     }
 
                     using (responseBody != null ? writer.Scope() : default)
@@ -548,6 +565,12 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         {
                             writer.Line($"var {valueVariable:D} = {message}.ExtractResponseContent();");
                             value = new Reference(valueVariable.ActualName, responseBody.Type);
+                        }
+                        else if (responseBody is ConstantResponseBody _ && returnType != null)
+                        {
+                            var body = (ConstantResponseBody)responseBody;
+                            writer.Line($"{returnType} {valueVariable:D} = {body.Value.Value:L};");
+                            value = new Reference(valueVariable.ActualName, returnType);
                         }
                         else if (returnType != null)
                         {

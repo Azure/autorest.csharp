@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace)
+        public Configuration(string outputFolder, string ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             AzureArm = azureArm;
             PublicClients = publicClients || AzureArm;
             ModelNamespace = modelNamespace;
+            HeadAsBoolean = headAsBoolean;
         }
 
 
@@ -30,5 +31,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
         public bool AzureArm { get; }
         public bool PublicClients { get; }
         public bool ModelNamespace { get; }
+        public bool HeadAsBoolean { get; }
     }
 }
