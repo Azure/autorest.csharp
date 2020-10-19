@@ -336,7 +336,10 @@ namespace AutoRest.CSharp.V3.Output.Models
             foreach (var response in operation.Responses)
             {
                 List<StatusCodes> statusCodes = new List<StatusCodes>();
-                Array.ForEach(response.HttpResponse.IntStatusCodes, statusCode => statusCodes.Add(new StatusCodes(statusCode, null)));
+                foreach (var statusCode in response.HttpResponse.IntStatusCodes)
+                {
+                    statusCodes.Add(new StatusCodes(statusCode, null));
+                }
                 clientResponse.Add(new Response(
                     operation.IsLongRunning ? null : BuildResponseBody(response),
                     statusCodes.ToArray()
@@ -352,10 +355,10 @@ namespace AutoRest.CSharp.V3.Output.Models
                 {
                     new Response(
                         new ConstantResponseBody(new Constant(true, new CSharpType(typeof(bool)))),
-                        new[] { new StatusCodes(null, (int)Family.SUCCESSFUL) }),
+                        new[] { new StatusCodes(null, 2) }),
                     new Response(
                         new ConstantResponseBody(new Constant(false, new CSharpType(typeof(bool)))),
-                        new[] { new StatusCodes(null, (int)Family.CLIENT_ERROR) }),
+                        new[] { new StatusCodes(null, 4) }),
                 };
             }
 

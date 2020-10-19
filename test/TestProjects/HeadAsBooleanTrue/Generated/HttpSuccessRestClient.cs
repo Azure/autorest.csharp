@@ -51,14 +51,16 @@ namespace HeadAsBooleanTrue
         {
             using var message = CreateHead200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status / 100)
+            switch (message.Response.Status)
             {
-                case 2:
+                case 200:
+                case int s when s > 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 4:
+                case 400:
+                case int s when s > 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -74,14 +76,16 @@ namespace HeadAsBooleanTrue
         {
             using var message = CreateHead200Request();
             _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status / 100)
+            switch (message.Response.Status)
             {
-                case 2:
+                case 200:
+                case int s when s > 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 4:
+                case 400:
+                case int s when s > 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -109,14 +113,16 @@ namespace HeadAsBooleanTrue
         {
             using var message = CreateHead204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status / 100)
+            switch (message.Response.Status)
             {
-                case 2:
+                case 200:
+                case int s when s > 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 4:
+                case 400:
+                case int s when s > 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -132,14 +138,16 @@ namespace HeadAsBooleanTrue
         {
             using var message = CreateHead204Request();
             _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status / 100)
+            switch (message.Response.Status)
             {
-                case 2:
+                case 200:
+                case int s when s > 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 4:
+                case 400:
+                case int s when s > 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -167,14 +175,16 @@ namespace HeadAsBooleanTrue
         {
             using var message = CreateHead404Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status / 100)
+            switch (message.Response.Status)
             {
-                case 2:
+                case 200:
+                case int s when s > 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 4:
+                case 400:
+                case int s when s > 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -190,14 +200,16 @@ namespace HeadAsBooleanTrue
         {
             using var message = CreateHead404Request();
             _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status / 100)
+            switch (message.Response.Status)
             {
-                case 2:
+                case 200:
+                case int s when s > 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 4:
+                case 400:
+                case int s when s > 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);

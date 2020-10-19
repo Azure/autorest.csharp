@@ -517,17 +517,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                 writer.Line($"var headers = new {headersModelType}({responseVariable});");
             }
 
-            string responseStatus;
-            if (returnType != null && returnType.IsFrameworkType && returnType.FrameworkType == typeof(bool)
-                && operation.Request.HttpMethod == RequestMethod.Head)
-            {
-                responseStatus = $"{responseVariable}.Status/100";
-            }
-            else
-            {
-                responseStatus = $"{responseVariable}.Status";
-            }
-            using (writer.Scope($"switch ({responseStatus})"))
+            using (writer.Scope($"switch ({responseVariable}.Status)"))
             {
                 foreach (var response in operation.Responses)
                 {
@@ -542,7 +532,16 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         else
                         {
-                           writer.Line($"case {statusCode.Family}:");
+                            if (statusCode.Family == 2)
+                            {
+                                writer.Line($"case 200:");
+                                writer.Line($"case int s when s > 200 && s < 300:");
+                            }
+                            else if (statusCode.Family == 4)
+                            {
+                                writer.Line($"case 400:");
+                                writer.Line($"case int s when s > 400 && s < 500:");
+                            }
                         }
                     }
 
@@ -566,10 +565,11 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             writer.Line($"var {valueVariable:D} = {message}.ExtractResponseContent();");
                             value = new Reference(valueVariable.ActualName, responseBody.Type);
                         }
-                        else if (responseBody is ConstantResponseBody _ && returnType != null)
+                        else if (responseBody is ConstantResponseBody body && returnType != null)
                         {
-                            var body = (ConstantResponseBody)responseBody;
-                            writer.Line($"{returnType} {valueVariable:D} = {body.Value.Value:L};");
+                            writer.Append($"{returnType} {valueVariable:D} = ");
+                            writer.WriteReferenceOrConstant(body.Value);
+                            writer.Line($";");
                             value = new Reference(valueVariable.ActualName, returnType);
                         }
                         else if (returnType != null)
