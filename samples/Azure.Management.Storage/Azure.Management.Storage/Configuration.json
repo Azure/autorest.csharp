@@ -1,1 +1,1 @@
-{"OutputFolder":".","Namespace":"Azure.Management.Storage","LibraryName":"Storage","SharedSourceFolders":["..\\..\\..\\src\\assets\\Generator.Shared","..\\..\\..\\src\\assets\\Azure.Core.Shared"],"AzureArm":true,"PublicClients":true,"ModelNamespace":true}
+{"OutputFolder":".","Namespace":"Azure.Management.Storage","LibraryName":"Storage","SharedSourceFolders":["..\\..\\..\\src\\assets\\Generator.Shared","..\\..\\..\\src\\assets\\Azure.Core.Shared"],"AzureArm":true,"PublicClients":true,"ModelNamespace":true,"HeadAsBoolean":false}

@@ -56,7 +56,8 @@ $testNames =
     'validation',
     'xml-service',
     'xms-error-responses',
-    'constants';
+    'constants',
+    'head';
 
 if (!($Exclude -contains "TestServer"))
 {
