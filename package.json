@@ -36,7 +36,7 @@
     "@microsoft.azure/autorest.modeler": "2.3.55",
     "autorest": "^2.0.4255",
     "coffee-script": "^1.11.1",
-    "dotnet-sdk-2.0.0": "^1.4.4",
+    "dotnet-sdk-2.2": "^2.2.1005",
     "gulp": "^3.9.1",
     "gulp-filter": "^5.0.0",
     "gulp-line-ending-corrector": "^1.0.1",
@@ -51,6 +51,6 @@
     "yarn": "^1.0.2"
   },
   "dependencies": {
-    "dotnet-2.0.0": "^1.4.4"
+    "dotnet-2.2": "^2.2.1005"
   }
 }
