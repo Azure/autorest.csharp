@@ -532,16 +532,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         }
                         else
                         {
-                            if (statusCode.Family == 2)
-                            {
-                                writer.Line($"case 200:");
-                                writer.Line($"case int s when s > 200 && s < 300:");
-                            }
-                            else if (statusCode.Family == 4)
-                            {
-                                writer.Line($"case 400:");
-                                writer.Line($"case int s when s > 400 && s < 500:");
-                            }
+                            writer.Line($"case int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}:");
                         }
                     }
 

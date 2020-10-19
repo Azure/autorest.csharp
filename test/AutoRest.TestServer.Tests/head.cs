@@ -3,6 +3,7 @@
 
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
 using head;
 using NUnit.Framework;
 
@@ -32,5 +33,26 @@ namespace AutoRest.TestServer.Tests
             var response = await new HttpSuccessClient(ClientDiagnostics, pipeline, host).Head404Async();
             Assert.AreEqual(404, response.Status);
         });
+
+        [Test]
+        public void ValidateHead200()
+        {
+            var method = TypeAsserts.HasPublicInstanceMethod(typeof(HttpSuccessClient), "Head200");
+            Assert.AreEqual(typeof(Response), method.ReturnType);
+        }
+
+        [Test]
+        public void ValidateHead204()
+        {
+            var method = TypeAsserts.HasPublicInstanceMethod(typeof(HttpSuccessClient), "Head204");
+            Assert.AreEqual(typeof(Response), method.ReturnType);
+        }
+
+        [Test]
+        public void ValidateHead404()
+        {
+            var method = TypeAsserts.HasPublicInstanceMethod(typeof(HttpSuccessClient), "Head404");
+            Assert.AreEqual(typeof(Response), method.ReturnType);
+        }
     }
 }

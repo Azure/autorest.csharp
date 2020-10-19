@@ -53,14 +53,12 @@ namespace HeadAsBooleanTrue
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
-                case 200:
-                case int s when s > 200 && s < 300:
+                case int s when s >= 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 400:
-                case int s when s > 400 && s < 500:
+                case int s when s >= 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -78,14 +76,12 @@ namespace HeadAsBooleanTrue
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
-                case 200:
-                case int s when s > 200 && s < 300:
+                case int s when s >= 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 400:
-                case int s when s > 400 && s < 500:
+                case int s when s >= 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -115,14 +111,12 @@ namespace HeadAsBooleanTrue
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
-                case 200:
-                case int s when s > 200 && s < 300:
+                case int s when s >= 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 400:
-                case int s when s > 400 && s < 500:
+                case int s when s >= 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -140,14 +134,12 @@ namespace HeadAsBooleanTrue
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
-                case 200:
-                case int s when s > 200 && s < 300:
+                case int s when s >= 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 400:
-                case int s when s > 400 && s < 500:
+                case int s when s >= 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -177,14 +169,12 @@ namespace HeadAsBooleanTrue
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
-                case 200:
-                case int s when s > 200 && s < 300:
+                case int s when s >= 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 400:
-                case int s when s > 400 && s < 500:
+                case int s when s >= 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
@@ -202,14 +192,12 @@ namespace HeadAsBooleanTrue
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
-                case 200:
-                case int s when s > 200 && s < 300:
+                case int s when s >= 200 && s < 300:
                     {
                         bool value = true;
                         return Response.FromValue(value, message.Response);
                     }
-                case 400:
-                case int s when s > 400 && s < 500:
+                case int s when s >= 400 && s < 500:
                     {
                         bool value = false;
                         return Response.FromValue(value, message.Response);
