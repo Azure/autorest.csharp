@@ -114,7 +114,7 @@ stages:
       jobs:
         - job: Update
           pool:
-            vmImage: ubuntu-18.04
+            vmImage: ubuntu-20.04
           variables:
             AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
           steps:
