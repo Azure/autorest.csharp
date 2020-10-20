@@ -37,9 +37,9 @@ stages:
           - checkout: self
           - checkout: azure-sdk-tools
           - task: NodeTool@0
-            displayName: "Install Node 13.x"
+            displayName: "Install Node 15.x"
             inputs:
-              versionSpec: '13.x'
+              versionSpec: '15.x'
           - script: |
               npm ci
             displayName: "Install packages"
