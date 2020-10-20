@@ -5,7 +5,7 @@ parameters:
 jobs:
 - job: ${{ parameters.name }}
   pool:
-    vmImage: ubuntu-18.04
+    vmImage: ubuntu-20.04
   steps:
     - task: NodeTool@0
       displayName: "Install Node 15.x"
