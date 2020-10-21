@@ -1034,7 +1034,7 @@ schemas: !<!Schemas>
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Accept
+          name: Accept1
           description: 'Accept: application/xml'
       protocol: !<!Protocols> {}
     - !<!ConstantSchema> &ref_166

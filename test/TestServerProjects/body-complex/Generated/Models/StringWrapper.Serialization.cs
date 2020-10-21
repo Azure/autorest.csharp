@@ -27,8 +27,15 @@ namespace body_complex.Models
             }
             if (Optional.IsDefined(NullProperty))
             {
-                writer.WritePropertyName("null");
-                writer.WriteStringValue(NullProperty);
+                if (NullProperty != null)
+                {
+                    writer.WritePropertyName("null");
+                    writer.WriteStringValue(NullProperty);
+                }
+                else
+                {
+                    writer.WriteNull("null");
+                }
             }
             writer.WriteEndObject();
         }
@@ -52,6 +59,11 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("null"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        @null = null;
+                        continue;
+                    }
                     @null = property.Value.GetString();
                     continue;
                 }

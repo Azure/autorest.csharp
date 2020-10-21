@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.Generation.Types;
@@ -541,31 +542,50 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                         ReferenceOrConstant value = default;
 
                         var valueVariable = new CodeWriterDeclaration("value");
-                        if (responseBody is ObjectResponseBody objectResponseBody)
+                        switch (responseBody)
                         {
-                            writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
-                            writer.WriteDeserializationForMethods(
-                                objectResponseBody.Serialization,
-                                async,
-                                (w, v) => w.Line($"{valueVariable} = {v};"),
-                                responseVariable);
-                            value = new Reference(valueVariable.ActualName, responseBody.Type);
-                        }
-                        else if (responseBody is StreamResponseBody _)
-                        {
-                            writer.Line($"var {valueVariable:D} = {message}.ExtractResponseContent();");
-                            value = new Reference(valueVariable.ActualName, responseBody.Type);
-                        }
-                        else if (responseBody is ConstantResponseBody body && returnType != null)
-                        {
-                            writer.Append($"{returnType} {valueVariable:D} = ");
-                            writer.WriteReferenceOrConstant(body.Value);
-                            writer.Line($";");
-                            value = new Reference(valueVariable.ActualName, returnType);
-                        }
-                        else if (returnType != null)
-                        {
-                            value = Constant.Default(returnType.WithNullable(true));
+                            case ObjectResponseBody objectResponseBody:
+                                writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
+                                writer.WriteDeserializationForMethods(
+                                    objectResponseBody.Serialization,
+                                    async,
+                                    (w, v) => w.Line($"{valueVariable} = {v};"),
+                                    responseVariable);
+                                value = new Reference(valueVariable.ActualName, responseBody.Type);
+                                break;
+                            case StreamResponseBody _:
+                                writer.Line($"var {valueVariable:D} = {message}.ExtractResponseContent();");
+                                value = new Reference(valueVariable.ActualName, responseBody.Type);
+                                break;
+                            case ConstantResponseBody body:
+                                writer.Append($"{returnType} {valueVariable:D} = ");
+                                writer.WriteReferenceOrConstant(body.Value);
+                                writer.Line($";");
+                                value = new Reference(valueVariable.ActualName, responseBody.Type);
+                                break;
+                            case StringResponseBody _:
+                                var streamReaderVariable = new CodeWriterDeclaration("streamReader");
+                                writer.Line($"{typeof(StreamReader)} {streamReaderVariable:D} = new {typeof(StreamReader)}({message}.Response.ContentStream);");
+                                writer.Append($"{returnType} {valueVariable:D} = ");
+                                if (async)
+                                {
+                                    writer.Line($"await {streamReaderVariable}.ReadToEndAsync();");
+                                }
+                                else
+                                {
+                                    writer.Line($"{streamReaderVariable}.ReadToEnd();");
+                                }
+                                value = new Reference(valueVariable.ActualName, responseBody.Type);
+                                break;
+                            default:
+                            {
+                                if (returnType != null)
+                                {
+                                    value = Constant.Default(returnType.WithNullable(true));
+                                }
+
+                                break;
+                            }
                         }
 
                         switch (kind)

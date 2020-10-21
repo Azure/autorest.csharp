@@ -916,10 +916,13 @@ input-file: "swagger-document"
 ```
 </details>
 
+<details>
+
 ## Configuration
+
 ```yaml
 # autorest-core version
-version: 3.0.6306
+version: 3.0.6324
 shared-source-folders:
   - $(this-folder)/src/assets/Generator.Shared
   - $(this-folder)/src/assets/Azure.Core.Shared
@@ -934,3 +937,5 @@ pipeline:
     input: csharpproj
     scope: output-scope
 ```
+
+</details>

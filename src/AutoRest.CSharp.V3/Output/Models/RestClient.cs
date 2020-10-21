@@ -375,22 +375,25 @@ namespace AutoRest.CSharp.V3.Output.Models
 
         private ResponseBody? BuildResponseBody(ServiceResponse response)
         {
-            ResponseBody? responseBody = null;
-            if (response is SchemaResponse schemaResponse)
+            if (response.HttpResponse.KnownMediaType == KnownMediaType.Text)
+            {
+                return new StringResponseBody();
+            }
+            else if (response is SchemaResponse schemaResponse)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 CSharpType responseType = TypeFactory.GetOutputType(_context.TypeFactory.CreateType(schema, isNullable: schemaResponse.IsNullable));
 
                 ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
 
-                responseBody = new ObjectResponseBody(responseType, serialization);
+                return new ObjectResponseBody(responseType, serialization);
             }
             else if (response is BinaryResponse)
             {
-                responseBody = new StreamResponseBody();
+                return new StreamResponseBody();
             }
 
-            return responseBody;
+            return null;
         }
 
         private static RequestParameterSerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
