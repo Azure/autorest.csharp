@@ -29,15 +29,8 @@ namespace body_complex.Models
             }
             if (Optional.IsDefined(Name))
             {
-                if (Name != null)
-                {
-                    writer.WritePropertyName("name");
-                    writer.WriteStringValue(Name);
-                }
-                else
-                {
-                    writer.WriteNull("name");
-                }
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
             }
             if (Optional.IsDefined(Color))
             {
@@ -66,11 +59,6 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        name = null;
-                        continue;
-                    }
                     name = property.Value.GetString();
                     continue;
                 }

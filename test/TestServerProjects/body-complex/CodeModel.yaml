@@ -563,7 +563,6 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: *ref_4
-          nullable: true
           serializedName: name
           language: !<!Languages> 
             default:
@@ -810,7 +809,6 @@ schemas: !<!Schemas>
           protocol: !<!Protocols> {}
         - !<!Property> 
           schema: *ref_14
-          nullable: true
           serializedName: 'null'
           language: !<!Languages> 
             default:
