@@ -129,6 +129,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
             if (configuration.SaveInputs)
             {
+                await codeModelTask;
                 await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }

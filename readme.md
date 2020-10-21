@@ -1,10 +1,10 @@
 # C# code generator for AutoRest V3
 
 ## Setup
-- [NodeJS](https://nodejs.org/en/) (13.x.x)
+- [NodeJS (14.x.x)](https://nodejs.org/en/) 
 - `npm install` (at root)
-- [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) (3.0.100)
-- [PowerShell Core](https://github.com/PowerShell/PowerShell/releases/latest)
+- [.NET Core SDK (3.0.100)](https://dotnet.microsoft.com/download/dotnet-core/3.0) 
+- [PowerShell Core 7](https://github.com/PowerShell/PowerShell/releases/latest)
 - [Java](https://www.java.com/en/download/) (for V2 testserver)
 
 ## Build
@@ -916,10 +916,13 @@ input-file: "swagger-document"
 ```
 </details>
 
+<details>
+
 ## Configuration
+
 ```yaml
 # autorest-core version
-version: 3.0.6306
+version: 3.0.6324
 shared-source-folders:
   - $(this-folder)/src/assets/Generator.Shared
   - $(this-folder)/src/assets/Azure.Core.Shared
@@ -934,3 +937,5 @@ pipeline:
     input: csharpproj
     scope: output-scope
 ```
+
+</details>
