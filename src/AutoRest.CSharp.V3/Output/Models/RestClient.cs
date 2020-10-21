@@ -240,19 +240,7 @@ namespace AutoRest.CSharp.V3.Output.Models
             if (bodyParameters.Count > 0)
             {
                 Debug.Assert(httpRequestWithBody != null);
-                if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
-                {
-                    Debug.Assert(bodyParameters.Count == 1);
-                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
-                    body = new BinaryRequestBody(bodyParameterValue);
-                }
-                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
-                {
-                    Debug.Assert(bodyParameters.Count == 1);
-                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
-                    body = new TextRequestBody(bodyParameterValue);
-                }
-                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Multipart)
+                if (httpRequestWithBody.KnownMediaType == KnownMediaType.Multipart)
                 {
                     List<MultipartRequestBodyPart> value = new List<MultipartRequestBodyPart>();
                     foreach (var parameter in bodyParameters)
@@ -285,35 +273,48 @@ namespace AutoRest.CSharp.V3.Output.Models
                 {
                     Debug.Assert(bodyParameters.Count == 1);
                     var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
-                    var serialization = _serializationBuilder.Build(
-                        httpRequestWithBody.KnownMediaType,
-                        bodyRequestParameter.Schema,
-                        bodyParameterValue.Type);
-
-                    // This method has a flattened body
-                    if (bodyRequestParameter.Flattened == true)
+                    if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary ||
+                        // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
+                        bodyRequestParameter.Schema is BinarySchema)
                     {
-                        var objectType = (ObjectType)_context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
-                        var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
-
-                        List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
-                        foreach (var virtualParameter in virtualParameters)
-                        {
-                            if (virtualParameter.Schema is ConstantSchema)
-                                continue;
-
-                            var actualParameter = allParameters[virtualParameter];
-
-                            initializationMap.Add(new ObjectPropertyInitializer(
-                                objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true),
-                                actualParameter));
-                        }
-
-                        body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
+                        body = new BinaryRequestBody(bodyParameterValue);
+                    }
+                    else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
+                    {
+                        body = new TextRequestBody(bodyParameterValue);
                     }
                     else
                     {
-                        body = new SchemaRequestBody(bodyParameterValue, serialization);
+                        var serialization = _serializationBuilder.Build(
+                            httpRequestWithBody.KnownMediaType,
+                            bodyRequestParameter.Schema,
+                            bodyParameterValue.Type);
+
+                        // This method has a flattened body
+                        if (bodyRequestParameter.Flattened == true)
+                        {
+                            var objectType = (ObjectType)_context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
+                            var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
+
+                            List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
+                            foreach (var virtualParameter in virtualParameters)
+                            {
+                                if (virtualParameter.Schema is ConstantSchema)
+                                    continue;
+
+                                var actualParameter = allParameters[virtualParameter];
+
+                                initializationMap.Add(new ObjectPropertyInitializer(
+                                    objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true),
+                                    actualParameter));
+                            }
+
+                            body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
+                        }
+                        else
+                        {
+                            body = new SchemaRequestBody(bodyParameterValue, serialization);
+                        }
                     }
                 }
             }
