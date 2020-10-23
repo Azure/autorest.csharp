@@ -24,6 +24,13 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class RestClient : ClientBase
     {
+        private HashSet<string> _ignoredRequestHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "x-ms-client-request-id",
+            "tracestate",
+            "traceparent"
+        };
+
         protected string RestClientSuffix { get; }
 
         private readonly OperationGroup _operationGroup;
@@ -219,6 +226,10 @@ namespace AutoRest.CSharp.V3.Output.Models
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
+                            if (_ignoredRequestHeader.Contains(serializedName))
+                            {
+                                continue;
+                            }
                             headers.Add(new RequestHeader(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), serializationFormat));
                             break;
                         case ParameterLocation.Query:
