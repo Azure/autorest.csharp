@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Builders;
@@ -24,7 +23,7 @@ namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class RestClient : ClientBase
     {
-        private HashSet<string> _ignoredRequestHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        private static readonly HashSet<string> IgnoredRequestHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "x-ms-client-request-id",
             "tracestate",
@@ -226,7 +225,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
-                            if (_ignoredRequestHeader.Contains(serializedName))
+                            if (IgnoredRequestHeader.Contains(serializedName))
                             {
                                 continue;
                             }
