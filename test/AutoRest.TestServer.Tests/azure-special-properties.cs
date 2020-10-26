@@ -179,8 +179,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task AzureXmsRequestClientOverwriteViaParameter() => TestStatus(async (host, pipeline) =>
         {
-            var value = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
-            return await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.ParamGetAsync(value);
+            using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+            return await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.ParamGetAsync();
         });
     }
 }

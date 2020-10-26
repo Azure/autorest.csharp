@@ -38,16 +38,15 @@ namespace Azure.Storage.Tables
         }
 
         /// <summary> Queries tables under the given account. </summary>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableQueryResponse>> QueryAsync(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableQueryResponse>> QueryAsync(QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Query");
             scope.Start();
             try
             {
-                return await RestClient.QueryAsync(requestId, queryOptions, cancellationToken).ConfigureAwait(false);
+                return await RestClient.QueryAsync(queryOptions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -57,16 +56,15 @@ namespace Azure.Storage.Tables
         }
 
         /// <summary> Queries tables under the given account. </summary>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableQueryResponse> Query(string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<TableQueryResponse> Query(QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Query");
             scope.Start();
             try
             {
-                return RestClient.Query(requestId, queryOptions, cancellationToken);
+                return RestClient.Query(queryOptions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -77,16 +75,15 @@ namespace Azure.Storage.Tables
 
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="tableProperties"> The Table properties. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableResponse>> CreateAsync(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableResponse>> CreateAsync(TableProperties tableProperties, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Create");
             scope.Start();
             try
             {
-                return await RestClient.CreateAsync(tableProperties, requestId, queryOptions, cancellationToken).ConfigureAwait(false);
+                return await RestClient.CreateAsync(tableProperties, queryOptions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -97,16 +94,15 @@ namespace Azure.Storage.Tables
 
         /// <summary> Creates a new table under the given account. </summary>
         /// <param name="tableProperties"> The Table properties. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableResponse> Create(TableProperties tableProperties, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<TableResponse> Create(TableProperties tableProperties, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Create");
             scope.Start();
             try
             {
-                return RestClient.Create(tableProperties, requestId, queryOptions, cancellationToken);
+                return RestClient.Create(tableProperties, queryOptions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -117,15 +113,14 @@ namespace Azure.Storage.Tables
 
         /// <summary> Operation permanently deletes the specified table. </summary>
         /// <param name="table"> The name of the table. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string table, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string table, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Delete");
             scope.Start();
             try
             {
-                return (await RestClient.DeleteAsync(table, requestId, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.DeleteAsync(table, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -136,15 +131,14 @@ namespace Azure.Storage.Tables
 
         /// <summary> Operation permanently deletes the specified table. </summary>
         /// <param name="table"> The name of the table. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string table, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string table, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Delete");
             scope.Start();
             try
             {
-                return RestClient.Delete(table, requestId, cancellationToken).GetRawResponse();
+                return RestClient.Delete(table, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -156,16 +150,15 @@ namespace Azure.Storage.Tables
         /// <summary> Queries entities in a table. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesAsync(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesAsync(string table, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntities");
             scope.Start();
             try
             {
-                return await RestClient.QueryEntitiesAsync(table, timeout, requestId, queryOptions, cancellationToken).ConfigureAwait(false);
+                return await RestClient.QueryEntitiesAsync(table, timeout, queryOptions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -177,16 +170,15 @@ namespace Azure.Storage.Tables
         /// <summary> Queries entities in a table. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableEntityQueryResponse> QueryEntities(string table, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<TableEntityQueryResponse> QueryEntities(string table, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntities");
             scope.Start();
             try
             {
-                return RestClient.QueryEntities(table, timeout, requestId, queryOptions, cancellationToken);
+                return RestClient.QueryEntities(table, timeout, queryOptions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -200,16 +192,15 @@ namespace Azure.Storage.Tables
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesWithPartitionAndRowKeyAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesWithPartitionAndRowKeyAsync(string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntitiesWithPartitionAndRowKey");
             scope.Start();
             try
             {
-                return await RestClient.QueryEntitiesWithPartitionAndRowKeyAsync(table, partitionKey, rowKey, timeout, requestId, queryOptions, cancellationToken).ConfigureAwait(false);
+                return await RestClient.QueryEntitiesWithPartitionAndRowKeyAsync(table, partitionKey, rowKey, timeout, queryOptions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -223,16 +214,15 @@ namespace Azure.Storage.Tables
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<TableEntityQueryResponse> QueryEntitiesWithPartitionAndRowKey(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<TableEntityQueryResponse> QueryEntitiesWithPartitionAndRowKey(string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntitiesWithPartitionAndRowKey");
             scope.Start();
             try
             {
-                return RestClient.QueryEntitiesWithPartitionAndRowKey(table, partitionKey, rowKey, timeout, requestId, queryOptions, cancellationToken);
+                return RestClient.QueryEntitiesWithPartitionAndRowKey(table, partitionKey, rowKey, timeout, queryOptions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -246,17 +236,16 @@ namespace Azure.Storage.Tables
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> UpdateEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> UpdateEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.UpdateEntity");
             scope.Start();
             try
             {
-                return (await RestClient.UpdateEntityAsync(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.UpdateEntityAsync(table, partitionKey, rowKey, timeout, tableEntityProperties, queryOptions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -270,17 +259,16 @@ namespace Azure.Storage.Tables
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response UpdateEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response UpdateEntity(string table, string partitionKey, string rowKey, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.UpdateEntity");
             scope.Start();
             try
             {
-                return RestClient.UpdateEntity(table, partitionKey, rowKey, timeout, requestId, tableEntityProperties, queryOptions, cancellationToken).GetRawResponse();
+                return RestClient.UpdateEntity(table, partitionKey, rowKey, timeout, tableEntityProperties, queryOptions, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -294,16 +282,15 @@ namespace Azure.Storage.Tables
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteEntityAsync(string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.DeleteEntity");
             scope.Start();
             try
             {
-                return (await RestClient.DeleteEntityAsync(table, partitionKey, rowKey, timeout, requestId, queryOptions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.DeleteEntityAsync(table, partitionKey, rowKey, timeout, queryOptions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -317,16 +304,15 @@ namespace Azure.Storage.Tables
         /// <param name="partitionKey"> The partition key of the entity. </param>
         /// <param name="rowKey"> The row key of the entity. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DeleteEntity(string table, string partitionKey, string rowKey, int? timeout = null, string requestId = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response DeleteEntity(string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.DeleteEntity");
             scope.Start();
             try
             {
-                return RestClient.DeleteEntity(table, partitionKey, rowKey, timeout, requestId, queryOptions, cancellationToken).GetRawResponse();
+                return RestClient.DeleteEntity(table, partitionKey, rowKey, timeout, queryOptions, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -338,17 +324,16 @@ namespace Azure.Storage.Tables
         /// <summary> Insert entity in a table. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> InsertEntityAsync(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> InsertEntityAsync(string table, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.InsertEntity");
             scope.Start();
             try
             {
-                return await RestClient.InsertEntityAsync(table, timeout, requestId, tableEntityProperties, queryOptions, cancellationToken).ConfigureAwait(false);
+                return await RestClient.InsertEntityAsync(table, timeout, tableEntityProperties, queryOptions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -360,17 +345,16 @@ namespace Azure.Storage.Tables
         /// <summary> Insert entity in a table. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, object>> InsertEntity(string table, int? timeout = null, string requestId = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, object>> InsertEntity(string table, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.InsertEntity");
             scope.Start();
             try
             {
-                return RestClient.InsertEntity(table, timeout, requestId, tableEntityProperties, queryOptions, cancellationToken);
+                return RestClient.InsertEntity(table, timeout, tableEntityProperties, queryOptions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -382,15 +366,14 @@ namespace Azure.Storage.Tables
         /// <summary> Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<SignedIdentifier>>> GetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<SignedIdentifier>>> GetAccessPolicyAsync(string table, int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.GetAccessPolicy");
             scope.Start();
             try
             {
-                return await RestClient.GetAccessPolicyAsync(table, timeout, requestId, cancellationToken).ConfigureAwait(false);
+                return await RestClient.GetAccessPolicyAsync(table, timeout, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -402,15 +385,14 @@ namespace Azure.Storage.Tables
         /// <summary> Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<SignedIdentifier>> GetAccessPolicy(string table, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<SignedIdentifier>> GetAccessPolicy(string table, int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.GetAccessPolicy");
             scope.Start();
             try
             {
-                return RestClient.GetAccessPolicy(table, timeout, requestId, cancellationToken);
+                return RestClient.GetAccessPolicy(table, timeout, cancellationToken);
             }
             catch (Exception e)
             {
@@ -422,16 +404,15 @@ namespace Azure.Storage.Tables
         /// <summary> sets stored access policies for the table that may be used with Shared Access Signatures. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> SetAccessPolicyAsync(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SetAccessPolicyAsync(string table, int? timeout = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.SetAccessPolicy");
             scope.Start();
             try
             {
-                return (await RestClient.SetAccessPolicyAsync(table, timeout, requestId, tableAcl, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.SetAccessPolicyAsync(table, timeout, tableAcl, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -443,16 +424,15 @@ namespace Azure.Storage.Tables
         /// <summary> sets stored access policies for the table that may be used with Shared Access Signatures. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response SetAccessPolicy(string table, int? timeout = null, string requestId = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
+        public virtual Response SetAccessPolicy(string table, int? timeout = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.SetAccessPolicy");
             scope.Start();
             try
             {
-                return RestClient.SetAccessPolicy(table, timeout, requestId, tableAcl, cancellationToken).GetRawResponse();
+                return RestClient.SetAccessPolicy(table, timeout, tableAcl, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {

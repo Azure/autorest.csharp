@@ -227,6 +227,7 @@ namespace AutoRest.CSharp.V3.Output.Models
                         case ParameterLocation.Header:
                             if (IgnoredRequestHeader.Contains(serializedName))
                             {
+                                methodParameters.Remove(requestParameter);
                                 continue;
                             }
                             headers.Add(new RequestHeader(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), serializationFormat));
