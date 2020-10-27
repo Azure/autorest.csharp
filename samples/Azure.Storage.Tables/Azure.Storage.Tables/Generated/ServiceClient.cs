@@ -39,15 +39,14 @@ namespace Azure.Storage.Tables
         /// <summary> Sets properties for a storage account&apos;s Table service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> SetPropertiesAsync(StorageServiceProperties storageServiceProperties, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> SetPropertiesAsync(StorageServiceProperties storageServiceProperties, int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.SetProperties");
             scope.Start();
             try
             {
-                return (await RestClient.SetPropertiesAsync(storageServiceProperties, timeout, requestId, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.SetPropertiesAsync(storageServiceProperties, timeout, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -59,15 +58,14 @@ namespace Azure.Storage.Tables
         /// <summary> Sets properties for a storage account&apos;s Table service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="storageServiceProperties"> The StorageService properties. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response SetProperties(StorageServiceProperties storageServiceProperties, int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual Response SetProperties(StorageServiceProperties storageServiceProperties, int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.SetProperties");
             scope.Start();
             try
             {
-                return RestClient.SetProperties(storageServiceProperties, timeout, requestId, cancellationToken).GetRawResponse();
+                return RestClient.SetProperties(storageServiceProperties, timeout, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -78,15 +76,14 @@ namespace Azure.Storage.Tables
 
         /// <summary> gets the properties of a storage account&apos;s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<StorageServiceProperties>> GetPropertiesAsync(int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StorageServiceProperties>> GetPropertiesAsync(int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetProperties");
             scope.Start();
             try
             {
-                return await RestClient.GetPropertiesAsync(timeout, requestId, cancellationToken).ConfigureAwait(false);
+                return await RestClient.GetPropertiesAsync(timeout, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -97,15 +94,14 @@ namespace Azure.Storage.Tables
 
         /// <summary> gets the properties of a storage account&apos;s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StorageServiceProperties> GetProperties(int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual Response<StorageServiceProperties> GetProperties(int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetProperties");
             scope.Start();
             try
             {
-                return RestClient.GetProperties(timeout, requestId, cancellationToken);
+                return RestClient.GetProperties(timeout, cancellationToken);
             }
             catch (Exception e)
             {
@@ -116,15 +112,14 @@ namespace Azure.Storage.Tables
 
         /// <summary> Retrieves statistics related to replication for the Table service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<StorageServiceStats>> GetStatisticsAsync(int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StorageServiceStats>> GetStatisticsAsync(int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
             scope.Start();
             try
             {
-                return await RestClient.GetStatisticsAsync(timeout, requestId, cancellationToken).ConfigureAwait(false);
+                return await RestClient.GetStatisticsAsync(timeout, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -135,15 +130,14 @@ namespace Azure.Storage.Tables
 
         /// <summary> Retrieves statistics related to replication for the Table service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account. </summary>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
-        /// <param name="requestId"> Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StorageServiceStats> GetStatistics(int? timeout = null, string requestId = null, CancellationToken cancellationToken = default)
+        public virtual Response<StorageServiceStats> GetStatistics(int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ServiceClient.GetStatistics");
             scope.Start();
             try
             {
-                return RestClient.GetStatistics(timeout, requestId, cancellationToken);
+                return RestClient.GetStatistics(timeout, cancellationToken);
             }
             catch (Exception e)
             {

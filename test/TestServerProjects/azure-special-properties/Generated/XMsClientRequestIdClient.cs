@@ -69,15 +69,14 @@ namespace azure_special_properties
         }
 
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
-        /// <param name="xMsClientRequestId"> This should appear as a method parameter, use value &apos;9C4D50EE-2D56-4CD3-8152-34347DC9F2B0&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ParamGetAsync(string xMsClientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ParamGetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XMsClientRequestIdClient.ParamGet");
             scope.Start();
             try
             {
-                return await RestClient.ParamGetAsync(xMsClientRequestId, cancellationToken).ConfigureAwait(false);
+                return await RestClient.ParamGetAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -87,15 +86,14 @@ namespace azure_special_properties
         }
 
         /// <summary> Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0. </summary>
-        /// <param name="xMsClientRequestId"> This should appear as a method parameter, use value &apos;9C4D50EE-2D56-4CD3-8152-34347DC9F2B0&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ParamGet(string xMsClientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response ParamGet(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XMsClientRequestIdClient.ParamGet");
             scope.Start();
             try
             {
-                return RestClient.ParamGet(xMsClientRequestId, cancellationToken);
+                return RestClient.ParamGet(cancellationToken);
             }
             catch (Exception e)
             {
