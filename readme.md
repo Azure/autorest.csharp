@@ -972,7 +972,7 @@ input-file: "swagger-document"
 
 ```yaml
 # autorest-core version
-version: 3.0.6324
+version: 3.0.6326
 shared-source-folders:
   - $(this-folder)/src/assets/Generator.Shared
   - $(this-folder)/src/assets/Azure.Core.Shared
