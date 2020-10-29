@@ -569,7 +569,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 writer.Append($"{returnType} {valueVariable:D} = ");
                                 if (async)
                                 {
-                                    writer.Line($"await {streamReaderVariable}.ReadToEndAsync();");
+                                    writer.Line($"await {streamReaderVariable}.ReadToEndAsync().ConfigureAwait(false);");
                                 }
                                 else
                                 {
