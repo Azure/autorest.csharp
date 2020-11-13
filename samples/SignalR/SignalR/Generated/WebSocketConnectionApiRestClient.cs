@@ -49,6 +49,7 @@ namespace SignalR
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -58,7 +59,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostDefaultHubBroadcastAsync(Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostDefaultHubBroadcastAsync(Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
             {
@@ -70,8 +71,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -82,7 +88,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public Response PostDefaultHubBroadcast(Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public Response<string> PostDefaultHubBroadcast(Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
             {
@@ -94,8 +100,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -115,6 +126,7 @@ namespace SignalR
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -124,7 +136,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostDefaultHubBroadcastAsync(string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostDefaultHubBroadcastAsync(string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
             {
@@ -136,8 +148,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -148,7 +165,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
-        public Response PostDefaultHubBroadcast(string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public Response<string> PostDefaultHubBroadcast(string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (data == null)
             {
@@ -160,8 +177,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -182,6 +204,7 @@ namespace SignalR
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -192,7 +215,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostBroadcastAsync(string hub, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostBroadcastAsync(string hub, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -208,8 +231,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -221,7 +249,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="data"/> is null. </exception>
-        public Response PostBroadcast(string hub, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public Response<string> PostBroadcast(string hub, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -237,8 +265,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -259,6 +292,7 @@ namespace SignalR
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -269,7 +303,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostBroadcastAsync(string hub, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostBroadcastAsync(string hub, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -285,8 +319,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -298,7 +337,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="data"/> is null. </exception>
-        public Response PostBroadcast(string hub, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public Response<string> PostBroadcast(string hub, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -314,8 +353,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -332,6 +376,7 @@ namespace SignalR
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -341,7 +386,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostSendToDefaultHubUserAsync(string id, Stream data, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostSendToDefaultHubUserAsync(string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (id == null)
             {
@@ -357,8 +402,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -369,7 +419,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="data"/> is null. </exception>
-        public Response PostSendToDefaultHubUser(string id, Stream data, CancellationToken cancellationToken = default)
+        public Response<string> PostSendToDefaultHubUser(string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (id == null)
             {
@@ -385,8 +435,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -403,6 +458,7 @@ namespace SignalR
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -412,7 +468,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostSendToDefaultHubUserAsync(string id, string data, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostSendToDefaultHubUserAsync(string id, string data, CancellationToken cancellationToken = default)
         {
             if (id == null)
             {
@@ -428,8 +484,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -440,7 +501,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="data"/> is null. </exception>
-        public Response PostSendToDefaultHubUser(string id, string data, CancellationToken cancellationToken = default)
+        public Response<string> PostSendToDefaultHubUser(string id, string data, CancellationToken cancellationToken = default)
         {
             if (id == null)
             {
@@ -456,8 +517,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -476,6 +542,7 @@ namespace SignalR
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -486,7 +553,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="id"/>, or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostSendToUserAsync(string hub, string id, Stream data, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostSendToUserAsync(string hub, string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -506,8 +573,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -519,7 +591,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="id"/>, or <paramref name="data"/> is null. </exception>
-        public Response PostSendToUser(string hub, string id, Stream data, CancellationToken cancellationToken = default)
+        public Response<string> PostSendToUser(string hub, string id, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -539,8 +611,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -559,6 +636,7 @@ namespace SignalR
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -569,7 +647,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="id"/>, or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostSendToUserAsync(string hub, string id, string data, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostSendToUserAsync(string hub, string id, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -589,8 +667,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -602,7 +685,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="id"/>, or <paramref name="data"/> is null. </exception>
-        public Response PostSendToUser(string hub, string id, string data, CancellationToken cancellationToken = default)
+        public Response<string> PostSendToUser(string hub, string id, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -622,8 +705,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -640,6 +728,7 @@ namespace SignalR
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -649,7 +738,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostSendToDefaultHubConnectionAsync(string connectionId, Stream data, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostSendToDefaultHubConnectionAsync(string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -665,8 +754,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -677,7 +771,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> or <paramref name="data"/> is null. </exception>
-        public Response PostSendToDefaultHubConnection(string connectionId, Stream data, CancellationToken cancellationToken = default)
+        public Response<string> PostSendToDefaultHubConnection(string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -693,8 +787,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -711,6 +810,7 @@ namespace SignalR
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -720,7 +820,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostSendToDefaultHubConnectionAsync(string connectionId, string data, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostSendToDefaultHubConnectionAsync(string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -736,8 +836,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -748,7 +853,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> or <paramref name="data"/> is null. </exception>
-        public Response PostSendToDefaultHubConnection(string connectionId, string data, CancellationToken cancellationToken = default)
+        public Response<string> PostSendToDefaultHubConnection(string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -764,8 +869,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -781,6 +891,7 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -788,7 +899,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> GetCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -800,9 +911,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -812,7 +928,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
-        public Response GetCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
+        public Response<string> GetCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -824,9 +940,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -842,6 +963,7 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -849,7 +971,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> HeadCheckDefaultHubConnectionExistenceAsync(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -861,9 +983,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -873,7 +1000,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
-        public Response HeadCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
+        public Response<string> HeadCheckDefaultHubConnectionExistence(string connectionId, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -885,9 +1012,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -907,6 +1039,7 @@ namespace SignalR
                 uri.AppendQuery("reason", reason, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -915,7 +1048,7 @@ namespace SignalR
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> DeleteCloseDefaultHubClientConnectionAsync(string connectionId, string reason = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> DeleteCloseDefaultHubClientConnectionAsync(string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -927,8 +1060,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -939,7 +1077,7 @@ namespace SignalR
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="connectionId"/> is null. </exception>
-        public Response DeleteCloseDefaultHubClientConnection(string connectionId, string reason = null, CancellationToken cancellationToken = default)
+        public Response<string> DeleteCloseDefaultHubClientConnection(string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (connectionId == null)
             {
@@ -951,8 +1089,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -971,6 +1114,7 @@ namespace SignalR
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -981,7 +1125,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="connectionId"/>, or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostSendToConnectionAsync(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostSendToConnectionAsync(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1001,8 +1145,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1014,7 +1163,7 @@ namespace SignalR
         /// <param name="data"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="connectionId"/>, or <paramref name="data"/> is null. </exception>
-        public Response PostSendToConnection(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
+        public Response<string> PostSendToConnection(string hub, string connectionId, Stream data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1034,8 +1183,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1054,6 +1208,7 @@ namespace SignalR
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -1064,7 +1219,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="connectionId"/>, or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostSendToConnectionAsync(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostSendToConnectionAsync(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1084,8 +1239,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1097,7 +1257,7 @@ namespace SignalR
         /// <param name="data"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="connectionId"/>, or <paramref name="data"/> is null. </exception>
-        public Response PostSendToConnection(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
+        public Response<string> PostSendToConnection(string hub, string connectionId, string data, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1117,8 +1277,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1136,6 +1301,7 @@ namespace SignalR
             uri.AppendPath("/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -1144,7 +1310,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> GetCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1160,9 +1326,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1173,7 +1344,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
-        public Response GetCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public Response<string> GetCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1189,9 +1360,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1209,6 +1385,7 @@ namespace SignalR
             uri.AppendPath("/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -1217,7 +1394,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> HeadCheckConnectionExistenceAsync(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1233,9 +1410,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1246,7 +1428,7 @@ namespace SignalR
         /// <param name="connectionId"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
-        public Response HeadCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
+        public Response<string> HeadCheckConnectionExistence(string hub, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1262,9 +1444,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1286,6 +1473,7 @@ namespace SignalR
                 uri.AppendQuery("reason", reason, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -1295,7 +1483,7 @@ namespace SignalR
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> DeleteCloseClientConnectionAsync(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> DeleteCloseClientConnectionAsync(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1311,8 +1499,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1324,7 +1517,7 @@ namespace SignalR
         /// <param name="reason"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="connectionId"/> is null. </exception>
-        public Response DeleteCloseClientConnection(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
+        public Response<string> DeleteCloseClientConnection(string hub, string connectionId, string reason = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1340,8 +1533,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1362,6 +1560,7 @@ namespace SignalR
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -1372,7 +1571,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostDefaultHubGroupBroadcastAsync(string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostDefaultHubGroupBroadcastAsync(string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1388,8 +1587,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1401,7 +1605,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="data"/> is null. </exception>
-        public Response PostDefaultHubGroupBroadcast(string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public Response<string> PostDefaultHubGroupBroadcast(string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1417,8 +1621,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1439,6 +1648,7 @@ namespace SignalR
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -1449,7 +1659,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostDefaultHubGroupBroadcastAsync(string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostDefaultHubGroupBroadcastAsync(string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1465,8 +1675,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1478,7 +1693,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="data"/> is null. </exception>
-        public Response PostDefaultHubGroupBroadcast(string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public Response<string> PostDefaultHubGroupBroadcast(string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1494,8 +1709,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1511,6 +1731,7 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -1518,7 +1739,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
-        public async Task<Response> GetCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1530,9 +1751,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1542,7 +1768,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
-        public Response GetCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
+        public Response<string> GetCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1554,9 +1780,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1572,6 +1803,7 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/groups/", false);
             uri.AppendPath(group, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -1579,7 +1811,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
-        public async Task<Response> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> HeadCheckDefaultHubGroupExistenceAsync(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1591,9 +1823,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1603,7 +1840,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> is null. </exception>
-        public Response HeadCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
+        public Response<string> HeadCheckDefaultHubGroupExistence(string group, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -1615,9 +1852,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1640,6 +1882,7 @@ namespace SignalR
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = RequestContent.Create(data);
             return message;
         }
@@ -1651,7 +1894,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostGroupBroadcastAsync(string hub, string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostGroupBroadcastAsync(string hub, string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1671,8 +1914,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1685,7 +1933,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="data"/> is null. </exception>
-        public Response PostGroupBroadcast(string hub, string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public Response<string> PostGroupBroadcast(string hub, string group, Stream data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1705,8 +1953,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1729,6 +1982,7 @@ namespace SignalR
             }
             request.Uri = uri;
             request.Headers.Add("Content-Type", "text/plain");
+            request.Headers.Add("Accept", "text/plain");
             request.Content = new StringRequestContent(data);
             return message;
         }
@@ -1740,7 +1994,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="data"/> is null. </exception>
-        public async Task<Response> PostGroupBroadcastAsync(string hub, string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PostGroupBroadcastAsync(string hub, string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1760,8 +2014,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1774,7 +2033,7 @@ namespace SignalR
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="data"/> is null. </exception>
-        public Response PostGroupBroadcast(string hub, string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
+        public Response<string> PostGroupBroadcast(string hub, string group, string data, IEnumerable<string> excluded = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1794,8 +2053,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1813,6 +2077,7 @@ namespace SignalR
             uri.AppendPath("/groups/", false);
             uri.AppendPath(group, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -1821,7 +2086,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
-        public async Task<Response> GetCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1837,9 +2102,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1850,7 +2120,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
-        public Response GetCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
+        public Response<string> GetCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1866,9 +2136,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1886,6 +2161,7 @@ namespace SignalR
             uri.AppendPath("/groups/", false);
             uri.AppendPath(group, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -1894,7 +2170,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
-        public async Task<Response> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> HeadCheckGroupExistenceAsync(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1910,9 +2186,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1923,7 +2204,7 @@ namespace SignalR
         /// <param name="group"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="group"/> is null. </exception>
-        public Response HeadCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
+        public Response<string> HeadCheckGroupExistence(string hub, string group, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -1939,9 +2220,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -1957,6 +2243,7 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -1964,7 +2251,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
-        public async Task<Response> GetCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -1976,9 +2263,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1988,7 +2280,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
-        public Response GetCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
+        public Response<string> GetCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2000,9 +2292,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2018,6 +2315,7 @@ namespace SignalR
             uri.AppendPath("/ws/api/v1/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2025,7 +2323,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
-        public async Task<Response> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> HeadCheckDefaultHubUserExistenceAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2037,9 +2335,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2049,7 +2352,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
-        public Response HeadCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
+        public Response<string> HeadCheckDefaultHubUserExistence(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2061,9 +2364,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2081,6 +2389,7 @@ namespace SignalR
             uri.AppendPath("/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2089,7 +2398,7 @@ namespace SignalR
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> PutAddConnectionToDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutAddConnectionToDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2105,9 +2414,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2118,7 +2432,7 @@ namespace SignalR
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="connectionId"/> is null. </exception>
-        public Response PutAddConnectionToDefaultHubGroup(string group, string connectionId, CancellationToken cancellationToken = default)
+        public Response<string> PutAddConnectionToDefaultHubGroup(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2134,9 +2448,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2154,6 +2473,7 @@ namespace SignalR
             uri.AppendPath("/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2162,7 +2482,7 @@ namespace SignalR
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> DeleteRemoveConnectionFromDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> DeleteRemoveConnectionFromDefaultHubGroupAsync(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2178,9 +2498,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2191,7 +2516,7 @@ namespace SignalR
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="connectionId"/> is null. </exception>
-        public Response DeleteRemoveConnectionFromDefaultHubGroup(string group, string connectionId, CancellationToken cancellationToken = default)
+        public Response<string> DeleteRemoveConnectionFromDefaultHubGroup(string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2207,9 +2532,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2227,6 +2557,7 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2235,7 +2566,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> GetCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2251,9 +2582,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2264,7 +2600,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public Response GetCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
+        public Response<string> GetCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2280,9 +2616,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2300,6 +2641,7 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2308,7 +2650,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> HeadCheckUserExistenceInDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2324,9 +2666,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2337,7 +2684,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public Response HeadCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
+        public Response<string> HeadCheckUserExistenceInDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2353,9 +2700,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2377,6 +2729,7 @@ namespace SignalR
                 uri.AppendQuery("ttl", ttl.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2386,7 +2739,7 @@ namespace SignalR
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> PutAddUserToDefaultHubGroupAsync(string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutAddUserToDefaultHubGroupAsync(string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2402,8 +2755,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2415,7 +2773,7 @@ namespace SignalR
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public Response PutAddUserToDefaultHubGroup(string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
+        public Response<string> PutAddUserToDefaultHubGroup(string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2431,8 +2789,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2450,6 +2813,7 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2458,7 +2822,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> DeleteRemoveUserFromDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> DeleteRemoveUserFromDefaultHubGroupAsync(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2474,8 +2838,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2486,7 +2855,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="group"/> or <paramref name="user"/> is null. </exception>
-        public Response DeleteRemoveUserFromDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
+        public Response<string> DeleteRemoveUserFromDefaultHubGroup(string group, string user, CancellationToken cancellationToken = default)
         {
             if (group == null)
             {
@@ -2502,8 +2871,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2520,6 +2894,7 @@ namespace SignalR
             uri.AppendPath(user, true);
             uri.AppendPath("/groups", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2527,7 +2902,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
-        public async Task<Response> DeleteRemoveUserFromAllDefaultHubGroupsAsync(string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> DeleteRemoveUserFromAllDefaultHubGroupsAsync(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2540,8 +2915,13 @@ namespace SignalR
             {
                 case 200:
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2551,7 +2931,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="user"/> is null. </exception>
-        public Response DeleteRemoveUserFromAllDefaultHubGroups(string user, CancellationToken cancellationToken = default)
+        public Response<string> DeleteRemoveUserFromAllDefaultHubGroups(string user, CancellationToken cancellationToken = default)
         {
             if (user == null)
             {
@@ -2564,8 +2944,13 @@ namespace SignalR
             {
                 case 200:
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2583,6 +2968,7 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2591,7 +2977,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> GetCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2607,9 +2993,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2620,7 +3011,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
-        public Response GetCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
+        public Response<string> GetCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2636,9 +3027,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2656,6 +3052,7 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2664,7 +3061,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> HeadCheckUserExistenceAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2680,9 +3077,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2693,7 +3095,7 @@ namespace SignalR
         /// <param name="user"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
-        public Response HeadCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
+        public Response<string> HeadCheckUserExistence(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2709,9 +3111,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2731,6 +3138,7 @@ namespace SignalR
             uri.AppendPath("/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2740,7 +3148,7 @@ namespace SignalR
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> PutAddConnectionToGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutAddConnectionToGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2760,9 +3168,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2774,7 +3187,7 @@ namespace SignalR
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="connectionId"/> is null. </exception>
-        public Response PutAddConnectionToGroup(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
+        public Response<string> PutAddConnectionToGroup(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2794,9 +3207,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2816,6 +3234,7 @@ namespace SignalR
             uri.AppendPath("/connections/", false);
             uri.AppendPath(connectionId, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2825,7 +3244,7 @@ namespace SignalR
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="connectionId"/> is null. </exception>
-        public async Task<Response> DeleteRemoveConnectionFromGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> DeleteRemoveConnectionFromGroupAsync(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2845,9 +3264,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2859,7 +3283,7 @@ namespace SignalR
         /// <param name="connectionId"> Target connection Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="connectionId"/> is null. </exception>
-        public Response DeleteRemoveConnectionFromGroup(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
+        public Response<string> DeleteRemoveConnectionFromGroup(string hub, string group, string connectionId, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2879,9 +3303,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2901,6 +3330,7 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2910,7 +3340,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public async Task<Response> GetCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> GetCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2930,9 +3360,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -2944,7 +3379,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public Response GetCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public Response<string> GetCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -2964,9 +3399,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -2986,6 +3426,7 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -2995,7 +3436,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public async Task<Response> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> HeadCheckUserExistenceInGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3015,9 +3456,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -3029,7 +3475,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public Response HeadCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public Response<string> HeadCheckUserExistenceInGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3049,9 +3495,14 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 200:
-                case 400:
                 case 404:
-                    return message.Response;
+                    return Response.FromValue<string>(null, message.Response);
+                case 400:
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -3075,6 +3526,7 @@ namespace SignalR
                 uri.AppendQuery("ttl", ttl.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -3085,7 +3537,7 @@ namespace SignalR
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public async Task<Response> PutAddUserToGroupAsync(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> PutAddUserToGroupAsync(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3105,8 +3557,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -3119,7 +3576,7 @@ namespace SignalR
         /// <param name="ttl"> Specifies the seconds that the user exists in the group. If not set, the user lives in the group forever. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public Response PutAddUserToGroup(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
+        public Response<string> PutAddUserToGroup(string hub, string group, string user, int? ttl = null, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3139,8 +3596,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -3160,6 +3622,7 @@ namespace SignalR
             uri.AppendPath("/users/", false);
             uri.AppendPath(user, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -3169,7 +3632,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public async Task<Response> DeleteRemoveUserFromGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> DeleteRemoveUserFromGroupAsync(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3189,8 +3652,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -3202,7 +3670,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/>, <paramref name="group"/>, or <paramref name="user"/> is null. </exception>
-        public Response DeleteRemoveUserFromGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
+        public Response<string> DeleteRemoveUserFromGroup(string hub, string group, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3222,8 +3690,13 @@ namespace SignalR
             switch (message.Response.Status)
             {
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -3242,6 +3715,7 @@ namespace SignalR
             uri.AppendPath(user, true);
             uri.AppendPath("/groups", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
             return message;
         }
 
@@ -3250,7 +3724,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
-        public async Task<Response> DeleteRemoveUserFromAllGroupsAsync(string hub, string user, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> DeleteRemoveUserFromAllGroupsAsync(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3267,8 +3741,13 @@ namespace SignalR
             {
                 case 200:
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -3279,7 +3758,7 @@ namespace SignalR
         /// <param name="user"> Target user Id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hub"/> or <paramref name="user"/> is null. </exception>
-        public Response DeleteRemoveUserFromAllGroups(string hub, string user, CancellationToken cancellationToken = default)
+        public Response<string> DeleteRemoveUserFromAllGroups(string hub, string user, CancellationToken cancellationToken = default)
         {
             if (hub == null)
             {
@@ -3296,8 +3775,13 @@ namespace SignalR
             {
                 case 200:
                 case 202:
+                    return Response.FromValue<string>(null, message.Response);
                 case 400:
-                    return message.Response;
+                    {
+                        StreamReader streamReader = new StreamReader(message.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

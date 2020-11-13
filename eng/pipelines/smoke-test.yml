@@ -5,12 +5,12 @@ parameters:
 jobs:
 - job: ${{ parameters.name }}
   pool:
-    vmImage: ubuntu-18.04
+    vmImage: ubuntu-20.04
   steps:
     - task: NodeTool@0
-      displayName: "Install Node 13.x"
+      displayName: "Install Node 14.x"
       inputs:
-        versionSpec: '13.x'
+        versionSpec: '14.x'
     - script: |
         npm ci
       displayName: "Install packages"

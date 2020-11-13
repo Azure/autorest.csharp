@@ -48,6 +48,11 @@ namespace additionalProperties.Models
             {
                 if (property.NameEquals("friendly"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     friendly = property.Value.GetBoolean();
                     continue;
                 }
@@ -63,6 +68,11 @@ namespace additionalProperties.Models
                 }
                 if (property.NameEquals("status"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     status = property.Value.GetBoolean();
                     continue;
                 }

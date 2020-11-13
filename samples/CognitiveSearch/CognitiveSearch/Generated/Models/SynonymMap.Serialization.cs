@@ -60,6 +60,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("encryptionKey"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
                     continue;
                 }

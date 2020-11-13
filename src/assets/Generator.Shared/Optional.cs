@@ -5,6 +5,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 
 namespace Azure.Core
 {
@@ -36,6 +37,11 @@ namespace Azure.Core
         public static bool IsDefined(string value)
         {
             return value != null;
+        }
+
+        public static bool IsDefined(JsonElement value)
+        {
+            return value.ValueKind != JsonValueKind.Undefined;
         }
 
         public static IReadOnlyDictionary<TKey, TValue> ToDictionary<TKey, TValue>(Optional<IReadOnlyDictionary<TKey, TValue>> optional)

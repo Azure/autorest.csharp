@@ -121,6 +121,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("httpHeaders"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
@@ -136,6 +141,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("timeout"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     timeout = property.Value.GetTimeSpan("P");
                     continue;
                 }

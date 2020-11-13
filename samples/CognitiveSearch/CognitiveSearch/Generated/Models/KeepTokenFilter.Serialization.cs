@@ -55,6 +55,11 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("keepWordsCase"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     keepWordsCase = property.Value.GetBoolean();
                     continue;
                 }

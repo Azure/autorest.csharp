@@ -72,6 +72,11 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("iswild"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     iswild = property.Value.GetBoolean();
                     continue;
                 }
@@ -92,6 +97,11 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("siblings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

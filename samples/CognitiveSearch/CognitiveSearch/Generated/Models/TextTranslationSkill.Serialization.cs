@@ -82,11 +82,21 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("defaultFromLanguageCode"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     defaultFromLanguageCode = new TextTranslationSkillLanguage(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("suggestedFrom"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     suggestedFrom = new TextTranslationSkillLanguage(property.Value.GetString());
                     continue;
                 }

@@ -53,11 +53,21 @@ namespace CognitiveSearch.Models
                 }
                 if (property.NameEquals("flags"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     flags = new RegexFlags(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("group"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     group = property.Value.GetInt32();
                     continue;
                 }

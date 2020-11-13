@@ -44,6 +44,11 @@ namespace extensible_enums_swagger.Models
                 }
                 if (property.NameEquals("DaysOfWeek"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     daysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());
                     continue;
                 }

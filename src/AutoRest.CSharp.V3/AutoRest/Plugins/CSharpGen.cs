@@ -115,7 +115,8 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true
+                autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
+                autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false
             );
 
             string codeModelYaml = string.Empty;
@@ -128,6 +129,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
 
             if (configuration.SaveInputs)
             {
+                await codeModelTask;
                 await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }

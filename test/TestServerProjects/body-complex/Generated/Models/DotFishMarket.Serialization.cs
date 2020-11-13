@@ -23,11 +23,21 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("sampleSalmon"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
                     continue;
                 }
                 if (property.NameEquals("salmons"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<DotSalmon> array = new List<DotSalmon>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -38,11 +48,21 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("sampleFish"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     sampleFish = DotFish.DeserializeDotFish(property.Value);
                     continue;
                 }
                 if (property.NameEquals("fishes"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<DotFish> array = new List<DotFish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

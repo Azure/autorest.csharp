@@ -43,6 +43,11 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
                 if (property.NameEquals("statistics"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
                     continue;
                 }

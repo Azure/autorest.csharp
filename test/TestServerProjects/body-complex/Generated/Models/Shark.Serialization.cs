@@ -67,6 +67,11 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("age"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     age = property.Value.GetInt32();
                     continue;
                 }
@@ -92,6 +97,11 @@ namespace body_complex.Models
                 }
                 if (property.NameEquals("siblings"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<Fish> array = new List<Fish>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

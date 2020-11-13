@@ -42,6 +42,7 @@ $testNames =
     'header',
     'httpInfrastructure',
     'lro',
+    'lro-parameterized-endpoints',
     'media_types',
     'model-flattening',
     'multiple-inheritance',
@@ -55,7 +56,8 @@ $testNames =
     'validation',
     'xml-service',
     'xms-error-responses',
-    'constants';
+    'constants',
+    'head';
 
 if (!($Exclude -contains "TestServer"))
 {

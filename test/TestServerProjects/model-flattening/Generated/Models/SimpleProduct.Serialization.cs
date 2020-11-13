@@ -73,6 +73,11 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("details"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         if (property0.NameEquals("max_product_display_name"))
@@ -87,6 +92,11 @@ namespace model_flattening.Models
                         }
                         if (property0.NameEquals("max_product_image"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
                                 if (property1.NameEquals("generic_value"))

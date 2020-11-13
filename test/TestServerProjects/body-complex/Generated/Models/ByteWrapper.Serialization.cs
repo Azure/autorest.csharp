@@ -31,6 +31,11 @@ namespace body_complex.Models
             {
                 if (property.NameEquals("field"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     field = property.Value.GetBytesFromBase64();
                     continue;
                 }

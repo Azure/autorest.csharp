@@ -230,11 +230,21 @@ namespace ModelShapes.Models
                 }
                 if (property.NameEquals("NonRequiredInt"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     nonRequiredInt = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("NonRequiredStringList"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -245,6 +255,11 @@ namespace ModelShapes.Models
                 }
                 if (property.NameEquals("NonRequiredIntList"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<int> array = new List<int>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -360,6 +375,11 @@ namespace ModelShapes.Models
                 }
                 if (property.NameEquals("NonRequiredReadonlyInt"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     nonRequiredReadonlyInt = property.Value.GetInt32();
                     continue;
                 }

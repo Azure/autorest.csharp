@@ -1099,7 +1099,7 @@ schemas: !<!Schemas>
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Accept
+          name: Accept1
           description: 'Accept: application/json'
       protocol: !<!Protocols> {}
   dictionaries:

@@ -37,9 +37,9 @@ stages:
           - checkout: self
           - checkout: azure-sdk-tools
           - task: NodeTool@0
-            displayName: "Install Node 13.x"
+            displayName: "Install Node 14.x"
             inputs:
-              versionSpec: '13.x'
+              versionSpec: '14.x'
           - script: |
               npm ci
             displayName: "Install packages"
@@ -58,6 +58,14 @@ stages:
           - script: |
               dotnet test AutoRest.CSharp.V3.sln
             displayName: "Test"
+            env:
+              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+              DOTNET_CLI_TELEMETRY_OPTOUT: 1
+              DOTNET_MULTILEVEL_LOOKUP: 0
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              dotnet test AutoRest.CSharp.V3.sln -c Release
+            displayName: "Test Release"
             env:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -106,7 +114,7 @@ stages:
       jobs:
         - job: Update
           pool:
-            vmImage: ubuntu-18.04
+            vmImage: ubuntu-20.04
           variables:
             AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
           steps:

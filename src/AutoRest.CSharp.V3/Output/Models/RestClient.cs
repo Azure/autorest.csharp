@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Output.Builders;
@@ -18,11 +17,19 @@ using AutoRest.CSharp.V3.Output.Models.Types;
 using AutoRest.CSharp.V3.Utilities;
 using Azure.Core;
 using Request = AutoRest.CSharp.V3.Output.Models.Requests.Request;
+using StatusCodes = AutoRest.CSharp.V3.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.V3.Output.Models
 {
     internal class RestClient : ClientBase
     {
+        private static readonly HashSet<string> IgnoredRequestHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "x-ms-client-request-id",
+            "tracestate",
+            "traceparent"
+        };
+
         protected string RestClientSuffix { get; }
 
         private readonly OperationGroup _operationGroup;
@@ -218,6 +225,11 @@ namespace AutoRest.CSharp.V3.Output.Models
                     switch (httpParameter.In)
                     {
                         case ParameterLocation.Header:
+                            if (IgnoredRequestHeader.Contains(serializedName))
+                            {
+                                methodParameters.Remove(requestParameter);
+                                continue;
+                            }
                             headers.Add(new RequestHeader(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), serializationFormat));
                             break;
                         case ParameterLocation.Query:
@@ -239,19 +251,7 @@ namespace AutoRest.CSharp.V3.Output.Models
             if (bodyParameters.Count > 0)
             {
                 Debug.Assert(httpRequestWithBody != null);
-                if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary)
-                {
-                    Debug.Assert(bodyParameters.Count == 1);
-                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
-                    body = new BinaryRequestBody(bodyParameterValue);
-                }
-                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
-                {
-                    Debug.Assert(bodyParameters.Count == 1);
-                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
-                    body = new TextRequestBody(bodyParameterValue);
-                }
-                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Multipart)
+                if (httpRequestWithBody.KnownMediaType == KnownMediaType.Multipart)
                 {
                     List<MultipartRequestBodyPart> value = new List<MultipartRequestBodyPart>();
                     foreach (var parameter in bodyParameters)
@@ -284,35 +284,48 @@ namespace AutoRest.CSharp.V3.Output.Models
                 {
                     Debug.Assert(bodyParameters.Count == 1);
                     var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
-                    var serialization = _serializationBuilder.Build(
-                        httpRequestWithBody.KnownMediaType,
-                        bodyRequestParameter.Schema,
-                        bodyParameterValue.Type);
-
-                    // This method has a flattened body
-                    if (bodyRequestParameter.Flattened == true)
+                    if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary ||
+                        // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
+                        bodyRequestParameter.Schema is BinarySchema)
                     {
-                        var objectType = (ObjectType)_context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
-                        var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
-
-                        List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
-                        foreach (var virtualParameter in virtualParameters)
-                        {
-                            if (virtualParameter.Schema is ConstantSchema)
-                                continue;
-
-                            var actualParameter = allParameters[virtualParameter];
-
-                            initializationMap.Add(new ObjectPropertyInitializer(
-                                objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true),
-                                actualParameter));
-                        }
-
-                        body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
+                        body = new BinaryRequestBody(bodyParameterValue);
+                    }
+                    else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
+                    {
+                        body = new TextRequestBody(bodyParameterValue);
                     }
                     else
                     {
-                        body = new SchemaRequestBody(bodyParameterValue, serialization);
+                        var serialization = _serializationBuilder.Build(
+                            httpRequestWithBody.KnownMediaType,
+                            bodyRequestParameter.Schema,
+                            bodyParameterValue.Type);
+
+                        // This method has a flattened body
+                        if (bodyRequestParameter.Flattened == true)
+                        {
+                            var objectType = (ObjectType)_context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
+                            var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
+
+                            List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
+                            foreach (var virtualParameter in virtualParameters)
+                            {
+                                if (virtualParameter.Schema is ConstantSchema)
+                                    continue;
+
+                                var actualParameter = allParameters[virtualParameter];
+
+                                initializationMap.Add(new ObjectPropertyInitializer(
+                                    objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true),
+                                    actualParameter));
+                            }
+
+                            body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
+                        }
+                        else
+                        {
+                            body = new SchemaRequestBody(bodyParameterValue, serialization);
+                        }
                     }
                 }
             }
@@ -334,13 +347,32 @@ namespace AutoRest.CSharp.V3.Output.Models
 
             foreach (var response in operation.Responses)
             {
+                List<StatusCodes> statusCodes = new List<StatusCodes>();
+                foreach (var statusCode in response.HttpResponse.IntStatusCodes)
+                {
+                    statusCodes.Add(new StatusCodes(statusCode, null));
+                }
                 clientResponse.Add(new Response(
                     operation.IsLongRunning ? null : BuildResponseBody(response),
-                    response.HttpResponse.IntStatusCodes.ToArray()
+                    statusCodes.ToArray()
                 ));
             }
 
             var responseType = ReduceResponses(clientResponse);
+
+            if (request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean)
+            {
+                responseType = new CSharpType(typeof(bool));
+                clientResponse = new List<Response>()
+                {
+                    new Response(
+                        new ConstantResponseBody(new Constant(true, new CSharpType(typeof(bool)))),
+                        new[] { new StatusCodes(null, 2) }),
+                    new Response(
+                        new ConstantResponseBody(new Constant(false, new CSharpType(typeof(bool)))),
+                        new[] { new StatusCodes(null, 4) }),
+                };
+            }
 
             return new RestClientMethod(
                 operationName,
@@ -355,22 +387,25 @@ namespace AutoRest.CSharp.V3.Output.Models
 
         private ResponseBody? BuildResponseBody(ServiceResponse response)
         {
-            ResponseBody? responseBody = null;
-            if (response is SchemaResponse schemaResponse)
+            if (response.HttpResponse.KnownMediaType == KnownMediaType.Text)
+            {
+                return new StringResponseBody();
+            }
+            else if (response is SchemaResponse schemaResponse)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 CSharpType responseType = TypeFactory.GetOutputType(_context.TypeFactory.CreateType(schema, isNullable: schemaResponse.IsNullable));
 
                 ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
 
-                responseBody = new ObjectResponseBody(responseType, serialization);
+                return new ObjectResponseBody(responseType, serialization);
             }
             else if (response is BinaryResponse)
             {
-                responseBody = new StreamResponseBody();
+                return new StreamResponseBody();
             }
 
-            return responseBody;
+            return null;
         }
 
         private static RequestParameterSerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
@@ -469,7 +504,7 @@ namespace AutoRest.CSharp.V3.Output.Models
             {
                 responses = new[]
                 {
-                    new Response(null, new[] { 200 })
+                    new Response(null, new[] { new StatusCodes(200, null) })
                 };
             }
 

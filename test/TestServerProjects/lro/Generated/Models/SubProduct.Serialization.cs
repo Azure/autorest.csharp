@@ -40,6 +40,11 @@ namespace lro.Models
                 }
                 if (property.NameEquals("properties"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         if (property0.NameEquals("provisioningState"))
@@ -49,6 +54,11 @@ namespace lro.Models
                         }
                         if (property0.NameEquals("provisioningStateValues"))
                         {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
                             provisioningStateValues = new SubProductPropertiesProvisioningStateValues(property0.Value.GetString());
                             continue;
                         }

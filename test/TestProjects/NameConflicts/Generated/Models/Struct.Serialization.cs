@@ -1203,6 +1203,11 @@ namespace NameConflicts.Models
                 }
                 if (property.NameEquals("System"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     system = new SystemEnum(property.Value.GetString());
                     continue;
                 }

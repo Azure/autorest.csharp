@@ -48,16 +48,31 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("minGram"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     minGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("maxGram"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     maxGram = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("side"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     side = property.Value.GetString().ToEdgeNGramTokenFilterSide();
                     continue;
                 }

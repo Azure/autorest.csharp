@@ -21,6 +21,11 @@ namespace model_flattening.Models
             {
                 if (property.NameEquals("status"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     status = property.Value.GetInt32();
                     continue;
                 }
@@ -31,6 +36,11 @@ namespace model_flattening.Models
                 }
                 if (property.NameEquals("parentError"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     parentError = DeserializeError(property.Value);
                     continue;
                 }

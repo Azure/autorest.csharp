@@ -21,6 +21,11 @@ namespace validation.Models
             {
                 if (property.NameEquals("code"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     code = property.Value.GetInt32();
                     continue;
                 }

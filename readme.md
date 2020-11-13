@@ -1,43 +1,94 @@
 # C# code generator for AutoRest V3
 
-## Setup
-- [NodeJS](https://nodejs.org/en/) (13.x.x)
-- `npm install` (at root)
-- [.NET Core SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) (3.0.100)
-- [PowerShell Core](https://github.com/PowerShell/PowerShell/releases/latest)
-- [Java](https://www.java.com/en/download/) (for V2 testserver)
+<!-- TOC depthfrom:2 -->
 
-## Build
-- `dotnet build` (at root)
-- `./eng/Generate.ps1` (at root in PowerShell Core)
-
-## Test
-- `dotnet test` (at root)
-
-## Customizing the generated code
-
-<!-- TOC depthfrom:3 -->
-
-- [Make a model internal](#make-a-model-internal)
-- [Rename a model class](#rename-a-model-class)
-- [Change a model namespace](#change-a-model-namespace)
-- [Make model property internal](#make-model-property-internal)
-- [Rename a model property](#rename-a-model-property)
-- [Change a model property type](#change-a-model-property-type)
-- [Preserve raw Json value of a property](#preserve-raw-json-value-of-a-property)
-- [Changing member doc comment](#changing-member-doc-comment)
-- [Customize serialization/deserialization methods](#customize-serializationdeserialization-methods)
-- [Renaming an enum](#renaming-an-enum)
-- [Renaming an enum member](#renaming-an-enum-member)
-- [Changing an enum to an extensible enum](#changing-an-enum-to-an-extensible-enum)
-- [Make a client internal](#make-a-client-internal)
-- [Rename a client](#rename-a-client)
-- [Replace any generated member](#replace-any-generated-member)
-- [Remove any generated member](#remove-any-generated-member)
-- [Change model namespace or accessability in bulk](#change-model-namespace-or-accessability-in-bulk)
-- [Exclude models from namespace](#exclude-models-from-namespace)
+- [Prerequisites](#prerequisites)
+- [Build](#build)
+- [Test](#test)
+- [Use in azure-sdk-net repo](#use-in-azure-sdk-net-repo)
+- [Use outside of the azure-sdk-net repo](#use-outside-of-the-azure-sdk-net-repo)
+- [Customizing the generated code](#customizing-the-generated-code)
+    - [Make a model internal](#make-a-model-internal)
+    - [Rename a model class](#rename-a-model-class)
+    - [Change a model namespace](#change-a-model-namespace)
+    - [Make model property internal](#make-model-property-internal)
+    - [Rename a model property](#rename-a-model-property)
+    - [Change a model property type](#change-a-model-property-type)
+    - [Preserve raw Json value of a property](#preserve-raw-json-value-of-a-property)
+    - [Changing member doc comment](#changing-member-doc-comment)
+    - [Customize serialization/deserialization methods](#customize-serializationdeserialization-methods)
+    - [Renaming an enum](#renaming-an-enum)
+    - [Renaming an enum member](#renaming-an-enum-member)
+    - [Changing an enum to an extensible enum](#changing-an-enum-to-an-extensible-enum)
+    - [Make a client internal](#make-a-client-internal)
+    - [Rename a client](#rename-a-client)
+    - [Replace any generated member](#replace-any-generated-member)
+    - [Remove any generated member](#remove-any-generated-member)
+    - [Change model namespace or accessability in bulk](#change-model-namespace-or-accessability-in-bulk)
+    - [Exclude models from namespace](#exclude-models-from-namespace)
 
 <!-- /TOC -->
+
+## Prerequisites
+
+- [NodeJS (14.x.x)](https://nodejs.org/en/) 
+- [.NET Core SDK (3.0.100)](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+- [PowerShell Core 7](https://github.com/PowerShell/PowerShell/releases/latest)
+- [Java](https://www.java.com/en/download/) (for V2 testserver)
+- `npm install` (at root)
+
+## Build
+
+- `dotnet build` (at root)
+
+## Test
+
+- `./eng/Generate.ps1` (at root in PowerShell Core)
+- `dotnet test` (at root)
+
+## Use in `azure-sdk-net` repo
+
+Run `dotnet build /t:GenerateCode` in the directory that contains your `.csproj` file or refer to [azure-sdk-for-net/CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/master/CONTRIBUTING.md#on-boarding-new-generated-code-library) for more details.
+
+## Use outside of the `azure-sdk-net` repo
+
+1. Add the `http://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json` feed to your NuGet.config:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <add key="Azure SDK Tools" value="https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json" protocolVersion="3" />
+  </packageSources>
+</configuration>
+```
+
+2. Add a package reference to `AutoRest.CSharp.V3` version `1.0.0-alpha.20201013.3` or later:
+
+```xml
+<PackageReference Include="AutoRest.CSharp.V3" Version="1.0.0-alpha.20201013.3" />
+```
+
+3. Add an `autorest.md` configuration file pointing to you swagger file:
+
+~~~ markdown
+``` yaml
+input-file:
+- $(this-folder)/swagger.json
+# - http://example.com/swagger.json
+```
+~~~
+
+Or reference an existing configuration file:
+~~~ markdown
+``` yaml
+require: http://example.com/readme.md
+```
+~~~
+
+4. Run `dotnet build /t:GenerateCode` in the directory that contains your `.csproj` file.
+
+## Customizing the generated code
 
 ### Make a model internal
 
@@ -916,10 +967,12 @@ input-file: "swagger-document"
 ```
 </details>
 
-## Configuration
+<details>
+ <summary>Repository-specific pipeline configuration</summary>
+
 ```yaml
 # autorest-core version
-version: 3.0.6306
+version: 3.0.6326
 shared-source-folders:
   - $(this-folder)/src/assets/Generator.Shared
   - $(this-folder)/src/assets/Azure.Core.Shared
@@ -934,3 +987,5 @@ pipeline:
     input: csharpproj
     scope: output-scope
 ```
+
+</details>

@@ -68,6 +68,11 @@ namespace CognitiveSearch.Models
             {
                 if (property.NameEquals("defaultLanguageCode"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     defaultLanguageCode = new SentimentSkillLanguage(property.Value.GetString());
                     continue;
                 }

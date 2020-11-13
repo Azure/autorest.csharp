@@ -68,6 +68,10 @@ namespace AutoRest.CSharp.V3.Generation.Types
             return Equals((CSharpType) obj);
         }
 
+        public bool Equals(Type type)
+        {
+            return IsFrameworkType && type == FrameworkType;
+        }
         public override int GetHashCode()
         {
             return HashCode.Combine(_implementation, _type, Arguments);

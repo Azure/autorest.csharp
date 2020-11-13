@@ -39,11 +39,21 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("rowSpan"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     rowSpan = property.Value.GetInt32();
                     continue;
                 }
                 if (property.NameEquals("columnSpan"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     columnSpan = property.Value.GetInt32();
                     continue;
                 }
@@ -69,6 +79,11 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("elements"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -79,11 +94,21 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 if (property.NameEquals("isHeader"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     isHeader = property.Value.GetBoolean();
                     continue;
                 }
                 if (property.NameEquals("isFooter"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     isFooter = property.Value.GetBoolean();
                     continue;
                 }

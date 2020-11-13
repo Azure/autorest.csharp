@@ -36,6 +36,11 @@ namespace body_dictionary.Models
             {
                 if (property.NameEquals("integer"))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
                     integer = property.Value.GetInt32();
                     continue;
                 }
