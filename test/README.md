@@ -2,7 +2,7 @@
 
 Azure services define their web APIs using [swagger files](https://github.com/azure/azure-rest-api-specs).
 
-To binding those into an SDK, Azure SDK uses [Autorest](https://github.com/Azure/autorest) to parse the swagger definitions into boilerplate networking and serialization code. 
+To bind those into an SDK, Azure SDK uses [Autorest](https://github.com/Azure/autorest) to parse the swagger definitions into boilerplate networking and serialization code. 
 
 As the Azure SDK has multiple supported languages, Autorest uses plugins for each languages backend. This repository is the C# platform support plugin. 
 
