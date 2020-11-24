@@ -5,7 +5,9 @@
 
 namespace Azure.Core
 {
+#pragma warning disable SA1649 // File name should match first type name
     internal class ResponseWithHeaders<THeaders>
+#pragma warning restore SA1649 // File name should match first type name
     {
         private readonly Response _rawResponse;
 
