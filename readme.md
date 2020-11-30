@@ -89,7 +89,7 @@ Along with this, it also bumps the generator to the new version.
 
 This bump is done [here](https://github.com/Azure/azure-sdk-for-net/blob/master/eng/Packages.Data.props).
 
-The generator is shipped as a nuget. 
+The generator is shipped as a NuGet package. 
 
 This way, every binding stays in lockstep with the current generator
 
