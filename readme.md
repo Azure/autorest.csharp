@@ -69,11 +69,11 @@ This document contains some additional [technical details](https://github.com/Az
 
 These instructions are only a general outline, see [the script](https://github.com/Azure/autorest.csharp/blob/feature/v3/eng/UpdateAzureSdkForNet.ps1) for details:
 
-- Use dotnet pack to package up a version of the generator
-- dotnet pack -o directory
-- Copy that nuget to your local nuget source
+- Use `dotnet pack` to package up a version of the generator
+- `dotnet pack -o directory` (where directory is replaced with the name of the directory)
+- Copy created nuget package to your local nuget source
 - Update package.props
-- dotnet restore -S directory 
+- `dotnet restore -S directory` (where directory is replaced with the name of the directory)
 
 ## Use in `azure-sdk-net` repo
 
