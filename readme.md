@@ -87,7 +87,7 @@ Refer also to [azure-sdk-for-net/CONTRIBUTING.md](https://github.com/Azure/azure
 
 Merging a change in autorest.csharp will open a PR against azure-sdk-for-net with every project’s generated code staged for review.
 
-Along with this, it also bumps of the generator to the new version. 
+Along with this, it also bumps the generator to the new version. 
 
 This bump is done [here](https://github.com/Azure/azure-sdk-for-net/blob/master/eng/Packages.Data.props).
 
