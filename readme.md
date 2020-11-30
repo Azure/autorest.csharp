@@ -85,7 +85,7 @@ Refer also to [azure-sdk-for-net/CONTRIBUTING.md](https://github.com/Azure/azure
 
 ### PR Integration with Azure SDK Repository
 
-Landing a change in autorest.csharp will open a PR against azure-sdk-for-net with every project’s generated code staged for review.
+Merging a change in autorest.csharp will open a PR against azure-sdk-for-net with every project’s generated code staged for review.
 
 Along with this, it also bumps of the generator to the new version. 
 
