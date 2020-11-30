@@ -45,13 +45,11 @@
 
 **`./eng/Generate.ps1` (at root in PowerShell Core)**
 
-This tests changes across many swagger definitions and samples.
+This command tests your change across many swagger definitions and samples.
 
 These arguments change the behavior:
 - `-fast` option skips Swagger -> YAML IL step. Much faster when only making codegen changes
 - `-fast SWAGGER_NAME` (where SWAGGER_NAME is replaced with the name of the swagger) to run only one case
-
-One important note is that Generate.ps1 runs logic similar to /t:GenerateCode but does not use it directly 
 
 **`dotnet test` (at root)**
 
