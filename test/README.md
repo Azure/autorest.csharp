@@ -51,4 +51,4 @@ One important part of codegen is serialization.
 
 There are a number of “shared” files that get included with the generated code implicitly into the final project
 - All are internal visibility, and let us iterate quickly upon their API surface
-- Long term the goal should be to upstream to azure core
+- Long term the goal should be to upstream to `Azure.Core`
