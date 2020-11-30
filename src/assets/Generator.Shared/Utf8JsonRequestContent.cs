@@ -46,6 +46,7 @@ namespace Azure.Core
         {
             JsonWriter.Dispose();
             _content.Dispose();
+            _stream.Dispose();
         }
     }
 }
