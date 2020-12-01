@@ -14,7 +14,10 @@ The plugin is normally called via JSON RPC but there is a standalone mode that c
 
 autorest uses a markdown based configuration system (autorest.md) to determine what swagger files to process. 
 
-The C# backend also has an associated csproj next to autorest.md that is processed for customizations and complication of output.
+The C# backend also has an associated csproj next to autorest.md that is both:
+
+- As an input to code generator - Partial classes include and attributes on them configure code generation
+- As the final destination of generated code - Generated code is written into a Generated folder and compiled as part of the the project later
 
 # History
 
@@ -30,7 +33,7 @@ There are two “tracks" of generated Azure SDK codegen with some history behind
 
 # Internals
 
-Autorest first take a pass at processing the swagger input files, and then hands the output to a “Modeler 4” pipeline inside auto rest which can encode patterns useful on all language backends
+Autorest first takes a pass at processing the swagger input files, and then hands the output to a “Modeler 4” pipeline inside auto rest which can encode patterns useful on all language backends
 
 Example: Many APIs have paging, where a request will only return the first 100, and you have to ask for additional "pages" of 100 one at a time
 
@@ -41,13 +44,16 @@ The c# autorest plugin/generator has three major components:
 - A model layer that builds up a representation of the desired output based upon the YAML IR 
   - These are C# specific modelling decisisons
   - The input project can customize the generated code by having partial classes defined. Those are read by the C# backend and modify the generated code.
-  - Generated code is output in a Generated folder next to the csproj
-- A rendering layer that uses CodeWriter to output C# code, which is injected into the 
+  - Generated code is output in a folder named 'Generated' next to the csproj
+- A rendering layer that uses CodeWriter to output C# code
 - A roslyn simplification pass processes that generated output to make formatting and namespaces look more natural
+  - See the [Simplifier](https://docs.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.simplification.simplifier?view=roslyn-dotnet) and [Formatter.Format](https://docs.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.formatting.formatter.format?view=roslyn-dotnet) for details.
 
 One important part of codegen is serialization.
 - Models get json serialization
 - Requests also get serialization (so they can be sent over HTTPRequest)
+  - For models a <ModelName>.Serialization class is created.
+  - For requests a Create<OperationName>Request method is created.
 
 There are a number of “shared” files that get included with the generated code implicitly into the final project
 - All are internal visibility, and let us iterate quickly upon their API surface
