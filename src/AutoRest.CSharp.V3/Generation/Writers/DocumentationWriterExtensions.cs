@@ -12,11 +12,18 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 {
     internal static class DocumentationWriterExtensions
     {
-        private static readonly char[] _newLineChars = {'\r', '\n'};
+        private static readonly char[] _newLineChars = { '\r', '\n' };
 
-        public static CodeWriter WriteXmlDocumentationInheritDoc(this CodeWriter writer)
+        public static CodeWriter WriteXmlDocumentationInheritDoc(this CodeWriter writer, string? cref = null)
         {
-            return writer.Line($"/// <inheritdoc />");
+            if (string.IsNullOrWhiteSpace(cref))
+            {
+                return writer.Line($"/// <inheritdoc />");
+            }
+            else
+            {
+                return writer.Line($"/// <inheritdoc cref=\"{cref}\"/>");
+            }
         }
 
         public static CodeWriter WriteXmlDocumentationSummary(this CodeWriter writer, string? text)
