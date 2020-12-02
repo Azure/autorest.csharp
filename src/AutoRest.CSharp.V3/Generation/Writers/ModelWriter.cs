@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
 
         private void WriteObjectSchema(CodeWriter writer, ObjectType schema)
         {
-            const string collectionOfT = "Collection{T}.";
+            const string collectionOfT = "ICollection{T}.";
             using (writer.Namespace(schema.Declaration.Namespace))
             {
                 List<CSharpType> implementsTypes = new List<CSharpType>();
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             .Line($"public {iCollectionKeyType} Keys => {additionalProperties}.Keys;")
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"public {iCollectionItemType} Values => {additionalProperties}.Values;")
-                            .WriteXmlDocumentationInheritDoc($"I{collectionOfT}Count")
+                            .WriteXmlDocumentationInheritDoc($"{collectionOfT}Count")
                             .Line($"int {iCollectionKeyValuePairType}.Count => {additionalProperties}.Count;");
 
                         if (!isReadonly)
@@ -132,17 +132,17 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                                 .Line($"public void Add({keyType} key, {itemType} value) => {additionalProperties}.Add(key, value);")
                                 .WriteXmlDocumentationInheritDoc()
                                 .Line($"public bool Remove({keyType} key) => {additionalProperties}.Remove(key);")
-                                .WriteXmlDocumentationInheritDoc($"I{collectionOfT}IsReadOnly")
+                                .WriteXmlDocumentationInheritDoc($"{collectionOfT}IsReadOnly")
                                 .Line($"bool {iCollectionKeyValuePairType}.IsReadOnly => {additionalProperties}.IsReadOnly;")
-                                .WriteXmlDocumentationInheritDoc($"I{collectionOfT}Add")
+                                .WriteXmlDocumentationInheritDoc($"{collectionOfT}Add")
                                 .Line($"void {iCollectionKeyValuePairType}.Add({keyValuePairType} value) => {additionalProperties}.Add(value);")
-                                .WriteXmlDocumentationInheritDoc($"I{collectionOfT}Remove")
+                                .WriteXmlDocumentationInheritDoc($"{collectionOfT}Remove")
                                 .Line($"bool {iCollectionKeyValuePairType}.Remove({keyValuePairType} value) => {additionalProperties}.Remove(value);")
-                                .WriteXmlDocumentationInheritDoc($"I{collectionOfT}Contains")
+                                .WriteXmlDocumentationInheritDoc($"{collectionOfT}Contains")
                                 .Line($"bool {iCollectionKeyValuePairType}.Contains({keyValuePairType} value) => {additionalProperties}.Contains(value);")
-                                .WriteXmlDocumentationInheritDoc($"I{collectionOfT}CopyTo")
+                                .WriteXmlDocumentationInheritDoc($"{collectionOfT}CopyTo")
                                 .Line($"void {iCollectionKeyValuePairType}.CopyTo({keyValuePairType}[] destination, int offset) => {additionalProperties}.CopyTo(destination, offset);")
-                                .WriteXmlDocumentationInheritDoc($"I{collectionOfT}Clear")
+                                .WriteXmlDocumentationInheritDoc($"{collectionOfT}Clear")
                                 .Line($"void {iCollectionKeyValuePairType}.Clear() => {additionalProperties}.Clear();");
                         }
 
