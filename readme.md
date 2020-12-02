@@ -43,12 +43,56 @@
 
 ## Test
 
-- `./eng/Generate.ps1` (at root in PowerShell Core)
-- `dotnet test` (at root)
+**`./eng/Generate.ps1` (at root in PowerShell Core)**
+
+This command tests your change across many swagger definitions and samples.
+
+These arguments change the behavior:
+- `-fast` option skips Swagger -> YAML IL step. Much faster when only making codegen changes
+- `-fast SWAGGER_NAME` (where SWAGGER_NAME is replaced with the name of the swagger) to run only one case
+
+**`dotnet test` (at root)**
+
+### Testing Details
+
+[autorest.testserver](http://github.com/Azure/autorest.testserver/) provides a platform for automated testing of the code generators. 
+
+It packages a bunch of test swagger files, along with a “mock” nodejs server. 
+
+The swagger files are compiled, and then run, which pings the mock server (to verify behavior). This tests both the Modeler 4 and language specific codegen. 
+
+This document contains some additional [technical details](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/README.md).
+
+### Testing generator changes against Azure SDK without a PR
+
+These instructions are only a general outline, see [the script](https://github.com/Azure/autorest.csharp/blob/feature/v3/eng/UpdateAzureSdkForNet.ps1) for details:
+
+- Use `dotnet pack` to package up a version of the generator
+- `dotnet pack -o directory` (where directory is replaced with the name of the directory)
+- Copy created nuget package to your local nuget source
+- Update package.props
+- `dotnet restore -S directory` (where directory is replaced with the name of the directory)
 
 ## Use in `azure-sdk-net` repo
 
-Run `dotnet build /t:GenerateCode` in the directory that contains your `.csproj` file or refer to [azure-sdk-for-net/CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/master/CONTRIBUTING.md#on-boarding-new-generated-code-library) for more details.
+Run `dotnet build /t:GenerateCode` in the directory that contains your `.csproj` file.
+
+This executes [these targets](https://github.com/Azure/autorest.csharp/blob/feature/v3/src/AutoRest.CSharp.V3/build/CodeGeneration.targets).
+
+Refer also to [azure-sdk-for-net/CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/master/CONTRIBUTING.md#on-boarding-new-generated-code-library) for more details.
+
+### PR Integration with Azure SDK Repository
+
+Merging a change in autorest.csharp will open a PR against azure-sdk-for-net with every project’s generated code staged for review.
+
+Along with this, it also bumps the generator to the new version. 
+
+This bump is done [here](https://github.com/Azure/azure-sdk-for-net/blob/master/eng/Packages.Data.props).
+
+The generator is shipped as a NuGet package. 
+
+This way, every binding stays in lockstep with the current generator
+
 
 ## Use outside of the `azure-sdk-net` repo
 
