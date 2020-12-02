@@ -45,7 +45,7 @@ namespace AdditionalPropertiesEx.Models
         public IEnumerable<string> Keys => AdditionalProperties.Keys;
         /// <inheritdoc />
         public IEnumerable<string> Values => AdditionalProperties.Values;
-        /// <inheritdoc cref="ICollection{T}.Count"/>
+        /// <inheritdoc cref="IReadOnlyCollection{T}.Count"/>
         int IReadOnlyCollection<KeyValuePair<string, string>>.Count => AdditionalProperties.Count;
         /// <inheritdoc />
         public string this[string key]

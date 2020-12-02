@@ -36,6 +36,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
         private void WriteObjectSchema(CodeWriter writer, ObjectType schema)
         {
             const string collectionOfT = "ICollection{T}.";
+            const string readonlyCollectionOfT = "IReadOnlyCollection{T}.";
             using (writer.Namespace(schema.Declaration.Namespace))
             {
                 List<CSharpType> implementsTypes = new List<CSharpType>();
@@ -122,7 +123,7 @@ namespace AutoRest.CSharp.V3.Generation.Writers
                             .Line($"public {iCollectionKeyType} Keys => {additionalProperties}.Keys;")
                             .WriteXmlDocumentationInheritDoc()
                             .Line($"public {iCollectionItemType} Values => {additionalProperties}.Values;")
-                            .WriteXmlDocumentationInheritDoc($"{collectionOfT}Count")
+                            .WriteXmlDocumentationInheritDoc($"{(isReadonly ? readonlyCollectionOfT : collectionOfT)}Count")
                             .Line($"int {iCollectionKeyValuePairType}.Count => {additionalProperties}.Count;");
 
                         if (!isReadonly)
