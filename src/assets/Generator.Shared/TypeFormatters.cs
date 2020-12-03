@@ -95,7 +95,6 @@ namespace Azure.Core
             return Convert.FromBase64CharArray(output, 0, output.Length);
         }
 
-
         private static int GetNumBase64PaddingCharsToAddForDecode(int inputLength)
         {
             switch (inputLength % 4)
