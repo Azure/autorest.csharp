@@ -53,8 +53,8 @@ stages:
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
               DOTNET_MULTILEVEL_LOOKUP: 0
           # - pwsh: ./eng/CodeChecks.ps1
-            displayName: "Check if code is up-to-date"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            # displayName: "Check if code is up-to-date"
+            # workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           # - script: |
           #     dotnet test AutoRest.CSharp.V3.sln
           #   displayName: "Test"
