@@ -23,7 +23,7 @@ try {
 
     # cmd /c "//registry.npmjs.org/:_authToken=$(Token)" > ./.npmrc
 
-    cmd /c "npm publish --registry=https://registry.npmjs.org/:_authToken=$Token --access public"
+    npm publish --registry=https://registry.npmjs.org/:_authToken=${Token} --access public
     # npm publish --access public
     
     # cmd /c "npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
