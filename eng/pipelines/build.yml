@@ -81,7 +81,7 @@ stages:
                 ./eng/PublishRelease.ps1
                 -WorkingDirectory ./artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
                 -PackageJson ./src/AutoRest.CSharp.V3/package.json
-                -Token $(azuresdk-github-pat)
+                -Token $(azure-sdk-npm-token)
                 -Artifacts $(Build.ArtifactStagingDirectory)
                 -BuildNumber $(Build.BuildNumber)
                 -Sha $(Build.SourceVersion)
