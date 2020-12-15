@@ -7,10 +7,8 @@ Copy-Item $PackageJson $WorkingDirectory -Force
 
 Push-Location $WorkingDirectory
 try {
-    # $currentVersion = node -p -e "require('./package.json').version";
-    # $devVersion = "$currentVersion-dev.$BuildNumber"
-
-    $devVersion = "$BuildNumber"
+    $currentVersion = node -p -e "require('./package.json').version";
+    $devVersion = "$currentVersion-dev.$BuildNumber"
 
     Write-Host "Setting version to $devVersion"
 
