@@ -1,5 +1,7 @@
-param($Token, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson, $CoverageUser, $CoveragePass)
+param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson, $CoverageUser, $CoveragePass)
 
+Write-Host "prininting npm token $NpmToken"
+Write-Host "prininting github token $GitHubToken"
 $WorkingDirectory = Resolve-Path $WorkingDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
@@ -17,14 +19,14 @@ try {
     npm version --no-git-tag-version $devVersion | Out-Null;
    
     $file = npm pack -q;
-   # $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
+    # $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
 
     Write-Host "Publishing $file"
     
     # git rev-list --parents HEAD --count --full-history
-    $filePath = Join-Path $WorkingDirectory '.npmrc'
-    "//registry.npmjs.org/:_authToken=$Token" | Out-File -FilePath $filePath
-     npm publish --access public
+    # $filePath = Join-Path $WorkingDirectory '.npmrc'
+    # "//registry.npmjs.org/:_authToken=$Token" | Out-File -FilePath $filePath
+    # npm publish --access public
     
     # cmd /c "npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
 
