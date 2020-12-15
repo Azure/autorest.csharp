@@ -15,15 +15,14 @@ try {
     npm version --no-git-tag-version $devVersion | Out-Null;
    
     $file = npm pack -q;
-    # $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
+    $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
 
     Write-Host "Publishing $file on GitHub!"
     
-    # cmd /c "npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag $devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
+    cmd /c "npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag $devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
     
     Write-Host "Publishing $file on Npm!"
 
-    # git rev-list --parents HEAD --count --full-history
     $filePath = Join-Path $WorkingDirectory '.npmrc'
     "//registry.npmjs.org/:_authToken=$NpmToken" | Out-File -FilePath $filePath
     npm publish --access public
