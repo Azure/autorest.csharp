@@ -24,6 +24,7 @@ try {
     Write-Host "Publishing $file on Npm!"
 
     $filePath = Join-Path $WorkingDirectory '.npmrc'
+
     "//registry.npmjs.org/:_authToken=$NpmToken" | Out-File -FilePath $filePath
     npm publish --access public
 }
