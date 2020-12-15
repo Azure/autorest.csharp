@@ -1,7 +1,5 @@
 param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson, $CoverageUser, $CoveragePass)
 
-Write-Host "prininting npm token $NpmToken"
-Write-Host "prininting github token $GitHubToken"
 $WorkingDirectory = Resolve-Path $WorkingDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
@@ -10,7 +8,7 @@ Copy-Item $PackageJson $WorkingDirectory -Force
 Push-Location $WorkingDirectory
 try {
     # $currentVersion = node -p -e "require('./package.json').version";
-    # $devVersion = "$currentVersion.$BuildNumber"
+    # $devVersion = "$currentVersion-dev.$BuildNumber"
 
     $devVersion = "$BuildNumber"
 
@@ -21,16 +19,16 @@ try {
     $file = npm pack -q;
     # $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
 
-    Write-Host "Publishing $file"
+    Write-Host "Publishing $file on GitHub!"
     
-    # git rev-list --parents HEAD --count --full-history
-    # $filePath = Join-Path $WorkingDirectory '.npmrc'
-    # "//registry.npmjs.org/:_authToken=$Token" | Out-File -FilePath $filePath
-    # npm publish --access public
+    # cmd /c "npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag $devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
     
-    # cmd /c "npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
+    Write-Host "Publishing $file on Npm!"
 
-    # Write-Host "##vso[task.setvariable variable=AutorestCSharpVersion;isSecret=false]https://github.com/Azure/autorest.csharp/releases/download/$devVersion/autorest-csharp-v3-$devVersion.tgz"
+    # git rev-list --parents HEAD --count --full-history
+    $filePath = Join-Path $WorkingDirectory '.npmrc'
+    "//registry.npmjs.org/:_authToken=$NpmToken" | Out-File -FilePath $filePath
+    npm publish --access public
 }
 finally {
     Pop-Location
