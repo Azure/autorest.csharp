@@ -89,7 +89,7 @@ stages:
                 -CoverageUser $(storage-coverage-user)
                 -CoveragePass $(storage-coverage-pass)
               failOnStderr: false
-              displayName: 'Publish to GitHub, Npm and coverage report'
+              displayName: 'Publish to GitHub, npm and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: smoke-test.yml
         parameters:
