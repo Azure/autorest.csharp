@@ -7,8 +7,10 @@ Copy-Item $PackageJson $WorkingDirectory -Force
 
 Push-Location $WorkingDirectory
 try {
-    $currentVersion = node -p -e "require('./package.json').version";
-    $devVersion = "$currentVersion.$BuildNumber"
+    # $currentVersion = node -p -e "require('./package.json').version";
+    # $devVersion = "$currentVersion.$BuildNumber"
+
+    $devVersion = "$BuildNumber"
 
     Write-Host "Setting version to $devVersion"
 
@@ -20,11 +22,9 @@ try {
     Write-Host "Publishing $file"
     
     # git rev-list --parents HEAD --count --full-history
-
-    # cmd /c "//registry.npmjs.org/:_authToken=$(Token)" > ./.npmrc
-
-    npm publish --registry=https://registry.npmjs.org/:_authToken=${Token} --access public
-    # npm publish --access public
+    $filePath = Join-Path $WorkingDirectory '.npmrc'
+    "//registry.npmjs.org/:_authToken=$Token" | Out-File -FilePath $filePath
+     npm publish --access public
     
     # cmd /c "npx -q publish-release --token $Token --repo autorest.csharp --owner azure --name $name --tag $devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
 
