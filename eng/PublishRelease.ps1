@@ -22,12 +22,12 @@ try {
     cmd /c ""npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1""
 
     $filePath = Join-Path $WorkingDirectory '.npmrc'
-    $env:NPM_TOKEN = $NpmToken
-    "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" | Out-File -FilePath $filePath
+    # $env:NPM_TOKEN = $NpmToken
+    "//registry.npmjs.org/:_authToken=$NpmToken" | Out-File -FilePath $filePath
 
     Write-Host "Publishing $file on Npm!"
     
-    npm publish --access public
+    npm publish $file --access public
 }
 finally {
     Pop-Location
