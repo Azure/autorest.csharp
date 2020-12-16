@@ -91,7 +91,7 @@ This bump is done [here](https://github.com/Azure/azure-sdk-for-net/blob/master/
 
 The generator is shipped as a NuGet package. 
 
-This way, every binding stays in lockstep with the current generator
+This way, every binding stays in lockstep with the current generator.
 
 
 ## Use outside of the `azure-sdk-net` repo
