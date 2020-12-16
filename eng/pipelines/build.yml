@@ -65,7 +65,7 @@ stages:
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
               dotnet test AutoRest.CSharp.V3.sln -c Release
-            displayName: "Test Release"
+            displayName: "Test Release Configuration"
             env:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
