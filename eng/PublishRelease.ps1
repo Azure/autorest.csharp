@@ -19,7 +19,7 @@ try {
 
     Write-Host "Publishing $file on GitHub!"
     
-    cmd /c "npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
+    cmd /c ""npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1""
 
     $filePath = Join-Path $WorkingDirectory '.npmrc'
     "//registry.npmjs.org/:_authToken=$NpmToken" | Out-File -FilePath $filePath
