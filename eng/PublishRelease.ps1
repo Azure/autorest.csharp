@@ -15,10 +15,11 @@ try {
     npm version --no-git-tag-version $devVersion | Out-Null;
    
     $file = npm pack -q;
+    $name = "Autorest for csharp v$devVersion"
 
     Write-Host "Publishing $file on GitHub!"
     
-    cmd /c "npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name Autorest for csharp v$devVersion --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
+    cmd /c "npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
     
     Write-Host "Publishing $file on Npm!"
 
