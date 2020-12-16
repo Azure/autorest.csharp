@@ -15,7 +15,7 @@ try {
     npm version --no-git-tag-version $devVersion | Out-Null;
    
     $file = npm pack -q;
-    $name = "Autorest for csharp v$devVersion"
+    $name = "Autorest for c# v$devVersion"
 
     Write-Host "Publishing $file on GitHub!"
     
