@@ -32,7 +32,6 @@ finally {
     Pop-Location
 }
 
-
 Push-Location $RepoRoot
 try {
     # set the version in the root package.json so coverage-push can pick it up
