@@ -15,18 +15,17 @@ try {
     npm version --no-git-tag-version $devVersion | Out-Null;
    
     $file = npm pack -q;
-    $name = [System.IO.Path]::GetFileNameWithoutExtension($file)
 
     Write-Host "Publishing $file on GitHub!"
     
-    cmd /c "npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name $name --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
+    cmd /c "npx -q publish-release --token $GitHubToken --repo autorest.csharp --owner azure --name Autorest for csharp v$devVersion --tag v$devVersion --notes=prerelease-build --prerelease --editRelease false --assets $file --target_commitish $Sha 2>&1"
     
-    # Write-Host "Publishing $file on Npm!"
+    Write-Host "Publishing $file on Npm!"
 
-    # $filePath = Join-Path $WorkingDirectory '.npmrc'
+    $filePath = Join-Path $WorkingDirectory '.npmrc'
 
-    # "//registry.npmjs.org/:_authToken=$NpmToken" | Out-File -FilePath $filePath
-    # npm publish --access public
+    "//registry.npmjs.org/:_authToken=$NpmToken" | Out-File -FilePath $filePath
+    npm publish --access public
 }
 finally {
     Pop-Location

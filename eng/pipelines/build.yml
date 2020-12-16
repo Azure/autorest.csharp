@@ -83,7 +83,6 @@ stages:
                 -PackageJson ./src/AutoRest.CSharp.V3/package.json
                 -GitHubToken $(azuresdk-github-pat)
                 -NpmToken $(azure-sdk-npm-token)
-                -Artifacts $(Build.ArtifactStagingDirectory)
                 -BuildNumber $(Build.BuildNumber)
                 -Sha $(Build.SourceVersion)
                 -CoverageUser $(storage-coverage-user)
