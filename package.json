@@ -6,5 +6,9 @@
     "autorest": "https://github.com/Azure/autorest/releases/download/autorest-3.0.6250/autorest-3.0.6250.tgz",
     "@microsoft.azure/autorest.testserver": "2.10.60"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "files": [
+    "*",
+    "!publish"
+   ]
 }

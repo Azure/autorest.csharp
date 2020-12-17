@@ -1,9 +1,9 @@
-param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson, $GitIgnore, $CoverageUser, $CoveragePass)
+param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson, $CoverageUser, $CoveragePass)
 
 $WorkingDirectory = Resolve-Path $WorkingDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
-Copy-Item $PackageJson, $GitIgnore $WorkingDirectory -Force
+Copy-Item $PackageJson $WorkingDirectory -Force
 
 Push-Location $WorkingDirectory
 try {
