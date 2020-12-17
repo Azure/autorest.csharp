@@ -1,9 +1,9 @@
-param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson, $CoverageUser, $CoveragePass)
+param($NpmToken, $GitHubToken, $BuildNumber, $Sha, $WorkingDirectory, $PackageJson, $GitIgnore, $CoverageUser, $CoveragePass)
 
 $WorkingDirectory = Resolve-Path $WorkingDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
 
-Copy-Item $PackageJson $WorkingDirectory -Force
+Copy-Item $PackageJson, $GitIgnore $WorkingDirectory -Force
 
 Push-Location $WorkingDirectory
 try {
@@ -23,7 +23,7 @@ try {
 
     $filePath = Join-Path $WorkingDirectory '.npmrc'
     $env:NPM_TOKEN = $NpmToken
-    "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" | Out-File -FilePath $filePath
+    "//registry.npmjs.org/:_authToken=$env:NPM_TOKEN" | Out-File -FilePath $filePath
 
     Write-Host "Publishing $file on Npm!"
     

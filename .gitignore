@@ -353,3 +353,6 @@ MigrationBackup/
 
 # Rider IDE
 .idea/
+
+#ignore publish folder created by dotnet pack
+publish/**/*
