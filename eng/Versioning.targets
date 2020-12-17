@@ -13,7 +13,7 @@
     <_PrereleaseIndex>$(Version.IndexOf('-'))</_PrereleaseIndex>
     <Version Condition="$(_PrereleaseIndex) &gt; 0">$(Version.SubString(0, $(_PrereleaseIndex)))</Version>
 
-    <Version>$(Version)-alpha.$(_BuildNumber)</Version>
+    <Version>$(Version)-beta.$(_BuildNumber)</Version>
   </PropertyGroup>
 
   <!--
