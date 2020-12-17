@@ -77,7 +77,7 @@ These instructions are only a general outline, see [the script](https://github.c
 
 Run `dotnet build /t:GenerateCode` in the directory that contains your `.csproj` file.
 
-This executes [these targets](https://github.com/Azure/autorest.csharp/blob/feature/v3/src/AutoRest.CSharp.V3/build/CodeGeneration.targets).
+This executes [these targets](https://github.com/Azure/autorest.csharp/blob/feature/v3/src/AutoRest.CSharp/build/CodeGeneration.targets).
 
 Refer also to [azure-sdk-for-net/CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/master/CONTRIBUTING.md#on-boarding-new-generated-code-library) for more details.
 
@@ -107,10 +107,10 @@ This way, every binding stays in lockstep with the current generator
 </configuration>
 ```
 
-2. Add a package reference to `AutoRest.CSharp.V3` version `1.0.0-alpha.20201013.3` or later:
+2. Add a package reference to `AutoRest.CSharp` version `1.0.0-alpha.20201013.3` or later:
 
 ```xml
-<PackageReference Include="AutoRest.CSharp.V3" Version="1.0.0-alpha.20201013.3" />
+<PackageReference Include="AutoRest.CSharp" Version="1.0.0-alpha.20201013.3" />
 ```
 
 3. Add an `autorest.md` configuration file pointing to you swagger file:
@@ -1021,7 +1021,7 @@ shared-source-folders:
   - $(this-folder)/src/assets/Generator.Shared
   - $(this-folder)/src/assets/Azure.Core.Shared
 save-inputs: true
-use: $(this-folder)/artifacts/bin/AutoRest.CSharp.V3/Debug/netcoreapp3.0/
+use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.0/
 clear-output-folder: false
 public-clients: true
 pipeline:

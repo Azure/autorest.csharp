@@ -1,6 +1,6 @@
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $autoRestBinary = "npx --no-install autorest"
-$AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
+$AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp')
 
 function Invoke($command)
 {
