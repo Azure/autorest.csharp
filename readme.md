@@ -39,7 +39,7 @@ ___
 
 ## Prerequisites
 
-- [NodeJS (14.x.x)](https://nodejs.org/en/) 
+- [NodeJS (14.x.x)](https://nodejs.org/en/)
 - [.NET Core SDK (5.0.100)](https://dotnet.microsoft.com/download/dotnet-core/5.0)
 - [PowerShell Core 7](https://github.com/PowerShell/PowerShell/releases/latest)
 - [Java](https://www.java.com/en/download/) (for V2 testserver)
@@ -63,11 +63,11 @@ These arguments change the behavior:
 
 ### Testing Details
 
-[autorest.testserver](http://github.com/Azure/autorest.testserver/) provides a platform for automated testing of the code generators. 
+[autorest.testserver](http://github.com/Azure/autorest.testserver/) provides a platform for automated testing of the code generators.
 
-It packages a bunch of test swagger files, along with a “mock” nodejs server. 
+It packages a bunch of test swagger files, along with a “mock” nodejs server.
 
-The swagger files are compiled, and then run, which pings the mock server (to verify behavior). This tests both the Modeler 4 and language specific codegen. 
+The swagger files are compiled, and then run, which pings the mock server (to verify behavior). This tests both the Modeler 4 and language specific codegen.
 
 This document contains some additional [technical details](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/README.md).
 
@@ -93,11 +93,11 @@ Refer also to [azure-sdk-for-net/CONTRIBUTING.md](https://github.com/Azure/azure
 
 Merging a change in autorest.csharp will open a PR against azure-sdk-for-net with every project’s generated code staged for review.
 
-Along with this, it also bumps the generator to the new version. 
+Along with this, it also bumps the generator to the new version.
 
 This bump is done [here](https://github.com/Azure/azure-sdk-for-net/blob/master/eng/Packages.Data.props).
 
-The generator is shipped as a NuGet package. 
+The generator is shipped as a NuGet package.
 
 This way, every binding stays in lockstep with the current generator
 
@@ -110,7 +110,7 @@ Use below command to generate code:
  autorest --use:@autorest/csharp@3.0.0-beta.20210210.4 --input-file:FILENAME  --clear-output-folder:true --output-folder:DIRECTORY
  ```
 
-Note: 
+Note:
 1. Use @autorest/csharp version v3.0.0-beta.20210210.4 or later.
 2. If you don't want to override the `.csproj` after the first generation, you can pass `--skip-csproj` flag with the autorest command.
 
@@ -253,7 +253,7 @@ namespace Azure.Service.Models
 {
     public partial class Model
     {
-        internal string Property { get; } 
+        internal string Property { get; }
     }
 }
 ```
@@ -300,7 +300,7 @@ namespace Azure.Service.Models
     public partial class Model
     {
         [CodeGenMember("Property")]
-        public string RenamedProperty { get; } 
+        public string RenamedProperty { get; }
     }
 }
 ```
@@ -330,7 +330,7 @@ Scenarios that would work:
 
 1. String <-> TimeSpan (both represented as string in JSON)
 2. Float <-> Int (both are numbers)
-3. String <-> Enums (both strings) 
+3. String <-> Enums (both strings)
 4. String -> Uri
 
 Won't work:
@@ -378,7 +378,7 @@ namespace Azure.Service.Models
     public partial class Model
     {
 -        public string Property { get; }
-+        // Serialization code now reads and writes DateTime value instead of string  
++        // Serialization code now reads and writes DateTime value instead of string
     }
 }
 ```
@@ -423,7 +423,7 @@ namespace Azure.Service.Models
     public partial class Model
     {
 -        public string Property { get; }
-+        // Serialization code now reads and writes JsonElement value instead of string  
++        // Serialization code now reads and writes JsonElement value instead of string
     }
 }
 ```
@@ -470,7 +470,7 @@ namespace Azure.Service.Models
     public partial class Model
     {
 -        /// Subpar doc comment
--        public string Property { get; }  
+-        public string Property { get; }
     }
 }
 ```
@@ -818,7 +818,7 @@ namespace Azure.Service.Models
     public partial class Model
     {
         public Model()
-        {  
+        {
             Property = "a";
         }
 
@@ -850,7 +850,7 @@ namespace Azure.Service.Models
     public partial class Model
     {
 -        public Model()
--        {  
+-        {
 -            Property = "a";
 -        }
     }
@@ -875,12 +875,12 @@ namespace Azure.Service.Models
     public partial class Model
     {
         public Model()
-        {  
+        {
             Property = "a";
         }
 
         public Model(string property)
-        {  
+        {
             Property = property;
         }
 
@@ -909,7 +909,7 @@ namespace Azure.Service.Models
     public partial class Model
     {
 -        public Model(string property)
--        {  
+-        {
 -            Property = property;
 -        }
     }
