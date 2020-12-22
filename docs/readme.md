@@ -10,10 +10,10 @@ These documents are C#-specific, see [our main docs][main_docs] for more general
     - How do I [use my C# client][csharp_client] now that I've generated it? Main docs are [here][main_client]
 
 3. Migrating from AutoRest 2.0 to 3.0
-    - I have old generated code using the previous version of AutoRest. How do I upgrade my code? Main docs [here][main_migrate], C#-specific docs [here][python_migrate]
+    - I have old generated code using the previous version of AutoRest. How do I upgrade my code? Main docs [here][main_migrate], C#-specific docs [here][csharp_migrate]
 
 4. Developing with AutoRest
-    - How do I generate or contribute to AutoRest in [dev mode][python_dev] Main docs [here][main_dev]
+    - How do I generate or contribute to AutoRest in [dev mode][csharp_dev] Main docs [here][main_dev]
 
 5. Samples
     - [Sample][sample] readmes and generated code for common scenarios.
