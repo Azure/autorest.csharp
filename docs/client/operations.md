@@ -201,7 +201,7 @@ namespace SyncPagingOperationTutorial
 
             foreach (var page in pageable.AsPages())
             {
-                var vaues = page.Values;
+                var values = page.Values;
             }
         }
     }

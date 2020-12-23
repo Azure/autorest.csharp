@@ -6,7 +6,7 @@ that the client is the main point of access to the generated code.
 ## Initializing and Authenticating Your Client
 
 You can use your client if you import the namespace you specified when generating (under flag `--namespace`). For the sake of this example,
-let's say the namespace is `AzurePets` and your client is `PetsClient`. You could then access the client if you import the namespace.
+let's say the namespace is `Azure.Pets` and your client is `PetsClient`. You could then access the client if you import the namespace.
 The default client also comes with these three parameters:
 
 * `clientDiagnostics`: The handler for diagnostic messaging in the client
@@ -14,7 +14,7 @@ The default client also comes with these three parameters:
 * `endpoint`: The base endpoint the client will hit. Is of type `string`.
 
 ```csharp
-using AzurePets;
+using Azure.Pets;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -40,7 +40,7 @@ using a [credential type][identity_credentials] obtained from the [`Azure.Identi
 we use the most common [`DefaultAzureCredential`][default_azure_credential].
 
 ```csharp
-using AzurePets;
+using Azure.Pets;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Identity;
