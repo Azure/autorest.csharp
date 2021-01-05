@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -23,12 +24,26 @@ namespace AutoRest.CSharp.Output.Models.Responses
 
         public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext context) : base(context)
         {
-            ResponseHeader CreateResponseHeader(HttpResponseHeader header) =>
-                new ResponseHeader(
+            ResponseHeader CreateResponseHeader(HttpResponseHeader header)
+            {
+                CSharpType type;
+                // WORKAROUND https://github.com/Azure/autorest/issues/3761
+                if (header.Extensions?.HeaderCollectionPrefix != null)
+                {
+                    type = new CSharpType(typeof(IDictionary<,>), typeof(string), context.TypeFactory.CreateType(header.Schema, false))
+                        .WithNullable(true);
+                }
+                else
+                {
+                    type = context.TypeFactory.CreateType(header.Schema, true);
+                }
+
+                return new ResponseHeader(
                     header.CSharpName(),
-                    header.Header,
-                    context.TypeFactory.CreateType(header.Schema, true),
+                    header.Extensions?.HeaderCollectionPrefix ?? header.Header,
+                    type,
                     BuilderHelpers.EscapeXmlDescription(header.Language!.Default.Description));
+            }
 
             string operationName = operation.CSharpName();
             var clientName = context.Library.FindRestClient(operationGroup).ClientPrefix;

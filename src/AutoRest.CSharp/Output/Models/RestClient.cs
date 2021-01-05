@@ -230,6 +230,12 @@ namespace AutoRest.CSharp.Output.Models
                                 methodParameters.Remove(requestParameter);
                                 continue;
                             }
+
+                            if (requestParameter.Extensions.HeaderCollectionPrefix != null)
+                            {
+                                serializedName = requestParameter.Extensions.HeaderCollectionPrefix;
+                            }
+
                             headers.Add(new RequestHeader(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), serializationFormat));
                             break;
                         case ParameterLocation.Query:

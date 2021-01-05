@@ -82,6 +82,8 @@ namespace AutoRest.CSharp.Input
                 return Array.Empty<string>();
             }
         }
+
+        public string? HeaderCollectionPrefix => TryGetValue("x-ms-header-collection-prefix", out object? value) ? value?.ToString() : null;
     }
 
     internal partial class ServiceResponse
