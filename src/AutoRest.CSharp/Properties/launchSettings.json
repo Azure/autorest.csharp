@@ -208,10 +208,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\SignalR\\SignalR"
     },
-    "StorageBlobs": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\StorageBlobs\\StorageBlobs"
-    },
     "subscriptionId-apiVersion": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\subscriptionId-apiVersion"
