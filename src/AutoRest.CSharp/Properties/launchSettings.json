@@ -140,6 +140,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\header"
     },
+    "HeaderCollectionPrefix": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeaderCollectionPrefix"
+    },
     "httpInfrastructure": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure"
@@ -203,6 +207,10 @@
     "SignalR": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\SignalR\\SignalR"
+    },
+    "StorageBlobs": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\StorageBlobs\\StorageBlobs"
     },
     "subscriptionId-apiVersion": {
       "commandName": "Project",
