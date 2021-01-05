@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -28,7 +29,19 @@ namespace AutoRest.CSharp.Output.Models
 
         protected Parameter BuildParameter(RequestParameter requestParameter)
         {
-            var type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
+            CSharpType type;
+
+            // WORKAROUND https://github.com/Azure/autorest/issues/3761
+            if (requestParameter.Extensions?.HeaderCollectionPrefix != null)
+            {
+                type = new CSharpType(typeof(IDictionary<,>), typeof(string), _typeFactory.CreateType(requestParameter.Schema, false))
+                    .WithNullable(requestParameter.IsNullable || !requestParameter.IsRequired);
+            }
+            else
+            {
+                type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
+            }
+
 
             var isRequired = requestParameter.Required == true;
             var defaultValue = ParseConstant(requestParameter);
