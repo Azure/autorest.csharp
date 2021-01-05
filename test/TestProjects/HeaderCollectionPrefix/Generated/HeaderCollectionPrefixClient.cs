@@ -14,23 +14,23 @@ using Azure.Core.Pipeline;
 
 namespace HeaderCollectionPrefix
 {
-    /// <summary> The SchemaMapping service client. </summary>
-    public partial class SchemaMappingClient
+    /// <summary> The HeaderCollectionPrefix service client. </summary>
+    public partial class HeaderCollectionPrefixClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal SchemaMappingRestClient RestClient { get; }
-        /// <summary> Initializes a new instance of SchemaMappingClient for mocking. </summary>
-        protected SchemaMappingClient()
+        internal HeaderCollectionPrefixRestClient RestClient { get; }
+        /// <summary> Initializes a new instance of HeaderCollectionPrefixClient for mocking. </summary>
+        protected HeaderCollectionPrefixClient()
         {
         }
-        /// <summary> Initializes a new instance of SchemaMappingClient. </summary>
+        /// <summary> Initializes a new instance of HeaderCollectionPrefixClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        internal SchemaMappingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        internal HeaderCollectionPrefixClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new SchemaMappingRestClient(clientDiagnostics, pipeline, endpoint);
+            RestClient = new HeaderCollectionPrefixRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -39,7 +39,7 @@ namespace HeaderCollectionPrefix
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(IDictionary<string, string> metadata = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Operation");
+            using var scope = _clientDiagnostics.CreateScope("HeaderCollectionPrefixClient.Operation");
             scope.Start();
             try
             {
@@ -56,7 +56,7 @@ namespace HeaderCollectionPrefix
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(IDictionary<string, string> metadata = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Operation");
+            using var scope = _clientDiagnostics.CreateScope("HeaderCollectionPrefixClient.Operation");
             scope.Start();
             try
             {

@@ -1,8 +1,8 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Schema mapping",
-    "description": "Schema mapping",
+    "title": "HeaderCollectionPrefix",
+    "description": "HeaderCollectionPrefix",
     "version": "1.0.0"
   },
   "host": "localhost:3000",

@@ -1,7 +1,7 @@
 !<!CodeModel> 
 info: !<!Info> 
-  description: Schema mapping
-  title: Schema mapping
+  description: HeaderCollectionPrefix
+  title: HeaderCollectionPrefix
 schemas: !<!Schemas> 
   strings:
     - !<!StringSchema> &ref_0
@@ -111,7 +111,7 @@ security: !<!Security>
   authenticationRequired: false
 language: !<!Languages> 
   default:
-    name: SchemaMapping
+    name: HeaderCollectionPrefix
     description: ''
 protocol: !<!Protocols> 
   http: !<!HttpModel> {}

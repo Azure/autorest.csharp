@@ -11,10 +11,10 @@ using Azure.Core;
 
 namespace HeaderCollectionPrefix
 {
-    internal class SchemaMappingOperationHeaders
+    internal class HeaderCollectionPrefixOperationHeaders
     {
         private readonly Response _response;
-        public SchemaMappingOperationHeaders(Response response)
+        public HeaderCollectionPrefixOperationHeaders(Response response)
         {
             _response = response;
         }

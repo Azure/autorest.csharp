@@ -14,17 +14,17 @@ using Azure.Core.Pipeline;
 
 namespace HeaderCollectionPrefix
 {
-    internal partial class SchemaMappingRestClient
+    internal partial class HeaderCollectionPrefixRestClient
     {
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of SchemaMappingRestClient. </summary>
+        /// <summary> Initializes a new instance of HeaderCollectionPrefixRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public SchemaMappingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        public HeaderCollectionPrefixRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             endpoint ??= new Uri("http://localhost:3000");
 
@@ -51,11 +51,11 @@ namespace HeaderCollectionPrefix
 
         /// <param name="metadata"> Optional. Include this parameter to specify that the queue&apos;s metadata be returned as part of the response body. Note that metadata requested with this parameter must be stored in accordance with the naming restrictions imposed by the 2009-09-19 version of the Queue service. Beginning with this version, all metadata names must adhere to the naming conventions for C# identifiers. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<SchemaMappingOperationHeaders>> OperationAsync(IDictionary<string, string> metadata = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<HeaderCollectionPrefixOperationHeaders>> OperationAsync(IDictionary<string, string> metadata = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateOperationRequest(metadata);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new SchemaMappingOperationHeaders(message.Response);
+            var headers = new HeaderCollectionPrefixOperationHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
@@ -67,11 +67,11 @@ namespace HeaderCollectionPrefix
 
         /// <param name="metadata"> Optional. Include this parameter to specify that the queue&apos;s metadata be returned as part of the response body. Note that metadata requested with this parameter must be stored in accordance with the naming restrictions imposed by the 2009-09-19 version of the Queue service. Beginning with this version, all metadata names must adhere to the naming conventions for C# identifiers. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<SchemaMappingOperationHeaders> Operation(IDictionary<string, string> metadata = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HeaderCollectionPrefixOperationHeaders> Operation(IDictionary<string, string> metadata = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateOperationRequest(metadata);
             _pipeline.Send(message, cancellationToken);
-            var headers = new SchemaMappingOperationHeaders(message.Response);
+            var headers = new HeaderCollectionPrefixOperationHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
