@@ -149,16 +149,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"{request}.Uri = {uri};");
 
-                foreach (var header in clientMethod.Request.Headers)
-                {
-                    WriteHeader(writer, request, header);
-                }
+                WriteHeaders(writer, clientMethod, request, content: false);
 
                 switch (clientMethod.Request.Body)
                 {
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))
                         {
+                            WriteHeaders(writer, clientMethod, request, content: true);
                             WriteSerializeContent(
                                 writer,
                                 request,
@@ -170,6 +168,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     case BinaryRequestBody binaryBody:
                         using (WriteValueNullCheck(writer, binaryBody.Value))
                         {
+                            WriteHeaders(writer, clientMethod, request, content: true);
                             writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
                             WriteConstantOrParameter(writer, binaryBody.Value);
                             writer.Line($");");
@@ -178,12 +177,15 @@ namespace AutoRest.CSharp.Generation.Writers
                     case TextRequestBody textBody:
                         using (WriteValueNullCheck(writer, textBody.Value))
                         {
+                            WriteHeaders(writer, clientMethod, request, content: true);
                             writer.Append($"{request}.Content = new {typeof(StringRequestContent)}(");
                             WriteConstantOrParameter(writer, textBody.Value);
                             writer.Line($");");
                         }
                         break;
                     case MultipartRequestBody multipartRequestBody:
+                        WriteHeaders(writer, clientMethod, request, content: true);
+
                         var multipartContent = new CodeWriterDeclaration("content");
                         writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
 
@@ -221,6 +223,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line($"{multipartContent}.ApplyToRequest({request});");
                         break;
                     case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
+                        WriteHeaders(writer, clientMethod, request, content: true);
+
                         var initializers = new List<PropertyInitializer>();
                         foreach (var initializer in flattenedSchemaRequestBody.Initializers)
                         {
@@ -248,6 +252,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"return {message};");
             }
             writer.Line();
+        }
+
+        private void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content)
+        {
+            foreach (var header in clientMethod.Request.Headers)
+            {
+                if (header.IsContentHeader == content)
+                {
+                    WriteHeader(writer, request, header);
+                }
+            }
         }
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, CodeWriterDelegate valueDelegate)

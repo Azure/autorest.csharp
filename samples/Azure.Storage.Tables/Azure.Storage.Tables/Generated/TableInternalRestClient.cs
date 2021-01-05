@@ -137,8 +137,8 @@ namespace Azure.Storage.Tables
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
             request.Headers.Add("DataServiceVersion", "3.0");
-            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             request.Headers.Add("Accept", "application/json;odata=nometadata");
+            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(tableProperties);
             request.Content = content;
@@ -508,10 +508,10 @@ namespace Azure.Storage.Tables
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
             request.Headers.Add("DataServiceVersion", "3.0");
-            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
+                request.Headers.Add("Content-Type", "application/json;odata=nometadata");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStartObject();
                 foreach (var item in tableEntityProperties)
@@ -716,10 +716,10 @@ namespace Azure.Storage.Tables
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
             request.Headers.Add("DataServiceVersion", "3.0");
-            request.Headers.Add("Content-Type", "application/json;odata=nometadata");
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
             {
+                request.Headers.Add("Content-Type", "application/json;odata=nometadata");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStartObject();
                 foreach (var item in tableEntityProperties)
@@ -915,10 +915,10 @@ namespace Azure.Storage.Tables
             uri.AppendQuery("comp", "acl", true);
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
-            request.Headers.Add("Content-Type", "application/xml");
             request.Headers.Add("Accept", "application/xml");
             if (tableAcl != null)
             {
+                request.Headers.Add("Content-Type", "application/xml");
                 var content = new XmlWriterContent();
                 content.XmlWriter.WriteStartElement("SignedIdentifiers");
                 foreach (var item in tableAcl)

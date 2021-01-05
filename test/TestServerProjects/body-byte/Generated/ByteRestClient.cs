@@ -202,8 +202,8 @@ namespace body_byte
             uri.Reset(endpoint);
             uri.AppendPath("/byte/nonAscii", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteBase64StringValue(byteBody);
             request.Content = content;

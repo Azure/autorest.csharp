@@ -56,8 +56,8 @@ namespace CognitiveSearch
             uri.AppendPath("/indexes", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(index);
             request.Content = content;
@@ -207,8 +207,8 @@ namespace CognitiveSearch
                 request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
             request.Headers.Add("Prefer", "return=representation");
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(index);
             request.Content = content;
@@ -517,8 +517,8 @@ namespace CognitiveSearch
             uri.AppendPath("')/search.analyze", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request0.Uri = uri;
-            request0.Headers.Add("Content-Type", "application/json");
             request0.Headers.Add("Accept", "application/json");
+            request0.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(request);
             request0.Content = content;
