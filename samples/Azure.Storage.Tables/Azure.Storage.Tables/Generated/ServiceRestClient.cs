@@ -61,8 +61,8 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", version);
-            request.Headers.Add("Content-Type", "application/xml");
             request.Headers.Add("Accept", "application/xml");
+            request.Headers.Add("Content-Type", "application/xml");
             var content = new XmlWriterContent();
             content.XmlWriter.WriteObjectValue(storageServiceProperties, "StorageServiceProperties");
             request.Content = content;

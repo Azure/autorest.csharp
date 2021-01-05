@@ -343,8 +343,8 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/simple", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/xml");
             request.Headers.Add("Accept", "application/xml");
+            request.Headers.Add("Content-Type", "application/xml");
             var content = new XmlWriterContent();
             content.XmlWriter.WriteObjectValue(slideshow, "slideshow");
             request.Content = content;
@@ -463,8 +463,8 @@ namespace xml_service
             uri.Reset(endpoint);
             uri.AppendPath("/xml/wrapped-lists", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/xml");
             request.Headers.Add("Accept", "application/xml");
+            request.Headers.Add("Content-Type", "application/xml");
             var content = new XmlWriterContent();
             content.XmlWriter.WriteObjectValue(wrappedLists, "AppleBarrel");
             request.Content = content;

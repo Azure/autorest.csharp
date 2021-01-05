@@ -216,10 +216,10 @@ namespace required_optional
             uri.Reset(endpoint);
             uri.AppendPath("/reqopt/implicit/optional/body", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (bodyParameter != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(bodyParameter);
                 request.Content = content;

@@ -43,10 +43,10 @@ namespace JsonAsBinary
             uri.Reset(endpoint);
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (body != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 request.Content = RequestContent.Create(body);
             }
             return message;
