@@ -47,4 +47,5 @@ Our generated SDKs produce various log messages that include information about:
 See our [logging sample][logging_sample] for set up.
 
 <!-- LINKS -->
+[request_failed_exception]: https://docs.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
 [logging_sample]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/Diagnostics.md#logging

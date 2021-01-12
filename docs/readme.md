@@ -34,4 +34,4 @@ These documents are C#-specific, see [our main docs][main_docs] for more general
 [main_dev]: https://github.com/Azure/autorest/tree/master/docs/dev/readme.md
 [sample]: ./samples/readme.md
 [faq]: ./faq.md
-[trobleshooting]: ./troubleshooting.md
+[troubleshooting]: ./troubleshooting.md

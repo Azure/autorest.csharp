@@ -36,7 +36,7 @@ namespace CSharpClientTutorial
 
 When generating your client in [ARM][arm] mode, we have defaults for `clientDiagnostics`, `pipeline`, and `endpoint`. We also add a parameter `tokenCredential` of type
 [`TokenCredential`][token_credential], where you pass in an OAuth token. We always recommend
-using a [credential type][identity_credentials] obtained from the [`Azure.Identity`][azure_identityy] for AAD authentication. For this example,
+using a [credential type][identity_credentials] obtained from the [`Azure.Identity`][azure_identity] for AAD authentication. For this example,
 we use the most common [`DefaultAzureCredential`][default_azure_credential].
 
 ```csharp
