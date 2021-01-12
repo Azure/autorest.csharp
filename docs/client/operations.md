@@ -45,7 +45,7 @@ namespace SyncOperationTutorial
 
 ### Async Operations
 
-We can also use our client to call async operations, and these operations are all suffixed with `Async`. Following the [example above](#sync-operations Sync Operations),
+We can also use our client to call async operations, and these operations are all suffixed with `Async`. Following the [example above](#sync-operations "Sync Operations"),
 our call to `GetDogAsync` looks like this:
 
 ```csharp
@@ -79,7 +79,7 @@ Long-running operations are operations which consist of an initial request sent 
 
 In concurrence with our [.NET guidelines][poller_guidelines], all of our long running operations are prefixed with `Start`, to signify the starting of the long running operation.
 
-For our example, we will use the long running operation generated from [this][example_swagger] swagger. Let's say we generated this swagger with namespace `Azure.Lro`.
+For our example, we will use the long running operation generated from [this][polling_paging_swagger] swagger. Let's say we generated this swagger with namespace `Azure.Lro`.
 
 ### Sync Long Running Operations
 
@@ -164,7 +164,7 @@ namespace AsyncLROOperationTutorial
 A paging operation pages through lists of data, returning an iterator for the items. Network calls get made when users start iterating through the output, not when the operation
 is initially called.
 
-For our example, we will use the paging operation generated from [this][example_swagger] swagger. Let's say we generated this swagger with namespace `Azure.Paging`.
+For our example, we will use the paging operation generated from [this][polling_paging_swagger] swagger. Let's say we generated this swagger with namespace `Azure.Paging`.
 
 ### Sync Paging Operations
 
@@ -257,3 +257,6 @@ a pager that pages through the final lists of data.
 [poller_guidelines]: https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning
 [pageable]: https://docs.microsoft.com/en-us/dotnet/api/azure.pageable-1?view=azure-dotnet
 [async_pageable]: https://docs.microsoft.com/en-us/dotnet/api/azure.asyncpageable-1?view=azure-dotnet
+[pets_swagger]: https://github.com/Azure/autorest/blob/master/docs/openapi/examples/pets.json
+[initializing]: ./initializing.md
+[polling_paging_swagger]: https://github.com/Azure/autorest/blob/master/docs/openapi/examples/pollingPaging.json
