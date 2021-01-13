@@ -7,31 +7,14 @@ that the client is the main point of access to the generated code.
 
 You can use your client if you import the namespace you specified when generating (under flag `--namespace`). For the sake of this example,
 let's say the namespace is `Azure.Pets` and your client is `PetsClient`. You could then access the client if you import the namespace.
-The default client also comes with these three parameters:
-
-* `clientDiagnostics`: The handler for diagnostic messaging in the client
-* `pipeline`: The HTTP pipeline for sending and receiving REST requests and responses. Is of type [`HttpPipeline`][http_pipeline]
-* `endpoint`: The base endpoint the client will hit. Is of type `string`.
 
 ```csharp
 using Azure.Pets;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace CSharpClientTutorial
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-            var pipeline = new HttpPipeline();
-            string endpoint = "http://localhost:3000";
-            var client = new PetsClient(clientDiagnostics, pipeline, endpoint);
-        }
-    }
-}
+string endpoint = "http://localhost:3000";
+var client = new PetsClient(endpoint);
 ```
 
 When generating your client in [ARM][arm] mode, we have defaults for `clientDiagnostics`, `pipeline`, and `endpoint`. We also add a parameter `tokenCredential` of type
@@ -45,17 +28,11 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Identity;
 
-namespace CSharpMgmtClientTutorial
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var client = new PetsClient(new DefaultAzureCredential());
-        }
-    }
-}
+string endpoint = "http://localhost:3000";
+var credential = new DefaultAzureCredential()
+var client = new PetsClient(endpoint, credential);
 ```
+
 You can also pass in [client options][client_options] through the `options` parameter. This is used for exposing various
 common client options, like policies for [diagnostics][diagnostics], [retry][retry], and [transport][transport].
 Finally, you can define client parameters in swagger, so these parameters would also be passed in at initialization time.

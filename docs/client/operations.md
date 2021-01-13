@@ -26,21 +26,11 @@ using AzurePets;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace SyncOperationTutorial
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-            var pipeline = new HttpPipeline();
-            string endpoint = "http://localhost:3000";
-            var client = new PetsClient(clientDiagnostics, pipeline, endpoint);
-            var dog = client.GetDog().Value;
-        }
-    }
-}
+internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
+var pipeline = new HttpPipeline();
+string endpoint = "http://localhost:3000";
+var client = new PetsClient(clientDiagnostics, pipeline, endpoint);
+var dog = client.GetDog().Value;
 ```
 
 ### Async Operations
@@ -56,21 +46,11 @@ using AzurePets;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace AsyncOperationTutorial
-{
-    class Program
-    {
-        static async void Main(string[] args)
-        {
-
-            internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-            var pipeline = new HttpPipeline();
-            string endpoint = "http://localhost:3000";
-            var client = new PetsClient(clientDiagnostics, pipeline, endpoint);
-            var dog = (await client.GetDogAsync()).Value;
-        }
-    }
-}
+internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
+var pipeline = new HttpPipeline();
+string endpoint = "http://localhost:3000";
+var client = new PetsClient(clientDiagnostics, pipeline, endpoint);
+var dog = (await client.GetDogAsync()).Value;
 ```
 
 ## Long Running Operations
@@ -93,35 +73,25 @@ using Azure.Lro.Models;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace SyncLROOperationTutorial
+internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
+var pipeline = new HttpPipeline();
+string endpoint = "http://localhost:3000";
+var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+
+var product = new Product
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
+    Id = 1,
+    Name = "My Polling Example"
+};
+var pollingOperation = client.StartBasicPolling(product);
 
-            internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-            var pipeline = new HttpPipeline();
-            string endpoint = "http://localhost:3000";
-            var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+while (!pollingOperation.HasCompleted)
+{
+    Thread.Sleep(2000);
+    pollingOperation.UpdateStatus();
+};
 
-            var product = new Product
-            {
-                Id = 1,
-                Name = "My Polling Example"
-            };
-            var pollingOperation = client.StartBasicPolling(product);
-
-            while (!pollingOperation.HasCompleted)
-            {
-                Thread.Sleep(2000);
-                pollingOperation.UpdateStatus();
-            };
-
-            var outputProduct = pollingOperation.Value;
-        }
-    }
-}
+var outputProduct = pollingOperation.Value;
 ```
 
 ### Async Long Running Operations
@@ -137,26 +107,17 @@ using Azure.Lro.Models;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace AsyncLROOperationTutorial
+internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
+var pipeline = new HttpPipeline();
+string endpoint = "http://localhost:3000";
+var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+
+var product = new Product
 {
-    class Program
-    {
-        static async void Main(string[] args)
-        {
-
-            internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-            var pipeline = new HttpPipeline();
-            string endpoint = "http://localhost:3000";
-            var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
-
-            var product = new Product
-            {
-                Id = 1,
-                Name = "My Polling Example"
-            };
-            var outputProduct = (await client.StartBasicPolling(product).WaitForCompletionAsync()).Value;
-    }
-}
+    Id = 1,
+    Name = "My Polling Example"
+};
+var outputProduct = (await client.StartBasicPolling(product).WaitForCompletionAsync()).Value;
 ```
 
 ## Paging Operations
@@ -171,40 +132,20 @@ For our example, we will use the paging operation generated from [this][polling_
 By default, our sync paging operations return a [`Pageable`][pageable] object. The initial call to the function returns
 the pager, but doesn't make any network calls. Instead, calls are made when users start iterating, with each network call returning a page of data.
 
-```python
-from azure.identity import DefaultAzureCredential
-from azure.paging import PollingPagingExampleClient
-
-client = PollingPagingExampleClient(credential=DefaultAzureCredential())
-pages = client.basic_paging()
-[print(page) for page in pages]
-```
-
 ```csharp
 using Azure.Paging;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace SyncPagingOperationTutorial
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
+internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
+var pipeline = new HttpPipeline();
+string endpoint = "http://localhost:3000";
+var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
 
-            internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-            var pipeline = new HttpPipeline();
-            string endpoint = "http://localhost:3000";
-            var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+var pageable = client.BasicPaging();
 
-            var pageable = client.BasicPaging();
-
-            foreach (var page in pageable.AsPages())
-            {
-                var values = page.Values;
-            }
-        }
-    }
+foreach (var item in pageable) {
+    ...
 }
 ```
 
@@ -222,26 +163,16 @@ using Azure.Paging;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace AsyncPagingOperationTutorial
+internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
+var pipeline = new HttpPipeline();
+string endpoint = "http://localhost:3000";
+var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+
+var pageableAsync = client.BasicPagingAsync();
+
+await foreach (var item in pageableAsync)
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-            var pipeline = new HttpPipeline();
-            string endpoint = "http://localhost:3000";
-            var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
-
-            var pageableAsync = client.BasicPagingAsync();
-
-            await foreach (var page in pageableAsync.AsPages())
-            {
-                var values = page.Values;
-            }
-        }
-    }
+    ...
 }
 ```
 
