@@ -8,20 +8,7 @@ statement
 ```csharp
 using AzurePets.Models;
 
-namespace CSharpClientTutorial
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            var dog = new Dog
-            {
-                ...
-            };
-        }
-    }
-}
+var dog = new Dog
 ```
 
 Enums are also listed in the `Models` namespace, so say you have enum class `DogTypes`. To access the `Dalmation` enum, your code would look like
@@ -29,15 +16,5 @@ Enums are also listed in the `Models` namespace, so say you have enum class `Dog
 ```csharp
 using AzurePets.Models;
 
-namespace CSharpClientTutorial
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            string myDogType= DogTypes.Dalmation;
-        }
-    }
-}
+DogTypes myDogType = DogTypes.Dalmation;
 ```

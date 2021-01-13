@@ -118,6 +118,9 @@ For more details please refer [these](https://github.com/Azure/autorest/tree/mas
 
 ## Customizing the generated code
 
+This section shows you how to use customizations when generating your code. These only apply when [generating in the azure-sdk-for-net repo](#use-in-azure-sdk-net-repo "Use in azure-sdk-net repo").
+You can also use directives to change your code, see how to do so in our [main docs][main_docs].
+
 ### Make a model internal
 
 Define a class with the same namespace and name as generated model and use the desired accessibility.
