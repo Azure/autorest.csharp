@@ -576,15 +576,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})");
                     break;
 
-                case EnumType clientEnum when clientEnum.IsExtendable:
-                    writer.Append($"new {implementation.Type}(");
-                    DeserializeFrameworkTypeValue(writer, element, clientEnum.BaseType.FrameworkType, SerializationFormat.Default);
-                    writer.Append($")");
-                    break;
-
-                case EnumType clientEnum when !clientEnum.IsExtendable:
-                    DeserializeFrameworkTypeValue(writer, element, clientEnum.BaseType.FrameworkType, SerializationFormat.Default);
-                    writer.Append($".To{clientEnum.Declaration.Name}()");
+                case EnumType clientEnum:
+                    writer.AppendEnumFromString(
+                        clientEnum,
+                        w => DeserializeFrameworkTypeValue(w, element, clientEnum.BaseType.FrameworkType, SerializationFormat.Default));
                     break;
             }
         }

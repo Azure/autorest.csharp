@@ -282,20 +282,18 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderParameterEnumNull() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamEnumAsync( scenario: "null", null));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/339")]
         public Task HeaderResponseEnumValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseEnumAsync( scenario: "valid");
-            Assert.AreEqual("GREY", response.Headers.Value);
+            Assert.AreEqual(GreyscaleColors.Grey, response.Headers.Value);
             return response.GetRawResponse();
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/339")]
         public Task HeaderResponseEnumNull() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseEnumAsync( scenario: "null");
-            Assert.AreEqual("", response.Headers.Value);
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = response.Headers.Value);
             return response.GetRawResponse();
         });
 
