@@ -1,8 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Runtime.InteropServices.ComTypes;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Response = Azure.Response;
 
@@ -49,7 +51,19 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var type = header.Type;
             writer.WriteXmlDocumentationSummary(header.Description);
-            writer.Line($"public {type} {header.Name} => {ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {type} value) ? value : null;");
+            writer.Append($"public {type} {header.Name} => ");
+            if (!type.IsFrameworkType && type.Implementation is EnumType enumType)
+            {
+                writer.Append($"{ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {typeof(string)} value) ? ");
+                writer.AppendEnumFromString(enumType, w => w.AppendRaw("value"));
+                writer.Append($" : ({type.WithNullable(true)}) null;");
+            }
+            else
+            {
+                writer.Append($"{ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {type} value) ? value : null;");
+            }
+
+            writer.Line();
         }
     }
 }

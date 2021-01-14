@@ -181,6 +181,21 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.AppendRaw(enumType.IsExtendable ? ".ToString()" : ".ToSerialString()");
         }
 
+        public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, CodeWriterDelegate value)
+        {
+            if (enumType.IsExtendable)
+            {
+                writer.Append($"new {enumType.Type}({value})");
+            }
+            else
+            {
+                writer.UseNamespace(enumType.Type.Namespace);
+                writer.Append($"{value}.To{enumType.Declaration.Name}()");
+            }
+
+            return writer;
+        }
+
         public static CodeWriter WriteReferenceOrConstant(this CodeWriter writer, ReferenceOrConstant value)
         {
             if (value.IsConstant)
