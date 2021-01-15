@@ -142,7 +142,7 @@
     },
     "HeaderCollectionPrefix": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeaderCollectionPrefix"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeaderCollectionPrefix\\generated"
     },
     "httpInfrastructure": {
       "commandName": "Project",
