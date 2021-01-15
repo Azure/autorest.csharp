@@ -301,7 +301,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Serialized file stream
             protocol: !<!Protocols> 
               http: !<!HttpBinaryResponse> 
                 knownMediaType: binary
@@ -316,7 +316,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -398,7 +398,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Serialized file stream
             protocol: !<!Protocols> 
               http: !<!HttpBinaryResponse> 
                 knownMediaType: binary
@@ -413,7 +413,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -495,7 +495,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Serialized file stream
             protocol: !<!Protocols> 
               http: !<!HttpBinaryResponse> 
                 knownMediaType: binary
@@ -510,7 +510,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
