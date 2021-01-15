@@ -2312,7 +2312,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: 'Success, table query completed.'
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2474,7 +2474,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: 'Success, table created.'
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2515,7 +2515,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: 'Success, table created.'
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2555,7 +2555,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2658,7 +2658,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: No Content
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2698,7 +2698,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2825,7 +2825,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2882,7 +2882,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3049,7 +3049,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3106,7 +3106,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3300,7 +3300,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3340,7 +3340,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3505,7 +3505,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3545,7 +3545,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3701,7 +3701,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3744,7 +3744,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3899,7 +3899,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3942,7 +3942,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -4082,7 +4082,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: No Content
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -4122,7 +4122,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -4269,7 +4269,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success (Accepted)
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -4302,7 +4302,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -4413,7 +4413,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -4449,7 +4449,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -4560,7 +4560,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -4603,7 +4603,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Failure
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:

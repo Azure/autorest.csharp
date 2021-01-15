@@ -263,7 +263,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The service is healthy
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -272,7 +272,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The service is temporarily unavailable
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -426,7 +426,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -436,7 +436,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -598,7 +598,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -608,7 +608,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -758,7 +758,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -768,7 +768,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -931,7 +931,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -941,7 +941,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1091,7 +1091,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1101,7 +1101,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1166,7 +1166,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1176,7 +1176,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1188,7 +1188,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1250,7 +1250,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1260,7 +1260,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1272,7 +1272,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1346,7 +1346,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1356,7 +1356,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1519,7 +1519,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1529,7 +1529,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1607,7 +1607,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1617,7 +1617,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1629,7 +1629,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1704,7 +1704,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1714,7 +1714,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1726,7 +1726,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1813,7 +1813,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1823,7 +1823,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -1985,7 +1985,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1995,7 +1995,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2060,7 +2060,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2070,7 +2070,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2082,7 +2082,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2144,7 +2144,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2154,7 +2154,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2166,7 +2166,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2338,7 +2338,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2348,7 +2348,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2426,7 +2426,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2436,7 +2436,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2448,7 +2448,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2523,7 +2523,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2533,7 +2533,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2545,7 +2545,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2607,7 +2607,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2617,7 +2617,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2629,7 +2629,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2691,7 +2691,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2701,7 +2701,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2713,7 +2713,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2788,7 +2788,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2798,7 +2798,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2810,7 +2810,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2885,7 +2885,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2895,7 +2895,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -2907,7 +2907,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2982,7 +2982,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2992,7 +2992,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3004,7 +3004,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3079,7 +3079,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3089,7 +3089,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3101,7 +3101,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3188,7 +3188,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3198,7 +3198,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3276,7 +3276,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3286,7 +3286,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3351,7 +3351,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The user is deleted
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3360,7 +3360,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The delete request is accepted and service is handling the request int the background
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3370,7 +3370,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3448,7 +3448,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3458,7 +3458,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3470,7 +3470,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3545,7 +3545,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3555,7 +3555,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3567,7 +3567,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3655,7 +3655,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3665,7 +3665,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3677,7 +3677,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3765,7 +3765,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3775,7 +3775,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3787,7 +3787,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3875,7 +3875,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3885,7 +3885,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -3897,7 +3897,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3985,7 +3985,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3995,7 +3995,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -4007,7 +4007,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Not Found
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -4107,7 +4107,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -4117,7 +4117,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -4208,7 +4208,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -4218,7 +4218,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text
@@ -4296,7 +4296,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The user is deleted
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -4305,7 +4305,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The delete request is accepted and service is handling the request int the background
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -4315,7 +4315,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Bad Request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: text

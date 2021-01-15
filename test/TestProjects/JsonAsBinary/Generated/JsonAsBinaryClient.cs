@@ -37,7 +37,7 @@ namespace JsonAsBinary
 
         /// <param name="body"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Stream>> OperationAsync(Stream body = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Stream>> OperationAsync(Stream body, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("JsonAsBinaryClient.Operation");
             scope.Start();
@@ -54,7 +54,7 @@ namespace JsonAsBinary
 
         /// <param name="body"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Stream> Operation(Stream body = null, CancellationToken cancellationToken = default)
+        public virtual Response<Stream> Operation(Stream body, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("JsonAsBinaryClient.Operation");
             scope.Start();

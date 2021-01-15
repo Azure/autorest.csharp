@@ -81,7 +81,7 @@ operationGroups:
                 language: !<!Languages> 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
@@ -89,7 +89,7 @@ operationGroups:
               - !<!Parameter> &ref_5
                 schema: *ref_3
                 implementation: Method
-                required: false
+                required: true
                 language: !<!Languages> 
                   default:
                     name: body
@@ -97,7 +97,7 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: body
-                    style: json
+                    style: binary
               - !<!Parameter> 
                 schema: *ref_4
                 implementation: Method
@@ -118,10 +118,11 @@ operationGroups:
                 name: ''
                 description: ''
             protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
+              http: !<!HttpBinaryRequest> 
                 path: /Operation/
                 method: put
-                knownMediaType: json
+                binary: true
+                knownMediaType: binary
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
@@ -132,7 +133,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK
             protocol: !<!Protocols> 
               http: !<!HttpBinaryResponse> 
                 knownMediaType: binary

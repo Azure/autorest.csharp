@@ -167,7 +167,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully received a 200 response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -178,7 +178,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
