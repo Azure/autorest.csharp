@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             var ns = await autoRest.GetValue<string>("namespace");
-            await autoRest.WriteFile($"{ns}.csproj", _csProjContent, "source-file-csharp");
+            await autoRest.WriteFile($"../{ns}.csproj", _csProjContent, "source-file-csharp");
 
             return true;
         }

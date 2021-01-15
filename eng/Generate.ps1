@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
@@ -196,6 +196,6 @@ if (![string]::IsNullOrWhiteSpace($filter))
 
 $keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-    Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:clean;
+    Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast;
 } -ThrottleLimit $parallel
 

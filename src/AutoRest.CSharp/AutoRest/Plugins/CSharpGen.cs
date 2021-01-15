@@ -31,7 +31,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask, Configuration configuration)
         {
             Directory.CreateDirectory(configuration.OutputFolder);
-            var project = await GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolders);
+            var projectDirectory = Path.Combine(configuration.OutputFolder, "../");
+            var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var context = new BuildContext(await codeModelTask, configuration, sourceInputModel);
@@ -127,6 +128,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
             });
 
+            if (!Path.IsPathRooted(configuration.OutputFolder))
+            {
+                await autoRest.Warning("output-folder path is required for customization");
+            }
             if (configuration.SaveInputs)
             {
                 await codeModelTask;
