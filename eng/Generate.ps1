@@ -64,9 +64,10 @@ if (!($Exclude -contains "TestServer"))
     foreach ($testName in $testNames)
     {
         $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
+        $projectDirectory = Join-Path $testServerDirectory $testName
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
-            'output'=$testServerDirectory;
+            'output'=$projectDirectory;
             'arguments'="--require=$configurationPath --input-file=$inputFile"
         }
     }
