@@ -171,8 +171,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/empty", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -553,8 +553,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/boolean/tfft", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -809,8 +809,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1065,8 +1065,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1321,8 +1321,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1577,8 +1577,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1833,8 +1833,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2089,8 +2089,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2345,8 +2345,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2601,8 +2601,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2731,8 +2731,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/duration/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2861,8 +2861,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/byte/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -3383,8 +3383,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/complex/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -3829,8 +3829,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/array/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -4216,8 +4216,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/dictionary/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)

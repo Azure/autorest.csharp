@@ -495,10 +495,10 @@ namespace AppConfiguration
             {
                 request.Headers.Add("If-None-Match", ifNoneMatch);
             }
-            request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
             request.Headers.Add("Accept", "application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json");
             if (entity != null)
             {
+                request.Headers.Add("Content-Type", "application/vnd.microsoft.appconfig.kv+json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(entity);
                 request.Content = content;

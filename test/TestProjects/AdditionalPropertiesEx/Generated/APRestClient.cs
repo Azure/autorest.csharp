@@ -44,8 +44,8 @@ namespace AdditionalPropertiesEx
             uri.Reset(endpoint);
             uri.AppendPath("/ap_operation", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(createParameters);
             request.Content = content;
@@ -158,8 +158,8 @@ namespace AdditionalPropertiesEx
             uri.Reset(endpoint);
             uri.AppendPath("/ap_struct_operation", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(createParameters);
             request.Content = content;
