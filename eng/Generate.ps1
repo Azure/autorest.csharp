@@ -94,7 +94,7 @@ if (!($Exclude -contains "TestProjects"))
         }
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
-            'output'=$testSwaggerPath;
+            'output'=$directory;
             'arguments'=$testArguments
             }
     }
