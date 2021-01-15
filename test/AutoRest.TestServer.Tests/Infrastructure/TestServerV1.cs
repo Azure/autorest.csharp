@@ -23,10 +23,10 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public TestServerV1()
         {
-            var portPhrase = "Server started at port ";
-            var startup = Path.Combine(GetBaseDirectory(), "legacy", "startup", "www.js");
+            var portPhrase = "Started server on port ";
+            var startup = Path.Combine(GetBaseDirectory(), "dist", "cli", "cli.js");
 
-            var processStartInfo = new ProcessStartInfo("node", startup);
+            var processStartInfo = new ProcessStartInfo("node", $"{startup} --port 0");
 
             // Use random port
             processStartInfo.Environment["PORT"] = "0";
@@ -39,9 +39,10 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             while (!_process.HasExited)
             {
                 var s = _process.StandardOutput.ReadLine();
-                if (s?.StartsWith(portPhrase) == true)
+                var indexOfPort = s?.IndexOf(portPhrase);
+                if (indexOfPort > 0)
                 {
-                    Host = new Uri($"http://localhost:{s.Substring(portPhrase.Length).Trim()}");
+                    Host = new Uri($"http://localhost:{s.Substring(indexOfPort.Value + portPhrase.Length).Trim()}");
                     Client = new HttpClient
                     {
                         BaseAddress = Host
