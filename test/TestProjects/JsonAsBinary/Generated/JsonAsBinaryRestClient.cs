@@ -44,18 +44,21 @@ namespace JsonAsBinary
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (body != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                request.Content = RequestContent.Create(body);
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = RequestContent.Create(body);
             return message;
         }
 
         /// <param name="body"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<Stream>> OperationAsync(Stream body = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public async Task<Response<Stream>> OperationAsync(Stream body, CancellationToken cancellationToken = default)
         {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
             using var message = CreateOperationRequest(body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -72,8 +75,14 @@ namespace JsonAsBinary
 
         /// <param name="body"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Stream> Operation(Stream body = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public Response<Stream> Operation(Stream body, CancellationToken cancellationToken = default)
         {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
             using var message = CreateOperationRequest(body);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)

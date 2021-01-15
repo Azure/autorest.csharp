@@ -202,7 +202,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully received no query parameters
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -213,7 +213,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -284,7 +284,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully received no query parameters
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -295,7 +295,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -367,7 +367,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully received ?arrayQuery=ArrayQuery1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -378,7 +378,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json

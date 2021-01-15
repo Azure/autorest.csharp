@@ -281,7 +281,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Received correct format
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -363,7 +363,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Received 'text/plain; encoding=UTF-8' as contentType
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json

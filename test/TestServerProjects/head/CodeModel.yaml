@@ -55,7 +55,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully returns the true boolean value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -64,7 +64,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully returns the false boolean value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -74,7 +74,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -113,7 +113,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully returns the true boolean value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -122,7 +122,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully returns the false boolean value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -132,7 +132,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -171,7 +171,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully returns the true boolean value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -180,7 +180,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully returns the false boolean value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -190,7 +190,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:

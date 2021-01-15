@@ -2072,7 +2072,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
             scope.Start();
@@ -2089,7 +2089,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryNull(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryNull");
             scope.Start();
@@ -2106,7 +2106,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
             scope.Start();
@@ -2123,7 +2123,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryEmpty");
             scope.Start();
@@ -2140,7 +2140,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
             scope.Start();
@@ -2157,7 +2157,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemNull");
             scope.Start();
@@ -2174,7 +2174,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
             scope.Start();
@@ -2191,7 +2191,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryItemEmpty");
             scope.Start();
@@ -2208,7 +2208,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
             scope.Start();
@@ -2225,7 +2225,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyDictionary<string, object>> GetDictionaryValid(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetDictionaryValid");
             scope.Start();
@@ -2241,9 +2241,9 @@ namespace body_dictionary
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfany to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutDictionaryValidAsync(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDictionaryValidAsync(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
             scope.Start();
@@ -2259,9 +2259,9 @@ namespace body_dictionary
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfany to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutDictionaryValid(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
+        public virtual Response PutDictionaryValid(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutDictionaryValid");
             scope.Start();

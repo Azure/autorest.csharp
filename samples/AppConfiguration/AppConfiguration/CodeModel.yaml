@@ -1432,7 +1432,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -1456,7 +1456,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1553,7 +1553,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -1571,7 +1571,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1694,7 +1694,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -1718,7 +1718,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1870,7 +1870,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -1888,7 +1888,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2024,7 +2024,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2062,7 +2062,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -2269,7 +2269,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2300,7 +2300,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -2439,7 +2439,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2468,7 +2468,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2487,7 +2487,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -2649,7 +2649,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2681,7 +2681,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -2822,7 +2822,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2846,7 +2846,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -2959,7 +2959,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -2977,7 +2977,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -3088,7 +3088,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3119,7 +3119,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -3270,7 +3270,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3301,7 +3301,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -3464,7 +3464,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3488,7 +3488,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -3632,7 +3632,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -3650,7 +3650,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:

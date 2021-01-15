@@ -134,7 +134,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The PNG file
             protocol: !<!Protocols> 
               http: !<!HttpBinaryResponse> 
                 knownMediaType: binary
@@ -149,7 +149,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -201,7 +201,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The large file
             protocol: !<!Protocols> 
               http: !<!HttpBinaryResponse> 
                 knownMediaType: binary
@@ -216,7 +216,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -268,7 +268,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The empty file stream
             protocol: !<!Protocols> 
               http: !<!HttpBinaryResponse> 
                 knownMediaType: binary
@@ -283,7 +283,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
