@@ -154,12 +154,10 @@ if ($updateLaunchSettings)
         'profiles' = [ordered]@{}
     };
 
-    $sharedSourceNormalized = $sharedSource.Replace($repoRoot, '$(SolutionDir)')
     foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
     {
         $definition = $swaggerDefinitions[$key];
-        $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, '$(SolutionDir)')
-        $codeModel = Join-Path $outputPath 'CodeModel.yaml'
+        $outputPath = (Join-Path $definition.output "generated").Replace($repoRoot, '$(SolutionDir)')
 
         $settings.profiles[$key] = [ordered]@{
             'commandName'='Project';

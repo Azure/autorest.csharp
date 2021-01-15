@@ -2,235 +2,235 @@
   "profiles": {
     "additionalProperties": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\additionalProperties\\additionalProperties"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\additionalProperties\\generated"
     },
     "AdditionalPropertiesEx": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\AdditionalPropertiesEx"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\AdditionalPropertiesEx\\generated"
     },
     "AppConfiguration": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\generated"
     },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\generated"
     },
     "Azure.Management.Storage": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Management.Storage\\Azure.Management.Storage"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Management.Storage\\generated"
     },
     "Azure.Network.Management.Interface": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Azure.Network.Management.Interface"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\generated"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\generated"
     },
     "azure-parameter-grouping": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping\\azure-parameter-grouping"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping\\generated"
     },
     "azure-special-properties": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-special-properties\\azure-special-properties"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-special-properties\\generated"
     },
     "body-array": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-array\\body-array"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-array\\generated"
     },
     "body-boolean": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-boolean\\body-boolean"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-boolean\\generated"
     },
     "body-byte": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-byte\\body-byte"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-byte\\generated"
     },
     "body-complex": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-complex\\body-complex"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-complex\\generated"
     },
     "body-date": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-date\\body-date"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-date\\generated"
     },
     "body-datetime": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-datetime\\body-datetime"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-datetime\\generated"
     },
     "body-datetime-rfc1123": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123\\body-datetime-rfc1123"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-datetime-rfc1123\\generated"
     },
     "body-dictionary": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-dictionary\\body-dictionary"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-dictionary\\generated"
     },
     "body-duration": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-duration\\body-duration"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-duration\\generated"
     },
     "body-file": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-file\\body-file"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-file\\generated"
     },
     "body-formdata": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-formdata\\body-formdata"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-formdata\\generated"
     },
     "body-integer": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-integer\\body-integer"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-integer\\generated"
     },
     "body-number": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-number\\body-number"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-number\\generated"
     },
     "body-string": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-string\\body-string"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-string\\generated"
     },
     "body-time": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-time\\body-time"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-time\\generated"
     },
     "CognitiveSearch": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\CognitiveSearch"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\generated"
     },
     "CognitiveServices.TextAnalytics": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\CognitiveServices.TextAnalytics"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveServices.TextAnalytics\\generated"
     },
     "constants": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\constants"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\generated"
     },
     "custom-baseUrl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\custom-baseUrl"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\generated"
     },
     "custom-baseUrl-more-options": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options\\custom-baseUrl-more-options"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-more-options\\generated"
     },
     "custom-baseUrl-paging": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\custom-baseUrl-paging"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\generated"
     },
     "extensible-enums-swagger": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger\\extensible-enums-swagger"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\extensible-enums-swagger\\generated"
     },
     "ExtensionClientName": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\ExtensionClientName"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\generated"
     },
     "head": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\head\\head"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\head\\generated"
     },
     "HeadAsBooleanTrue": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeadAsBooleanTrue\\HeadAsBooleanTrue"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeadAsBooleanTrue\\generated"
     },
     "header": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\header\\header"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\header\\generated"
     },
     "httpInfrastructure": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\httpInfrastructure"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\generated"
     },
     "Inheritance": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Inheritance\\Inheritance"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Inheritance\\generated"
     },
     "JsonAsBinary": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\JsonAsBinary\\JsonAsBinary"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\JsonAsBinary\\generated"
     },
     "lro": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro\\lro"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro\\generated"
     },
     "lro-parameterized-endpoints": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro-parameterized-endpoints\\lro-parameterized-endpoints"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro-parameterized-endpoints\\generated"
     },
     "media_types": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types\\media_types"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types\\generated"
     },
     "model-flattening": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening\\model-flattening"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening\\generated"
     },
     "ModelNamespace": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelNamespace\\ModelNamespace"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelNamespace\\generated"
     },
     "ModelShapes": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelShapes\\ModelShapes"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelShapes\\generated"
     },
     "multiple-inheritance": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\multiple-inheritance\\multiple-inheritance"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\multiple-inheritance\\generated"
     },
     "NameConflicts": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NameConflicts\\NameConflicts"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NameConflicts\\generated"
     },
     "non-string-enum": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\non-string-enum"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\non-string-enum\\generated"
     },
     "object-type": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\object-type"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\generated"
     },
     "paging": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\paging\\paging"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\paging\\generated"
     },
     "required-optional": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\required-optional"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\generated"
     },
     "SignalR": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\SignalR\\SignalR"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\SignalR\\generated"
     },
     "subscriptionId-apiVersion": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\subscriptionId-apiVersion\\subscriptionId-apiVersion"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\subscriptionId-apiVersion\\generated"
     },
     "TypeSchemaMapping": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\TypeSchemaMapping"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\generated"
     },
     "url": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url\\url"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url\\generated"
     },
     "url-multi-collectionFormat": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat\\url-multi-collectionFormat"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat\\generated"
     },
     "validation": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\validation\\validation"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\validation\\generated"
     },
     "xml-service": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xml-service\\xml-service"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xml-service\\generated"
     },
     "xms-error-responses": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xms-error-responses\\xms-error-responses"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xms-error-responses\\generated"
     }
   }
 }
