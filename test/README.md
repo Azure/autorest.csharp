@@ -58,3 +58,23 @@ One important part of codegen is serialization.
 There are a number of “shared” files that get included with the generated code implicitly into the final project
 - All are internal visibility, and let us iterate quickly upon their API surface
 - Long term the goal should be to upstream to `Azure.Core`
+
+# Testing Details
+
+[autorest.testserver](http://github.com/Azure/autorest.testserver/) provides a platform for automated testing of the code generators.
+
+It packages a bunch of test swagger files, along with a “mock” nodejs server.
+
+The swagger files are compiled, and then run, which pings the mock server (to verify behavior). This tests both the Modeler 4 and language specific codegen.
+
+This document contains some additional [technical details](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/README.md).
+
+# Testing generator changes against Azure SDK without a PR
+
+These instructions are only a general outline, see [the script](https://github.com/Azure/autorest.csharp/blob/feature/v3/eng/UpdateAzureSdkForNet.ps1) for details:
+
+- Use `dotnet pack` to package up a version of the generator
+- `dotnet pack -o directory` (where directory is replaced with the name of the directory)
+- Copy created nuget package to your local nuget source
+- Update package.props
+- `dotnet restore -S directory` (where directory is replaced with the name of the directory)
