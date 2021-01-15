@@ -343,7 +343,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: A Pet which contains more properties than what is defined.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -354,7 +354,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -406,7 +406,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: A Pet which contains more properties than what is defined.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -420,7 +420,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -500,7 +500,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: A Pet which contains more properties than what is defined.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -511,7 +511,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -563,7 +563,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: A Pet which contains more properties than what is defined.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -577,7 +577,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json

@@ -367,7 +367,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The null String value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -381,7 +381,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -468,7 +468,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Empty Response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -479,7 +479,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -537,7 +537,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The empty String value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -551,7 +551,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -637,7 +637,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Empty Response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -648,7 +648,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -707,7 +707,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The mbcs String value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -721,7 +721,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -807,7 +807,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Empty Response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -818,7 +818,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -877,7 +877,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The String value with leading and trailing whitespace '<tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>'
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -891,7 +891,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -977,7 +977,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Empty Response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -988,7 +988,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1047,7 +1047,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The not provided string value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1061,7 +1061,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1119,7 +1119,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The base64 encoded string value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1133,7 +1133,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1185,7 +1185,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The base64url encoded string value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1199,7 +1199,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1279,7 +1279,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Empty Response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1290,7 +1290,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1343,7 +1343,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The null value
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1357,7 +1357,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1417,7 +1417,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: 'The String value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color'''
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1431,7 +1431,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1518,7 +1518,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Empty Response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1529,7 +1529,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1588,7 +1588,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: 'The String value ''red color'' from enumeration of ''red color'', ''green-color'', ''blue_color'''
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1602,7 +1602,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1689,7 +1689,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Empty Response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1700,7 +1700,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1759,7 +1759,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: The String value 'green-color' from a constant
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1773,7 +1773,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1860,7 +1860,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Empty Response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1871,7 +1871,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json

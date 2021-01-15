@@ -344,7 +344,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Horse with name 'Fred' and isAShowHorse true
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -358,7 +358,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -439,7 +439,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Received correct format
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -491,7 +491,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Pet with name 'Peanut'
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -505,7 +505,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -586,7 +586,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Received correct format
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -638,7 +638,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Feline where meows and hisses are true
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -652,7 +652,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -733,7 +733,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Received correct format
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -785,7 +785,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: 'Cat with name ''Whiskers'' where likesMilk, meows, and hisses is true'
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -799,7 +799,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -880,7 +880,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Received correct format
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -932,7 +932,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: 'Kitten with name ''Gatito'' where likesMilk and meows is true, and hisses and eatsMiceYet is false'
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -946,7 +946,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1027,7 +1027,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Received correct format
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json

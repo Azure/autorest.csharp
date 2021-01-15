@@ -1303,7 +1303,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -1314,7 +1314,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Default response
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1395,7 +1395,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1447,7 +1447,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1528,7 +1528,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -1621,7 +1621,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:

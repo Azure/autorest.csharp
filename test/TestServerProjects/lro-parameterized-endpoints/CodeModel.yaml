@@ -179,7 +179,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Will return string 'success' if polling was a success
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -191,7 +191,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Accepted polling request
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -210,7 +210,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Unexpected error
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json

@@ -9619,7 +9619,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List blob services operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -9812,7 +9812,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Sets The properties of a storage account’s Blob service successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -10022,7 +10022,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- returned the properties of a storage account’s Blob service.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -10202,7 +10202,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List Container operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -10367,7 +10367,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- The Container is already created.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -10380,7 +10380,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Created -- Create Container operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -10555,7 +10555,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Update Container operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -10677,7 +10677,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Get Container operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -10816,7 +10816,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Delete Container operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -10825,7 +10825,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: No Content -- The Container not exist.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -10972,7 +10972,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Set legal hold tags for Container completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -11132,7 +11132,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Clear legal hold tags for Container completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -11326,7 +11326,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Creates or updates container ImmutabilityPolicy operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -11481,7 +11481,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Gets container ImmutabilityPolicy operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -11633,7 +11633,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Deletes container ImmutabilityPolicy operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -11775,7 +11775,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Locks container ImmutabilityPolicy operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -11969,7 +11969,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Extends container ImmutabilityPolicy operation completed successfully..
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 headers:
@@ -12127,7 +12127,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Lease Container operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -12253,7 +12253,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List file services operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -12267,7 +12267,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -12475,7 +12475,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Sets The properties of a storage account’s File service successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -12489,7 +12489,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -12685,7 +12685,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- returned the properties of a storage account’s File service.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -12699,7 +12699,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -12883,7 +12883,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List Shares operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -12897,7 +12897,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13084,7 +13084,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- The Share is already created.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13097,7 +13097,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Created -- Create Share operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13111,7 +13111,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13309,7 +13309,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Update Share operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13323,7 +13323,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13452,7 +13452,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Get Share operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13466,7 +13466,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13600,7 +13600,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Delete Share operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -13609,7 +13609,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: No Content -- The Share not exist.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -13620,7 +13620,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13782,7 +13782,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- The Share is successfully restored.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -13793,7 +13793,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -13869,7 +13869,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK. The request has succeeded.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -14263,7 +14263,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List of storage SKUs in the given subscription retrieved and returned successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -18109,7 +18109,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Operation to check the storage account name availability was successful.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -18231,7 +18231,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- returned when the storage account was already created from a previous request with the same properties specified in the request body.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -18243,7 +18243,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Accepted -- Create or update request accepted; operation will complete asynchronously.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -18396,7 +18396,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- storage account deleted successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -18405,7 +18405,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: NoContent -- account does not exist in the subscription.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -18506,7 +18506,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- properties retrieved successfully for the storage account.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -18773,7 +18773,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- storage account properties updated successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -19046,7 +19046,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List of storage accounts was retrieved and returned successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -19363,7 +19363,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List of storage accounts in the given resource group retrieved and returned successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -19520,7 +19520,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- list of keys retrieved and returned successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -19661,7 +19661,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- specified key regenerated successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -19813,7 +19813,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- returned the account SAS created for the storage account requested.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -19943,7 +19943,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- returned the service SAS created for the storage service requested.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -20025,7 +20025,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: 'OK -- Returned when the storage account failover is completed, and the secondary cluster has become primary.'
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -20034,7 +20034,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Accepted -- Failover request accepted; operation will complete asynchronously.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -20183,7 +20183,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- returned when blob ranges are restored completely with the same properties specified in the request body.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -20196,7 +20196,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Accepted -- Blob restore request accepted; operation will complete asynchronously.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -20301,7 +20301,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- revoke user delegation keys succeeded.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -20383,7 +20383,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- current usage count and limit retrieved and returned successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -20505,7 +20505,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Get the managementpolicy successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -20679,7 +20679,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Put managementpolicy successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -20868,7 +20868,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Delete the managementpolicy successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -20877,7 +20877,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: No Content -- The managementpolicy does not exist.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -20988,7 +20988,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Get the private endpoint connection properties successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21002,7 +21002,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21172,7 +21172,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Update the private endpoint connection properties successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21186,7 +21186,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21307,7 +21307,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Delete the private endpoint connection successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -21316,7 +21316,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: No Content -- The private endpoint connection does not exist.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -21327,7 +21327,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21428,7 +21428,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Successfully retrieved private link resources.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21583,7 +21583,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List object replication policies successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21597,7 +21597,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21719,7 +21719,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Get the object replication policy successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21733,7 +21733,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21889,7 +21889,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Put object replication policy successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -21903,7 +21903,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22163,7 +22163,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Delete the object replication policy successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -22172,7 +22172,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: No Content -- The object replication policy does not exist.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -22183,7 +22183,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22328,7 +22328,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Update encryption scope operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22341,7 +22341,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Created -- Create encryption scope operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22355,7 +22355,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22513,7 +22513,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Update encryption scope operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22527,7 +22527,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22650,7 +22650,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- Get encryption scope operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22664,7 +22664,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Error response describing why the operation failed.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -22765,7 +22765,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK -- List encryption scopes operation completed successfully.
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
