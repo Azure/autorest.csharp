@@ -6,15 +6,15 @@ Models and enums are generated in the `Models` namespace. So, say you are using 
 statement
 
 ```csharp
-using AzurePets.Models;
+using Azure.Pets.Models;
 
-var dog = new Dog
+var dog = new Dog();
 ```
 
 Enums are also listed in the `Models` namespace, so say you have enum class `DogTypes`. To access the `Dalmation` enum, your code would look like
 
 ```csharp
-using AzurePets.Models;
+using Azure.Pets.Models;
 
 DogTypes myDogType = DogTypes.Dalmation;
 ```

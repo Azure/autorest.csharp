@@ -7,13 +7,15 @@ ___
    - If you still want to generate code based on `V2` version, you can add `--legacy` flag to the command line to get the previous behavior.
 ___
 
-
 # C# code generator for AutoRest V3
 
 - [Prerequisites](#prerequisites)
 - [Build](#build)
 - [Test](#test)
+    - [Testing Details](#testing-details)
+    - [Testing generator changes against Azure SDK without a PR](#testing-generator-changes-against-azure-sdk-without-a-pr)
 - [Use in azure-sdk-net repo](#use-in-azure-sdk-net-repo)
+    - [PR Integration with Azure SDK Repository](#pr-integration-with-azure-sdk-repository)
 - [Use outside of the azure-sdk-net repo](#use-outside-of-the-azure-sdk-net-repo)
 - [Customizing the generated code](#customizing-the-generated-code)
     - [Make a model internal](#make-a-model-internal)

@@ -15,6 +15,8 @@ Our [main docs][main_debugging] show you how to pass in flags (`--verbose` / `--
 
 To debug into the C# generator's code, simply add `--csharp.debugger`, and you should be able to step through our code base.
 
+In addition, you can open the `AutoRest.CSharp.sln` solution and the generator project using existing run profiles for test and sample swaggers. See [launchSettings.json](../../src/AutoRest.CSharp/Properties/launchSettings.json)
+
 <!-- LINKS -->
 [main_docs]: https://github.com/Azure/autorest/tree/master/docs/troubleshooting.md
 [autorest_csharp_issues]: https://github.com/Azure/autorest.csharp/issues
