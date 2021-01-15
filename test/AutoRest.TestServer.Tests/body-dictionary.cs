@@ -586,11 +586,11 @@ namespace AutoRest.TestServer.Tests
         //TODO: Passes but has a bug: https://github.com/Azure/autorest.modelerfour/issues/106
         public Task PutDictionaryDictionaryValid() => TestStatus(async (host, pipeline) =>
         {
-            var value = new Dictionary<string, object>
+            var value = new Dictionary<string, IDictionary<string, string>>
             {
-                { "0", new Dictionary<string, object> { { "1", "one" }, { "2", "two" }, { "3", "three" } } },
-                { "1", new Dictionary<string, object> { { "4", "four" }, { "5", "five" }, { "6", "six" } } },
-                { "2", new Dictionary<string, object> { { "7", "seven" }, { "8", "eight" }, { "9", "nine" } } }
+                { "0", new Dictionary<string, string> { { "1", "one" }, { "2", "two" }, { "3", "three" } } },
+                { "1", new Dictionary<string, string> { { "4", "four" }, { "5", "five" }, { "6", "six" } } },
+                { "2", new Dictionary<string, string> { { "7", "seven" }, { "8", "eight" }, { "9", "nine" } } }
             };
             return await new DictionaryClient(ClientDiagnostics, pipeline, host).PutDictionaryValidAsync(value);
         });
