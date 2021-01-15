@@ -835,7 +835,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: OK. We will be returning an error though
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 statusCodes:
@@ -848,7 +848,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Will return error. Make sure the error can be correctly deserialized
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
@@ -861,7 +861,7 @@ operationGroups:
             language: !<!Languages> 
               default:
                 name: ''
-                description: ''
+                description: Default
             protocol: !<!Protocols> 
               http: !<!HttpResponse> 
                 knownMediaType: json
