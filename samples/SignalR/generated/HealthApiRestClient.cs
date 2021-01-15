@@ -19,5 +19,62 @@ namespace SignalR
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
+
+        /// <summary> Initializes a new instance of HealthApiRestClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="endpoint"> server parameter. </param>
+        public HealthApiRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        {
+            endpoint ??= new Uri("");
+
+            this.endpoint = endpoint;
+            _clientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
+        }
+
+        internal HttpMessage CreateHeadIndexRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/api/v1/health", false);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Get service health status. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> HeadIndexAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateHeadIndexRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 503:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Get service health status. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response HeadIndex(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateHeadIndexRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 503:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }
