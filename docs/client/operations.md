@@ -22,15 +22,12 @@ We will be using the [example swagger][pets_swagger] in our main docs repo. Afte
 call our operation like this:
 
 ```csharp
-using AzurePets;
+using Azure.Pets;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-var pipeline = new HttpPipeline();
-string endpoint = "http://localhost:3000";
-var client = new PetsClient(clientDiagnostics, pipeline, endpoint);
-var dog = client.GetDog().Value;
+var client = new PetsClient(endpoint);
+Dog dog = client.GetDog().Value;
 ```
 
 ### Async Operations
@@ -42,15 +39,12 @@ our call to `GetDogAsync` looks like this:
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AzurePets;
+using Azure.Pets;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-var pipeline = new HttpPipeline();
-string endpoint = "http://localhost:3000";
-var client = new PetsClient(clientDiagnostics, pipeline, endpoint);
-var dog = (await client.GetDogAsync()).Value;
+var client = new PetsClient(endpoint);
+Dog dog = (await client.GetDogAsync()).Value;
 ```
 
 ## Long Running Operations
@@ -73,10 +67,8 @@ using Azure.Lro.Models;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-var pipeline = new HttpPipeline();
 string endpoint = "http://localhost:3000";
-var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+var client = new PollingPagingExampleClient(endpoint);
 
 var product = new Product
 {
@@ -107,10 +99,7 @@ using Azure.Lro.Models;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-var pipeline = new HttpPipeline();
-string endpoint = "http://localhost:3000";
-var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+var client = new PollingPagingExampleClient(endpoint);
 
 var product = new Product
 {
@@ -137,10 +126,7 @@ using Azure.Paging;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-var pipeline = new HttpPipeline();
-string endpoint = "http://localhost:3000";
-var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+var client = new PollingPagingExampleClient(endpoint);
 
 var pageable = client.BasicPaging();
 
@@ -163,10 +149,8 @@ using Azure.Paging;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-internal static ClientDiagnostics clientDiagnostics = new ClientDiagnostics();
-var pipeline = new HttpPipeline();
 string endpoint = "http://localhost:3000";
-var client = new PollingPagingExampleClient(clientDiagnostics, pipeline, endpoint);
+var client = new PollingPagingExampleClient(endpoint);
 
 var pageableAsync = client.BasicPagingAsync();
 
