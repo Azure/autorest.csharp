@@ -34,7 +34,7 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     }
 
     Invoke $command
-    "dotnet build $baseOutput --verbosity quiet /nologo"
+    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
 }
 
 function AutoRest-Reset()
