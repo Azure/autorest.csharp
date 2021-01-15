@@ -146,7 +146,6 @@ namespace header
             uri.Reset(endpoint);
             uri.AppendPath("/header/param/protectedkey", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", contentType);
             request.Headers.Add("Accept", "application/json");
             return message;
         }

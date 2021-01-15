@@ -32,7 +32,7 @@
 ## Prerequisites
 
 - [NodeJS (14.x.x)](https://nodejs.org/en/) 
-- [.NET Core SDK (3.0.100)](https://dotnet.microsoft.com/download/dotnet-core/3.0)
+- [.NET Core SDK (3.1.301)](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 - [PowerShell Core 7](https://github.com/PowerShell/PowerShell/releases/latest)
 - [Java](https://www.java.com/en/download/) (for V2 testserver)
 - `npm install` (at root)

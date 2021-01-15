@@ -394,12 +394,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"{nonNullable}.Deserialize{nonNullable.Name}({element})");
                     break;
 
-                case EnumType clientEnum when clientEnum.IsExtendable:
-                    writer.Append($"new {nonNullable}({element}.Value)");
-                    break;
-
-                case EnumType clientEnum when !clientEnum.IsExtendable:
-                    writer.Append($"{element}.Value.To{nonNullable.Name}()");
+                case EnumType clientEnum:
+                    writer.AppendEnumFromString(clientEnum, w => w.Append($"{element}.Value"));
                     break;
 
                 default:
