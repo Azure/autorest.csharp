@@ -277,6 +277,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/982")]
         public Task GetDictionaryDictionaryItemNull() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDictionaryItemNullAsync();
