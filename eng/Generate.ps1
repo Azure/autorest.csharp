@@ -93,7 +93,6 @@ if (!($Exclude -contains "TestProjects"))
             $inputFile = Join-Path $directory "$testName.json"
             $testArguments ="--require=$configurationPath --input-file=$inputFile"
         }
-         
         $outputDir = $directory
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
