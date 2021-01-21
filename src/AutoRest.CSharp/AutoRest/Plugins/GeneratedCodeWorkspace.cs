@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public void AddGeneratedFile(string name, string text)
         {
-            var document = _project.AddDocument("." + "/" + name, text, GeneratedFolders);
+            var document = _project.AddDocument(name, text, GeneratedFolders);
             var root = document.GetSyntaxRootAsync().Result;
             Debug.Assert(root != null);
 
@@ -96,23 +96,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var projectTask = Interlocked.Exchange(ref _cachedProject, null);
             var generatedCodeProject = projectTask != null ? await projectTask : CreateGeneratedCodeProject();
 
-            if (Path.IsPathRooted(projectDirectory))
+            if (Path.IsPathRooted(projectDirectory) && Path.IsPathRooted(outputDirectory))
             {
                 projectDirectory = Path.GetFullPath(projectDirectory);
-            }
-            if (Path.IsPathRooted(outputDirectory))
-            {
                 outputDirectory = Path.GetFullPath(outputDirectory);
-            }
 
-            foreach (string sourceFile in Directory.GetFiles(projectDirectory, "*.cs", SearchOption.AllDirectories))
-            {
-                // Ignore existing generated code
-                if (sourceFile.StartsWith(outputDirectory))
+                foreach (string sourceFile in Directory.GetFiles(projectDirectory, "*.cs", SearchOption.AllDirectories))
                 {
-                    continue;
+                    // Ignore existing generated code
+                    if (sourceFile.StartsWith(outputDirectory))
+                    {
+                        continue;
+                    }
+                    generatedCodeProject = generatedCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
                 }
-                generatedCodeProject = generatedCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
             }
 
             foreach (var sharedSourceFolder in sharedSourceFolders)
