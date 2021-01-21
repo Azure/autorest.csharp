@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>Microsoft.Azure.AutoRest.CSharp</PackageId>
     <OutputType>Exe</OutputType>
     <Version>3.0.0</Version>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -28,8 +29,8 @@
     <Compile Include="../../src/assets/**/*.cs" />
     <TfmSpecificPackageFile Include="../../src/assets/" PackagePath="content" />
 
-    <Content Include="build\CodeGeneration.targets" PackagePath="build\AutoRest.CSharp.targets" />
-    <Content Include="build\CodeGeneration.targets" PackagePath="buildMultiTargeting\AutoRest.CSharp.targets" />
+    <Content Include="build\CodeGeneration.targets" PackagePath="build\Microsoft.Azure.AutoRest.CSharp.targets" />
+    <Content Include="build\CodeGeneration.targets" PackagePath="buildMultiTargeting\Microsoft.Azure.AutoRest.CSharp.targets" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,7 +48,7 @@
       <_RawUrl>$(_SourceRoot)$(_RelativePath.Replace('\', '/'))/*</_RawUrl>
       <_ReadmeMdPath>$(_RepoRoot)readme.md</_ReadmeMdPath>
       <_PackageJsonPath>$(_RepoRoot)package.json</_PackageJsonPath>
-      <_GeneratedPropsFilePath>$(IntermediateOutputPath)/AutoRest.CSharp.props</_GeneratedPropsFilePath>
+      <_GeneratedPropsFilePath>$(IntermediateOutputPath)/Microsoft.Azure.AutoRest.CSharp.props</_GeneratedPropsFilePath>
 
       <_ReadmeMdLines>$([System.IO.File]::ReadAllText($(_ReadmeMdPath)))</_ReadmeMdLines>
       <_PackageJsonLines>$([System.IO.File]::ReadAllText($(_PackageJsonPath)))</_PackageJsonLines>

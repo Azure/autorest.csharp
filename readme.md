@@ -107,10 +107,10 @@ This way, every binding stays in lockstep with the current generator
 </configuration>
 ```
 
-2. Add a package reference to `AutoRest.CSharp` version `1.0.0-alpha.20201013.3` or later:
+2. Add a package reference to `Microsoft.Azure.AutoRest.CSharp` version `v3.0.0-beta.20210120.1` or later:
 
 ```xml
-<PackageReference Include="AutoRest.CSharp" Version="1.0.0-alpha.20201013.3" />
+<PackageReference Include="Microsoft.Azure.AutoRest.CSharp" Version=" v3.0.0-beta.20210120.1" />
 ```
 
 3. Add an `autorest.md` configuration file pointing to you swagger file:
