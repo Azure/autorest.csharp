@@ -93,10 +93,9 @@ if (!($Exclude -contains "TestProjects"))
             $inputFile = Join-Path $directory "$testName.json"
             $testArguments ="--require=$configurationPath --input-file=$inputFile"
         }
-        $projectPath = $directory
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
-            'output'= $projectPath;
+            'output'=$directory;
             'arguments'=$testArguments
         }
     }
@@ -158,7 +157,7 @@ if ($updateLaunchSettings)
     foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
     {
         $definition = $swaggerDefinitions[$key];
-        $outputPath = (Join-Path $definition.output "generated").Replace($repoRoot, '$(SolutionDir)')
+        $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
 
         $settings.profiles[$key] = [ordered]@{
             'commandName'='Project';

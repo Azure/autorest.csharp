@@ -32,5 +32,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool PublicClients { get; }
         public bool ModelNamespace { get; }
         public bool HeadAsBoolean { get; }
+        public static string ProjectRelativeDirectory = "../";
     }
 }

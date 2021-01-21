@@ -1,6 +1,6 @@
 * text=auto
 
-**/Generated/**/*.cs linguist-generated=true
-**/Generated/**/*.csproj linguist-generated=true
+**/Generated/*.cs linguist-generated=true
+**/*.csproj linguist-generated=true
 **/*.yaml linguist-generated=true
 **/Configuration.json linguist-generated=true

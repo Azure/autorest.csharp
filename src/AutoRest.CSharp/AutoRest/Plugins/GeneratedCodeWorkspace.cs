@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     internal class GeneratedCodeWorkspace
     {
         public static string SharedFolder = "shared";
-        public static string GeneratedFolder = "generated";
+        public static string GeneratedFolder = "Generated";
 
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
@@ -91,17 +91,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return document;
         }
 
-        public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string[] sharedSourceFolders)
+        public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string outputDirectory, string[] sharedSourceFolders)
         {
             var projectTask = Interlocked.Exchange(ref _cachedProject, null);
             var generatedCodeProject = projectTask != null ? await projectTask : CreateGeneratedCodeProject();
 
-            var generatedCodeDirectory = Path.Combine(projectDirectory, "generated");
+            if (Path.IsPathRooted(projectDirectory))
+            {
+                projectDirectory = Path.GetFullPath(projectDirectory);
+            }
+            if (Path.IsPathRooted(outputDirectory))
+            {
+                outputDirectory = Path.GetFullPath(outputDirectory);
+            }
 
             foreach (string sourceFile in Directory.GetFiles(projectDirectory, "*.cs", SearchOption.AllDirectories))
             {
                 // Ignore existing generated code
-                if (sourceFile.StartsWith(generatedCodeDirectory))
+                if (sourceFile.StartsWith(outputDirectory))
                 {
                     continue;
                 }

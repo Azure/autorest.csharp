@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Generation.Types;
@@ -31,8 +32,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask, Configuration configuration)
         {
             Directory.CreateDirectory(configuration.OutputFolder);
-            var projectDirectory = Path.Combine(configuration.OutputFolder, "../");
-            var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.SharedSourceFolders);
+            var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
+            var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var context = new BuildContext(await codeModelTask, configuration, sourceInputModel);
@@ -130,7 +131,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (!Path.IsPathRooted(configuration.OutputFolder))
             {
-                await autoRest.Warning("output-folder path is required for customization");
+                await autoRest.Warning("output-folder path should be an absolute path");
             }
             if (configuration.SaveInputs)
             {
