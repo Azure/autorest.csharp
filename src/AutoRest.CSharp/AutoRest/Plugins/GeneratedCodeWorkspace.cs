@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public void AddGeneratedFile(string name, string text)
         {
-            var document = _project.AddDocument(GeneratedFolder + "/" + name, text, GeneratedFolders);
+            var document = _project.AddDocument(name, text, GeneratedFolders);
             var root = document.GetSyntaxRootAsync().Result;
             Debug.Assert(root != null);
 
@@ -91,21 +91,25 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return document;
         }
 
-        public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string[] sharedSourceFolders)
+        public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string outputDirectory, string[] sharedSourceFolders)
         {
             var projectTask = Interlocked.Exchange(ref _cachedProject, null);
             var generatedCodeProject = projectTask != null ? await projectTask : CreateGeneratedCodeProject();
 
-            var generatedCodeDirectory = Path.Combine(projectDirectory, "Generated");
-
-            foreach (string sourceFile in Directory.GetFiles(projectDirectory, "*.cs", SearchOption.AllDirectories))
+            if (Path.IsPathRooted(projectDirectory) && Path.IsPathRooted(outputDirectory))
             {
-                // Ignore existing generated code
-                if (sourceFile.StartsWith(generatedCodeDirectory))
+                projectDirectory = Path.GetFullPath(projectDirectory);
+                outputDirectory = Path.GetFullPath(outputDirectory);
+
+                foreach (string sourceFile in Directory.GetFiles(projectDirectory, "*.cs", SearchOption.AllDirectories))
                 {
-                    continue;
+                    // Ignore existing generated code
+                    if (sourceFile.StartsWith(outputDirectory))
+                    {
+                        continue;
+                    }
+                    generatedCodeProject = generatedCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
                 }
-                generatedCodeProject = generatedCodeProject.AddDocument(sourceFile, File.ReadAllText(sourceFile), Array.Empty<string>(), sourceFile).Project;
             }
 
             foreach (var sharedSourceFolder in sharedSourceFolders)

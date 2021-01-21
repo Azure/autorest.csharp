@@ -1022,7 +1022,7 @@ shared-source-folders:
   - $(this-folder)/src/assets/Azure.Core.Shared
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.0/
-clear-output-folder: false
+clear-output-folder: true
 public-clients: true
 pipeline:
   csharpproj:
