@@ -1017,9 +1017,6 @@ input-file: "swagger-document"
 ```yaml
 # autorest-core version
 version: 3.0.6326
-shared-source-folders:
-  - $(this-folder)/src/assets/Generator.Shared
-  - $(this-folder)/src/assets/Azure.Core.Shared
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.0/
 clear-output-folder: true
