@@ -30,10 +30,6 @@ namespace AutoRest.CSharp.Utilities
 
         public static string[]? ToStringArray(this JsonElement? element)
         {
-            if (element?.ValueKind == JsonValueKind.String)
-            {
-                return element.Value.GetString().Split(";");
-            }
             return element?.ValueKind == JsonValueKind.Array ? element.Value.EnumerateArray().Select(e => e.GetString()).ToArray() : null;
         }
 
