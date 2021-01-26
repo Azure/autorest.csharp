@@ -109,18 +109,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
 
-            var configuration = new Configuration(
-                    TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
-                GetRequiredOption<string>(autoRest, "namespace"),
-                autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
-                GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
-                autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
-                autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false
-            );
-
             string codeModelYaml = string.Empty;
 
             Task<CodeModel> codeModelTask = Task.Run(async () =>
@@ -129,13 +117,28 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
             });
 
+            var codeModel = await codeModelTask;
+            var defaultLibraryName = codeModel.Language.Default.Name;
+
+            var configuration = new Configuration(
+                    TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
+                autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
+                autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
+                GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
+                autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
+                autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
+                autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
+                autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
+                autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false,
+                defaultLibraryName
+            );
+
             if (!Path.IsPathRooted(configuration.OutputFolder))
             {
                 await autoRest.Warning("output-folder path should be an absolute path");
             }
             if (configuration.SaveInputs)
             {
-                await codeModelTask;
                 await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }

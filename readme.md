@@ -1021,12 +1021,6 @@ save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.0/
 clear-output-folder: true
 public-clients: true
-pipeline:
-  csharpproj:
-    input: modelerfour/identity
-  csharpproj/emitter:
-    input: csharpproj
-    scope: output-scope
 ```
 
 </details>

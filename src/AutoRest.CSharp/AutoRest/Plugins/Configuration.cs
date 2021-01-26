@@ -8,12 +8,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, string defaultLibraryName)
         {
             OutputFolder = outputFolder;
-            Namespace = ns;
-            var namespaceParts = ns.Split('.');
-            LibraryName = name ?? namespaceParts.Last();
+            Namespace = ns ?? defaultLibraryName;
+            LibraryName = name ?? defaultLibraryName;
             SharedSourceFolders = sharedSourceFolders;
             SaveInputs = saveInputs;
             AzureArm = azureArm;

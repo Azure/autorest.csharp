@@ -19,8 +19,10 @@ namespace AutoRest.CSharp.AutoRest.Communication
         {
             var basePath = args.Single(a=> !a.StartsWith("--"));
 
-            var configuration = LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
+            var codeModel = await codeModelTask;
+            var defaultLibraryName = codeModel.Language.Default.Name;
+            var configuration = LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")), defaultLibraryName);
             var workspace = await new CSharpGen().ExecuteAsync(codeModelTask, configuration);
 
             await foreach (var file in workspace.GetGeneratedFilesAsync())
@@ -68,7 +70,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
         }
 
-        private static Configuration LoadConfiguration(string basePath, string json)
+        private static Configuration LoadConfiguration(string basePath, string json, string defaultLibraryName)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
@@ -88,7 +90,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.AzureArm)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean()
+                root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
+                defaultLibraryName
             );
         }
     }
