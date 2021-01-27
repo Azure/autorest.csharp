@@ -18,9 +18,7 @@ pipeline:
     scope: output-scope
 output-scope:
   output-artifact: source-file-csharp
-shared-source-folders:
-  - $(this-folder)/Generator.Shared
-  - $(this-folder)/Azure.Core.Shared
+shared-source-folders: $(this-folder)/Generator.Shared;$(this-folder)/Azure.Core.Shared
 ```
 
 ```yaml !$(skip-csproj)
