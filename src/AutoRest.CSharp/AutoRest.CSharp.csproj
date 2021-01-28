@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
     <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

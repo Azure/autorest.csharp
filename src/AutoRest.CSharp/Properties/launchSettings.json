@@ -204,10 +204,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\Generated"
     },
-    "SignalR": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\SignalR\\Generated"
-    },
     "subscriptionId-apiVersion": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\subscriptionId-apiVersion\\Generated"
