@@ -32,20 +32,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
-            var ns = await autoRest.GetValue<string>("namespace");
-
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName))
                 throw new Exception("Generator did not receive the code model file.");
 
-            Task<CodeModel> codeModelTask = Task.Run(async () =>
-            {
-                var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-                return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-            });
+           var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+           var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            var codeModel = await codeModelTask;
             var defaultLibraryName = codeModel.Language.Default.Name;
+            var ns = await autoRest.GetValue<string>("namespace");
 
             await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{ns ?? defaultLibraryName}.csproj", _csProjContent, "source-file-csharp");
 

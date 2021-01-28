@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteAggregateClient(CodeWriter writer, BuildContext context)
         {
-            var title = context.Configuration.LibraryName;
-            using (writer.Scope($"namespace {context.Configuration.Namespace}"))
+            var title = context.Configuration.LibraryName ?? context.DefaultLibraryName;
+            using (writer.Scope($"namespace {context.Configuration.Namespace ?? context.DefaultNamespace}"))
             {
                 Dictionary<string, Parameter> allParameters = new Dictionary<string, Parameter>();
                 foreach (var parameter in context.Library.Clients.SelectMany(p => p.RestClient.Parameters))
@@ -154,9 +154,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteClientOptions(CodeWriter writer, BuildContext context)
         {
-            var title = context.Configuration.LibraryName;
+            var title = context.Configuration.LibraryName ?? context.DefaultLibraryName;
 
-            using (writer.Scope($"namespace {context.Configuration.Namespace}"))
+            using (writer.Scope($"namespace {context.Configuration.Namespace ?? context.DefaultNamespace}"))
             {
                 writer.WriteXmlDocumentationSummary($"Client options for {title}.");
                 using (writer.Scope($"public class {title}ManagementClientOptions: {typeof(ClientOptions)}"))

@@ -93,11 +93,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 ManagementClientWriter.WriteClientOptions(codeWriter, context);
-                project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClientOptions.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"{context.Configuration.LibraryName ?? context.DefaultLibraryName}ManagementClientOptions.cs", codeWriter.ToString());
 
                 var clientCodeWriter = new CodeWriter();
                 ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
-                project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClient.cs", clientCodeWriter.ToString());
+                project.AddGeneratedFile($"{context.Configuration.LibraryName ?? context.DefaultLibraryName}ManagementClient.cs", clientCodeWriter.ToString());
 
             }
 
@@ -109,17 +109,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
 
-            string codeModelYaml = string.Empty;
-
-            Task<CodeModel> codeModelTask = Task.Run(async () =>
-            {
-                codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-                return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-            });
-
-            var codeModel = await codeModelTask;
-            var defaultLibraryName = codeModel.Language.Default.Name;
-
             var configuration = new Configuration(
                     TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
                 autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
@@ -129,9 +118,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
-                autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false,
-                defaultLibraryName
+                autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false
             );
+
+            string codeModelYaml = string.Empty;
+
+            Task<CodeModel> codeModelTask = Task.Run(async () =>
+            {
+                codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+                return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+            });
 
             if (!Path.IsPathRooted(configuration.OutputFolder))
             {
@@ -139,6 +135,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             if (configuration.SaveInputs)
             {
+                await codeModelTask;
                 await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }

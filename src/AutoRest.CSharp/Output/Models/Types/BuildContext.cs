@@ -24,7 +24,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CodeModel CodeModel { get; }
         public SchemaUsageProvider SchemaUsageProvider { get; }
         public OutputLibrary Library => _library ??= new OutputLibrary(CodeModel, this);
-        public string DefaultNamespace => Configuration.Namespace;
+        public string DefaultNamespace => Configuration.Namespace ?? CodeModel.Language.Default.Name;
+        public string DefaultLibraryName => Configuration.LibraryName ?? CodeModel.Language.Default.Name;
         public TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
         public Configuration Configuration { get; }
         public SourceInputModel SourceInputModel { get; }
