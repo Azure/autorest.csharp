@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected TypeProvider(BuildContext context)
         {
             _context = context;
-            _existingType = new Lazy<INamedTypeSymbol?>(() =>  _context.SourceInputModel.FindForType(DefaultNamespace, DefaultName));
+            _existingType = new Lazy<INamedTypeSymbol?>(() =>  _context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
         public CSharpType Type => new CSharpType(

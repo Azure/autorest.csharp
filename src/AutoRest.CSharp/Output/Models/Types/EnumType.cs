@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         $" expected enum or struct got {ExistingType.TypeKind}")
                 };
 
-                _typeMapping = context.SourceInputModel.CreateForModel(ExistingType);
+                _typeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
             }
 
             BaseType = context.TypeFactory.CreateType(baseType, false);

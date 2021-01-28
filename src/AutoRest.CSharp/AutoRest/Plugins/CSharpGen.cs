@@ -93,11 +93,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 ManagementClientWriter.WriteClientOptions(codeWriter, context);
-                project.AddGeneratedFile($"{context.Configuration.LibraryName ?? context.DefaultLibraryName}ManagementClientOptions.cs", codeWriter.ToString());
+                var libraryName = ManagementClientWriter.GetManagementClientPrefix(context.DefaultLibraryName);
+                project.AddGeneratedFile($"{libraryName}ManagementClientOptions.cs", codeWriter.ToString());
 
                 var clientCodeWriter = new CodeWriter();
                 ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
-                project.AddGeneratedFile($"{context.Configuration.LibraryName ?? context.DefaultLibraryName}ManagementClient.cs", clientCodeWriter.ToString());
+                project.AddGeneratedFile($"{libraryName}ManagementClient.cs", clientCodeWriter.ToString());
 
             }
 
@@ -109,17 +110,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
 
-            var configuration = new Configuration(
-                    TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
-                autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
-                autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
-                GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
-                autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
-                autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false
-            );
+            var configuration = Configuration.GetConfiguration(autoRest);
 
             string codeModelYaml = string.Empty;
 
@@ -147,21 +138,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             return true;
-        }
-
-        private T GetRequiredOption<T>(IPluginCommunication autoRest, string name)
-        {
-            return autoRest.GetValue<T>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
-        }
-
-        private static string TrimFileSuffix(string path)
-        {
-            if (Uri.IsWellFormedUriString(path, UriKind.Absolute))
-            {
-                path = new Uri(path).LocalPath;
-            }
-
-            return path;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private OutputLibrary? _library;
         private TypeFactory? _typeFactory;
 
-        public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel sourceInputModel)
+        public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel)
         {
             CodeModel = codeModel;
             SchemaUsageProvider = new SchemaUsageProvider(codeModel);
@@ -28,6 +28,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public string DefaultLibraryName => Configuration.LibraryName ?? CodeModel.Language.Default.Name;
         public TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
         public Configuration Configuration { get; }
-        public SourceInputModel SourceInputModel { get; }
+        public SourceInputModel? SourceInputModel { get; }
     }
 }

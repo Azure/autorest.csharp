@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -36,13 +37,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (string.IsNullOrEmpty(codeModelFileName))
                 throw new Exception("Generator did not receive the code model file.");
 
-           var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-           var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+            var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+            var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            var defaultLibraryName = codeModel.Language.Default.Name;
-            var ns = await autoRest.GetValue<string>("namespace");
+            var configuration = Configuration.GetConfiguration(autoRest);
 
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{ns ?? defaultLibraryName}.csproj", _csProjContent, "source-file-csharp");
+            var context = new BuildContext(codeModel, configuration, null);
+
+            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", _csProjContent, "source-file-csharp");
 
             return true;
         }
