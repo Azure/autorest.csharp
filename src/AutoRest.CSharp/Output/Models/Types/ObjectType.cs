@@ -60,10 +60,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 DefaultNamespace = context.DefaultNamespace;
             }
-            _sourceTypeMapping = context.SourceInputModel.CreateForModel(ExistingType);
+            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute
-            if (_sourceTypeMapping.Usage != null)
+            if (_sourceTypeMapping?.Usage != null)
             {
                 foreach (var usage in _sourceTypeMapping.Usage)
                 {

@@ -102,7 +102,6 @@ if (!($Exclude -contains "TestProjects"))
 }
 # Sample configuration
 $projectNames =
-    'SignalR',
     'AppConfiguration',
     'CognitiveServices.TextAnalytics',
     'CognitiveSearch',
