@@ -30,7 +30,7 @@ schemas: !<!Schemas>
       summary: A set of tags.
       language: !<!Languages> 
         default:
-          name: RenamedPropertyString
+          name: OriginalSchemaOriginalPropertyString
           description: A description about the set of tags.
       protocol: !<!Protocols> {}
   constants:
@@ -60,7 +60,7 @@ schemas: !<!Schemas>
       elementType: *ref_1
       language: !<!Languages> 
         default:
-          name: RenamedProperty
+          name: OriginalSchemaOriginalProperty
           description: A description about the set of tags.
       protocol: !<!Protocols> {}
   objects:
