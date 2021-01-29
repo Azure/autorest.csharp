@@ -29,19 +29,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected Parameter BuildParameter(RequestParameter requestParameter)
         {
-            CSharpType type;
-
-            // WORKAROUND https://github.com/Azure/autorest/issues/3761
-            if (requestParameter.Extensions?.HeaderCollectionPrefix != null)
-            {
-                type = new CSharpType(typeof(IDictionary<,>), typeof(string), _typeFactory.CreateType(requestParameter.Schema, false))
-                    .WithNullable(requestParameter.IsNullable || !requestParameter.IsRequired);
-            }
-            else
-            {
-                type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
-            }
-
+            CSharpType type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
 
             var isRequired = requestParameter.Required == true;
             var defaultValue = ParseConstant(requestParameter);
