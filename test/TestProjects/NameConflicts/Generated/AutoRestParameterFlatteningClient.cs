@@ -187,14 +187,8 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public virtual async Task<AutoRestParameterFlatteningAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<AutoRestParameterFlatteningAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
             using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
             scope0.Start();
             try
@@ -212,14 +206,8 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public virtual AutoRestParameterFlatteningAnalyzeBodyOperation StartAnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
+        public virtual AutoRestParameterFlatteningAnalyzeBodyOperation StartAnalyzeBody(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
             using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
             scope0.Start();
             try

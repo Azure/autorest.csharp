@@ -3218,7 +3218,6 @@ operationGroups:
               - !<!Parameter> &ref_131
                 schema: *ref_129
                 implementation: Method
-                required: true
                 language: !<!Languages> 
                   default:
                     name: fileStream
@@ -3877,7 +3876,6 @@ operationGroups:
               - !<!Parameter> &ref_150
                 schema: *ref_148
                 implementation: Method
-                required: true
                 language: !<!Languages> 
                   default:
                     name: fileStream
@@ -4154,7 +4152,6 @@ operationGroups:
               - !<!Parameter> &ref_157
                 schema: *ref_155
                 implementation: Method
-                required: true
                 language: !<!Languages> 
                   default:
                     name: fileStream

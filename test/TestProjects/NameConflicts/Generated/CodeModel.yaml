@@ -2425,7 +2425,6 @@ operationGroups:
               - !<!Parameter> &ref_128
                 schema: *ref_127
                 implementation: Method
-                required: true
                 language: !<!Languages> 
                   default:
                     name: stringBody

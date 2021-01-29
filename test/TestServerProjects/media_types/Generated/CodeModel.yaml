@@ -179,7 +179,6 @@ operationGroups:
               - !<!Parameter> &ref_7
                 schema: *ref_4
                 implementation: Method
-                required: true
                 language: !<!Languages> 
                   default:
                     name: input
@@ -319,7 +318,6 @@ operationGroups:
               - !<!Parameter> &ref_13
                 schema: *ref_0
                 implementation: Method
-                required: true
                 language: !<!Languages> 
                   default:
                     name: input

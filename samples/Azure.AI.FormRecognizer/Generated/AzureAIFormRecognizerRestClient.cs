@@ -214,7 +214,7 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
-        internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, ContentType contentType, Stream fileStream, bool? includeTextDetails)
+        internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, ContentType contentType, bool? includeTextDetails, Stream fileStream)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -231,26 +231,23 @@ namespace Azure.AI.FormRecognizer
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", contentType.ToSerialString());
-            request.Content = RequestContent.Create(fileStream);
+            if (fileStream != null)
+            {
+                request.Headers.Add("Content-Type", contentType.ToSerialString());
+                request.Content = RequestContent.Create(fileStream);
+            }
             return message;
         }
 
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="contentType"> Upload file type. </param>
-        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileStream"/> is null. </exception>
-        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeWithCustomModelHeaders>> AnalyzeWithCustomModelAsync(Guid modelId, ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeWithCustomModelHeaders>> AnalyzeWithCustomModelAsync(Guid modelId, ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
-            if (fileStream == null)
-            {
-                throw new ArgumentNullException(nameof(fileStream));
-            }
-
-            using var message = CreateAnalyzeWithCustomModelRequest(modelId, contentType, fileStream, includeTextDetails);
+            using var message = CreateAnalyzeWithCustomModelRequest(modelId, contentType, includeTextDetails, fileStream);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AzureAIFormRecognizerAnalyzeWithCustomModelHeaders(message.Response);
             switch (message.Response.Status)
@@ -265,18 +262,12 @@ namespace Azure.AI.FormRecognizer
         /// <summary> Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="contentType"> Upload file type. </param>
-        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileStream"/> is null. </exception>
-        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeWithCustomModelHeaders> AnalyzeWithCustomModel(Guid modelId, ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeWithCustomModelHeaders> AnalyzeWithCustomModel(Guid modelId, ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
-            if (fileStream == null)
-            {
-                throw new ArgumentNullException(nameof(fileStream));
-            }
-
-            using var message = CreateAnalyzeWithCustomModelRequest(modelId, contentType, fileStream, includeTextDetails);
+            using var message = CreateAnalyzeWithCustomModelRequest(modelId, contentType, includeTextDetails, fileStream);
             _pipeline.Send(message, cancellationToken);
             var headers = new AzureAIFormRecognizerAnalyzeWithCustomModelHeaders(message.Response);
             switch (message.Response.Status)
@@ -599,7 +590,7 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
-        internal HttpMessage CreateAnalyzeReceiptAsyncRequest(ContentType contentType, Stream fileStream, bool? includeTextDetails)
+        internal HttpMessage CreateAnalyzeReceiptAsyncRequest(ContentType contentType, bool? includeTextDetails, Stream fileStream)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -614,25 +605,22 @@ namespace Azure.AI.FormRecognizer
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", contentType.ToSerialString());
-            request.Content = RequestContent.Create(fileStream);
+            if (fileStream != null)
+            {
+                request.Headers.Add("Content-Type", contentType.ToSerialString());
+                request.Content = RequestContent.Create(fileStream);
+            }
             return message;
         }
 
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="contentType"> Upload file type. </param>
-        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileStream"/> is null. </exception>
-        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders>> AnalyzeReceiptAsyncAsync(ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders>> AnalyzeReceiptAsyncAsync(ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
-            if (fileStream == null)
-            {
-                throw new ArgumentNullException(nameof(fileStream));
-            }
-
-            using var message = CreateAnalyzeReceiptAsyncRequest(contentType, fileStream, includeTextDetails);
+            using var message = CreateAnalyzeReceiptAsyncRequest(contentType, includeTextDetails, fileStream);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders(message.Response);
             switch (message.Response.Status)
@@ -646,18 +634,12 @@ namespace Azure.AI.FormRecognizer
 
         /// <summary> Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - &apos;application/pdf&apos;, &apos;image/jpeg&apos;, &apos;image/png&apos; or &apos;image/tiff&apos;. Alternatively, use &apos;application/json&apos; type to specify the location (Uri or local path) of the document to be analyzed. </summary>
         /// <param name="contentType"> Upload file type. </param>
-        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
+        /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileStream"/> is null. </exception>
-        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders> AnalyzeReceiptAsync(ContentType contentType, Stream fileStream, bool? includeTextDetails = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders> AnalyzeReceiptAsync(ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
-            if (fileStream == null)
-            {
-                throw new ArgumentNullException(nameof(fileStream));
-            }
-
-            using var message = CreateAnalyzeReceiptAsyncRequest(contentType, fileStream, includeTextDetails);
+            using var message = CreateAnalyzeReceiptAsyncRequest(contentType, includeTextDetails, fileStream);
             _pipeline.Send(message, cancellationToken);
             var headers = new AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders(message.Response);
             switch (message.Response.Status)
@@ -798,8 +780,11 @@ namespace Azure.AI.FormRecognizer
             uri.AppendPath("/layout/analyze", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", contentType.ToSerialString());
-            request.Content = RequestContent.Create(fileStream);
+            if (fileStream != null)
+            {
+                request.Headers.Add("Content-Type", contentType.ToSerialString());
+                request.Content = RequestContent.Create(fileStream);
+            }
             return message;
         }
 
@@ -807,14 +792,8 @@ namespace Azure.AI.FormRecognizer
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileStream"/> is null. </exception>
-        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders>> AnalyzeLayoutAsyncAsync(ContentType contentType, Stream fileStream, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders>> AnalyzeLayoutAsyncAsync(ContentType contentType, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
-            if (fileStream == null)
-            {
-                throw new ArgumentNullException(nameof(fileStream));
-            }
-
             using var message = CreateAnalyzeLayoutAsyncRequest(contentType, fileStream);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders(message.Response);
@@ -831,14 +810,8 @@ namespace Azure.AI.FormRecognizer
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fileStream"/> is null. </exception>
-        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders> AnalyzeLayoutAsync(ContentType contentType, Stream fileStream, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders> AnalyzeLayoutAsync(ContentType contentType, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
-            if (fileStream == null)
-            {
-                throw new ArgumentNullException(nameof(fileStream));
-            }
-
             using var message = CreateAnalyzeLayoutAsyncRequest(contentType, fileStream);
             _pipeline.Send(message, cancellationToken);
             var headers = new AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders(message.Response);

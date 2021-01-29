@@ -20,7 +20,6 @@ schemas: !<!Schemas>
         default:
           name: String
           description: ''
-          header: x-ms-meta
       protocol: !<!Protocols> {}
 globalParameters:
   - !<!Parameter> &ref_1
@@ -50,7 +49,14 @@ operationGroups:
         parameters:
           - *ref_1
           - !<!Parameter> &ref_3
-            schema: *ref_2
+            schema: !<!DictionarySchema> 
+              type: dictionary
+              elementType: *ref_2
+              language: !<!Languages> 
+                default:
+                  name: string
+                  description: ''
+              protocol: !<!Protocols> {}
             implementation: Method
             extensions:
               x-ms-header-collection-prefix: x-ms-meta-
@@ -87,7 +93,15 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_2
+                    schema: !<!DictionarySchema> 
+                      type: dictionary
+                      elementType: *ref_2
+                      language: !<!Languages> 
+                        default:
+                          name: string
+                          description: ''
+                          header: x-ms-meta
+                      protocol: !<!Protocols> {}
                     header: x-ms-meta
                     extensions:
                       x-ms-header-collection-prefix: x-ms-meta-
