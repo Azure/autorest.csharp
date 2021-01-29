@@ -157,7 +157,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: ProductId
+          name: BaseProductId
           description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
       protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_16
@@ -167,7 +167,7 @@ schemas: !<!Schemas>
           version: 1.0.0
       language: !<!Languages> 
         default:
-          name: Description
+          name: BaseProductDescription
           description: Description of product.
       protocol: !<!Protocols> {}
   choices:
@@ -280,7 +280,7 @@ schemas: !<!Schemas>
       valueType: *ref_0
       language: !<!Languages> 
         default:
-          name: Capacity
+          name: SimpleProductPropertiesMaxProductCapacity
           description: 'Capacity of product. For example, 4 people.'
       protocol: !<!Protocols> {}
   dictionaries:

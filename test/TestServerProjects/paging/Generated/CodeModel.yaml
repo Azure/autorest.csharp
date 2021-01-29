@@ -771,7 +771,7 @@ schemas: !<!Schemas>
             elementType: *ref_19
             language: !<!Languages> 
               default:
-                name: Indexes
+                name: ProductResultValueWithXMSClientNameValues
                 description: Array of Product
             protocol: !<!Protocols> {}
           serializedName: values
