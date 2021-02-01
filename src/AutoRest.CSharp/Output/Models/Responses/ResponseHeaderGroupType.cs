@@ -26,17 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
         {
             ResponseHeader CreateResponseHeader(HttpResponseHeader header)
             {
-                CSharpType type;
-                // WORKAROUND https://github.com/Azure/autorest/issues/3761
-                if (header.Extensions?.HeaderCollectionPrefix != null)
-                {
-                    type = new CSharpType(typeof(IDictionary<,>), typeof(string), context.TypeFactory.CreateType(header.Schema, false))
-                        .WithNullable(true);
-                }
-                else
-                {
-                    type = context.TypeFactory.CreateType(header.Schema, true);
-                }
+                CSharpType type = context.TypeFactory.CreateType(header.Schema, true);
 
                 return new ResponseHeader(
                     header.CSharpName(),

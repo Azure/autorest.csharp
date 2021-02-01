@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -17,11 +18,13 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string PipelineField = "_pipeline";
         private const string TokenCredentialVariable = "tokenCredential";
         private const string OptionsVariable = "options";
+        private const string ClientSuffixValue = "ManagementClient";
+        private const string OperationsSuffixValue = "Operations";
 
         public static void WriteAggregateClient(CodeWriter writer, BuildContext context)
         {
-            var title = context.Configuration.LibraryName;
-            using (writer.Scope($"namespace {context.Configuration.Namespace}"))
+            var title = GetManagementClientPrefix(context.DefaultLibraryName);
+            using (writer.Scope($"namespace {context.Configuration.Namespace ?? context.DefaultNamespace}"))
             {
                 Dictionary<string, Parameter> allParameters = new Dictionary<string, Parameter>();
                 foreach (var parameter in context.Library.Clients.SelectMany(p => p.RestClient.Parameters))
@@ -154,15 +157,32 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteClientOptions(CodeWriter writer, BuildContext context)
         {
-            var title = context.Configuration.LibraryName;
+            var title = GetManagementClientPrefix(context.DefaultLibraryName);
 
-            using (writer.Scope($"namespace {context.Configuration.Namespace}"))
+            using (writer.Scope($"namespace {context.Configuration.Namespace ?? context.DefaultNamespace}"))
             {
                 writer.WriteXmlDocumentationSummary($"Client options for {title}.");
                 using (writer.Scope($"public class {title}ManagementClientOptions: {typeof(ClientOptions)}"))
                 {
                 }
             }
+        }
+
+        public static string GetManagementClientPrefix(string name)
+        {
+            name = name.ToCleanName();
+
+            if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
+            {
+                name = name.Substring(0, name.Length - OperationsSuffixValue.Length);
+            }
+
+            if (name.EndsWith(ClientSuffixValue) && name.Length >= ClientSuffixValue.Length)
+            {
+                name = name.Substring(0, name.Length - ClientSuffixValue.Length);
+            }
+
+            return name;
         }
 
         private static string ToVersionProperty(string s)

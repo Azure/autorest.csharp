@@ -31,6 +31,11 @@ namespace Azure.Core
             headers.Add(name, value.ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture));
         }
 
+        public static void Add(this RequestHeaders headers, string name, long value)
+        {
+            headers.Add(name, value.ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture));
+        }
+
         public static void Add(this RequestHeaders headers, string name, DateTimeOffset value, string format)
         {
             headers.Add(name, TypeFormatters.ToString(value, format));

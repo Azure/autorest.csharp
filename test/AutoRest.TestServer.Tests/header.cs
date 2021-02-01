@@ -67,6 +67,21 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderParameterLongPositive() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamLongAsync( scenario: "positive", 105));
 
         [Test]
+        public async Task HeaderParameterLongPositiveMaxLong()
+        {
+            string value = null;
+            using var testServer = new InProcTestServer(async content =>
+            {
+                value = content.Request.Headers["value"];
+                await content.Response.Body.FlushAsync();
+            });
+
+            await new HeaderClient(ClientDiagnostics, InProcTestBase.HttpPipeline, testServer.Address).ParamLongAsync(scenario: "positive", long.MaxValue);
+
+            Assert.AreEqual(long.MaxValue.ToString("G"), value);
+        }
+
+        [Test]
         public Task HeaderParameterLongNegative() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamLongAsync( scenario: "negative", -2));
 
         [Test]

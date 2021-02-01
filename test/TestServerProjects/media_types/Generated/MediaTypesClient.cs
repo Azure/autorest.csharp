@@ -40,7 +40,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
@@ -59,7 +59,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> AnalyzeBody(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
+        public virtual Response<string> AnalyzeBody(ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
@@ -113,7 +113,7 @@ namespace media_types
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> ContentTypeWithEncodingAsync(string input, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> ContentTypeWithEncodingAsync(string input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
@@ -131,7 +131,7 @@ namespace media_types
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> ContentTypeWithEncoding(string input, CancellationToken cancellationToken = default)
+        public virtual Response<string> ContentTypeWithEncoding(string input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();

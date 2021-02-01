@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Generation.Types;
@@ -31,7 +32,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask, Configuration configuration)
         {
             Directory.CreateDirectory(configuration.OutputFolder);
-            var project = await GeneratedCodeWorkspace.Create(configuration.OutputFolder, configuration.SharedSourceFolders);
+            var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
+            var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var context = new BuildContext(await codeModelTask, configuration, sourceInputModel);
@@ -91,11 +93,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var codeWriter = new CodeWriter();
                 ManagementClientWriter.WriteClientOptions(codeWriter, context);
-                project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClientOptions.cs", codeWriter.ToString());
+                var libraryName = ManagementClientWriter.GetManagementClientPrefix(context.DefaultLibraryName);
+                project.AddGeneratedFile($"{libraryName}ManagementClientOptions.cs", codeWriter.ToString());
 
                 var clientCodeWriter = new CodeWriter();
                 ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
-                project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClient.cs", clientCodeWriter.ToString());
+                project.AddGeneratedFile($"{libraryName}ManagementClient.cs", clientCodeWriter.ToString());
 
             }
 
@@ -107,17 +110,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
 
-            var configuration = new Configuration(
-                    TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
-                GetRequiredOption<string>(autoRest, "namespace"),
-                autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
-                GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
-                autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
-                autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false
-            );
+            var configuration = Configuration.GetConfiguration(autoRest);
 
             string codeModelYaml = string.Empty;
 
@@ -127,6 +120,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
             });
 
+            if (!Path.IsPathRooted(configuration.OutputFolder))
+            {
+                await autoRest.Warning("output-folder path should be an absolute path");
+            }
             if (configuration.SaveInputs)
             {
                 await codeModelTask;
@@ -141,21 +138,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             return true;
-        }
-
-        private T GetRequiredOption<T>(IPluginCommunication autoRest, string name)
-        {
-            return autoRest.GetValue<T>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
-        }
-
-        private static string TrimFileSuffix(string path)
-        {
-            if (Uri.IsWellFormedUriString(path, UriKind.Absolute))
-            {
-                path = new Uri(path).LocalPath;
-            }
-
-            return path;
         }
     }
 }

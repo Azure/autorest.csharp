@@ -14,5 +14,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
         Task<string[]> ListInputs(string? artifactType = null);
         Task WriteFile(string filename, string content, string artifactType, RawSourceMap? sourceMap = null);
         Task Fatal(string text);
+        Task Warning(string text);
     }
 }
