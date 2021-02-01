@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
@@ -571,5 +572,37 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(7, value.MinuteMetrics.RetentionPolicy.Days);
             Assert.AreEqual(true, value.MinuteMetrics.RetentionPolicy.Enabled);
         });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task XmlGetBytes() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetBytesAsync();
+            Assert.AreEqual(Encoding.UTF8.GetBytes("Hello world"), result.Value.Bytes);
+        });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task XmlPutBytes() => TestStatus(async (host, pipeline) =>
+            await new XmlClient(ClientDiagnostics, pipeline, host).PutBinaryAsync(new ()
+            {
+                Bytes = Encoding.UTF8.GetBytes("Hello world")
+            }));
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task XmlGetUrl() => Test(async (host, pipeline) =>
+        {
+            var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetUriAsync();
+            Assert.AreEqual("https://myaccount.blob.core.windows.net/", result.Value.Url.ToString());
+        });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
+        public Task XmlPutUrl() => TestStatus(async (host, pipeline) =>
+            await new XmlClient(ClientDiagnostics, pipeline, host).PutUriAsync(new ModelWithUrlProperty()
+            {
+                Url = new Uri("https://myaccount.blob.core.windows.net/")
+            }));
     }
 }

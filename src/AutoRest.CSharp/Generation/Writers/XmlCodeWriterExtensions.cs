@@ -360,11 +360,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     return;
                 }
 
+                if (frameworkType == typeof(Uri))
+                {
+                    writer.Line($"new {typeof(Uri)}(({typeof(string)}){element})");
+                    return;
+                }
+
                 writer.Append($"{element}.");
 
                 if (frameworkType == typeof(byte[]))
                 {
-                    writer.AppendRaw("GetBytesFromBase64");
+                    writer.AppendRaw("GetBytesFromBase64Value");
                 }
 
                 if (frameworkType == typeof(DateTimeOffset))

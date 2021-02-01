@@ -1871,5 +1871,245 @@ namespace xml_service
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateGetBytesRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/xml/bytes", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
+            return message;
+        }
+
+        /// <summary> Get an XML document with binary property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<ModelWithByteProperty>> GetBytesAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetBytesRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithByteProperty value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("ModelWithByteProperty") is XElement modelWithBytePropertyElement)
+                        {
+                            value = ModelWithByteProperty.DeserializeModelWithByteProperty(modelWithBytePropertyElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Get an XML document with binary property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ModelWithByteProperty> GetBytes(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetBytesRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithByteProperty value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("ModelWithByteProperty") is XElement modelWithBytePropertyElement)
+                        {
+                            value = ModelWithByteProperty.DeserializeModelWithByteProperty(modelWithBytePropertyElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePutBinaryRequest(ModelWithByteProperty slideshow)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/xml/bytes", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
+            request.Headers.Add("Content-Type", "application/xml");
+            var content = new XmlWriterContent();
+            content.XmlWriter.WriteObjectValue(slideshow, "ModelWithByteProperty");
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Put an XML document with binary property. </summary>
+        /// <param name="slideshow"> The ModelWithByteProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="slideshow"/> is null. </exception>
+        public async Task<Response> PutBinaryAsync(ModelWithByteProperty slideshow, CancellationToken cancellationToken = default)
+        {
+            if (slideshow == null)
+            {
+                throw new ArgumentNullException(nameof(slideshow));
+            }
+
+            using var message = CreatePutBinaryRequest(slideshow);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Put an XML document with binary property. </summary>
+        /// <param name="slideshow"> The ModelWithByteProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="slideshow"/> is null. </exception>
+        public Response PutBinary(ModelWithByteProperty slideshow, CancellationToken cancellationToken = default)
+        {
+            if (slideshow == null)
+            {
+                throw new ArgumentNullException(nameof(slideshow));
+            }
+
+            using var message = CreatePutBinaryRequest(slideshow);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateGetUriRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/xml/url", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
+            return message;
+        }
+
+        /// <summary> Get an XML document with uri property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<ModelWithUrlProperty>> GetUriAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetUriRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithUrlProperty value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("ModelWithUrlProperty") is XElement modelWithUrlPropertyElement)
+                        {
+                            value = ModelWithUrlProperty.DeserializeModelWithUrlProperty(modelWithUrlPropertyElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Get an XML document with uri property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ModelWithUrlProperty> GetUri(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateGetUriRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithUrlProperty value = default;
+                        var document = XDocument.Load(message.Response.ContentStream, LoadOptions.PreserveWhitespace);
+                        if (document.Element("ModelWithUrlProperty") is XElement modelWithUrlPropertyElement)
+                        {
+                            value = ModelWithUrlProperty.DeserializeModelWithUrlProperty(modelWithUrlPropertyElement);
+                        }
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePutUriRequest(ModelWithUrlProperty model)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/xml/url", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/xml");
+            request.Headers.Add("Content-Type", "application/xml");
+            var content = new XmlWriterContent();
+            content.XmlWriter.WriteObjectValue(model, "ModelWithUrlProperty");
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Put an XML document with uri property. </summary>
+        /// <param name="model"> The ModelWithUrlProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
+        public async Task<Response> PutUriAsync(ModelWithUrlProperty model, CancellationToken cancellationToken = default)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            using var message = CreatePutUriRequest(model);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Put an XML document with uri property. </summary>
+        /// <param name="model"> The ModelWithUrlProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
+        public Response PutUri(ModelWithUrlProperty model, CancellationToken cancellationToken = default)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            using var message = CreatePutUriRequest(model);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }
