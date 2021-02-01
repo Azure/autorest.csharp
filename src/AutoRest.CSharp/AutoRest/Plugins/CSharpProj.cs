@@ -23,9 +23,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <Nullable>annotations</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+	<RestoreAdditionalProjectSources>https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json</RestoreAdditionalProjectSources>
+  </PropertyGroup>
+	
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.1.0"" />
-    <PackageReference Include=""System.Text.Json"" Version=""4.6.0"" />
+	<PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""3.0.0-beta.20210129.2"" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core"" Version=""1.6.0"" />
   </ItemGroup>
 
 </Project>
