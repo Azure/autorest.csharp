@@ -36,7 +36,7 @@
     <NoWarn>$(NoWarn);CA1812</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(_GenerateCode)' == 'true'">
+  <ItemGroup Condition="'$(_GenerateCode)' == 'true'" and "'$(IncludeGeneratorSharedCode)' == 'true'">
     <Compile Include="$(AzureCoreSharedCodeDirectory)/**/*.cs" Condition="'$(IncludeAzureCoreSharedCode)' == 'true'" Link="Shared/Core/%(RecursiveDir)/%(Filename)%(Extension)" />
     <Compile Include="$(AutoRestSharedCodeDirectory)/**/*.cs" Link="Shared/AutoRest/%(RecursiveDir)/%(Filename)%(Extension)" />
   </ItemGroup>
