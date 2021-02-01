@@ -8,7 +8,7 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The PetSadError. </summary>
-    internal partial class PetSadError : PetActionError
+    public partial class PetSadError : PetActionError
     {
         /// <summary> Initializes a new instance of PetSadError. </summary>
         internal PetSadError()
@@ -17,10 +17,11 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> Initializes a new instance of PetSadError. </summary>
+        /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"> . </param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
-        internal PetSadError(string errorType, string errorMessage, string reason) : base(errorType, errorMessage)
+        internal PetSadError(string actionResponse, string errorType, string errorMessage, string reason) : base(actionResponse, errorType, errorMessage)
         {
             Reason = reason;
             ErrorType = errorType ?? "PetSadError";
