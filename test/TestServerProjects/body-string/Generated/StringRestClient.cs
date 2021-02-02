@@ -531,7 +531,7 @@ namespace body_string
                     {
                         byte[] value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = document.RootElement.GetBytesFromBase64();
+                        value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -551,7 +551,7 @@ namespace body_string
                     {
                         byte[] value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = document.RootElement.GetBytesFromBase64();
+                        value = document.RootElement.GetBytesFromBase64("D");
                         return Response.FromValue(value, message.Response);
                     }
                 default:

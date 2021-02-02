@@ -51,9 +51,9 @@ namespace Azure.Core
             headers.Add(name, value.ToString());
         }
 
-        public static void Add(this RequestHeaders headers, string name, byte[] value)
+        public static void Add(this RequestHeaders headers, string name, byte[] value, string format)
         {
-            headers.Add(name, Convert.ToBase64String(value));
+            headers.Add(name, TypeFormatters.ToString(value, format));
         }
 
         public static void Add(this RequestHeaders headers, string prefix, IDictionary<string, string> headersToAdd)

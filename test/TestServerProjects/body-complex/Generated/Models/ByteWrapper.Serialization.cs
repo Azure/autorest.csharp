@@ -19,7 +19,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(Field))
             {
                 writer.WritePropertyName("field");
-                writer.WriteBase64StringValue(Field);
+                writer.WriteBase64StringValue(Field, "D");
             }
             writer.WriteEndObject();
         }
@@ -36,7 +36,7 @@ namespace body_complex.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    field = property.Value.GetBytesFromBase64();
+                    field = property.Value.GetBytesFromBase64("D");
                     continue;
                 }
             }

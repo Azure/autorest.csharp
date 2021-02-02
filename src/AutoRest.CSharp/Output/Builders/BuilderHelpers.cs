@@ -56,10 +56,11 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static SerializationFormat GetSerializationFormat(Schema schema) => schema switch
         {
-            ByteArraySchema byteArraySchema when byteArraySchema.Format == ByteArraySchemaFormat.Base64url => SerializationFormat.Bytes_Base64Url,
+            ByteArraySchema {Format: ByteArraySchemaFormat.Base64url} => SerializationFormat.Bytes_Base64Url,
+            ByteArraySchema {Format: ByteArraySchemaFormat.Byte} => SerializationFormat.Bytes_Base64,
             UnixTimeSchema _ => SerializationFormat.DateTime_Unix,
-            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTime => SerializationFormat.DateTime_ISO8601,
-            DateTimeSchema dateTimeSchema when dateTimeSchema.Format == DateTimeSchemaFormat.DateTimeRfc1123 => SerializationFormat.DateTime_RFC1123,
+            DateTimeSchema {Format: DateTimeSchemaFormat.DateTime} => SerializationFormat.DateTime_ISO8601,
+            DateTimeSchema {Format: DateTimeSchemaFormat.DateTimeRfc1123} => SerializationFormat.DateTime_RFC1123,
             DateSchema _ => SerializationFormat.Date_ISO8601,
             DurationSchema _ => SerializationFormat.Duration_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
