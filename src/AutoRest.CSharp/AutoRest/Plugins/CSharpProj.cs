@@ -3,6 +3,8 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
@@ -30,7 +32,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 	
   <ItemGroup>
-	<PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""3.0.0-beta.20210201.1"" />
+	<PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +42,32 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 </Project>
 
 ";
+        internal static string GetVersion()
+        {
+            const string PackagePrefix = "AutoRest.CSharp";
+
+            Assembly clientAssembly = Assembly.GetExecutingAssembly();
+
+            AssemblyInformationalVersionAttribute? versionAttribute = clientAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+            if (versionAttribute == null)
+            {
+                throw new InvalidOperationException($"{nameof(AssemblyInformationalVersionAttribute)} is required on client SDK assembly '{clientAssembly.FullName}'");
+            }
+
+            string version = versionAttribute.InformationalVersion;
+
+            string assemblyName = clientAssembly.GetName().Name!;
+            if (assemblyName.StartsWith(PackagePrefix, StringComparison.Ordinal))
+            {
+                assemblyName = assemblyName.Substring(PackagePrefix.Length);
+            }
+
+            int hashSeparator = version.IndexOf('+');
+            version = version.Substring(0, hashSeparator);
+
+            return version;
+        }
+
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
@@ -53,7 +81,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var context = new BuildContext(codeModel, configuration, null);
 
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", _csProjContent, "source-file-csharp");
+            var version = GetVersion();
+            var csProjContent = string.Format(_csProjContent, version);
+
+            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
 
             return true;
         }
