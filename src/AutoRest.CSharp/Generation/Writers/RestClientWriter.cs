@@ -467,12 +467,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSerializationFormat(CodeWriter writer, SerializationFormat format)
         {
-            if (format == SerializationFormat.Bytes_Base64Url)
-            {
-                // base64url is the only options for paths ns queries
-                return;
-            }
-
             var formatSpecifier = format.ToFormatSpecifier();
             if (formatSpecifier != null)
             {

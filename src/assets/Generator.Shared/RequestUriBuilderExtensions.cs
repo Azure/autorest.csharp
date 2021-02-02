@@ -32,9 +32,9 @@ namespace Azure.Core
             builder.AppendPath(value.ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture), escape);
         }
 
-        public static void AppendPath(this RequestUriBuilder builder, byte[] value, bool escape = true)
+        public static void AppendPath(this RequestUriBuilder builder, byte[] value, string format, bool escape = true)
         {
-            builder.AppendPath(TypeFormatters.ToBase64UrlString(value), escape);
+            builder.AppendPath(TypeFormatters.ToString(value, format), escape);
         }
 
         public static void AppendPath(this RequestUriBuilder builder, IEnumerable<string> value, bool escape = true)
@@ -92,9 +92,9 @@ namespace Azure.Core
             builder.AppendQuery(name, XmlConvert.ToString(value), escape);
         }
 
-        public static void AppendQuery(this RequestUriBuilder builder, string name, byte[] value, bool escape = true)
+        public static void AppendQuery(this RequestUriBuilder builder, string name, byte[] value, string format, bool escape = true)
         {
-            builder.AppendQuery(name, Convert.ToBase64String(value), escape);
+            builder.AppendQuery(name, TypeFormatters.ToString(value, format), escape);
         }
 
         public static void AppendQuery(this RequestUriBuilder builder, string name, Guid value, bool escape = true)

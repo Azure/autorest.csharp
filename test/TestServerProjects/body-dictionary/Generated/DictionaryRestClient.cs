@@ -2817,7 +2817,7 @@ namespace body_dictionary
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64("D"));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -2842,7 +2842,7 @@ namespace body_dictionary
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64("D"));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -2868,7 +2868,7 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteBase64StringValue(item.Value);
+                content.JsonWriter.WriteBase64StringValue(item.Value, "D");
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -2947,7 +2947,7 @@ namespace body_dictionary
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64("D"));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -2972,7 +2972,7 @@ namespace body_dictionary
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64("D"));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);

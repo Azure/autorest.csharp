@@ -3081,7 +3081,7 @@ namespace body_array
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(item.GetBytesFromBase64());
+                            array.Add(item.GetBytesFromBase64("D"));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3106,7 +3106,7 @@ namespace body_array
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(item.GetBytesFromBase64());
+                            array.Add(item.GetBytesFromBase64("D"));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3131,7 +3131,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteBase64StringValue(item);
+                content.JsonWriter.WriteBase64StringValue(item, "D");
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;
@@ -3210,7 +3210,7 @@ namespace body_array
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(item.GetBytesFromBase64());
+                            array.Add(item.GetBytesFromBase64("D"));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3235,7 +3235,7 @@ namespace body_array
                         List<byte[]> array = new List<byte[]>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(item.GetBytesFromBase64());
+                            array.Add(item.GetBytesFromBase64("D"));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
