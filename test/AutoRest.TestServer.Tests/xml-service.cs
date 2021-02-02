@@ -584,7 +584,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task XmlPutBytes() => TestStatus(async (host, pipeline) =>
-            await new XmlClient(ClientDiagnostics, pipeline, host).PutBinaryAsync(new ()
+            await new XmlClient(ClientDiagnostics, pipeline, host).PutBinaryAsync(new ModelWithByteProperty()
             {
                 Bytes = Encoding.UTF8.GetBytes("Hello world")
             }));
