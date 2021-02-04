@@ -24,23 +24,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
-    <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
-	<RestoreAdditionalProjectSources>https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json</RestoreAdditionalProjectSources>
-  </PropertyGroup>
-	
-  <ItemGroup>
-	<PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" />
-  </ItemGroup>
-
+{0}
   <ItemGroup>
     <PackageReference Include=""Azure.Core"" Version=""1.6.0"" />
   </ItemGroup>
 
 </Project>
+";
+         private string _csProjPackageReference = @"
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+    <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
+	<RestoreAdditionalProjectSources>https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json</RestoreAdditionalProjectSources>
+  </PropertyGroup>
 
+  <ItemGroup>
+	<PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" />
+  </ItemGroup>
 ";
         internal static string GetVersion()
         {
@@ -63,7 +63,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             int hashSeparator = version.IndexOf('+');
-            version = version.Substring(0, hashSeparator);
+            if (hashSeparator != -1)
+            {
+                 return version.Substring(0, hashSeparator);
+            }
 
             return version;
         }
@@ -81,10 +84,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var context = new BuildContext(codeModel, configuration, null);
 
-            var version = GetVersion();
-            var csProjContent = string.Format(_csProjContent, version);
+            if (configuration.SkipCSProjPackageReference)
+            {
+                _csProjContent = string.Format(_csProjContent, "");
+            }
+            else
+            {
+                var version = GetVersion();
+                _csProjPackageReference = string.Format(_csProjPackageReference, version);
+                _csProjContent = string.Format(_csProjContent, _csProjPackageReference);
+            }
 
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
+            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", _csProjContent, "source-file-csharp");
 
             return true;
         }

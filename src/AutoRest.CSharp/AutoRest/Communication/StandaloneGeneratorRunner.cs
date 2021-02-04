@@ -88,7 +88,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.AzureArm)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean()
+                root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
+                root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean()
             );
         }
     }

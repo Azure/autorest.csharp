@@ -96,41 +96,17 @@ This way, every binding stays in lockstep with the current generator
 
 ## Use outside of the `azure-sdk-net` repo
 
-1. Add the `http://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json` feed to your NuGet.config:
+Use below command to generate code:
 
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <packageSources>
-    <add key="Azure SDK Tools" value="https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json" protocolVersion="3" />
-  </packageSources>
-</configuration>
-```
+ ```
+ autorest --use:@autorest/csharp@3.0.0-beta.20210204.1 --input-file:FILENAME  --clear-output-folder:true --output-folder:DIRECTORY
+ ```
 
-2. Add a package reference to `Microsoft.Azure.AutoRest.CSharp` version `v3.0.0-beta.20210120.1` or later:
+Note: 
+1. Use @autorest/csharp version v3.0.0-beta.20210204.1 or later.
+2. If you don't want to override the `.csproj` after the first generation, you can pass `--skip-csproj` flag with the autorest command.
 
-```xml
-<PackageReference Include="Microsoft.Azure.AutoRest.CSharp" Version=" v3.0.0-beta.20210120.1" />
-```
-
-3. Add an `autorest.md` configuration file pointing to you swagger file:
-
-~~~ markdown
-``` yaml
-input-file:
-- $(this-folder)/swagger.json
-# - http://example.com/swagger.json
-```
-~~~
-
-Or reference an existing configuration file:
-~~~ markdown
-``` yaml
-require: http://example.com/readme.md
-```
-~~~
-
-4. Run `dotnet build /t:GenerateCode` in the directory that contains your `.csproj` file.
+For more details please refer [these](https://github.com/Azure/autorest/tree/master/docs/generate) docs to generate code from your OpenAPI definition using AutoRest.
 
 ## Customizing the generated code
 
@@ -1021,6 +997,7 @@ save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.0/
 clear-output-folder: true
 public-clients: true
+skip-csproj-packagereference: true
 ```
 
 </details>
