@@ -76,18 +76,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var context = new BuildContext(codeModel, configuration, null);
 
+            string csProjContent;
             if (configuration.SkipCSProjPackageReference)
             {
-                _csProjContent = string.Format(_csProjContent, "");
+                csProjContent = string.Format(_csProjContent, "");
             }
             else
             {
                 var version = GetVersion();
-                _csProjPackageReference = string.Format(_csProjPackageReference, version);
-                _csProjContent = string.Format(_csProjContent, _csProjPackageReference);
+                var csProjPackageReference = string.Format(_csProjPackageReference, version);
+                csProjContent = string.Format(_csProjContent, csProjPackageReference);
             }
 
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", _csProjContent, "source-file-csharp");
+            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
 
             return true;
         }
