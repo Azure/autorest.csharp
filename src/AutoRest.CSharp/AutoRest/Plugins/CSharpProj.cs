@@ -31,21 +31,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
 </Project>
 ";
-         private string _csProjPackageReference = @"
+        private string _csProjPackageReference = @"
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
     <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
-	<RestoreAdditionalProjectSources>https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json</RestoreAdditionalProjectSources>
+	  <RestoreAdditionalProjectSources>https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json</RestoreAdditionalProjectSources>
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" />
+	  <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" />
   </ItemGroup>
 ";
         internal static string GetVersion()
         {
-            const string PackagePrefix = "AutoRest.CSharp";
-
             Assembly clientAssembly = Assembly.GetExecutingAssembly();
 
             AssemblyInformationalVersionAttribute? versionAttribute = clientAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
@@ -56,16 +54,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             string version = versionAttribute.InformationalVersion;
 
-            string assemblyName = clientAssembly.GetName().Name!;
-            if (assemblyName.StartsWith(PackagePrefix, StringComparison.Ordinal))
-            {
-                assemblyName = assemblyName.Substring(PackagePrefix.Length);
-            }
-
             int hashSeparator = version.IndexOf('+');
             if (hashSeparator != -1)
             {
-                 return version.Substring(0, hashSeparator);
+                return version.Substring(0, hashSeparator);
             }
 
             return version;
