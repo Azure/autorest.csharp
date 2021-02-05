@@ -3,6 +3,8 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
@@ -22,15 +24,45 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-
+{0}
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.1.0"" />
-    <PackageReference Include=""System.Text.Json"" Version=""4.6.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.6.0"" />
   </ItemGroup>
 
 </Project>
-
 ";
+        private string _csProjPackageReference = @"
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+    <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
+	  <RestoreAdditionalProjectSources>https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json</RestoreAdditionalProjectSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" />
+  </ItemGroup>
+";
+        internal static string GetVersion()
+        {
+            Assembly clientAssembly = Assembly.GetExecutingAssembly();
+
+            AssemblyInformationalVersionAttribute? versionAttribute = clientAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+            if (versionAttribute == null)
+            {
+                throw new InvalidOperationException($"{nameof(AssemblyInformationalVersionAttribute)} is required on client SDK assembly '{clientAssembly.FullName}'");
+            }
+
+            string version = versionAttribute.InformationalVersion;
+
+            int hashSeparator = version.IndexOf('+');
+            if (hashSeparator != -1)
+            {
+                return version.Substring(0, hashSeparator);
+            }
+
+            return version;
+        }
+
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
@@ -44,7 +76,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var context = new BuildContext(codeModel, configuration, null);
 
-            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", _csProjContent, "source-file-csharp");
+            string csProjContent;
+            if (configuration.SkipCSProjPackageReference)
+            {
+                csProjContent = string.Format(_csProjContent, "");
+            }
+            else
+            {
+                var version = GetVersion();
+                var csProjPackageReference = string.Format(_csProjPackageReference, version);
+                csProjContent = string.Format(_csProjContent, csProjPackageReference);
+            }
+
+            await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");
 
             return true;
         }
