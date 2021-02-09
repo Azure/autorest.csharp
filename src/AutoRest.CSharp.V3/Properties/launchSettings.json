@@ -2,7 +2,7 @@
   "profiles": {
     "additionalProperties": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\compute"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\additionalProperties"
     },
     "AdditionalPropertiesEx": {
       "commandName": "Project",
@@ -231,6 +231,10 @@
     "xms-error-responses": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xms-error-responses"
+    },
+    "compute": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\compute"
     }
   }
 }
