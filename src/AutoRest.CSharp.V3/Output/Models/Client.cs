@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.V3.Output.Models
     internal class Client: ClientBase
     {
         private readonly OperationGroup _operationGroup;
-        private readonly BuildContext _context;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
         private LongRunningOperationMethod[]? _longRunningOperationMethods;
@@ -25,7 +24,6 @@ namespace AutoRest.CSharp.V3.Output.Models
         public Client(OperationGroup operationGroup, BuildContext context): base(context)
         {
             _operationGroup = operationGroup;
-            _context = context;
 
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
             DefaultName = clientPrefix + ClientSuffix;

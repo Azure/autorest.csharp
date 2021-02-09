@@ -41,6 +41,7 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new ResponseHeaderGroupWriter();
+            var resourceOperationWriter = new ResourceOperationWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -71,12 +72,26 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            foreach (var client in context.Library.Clients)
+            if (!context.Configuration.AzureArm)
             {
-                var codeWriter = new CodeWriter();
-                clientWriter.WriteClient(codeWriter, client, context.Configuration);
+                foreach (var client in context.Library.Clients)
+                {
+                    var codeWriter = new CodeWriter();
+                    clientWriter.WriteClient(codeWriter, client, context.Configuration);
 
-                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                    project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                }
+            }
+
+            if (context.Configuration.AzureArm)
+            {
+                foreach (var resourceOperation in context.Library.ResourceOperations)
+                {
+                    var codeWriter = new CodeWriter();
+                    resourceOperationWriter.WriteClient(codeWriter, resourceOperation);
+
+                    project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
+                }
             }
 
             foreach (var operation in context.Library.LongRunningOperations)
@@ -96,7 +111,6 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 var clientCodeWriter = new CodeWriter();
                 ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
                 project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClient.cs", clientCodeWriter.ToString());
-
             }
 
             return project;

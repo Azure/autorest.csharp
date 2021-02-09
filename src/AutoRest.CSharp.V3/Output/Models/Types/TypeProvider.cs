@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
 {
     internal abstract class TypeProvider
     {
-        private readonly BuildContext _context;
+        protected readonly BuildContext _context;
         private readonly Lazy<INamedTypeSymbol?> _existingType;
         private TypeDeclarationOptions? _type;
 

@@ -16,14 +16,12 @@ namespace AutoRest.CSharp.V3.Output.Models
         private const string OperationsSuffixValue = "Operations";
         protected string ClientSuffix { get; }
 
-        private readonly BuildContext _context;
         private readonly TypeFactory _typeFactory;
 
         protected ClientBase(BuildContext context): base(context)
         {
             ClientSuffix = context.Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
             _typeFactory = context.TypeFactory;
-            _context = context;
         }
 
         protected Parameter BuildParameter(RequestParameter requestParameter)

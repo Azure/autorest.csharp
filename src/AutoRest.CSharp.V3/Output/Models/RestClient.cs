@@ -33,7 +33,6 @@ namespace AutoRest.CSharp.V3.Output.Models
         protected string RestClientSuffix { get; }
 
         private readonly OperationGroup _operationGroup;
-        private readonly BuildContext _context;
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly SerializationBuilder _serializationBuilder;
         private Dictionary<ServiceRequest, RestClientMethod>? _requestMethods;
@@ -43,7 +42,6 @@ namespace AutoRest.CSharp.V3.Output.Models
         public RestClient(OperationGroup operationGroup, BuildContext context) : base(context)
         {
             _operationGroup = operationGroup;
-            _context = context;
             _parameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
