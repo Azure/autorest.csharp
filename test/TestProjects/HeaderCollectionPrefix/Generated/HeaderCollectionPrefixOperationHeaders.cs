@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace HeaderCollectionPrefix
 {
-    internal class HeaderCollectionPrefixOperationHeaders
+    internal partial class HeaderCollectionPrefixOperationHeaders
     {
         private readonly Response _response;
         public HeaderCollectionPrefixOperationHeaders(Response response)

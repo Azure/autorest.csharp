@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class AutocompleteModeExtensions
+    internal static partial class AutocompleteModeExtensions
     {
         public static string ToSerialString(this AutocompleteMode value) => value switch
         {

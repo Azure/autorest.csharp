@@ -9,7 +9,7 @@ using System;
 
 namespace Azure.Management.Storage.Models
 {
-    internal static class SkuTierExtensions
+    internal static partial class SkuTierExtensions
     {
         public static string ToSerialString(this SkuTier value) => value switch
         {

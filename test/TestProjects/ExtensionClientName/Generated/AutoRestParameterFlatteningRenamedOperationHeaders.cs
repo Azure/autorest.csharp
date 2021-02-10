@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace ExtensionClientName
 {
-    internal class AutoRestParameterFlatteningRenamedOperationHeaders
+    internal partial class AutoRestParameterFlatteningRenamedOperationHeaders
     {
         private readonly Response _response;
         public AutoRestParameterFlatteningRenamedOperationHeaders(Response response)

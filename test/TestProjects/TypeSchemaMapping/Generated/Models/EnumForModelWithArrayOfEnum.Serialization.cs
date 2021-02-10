@@ -9,7 +9,7 @@ using System;
 
 namespace TypeSchemaMapping.Models
 {
-    internal static class EnumForModelWithArrayOfEnumExtensions
+    internal static partial class EnumForModelWithArrayOfEnumExtensions
     {
         public static string ToSerialString(this EnumForModelWithArrayOfEnum value) => value switch
         {

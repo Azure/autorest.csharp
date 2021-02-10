@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables
 {
-    internal class TableInternalUpdateEntityHeaders
+    internal partial class TableInternalUpdateEntityHeaders
     {
         private readonly Response _response;
         public TableInternalUpdateEntityHeaders(Response response)

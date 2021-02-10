@@ -9,7 +9,7 @@ using System;
 
 namespace Azure.Management.Storage.Models
 {
-    internal static class KeyPermissionExtensions
+    internal static partial class KeyPermissionExtensions
     {
         public static string ToSerialString(this KeyPermission value) => value switch
         {

@@ -9,7 +9,7 @@ using System;
 
 namespace Inheritance.Models
 {
-    internal static class BaseClassWithEnumDiscriminatorEnumExtensions
+    internal static partial class BaseClassWithEnumDiscriminatorEnumExtensions
     {
         public static string ToSerialString(this BaseClassWithEnumDiscriminatorEnum value) => value switch
         {

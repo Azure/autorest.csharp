@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer
 {
-    internal class AzureAIFormRecognizerCopyCustomModelHeaders
+    internal partial class AzureAIFormRecognizerCopyCustomModelHeaders
     {
         private readonly Response _response;
         public AzureAIFormRecognizerCopyCustomModelHeaders(Response response)

@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
 
-                using (writer.Scope($"{responseHeaderGroup.Declaration.Accessibility} class {responseHeaderGroup.Declaration.Name}"))
+                using (writer.Scope($"{responseHeaderGroup.Declaration.Accessibility} partial class {responseHeaderGroup.Declaration.Name}"))
                 {
                     WriteField(writer);
                     WriteConstructor(writer, responseHeaderGroup);

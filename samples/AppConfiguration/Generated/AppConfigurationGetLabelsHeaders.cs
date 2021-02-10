@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace AppConfiguration
 {
-    internal class AppConfigurationGetLabelsHeaders
+    internal partial class AppConfigurationGetLabelsHeaders
     {
         private readonly Response _response;
         public AppConfigurationGetLabelsHeaders(Response response)

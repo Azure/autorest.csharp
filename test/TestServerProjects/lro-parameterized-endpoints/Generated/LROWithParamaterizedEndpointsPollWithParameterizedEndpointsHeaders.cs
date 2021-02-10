@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro_parameterized_endpoints
 {
-    internal class LROWithParamaterizedEndpointsPollWithParameterizedEndpointsHeaders
+    internal partial class LROWithParamaterizedEndpointsPollWithParameterizedEndpointsHeaders
     {
         private readonly Response _response;
         public LROWithParamaterizedEndpointsPollWithParameterizedEndpointsHeaders(Response response)

@@ -9,7 +9,7 @@ using System;
 
 namespace body_string.Models
 {
-    internal static class ColorsExtensions
+    internal static partial class ColorsExtensions
     {
         public static string ToSerialString(this Colors value) => value switch
         {

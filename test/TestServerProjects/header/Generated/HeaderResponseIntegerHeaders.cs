@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace header
 {
-    internal class HeaderResponseIntegerHeaders
+    internal partial class HeaderResponseIntegerHeaders
     {
         private readonly Response _response;
         public HeaderResponseIntegerHeaders(Response response)

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace AppConfiguration
 {
-    internal class AppConfigurationPutKeyValueHeaders
+    internal partial class AppConfigurationPutKeyValueHeaders
     {
         private readonly Response _response;
         public AppConfigurationPutKeyValueHeaders(Response response)

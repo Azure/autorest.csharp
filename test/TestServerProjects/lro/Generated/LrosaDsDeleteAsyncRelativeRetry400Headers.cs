@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LrosaDsDeleteAsyncRelativeRetry400Headers
+    internal partial class LrosaDsDeleteAsyncRelativeRetry400Headers
     {
         private readonly Response _response;
         public LrosaDsDeleteAsyncRelativeRetry400Headers(Response response)

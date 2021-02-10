@@ -13,7 +13,7 @@ using Azure.Management.Storage;
 namespace Azure.Management.Storage
 {
     /// <summary> Storage service management client. </summary>
-    public class StorageManagementClient
+    public partial class StorageManagementClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;

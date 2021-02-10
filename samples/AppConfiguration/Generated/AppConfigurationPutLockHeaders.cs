@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace AppConfiguration
 {
-    internal class AppConfigurationPutLockHeaders
+    internal partial class AppConfigurationPutLockHeaders
     {
         private readonly Response _response;
         public AppConfigurationPutLockHeaders(Response response)

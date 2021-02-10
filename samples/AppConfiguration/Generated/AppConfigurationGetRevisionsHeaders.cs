@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace AppConfiguration
 {
-    internal class AppConfigurationGetRevisionsHeaders
+    internal partial class AppConfigurationGetRevisionsHeaders
     {
         private readonly Response _response;
         public AppConfigurationGetRevisionsHeaders(Response response)

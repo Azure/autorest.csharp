@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace AppConfiguration
 {
-    internal class AppConfigurationDeleteLockHeaders
+    internal partial class AppConfigurationDeleteLockHeaders
     {
         private readonly Response _response;
         public AppConfigurationDeleteLockHeaders(Response response)
