@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class TextSplitModeExtensions
+    internal static partial class TextSplitModeExtensions
     {
         public static string ToSerialString(this TextSplitMode value) => value switch
         {

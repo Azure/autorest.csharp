@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class ImageDetailExtensions
+    internal static partial class ImageDetailExtensions
     {
         public static string ToSerialString(this ImageDetail value) => value switch
         {

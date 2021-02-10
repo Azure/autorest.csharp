@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables
 {
-    internal class TableInternalDeleteHeaders
+    internal partial class TableInternalDeleteHeaders
     {
         private readonly Response _response;
         public TableInternalDeleteHeaders(Response response)

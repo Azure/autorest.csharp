@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace header
 {
-    internal class HeaderResponseProtectedKeyHeaders
+    internal partial class HeaderResponseProtectedKeyHeaders
     {
         private readonly Response _response;
         public HeaderResponseProtectedKeyHeaders(Response response)

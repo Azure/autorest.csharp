@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables
 {
-    internal class TableInternalSetAccessPolicyHeaders
+    internal partial class TableInternalSetAccessPolicyHeaders
     {
         private readonly Response _response;
         public TableInternalSetAccessPolicyHeaders(Response response)

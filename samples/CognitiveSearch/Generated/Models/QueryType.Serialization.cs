@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class QueryTypeExtensions
+    internal static partial class QueryTypeExtensions
     {
         public static string ToSerialString(this QueryType value) => value switch
         {

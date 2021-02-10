@@ -9,7 +9,7 @@ using System;
 
 namespace ModelNamespace
 {
-    internal static class TestNonExtensibleEnumExtensions
+    internal static partial class TestNonExtensibleEnumExtensions
     {
         public static string ToSerialString(this TestNonExtensibleEnum value) => value switch
         {

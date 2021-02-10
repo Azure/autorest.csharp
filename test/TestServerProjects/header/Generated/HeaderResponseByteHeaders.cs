@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace header
 {
-    internal class HeaderResponseByteHeaders
+    internal partial class HeaderResponseByteHeaders
     {
         private readonly Response _response;
         public HeaderResponseByteHeaders(Response response)

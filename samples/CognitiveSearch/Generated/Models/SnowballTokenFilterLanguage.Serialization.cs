@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class SnowballTokenFilterLanguageExtensions
+    internal static partial class SnowballTokenFilterLanguageExtensions
     {
         public static string ToSerialString(this SnowballTokenFilterLanguage value) => value switch
         {

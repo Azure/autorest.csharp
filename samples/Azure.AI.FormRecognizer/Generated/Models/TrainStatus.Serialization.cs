@@ -9,7 +9,7 @@ using System;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    internal static class TrainStatusExtensions
+    internal static partial class TrainStatusExtensions
     {
         public static string ToSerialString(this TrainStatus value) => value switch
         {

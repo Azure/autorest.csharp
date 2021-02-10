@@ -10,7 +10,7 @@ using Azure.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> Client options for Storage. </summary>
-    public class StorageManagementClientOptions : ClientOptions
+    public partial class StorageManagementClientOptions : ClientOptions
     {
     }
 }

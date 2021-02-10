@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class TextExtractionAlgorithmExtensions
+    internal static partial class TextExtractionAlgorithmExtensions
     {
         public static string ToSerialString(this TextExtractionAlgorithm value) => value switch
         {

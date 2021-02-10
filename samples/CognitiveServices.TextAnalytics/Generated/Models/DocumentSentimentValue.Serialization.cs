@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    internal static class DocumentSentimentValueExtensions
+    internal static partial class DocumentSentimentValueExtensions
     {
         public static string ToSerialString(this DocumentSentimentValue value) => value switch
         {

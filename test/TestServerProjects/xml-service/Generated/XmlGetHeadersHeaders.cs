@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xml_service
 {
-    internal class XmlGetHeadersHeaders
+    internal partial class XmlGetHeadersHeaders
     {
         private readonly Response _response;
         public XmlGetHeadersHeaders(Response response)

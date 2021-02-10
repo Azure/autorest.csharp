@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer
 {
-    internal class AzureAIFormRecognizerGenerateModelCopyAuthorizationHeaders
+    internal partial class AzureAIFormRecognizerGenerateModelCopyAuthorizationHeaders
     {
         private readonly Response _response;
         public AzureAIFormRecognizerGenerateModelCopyAuthorizationHeaders(Response response)

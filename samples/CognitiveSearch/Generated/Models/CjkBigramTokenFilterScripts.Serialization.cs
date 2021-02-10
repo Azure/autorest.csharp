@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class CjkBigramTokenFilterScriptsExtensions
+    internal static partial class CjkBigramTokenFilterScriptsExtensions
     {
         public static string ToSerialString(this CjkBigramTokenFilterScripts value) => value switch
         {

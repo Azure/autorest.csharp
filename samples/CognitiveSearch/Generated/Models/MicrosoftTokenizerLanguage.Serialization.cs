@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class MicrosoftTokenizerLanguageExtensions
+    internal static partial class MicrosoftTokenizerLanguageExtensions
     {
         public static string ToSerialString(this MicrosoftTokenizerLanguage value) => value switch
         {

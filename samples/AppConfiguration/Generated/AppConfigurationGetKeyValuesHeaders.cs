@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace AppConfiguration
 {
-    internal class AppConfigurationGetKeyValuesHeaders
+    internal partial class AppConfigurationGetKeyValuesHeaders
     {
         private readonly Response _response;
         public AppConfigurationGetKeyValuesHeaders(Response response)

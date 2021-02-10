@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace AppConfiguration
 {
-    internal class AppConfigurationDeleteKeyValueHeaders
+    internal partial class AppConfigurationDeleteKeyValueHeaders
     {
         private readonly Response _response;
         public AppConfigurationDeleteKeyValueHeaders(Response response)

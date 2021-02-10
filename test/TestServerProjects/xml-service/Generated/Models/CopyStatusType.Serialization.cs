@@ -9,7 +9,7 @@ using System;
 
 namespace xml_service.Models
 {
-    internal static class CopyStatusTypeExtensions
+    internal static partial class CopyStatusTypeExtensions
     {
         public static string ToSerialString(this CopyStatusType value) => value switch
         {
