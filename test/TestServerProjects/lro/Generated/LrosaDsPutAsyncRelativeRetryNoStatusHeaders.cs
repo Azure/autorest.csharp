@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LrosaDsPutAsyncRelativeRetryNoStatusHeaders
+    internal partial class LrosaDsPutAsyncRelativeRetryNoStatusHeaders
     {
         private readonly Response _response;
         public LrosaDsPutAsyncRelativeRetryNoStatusHeaders(Response response)

@@ -9,7 +9,7 @@ using System;
 
 namespace TypeSchemaMapping.Models
 {
-    internal static class UnexposedNonExtensibleEnumExtensions
+    internal static partial class UnexposedNonExtensibleEnumExtensions
     {
         public static string ToSerialString(this UnexposedNonExtensibleEnum value) => value switch
         {

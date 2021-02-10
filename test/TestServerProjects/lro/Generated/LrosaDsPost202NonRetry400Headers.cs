@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LrosaDsPost202NonRetry400Headers
+    internal partial class LrosaDsPost202NonRetry400Headers
     {
         private readonly Response _response;
         public LrosaDsPost202NonRetry400Headers(Response response)

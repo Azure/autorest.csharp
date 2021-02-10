@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace httpInfrastructure
 {
-    internal class HttpRedirectsPost303Headers
+    internal partial class HttpRedirectsPost303Headers
     {
         private readonly Response _response;
         public HttpRedirectsPost303Headers(Response response)

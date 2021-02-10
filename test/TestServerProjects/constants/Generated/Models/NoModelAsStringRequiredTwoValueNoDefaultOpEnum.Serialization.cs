@@ -9,7 +9,7 @@ using System;
 
 namespace constants.Models
 {
-    internal static class NoModelAsStringRequiredTwoValueNoDefaultOpEnumExtensions
+    internal static partial class NoModelAsStringRequiredTwoValueNoDefaultOpEnumExtensions
     {
         public static string ToSerialString(this NoModelAsStringRequiredTwoValueNoDefaultOpEnum value) => value switch
         {

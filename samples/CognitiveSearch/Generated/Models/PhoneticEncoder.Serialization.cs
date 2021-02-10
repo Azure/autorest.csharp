@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class PhoneticEncoderExtensions
+    internal static partial class PhoneticEncoderExtensions
     {
         public static string ToSerialString(this PhoneticEncoder value) => value switch
         {

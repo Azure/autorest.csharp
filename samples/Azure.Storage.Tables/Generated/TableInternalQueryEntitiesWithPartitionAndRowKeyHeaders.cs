@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables
 {
-    internal class TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders
+    internal partial class TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders
     {
         private readonly Response _response;
         public TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders(Response response)

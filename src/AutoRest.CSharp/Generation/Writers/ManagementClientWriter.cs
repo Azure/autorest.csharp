@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 writer.WriteXmlDocumentationSummary($"{title} service management client.");
-                using (writer.Scope($"public class {title}ManagementClient"))
+                using (writer.Scope($"public partial class {title}ManagementClient"))
                 {
                     writer.Line($"private readonly {typeof(ClientDiagnostics)}  {ClientDiagnosticsField};");
                     writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Scope($"namespace {context.Configuration.Namespace ?? context.DefaultNamespace}"))
             {
                 writer.WriteXmlDocumentationSummary($"Client options for {title}.");
-                using (writer.Scope($"public class {title}ManagementClientOptions: {typeof(ClientOptions)}"))
+                using (writer.Scope($"public partial class {title}ManagementClientOptions: {typeof(ClientOptions)}"))
                 {
                 }
             }

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LrosaDsPost202NoLocationHeaders
+    internal partial class LrosaDsPost202NoLocationHeaders
     {
         private readonly Response _response;
         public LrosaDsPost202NoLocationHeaders(Response response)

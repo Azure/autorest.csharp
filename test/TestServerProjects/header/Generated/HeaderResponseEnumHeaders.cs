@@ -11,7 +11,7 @@ using header.Models;
 
 namespace header
 {
-    internal class HeaderResponseEnumHeaders
+    internal partial class HeaderResponseEnumHeaders
     {
         private readonly Response _response;
         public HeaderResponseEnumHeaders(Response response)

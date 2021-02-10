@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LRORetrysDeleteProvisioning202Accepted200SucceededHeaders
+    internal partial class LRORetrysDeleteProvisioning202Accepted200SucceededHeaders
     {
         private readonly Response _response;
         public LRORetrysDeleteProvisioning202Accepted200SucceededHeaders(Response response)

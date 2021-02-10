@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class ScoringFunctionInterpolationExtensions
+    internal static partial class ScoringFunctionInterpolationExtensions
     {
         public static string ToSerialString(this ScoringFunctionInterpolation value) => value switch
         {

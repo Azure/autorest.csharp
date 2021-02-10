@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace header
 {
-    internal class HeaderResponseDurationHeaders
+    internal partial class HeaderResponseDurationHeaders
     {
         private readonly Response _response;
         public HeaderResponseDurationHeaders(Response response)

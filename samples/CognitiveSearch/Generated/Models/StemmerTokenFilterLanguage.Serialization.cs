@@ -9,7 +9,7 @@ using System;
 
 namespace CognitiveSearch.Models
 {
-    internal static class StemmerTokenFilterLanguageExtensions
+    internal static partial class StemmerTokenFilterLanguageExtensions
     {
         public static string ToSerialString(this StemmerTokenFilterLanguage value) => value switch
         {
