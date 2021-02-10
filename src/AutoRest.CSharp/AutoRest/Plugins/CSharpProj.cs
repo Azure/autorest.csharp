@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" />
+	  <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" PrivateAssets=""All"" />
   </ItemGroup>
 ";
         internal static string GetVersion()
