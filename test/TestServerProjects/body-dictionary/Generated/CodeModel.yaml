@@ -834,6 +834,7 @@ schemas: !<!Schemas>
     - !<!DictionarySchema> &ref_112
       type: dictionary
       elementType: *ref_18
+      nullableItems: true
       language: !<!Languages> 
         default:
           name: DictionaryOfString
@@ -4399,6 +4400,7 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_96
+            nullable: true
             language: !<!Languages> 
               default:
                 name: ''
@@ -4820,6 +4822,7 @@ operationGroups:
         responses:
           - !<!SchemaResponse> 
             schema: *ref_103
+            nullable: true
             language: !<!Languages> 
               default:
                 name: ''

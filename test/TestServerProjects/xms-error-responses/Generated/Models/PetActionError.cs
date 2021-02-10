@@ -8,19 +8,21 @@
 namespace xms_error_responses.Models
 {
     /// <summary> The PetActionError. </summary>
-    internal partial class PetActionError
+    public partial class PetActionError : PetAction
     {
         /// <summary> Initializes a new instance of PetActionError. </summary>
         internal PetActionError()
         {
+            ErrorType = "PetActionError";
         }
 
         /// <summary> Initializes a new instance of PetActionError. </summary>
+        /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"> . </param>
         /// <param name="errorMessage"> the error message. </param>
-        internal PetActionError(string errorType, string errorMessage)
+        internal PetActionError(string actionResponse, string errorType, string errorMessage) : base(actionResponse)
         {
-            ErrorType = errorType;
+            ErrorType = errorType ?? "PetActionError";
             ErrorMessage = errorMessage;
         }
 

@@ -4,7 +4,7 @@ info: !<!Info>
   title: XMS Error Response Extensions
 schemas: !<!Schemas> 
   numbers:
-    - !<!NumberSchema> &ref_28
+    - !<!NumberSchema> &ref_29
       type: integer
       apiVersions:
         - !<!ApiVersion> 
@@ -23,7 +23,7 @@ schemas: !<!Schemas>
           name: String
           description: simple string
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_25
+    - !<!StringSchema> &ref_26
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -83,7 +83,7 @@ schemas: !<!Schemas>
           name: BaseErrorSomeBaseProp
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_15
+    - !<!StringSchema> &ref_24
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -154,7 +154,7 @@ schemas: !<!Schemas>
           description: is the pet hungry or thirsty or both
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_26
+    - !<!ConstantSchema> &ref_27
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -373,30 +373,6 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_7
-    - !<!ObjectSchema> &ref_30
-      type: object
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 0.0.0
-      properties:
-        - !<!Property> 
-          schema: *ref_15
-          serializedName: actionResponse
-          language: !<!Languages> 
-            default:
-              name: actionResponse
-              description: action feedback
-          protocol: !<!Protocols> {}
-      serializationFormats:
-        - json
-      usage:
-        - output
-      language: !<!Languages> 
-        default:
-          name: PetAction
-          description: ''
-          namespace: ''
-      protocol: !<!Protocols> {}
     - !<!ObjectSchema> &ref_17
       type: object
       apiVersions:
@@ -411,12 +387,64 @@ schemas: !<!Schemas>
                 version: 0.0.0
             children: !<!Relations> 
               all:
-                - !<!ObjectSchema> &ref_19
+                - !<!ObjectSchema> &ref_15
                   type: object
                   apiVersions:
                     - !<!ApiVersion> 
                       version: 0.0.0
-                  discriminatorValue: PetHungryOrThirstyError
+                  children: !<!Relations> 
+                    all:
+                      - !<!ObjectSchema> &ref_19
+                        type: object
+                        apiVersions:
+                          - !<!ApiVersion> 
+                            version: 0.0.0
+                        discriminatorValue: PetHungryOrThirstyError
+                        parents: !<!Relations> 
+                          all:
+                            - *ref_15
+                            - *ref_16
+                            - *ref_17
+                          immediate:
+                            - *ref_15
+                        properties:
+                          - !<!Property> 
+                            schema: *ref_18
+                            serializedName: hungryOrThirsty
+                            language: !<!Languages> 
+                              default:
+                                name: hungryOrThirsty
+                                description: is the pet hungry or thirsty or both
+                            protocol: !<!Protocols> {}
+                        serializationFormats:
+                          - json
+                        usage:
+                          - output
+                          - exception
+                        language: !<!Languages> 
+                          default:
+                            name: PetHungryOrThirstyError
+                            description: ''
+                            namespace: ''
+                        protocol: !<!Protocols> {}
+                    immediate:
+                      - *ref_19
+                  discriminator: !<!Discriminator> 
+                    all:
+                      PetHungryOrThirstyError: *ref_19
+                    immediate:
+                      PetHungryOrThirstyError: *ref_19
+                    property: !<!Property> &ref_22
+                      schema: *ref_20
+                      isDiscriminator: true
+                      required: true
+                      serializedName: errorType
+                      language: !<!Languages> 
+                        default:
+                          name: errorType
+                          description: ''
+                      protocol: !<!Protocols> {}
+                  discriminatorValue: PetSadError
                   parents: !<!Relations> 
                     all:
                       - *ref_16
@@ -425,102 +453,93 @@ schemas: !<!Schemas>
                       - *ref_16
                   properties:
                     - !<!Property> 
-                      schema: *ref_18
-                      serializedName: hungryOrThirsty
+                      schema: *ref_21
+                      serializedName: reason
                       language: !<!Languages> 
                         default:
-                          name: hungryOrThirsty
-                          description: is the pet hungry or thirsty or both
+                          name: reason
+                          description: why is the pet sad
                       protocol: !<!Protocols> {}
                   serializationFormats:
                     - json
                   usage:
+                    - output
                     - exception
                   language: !<!Languages> 
                     default:
-                      name: PetHungryOrThirstyError
+                      name: PetSadError
                       description: ''
                       namespace: ''
                   protocol: !<!Protocols> {}
-              immediate:
                 - *ref_19
+              immediate:
+                - *ref_15
             discriminator: !<!Discriminator> 
               all:
                 PetHungryOrThirstyError: *ref_19
+                PetSadError: *ref_15
               immediate:
-                PetHungryOrThirstyError: *ref_19
-              property: !<!Property> &ref_22
-                schema: *ref_20
-                isDiscriminator: true
-                required: true
-                serializedName: errorType
-                language: !<!Languages> 
-                  default:
-                    name: errorType
-                    description: ''
-                protocol: !<!Protocols> {}
-            discriminatorValue: PetSadError
+                PetSadError: *ref_15
+              property: *ref_22
+            discriminatorValue: PetActionError
             parents: !<!Relations> 
               all:
                 - *ref_17
               immediate:
                 - *ref_17
             properties:
+              - *ref_22
               - !<!Property> 
-                schema: *ref_21
-                serializedName: reason
+                schema: *ref_23
+                required: false
+                serializedName: errorMessage
                 language: !<!Languages> 
                   default:
-                    name: reason
-                    description: why is the pet sad
+                    name: errorMessage
+                    description: the error message
                 protocol: !<!Protocols> {}
             serializationFormats:
               - json
             usage:
               - exception
+              - output
             language: !<!Languages> 
               default:
-                name: PetSadError
+                name: PetActionError
                 description: ''
                 namespace: ''
             protocol: !<!Protocols> {}
+          - *ref_15
           - *ref_19
         immediate:
           - *ref_16
-      discriminator: !<!Discriminator> 
-        all:
-          PetHungryOrThirstyError: *ref_19
-          PetSadError: *ref_16
-        immediate:
-          PetSadError: *ref_16
-        property: *ref_22
       properties:
-        - *ref_22
         - !<!Property> 
-          schema: *ref_23
-          required: false
-          serializedName: errorMessage
+          schema: *ref_24
+          serializedName: actionResponse
           language: !<!Languages> 
             default:
-              name: errorMessage
-              description: the error message
+              name: actionResponse
+              description: action feedback
           protocol: !<!Protocols> {}
       serializationFormats:
         - json
       usage:
+        - output
         - exception
       language: !<!Languages> 
         default:
-          name: PetActionError
+          name: PetAction
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
+    - *ref_16
     - *ref_6
     - *ref_11
-    - *ref_16
+    - *ref_15
     - *ref_19
 globalParameters:
-  - !<!Parameter> &ref_24
+  - !<!Parameter> &ref_25
     schema: *ref_0
     clientDefaultValue: 'http://localhost'
     implementation: Client
@@ -545,9 +564,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 0.0.0
         parameters:
-          - *ref_24
-          - !<!Parameter> &ref_27
-            schema: *ref_25
+          - *ref_25
+          - !<!Parameter> &ref_28
+            schema: *ref_26
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -562,7 +581,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_26
+                schema: *ref_27
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -585,7 +604,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_27
+          - *ref_28
         responses:
           - !<!SchemaResponse> 
             schema: *ref_1
@@ -611,7 +630,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_25
+            schema: *ref_26
             extensions:
               x-ms-error-response: true
             language: !<!Languages> 
@@ -641,7 +660,7 @@ operationGroups:
                 statusCodes:
                   - '404'
           - !<!SchemaResponse> 
-            schema: *ref_28
+            schema: *ref_29
             extensions:
               x-ms-error-response: true
             language: !<!Languages> 
@@ -674,9 +693,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 0.0.0
         parameters:
-          - *ref_24
-          - !<!Parameter> &ref_29
-            schema: *ref_25
+          - *ref_25
+          - !<!Parameter> &ref_30
+            schema: *ref_26
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -691,7 +710,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_26
+                schema: *ref_27
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -714,10 +733,10 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_29
+          - *ref_30
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_30
+            schema: *ref_17
             language: !<!Languages> 
               default:
                 name: ''
@@ -731,7 +750,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_17
+            schema: *ref_16
             extensions:
               x-ms-error-response: true
             language: !<!Languages> 
@@ -746,7 +765,7 @@ operationGroups:
                 statusCodes:
                   - '500'
           - !<!SchemaResponse> 
-            schema: *ref_17
+            schema: *ref_16
             language: !<!Languages> 
               default:
                 name: ''
@@ -762,6 +781,98 @@ operationGroups:
           default:
             name: DoSomething
             description: Asks pet to do something
+        protocol: !<!Protocols> {}
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 0.0.0
+        parameters:
+          - *ref_25
+          - !<!Parameter> &ref_31
+            schema: *ref_26
+            clientDefaultValue: value1
+            implementation: Method
+            extensions:
+              x-ms-client-default: value1
+            language: !<!Languages> 
+              default:
+                name: models
+                description: 'Make sure model deserialization doesn''t conflict with this param name, which has input name ''models''. Use client default value in call'
+                serializedName: models
+            protocol: !<!Protocols> 
+              http: !<!HttpParameter> 
+                in: query
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> 
+                schema: *ref_27
+                implementation: Method
+                origin: 'modelerfour:synthesized/accept'
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: header
+            signatureParameters: []
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpRequest> 
+                path: /errorStatusCodes/Pets/hasModelsParam
+                method: post
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_31
+        responses:
+          - !<!Response> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: OK. We will be returning an error though
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !<!SchemaResponse> 
+            schema: *ref_16
+            extensions:
+              x-ms-error-response: true
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: Will return error. Make sure the error can be correctly deserialized
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '500'
+          - !<!SchemaResponse> 
+            schema: *ref_16
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: Default
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !<!Languages> 
+          default:
+            name: HasModelsParam
+            description: Ensure you can correctly deserialize the returned PetActionError and deserialization doesn't conflict with the input param name 'models'
         protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:
