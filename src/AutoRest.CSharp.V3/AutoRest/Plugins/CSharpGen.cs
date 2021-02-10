@@ -2,26 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.V3.AutoRest.Communication;
-using AutoRest.CSharp.V3.Generation.Types;
 using AutoRest.CSharp.V3.Generation.Writers;
 using AutoRest.CSharp.V3.Input;
 using AutoRest.CSharp.V3.Input.Source;
-using AutoRest.CSharp.V3.Output.Builders;
 using AutoRest.CSharp.V3.Output.Models.Responses;
 using AutoRest.CSharp.V3.Output.Models.Types;
-using AutoRest.CSharp.V3.Utilities;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.Simplification;
-using Microsoft.CodeAnalysis.Text;
-using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
 namespace AutoRest.CSharp.V3.AutoRest.Plugins
 {
@@ -100,25 +89,25 @@ namespace AutoRest.CSharp.V3.AutoRest.Plugins
                 }
             }
 
-            // foreach (var operation in context.Library.LongRunningOperations)
-            // {
-            //     var codeWriter = new CodeWriter();
-            //     LongRunningOperationWriter.Write(codeWriter, operation);
+            foreach (var operation in context.Library.LongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                LongRunningOperationWriter.Write(codeWriter, operation);
 
-            //     project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
-            // }
+                project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
+            }
 
-            // if (context.Configuration.AzureArm)
-            // {
-            //     var codeWriter = new CodeWriter();
-            //     ManagementClientWriter.WriteClientOptions(codeWriter, context);
-            //     project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClientOptions.cs", codeWriter.ToString());
+            if (context.Configuration.AzureArm)
+            {
+                var codeWriter = new CodeWriter();
+                ManagementClientWriter.WriteClientOptions(codeWriter, context);
+                project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClientOptions.cs", codeWriter.ToString());
 
-            //     var clientCodeWriter = new CodeWriter();
-            //     ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
-            //     project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClient.cs", clientCodeWriter.ToString());
+                var clientCodeWriter = new CodeWriter();
+                ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
+                project.AddGeneratedFile($"{context.Configuration.LibraryName}ManagementClient.cs", clientCodeWriter.ToString());
 
-            // }
+            }
 
             return project;
         }
