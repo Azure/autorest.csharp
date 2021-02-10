@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         private Dictionary<Schema, TypeProvider>? _models;
         private Dictionary<OperationGroup, Client>? _clients;
         private Dictionary<OperationGroup, RestClient>? _restClients;
+        private Dictionary<OperationGroup, ResourceData>? _resourceData;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
 
@@ -30,6 +31,8 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
+
+        public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
         public IEnumerable<Client> Clients => EnsureClients().Values;
 
@@ -120,6 +123,22 @@ namespace AutoRest.CSharp.V3.Output.Models.Types
             }
 
             return _restClients;
+        }
+
+        private Dictionary<OperationGroup, ResourceData> EnsureResourceData()
+        {
+            if (_resourceData != null)
+            {
+                return _resourceData;
+            }
+
+            _resourceData = new Dictionary<OperationGroup, ResourceData>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _resourceData.Add(operationGroup, new ResourceData(operationGroup, _context));
+            }
+
+            return _resourceData;
         }
 
         public TypeProvider FindTypeForSchema(Schema schema)
