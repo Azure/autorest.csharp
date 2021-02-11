@@ -11,7 +11,7 @@ using header.Models;
 
 namespace header
 {
-    internal class HeaderResponseEnumHeaders
+    internal partial class HeaderResponseEnumHeaders
     {
         private readonly Response _response;
         public HeaderResponseEnumHeaders(Response response)
@@ -19,6 +19,6 @@ namespace header
             _response = response;
         }
         /// <summary> response with header values &quot;GREY&quot; or null. </summary>
-        public GreyscaleColors? Value => _response.Headers.TryGetValue("value", out GreyscaleColors? value) ? value : null;
+        public GreyscaleColors? Value => _response.Headers.TryGetValue("value", out string value) ? value.ToGreyscaleColors() : (GreyscaleColors?)null;
     }
 }

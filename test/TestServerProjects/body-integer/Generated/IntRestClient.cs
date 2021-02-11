@@ -375,8 +375,8 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/max/32", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
@@ -424,8 +424,8 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/max/64", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
@@ -473,8 +473,8 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/min/32", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
@@ -522,8 +522,8 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/min/64", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody);
             request.Content = content;
@@ -624,8 +624,8 @@ namespace body_integer
             uri.Reset(endpoint);
             uri.AppendPath("/int/unixtime", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(intBody, "U");
             request.Content = content;

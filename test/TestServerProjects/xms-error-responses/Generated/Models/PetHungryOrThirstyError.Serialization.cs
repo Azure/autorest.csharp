@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    internal partial class PetHungryOrThirstyError
+    public partial class PetHungryOrThirstyError
     {
         internal static PetHungryOrThirstyError DeserializePetHungryOrThirstyError(JsonElement element)
         {
@@ -18,6 +18,7 @@ namespace xms_error_responses.Models
             Optional<string> reason = default;
             string errorType = default;
             Optional<string> errorMessage = default;
+            Optional<string> actionResponse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("hungryOrThirsty"))
@@ -40,8 +41,13 @@ namespace xms_error_responses.Models
                     errorMessage = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("actionResponse"))
+                {
+                    actionResponse = property.Value.GetString();
+                    continue;
+                }
             }
-            return new PetHungryOrThirstyError(errorType, errorMessage.Value, reason.Value, hungryOrThirsty.Value);
+            return new PetHungryOrThirstyError(actionResponse.Value, errorType, errorMessage.Value, reason.Value, hungryOrThirsty.Value);
         }
     }
 }

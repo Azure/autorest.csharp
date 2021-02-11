@@ -45,9 +45,12 @@ namespace media_types
             uri.Reset(endpoint);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", contentType.ToSerialString());
             request.Headers.Add("Accept", "application/json");
-            request.Content = RequestContent.Create(input);
+            if (input != null)
+            {
+                request.Headers.Add("Content-Type", contentType.ToSerialString());
+                request.Content = RequestContent.Create(input);
+            }
             return message;
         }
 
@@ -55,14 +58,8 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public async Task<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
             using var message = CreateAnalyzeBodyRequest(contentType, input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -83,14 +80,8 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public Response<string> AnalyzeBody(ContentType contentType, Stream input, CancellationToken cancellationToken = default)
+        public Response<string> AnalyzeBody(ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
             using var message = CreateAnalyzeBodyRequest(contentType, input);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -116,10 +107,10 @@ namespace media_types
             uri.Reset(endpoint);
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (input != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(input);
                 request.Content = content;
@@ -178,23 +169,20 @@ namespace media_types
             uri.Reset(endpoint);
             uri.AppendPath("/mediatypes/contentTypeWithEncoding", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "text/plain");
             request.Headers.Add("Accept", "application/json");
-            request.Content = new StringRequestContent(input);
+            if (input != null)
+            {
+                request.Headers.Add("Content-Type", "text/plain");
+                request.Content = new StringRequestContent(input);
+            }
             return message;
         }
 
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public async Task<Response<string>> ContentTypeWithEncodingAsync(string input, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> ContentTypeWithEncodingAsync(string input = null, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
             using var message = CreateContentTypeWithEncodingRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -214,14 +202,8 @@ namespace media_types
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public Response<string> ContentTypeWithEncoding(string input, CancellationToken cancellationToken = default)
+        public Response<string> ContentTypeWithEncoding(string input = null, CancellationToken cancellationToken = default)
         {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
             using var message = CreateContentTypeWithEncodingRequest(input);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)

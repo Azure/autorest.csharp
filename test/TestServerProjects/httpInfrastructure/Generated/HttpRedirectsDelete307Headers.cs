@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace httpInfrastructure
 {
-    internal class HttpRedirectsDelete307Headers
+    internal partial class HttpRedirectsDelete307Headers
     {
         private readonly Response _response;
         public HttpRedirectsDelete307Headers(Response response)

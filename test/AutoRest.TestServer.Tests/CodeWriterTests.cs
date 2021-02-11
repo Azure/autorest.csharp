@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.V3.Generation.Writers;
+using AutoRest.CSharp.Generation.Writers;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests

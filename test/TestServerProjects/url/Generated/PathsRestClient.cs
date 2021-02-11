@@ -809,7 +809,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
             uri.AppendPath("/paths/byte/multibyte/", false);
-            uri.AppendPath(bytePath, true);
+            uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -867,7 +867,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
             uri.AppendPath("/paths/byte/empty/", false);
-            uri.AppendPath(new byte[] { }, true);
+            uri.AppendPath(new byte[] { }, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -911,7 +911,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
             uri.AppendPath("/paths/byte/null/", false);
-            uri.AppendPath(bytePath, true);
+            uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1149,7 +1149,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
             uri.AppendPath("/paths/string/bG9yZW0/", false);
-            uri.AppendPath(base64UrlPath, true);
+            uri.AppendPath(base64UrlPath, "U", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace httpInfrastructure
 {
-    internal class HttpRedirectsHead301Headers
+    internal partial class HttpRedirectsHead301Headers
     {
         private readonly Response _response;
         public HttpRedirectsHead301Headers(Response response)

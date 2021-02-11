@@ -9,7 +9,7 @@ using System;
 
 namespace NamespaceForEnums
 {
-    internal static class CustomFruitEnumExtensions
+    internal static partial class CustomFruitEnumExtensions
     {
         public static string ToSerialString(this CustomFruitEnum value) => value switch
         {

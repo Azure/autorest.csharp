@@ -44,8 +44,8 @@ namespace body_formdata
             uri.Reset(endpoint);
             uri.AppendPath("/formdata/stream/uploadfile", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "multipart/form-data");
             request.Headers.Add("Accept", "application/octet-stream, application/json");
+            request.Headers.Add("Content-Type", "multipart/form-data");
             var content = new MultipartFormDataContent();
             content.Add(RequestContent.Create(fileContent), "fileContent", null);
             content.Add(new StringRequestContent(fileName), "fileName", null);
@@ -122,8 +122,8 @@ namespace body_formdata
             uri.Reset(endpoint);
             uri.AppendPath("/formdata/stream/uploadfile", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Headers.Add("Accept", "application/octet-stream, application/json");
+            request.Headers.Add("Content-Type", "application/octet-stream");
             request.Content = RequestContent.Create(fileContent);
             return message;
         }
@@ -187,8 +187,8 @@ namespace body_formdata
             uri.Reset(endpoint);
             uri.AppendPath("/formdata/stream/uploadfiles", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "multipart/form-data");
             request.Headers.Add("Accept", "application/octet-stream, application/json");
+            request.Headers.Add("Content-Type", "multipart/form-data");
             var content = new MultipartFormDataContent();
             foreach (var value in fileContent)
             {

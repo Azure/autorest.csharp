@@ -1009,7 +1009,7 @@ namespace url
             uri.AppendPath("/queries/byte/multibyte", false);
             if (byteQuery != null)
             {
-                uri.AppendQuery("byteQuery", byteQuery, true);
+                uri.AppendQuery("byteQuery", byteQuery, "D", true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1056,7 +1056,7 @@ namespace url
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
             uri.AppendPath("/queries/byte/empty", false);
-            uri.AppendQuery("byteQuery", new byte[] { }, true);
+            uri.AppendQuery("byteQuery", new byte[] { }, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1102,7 +1102,7 @@ namespace url
             uri.AppendPath("/queries/byte/null", false);
             if (byteQuery != null)
             {
-                uri.AppendQuery("byteQuery", byteQuery, true);
+                uri.AppendQuery("byteQuery", byteQuery, "D", true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

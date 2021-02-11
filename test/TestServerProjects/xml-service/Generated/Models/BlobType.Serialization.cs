@@ -9,7 +9,7 @@ using System;
 
 namespace xml_service.Models
 {
-    internal static class BlobTypeExtensions
+    internal static partial class BlobTypeExtensions
     {
         public static string ToSerialString(this BlobType value) => value switch
         {

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LrosaDsDeleteNonRetry400Headers
+    internal partial class LrosaDsDeleteNonRetry400Headers
     {
         private readonly Response _response;
         public LrosaDsDeleteNonRetry400Headers(Response response)
