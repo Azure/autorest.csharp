@@ -34,7 +34,7 @@
     },
     "Azure.ResourceManager.Compute": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Azure.ResourceManager.Compute\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Compute\\Generated"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",

@@ -50,13 +50,13 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected Constant ParseConstant(ConstantSchema constant) =>
-            BuilderHelpers.ParseConstant(constant.Value.Value, _context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
+            BuilderHelpers.ParseConstant(constant.Value.Value, Context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
 
         private Constant? ParseConstant(RequestParameter parameter)
         {
             if (parameter.ClientDefaultValue != null)
             {
-                CSharpType constantTypeReference = _context.TypeFactory.CreateType(parameter.Schema, parameter.IsNullable);
+                CSharpType constantTypeReference = Context.TypeFactory.CreateType(parameter.Schema, parameter.IsNullable);
                 return BuilderHelpers.ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
             }
 
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected string GetClientPrefix(string name)
         {
-            name = string.IsNullOrEmpty(name) ? _context.CodeModel.Language.Default.Name : name.ToCleanName();
+            name = string.IsNullOrEmpty(name) ? Context.CodeModel.Language.Default.Name : name.ToCleanName();
 
             if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
             {

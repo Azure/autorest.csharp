@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var name = BuilderHelpers.DisambiguateName(Type, c.CSharpName());
                 var memberMapping = _typeMapping?.GetForMember(name);
                 values.Add(new EnumTypeValue(
-                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _context.TypeFactory),
+                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, Context.TypeFactory),
                     CreateDescription(c),
                     BuilderHelpers.ParseConstant(c.Value, BaseType)));
             }

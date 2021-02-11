@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models
             : base(context)
         {
             _operationGroup = operationGroup;
-            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
+            string clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
             DefaultName = clientPrefix + OperationsSuffixValue;
         }
 
@@ -32,11 +32,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
 
-        public RestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
+        public RestClient RestClient => _restClient ??= Context.Library.FindRestClient(_operationGroup);
 
         protected string GetClientPrefix(string name)
         {
-            name = string.IsNullOrEmpty(name) ? _context.CodeModel.Language.Default.Name : name.ToCleanName();
+            name = string.IsNullOrEmpty(name) ? Context.CodeModel.Language.Default.Name : name.ToCleanName();
 
             if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
             {

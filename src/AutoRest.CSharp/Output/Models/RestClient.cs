@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
 
-                    var headerModel = _context.Library.FindHeaderModel(operation);
+                    var headerModel = Context.Library.FindHeaderModel(operation);
                     _requestMethods.Add(serviceRequest, BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel));
                 }
             }
@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         if (requestParameter.GroupedBy is RequestParameter groupedByParameter)
                         {
-                            var groupModel = (ObjectType)_context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+                            var groupModel = (ObjectType)Context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
                             var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
 
                             constantOrReference = new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
@@ -308,7 +308,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Flattened == true)
                         {
-                            var objectType = (ObjectType)_context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
+                            var objectType = (ObjectType)Context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
                             var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
 
                             List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
@@ -364,7 +364,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var responseType = ReduceResponses(clientResponse);
 
-            if (request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean)
+            if (request.HttpMethod == RequestMethod.Head && Context.Configuration.HeadAsBoolean)
             {
                 responseType = new CSharpType(typeof(bool));
                 clientResponse = new List<Response>()
@@ -398,7 +398,7 @@ namespace AutoRest.CSharp.Output.Models
             else if (response is SchemaResponse schemaResponse)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                CSharpType responseType = TypeFactory.GetOutputType(_context.TypeFactory.CreateType(schema, isNullable: schemaResponse.IsNullable));
+                CSharpType responseType = TypeFactory.GetOutputType(Context.TypeFactory.CreateType(schema, isNullable: schemaResponse.IsNullable));
 
                 ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
 
