@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.V3.Output.Models
         private const string ClientSuffixValue = "Client";
         private const string OperationsSuffixValue = "Operations";
         private OperationGroup _operationGroup;
+        private RestClient? _restClient;
 
         public ResourceOperation(OperationGroup operationGroup, BuildContext context)
             : base(context)
@@ -30,6 +31,8 @@ namespace AutoRest.CSharp.V3.Output.Models
         protected override string DefaultAccessibility { get; } = "public";
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
+
+        public RestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
 
         protected string GetClientPrefix(string name)
         {

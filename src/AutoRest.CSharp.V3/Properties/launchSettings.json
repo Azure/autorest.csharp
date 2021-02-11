@@ -12,6 +12,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\AppConfiguration"
     },
+    "azure-parameter-grouping": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping"
+    },
+    "azure-special-properties": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-special-properties"
+    },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Azure.AI.FormRecognizer"
@@ -27,14 +35,6 @@
     "Azure.Storage.Tables": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\Azure.Storage.Tables"
-    },
-    "azure-parameter-grouping": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping"
-    },
-    "azure-special-properties": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-special-properties"
     },
     "body-array": {
       "commandName": "Project",
@@ -231,10 +231,6 @@
     "xms-error-responses": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xms-error-responses"
-    },
-    "compute": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\compute"
     }
   }
 }
