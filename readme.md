@@ -1,4 +1,4 @@
-# C# code generator for AutoRest V3
+#### Default `autorest --csharp` generator change
 ___
 
 :warning: We have updated the default generator used by `autorest --csharp` to the new version `V3`, which uses `@autorest/csharp` package and it will have few side effects:
@@ -8,7 +8,7 @@ ___
 ___
 
 
-
+# C# code generator for AutoRest V3
 <!-- TOC depthfrom:2 -->
 
 - [Prerequisites](#prerequisites)
