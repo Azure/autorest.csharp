@@ -94,7 +94,7 @@ schemas: !<!Schemas>
           language:
             default:
               name: One
-              description: one
+              description: This is a really long comment to see what wrapping looks like. This comment is really long and it should wrap for readability. Please wrap. This should wrap.
         - !<!ChoiceValue> 
           value: '2'
           language:
