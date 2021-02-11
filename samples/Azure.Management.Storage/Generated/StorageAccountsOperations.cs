@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using Azure.Core.Pipeline;
-
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific StorageAccounts. </summary>
@@ -15,15 +12,6 @@ namespace Azure.Management.Storage
     {
         /// <summary> Initializes a new instance of StorageAccountsOperations for mocking. </summary>
         protected StorageAccountsOperations()
-        {
-        }
-        /// <summary> Initializes a new instance of StorageAccountsOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="subscriptionId"> The ID of the target subscription. </param>
-        /// <param name="endpoint"> server parameter. </param>
-        /// <param name="apiVersion"> Api Version. </param>
-        internal StorageAccountsOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-06-01")
         {
         }
     }

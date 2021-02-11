@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace xms_error_responses.Models
 {
-    public partial class PetActionError
+    internal partial class PetActionError
     {
         internal static PetActionError DeserializePetActionError(JsonElement element)
         {
@@ -24,7 +24,6 @@ namespace xms_error_responses.Models
             }
             string errorType = default;
             Optional<string> errorMessage = default;
-            Optional<string> actionResponse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("errorType"))
@@ -37,13 +36,8 @@ namespace xms_error_responses.Models
                     errorMessage = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("actionResponse"))
-                {
-                    actionResponse = property.Value.GetString();
-                    continue;
-                }
             }
-            return new PetActionError(actionResponse.Value, errorType, errorMessage.Value);
+            return new PetActionError(errorType, errorMessage.Value);
         }
     }
 }

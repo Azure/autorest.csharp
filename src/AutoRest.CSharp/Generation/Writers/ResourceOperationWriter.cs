@@ -34,27 +34,6 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Scope($"protected {resourceOperation.Type.Name:D}()"))
             {
             }
-
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {resourceOperation.Type.Name}");
-            writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, "The handler for diagnostic messaging in the client.");
-            writer.WriteXmlDocumentationParameter(PipelineVariable, "The HTTP pipeline for sending and receiving REST requests and responses.");
-            foreach (var parameter in resourceOperation.RestClient.Parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-            }
-
-            writer.Append($"internal {resourceOperation.Type.Name:D}({typeof(ClientDiagnostics)} {ClientDiagnosticsVariable}, {typeof(HttpPipeline)} {PipelineVariable},");
-            foreach (var parameter in resourceOperation.RestClient.Parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-
-            writer.RemoveTrailingComma();
-            writer.Line($")");
-            using (writer.Scope())
-            {
-            }
-            writer.Line();
         }
     }
 }

@@ -272,7 +272,7 @@ schemas: !<!Schemas>
           name: AppleBarrelBadApplesItem
           description: ''
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_121
+    - !<!StringSchema> &ref_119
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -1012,7 +1012,7 @@ schemas: !<!Schemas>
           description: ''
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_110
+    - !<!ConstantSchema> &ref_108
       type: constant
       value: !<!ConstantValue> 
         value: application/xml
@@ -1022,7 +1022,7 @@ schemas: !<!Schemas>
           name: Accept
           description: 'Accept: application/xml'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_112
+    - !<!ConstantSchema> &ref_110
       type: constant
       value: !<!ConstantValue> 
         value: application/xml
@@ -1032,7 +1032,7 @@ schemas: !<!Schemas>
           name: ApplicationXml
           description: Content Type 'application/xml'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_134
+    - !<!ConstantSchema> &ref_132
       type: constant
       value: !<!ConstantValue> 
         value: list
@@ -1042,7 +1042,7 @@ schemas: !<!Schemas>
           name: Constant10
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_136
+    - !<!ConstantSchema> &ref_134
       type: constant
       value: !<!ConstantValue> 
         value: properties
@@ -1052,7 +1052,7 @@ schemas: !<!Schemas>
           name: Constant11
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_137
+    - !<!ConstantSchema> &ref_135
       type: constant
       value: !<!ConstantValue> 
         value: service
@@ -1062,7 +1062,7 @@ schemas: !<!Schemas>
           name: Constant12
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_140
+    - !<!ConstantSchema> &ref_138
       type: constant
       value: !<!ConstantValue> 
         value: acl
@@ -1072,7 +1072,7 @@ schemas: !<!Schemas>
           name: Constant13
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_141
+    - !<!ConstantSchema> &ref_139
       type: constant
       value: !<!ConstantValue> 
         value: container
@@ -1082,7 +1082,7 @@ schemas: !<!Schemas>
           name: Constant14
           description: ''
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_145
+    - !<!ConstantSchema> &ref_143
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -1092,7 +1092,7 @@ schemas: !<!Schemas>
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_148
+    - !<!ConstantSchema> &ref_146
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -1110,18 +1110,6 @@ schemas: !<!Schemas>
         default:
           name: Metadata
           description: Dictionary of <string>
-      protocol: !<!Protocols> {}
-  byteArrays:
-    - !<!ByteArraySchema> &ref_97
-      type: byte-array
-      format: byte
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: ModelWithBytePropertyBytes
-          description: ''
       protocol: !<!Protocols> {}
   dateTimes:
     - !<!DateTimeSchema> &ref_21
@@ -1207,19 +1195,8 @@ schemas: !<!Schemas>
           name: BlobPropertiesDeletedTime
           description: ''
       protocol: !<!Protocols> {}
-  uris:
-    - !<!UriSchema> &ref_98
-      type: uri
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      language: !<!Languages> 
-        default:
-          name: ModelWithUrlPropertyUrl
-          description: ''
-      protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_111
+    - !<!ObjectSchema> &ref_109
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1277,7 +1254,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_4
-    - !<!ObjectSchema> &ref_114
+    - !<!ObjectSchema> &ref_112
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1341,7 +1318,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_7
-    - !<!ObjectSchema> &ref_116
+    - !<!ObjectSchema> &ref_114
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1372,7 +1349,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_100
+          schema: !<!ArraySchema> &ref_98
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -1400,7 +1377,7 @@ schemas: !<!Schemas>
                       description: ''
                   protocol: !<!Protocols> {}
                 - !<!Property> 
-                  schema: !<!ArraySchema> &ref_99
+                  schema: !<!ArraySchema> &ref_97
                     type: array
                     apiVersions:
                       - !<!ApiVersion> 
@@ -1463,7 +1440,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_14
-    - !<!ObjectSchema> &ref_117
+    - !<!ObjectSchema> &ref_115
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1495,14 +1472,14 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_119
+    - !<!ObjectSchema> &ref_117
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
       properties:
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_101
+          schema: !<!ArraySchema> &ref_99
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -1525,7 +1502,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_102
+          schema: !<!ArraySchema> &ref_100
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -1558,7 +1535,7 @@ schemas: !<!Schemas>
           description: A barrel of apples.
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_103
+    - !<!ObjectSchema> &ref_101
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1605,7 +1582,7 @@ schemas: !<!Schemas>
           description: A banana.
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_135
+    - !<!ObjectSchema> &ref_133
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1648,7 +1625,7 @@ schemas: !<!Schemas>
               description: ''
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_104
+          schema: !<!ArraySchema> &ref_102
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -1809,7 +1786,7 @@ schemas: !<!Schemas>
       protocol: !<!Protocols> {}
     - *ref_34
     - *ref_35
-    - !<!ObjectSchema> &ref_138
+    - !<!ObjectSchema> &ref_136
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -1987,7 +1964,7 @@ schemas: !<!Schemas>
               description: a summary of request statistics grouped by API in minute aggregates for blobs
           protocol: !<!Protocols> {}
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_105
+          schema: !<!ArraySchema> &ref_103
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -2111,7 +2088,7 @@ schemas: !<!Schemas>
     - *ref_45
     - *ref_46
     - *ref_54
-    - !<!ObjectSchema> &ref_106
+    - !<!ObjectSchema> &ref_104
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2196,7 +2173,7 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_59
-    - !<!ObjectSchema> &ref_144
+    - !<!ObjectSchema> &ref_142
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2264,7 +2241,7 @@ schemas: !<!Schemas>
                 version: 1.0.0
             properties:
               - !<!Property> 
-                schema: !<!ArraySchema> &ref_107
+                schema: !<!ArraySchema> &ref_105
                   type: array
                   apiVersions:
                     - !<!ApiVersion> 
@@ -2306,7 +2283,7 @@ schemas: !<!Schemas>
                     description: ''
                 protocol: !<!Protocols> {}
               - !<!Property> 
-                schema: !<!ArraySchema> &ref_108
+                schema: !<!ArraySchema> &ref_106
                   type: array
                   apiVersions:
                     - !<!ApiVersion> 
@@ -2702,7 +2679,7 @@ schemas: !<!Schemas>
     - *ref_92
     - *ref_93
     - *ref_94
-    - !<!ObjectSchema> &ref_146
+    - !<!ObjectSchema> &ref_144
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2726,7 +2703,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_149
+    - !<!ObjectSchema> &ref_147
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2750,7 +2727,7 @@ schemas: !<!Schemas>
           description: ''
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_150
+    - !<!ObjectSchema> &ref_148
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -2788,73 +2765,40 @@ schemas: !<!Schemas>
           description: 'Contans property '
           namespace: ''
       protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_151
-      type: object
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      properties:
-        - !<!Property> 
-          schema: *ref_97
-          serializedName: Bytes
-          language: !<!Languages> 
-            default:
-              name: bytes
-              description: ''
-          protocol: !<!Protocols> {}
-      serializationFormats:
-        - xml
-      usage:
-        - output
-        - input
-      language: !<!Languages> 
-        default:
-          name: ModelWithByteProperty
-          description: ''
-          namespace: ''
-      protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_153
-      type: object
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      properties:
-        - !<!Property> 
-          schema: *ref_98
-          serializedName: Url
-          language: !<!Languages> 
-            default:
-              name: url
-              description: ''
-          protocol: !<!Protocols> {}
-      serializationFormats:
-        - xml
-      usage:
-        - output
-        - input
-      language: !<!Languages> 
-        default:
-          name: ModelWithUrlProperty
-          description: ''
-          namespace: ''
-      protocol: !<!Protocols> {}
   arrays:
+    - *ref_97
+    - *ref_98
     - *ref_99
     - *ref_100
-    - *ref_101
-    - *ref_102
-    - !<!ArraySchema> &ref_124
+    - !<!ArraySchema> &ref_122
       type: array
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-      elementType: *ref_103
+      elementType: *ref_101
       serialization:
         xml:
           name: bananas
           attribute: false
           text: false
           wrapped: false
+      language: !<!Languages> 
+        default:
+          name: ArrayOfBanana
+          description: Array of Banana
+      protocol: !<!Protocols> {}
+    - !<!ArraySchema> &ref_123
+      type: array
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      elementType: *ref_101
+      serialization:
+        xml:
+          name: bananas
+          attribute: false
+          text: false
+          wrapped: true
       language: !<!Languages> 
         default:
           name: ArrayOfBanana
@@ -2865,30 +2809,30 @@ schemas: !<!Schemas>
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-      elementType: *ref_103
-      serialization:
-        xml:
-          name: bananas
-          attribute: false
-          text: false
-          wrapped: true
-      language: !<!Languages> 
-        default:
-          name: ArrayOfBanana
-          description: Array of Banana
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_127
-      type: array
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      elementType: *ref_103
+      elementType: *ref_101
       serialization:
         xml:
           name: bananas
           attribute: false
           text: false
           wrapped: false
+      language: !<!Languages> 
+        default:
+          name: ArrayOfBanana
+          description: Array of Banana
+      protocol: !<!Protocols> {}
+    - !<!ArraySchema> &ref_126
+      type: array
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      elementType: *ref_101
+      serialization:
+        xml:
+          name: bananas
+          attribute: false
+          text: false
+          wrapped: true
       language: !<!Languages> 
         default:
           name: ArrayOfBanana
@@ -2899,24 +2843,7 @@ schemas: !<!Schemas>
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-      elementType: *ref_103
-      serialization:
-        xml:
-          name: bananas
-          attribute: false
-          text: false
-          wrapped: true
-      language: !<!Languages> 
-        default:
-          name: ArrayOfBanana
-          description: Array of Banana
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_130
-      type: array
-      apiVersions:
-        - !<!ApiVersion> 
-          version: 1.0.0
-      elementType: *ref_103
+      elementType: *ref_101
       serialization:
         xml:
           name: bananas
@@ -2928,12 +2855,12 @@ schemas: !<!Schemas>
           name: ArrayOfBanana
           description: Array of Banana
       protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_131
+    - !<!ArraySchema> &ref_129
       type: array
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-      elementType: *ref_103
+      elementType: *ref_101
       serialization:
         xml:
           name: bananas
@@ -2945,14 +2872,14 @@ schemas: !<!Schemas>
           name: ArrayOfBanana
           description: Array of Banana
       protocol: !<!Protocols> {}
-    - *ref_104
-    - *ref_105
-    - !<!ArraySchema> &ref_142
+    - *ref_102
+    - *ref_103
+    - !<!ArraySchema> &ref_140
       type: array
       apiVersions:
         - !<!ApiVersion> 
           version: 1.0.0
-      elementType: *ref_106
+      elementType: *ref_104
       serialization:
         xml:
           name: SignedIdentifiers
@@ -2964,10 +2891,10 @@ schemas: !<!Schemas>
           name: SignedIdentifiers
           description: a collection of signed identifiers
       protocol: !<!Protocols> {}
-    - *ref_107
-    - *ref_108
+    - *ref_105
+    - *ref_106
 globalParameters:
-  - !<!Parameter> &ref_109
+  - !<!Parameter> &ref_107
     schema: *ref_0
     clientDefaultValue: 'http://localhost:3000'
     implementation: Client
@@ -2992,12 +2919,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3022,7 +2949,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_111
+            schema: *ref_109
             language: !<!Languages> 
               default:
                 name: ''
@@ -3044,12 +2971,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3061,8 +2988,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_113
-                schema: *ref_111
+              - !<!Parameter> &ref_111
+                schema: *ref_109
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3074,7 +3001,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_113
+              - *ref_111
             language: !<!Languages> 
               default:
                 name: ''
@@ -3108,12 +3035,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3138,7 +3065,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_114
+            schema: *ref_112
             language: !<!Languages> 
               default:
                 name: ''
@@ -3160,12 +3087,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3177,8 +3104,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_115
-                schema: *ref_114
+              - !<!Parameter> &ref_113
+                schema: *ref_112
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3190,7 +3117,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_115
+              - *ref_113
             language: !<!Languages> 
               default:
                 name: ''
@@ -3224,12 +3151,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3254,7 +3181,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_116
+            schema: *ref_114
             language: !<!Languages> 
               default:
                 name: ''
@@ -3268,7 +3195,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_117
+            schema: *ref_115
             language: !<!Languages> 
               default:
                 name: ''
@@ -3290,12 +3217,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3307,8 +3234,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_118
-                schema: *ref_116
+              - !<!Parameter> &ref_116
+                schema: *ref_114
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3320,7 +3247,7 @@ operationGroups:
                     in: body
                     style: xml
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3333,7 +3260,7 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
             signatureParameters:
-              - *ref_118
+              - *ref_116
             language: !<!Languages> 
               default:
                 name: ''
@@ -3359,7 +3286,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_117
+            schema: *ref_115
             language: !<!Languages> 
               default:
                 name: ''
@@ -3381,12 +3308,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3411,7 +3338,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_119
+            schema: *ref_117
             language: !<!Languages> 
               default:
                 name: ''
@@ -3433,12 +3360,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3450,8 +3377,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_120
-                schema: *ref_119
+              - !<!Parameter> &ref_118
+                schema: *ref_117
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3463,7 +3390,7 @@ operationGroups:
                     in: body
                     style: xml
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3476,7 +3403,7 @@ operationGroups:
                   http: !<!HttpParameter> 
                     in: header
             signatureParameters:
-              - *ref_120
+              - *ref_118
             language: !<!Languages> 
               default:
                 name: ''
@@ -3502,7 +3429,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !<!SchemaResponse> 
-            schema: *ref_117
+            schema: *ref_115
             language: !<!Languages> 
               default:
                 name: ''
@@ -3524,7 +3451,7 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             language: !<!Languages> 
@@ -3547,7 +3474,7 @@ operationGroups:
               http: !<!HttpResponse> 
                 headers:
                   - !<!HttpHeader> 
-                    schema: *ref_121
+                    schema: *ref_119
                     header: Custom-Header
                     language:
                       default:
@@ -3565,12 +3492,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3595,7 +3522,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_116
+            schema: *ref_114
             language: !<!Languages> 
               default:
                 name: ''
@@ -3617,12 +3544,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3634,8 +3561,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_122
-                schema: *ref_116
+              - !<!Parameter> &ref_120
+                schema: *ref_114
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3647,7 +3574,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_122
+              - *ref_120
             language: !<!Languages> 
               default:
                 name: ''
@@ -3681,12 +3608,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3711,7 +3638,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_119
+            schema: *ref_117
             language: !<!Languages> 
               default:
                 name: ''
@@ -3733,12 +3660,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3750,8 +3677,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_123
-                schema: *ref_119
+              - !<!Parameter> &ref_121
+                schema: *ref_117
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3763,7 +3690,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_123
+              - *ref_121
             language: !<!Languages> 
               default:
                 name: ''
@@ -3797,12 +3724,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3827,7 +3754,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_124
+            schema: *ref_122
             language: !<!Languages> 
               default:
                 name: ''
@@ -3849,12 +3776,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3866,8 +3793,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_126
-                schema: *ref_125
+              - !<!Parameter> &ref_124
+                schema: *ref_123
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3879,7 +3806,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_126
+              - *ref_124
             language: !<!Languages> 
               default:
                 name: ''
@@ -3913,12 +3840,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -3943,7 +3870,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_127
+            schema: *ref_125
             language: !<!Languages> 
               default:
                 name: ''
@@ -3965,12 +3892,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -3982,8 +3909,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_129
-                schema: *ref_128
+              - !<!Parameter> &ref_127
+                schema: *ref_126
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -3995,7 +3922,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_129
+              - *ref_127
             language: !<!Languages> 
               default:
                 name: ''
@@ -4029,12 +3956,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -4059,7 +3986,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_130
+            schema: *ref_128
             language: !<!Languages> 
               default:
                 name: ''
@@ -4081,12 +4008,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -4098,8 +4025,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_132
-                schema: *ref_131
+              - !<!Parameter> &ref_130
+                schema: *ref_129
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -4111,7 +4038,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_132
+              - *ref_130
             language: !<!Languages> 
               default:
                 name: ''
@@ -4145,12 +4072,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -4175,7 +4102,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_103
+            schema: *ref_101
             language: !<!Languages> 
               default:
                 name: ''
@@ -4197,12 +4124,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -4214,8 +4141,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_133
-                schema: *ref_103
+              - !<!Parameter> &ref_131
+                schema: *ref_101
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -4227,7 +4154,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_133
+              - *ref_131
             language: !<!Languages> 
               default:
                 name: ''
@@ -4261,9 +4188,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
           - !<!Parameter> 
-            schema: *ref_134
+            schema: *ref_132
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4278,7 +4205,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -4303,7 +4230,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_135
+            schema: *ref_133
             language: !<!Languages> 
               default:
                 name: ''
@@ -4325,9 +4252,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
           - !<!Parameter> 
-            schema: *ref_136
+            schema: *ref_134
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4339,7 +4266,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - !<!Parameter> 
-            schema: *ref_137
+            schema: *ref_135
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4354,7 +4281,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -4379,7 +4306,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_138
+            schema: *ref_136
             language: !<!Languages> 
               default:
                 name: ''
@@ -4401,9 +4328,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
           - !<!Parameter> 
-            schema: *ref_136
+            schema: *ref_134
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4415,7 +4342,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - !<!Parameter> 
-            schema: *ref_137
+            schema: *ref_135
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4430,7 +4357,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -4442,8 +4369,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_139
-                schema: *ref_138
+              - !<!Parameter> &ref_137
+                schema: *ref_136
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -4455,7 +4382,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_139
+              - *ref_137
             language: !<!Languages> 
               default:
                 name: ''
@@ -4489,9 +4416,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
           - !<!Parameter> 
-            schema: *ref_140
+            schema: *ref_138
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4503,7 +4430,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - !<!Parameter> 
-            schema: *ref_141
+            schema: *ref_139
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4518,7 +4445,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -4543,7 +4470,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_142
+            schema: *ref_140
             language: !<!Languages> 
               default:
                 name: ''
@@ -4565,9 +4492,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
           - !<!Parameter> 
-            schema: *ref_140
+            schema: *ref_138
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4579,7 +4506,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - !<!Parameter> 
-            schema: *ref_141
+            schema: *ref_139
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4594,7 +4521,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_112
+                schema: *ref_110
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -4606,8 +4533,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_143
-                schema: *ref_142
+              - !<!Parameter> &ref_141
+                schema: *ref_140
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -4619,7 +4546,7 @@ operationGroups:
                     in: body
                     style: xml
             signatureParameters:
-              - *ref_143
+              - *ref_141
             language: !<!Languages> 
               default:
                 name: ''
@@ -4653,9 +4580,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
           - !<!Parameter> 
-            schema: *ref_134
+            schema: *ref_132
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4667,7 +4594,7 @@ operationGroups:
               http: !<!HttpParameter> 
                 in: query
           - !<!Parameter> 
-            schema: *ref_141
+            schema: *ref_139
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -4682,7 +4609,7 @@ operationGroups:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -4707,7 +4634,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_144
+            schema: *ref_142
             language: !<!Languages> 
               default:
                 name: ''
@@ -4729,12 +4656,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_145
+                schema: *ref_143
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -4746,8 +4673,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_147
-                schema: *ref_146
+              - !<!Parameter> &ref_145
+                schema: *ref_144
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -4759,7 +4686,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_147
+              - *ref_145
             language: !<!Languages> 
               default:
                 name: ''
@@ -4793,12 +4720,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_148
+                schema: *ref_146
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -4823,7 +4750,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_149
+            schema: *ref_147
             language: !<!Languages> 
               default:
                 name: ''
@@ -4845,12 +4772,12 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_109
+          - *ref_107
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_110
+                schema: *ref_108
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -4875,7 +4802,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_150
+            schema: *ref_148
             language: !<!Languages> 
               default:
                 name: ''
@@ -4891,320 +4818,6 @@ operationGroups:
           default:
             name: GetXMsText
             description: 'Get back an XML object with an x-ms-text property, which should translate to the returned object''s ''language'' property being ''english'' and its ''content'' property being ''I am text'''
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
-        apiVersions:
-          - !<!ApiVersion> 
-            version: 1.0.0
-        parameters:
-          - *ref_109
-        requests:
-          - !<!Request> 
-            parameters:
-              - !<!Parameter> 
-                schema: *ref_110
-                implementation: Method
-                origin: 'modelerfour:synthesized/accept'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-            signatureParameters: []
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: /xml/bytes
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !<!SchemaResponse> 
-            schema: *ref_151
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: "The simple\_XML document"
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !<!SchemaResponse> 
-            schema: *ref_117
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - default
-        language: !<!Languages> 
-          default:
-            name: GetBytes
-            description: Get an XML document with binary property
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
-        apiVersions:
-          - !<!ApiVersion> 
-            version: 1.0.0
-        parameters:
-          - *ref_109
-        requests:
-          - !<!Request> 
-            parameters:
-              - !<!Parameter> 
-                schema: *ref_112
-                implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-              - !<!Parameter> &ref_152
-                schema: *ref_151
-                implementation: Method
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: slideshow
-                    description: ''
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: body
-                    style: xml
-              - !<!Parameter> 
-                schema: *ref_110
-                implementation: Method
-                origin: 'modelerfour:synthesized/accept'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-            signatureParameters:
-              - *ref_152
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
-                path: /xml/bytes
-                method: put
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !<!Response> 
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: Indicates success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !<!SchemaResponse> 
-            schema: *ref_117
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - default
-        language: !<!Languages> 
-          default:
-            name: PutBinary
-            description: Put an XML document with binary property
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
-        apiVersions:
-          - !<!ApiVersion> 
-            version: 1.0.0
-        parameters:
-          - *ref_109
-        requests:
-          - !<!Request> 
-            parameters:
-              - !<!Parameter> 
-                schema: *ref_110
-                implementation: Method
-                origin: 'modelerfour:synthesized/accept'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-            signatureParameters: []
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: /xml/url
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !<!SchemaResponse> 
-            schema: *ref_153
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: "The simple\_XML document"
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !<!SchemaResponse> 
-            schema: *ref_117
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - default
-        language: !<!Languages> 
-          default:
-            name: GetUri
-            description: Get an XML document with uri property
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
-        apiVersions:
-          - !<!ApiVersion> 
-            version: 1.0.0
-        parameters:
-          - *ref_109
-        requests:
-          - !<!Request> 
-            parameters:
-              - !<!Parameter> 
-                schema: *ref_112
-                implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-              - !<!Parameter> &ref_154
-                schema: *ref_153
-                implementation: Method
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: model
-                    description: ''
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: body
-                    style: xml
-              - !<!Parameter> 
-                schema: *ref_110
-                implementation: Method
-                origin: 'modelerfour:synthesized/accept'
-                required: true
-                language: !<!Languages> 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
-                    in: header
-            signatureParameters:
-              - *ref_154
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
-                path: /xml/url
-                method: put
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !<!Response> 
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: Indicates success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !<!SchemaResponse> 
-            schema: *ref_117
-            language: !<!Languages> 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
-                knownMediaType: xml
-                mediaTypes:
-                  - application/xml
-                statusCodes:
-                  - default
-        language: !<!Languages> 
-          default:
-            name: PutUri
-            description: Put an XML document with uri property
         protocol: !<!Protocols> {}
     language: !<!Languages> 
       default:

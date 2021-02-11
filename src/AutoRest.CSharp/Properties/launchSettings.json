@@ -12,6 +12,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\Generated"
     },
+    "azure-parameter-grouping": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping\\Generated"
+    },
+    "azure-special-properties": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-special-properties\\Generated"
+    },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Generated"
@@ -24,17 +32,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Generated"
     },
+    "Azure.ResourceManager.Compute": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Azure.ResourceManager.Compute\\Generated"
+    },
     "Azure.Storage.Tables": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Storage.Tables\\Generated"
-    },
-    "azure-parameter-grouping": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping\\Generated"
-    },
-    "azure-special-properties": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-special-properties\\Generated"
     },
     "body-array": {
       "commandName": "Project",

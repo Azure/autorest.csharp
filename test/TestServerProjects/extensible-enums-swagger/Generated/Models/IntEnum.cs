@@ -26,7 +26,7 @@ namespace extensible_enums_swagger.Models
         private const string TwoValue = "2";
         private const string ThreeValue = "3";
 
-        /// <summary> This is a really long comment to see what wrapping looks like. This comment is really long and it should wrap for readability. Please wrap. This should wrap. </summary>
+        /// <summary> one. </summary>
         public static IntEnum One { get; } = new IntEnum(OneValue);
         /// <summary> two. </summary>
         public static IntEnum Two { get; } = new IntEnum(TwoValue);
