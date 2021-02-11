@@ -4,10 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AutoRest.CSharp.V3.Output.Models;
+using AutoRest.CSharp.Output.Models;
 using Azure.Core.Pipeline;
 
-namespace AutoRest.CSharp.V3.Generation.Writers
+namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ResourceOperationWriter
     {

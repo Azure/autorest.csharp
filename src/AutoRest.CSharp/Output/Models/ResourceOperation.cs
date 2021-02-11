@@ -4,12 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AutoRest.CSharp.V3.Input;
-using AutoRest.CSharp.V3.Output.Builders;
-using AutoRest.CSharp.V3.Output.Models.Types;
-using AutoRest.CSharp.V3.Utilities;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.V3.Output.Models
+namespace AutoRest.CSharp.Output.Models
 {
     internal class ResourceOperation : TypeProvider
     {
