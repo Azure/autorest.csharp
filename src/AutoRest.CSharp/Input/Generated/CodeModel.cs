@@ -6,7 +6,7 @@
 
 namespace AutoRest.CSharp.Input
 {
-    #pragma warning disable // Disable all warnings
+#pragma warning disable // Disable all warnings
 
     /// <summary>- since API version formats range from
     /// Azure ARM API date style (2018-01-01) to semver (1.2.3)
@@ -216,6 +216,8 @@ namespace AutoRest.CSharp.Input
         /// <summary>additional metadata extensions dictionary</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "extensions")]
         public DictionaryOfAny? Extensions { get; set; }
+
+        public string? FullProvider { get; set; }
     }
 
     /// <summary>the bare-minimum fields for per-language metadata on a given aspect</summary>

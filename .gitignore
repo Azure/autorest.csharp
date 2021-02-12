@@ -351,5 +351,9 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+#vscode
+.vscode
+
 # Rider IDE
 .idea/
+.vscode/solution-explorer/class.cs-template
