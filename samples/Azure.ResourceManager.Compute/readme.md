@@ -3,13 +3,15 @@
 > see https://aka.ms/autorest
 
 ``` yaml
-require: $(this-folder)/../../../readme.md
 azure-arm: true
+require: $(this-folder)/../../readme.md
+input-file: $(this-folder)/compute.json
+namespace: Azure.ResourceManager.Compute
 model-namespace: false
 public-clients: false
 head-as-boolean: false
-namespace: Azure.ResourceManager.Compute
-library-name: Azure.ResourceManager.Compute
-input-file: $(this-folder)/compute.json
 payload-flattening-threshold: 2
+
+modelerfour:
+  lenient-model-deduplication: true
 ```
