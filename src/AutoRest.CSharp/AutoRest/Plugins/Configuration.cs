@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, JsonElement? overrides = null)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, JsonElement? operationGroupMapping = default)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ModelNamespace = modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
-            OperationsOverrides = overrides == null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(overrides.ToString());
+            OperationGroupMapping = operationGroupMapping.ToString() == "" ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupMapping.ToString());
         }
 
         public string OutputFolder { get; }
@@ -37,12 +37,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool HeadAsBoolean { get; }
         public bool SkipCSProjPackageReference { get; }
         public static string ProjectRelativeDirectory = "../";
-        public Dictionary<string, string> OperationsOverrides;
+        public Dictionary<string, string> OperationGroupMapping;
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
             return new Configuration(
-                TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
+                    TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
                 autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
                 autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
                 GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
@@ -59,8 +59,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static T GetRequiredOption<T>(IPluginCommunication autoRest, string name)
         {
-            return autoRest.GetValue<T>(name).GetAwaiter().GetResult() ??
-                throw new InvalidOperationException($"{name} configuration parameter is required");
+            return autoRest.GetValue<T>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
         }
 
         private static string TrimFileSuffix(string path)

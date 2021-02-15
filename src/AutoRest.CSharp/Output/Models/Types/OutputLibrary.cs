@@ -8,6 +8,9 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -25,6 +28,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _codeModel = codeModel;
             _context = context;
+            if (context.Configuration.AzureArm)
+            {
+                DecorateOperationGroup();
+            }
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
@@ -169,6 +176,190 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             EnsureHeaderModels().TryGetValue(operation, out var model);
             return model;
+        }
+
+        private void DecorateOperationGroup()
+        {
+            foreach (var operations in _codeModel.OperationGroups)
+            {
+                operations.ProviderName = _context.Configuration.OperationGroupMapping.ContainsKey(operations.Key) ? _context.Configuration.OperationGroupMapping[operations.Key] : ConstructOperationProviderName(operations);
+                operations.IsTenantResource = IsTenantOnly(MakeTokens(operations), operations.ProviderName);
+            }
+        }
+
+        private string ConstructOperationProviderName(OperationGroup operations)
+        {
+
+            string? providerName = "";
+            var request = GetBestMethod(operations);
+            bool adding = false;
+            if (request != null)
+            {
+                foreach (var segment in GetPathSegments(request.Path))
+                {
+                    var asSplit = segment.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                    if (asSplit?.Length > 1 && asSplit.First().Equals("providers"))
+                    {
+                        adding = true;
+                        providerName = segment.Substring("providers".Length + 2).TrimEnd('/');
+                    }
+                    else if (adding)
+                    {
+                        providerName += segment.TrimEnd('/');
+                    }
+                }
+            }
+            return providerName.TrimEnd('/');
+        }
+        private static List<string> GetPathSegments(string httpRequestUri)
+        {
+            List<string> seg = new List<string>();
+            string canidate = "";
+
+            foreach (var ch in httpRequestUri)
+            {
+                if (ch == '{')
+                {
+                    if (canidate != "" && canidate != "/")
+                    {
+                        seg.Add(canidate);
+                    }
+                    canidate = "";
+                }
+                else if (ch == '}')
+                {
+                    canidate = "";
+                }
+                else
+                {
+                    canidate += ch;
+                }
+            }
+            if (canidate != "" && canidate != "/")
+            {
+                seg.Add(canidate);
+            }
+            return seg;
+        }
+
+        private HttpRequest? GetBestMethod(OperationGroup operations)
+        {
+            HttpRequest? canidate = null;
+            foreach (var x in operations.Operations)
+            {
+                foreach (var serviceRequest in x.Requests)
+                {
+                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
+                    {
+                        if (httpRequest.Method == HttpMethod.Put)
+                        {
+                            return httpRequest;
+                        }
+                        else if (httpRequest.Method == HttpMethod.Delete)
+                        {
+                            canidate = httpRequest;
+                        }
+                        else if (httpRequest.Method == HttpMethod.Patch)
+                        {
+                            canidate ??= httpRequest;
+                        }
+                    }
+                }
+            }
+            return canidate;
+        }
+
+        public bool IsTenantOnly(List<List<ProviderToken>> tokens, string providerName)
+        {
+            bool foundTenant = false;
+            bool foundNonTenant = false;
+            for (int j = 0; j < tokens.Count && (!foundTenant || !foundNonTenant); j++)
+            {
+                var tokenList = tokens[j];
+                for (int i = 0; i < tokenList.Count && (!foundTenant || !foundNonTenant); i++)
+                {
+                    var token = tokenList[i];
+                    foundNonTenant = !foundNonTenant ? token.isFullProvider && !token.noPred && VerifyOperation(token.tokenValue, providerName) : true;
+                    foundTenant = !foundTenant ? token.isFullProvider && token.noPred && VerifyOperation(token.tokenValue, providerName) : true;
+                }
+            }
+            return foundTenant && !foundNonTenant;
+        }
+
+        public static List<ProviderToken> Tokenize(string path)
+        {
+            string canidate = "";
+            var currentToken = new ProviderToken();
+            string currentConstant = "";
+            var tokens = new List<ProviderToken>();
+            foreach (var ch in path)
+            {
+                if (ch == '{')
+                {
+                    if (canidate != "" && canidate != "/")
+                    {
+                        var asSplit = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                        if (asSplit.Length != 0 && asSplit.First().Equals("providers"))
+                        {
+                            currentToken.tokenValue = canidate;
+                            currentToken.noPred = currentConstant == "";
+                            currentToken.isFullProvider = asSplit.Length > 1;
+                        }
+                        currentConstant = canidate;
+                    }
+                    canidate = "";
+                }
+                else if (ch == '}')
+                {
+                    if (canidate != "" && currentToken.tokenValue != "")
+                    {
+                        currentToken.hasReferenceSuccessor = currentConstant == currentToken.tokenValue;
+                        tokens.Add(currentToken);
+                        currentToken = new ProviderToken();
+                    }
+                    currentToken.hadSpecialReference = !currentToken.hadSpecialReference ? currentToken.tokenValue == "" && currentConstant == "" : true;
+                    canidate = "";
+                }
+                else
+                {
+                    canidate += ch;
+                }
+            }
+
+            if (canidate != "" && canidate != "/")
+            {
+                var asSplit = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                if (asSplit.Length > 1 && asSplit.First().Equals("providers"))
+                {
+                    currentToken.noPred = currentConstant == "";
+                    currentToken.isFullProvider = true;
+                    currentToken.tokenValue = canidate;
+                    tokens.Add(currentToken);
+                }
+            }
+            return tokens;
+        }
+
+        public List<List<ProviderToken>> MakeTokens(OperationGroup operations)
+        {
+            List<List<ProviderToken>> tokens = new List<List<ProviderToken>>();
+
+            foreach (var op in operations.Operations)
+            {
+                foreach (var serviceRequest in op.Requests)
+                {
+                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
+                    {
+                        tokens.Add(Tokenize(httpRequest.Path));
+                    }
+                }
+            }
+            return tokens;
+        }
+
+        public bool VerifyOperation(string tokenValue, string providerName)
+        {
+            return tokenValue.Substring("providers".Length + 2).Equals(providerName);
         }
     }
 }

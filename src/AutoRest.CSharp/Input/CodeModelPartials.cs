@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Input
 
     internal partial class DictionaryOfAny
     {
-        private static char[] _formatSplitChar = new[] {',', ' '};
+        private static char[] _formatSplitChar = new[] { ',', ' ' };
 
         public string? Accessibility => TryGetValue("x-accessibility", out object? value) ? value?.ToString() : null;
         public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
@@ -85,7 +85,11 @@ namespace AutoRest.CSharp.Input
 
         public string? HeaderCollectionPrefix => TryGetValue("x-ms-header-collection-prefix", out object? value) ? value?.ToString() : null;
     }
-
+    internal partial class OperationGroup
+    {
+        public string? ProviderName { get; set; }
+        public bool IsTenantResource { get; set; }
+    }
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
@@ -167,6 +171,7 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "nextLinkOperation")]
         public Operation? NextLinkOperation { get; set; }
     }
+
 
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>
