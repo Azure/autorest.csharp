@@ -24,6 +24,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
 
+        private static readonly int ProviderOffset = "providers".Length + 2;
+
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
@@ -201,7 +203,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     if (asSplit?.Length > 1 && asSplit.First().Equals("providers"))
                     {
                         adding = true;
-                        providerName = segment.Substring("providers".Length + 2).TrimEnd('/');
+                        providerName = segment.Substring(ProviderOffset).TrimEnd('/');
                     }
                     else if (adding)
                     {
@@ -359,7 +361,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool VerifyOperation(string tokenValue, string providerName)
         {
-            return tokenValue.Substring("providers".Length + 2).Equals(providerName);
+            return tokenValue.Substring(ProviderOffset).Equals(providerName);
         }
     }
 }
