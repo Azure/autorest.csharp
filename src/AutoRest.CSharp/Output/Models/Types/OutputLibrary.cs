@@ -8,6 +8,9 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -25,6 +28,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _codeModel = codeModel;
             _context = context;
+            if (context.Configuration.AzureArm)
+            {
+                DecorateOperationGroup();
+            }
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
@@ -169,6 +176,96 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             EnsureHeaderModels().TryGetValue(operation, out var model);
             return model;
+        }
+
+        private void DecorateOperationGroup()
+        {
+            foreach (var operations in _codeModel.OperationGroups)
+            {
+                operations.ProviderName = _context.Configuration.OperationGroupMapping.ContainsKey(operations.Key) ? _context.Configuration.OperationGroupMapping[operations.Key] : ConstructOperationProviderName(operations);
+            }
+        }
+
+        private string ConstructOperationProviderName(OperationGroup operations)
+        {
+
+            string? providerName = "";
+            var request = GetBestMethod(operations);
+            bool adding = false;
+            if (request != null)
+            {
+                foreach (var segment in GetPathSegments(request.Path))
+                {
+                    var asSplit = segment.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                    if (asSplit?.Length > 1 && asSplit.First().Equals("providers"))
+                    {
+                        adding = true;
+                        providerName = segment.Substring("providers".Length + 2).TrimEnd('/');
+                    }
+                    else if (adding)
+                    {
+                        providerName += segment.TrimEnd('/');
+                    }
+                }
+            }
+            return providerName.TrimEnd('/');
+        }
+        private static List<string> GetPathSegments(string httpRequestUri)
+        {
+            List<string> seg = new List<string>();
+            string canidate = "";
+
+            foreach (var ch in httpRequestUri)
+            {
+                if (ch == '{')
+                {
+                    if (canidate != "" && canidate != "/")
+                    {
+                        seg.Add(canidate);
+                    }
+                    canidate = "";
+                }
+                else if (ch == '}')
+                {
+                    canidate = "";
+                }
+                else
+                {
+                    canidate += ch;
+                }
+            }
+            if (canidate != "" && canidate != "/")
+            {
+                seg.Add(canidate);
+            }
+            return seg;
+        }
+
+        private HttpRequest? GetBestMethod(OperationGroup operations)
+        {
+            HttpRequest? canidate = null;
+            foreach (var x in operations.Operations)
+            {
+                foreach (var serviceRequest in x.Requests)
+                {
+                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
+                    {
+                        if (httpRequest.Method == HttpMethod.Put)
+                        {
+                            return httpRequest;
+                        }
+                        else if (httpRequest.Method == HttpMethod.Delete)
+                        {
+                            canidate = httpRequest;
+                        }
+                        else if (httpRequest.Method == HttpMethod.Patch)
+                        {
+                            canidate ??= httpRequest;
+                        }
+                    }
+                }
+            }
+            return canidate;
         }
     }
 }
