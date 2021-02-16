@@ -5,6 +5,7 @@
 
 ``` yaml
 title: Azure.Storage.Tables
+azure-arm: false
 require: $(this-folder)/../../readme.md
 #branch:tablesSwagger
 input-file:
