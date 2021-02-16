@@ -244,12 +244,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return constants;
         }
 
-        private HttpRequest? GetBestMethod(OperationGroup operations)
+        private HttpRequest? GetBestMethod(OperationGroup operationsGroup)
         {
             HttpRequest? canidate = null;
-            foreach (var x in operations.Operations)
+            foreach (var operation in operationsGroup.Operations)
             {
-                foreach (var serviceRequest in x.Requests)
+                foreach (var serviceRequest in operation.Requests)
                 {
                     if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
                     {
