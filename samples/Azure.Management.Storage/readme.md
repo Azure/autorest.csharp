@@ -15,4 +15,7 @@ payload-flattening-threshold: 2
 
 modelerfour:
   lenient-model-deduplication: true
+
+operation-group-mapping:
+   Operations: /providers/Microsoft.Storage/operations
 ```
