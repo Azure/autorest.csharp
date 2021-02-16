@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private string ConstructOperationResourseType(OperationGroup operationsGroup)
         {
 
-            string providerName = "";
+            string resourceName = "";
             var request = GetBestMethod(operationsGroup);
             bool adding = false;
             if (request != null)
@@ -202,15 +202,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                     if (asSplit?.Length > 1 && asSplit.First().Equals(_proivders))
                     {
                         adding = true;
-                        providerName = segment.Substring(_proivders.Length + 2).TrimEnd('/');
+                        resourceName = segment.Substring(_proivders.Length + 2).TrimEnd('/');
                     }
                     else if (adding)
                     {
-                        providerName += segment.TrimEnd('/');
+                        resourceName += segment.TrimEnd('/');
                     }
                 }
             }
-            return providerName.TrimEnd('/');
+            return resourceName.TrimEnd('/');
         }
 
         private static List<string> GetConstants(string httpRequestUri)
