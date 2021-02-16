@@ -88,7 +88,7 @@ schemas: !<!Schemas>
           name: ComputeOperationValueDisplayProvider
           description: The resource provider for the operation.
       protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_25
+    - !<!StringSchema> &ref_26
       type: string
       apiVersions:
         - !<!ApiVersion> 
@@ -158,6 +158,16 @@ schemas: !<!Schemas>
           name: AvailabilitySetListResultNextLink
           description: The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_21
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2020-06-01'
+      language: !<!Languages> 
+        default:
+          name: AvailabilitySetUpdateSku
+          description: sku
+      protocol: !<!Protocols> {}
   sealedChoices:
     - !<!SealedChoiceSchema> &ref_14
       choices:
@@ -190,7 +200,7 @@ schemas: !<!Schemas>
           description: The level code.
       protocol: !<!Protocols> {}
   constants:
-    - !<!ConstantSchema> &ref_26
+    - !<!ConstantSchema> &ref_27
       type: constant
       value: !<!ConstantValue> 
         value: '2020-06-01'
@@ -200,7 +210,7 @@ schemas: !<!Schemas>
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_29
+    - !<!ConstantSchema> &ref_30
       type: constant
       value: !<!ConstantValue> 
         value: application/json
@@ -223,14 +233,14 @@ schemas: !<!Schemas>
           description: The time of the status.
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_30
+    - !<!ObjectSchema> &ref_31
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: '2020-06-01'
       properties:
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_21
+          schema: !<!ArraySchema> &ref_24
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -340,14 +350,14 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
     - *ref_7
-    - !<!ObjectSchema> &ref_33
+    - !<!ObjectSchema> &ref_34
       type: object
       apiVersions:
         - !<!ApiVersion> 
           version: '2020-06-01'
       properties:
         - !<!Property> 
-          schema: !<!ArraySchema> &ref_24
+          schema: !<!ArraySchema> &ref_25
             type: array
             apiVersions:
               - !<!ApiVersion> 
@@ -571,14 +581,90 @@ schemas: !<!Schemas>
     - *ref_19
     - *ref_12
     - *ref_20
+    - !<!ObjectSchema> 
+      type: object
+      apiVersions:
+        - !<!ApiVersion> 
+          version: '2020-06-01'
+      properties:
+        - !<!Property> 
+          schema: *ref_21
+          serializedName: sku
+          language: !<!Languages> 
+            default:
+              name: sku
+              description: sku
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_9
+          flattenedNames:
+            - properties
+            - platformUpdateDomainCount
+          serializedName: platformUpdateDomainCount
+          language: !<!Languages> 
+            default:
+              name: platformUpdateDomainCount
+              description: Update Domain count.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_10
+          flattenedNames:
+            - properties
+            - platformFaultDomainCount
+          serializedName: platformFaultDomainCount
+          language: !<!Languages> 
+            default:
+              name: platformFaultDomainCount
+              description: Fault Domain count.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_22
+          flattenedNames:
+            - properties
+            - virtualMachines
+          serializedName: virtualMachines
+          language: !<!Languages> 
+            default:
+              name: virtualMachines
+              description: A list of references to all virtual machines in the availability set.
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_12
+          flattenedNames:
+            - properties
+            - proximityPlacementGroup
+          serializedName: proximityPlacementGroup
+          language: !<!Languages> 
+            default:
+              name: proximityPlacementGroup
+              description: 'Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01.'
+          protocol: !<!Protocols> {}
+        - !<!Property> 
+          schema: *ref_23
+          flattenedNames:
+            - properties
+            - statuses
+          readOnly: true
+          serializedName: statuses
+          language: !<!Languages> 
+            default:
+              name: statuses
+              description: The resource status information.
+          protocol: !<!Protocols> {}
+      language: !<!Languages> 
+        default:
+          name: AvailabilitySetUpdate
+          description: Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated.
+          namespace: ''
+      protocol: !<!Protocols> {}
   arrays:
-    - *ref_21
+    - *ref_24
     - *ref_22
     - *ref_23
-    - *ref_24
+    - *ref_25
 globalParameters:
-  - !<!Parameter> &ref_31
-    schema: *ref_25
+  - !<!Parameter> &ref_32
+    schema: *ref_26
     implementation: Client
     required: true
     extensions:
@@ -591,7 +677,7 @@ globalParameters:
     protocol: !<!Protocols> 
       http: !<!HttpParameter> 
         in: path
-  - !<!Parameter> &ref_27
+  - !<!Parameter> &ref_28
     schema: *ref_0
     clientDefaultValue: 'https://management.azure.com'
     implementation: Client
@@ -607,8 +693,8 @@ globalParameters:
     protocol: !<!Protocols> 
       http: !<!HttpParameter> 
         in: uri
-  - !<!Parameter> &ref_28
-    schema: *ref_26
+  - !<!Parameter> &ref_29
+    schema: *ref_27
     implementation: Client
     origin: 'modelerfour:synthesized/api-version'
     required: true
@@ -629,13 +715,13 @@ operationGroups:
           - !<!ApiVersion> 
             version: '2020-06-01'
         parameters:
-          - *ref_27
           - *ref_28
+          - *ref_29
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_29
+                schema: *ref_30
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -660,7 +746,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_30
+            schema: *ref_31
             language: !<!Languages> 
               default:
                 name: ''
@@ -695,9 +781,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: '2020-06-01'
         parameters:
-          - *ref_27
-          - !<!Parameter> &ref_32
-            schema: *ref_25
+          - *ref_28
+          - !<!Parameter> &ref_33
+            schema: *ref_26
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -708,13 +794,13 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - *ref_28
-          - *ref_31
+          - *ref_29
+          - *ref_32
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_29
+                schema: *ref_30
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -737,10 +823,10 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_32
+          - *ref_33
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_33
+            schema: *ref_34
             language: !<!Languages> 
               default:
                 name: ''
@@ -767,9 +853,9 @@ operationGroups:
           - !<!ApiVersion> 
             version: '2020-06-01'
         parameters:
-          - *ref_27
-          - !<!Parameter> &ref_34
-            schema: *ref_25
+          - *ref_28
+          - !<!Parameter> &ref_35
+            schema: *ref_26
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -780,8 +866,8 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - !<!Parameter> &ref_35
-            schema: *ref_25
+          - !<!Parameter> &ref_36
+            schema: *ref_26
             implementation: Method
             required: true
             language: !<!Languages> 
@@ -792,13 +878,13 @@ operationGroups:
             protocol: !<!Protocols> 
               http: !<!HttpParameter> 
                 in: path
-          - *ref_28
-          - *ref_31
+          - *ref_29
+          - *ref_32
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_29
+                schema: *ref_30
                 implementation: Method
                 origin: 'modelerfour:synthesized/accept'
                 required: true
@@ -821,11 +907,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_34
           - *ref_35
+          - *ref_36
         responses:
           - !<!SchemaResponse> 
-            schema: *ref_30
+            schema: *ref_31
             language: !<!Languages> 
               default:
                 name: ''
