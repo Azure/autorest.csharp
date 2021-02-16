@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Input
 
     internal partial class OperationGroup
     {
-        public string? ResourceType { get; set; }
+        public string ResourceType { get; set; }
     }
 
     internal partial class ServiceResponse
