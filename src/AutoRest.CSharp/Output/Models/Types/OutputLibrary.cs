@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             return providerName.TrimEnd('/');
         }
-        
+
         private static List<string> GetConstants(string httpRequestUri)
         {
             List<string> constants = new List<string>();
