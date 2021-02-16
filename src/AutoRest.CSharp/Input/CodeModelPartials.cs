@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Input
     }
     internal partial class OperationGroup
     {
-        public string? ProviderName { get; set; }
+        public string? ResourceType { get; set; }
     }
     internal partial class ServiceResponse
     {
@@ -170,7 +170,6 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "nextLinkOperation")]
         public Operation? NextLinkOperation { get; set; }
     }
-
 
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>

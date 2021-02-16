@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, RestClient>? _restClients;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
+        private readonly string _proivders = "providers";
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -180,27 +181,28 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private void DecorateOperationGroup()
         {
-            foreach (var operations in _codeModel.OperationGroups)
+            foreach (var operationsGroup in _codeModel.OperationGroups)
             {
-                operations.ProviderName = _context.Configuration.OperationGroupMapping.ContainsKey(operations.Key) ? _context.Configuration.OperationGroupMapping[operations.Key] : ConstructOperationProviderName(operations);
+                string? resourceType = "";
+                operationsGroup.ResourceType = _context.Configuration.OperationGroupMapping.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
             }
         }
 
-        private string ConstructOperationProviderName(OperationGroup operations)
+        private string ConstructOperationResourseType(OperationGroup operationsGroup)
         {
 
-            string? providerName = "";
-            var request = GetBestMethod(operations);
+            string providerName = "";
+            var request = GetBestMethod(operationsGroup);
             bool adding = false;
             if (request != null)
             {
-                foreach (var segment in GetPathSegments(request.Path))
+                foreach (var segment in GetConstants(request.Path))
                 {
                     var asSplit = segment.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                    if (asSplit?.Length > 1 && asSplit.First().Equals("providers"))
+                    if (asSplit?.Length > 1 && asSplit.First().Equals(_proivders))
                     {
                         adding = true;
-                        providerName = segment.Substring("providers".Length + 2).TrimEnd('/');
+                        providerName = segment.Substring(_proivders.Length + 2).TrimEnd('/');
                     }
                     else if (adding)
                     {
@@ -208,11 +210,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
             }
+            if (request == null || providerName == "")
+            {
+                throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
+                "\nPlease try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
+            }
             return providerName.TrimEnd('/');
         }
-        private static List<string> GetPathSegments(string httpRequestUri)
+        
+        private static List<string> GetConstants(string httpRequestUri)
         {
-            List<string> seg = new List<string>();
+            List<string> constants = new List<string>();
             string canidate = "";
 
             foreach (var ch in httpRequestUri)
@@ -221,7 +229,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (canidate != "" && canidate != "/")
                     {
-                        seg.Add(canidate);
+                        constants.Add(canidate);
                     }
                     canidate = "";
                 }
@@ -236,9 +244,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             if (canidate != "" && canidate != "/")
             {
-                seg.Add(canidate);
+                constants.Add(canidate);
             }
-            return seg;
+            return constants;
         }
 
         private HttpRequest? GetBestMethod(OperationGroup operations)
