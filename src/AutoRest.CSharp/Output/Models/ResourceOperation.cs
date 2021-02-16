@@ -15,16 +15,20 @@ namespace AutoRest.CSharp.Output.Models
     {
         private const string ClientSuffixValue = "Client";
         private const string OperationsSuffixValue = "Operations";
-        private OperationGroup _operationGroup;
-        private RestClient? _restClient;
+        private const string ContainerSuffixValue = "Container";
+
+        protected OperationGroup _operationGroup;
+        protected RestClient? _restClient;
 
         public ResourceOperation(OperationGroup operationGroup, BuildContext context)
             : base(context)
         {
             _operationGroup = operationGroup;
             string clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
-            DefaultName = clientPrefix + OperationsSuffixValue;
+            DefaultName = clientPrefix + SuffixValue;
         }
+
+        protected virtual string SuffixValue => OperationsSuffixValue;
 
         protected override string DefaultName { get; }
 
@@ -48,10 +52,15 @@ namespace AutoRest.CSharp.Output.Models
                 name = name.Substring(0, name.Length - ClientSuffixValue.Length);
             }
 
+            if (name.EndsWith(ContainerSuffixValue) && name.Length >= ContainerSuffixValue.Length)
+            {
+                name = name.Substring(0, name.Length - ContainerSuffixValue.Length);
+            }
+
             return name;
         }
 
-        protected static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
+        protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
             StringBuilder summary = new StringBuilder();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?

@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new ResponseHeaderGroupWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
+            var resourceContainerWriter = new ResourceContainerWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -91,6 +92,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     resourceOperationWriter.WriteClient(codeWriter, resourceOperation);
 
                     project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
+                }
+
+                foreach (var resourceContainer in context.Library.ResourceContainers)
+                {
+                    var codeWriter = new CodeWriter();
+                    resourceContainerWriter.WriteClient(codeWriter, resourceContainer);
+
+                    project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
                 }
             }
             else
