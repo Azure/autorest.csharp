@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ModelNamespace = modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
-            OperationGroupMapping = operationGroupMapping.ToString() == "" ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupMapping.ToString());
+            OperationGroupMapping = operationGroupMapping.ToString() == string.Empty ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupMapping.ToString());
         }
 
         public string OutputFolder { get; }
