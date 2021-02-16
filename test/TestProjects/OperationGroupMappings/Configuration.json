@@ -1,5 +1,0 @@
-{"OutputFolder":".","Namespace":"OperationGroupMappings","LibraryName":null,"SharedSourceFolders":["..\\..\\..\\src\\assets\\Generator.Shared","..\\..\\..\\src\\assets\\Azure.Core.Shared"],"AzureArm":true,"PublicClients":true,"ModelNamespace":true,"HeadAsBoolean":false,"SkipCSProjPackageReference":true,
-    "OperationGroupMapping": {
-       "Operations": "Microsoft.Compute/operations"
-    }
-}
