@@ -199,7 +199,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 foreach (var segment in GetConstants(request.Path))
                 {
                     var asSplit = segment.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                    if (asSplit?.Length > 1 && asSplit.First().Equals(_proivders))
+                    if (asSplit?.Length > 1 && asSplit[0].Equals(_proivders))
                     {
                         adding = true;
                         resourceName = segment.Substring(_proivders.Length + 2).TrimEnd('/');
