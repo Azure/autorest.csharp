@@ -57,9 +57,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     writer.WriteBoolean(nameof(Configuration.ModelNamespace), configuration.ModelNamespace);
                     writer.WriteBoolean(nameof(Configuration.HeadAsBoolean), configuration.HeadAsBoolean);
                     writer.WriteBoolean(nameof(Configuration.SkipCSProjPackageReference), configuration.SkipCSProjPackageReference);
-                    JsonSerializerOptions encoder = new JsonSerializerOptions();
-                    encoder.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
-                    writer.WriteString(nameof(Configuration.OperationGroupMapping), JsonSerializer.Serialize<Dictionary<string, string>>(configuration.OperationGroupMapping, encoder));
+                    writer.WriteStartObject(nameof(Configuration.OperationGroupMapping));
+                    foreach (var keyval in configuration.OperationGroupMapping)
+                    {
+                        writer.WriteString(keyval.Key, keyval.Value);
+                    }
+                    writer.WriteEndObject();
                     writer.WriteEndObject();
                 }
 
