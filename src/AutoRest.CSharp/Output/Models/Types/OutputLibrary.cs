@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, RestClient>? _restClients;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
-        private readonly string _proivders = "providers";
+        private const string Providers = "providers";
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -199,10 +199,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 foreach (var segment in GetConstants(request.Path))
                 {
                     var asSplit = segment.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                    if (asSplit?.Length > 1 && asSplit[0].Equals(_proivders))
+                    if (asSplit?.Length > 1 && asSplit[0].Equals(Providers))
                     {
                         adding = true;
-                        resourceName = segment.Substring(_proivders.Length + 2).TrimEnd('/');
+                        resourceName = segment.Substring(Providers.Length + 2).TrimEnd('/');
                     }
                     else if (adding)
                     {
