@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.Output.Models
         private const string OperationsSuffixValue = "Operations";
         private const string ContainerSuffixValue = "Container";
 
-
         protected OperationGroup _operationGroup;
         protected RestClient? _restClient;
 
