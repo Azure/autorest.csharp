@@ -85,10 +85,12 @@ namespace AutoRest.CSharp.Input
 
         public string? HeaderCollectionPrefix => TryGetValue("x-ms-header-collection-prefix", out object? value) ? value?.ToString() : null;
     }
+
     internal partial class OperationGroup
     {
         public string? ResourceType { get; set; }
     }
+
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
