@@ -17,5 +17,8 @@ modelerfour:
   lenient-model-deduplication: true
 
 operation-group-mapping:
-   Operations: /providers/Microsoft.Storage/operations
+   Operations: Microsoft.Storage/operations
+   Skus: Microsoft.Storage/skus
+   Usages: Microsoft.Storage/locations/usages
+   PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
 ```
