@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
     {
         public static async Task RunAsync(string[] args)
         {
-            var basePath = args.Single(a=> !a.StartsWith("--"));
+            var basePath = args.Single(a => !a.StartsWith("--"));
 
             var configuration = LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
@@ -57,6 +57,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     writer.WriteBoolean(nameof(Configuration.ModelNamespace), configuration.ModelNamespace);
                     writer.WriteBoolean(nameof(Configuration.HeadAsBoolean), configuration.HeadAsBoolean);
                     writer.WriteBoolean(nameof(Configuration.SkipCSProjPackageReference), configuration.SkipCSProjPackageReference);
+                    writer.WriteString(nameof(Configuration.OperationGroupMapping), JsonSerializer.Serialize<Dictionary<string, string>>(configuration.OperationGroupMapping));
                     writer.WriteEndObject();
                 }
 
