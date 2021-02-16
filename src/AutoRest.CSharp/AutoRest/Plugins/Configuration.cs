@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
                 autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("skip-csproj-packagereference").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<JsonElement?>("OperationGroupMapping").GetAwaiter().GetResult()
+                autoRest.GetValue<JsonElement?>("operation-group-mapping").GetAwaiter().GetResult()
             );
 
         }
