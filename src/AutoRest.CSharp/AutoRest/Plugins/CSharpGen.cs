@@ -46,15 +46,37 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
 
+            /*var operationGroups = new Dictionary<string, OperationGroup>();
+            if (context.Configuration.AzureArm)
+            {
+                foreach (var operation in context.Library.OperationGroups)
+                {
+                    var key = operation.Key;
+                    if (key.EndsWith('s'))
+                    {
+                        operationGroups.Add(operation.Key.Substring(0, operation.Key.Length - 1), operation);
+                        Console.WriteLine(operation.Key.Substring(0, operation.Key.Length - 1));
+                    }
+                    else
+                    {
+                        operationGroups.Add(operation.Key, operation);
+                        Console.WriteLine(operation.Key);
+                    }
+                }
+            }*/
             foreach (var model in context.Library.Models)
             {
+                var name = model.Type.Name;
+                /*if (context.Configuration.AzureArm && operationGroups.ContainsKey(name))
+                {
+                    continue;
+                }*/
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
-                var name = model.Type.Name;
                 project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
@@ -119,7 +141,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-            if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
+            if (string.IsNullOrEmpty(codeModelFileName))
+                throw new Exception("Generator did not receive the code model file.");
 
             var configuration = Configuration.GetConfiguration(autoRest);
 

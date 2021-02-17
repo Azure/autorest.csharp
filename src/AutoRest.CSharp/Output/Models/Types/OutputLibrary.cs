@@ -3,11 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -22,14 +24,39 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
+        //private Dictionary<string, OperationGroup> _operationGroups;
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
             _context = context;
+            /*_operationGroups = new Dictionary<string, OperationGroup>();
+            foreach (var operation in _codeModel.OperationGroups)
+            {
+                var key = operation.Key;
+                _operationGroups.Add(operation.Key, operation);
+            }*/
+            /* foreach (var operation in _codeModel.OperationGroups)
+             {
+                 var key = operation.Key;
+                 if (key.EndsWith('s'))
+                 {
+                     _operationGroups.Add(operation.Key.Substring(0, operation.Key.Length - 1), operation);
+                     Console.WriteLine(operation.Key.Substring(0, operation.Key.Length - 1));
+                 }
+                 else
+                 {
+                     _operationGroups.Add(operation.Key, operation);
+                     Console.WriteLine(operation.Key);
+                 }
+
+             }*/
+            Console.WriteLine("---------------------------------------------");
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+
+        //public ICollection<OperationGroup> OperationGroups => GetOperationGroups();
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
 
@@ -42,6 +69,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
         public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
+
+        /*private ICollection<OperationGroup> GetOperationGroups()
+        {
+            return _codeModel.OperationGroups;
+        }*/
 
         private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
         {
@@ -174,6 +206,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
+
+            /*if (_context.Configuration.AzureArm)
+            {
+                allSchemas = allSchemas.Where(s => !_operationGroups.ContainsKey(s.Name));
+                var count = 0;
+                foreach (var schema in allSchemas)
+                {
+                    Console.WriteLine(schema.Name);
+                    count++;
+                }
+                Console.WriteLine(count);  // 205, 220
+            }*/
 
             return allSchemas.ToDictionary(schema => schema, BuildModel);
         }
