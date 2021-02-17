@@ -107,7 +107,7 @@ $projectNames =
     'CognitiveSearch',
     'Azure.AI.FormRecognizer',
     'Azure.Storage.Tables',
-    'Azure.ResourceManager.Compute',
+    'Azure.ResourceManager.Sample',
     'Azure.Management.Storage',
     'Azure.Network.Management.Interface'
 
