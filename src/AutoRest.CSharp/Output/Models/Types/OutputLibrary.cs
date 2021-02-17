@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
             }
-            if (request == null || providerName == "")
+            if (request == null || resourceName == "")
             {
                 throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
                 "\nPlease try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
