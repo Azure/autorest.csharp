@@ -57,12 +57,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     writer.WriteBoolean(nameof(Configuration.ModelNamespace), configuration.ModelNamespace);
                     writer.WriteBoolean(nameof(Configuration.HeadAsBoolean), configuration.HeadAsBoolean);
                     writer.WriteBoolean(nameof(Configuration.SkipCSProjPackageReference), configuration.SkipCSProjPackageReference);
-                    writer.WriteStartObject(nameof(Configuration.OperationGroupMapping));
-                    foreach (var keyval in configuration.OperationGroupMapping)
+                    if (configuration.OperationGroupMapping.Count > 0)
                     {
-                        writer.WriteString(keyval.Key, keyval.Value);
+                        writer.WriteStartObject(nameof(Configuration.OperationGroupMapping));
+                        foreach (var keyval in configuration.OperationGroupMapping)
+                        {
+                            writer.WriteString(keyval.Key, keyval.Value);
+                        }
+                        writer.WriteEndObject();
                     }
-                    writer.WriteEndObject();
                     writer.WriteEndObject();
                 }
 
