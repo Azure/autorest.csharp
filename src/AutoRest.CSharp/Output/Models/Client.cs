@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Output.Models
     internal class Client: ClientBase
     {
         private readonly OperationGroup _operationGroup;
-        private readonly BuildContext _context;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
         private LongRunningOperationMethod[]? _longRunningOperationMethods;
@@ -25,7 +24,6 @@ namespace AutoRest.CSharp.Output.Models
         public Client(OperationGroup operationGroup, BuildContext context): base(context)
         {
             _operationGroup = operationGroup;
-            _context = context;
 
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
             DefaultName = clientPrefix + ClientSuffix;
@@ -34,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public string ClientShortName { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
-        public RestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
+        public RestClient RestClient => _restClient ??= Context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
@@ -88,7 +86,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         yield return new LongRunningOperationMethod(
                             name,
-                            _context.Library.FindLongRunningOperation(operation),
+                            Context.Library.FindLongRunningOperation(operation),
                             startMethod,
                             new Diagnostic($"{Declaration.Name}.Start{name}")
                         );

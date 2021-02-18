@@ -19,6 +19,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<Schema, TypeProvider>? _models;
         private Dictionary<OperationGroup, Client>? _clients;
         private Dictionary<OperationGroup, RestClient>? _restClients;
+        private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
+        private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
         private const string Providers = "providers";
@@ -36,6 +38,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
+
+        public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
+
+        public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
         public IEnumerable<Client> Clients => EnsureClients().Values;
 
@@ -127,6 +133,39 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return _restClients;
         }
+
+        private Dictionary<OperationGroup, ResourceOperation> EnsureResourceOperations()
+        {
+            if (_resourceOperations != null)
+            {
+                return _resourceOperations;
+            }
+
+            _resourceOperations = new Dictionary<OperationGroup, ResourceOperation>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
+            }
+
+            return _resourceOperations;
+        }
+
+        private Dictionary<OperationGroup, ResourceContainer> EnsureResourceContainers()
+        {
+            if (_resourceContainers != null)
+            {
+                return _resourceContainers;
+            }
+
+            _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+            }
+
+            return _resourceContainers;
+        }
+
 
         public TypeProvider FindTypeForSchema(Schema schema)
         {
