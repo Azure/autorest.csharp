@@ -260,15 +260,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No \"providers\" string found in the URI");
             }
-            var resourceType = ConstructResourceName(method.Path.Substring(indexOfProvider + Providers.Length + 1));
+            var resourceType = ConstructResourceType(method.Path.Substring(indexOfProvider + Providers.Length));
 
             return resourceType.ToString().TrimEnd('/');
         }
 
-        private static string ConstructResourceName(string httpRequestUri)
+        private static string ConstructResourceType(string httpRequestUri)
         {
             var returnString = new StringBuilder();
-            var currentString = new StringBuilder();
             var insideBrace = false;
 
             foreach (var ch in httpRequestUri)
