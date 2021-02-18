@@ -9,6 +9,7 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Utilities;
 using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -17,46 +18,92 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext _context;
-        private Dictionary<Schema, TypeProvider>? _models;
         private Dictionary<OperationGroup, Client>? _clients;
         private Dictionary<OperationGroup, RestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
-        //private Dictionary<string, OperationGroup> _operationGroups;
+        private Dictionary<Schema, OperationGroup> _operationGroups;
+        private Dictionary<Schema, TypeProvider>? _models;
+        private Dictionary<Schema, TypeProvider>? _resourceModels;
+
+        private Dictionary<Schema, TypeProvider> SchemaMap
+        {
+            get
+            {
+                if (_models is null)
+                {
+                    BuildModels();
+                }
+#pragma warning disable CS8603 // Possible null reference return.
+                return _models;
+#pragma warning restore CS8603 // Possible null reference return.
+            }
+        }
+
+        private Dictionary<Schema, TypeProvider> ResourceSchemaMap
+        {
+            get
+            {
+                if (_resourceModels is null)
+                {
+                    BuildModels();
+                }
+#pragma warning disable CS8603 // Possible null reference return.
+                return _resourceModels;
+#pragma warning restore CS8603 // Possible null reference return.
+            }
+        }
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
             _context = context;
-            /*_operationGroups = new Dictionary<string, OperationGroup>();
-            foreach (var operation in _codeModel.OperationGroups)
-            {
-                var key = operation.Key;
-                _operationGroups.Add(operation.Key, operation);
-            }*/
-            /* foreach (var operation in _codeModel.OperationGroups)
-             {
-                 var key = operation.Key;
-                 if (key.EndsWith('s'))
-                 {
-                     _operationGroups.Add(operation.Key.Substring(0, operation.Key.Length - 1), operation);
-                     Console.WriteLine(operation.Key.Substring(0, operation.Key.Length - 1));
-                 }
-                 else
-                 {
-                     _operationGroups.Add(operation.Key, operation);
-                     Console.WriteLine(operation.Key);
-                 }
+            _operationGroups = new Dictionary<Schema, OperationGroup>();
 
-             }*/
-            Console.WriteLine("---------------------------------------------");
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _operationGroups.Add(GetSchemaFromOperationGroup(operationGroup), operationGroup);
+            }
+        }
+
+        private Schema GetSchemaFromOperationGroup(OperationGroup operationGroup)
+        {
+            foreach (var operation in operationGroup.Operations)
+            {
+                var putOperation = GetPut(operation);
+                var param = GetBodySchema(putOperation);
+                return param.Schema;
+            }
+            throw new Exception("schema not found");
+        }
+
+        private RequestParameter GetBodySchema(ServiceRequest request)
+        {
+            foreach (var param in request.Parameters)
+            {
+                var httpParam = param.Protocol.Http as HttpParameter;
+                if (httpParam?.In == ParameterLocation.Body)
+                    return param;
+            }
+            throw new Exception("No body param found");
+        }
+
+        private ServiceRequest GetPut(Operation operation)
+        {
+            foreach (var request in operation.Requests)
+            {
+                var http = request.Protocol.Http as HttpRequest;
+                if (http?.Method == HttpMethod.Put)
+                    return request;
+            }
+            throw new Exception("No put found");
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
-        //public ICollection<OperationGroup> OperationGroups => GetOperationGroups();
+        public IEnumerable<TypeProvider> ResourceModels => ResourceSchemaMap.Values;
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
 
@@ -69,11 +116,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
         public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
-
-        /*private ICollection<OperationGroup> GetOperationGroups()
-        {
-            return _codeModel.OperationGroups;
-        }*/
 
         private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
         {
@@ -195,31 +237,38 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public TypeProvider FindTypeForSchema(Schema schema)
         {
-            return SchemaMap[schema];
+            TypeProvider? result;
+            if (!SchemaMap.TryGetValue(schema, out result))
+            {
+                if (!ResourceSchemaMap.TryGetValue(schema, out result))
+                {
+                    throw new KeyNotFoundException($"{schema.Name} was not found in model or resource schema map");
+                }
+            }
+            return result;
         }
 
-        private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
-
-        private Dictionary<Schema, TypeProvider> BuildModels()
+        private void BuildModels()
         {
+            _models = new Dictionary<Schema, TypeProvider>();
+            _resourceModels = new Dictionary<Schema, TypeProvider>();
+
             var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
 
-            /*if (_context.Configuration.AzureArm)
+            foreach (var schema in allSchemas)
             {
-                allSchemas = allSchemas.Where(s => !_operationGroups.ContainsKey(s.Name));
-                var count = 0;
-                foreach (var schema in allSchemas)
+                if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema))
                 {
-                    Console.WriteLine(schema.Name);
-                    count++;
+                    _resourceModels.Add(schema, BuildModel(schema));
                 }
-                Console.WriteLine(count);  // 205, 220
-            }*/
-
-            return allSchemas.ToDictionary(schema => schema, BuildModel);
+                else
+                {
+                    _models.Add(schema, BuildModel(schema));
+                }
+            }
         }
 
         private TypeProvider BuildModel(Schema schema) => schema switch
