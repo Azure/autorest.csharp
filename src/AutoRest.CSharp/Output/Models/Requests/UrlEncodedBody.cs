@@ -7,7 +7,9 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class UrlEncodedBody : RequestBody
     {
-        public List<(string, ReferenceOrConstant)> Values = new List<(string, ReferenceOrConstant)>();
+        public record NamedReferenceOrConstant (string Name, ReferenceOrConstant Value);
+
+        public List<NamedReferenceOrConstant> Values = new List<NamedReferenceOrConstant>();
 
         public UrlEncodedBody()
         {
@@ -15,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
         public void Add (string parameter, ReferenceOrConstant value)
         {
-            Values.Add((parameter, value));
+            Values.Add(new NamedReferenceOrConstant (parameter, value));
         }
     }
 }
