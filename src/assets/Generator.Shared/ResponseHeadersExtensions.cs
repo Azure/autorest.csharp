@@ -74,7 +74,7 @@ namespace Azure.Core
 
         public static bool TryGetValue(this ResponseHeaders headers, string prefix, out IDictionary<string, string> value)
         {
-            value = new Dictionary<string, string>();
+            value = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             foreach (HttpHeader item in headers)
             {
