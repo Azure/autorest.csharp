@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
     {
         public record NamedReferenceOrConstant (string Name, ReferenceOrConstant Value);
 
-        public List<NamedReferenceOrConstant> Values = new List<NamedReferenceOrConstant>();
+        public List<NamedReferenceOrConstant> Values { get; set; }= new List<NamedReferenceOrConstant>();
 
         public UrlEncodedBody()
         {
