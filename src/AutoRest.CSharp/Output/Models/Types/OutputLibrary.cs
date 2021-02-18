@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                                             Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
             }
             var indexOfProvider = method.Path.IndexOf(Providers);
-            if (indexOfProvider < -1)
+            if (indexOfProvider < 0)
             {
                 throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {Providers} string found in the URI");
             }
