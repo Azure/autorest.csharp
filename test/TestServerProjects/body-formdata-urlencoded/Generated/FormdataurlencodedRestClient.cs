@@ -49,8 +49,14 @@ namespace body_formdata_urlencoded
             content.Add("pet_type", petType.ToString());
             content.Add("pet_food", petFood.ToString());
             content.Add("pet_age", petAge.ToString());
-            content.Add("name", name?.ToString());
-            content.Add("status", status?.ToString());
+            if (name != null)
+            {
+                content.Add("name", name);
+            }
+            if (status != null)
+            {
+                content.Add("status", status);
+            }
             content.Build();
             request.Content = content;
             return message;

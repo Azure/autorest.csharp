@@ -250,9 +250,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         foreach (var (name, value) in urlEncodedRequestBody.Values)
                         {
-                            writer.Append($"content.Add(\"{name}\",");
-                            WriteConstantOrParameter(writer, value);
-                            writer.Line($"{(value.Type.IsNullable ? "?" : "")}.ToString());");
+                            using (WriteValueNullCheck(writer, value))
+                            {
+                                writer.Append($"content.Add({name:L},");
+                                WriteConstantOrParameterAsString(writer, value);
+                                writer.Line($");");
+                            }
                         }
                         writer.Append($"content.Build();\n");
                         writer.Append($"request.Content = content;\n");
@@ -375,6 +378,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 WriteStatusCodeSwitch(writer, messageVariable, operation, async);
             }
             writer.Line();
+        }
+
+        private void WriteConstantOrParameterAsString(CodeWriter writer, ReferenceOrConstant constantOrReference)
+        {
+            WriteConstantOrParameter(writer, constantOrReference, enumAsString: true);
+            if (constantOrReference.Type.IsFrameworkType &&constantOrReference.Type.FrameworkType != typeof(string))
+            {
+                writer.Append($".ToString()");
+            }
         }
 
         private void WriteConstantOrParameter(CodeWriter writer, ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool enumAsString = false)
