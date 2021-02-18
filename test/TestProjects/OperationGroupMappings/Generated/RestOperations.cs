@@ -15,20 +15,20 @@ using Azure.Core.Pipeline;
 
 namespace OperationGroupMappings
 {
-    internal partial class RestClient
+    internal partial class RestOperations
     {
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of RestClient. </summary>
+        /// <summary> Initializes a new instance of RestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public RestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2020-06-01")
+        public RestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
             endpoint ??= new Uri("https://management.azure.com");
             if (apiVersion == null)
