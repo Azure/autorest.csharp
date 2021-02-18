@@ -13,31 +13,19 @@ namespace Azure.Core
 {
     internal class FormUrlEncodedContent : RequestContent
     {
-        internal class Builder
+        private List<KeyValuePair<string?, string?>> _values = new List<KeyValuePair<string?, string?>>();
+        private Encoding Latin1 = Encoding.GetEncoding("iso-8859-1");
+        private byte[] _bytes = new byte[0];
+
+        public void Add (string parameter, string value)
         {
-            private List<KeyValuePair<string?, string?>> Values = new List<KeyValuePair<string?, string?>>();
-
-            public Builder ()
-            {
-            }
-
-            public void Add (string parameter, string value)
-            {
-                Values.Add(new KeyValuePair<string?, string?> (parameter, value));
-            }
-
-            public FormUrlEncodedContent Build ()
-            {
-                return new FormUrlEncodedContent(Values);
-            }
+            _values.Add(new KeyValuePair<string?, string?> (parameter, value));
         }
 
-        private Encoding Latin1 = Encoding.GetEncoding("iso-8859-1");
-        private readonly byte[] _bytes;
-
-        internal FormUrlEncodedContent(IEnumerable<KeyValuePair<string?, string?>> nameValueCollection)
+        public void Build ()
         {
-            _bytes = GetContentByteArray(nameValueCollection);
+            _bytes = GetContentByteArray(_values);
+            _values.Clear();
         }
 
         public override async Task WriteToAsync(Stream stream, CancellationToken cancellation)

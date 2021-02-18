@@ -45,13 +45,14 @@ namespace body_formdata_urlencoded
             uri.AppendPath(petId, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
-            var contentBuilder = new FormUrlEncodedContent.Builder();
-            contentBuilder.Add("pet_type", petType.ToString());
-            contentBuilder.Add("pet_food", petFood.ToString());
-            contentBuilder.Add("pet_age", petAge.ToString());
-            contentBuilder.Add("name", name?.ToString());
-            contentBuilder.Add("status", status?.ToString());
-            request.Content = contentBuilder.Build();
+            var content = new FormUrlEncodedContent();
+            content.Add("pet_type", petType.ToString());
+            content.Add("pet_food", petFood.ToString());
+            content.Add("pet_age", petAge.ToString());
+            content.Add("name", name?.ToString());
+            content.Add("status", status?.ToString());
+            content.Build();
+            request.Content = content;
             return message;
         }
 

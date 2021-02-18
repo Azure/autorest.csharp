@@ -246,15 +246,16 @@ namespace AutoRest.CSharp.Generation.Writers
                         break;
                     case UrlEncodedBody urlEncodedRequestBody:
                         WriteHeaders(writer, clientMethod, request, content: true);
-                        writer.Append($"var contentBuilder = new Azure.Core.FormUrlEncodedContent.Builder ();\n");
+                        writer.Append($"var content = new Azure.Core.FormUrlEncodedContent ();\n");
 
                         foreach (var (name, value) in urlEncodedRequestBody.Values)
                         {
-                            writer.Append($"contentBuilder.Add(\"{name}\",");
+                            writer.Append($"content.Add(\"{name}\",");
                             WriteConstantOrParameter(writer, value);
                             writer.Line($"{(value.Type.IsNullable ? "?" : "")}.ToString());");
                         }
-                        writer.Append($"request.Content = contentBuilder.Build();\n");
+                        writer.Append($"content.Build();\n");
+                        writer.Append($"request.Content = content;\n");
                         break;
                     case null:
                         break;

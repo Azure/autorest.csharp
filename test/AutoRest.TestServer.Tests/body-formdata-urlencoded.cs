@@ -16,19 +16,10 @@ namespace AutoRest.TestServer.Tests
     {
         public BodyFormdataUrlEncodedTests(TestServerVersion version) : base(version, "formsdataurlencoded") { }
 
-        private static MemoryStream MakeStream(string text)
-        {
-            return new MemoryStream(Encoding.UTF8.GetBytes(text));
-        }
-
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
-        public Task UpdatePetWithForm() => Test(async (host, pipeline) =>
-        {
-            var client = new FormdataurlencodedClient(ClientDiagnostics, pipeline, host);
-
-            var output = await client.UpdatePetWithFormAsync(1, PostContentSchemaPetType.Dog, "meat", 42, "Fido");
-            Console.WriteLine(output.ToString());
-        });
+        public Task UpdatePetWithForm() => TestStatus(async (host, pipeline) =>
+            await new FormdataurlencodedClient(ClientDiagnostics, pipeline, host)
+                .UpdatePetWithFormAsync(1, PostContentSchemaPetType.Dog, "meat", 42, "Fido"));
     }
 }
