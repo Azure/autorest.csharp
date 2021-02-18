@@ -199,7 +199,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/subscription/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/support/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/synapse/data-plane/readme.md
-https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/synapse/resource-manager/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/synapse/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/timeseriesinsights/data-plane/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/timeseriesinsights/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/trafficmanager/resource-manager/readme.md
