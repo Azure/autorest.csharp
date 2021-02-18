@@ -171,8 +171,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/empty", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -553,8 +553,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/boolean/tfft", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -809,8 +809,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1065,8 +1065,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/long/1.-1.3.300", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1321,8 +1321,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1577,8 +1577,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -1833,8 +1833,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2089,8 +2089,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2345,8 +2345,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2601,8 +2601,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2731,8 +2731,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/duration/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -2817,7 +2817,7 @@ namespace body_dictionary
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64("D"));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -2842,7 +2842,7 @@ namespace body_dictionary
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64("D"));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -2861,14 +2861,14 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/prim/byte/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteBase64StringValue(item.Value);
+                content.JsonWriter.WriteBase64StringValue(item.Value, "D");
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -2947,7 +2947,7 @@ namespace body_dictionary
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64("D"));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -2972,7 +2972,7 @@ namespace body_dictionary
                         Dictionary<string, byte[]> dictionary = new Dictionary<string, byte[]>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64());
+                            dictionary.Add(property.Name, property.Value.GetBytesFromBase64("D"));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3070,12 +3070,19 @@ namespace body_dictionary
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                        foreach (var property in document.RootElement.EnumerateObject())
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            value = null;
                         }
-                        value = dictionary;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
+                            value = dictionary;
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3095,12 +3102,19 @@ namespace body_dictionary
                     {
                         IReadOnlyDictionary<string, Widget> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
-                        foreach (var property in document.RootElement.EnumerateObject())
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            value = null;
                         }
-                        value = dictionary;
+                        else
+                        {
+                            Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
+                            }
+                            value = dictionary;
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3383,8 +3397,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/complex/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -3466,17 +3480,24 @@ namespace body_dictionary
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                        foreach (var property in document.RootElement.EnumerateObject())
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            List<string> array = new List<string>();
-                            foreach (var item in property.Value.EnumerateArray())
-                            {
-                                array.Add(item.GetString());
-                            }
-                            dictionary.Add(property.Name, array);
+                            value = null;
                         }
-                        value = dictionary;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                List<string> array = new List<string>();
+                                foreach (var item in property.Value.EnumerateArray())
+                                {
+                                    array.Add(item.GetString());
+                                }
+                                dictionary.Add(property.Name, array);
+                            }
+                            value = dictionary;
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3496,17 +3517,24 @@ namespace body_dictionary
                     {
                         IReadOnlyDictionary<string, IList<string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
-                        foreach (var property in document.RootElement.EnumerateObject())
+                        if (document.RootElement.ValueKind == JsonValueKind.Null)
                         {
-                            List<string> array = new List<string>();
-                            foreach (var item in property.Value.EnumerateArray())
-                            {
-                                array.Add(item.GetString());
-                            }
-                            dictionary.Add(property.Name, array);
+                            value = null;
                         }
-                        value = dictionary;
+                        else
+                        {
+                            Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
+                            foreach (var property in document.RootElement.EnumerateObject())
+                            {
+                                List<string> array = new List<string>();
+                                foreach (var item in property.Value.EnumerateArray())
+                                {
+                                    array.Add(item.GetString());
+                                }
+                                dictionary.Add(property.Name, array);
+                            }
+                            value = dictionary;
+                        }
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -3829,8 +3857,8 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/array/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
@@ -3907,7 +3935,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3915,12 +3943,17 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                            foreach (var property0 in property.Value.EnumerateObject())
+                            {
+                                dictionary0.Add(property0.Name, property0.Value.GetString());
+                            }
+                            dictionary.Add(property.Name, dictionary0);
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3932,7 +3965,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries with value null. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyDictionary<string, object>> GetDictionaryNull(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryNull(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryNullRequest();
             _pipeline.Send(message, cancellationToken);
@@ -3940,12 +3973,17 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                            foreach (var property0 in property.Value.EnumerateObject())
+                            {
+                                dictionary0.Add(property0.Name, property0.Value.GetString());
+                            }
+                            dictionary.Add(property.Name, dictionary0);
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3970,7 +4008,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -3978,12 +4016,17 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                            foreach (var property0 in property.Value.EnumerateObject())
+                            {
+                                dictionary0.Add(property0.Name, property0.Value.GetString());
+                            }
+                            dictionary.Add(property.Name, dictionary0);
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3995,7 +4038,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyDictionary<string, object>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryEmpty(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryEmptyRequest();
             _pipeline.Send(message, cancellationToken);
@@ -4003,12 +4046,17 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                            foreach (var property0 in property.Value.EnumerateObject())
+                            {
+                                dictionary0.Add(property0.Name, property0.Value.GetString());
+                            }
+                            dictionary.Add(property.Name, dictionary0);
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -4033,7 +4081,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryItemNullAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryItemNullRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4041,12 +4089,24 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                                foreach (var property0 in property.Value.EnumerateObject())
+                                {
+                                    dictionary0.Add(property0.Name, property0.Value.GetString());
+                                }
+                                dictionary.Add(property.Name, dictionary0);
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -4058,7 +4118,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: null, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyDictionary<string, object>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryItemNull(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryItemNullRequest();
             _pipeline.Send(message, cancellationToken);
@@ -4066,12 +4126,24 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            if (property.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                dictionary.Add(property.Name, null);
+                            }
+                            else
+                            {
+                                Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                                foreach (var property0 in property.Value.EnumerateObject())
+                                {
+                                    dictionary0.Add(property0.Name, property0.Value.GetString());
+                                }
+                                dictionary.Add(property.Name, dictionary0);
+                            }
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -4096,7 +4168,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryItemEmptyAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryItemEmptyRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4104,12 +4176,17 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                            foreach (var property0 in property.Value.EnumerateObject())
+                            {
+                                dictionary0.Add(property0.Name, property0.Value.GetString());
+                            }
+                            dictionary.Add(property.Name, dictionary0);
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -4121,7 +4198,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyDictionary<string, object>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryItemEmpty(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryItemEmptyRequest();
             _pipeline.Send(message, cancellationToken);
@@ -4129,12 +4206,17 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                            foreach (var property0 in property.Value.EnumerateObject())
+                            {
+                                dictionary0.Add(property0.Name, property0.Value.GetString());
+                            }
+                            dictionary.Add(property.Name, dictionary0);
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -4159,7 +4241,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<IReadOnlyDictionary<string, object>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyDictionary<string, IDictionary<string, string>>>> GetDictionaryValidAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryValidRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -4167,12 +4249,17 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                            foreach (var property0 in property.Value.EnumerateObject())
+                            {
+                                dictionary0.Add(property0.Name, property0.Value.GetString());
+                            }
+                            dictionary.Add(property.Name, dictionary0);
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -4184,7 +4271,7 @@ namespace body_dictionary
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<IReadOnlyDictionary<string, object>> GetDictionaryValid(CancellationToken cancellationToken = default)
+        public Response<IReadOnlyDictionary<string, IDictionary<string, string>>> GetDictionaryValid(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDictionaryValidRequest();
             _pipeline.Send(message, cancellationToken);
@@ -4192,12 +4279,17 @@ namespace body_dictionary
             {
                 case 200:
                     {
-                        IReadOnlyDictionary<string, object> value = default;
+                        IReadOnlyDictionary<string, IDictionary<string, string>> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                        Dictionary<string, IDictionary<string, string>> dictionary = new Dictionary<string, IDictionary<string, string>>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            dictionary.Add(property.Name, property.Value.GetObject());
+                            Dictionary<string, string> dictionary0 = new Dictionary<string, string>();
+                            foreach (var property0 in property.Value.EnumerateObject())
+                            {
+                                dictionary0.Add(property0.Name, property0.Value.GetString());
+                            }
+                            dictionary.Add(property.Name, dictionary0);
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -4207,7 +4299,7 @@ namespace body_dictionary
             }
         }
 
-        internal HttpMessage CreatePutDictionaryValidRequest(IDictionary<string, object> arrayBody)
+        internal HttpMessage CreatePutDictionaryValidRequest(IDictionary<string, IDictionary<string, string>> arrayBody)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -4216,14 +4308,20 @@ namespace body_dictionary
             uri.Reset(endpoint);
             uri.AppendPath("/dictionary/dictionary/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value);
+                content.JsonWriter.WriteStartObject();
+                foreach (var item0 in item.Value)
+                {
+                    content.JsonWriter.WritePropertyName(item0.Key);
+                    content.JsonWriter.WriteStringValue(item0.Value);
+                }
+                content.JsonWriter.WriteEndObject();
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -4231,10 +4329,10 @@ namespace body_dictionary
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfany to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
-        public async Task<Response> PutDictionaryValidAsync(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
+        public async Task<Response> PutDictionaryValidAsync(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {
@@ -4253,10 +4351,10 @@ namespace body_dictionary
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {&quot;0&quot;: {&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;, &quot;3&quot;: &quot;three&quot;}, &quot;1&quot;: {&quot;4&quot;: &quot;four&quot;, &quot;5&quot;: &quot;five&quot;, &quot;6&quot;: &quot;six&quot;}, &quot;2&quot;: {&quot;7&quot;: &quot;seven&quot;, &quot;8&quot;: &quot;eight&quot;, &quot;9&quot;: &quot;nine&quot;}}. </summary>
-        /// <param name="arrayBody"> The DictionaryOfany to use. </param>
+        /// <param name="arrayBody"> The DictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
-        public Response PutDictionaryValid(IDictionary<string, object> arrayBody, CancellationToken cancellationToken = default)
+        public Response PutDictionaryValid(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             if (arrayBody == null)
             {

@@ -51,8 +51,8 @@ namespace NameConflicts
             uri0.AppendQuery("pipeline", pipeline, true);
             uri0.AppendQuery("clientDiagnostics", clientDiagnostics, true);
             request0.Uri = uri0;
-            request0.Headers.Add("Content-Type", "application/json");
             request0.Headers.Add("Accept", "application/json");
+            request0.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(@class);
             request0.Content = content;
@@ -180,22 +180,19 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/conflictingLROOverloads", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/pdf");
-            request.Content = RequestContent.Create(stringBody);
+            if (stringBody != null)
+            {
+                request.Headers.Add("Content-Type", "application/pdf");
+                request.Content = RequestContent.Create(stringBody);
+            }
             return message;
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public async Task<Azure.Response> AnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        public async Task<Azure.Response> AnalyzeBodyAsync(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
             using var message = CreateAnalyzeBodyRequest(stringBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
@@ -210,14 +207,8 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public Azure.Response AnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
+        public Azure.Response AnalyzeBody(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
             using var message = CreateAnalyzeBodyRequest(stringBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
@@ -238,9 +229,9 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/conflictingLROOverloads", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             if (stringBody != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(stringBody);
                 request.Content = content;
@@ -289,10 +280,10 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/HttpMessage", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (httpMessage != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(httpMessage);
                 request.Content = content;
@@ -349,10 +340,10 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/Request", false);
             request0.Uri = uri;
-            request0.Headers.Add("Content-Type", "application/json");
             request0.Headers.Add("Accept", "application/json");
             if (request != null)
             {
+                request0.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(request);
                 request0.Content = content;
@@ -409,10 +400,10 @@ namespace NameConflicts
             uri.Reset(endpoint);
             uri.AppendPath("/Response", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (response != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(response);
                 request.Content = content;

@@ -112,10 +112,10 @@ namespace extensible_enums_swagger
             uri.Reset(endpoint);
             uri.AppendPath("/extensibleenums/pet/addPet", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (petParam != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(petParam);
                 request.Content = content;

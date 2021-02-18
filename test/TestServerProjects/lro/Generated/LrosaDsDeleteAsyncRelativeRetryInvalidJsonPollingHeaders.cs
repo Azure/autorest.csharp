@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders
+    internal partial class LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders
     {
         private readonly Response _response;
         public LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders(Response response)

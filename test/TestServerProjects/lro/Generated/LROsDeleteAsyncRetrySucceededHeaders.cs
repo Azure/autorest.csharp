@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LROsDeleteAsyncRetrySucceededHeaders
+    internal partial class LROsDeleteAsyncRetrySucceededHeaders
     {
         private readonly Response _response;
         public LROsDeleteAsyncRetrySucceededHeaders(Response response)

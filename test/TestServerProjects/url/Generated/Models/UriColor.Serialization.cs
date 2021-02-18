@@ -9,7 +9,7 @@ using System;
 
 namespace url.Models
 {
-    internal static class UriColorExtensions
+    internal static partial class UriColorExtensions
     {
         public static string ToSerialString(this UriColor value) => value switch
         {

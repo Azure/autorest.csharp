@@ -31,6 +31,11 @@ namespace Azure.Core
             headers.Add(name, value.ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture));
         }
 
+        public static void Add(this RequestHeaders headers, string name, long value)
+        {
+            headers.Add(name, value.ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture));
+        }
+
         public static void Add(this RequestHeaders headers, string name, DateTimeOffset value, string format)
         {
             headers.Add(name, TypeFormatters.ToString(value, format));
@@ -46,9 +51,17 @@ namespace Azure.Core
             headers.Add(name, value.ToString());
         }
 
-        public static void Add(this RequestHeaders headers, string name, byte[] value)
+        public static void Add(this RequestHeaders headers, string name, byte[] value, string format)
         {
-            headers.Add(name, Convert.ToBase64String(value));
+            headers.Add(name, TypeFormatters.ToString(value, format));
+        }
+
+        public static void Add(this RequestHeaders headers, string prefix, IDictionary<string, string> headersToAdd)
+        {
+            foreach (var header in headersToAdd)
+            {
+                headers.Add(prefix + header.Key, header.Value);
+            }
         }
 
         public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter)

@@ -43,10 +43,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/200/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -97,10 +97,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/201/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -196,10 +196,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/200/succeeded/nostate", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -248,10 +248,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/202/retry/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -300,10 +300,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/201/creating/succeeded/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -354,10 +354,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/200/updating/succeeded/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -406,10 +406,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/201/created/failed/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -460,10 +460,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/200/accepted/canceled/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -512,10 +512,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/put/noheader/202/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -566,10 +566,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putasync/retry/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -620,10 +620,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putasync/noretry/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -674,10 +674,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putasync/retry/failed", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -728,10 +728,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putasync/noretry/canceled", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -782,10 +782,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putasync/noheader/201/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -836,10 +836,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putnonresource/202/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (sku != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(sku);
                 request.Content = content;
@@ -888,10 +888,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putnonresourceasync/202/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (sku != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(sku);
                 request.Content = content;
@@ -940,10 +940,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putsubresource/202/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -992,10 +992,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/putsubresourceasync/202/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -1641,10 +1641,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/post/202/retry/200", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -1695,10 +1695,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/post/202/noretry/204", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -1878,10 +1878,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/postasync/retry/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -1934,10 +1934,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/postasync/noretry/succeeded", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -1990,10 +1990,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/postasync/retry/failed", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;
@@ -2044,10 +2044,10 @@ namespace lro
             uri.Reset(endpoint);
             uri.AppendPath("/lro/postasync/retry/canceled", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (product != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteObjectValue(product);
                 request.Content = content;

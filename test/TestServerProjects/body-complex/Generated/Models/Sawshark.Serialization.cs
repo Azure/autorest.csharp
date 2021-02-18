@@ -20,7 +20,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(Picture))
             {
                 writer.WritePropertyName("picture");
-                writer.WriteBase64StringValue(Picture);
+                writer.WriteBase64StringValue(Picture, "D");
             }
             if (Optional.IsDefined(Age))
             {
@@ -69,7 +69,7 @@ namespace body_complex.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    picture = property.Value.GetBytesFromBase64();
+                    picture = property.Value.GetBytesFromBase64("D");
                     continue;
                 }
                 if (property.NameEquals("age"))

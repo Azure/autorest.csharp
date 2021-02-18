@@ -9,7 +9,7 @@ using System;
 
 namespace header.Models
 {
-    internal static class GreyscaleColorsExtensions
+    internal static partial class GreyscaleColorsExtensions
     {
         public static string ToSerialString(this GreyscaleColors value) => value switch
         {

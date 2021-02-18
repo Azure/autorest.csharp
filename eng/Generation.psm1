@@ -1,6 +1,6 @@
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $autoRestBinary = "npx --no-install autorest"
-$AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp.V3')
+$AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp')
 
 function Invoke($command)
 {
@@ -22,9 +22,9 @@ function Invoke($command)
     }
 }
 
-function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast, $clean)
+function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedSource, $fast)
 {
-    $outputPath = Join-Path $baseOutput $projectName
+    $outputPath = Join-Path $baseOutput "Generated"
     $namespace = $projectName.Replace('-', '_')
     $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
 
@@ -33,17 +33,8 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
         $command = "dotnet run --project $script:AutoRestPluginProject --no-build -- --standalone $outputPath"
     }
 
-    if ($clean)
-    {
-        if (Test-Path $outputPath)
-        {
-            Get-ChildItem $outputPath -Filter Generated -Directory -Recurse | Get-ChildItem -File -Recurse | Remove-Item -Force
-            New-Item -ItemType Directory -Force -Path $outputPath | Out-Null;
-        }
-    }
-
     Invoke $command
-    Invoke "dotnet build $outputPath --verbosity quiet /nologo"
+    Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
 }
 
 function AutoRest-Reset()
