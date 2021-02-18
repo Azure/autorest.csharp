@@ -1,34 +1,57 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+// Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.Simplification;
-using Microsoft.CodeAnalysis.Text;
-using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
+        public async Task<bool> Execute(IPluginCommunication autoRest)
+        {
+            string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+            if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
+
+            var configuration = Configuration.GetConfiguration(autoRest);
+
+            string codeModelYaml = string.Empty;
+
+            Task<CodeModel> codeModelTask = Task.Run(async () =>
+            {
+                codeModelYaml = await autoRest.ReadFile(codeModelFileName);
+                return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
+            });
+
+            if (!Path.IsPathRooted(configuration.OutputFolder))
+            {
+                await autoRest.Warning("output-folder path should be an absolute path");
+            }
+            if (configuration.SaveInputs)
+            {
+                await codeModelTask;
+                await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
+                await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
+            }
+
+            var project = await ExecuteAsync(codeModelTask, configuration);
+            await foreach (var file in project.GetGeneratedFilesAsync())
+            {
+                await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
+            }
+
+            return true;
+        }
+
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask, Configuration configuration)
         {
             Directory.CreateDirectory(configuration.OutputFolder);
@@ -45,6 +68,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var headerModelModelWriter = new ResponseHeaderGroupWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
+            var managementResourceWriter = new ManagementResourceWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -86,6 +110,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (context.Configuration.AzureArm)
             {
+                foreach (var r in context.Library.ManagementResources)
+                {
+                    var codeWriter = new CodeWriter();
+                    managementResourceWriter.WriteResource(codeWriter, r);
+                    project.AddGeneratedFile($"Models/{r.Type.Name}.cs", codeWriter.ToString());
+                }
+
                 foreach (var resourceOperation in context.Library.ResourceOperations)
                 {
                     var codeWriter = new CodeWriter();
@@ -114,41 +145,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             return project;
-        }
-
-        public async Task<bool> Execute(IPluginCommunication autoRest)
-        {
-            string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-            if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
-
-            var configuration = Configuration.GetConfiguration(autoRest);
-
-            string codeModelYaml = string.Empty;
-
-            Task<CodeModel> codeModelTask = Task.Run(async () =>
-            {
-                codeModelYaml = await autoRest.ReadFile(codeModelFileName);
-                return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
-            });
-
-            if (!Path.IsPathRooted(configuration.OutputFolder))
-            {
-                await autoRest.Warning("output-folder path should be an absolute path");
-            }
-            if (configuration.SaveInputs)
-            {
-                await codeModelTask;
-                await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
-                await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
-            }
-
-            var project = await ExecuteAsync(codeModelTask, configuration);
-            await foreach (var file in project.GetGeneratedFilesAsync())
-            {
-                await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
-            }
-
-            return true;
         }
     }
 }

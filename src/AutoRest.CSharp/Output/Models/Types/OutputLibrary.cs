@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
 
+        private Dictionary<OperationGroup, ManagementResource>? _managementResources;
+
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
@@ -32,6 +34,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
+
+        public IEnumerable<ManagementResource> ManagementResources => EnsureManagementResources().Values;
 
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
@@ -126,6 +130,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return _restClients;
+        }
+
+        private Dictionary<OperationGroup, ManagementResource> EnsureManagementResources()
+        {
+            if (_managementResources != null)
+            {
+                return _managementResources;
+            }
+
+            _managementResources = new Dictionary<OperationGroup, ManagementResource>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _managementResources.Add(operationGroup, new ManagementResource(operationGroup, _context));
+            }
+
+            return _managementResources;
         }
 
         private Dictionary<OperationGroup, ResourceOperation> EnsureResourceOperations()

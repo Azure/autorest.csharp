@@ -7,8 +7,8 @@
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing a Usage along with the instance operations that can be performed on it. </summary>
-    public partial class Usage
+    /// <summary> A class representing a AvailabilitySets along with the instance operations that can be performed on it. </summary>
+    public partial class AvailabilitySets
     {
     }
 }
