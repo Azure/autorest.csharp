@@ -249,6 +249,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
         }
+
         private string ConstructOperationResourseType(OperationGroup operationsGroup)
         {
             var method = GetBestMethod(operationsGroup);
@@ -308,7 +309,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }
             return null;
-        }
 
         public bool IsTenantOnly(List<List<ProviderToken>> tokens, string providerName)
         {
