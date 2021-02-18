@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
-        private const string Providers = "providers";
+        private const string Providers = "/providers/";
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var indexOfProvider = method.Path.IndexOf(Providers);
             if (indexOfProvider < 0)
             {
-                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {Providers} string found in the URI");
+                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No \"providers\" string found in the URI");
             }
             var resourceType = ConstructResourceName(method.Path.Substring(indexOfProvider + Providers.Length + 1));
 
