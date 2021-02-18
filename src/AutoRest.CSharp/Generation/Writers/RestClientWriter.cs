@@ -19,6 +19,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -242,6 +243,18 @@ namespace AutoRest.CSharp.Generation.Writers
                             request,
                             flattenedSchemaRequestBody.Serialization,
                             w => w.Append(modelVariable));
+                        break;
+                    case UrlEncodedBody urlEncodedRequestBody:
+                        WriteHeaders(writer, clientMethod, request, content: true);
+                        writer.Append($"var contentBuilder = new Azure.Core.FormUrlEncodedContent.Builder ();\n");
+
+                        foreach (var (name, value) in urlEncodedRequestBody.Values)
+                        {
+                            writer.Append($"contentBuilder.Add(\"{name}\",");
+                            WriteConstantOrParameter(writer, value);
+                            writer.Line($"{(value.Type.IsNullable ? "?" : "")}.ToString());");
+                        }
+                        writer.Append($"request.Content = contentBuilder.Build();\n");
                         break;
                     case null:
                         break;

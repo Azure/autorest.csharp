@@ -951,6 +951,10 @@ namespace AutoRest.CSharp.Input
         /// <summary>When a parameter is grouped into another, this will tell where the parameter got grouped into.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "groupedBy")]
         public RequestParameter? GroupedBy { get; set; }
+
+        /// <summary>If this parameter is to be included in a multipart request body.</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "isInMultipart")]
+        public bool? IsInMultipart { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -1645,6 +1649,35 @@ namespace AutoRest.CSharp.Input
         public string? ExternalValue { get; set; }
     }
 
+    /// <summary>standard HTTP protocol methods</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal enum HttpMethod
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"delete")]
+        Delete = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"get")]
+        Get = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"head")]
+        Head = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"options")]
+        Options = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"patch")]
+        Patch = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"post")]
+        Post = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"put")]
+        Put = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"trace")]
+        Trace = 7,
+    }
+
     /// <summary>The Serialization Style used for the parameter.
     ///
     /// Describes how the parameter value will be serialized depending on the type of the parameter value.</summary>
@@ -1712,35 +1745,6 @@ namespace AutoRest.CSharp.Input
 
         [System.Runtime.Serialization.EnumMember(Value = @"simple")]
         Simple = 2,
-    }
-
-    /// <summary>standard HTTP protocol methods</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal enum HttpMethod
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"delete")]
-        Delete = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"get")]
-        Get = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"head")]
-        Head = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"options")]
-        Options = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"patch")]
-        Patch = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"post")]
-        Post = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"put")]
-        Put = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"trace")]
-        Trace = 7,
     }
 
     /// <summary>the location that this parameter is placed in the http request</summary>
