@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,11 +23,20 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
+        private const string Providers = "providers";
+
+        private readonly int ProviderOffset = Providers.Length + 2;
+
+
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
             _context = context;
+            if (context.Configuration.AzureArm)
+            {
+                DecorateOperationGroup();
+            }
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
@@ -160,7 +170,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _resourceContainers;
         }
 
-
         public TypeProvider FindTypeForSchema(Schema schema)
         {
             return SchemaMap[schema];
@@ -208,6 +217,190 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             EnsureHeaderModels().TryGetValue(operation, out var model);
             return model;
+        }
+
+        private void DecorateOperationGroup()
+        {
+            foreach (var operationsGroup in _codeModel.OperationGroups)
+            {
+                MapHttpMethodToOperation(operationsGroup);
+                string? resourceType;
+                operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
+                operationsGroup.IsTenantResource = IsTenantOnly(MakeTokens(operationsGroup), operationsGroup.ResourceType);
+            }
+        }
+        private void MapHttpMethodToOperation(OperationGroup operationsGroup)
+        {
+            operationsGroup.OperationHttpMethodMapping = new Dictionary<HttpMethod, List<ServiceRequest>>();
+            foreach (var operation in operationsGroup.Operations)
+            {
+                foreach (var serviceRequest in operation.Requests)
+                {
+                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
+                    {
+                        List<ServiceRequest>? list;
+                        if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
+                        {
+                            list = new List<ServiceRequest>();
+                            operationsGroup.OperationHttpMethodMapping.Add(httpRequest.Method, list);
+                        }
+                        list.Add(serviceRequest);
+                    }
+                }
+            }
+        }
+        private string ConstructOperationResourseType(OperationGroup operationsGroup)
+        {
+            var method = GetBestMethod(operationsGroup);
+            if (method == null)
+            {
+                throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
+                "\nPlease try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
+            }
+            var indexOfProvider = method.Path.IndexOf(Providers);
+            if (indexOfProvider < -1)
+            {
+                throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
+               "\nNo \"provider\" string found in the URI");
+            }
+            var resourceType = ConstructResourceName(method.Path.Substring(indexOfProvider + Providers.Length + 1));
+
+            return resourceType.ToString().TrimEnd('/');
+        }
+
+        private static string ConstructResourceName(string httpRequestUri)
+        {
+            var returnString = new StringBuilder();
+            var currentString = new StringBuilder();
+            var insideBrace = false;
+
+            foreach (var ch in httpRequestUri)
+            {
+                if (ch == '{')
+                {
+                    insideBrace = true;
+                }
+                else if (ch == '}')
+                {
+                    insideBrace = false;
+                }
+                else if (!insideBrace)
+                {
+                    returnString.Append(ch);
+                }
+            }
+            return returnString.ToString();
+        }
+
+        private HttpRequest? GetBestMethod(OperationGroup operationsGroup)
+        {
+            List<ServiceRequest>? requests;
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out requests))
+            {
+                return (HttpRequest?)requests[0].Protocol?.Http;
+            }
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Delete, out requests))
+            {
+                return (HttpRequest?)requests[0].Protocol?.Http;
+            }
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Patch, out requests))
+            {
+                return (HttpRequest?)requests[0].Protocol?.Http;
+            }
+            return null;
+        }
+
+        public bool IsTenantOnly(List<List<ProviderToken>> tokens, string providerName)
+        {
+            bool foundTenant = false;
+            bool foundNonTenant = false;
+            for (int j = 0; j < tokens.Count && (!foundTenant || !foundNonTenant); j++)
+            {
+                var tokenList = tokens[j];
+                for (int i = 0; i < tokenList.Count && (!foundTenant || !foundNonTenant); i++)
+                {
+                    var token = tokenList[i];
+                    foundNonTenant = !foundNonTenant ? token.isFullProvider && !token.noPred && VerifyOperation(token.tokenValue, providerName) : true;
+                    foundTenant = !foundTenant ? token.isFullProvider && token.noPred && VerifyOperation(token.tokenValue, providerName) : true;
+                }
+            }
+            return foundTenant && !foundNonTenant;
+        }
+
+        public static List<ProviderToken> Tokenize(string path)
+        {
+            string canidate = "";
+            var currentToken = new ProviderToken();
+            string currentConstant = "";
+            var tokens = new List<ProviderToken>();
+            foreach (var ch in path)
+            {
+                if (ch == '{')
+                {
+                    if (canidate != "" && canidate != "/")
+                    {
+                        var asSplit = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                        if (asSplit.Length != 0 && asSplit.First().Equals("providers"))
+                        {
+                            currentToken.tokenValue = canidate;
+                            currentToken.noPred = currentConstant == "";
+                            currentToken.isFullProvider = asSplit.Length > 1;
+                        }
+                        currentConstant = canidate;
+                    }
+                    canidate = "";
+                }
+                else if (ch == '}')
+                {
+                    if (canidate != "" && currentToken.tokenValue != "")
+                    {
+                        currentToken.hasReferenceSuccessor = currentConstant == currentToken.tokenValue;
+                        tokens.Add(currentToken);
+                        currentToken = new ProviderToken();
+                    }
+                    currentToken.hadSpecialReference = !currentToken.hadSpecialReference ? currentToken.tokenValue == "" && currentConstant == "" : true;
+                    canidate = "";
+                }
+                else
+                {
+                    canidate += ch;
+                }
+            }
+
+            if (canidate != "" && canidate != "/")
+            {
+                var asSplit = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                if (asSplit.Length > 1 && asSplit.First().Equals("providers"))
+                {
+                    currentToken.noPred = currentConstant == "";
+                    currentToken.isFullProvider = true;
+                    currentToken.tokenValue = canidate;
+                    tokens.Add(currentToken);
+                }
+            }
+            return tokens;
+        }
+
+        public List<List<ProviderToken>> MakeTokens(OperationGroup operationsGroup)
+        {
+            List<List<ProviderToken>> tokens = new List<List<ProviderToken>>();
+
+            foreach (var op in operationsGroup.Operations)
+            {
+                foreach (var serviceRequest in op.Requests)
+                {
+                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
+                    {
+                        tokens.Add(Tokenize(httpRequest.Path));
+                    }
+                }
+            }
+            return tokens;
+        }
+
+        public bool VerifyOperation(string tokenValue, string providerName)
+        {
+            return tokenValue.Substring(ProviderOffset).Equals(providerName);
         }
     }
 }

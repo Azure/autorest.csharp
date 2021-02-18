@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
     {
         public static async Task RunAsync(string[] args)
         {
-            var basePath = args.Single(a=> !a.StartsWith("--"));
+            var basePath = args.Single(a => !a.StartsWith("--"));
 
             var configuration = LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
@@ -57,6 +57,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     writer.WriteBoolean(nameof(Configuration.ModelNamespace), configuration.ModelNamespace);
                     writer.WriteBoolean(nameof(Configuration.HeadAsBoolean), configuration.HeadAsBoolean);
                     writer.WriteBoolean(nameof(Configuration.SkipCSProjPackageReference), configuration.SkipCSProjPackageReference);
+                    if (configuration.OperationGroupToResourceType.Count > 0)
+                    {
+                        writer.WriteStartObject(nameof(Configuration.OperationGroupToResourceType));
+                        foreach (var keyval in configuration.OperationGroupToResourceType)
+                        {
+                            writer.WriteString(keyval.Key, keyval.Value);
+                        }
+                        writer.WriteEndObject();
+                    }
                     writer.WriteEndObject();
                 }
 
@@ -90,7 +99,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean()
+                root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
+                root.GetProperty(nameof(Configuration.OperationGroupToResourceType))
             );
         }
     }
