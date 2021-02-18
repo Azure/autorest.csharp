@@ -225,61 +225,28 @@ namespace AutoRest.CSharp.Output.Models.Types
                 operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
             }
         }
+
         private void MapHttpMethodToOperation(OperationGroup operationsGroup)
         {
-            operationsGroup.OperationHttpMethodMapping = new Dictionary<HttpMethod, List<HttpRequest>>()
-            {
-                {HttpMethod.Put, new List<HttpRequest>()},
-                {HttpMethod.Delete, new List<HttpRequest>()},
-                {HttpMethod.Patch, new List<HttpRequest>()},
-                {HttpMethod.Post, new List<HttpRequest>()},
-                {HttpMethod.Get, new List<HttpRequest>()},
-                {HttpMethod.Head, new List<HttpRequest>()},
-                {HttpMethod.Options, new List<HttpRequest>()},
-                {HttpMethod.Trace, new List<HttpRequest>()},
-            };
+            operationsGroup.OperationHttpMethodMapping = new Dictionary<HttpMethod, List<ServiceRequest>>();
             foreach (var operation in operationsGroup.Operations)
             {
                 foreach (var serviceRequest in operation.Requests)
                 {
                     if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
                     {
-                        if (httpRequest.Method == HttpMethod.Put)
+                        List<ServiceRequest>? list;
+                        if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
                         {
-                            operationsGroup.OperationHttpMethodMapping[HttpMethod.Put].Add(httpRequest);
+                            list = new List<ServiceRequest>();
+                            operationsGroup.OperationHttpMethodMapping.Add(httpRequest.Method, list);
                         }
-                        else if (httpRequest.Method == HttpMethod.Delete)
-                        {
-                            operationsGroup.OperationHttpMethodMapping[HttpMethod.Delete].Add(httpRequest);
-                        }
-                        else if (httpRequest.Method == HttpMethod.Patch)
-                        {
-                            operationsGroup.OperationHttpMethodMapping[HttpMethod.Patch].Add(httpRequest);
-                        }
-                        else if (httpRequest.Method == HttpMethod.Get)
-                        {
-                            operationsGroup.OperationHttpMethodMapping[HttpMethod.Get].Add(httpRequest);
-                        }
-                        else if (httpRequest.Method == HttpMethod.Post)
-                        {
-                            operationsGroup.OperationHttpMethodMapping[HttpMethod.Post].Add(httpRequest);
-                        }
-                        else if (httpRequest.Method == HttpMethod.Head)
-                        {
-                            operationsGroup.OperationHttpMethodMapping[HttpMethod.Head].Add(httpRequest);
-                        }
-                        else if (httpRequest.Method == HttpMethod.Trace)
-                        {
-                            operationsGroup.OperationHttpMethodMapping[HttpMethod.Trace].Add(httpRequest);
-                        }
-                        else if (httpRequest.Method == HttpMethod.Options)
-                        {
-                            operationsGroup.OperationHttpMethodMapping[HttpMethod.Options].Add(httpRequest);
-                        }
+                        list.Add(serviceRequest);
                     }
                 }
             }
         }
+
         private string ConstructOperationResourseType(OperationGroup operationsGroup)
         {
             var method = GetBestMethod(operationsGroup);
@@ -289,24 +256,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 "\nPlease try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
             }
             var indexOfProvider = method.Path.IndexOf(Providers);
-            if (indexOfProvider < 0)
+            if (indexOfProvider < -1)
             {
                 throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
                "\nNo \"provider\" string found in the URI");
             }
-            var resourceType = ConstructResourceName(method.Path.Substring(indexOfProvider));
-            if (resourceType == "")
-            {
-                throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
-               "\nNo the resource type URI contained providers but was formated not as expected: " + method.Path);
-            }
-            return resourceType.Substring(Providers.Length + 1).TrimEnd('/');
-        }
+            var resourceType = ConstructResourceName(method.Path.Substring(indexOfProvider + Providers.Length + 1));
 
-        private static bool IsValidResourceTypeName(StringBuilder name)
-        {
-            var split = name.ToString().Split('/');
-            return split.Length > 1 && split[0].Equals(Providers);
+            return resourceType.ToString().TrimEnd('/');
         }
 
         private static string ConstructResourceName(string httpRequestUri)
@@ -319,15 +276,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (ch == '{')
                 {
-                    if (currentString.Length != 0 && currentString.ToString() != "/")
-                    {
-                        if (returnString.Length == 0 && !IsValidResourceTypeName(currentString))
-                        {
-                            return ""; // provider is not formated correctly
-                        }
-                        returnString.Append(currentString.Remove(currentString.Length - 1, 1));
-                    }
-                    currentString = new StringBuilder();
                     insideBrace = true;
                 }
                 else if (ch == '}')
@@ -336,29 +284,26 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
                 else if (!insideBrace)
                 {
-                    currentString.Append(ch);
+                    returnString.Append(ch);
                 }
-            }
-            if (currentString.Length != 0 && currentString.ToString() != "/")
-            {
-                returnString.Append(currentString);
             }
             return returnString.ToString();
         }
 
         private HttpRequest? GetBestMethod(OperationGroup operationsGroup)
         {
-            if (operationsGroup.OperationHttpMethodMapping[HttpMethod.Put].Count > 0)
+            List<ServiceRequest>? requests;
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out requests))
             {
-                return operationsGroup.OperationHttpMethodMapping[HttpMethod.Put][0];
+                return (HttpRequest?)requests[0].Protocol?.Http;
             }
-            if (operationsGroup.OperationHttpMethodMapping[HttpMethod.Delete].Count > 0)
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Delete, out requests))
             {
-                return operationsGroup.OperationHttpMethodMapping[HttpMethod.Put][0];
+                return (HttpRequest?)requests[0].Protocol?.Http;
             }
-            if (operationsGroup.OperationHttpMethodMapping[HttpMethod.Patch].Count > 0)
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Patch, out requests))
             {
-                return operationsGroup.OperationHttpMethodMapping[HttpMethod.Patch][0];
+                return (HttpRequest?)requests[0].Protocol?.Http;
             }
             return null;
         }
