@@ -89,6 +89,9 @@ namespace AutoRest.CSharp.Input
     internal partial class OperationGroup
     {
         public string ResourceType { get; set; }
+
+        public Dictionary<HttpMethod, List<HttpRequest>> OperationHttpMethodMapping { get; set; }
+
     }
 
     internal partial class ServiceResponse

@@ -16,7 +16,7 @@ payload-flattening-threshold: 2
 modelerfour:
   lenient-model-deduplication: true
 
-operation-group-mapping:
+operation-group-to-resource-type:
    Operations: Microsoft.Storage/operations
    Skus: Microsoft.Storage/skus
    Usages: Microsoft.Storage/locations/usages

@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, JsonElement? operationGroupMapping = default)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, JsonElement? operationGroupToResourceType = default)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ModelNamespace = modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
-            OperationGroupMapping = operationGroupMapping.ToString() == string.Empty ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupMapping.ToString());
+            OperationGroupToResourceType = operationGroupToResourceType.HasValue && operationGroupToResourceType.Value.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
         }
 
         public string OutputFolder { get; }
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool HeadAsBoolean { get; }
         public bool SkipCSProjPackageReference { get; }
         public static string ProjectRelativeDirectory = "../";
-        public Dictionary<string, string> OperationGroupMapping;
+        public Dictionary<string, string> OperationGroupToResourceType;
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
                 autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("skip-csproj-packagereference").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<JsonElement?>("operation-group-mapping").GetAwaiter().GetResult()
+                autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult()
             );
 
         }
