@@ -25,8 +25,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
         private const string Providers = "/providers/";
 
-        private readonly int ProviderOffset = Providers.Length;
-
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
@@ -398,7 +396,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool VerifyOperation(string tokenValue, string providerName)
         {
-            return tokenValue.Substring(ProviderOffset).Equals(providerName);
+            return tokenValue.Substring(Providers.Length).Equals(providerName);
         }
     }
 }
