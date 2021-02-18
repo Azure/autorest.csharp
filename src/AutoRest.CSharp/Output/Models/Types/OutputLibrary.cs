@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
                "\nNo the resource type URI contained providers but was formated not as expected: " + method.Path);
             }
-            return resourceType.Substring(Providers.Length + 2).TrimEnd('/');
+            return resourceType.Substring(Providers.Length + 1).TrimEnd('/');
         }
 
         private static bool IsValidResourceTypeName(StringBuilder name)
