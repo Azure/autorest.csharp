@@ -23,11 +23,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
-        private const string Providers = "providers";
+        private const string Providers = "/providers/";
 
-        private readonly int ProviderOffset = Providers.Length + 2;
-
-
+        private readonly int ProviderOffset = Providers.Length;
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -229,6 +227,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 operationsGroup.IsTenantResource = IsTenantOnly(MakeTokens(operationsGroup), operationsGroup.ResourceType);
             }
         }
+
         private void MapHttpMethodToOperation(OperationGroup operationsGroup)
         {
             operationsGroup.OperationHttpMethodMapping = new Dictionary<HttpMethod, List<ServiceRequest>>();
@@ -255,24 +254,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             var method = GetBestMethod(operationsGroup);
             if (method == null)
             {
-                throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
-                "\nPlease try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
+                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key} 
+                                            Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
             }
             var indexOfProvider = method.Path.IndexOf(Providers);
-            if (indexOfProvider < -1)
+            if (indexOfProvider < 0)
             {
-                throw new ArgumentException("Could not set ResourceType for operations group " + operationsGroup.Key +
-               "\nNo \"provider\" string found in the URI");
+                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {Providers} string found in the URI");
             }
-            var resourceType = ConstructResourceName(method.Path.Substring(indexOfProvider + Providers.Length + 1));
+            var resourceType = ConstructResourceType(method.Path.Substring(indexOfProvider + Providers.Length));
 
             return resourceType.ToString().TrimEnd('/');
         }
 
-        private static string ConstructResourceName(string httpRequestUri)
+        private static string ConstructResourceType(string httpRequestUri)
         {
             var returnString = new StringBuilder();
-            var currentString = new StringBuilder();
             var insideBrace = false;
 
             foreach (var ch in httpRequestUri)
@@ -309,6 +306,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }
             return null;
+        }
 
         public bool IsTenantOnly(List<List<ProviderToken>> tokens, string providerName)
         {

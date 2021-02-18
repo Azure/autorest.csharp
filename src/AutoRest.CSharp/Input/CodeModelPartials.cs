@@ -89,17 +89,10 @@ namespace AutoRest.CSharp.Input
     internal partial class OperationGroup
     {
         public string ResourceType { get; set; }
-        public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
-    }
-
-    internal partial class OperationGroup
-    {
-        public string ResourceType { get; set; }
         public bool IsTenantResource { get; set; }
-
         public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
-
     }
+
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
