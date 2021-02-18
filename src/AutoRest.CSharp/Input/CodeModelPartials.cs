@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Input
 
     internal partial class DictionaryOfAny
     {
-        private static char[] _formatSplitChar = new[] {',', ' '};
+        private static char[] _formatSplitChar = new[] { ',', ' ' };
 
         public string? Accessibility => TryGetValue("x-accessibility", out object? value) ? value?.ToString() : null;
         public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
@@ -84,6 +84,12 @@ namespace AutoRest.CSharp.Input
         }
 
         public string? HeaderCollectionPrefix => TryGetValue("x-ms-header-collection-prefix", out object? value) ? value?.ToString() : null;
+    }
+
+    internal partial class OperationGroup
+    {
+        public string ResourceType { get; set; }
+        public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
     }
 
     internal partial class ServiceResponse

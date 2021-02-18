@@ -24,9 +24,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Generated"
     },
-    "Azure.ResourceManager.Compute": {
+    "Azure.ResourceManager.Sample": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Compute\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Sample\\Generated"
     },
     "Azure.Storage.Tables": {
       "commandName": "Project",
@@ -199,6 +199,10 @@
     "object-type": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\object-type\\Generated"
+    },
+    "OperationGroupMappings": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\OperationGroupMappings\\Generated"
     },
     "paging": {
       "commandName": "Project",

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -24,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
+        private const string Providers = "/providers/";
         private Dictionary<Schema, OperationGroup> _operationGroups;
         private Dictionary<Schema, TypeProvider>? _models;
         private Dictionary<Schema, TypeProvider>? _resourceModels;
@@ -60,6 +62,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _codeModel = codeModel;
             _context = context;
+            if (context.Configuration.AzureArm)
+            {
+                DecorateOperationGroup();
+            }
             _operationGroups = new Dictionary<Schema, OperationGroup>();
 
             foreach (var operationGroup in _codeModel.OperationGroups)
@@ -301,6 +307,96 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             EnsureHeaderModels().TryGetValue(operation, out var model);
             return model;
+        }
+
+        private void DecorateOperationGroup()
+        {
+            foreach (var operationsGroup in _codeModel.OperationGroups)
+            {
+                MapHttpMethodToOperation(operationsGroup);
+                string? resourceType;
+                operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
+            }
+        }
+
+        private void MapHttpMethodToOperation(OperationGroup operationsGroup)
+        {
+            operationsGroup.OperationHttpMethodMapping = new Dictionary<HttpMethod, List<ServiceRequest>>();
+            foreach (var operation in operationsGroup.Operations)
+            {
+                foreach (var serviceRequest in operation.Requests)
+                {
+                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
+                    {
+                        List<ServiceRequest>? list;
+                        if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
+                        {
+                            list = new List<ServiceRequest>();
+                            operationsGroup.OperationHttpMethodMapping.Add(httpRequest.Method, list);
+                        }
+                        list.Add(serviceRequest);
+                    }
+                }
+            }
+        }
+
+        private string ConstructOperationResourseType(OperationGroup operationsGroup)
+        {
+            var method = GetBestMethod(operationsGroup);
+            if (method == null)
+            {
+                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key} 
+                                            Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
+            }
+            var indexOfProvider = method.Path.IndexOf(Providers);
+            if (indexOfProvider < 0)
+            {
+                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {Providers} string found in the URI");
+            }
+            var resourceType = ConstructResourceType(method.Path.Substring(indexOfProvider + Providers.Length));
+
+            return resourceType.ToString().TrimEnd('/');
+        }
+
+        private static string ConstructResourceType(string httpRequestUri)
+        {
+            var returnString = new StringBuilder();
+            var insideBrace = false;
+
+            foreach (var ch in httpRequestUri)
+            {
+                if (ch == '{')
+                {
+                    insideBrace = true;
+                }
+                else if (ch == '}')
+                {
+                    insideBrace = false;
+                }
+                else if (!insideBrace)
+                {
+                    returnString.Append(ch);
+                }
+            }
+            return returnString.ToString();
+        }
+
+        private HttpRequest? GetBestMethod(OperationGroup operationsGroup)
+        {
+            List<ServiceRequest>? requests;
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out requests))
+            {
+                return (HttpRequest?)requests[0].Protocol?.Http;
+            }
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Delete, out requests))
+            {
+                return (HttpRequest?)requests[0].Protocol?.Http;
+            }
+            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Patch, out requests))
+            {
+                return (HttpRequest?)requests[0].Protocol?.Http;
+            }
+            return null;
         }
     }
 }
