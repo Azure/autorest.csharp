@@ -5,6 +5,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class ProviderSegment
     {
+        internal static readonly string Providers = "/providers/";
         internal bool NoPredecessor { get; set; }
         internal bool HasReferenceSuccessor { get; set; }
         internal bool IsFullProvider { get; set; }

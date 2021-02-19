@@ -9,6 +9,7 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Type.Decorate;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -23,8 +24,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
-        private const string Providers = "/providers/";
-        private const string ProvidersTrimed = "providers";
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -223,7 +222,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 MapHttpMethodToOperation(operationsGroup);
                 string? resourceType;
                 operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
-                operationsGroup.IsTenantResource = IsTenantOnly(operationsGroup);
+                operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
             }
         }
 
@@ -236,7 +235,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
                     {
-                        httpRequest.ProviderSegments = GetProviderSegments(httpRequest.Path);
+                        httpRequest.ProviderSegments = ProviderSegmentDetection.GetProviderSegments(httpRequest.Path);
                         List<ServiceRequest>? list;
                         if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
                         {
@@ -257,12 +256,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key} 
                                             Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
             }
-            var indexOfProvider = method.Path.IndexOf(Providers);
+            var indexOfProvider = method.Path.IndexOf(ProviderSegment.Providers);
             if (indexOfProvider < 0)
             {
-                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {Providers} string found in the URI");
+                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {ProviderSegment.Providers} string found in the URI");
             }
-            var resourceType = ConstructResourceType(method.Path.Substring(indexOfProvider + Providers.Length));
+            var resourceType = ConstructResourceType(method.Path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
 
             return resourceType.ToString().TrimEnd('/');
         }
@@ -306,67 +305,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }
             return null;
-        }
-
-        public bool IsTenantOnly(OperationGroup operationGroup)
-        {
-            bool foundTenant = false;
-            foreach (var keyValue in operationGroup.OperationHttpMethodMapping)
-            {
-                foreach (var httpRequest in keyValue.Value)
-                {
-                    var providerSegmentsList = ((HttpRequest?)httpRequest?.Protocol?.Http)?.ProviderSegments;
-                    for (int i = 0; i < providerSegmentsList?.Count; i++)
-                    {
-                        var segment = providerSegmentsList[i];
-                        if (VerifyOperation(segment.TokenValue, operationGroup.ResourceType) && segment.IsFullProvider)
-                        {
-                            foundTenant = foundTenant || segment.NoPredecessor;
-                            if (!segment.NoPredecessor)
-                            {
-                                return false;
-                            }
-                            break;
-                        }
-                    }
-                }
-            }
-            return foundTenant;
-        }
-
-        //Extensions algo will use same tokens ADO #5523
-        public static List<ProviderSegment> GetProviderSegments(string path)
-        {
-            if (path == String.Empty)
-            {
-                return new List<ProviderSegment>();
-            }
-            var offset = path.IndexOf(Providers);
-            ProviderSegment currentToken;
-            var tokens = new List<ProviderSegment>();
-            int pathLen = path.Length;
-            int nextReference;
-            currentToken = new ProviderSegment();
-            currentToken.HadSpecialReference = path[0] == '/' && path[1] == '{';
-            currentToken.NoPredecessor = offset == 0;
-            do
-            {
-                offset += Providers.Length;
-                nextReference = path.IndexOf('{', offset);
-                currentToken.HasReferenceSuccessor = nextReference > -1;
-                currentToken.IsFullProvider = offset != nextReference;
-                var tokenLength = nextReference > -1 ? nextReference - offset : pathLen - offset;
-                currentToken.TokenValue = path.Substring(offset, tokenLength);
-                tokens.Add(currentToken);
-                offset = path.IndexOf(Providers, offset + tokenLength);
-                currentToken = new ProviderSegment();
-            } while (offset > -1);
-            return tokens;
-        }
-
-        public bool VerifyOperation(string tokenValue, string resourceType)
-        {
-            return tokenValue.Equals(resourceType);
         }
     }
 }
