@@ -316,8 +316,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 for (int i = 0; i < tokenList.Count && (!foundTenant || !foundNonTenant); i++)
                 {
                     var token = tokenList[i];
-                    foundNonTenant = !foundNonTenant ? token.isFullProvider && !token.noPredecessor && VerifyOperation(token.tokenValue, providerName) : true;
-                    foundTenant = !foundTenant ? token.isFullProvider && token.noPredecessor && VerifyOperation(token.tokenValue, providerName) : true;
+                    var operationMatch = VerifyOperation(token.tokenValue, providerName);
+                    foundNonTenant = !foundNonTenant ? token.isFullProvider && !token.noPredecessor && operationMatch : true;
+                    foundTenant = !foundTenant ? token.isFullProvider && token.noPredecessor && operationMatch : true;
                 }
             }
             return foundTenant && !foundNonTenant;
