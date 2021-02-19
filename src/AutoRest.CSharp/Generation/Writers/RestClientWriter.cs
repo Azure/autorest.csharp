@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 writer.Line($");");
                             }
                         }
-                        writer.Append($"{request}.Content = {urlContent};\n");
+                        writer.Line($"{request}.Content = {urlContent};");
                         break;
                     case null:
                         break;
