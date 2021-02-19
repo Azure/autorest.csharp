@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
         private const string Providers = "/providers/";
+        private const string ProvidersTrimed = "providers";
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -222,7 +223,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 MapHttpMethodToOperation(operationsGroup);
                 string? resourceType;
                 operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
-                operationsGroup.IsTenantResource = IsTenantOnly(MakeTokens(operationsGroup), operationsGroup.ResourceType);
+                operationsGroup.IsTenantResource = IsTenantOnly(operationsGroup);
             }
         }
 
@@ -235,6 +236,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
                     {
+                        httpRequest.ProviderSegments = GetProviderSegments(httpRequest.Path);
                         List<ServiceRequest>? list;
                         if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
                         {
@@ -306,101 +308,65 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        public bool IsTenantOnly(List<List<ProviderToken>> tokens, string providerName)
+        public bool IsTenantOnly(OperationGroup operationGroup)
         {
             bool foundTenant = false;
-            bool foundNonTenant = false;
-            for (int j = 0; j < tokens.Count && (!foundTenant || !foundNonTenant); j++)
+            foreach (var keyValue in operationGroup.OperationHttpMethodMapping)
             {
-                var tokenList = tokens[j];
-                for (int i = 0; i < tokenList.Count && (!foundTenant || !foundNonTenant); i++)
+                foreach (var httpRequest in keyValue.Value)
                 {
-                    var token = tokenList[i];
-                    var operationMatch = VerifyOperation(token.tokenValue, providerName);
-                    foundNonTenant = !foundNonTenant ? token.isFullProvider && !token.noPredecessor && operationMatch : true;
-                    foundTenant = !foundTenant ? token.isFullProvider && token.noPredecessor && operationMatch : true;
+                    var providerSegmentsList = ((HttpRequest?)httpRequest?.Protocol?.Http)?.ProviderSegments;
+                    for (int i = 0; i < providerSegmentsList?.Count; i++)
+                    {
+                        var segment = providerSegmentsList[i];
+                        if (VerifyOperation(segment.TokenValue, operationGroup.ResourceType) && segment.IsFullProvider)
+                        {
+                            foundTenant = foundTenant || segment.NoPredecessor;
+                            if (!segment.NoPredecessor)
+                            {
+                                return false;
+                            }
+                            break;
+                        }
+                    }
                 }
             }
-            return foundTenant && !foundNonTenant;
+            return foundTenant;
         }
 
         //Extensions algo will use same tokens ADO #5523
-        public static List<ProviderToken> Tokenize(string path)
+        public static List<ProviderSegment> GetProviderSegments(string path)
         {
-            string canidate = "";
-            string currentConstant = "";
-            var currentToken = new ProviderToken();
-            var tokens = new List<ProviderToken>();
-            bool insideBrace = false;
-            foreach (var ch in path)
+            if (path == String.Empty)
             {
-                if (ch == '{')
-                {
-                    if (canidate != "" && canidate != "/")
-                    {
-                        var split = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                        if (split.Length != 0 && split[0].Equals("providers"))
-                        {
-                            currentToken.tokenValue = canidate;
-                            currentToken.noPredecessor = currentConstant == "";
-                            currentToken.isFullProvider = split.Length > 1;
-                        }
-                        currentConstant = canidate;
-                    }
-                    canidate = "";
-                    insideBrace = true;
-                }
-                else if (ch == '}')
-                {
-                    if (currentToken.tokenValue != "")
-                    {
-                        currentToken.hasReferenceSuccessor = true;
-                        tokens.Add(currentToken);
-                        currentToken = new ProviderToken();
-                    }
-                    currentToken.hadSpecialReference = !currentToken.hadSpecialReference ? currentToken.tokenValue == "" && currentConstant == "" : true;
-                    insideBrace = false;
-                }
-                else if (!insideBrace)
-                {
-                    canidate += ch;
-                }
+                return new List<ProviderSegment>();
             }
-
-            if (canidate != "" && canidate != "/")
+            var offset = path.IndexOf(Providers);
+            ProviderSegment currentToken;
+            var tokens = new List<ProviderSegment>();
+            int pathLen = path.Length;
+            int nextReference;
+            currentToken = new ProviderSegment();
+            currentToken.HadSpecialReference = path[0] == '/' && path[1] == '{';
+            currentToken.NoPredecessor = offset == 0;
+            do
             {
-                var split = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                if (split.Length != 0 && split[0].Equals("providers"))
-                {
-                    currentToken.noPredecessor = currentConstant == "";
-                    currentToken.isFullProvider = split.Length > 1;
-                    currentToken.tokenValue = canidate;
-                    tokens.Add(currentToken);
-                }
-            }
+                offset += Providers.Length;
+                nextReference = path.IndexOf('{', offset);
+                currentToken.HasReferenceSuccessor = nextReference > -1;
+                currentToken.IsFullProvider = offset != nextReference;
+                var tokenLength = nextReference > -1 ? nextReference - offset : pathLen - offset;
+                currentToken.TokenValue = path.Substring(offset, tokenLength);
+                tokens.Add(currentToken);
+                offset = path.IndexOf(Providers, offset + tokenLength);
+                currentToken = new ProviderSegment();
+            } while (offset > -1);
             return tokens;
         }
 
-        public List<List<ProviderToken>> MakeTokens(OperationGroup operationsGroup)
+        public bool VerifyOperation(string tokenValue, string resourceType)
         {
-            List<List<ProviderToken>> tokens = new List<List<ProviderToken>>();
-
-            foreach (var op in operationsGroup.Operations)
-            {
-                foreach (var serviceRequest in op.Requests)
-                {
-                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
-                    {
-                        tokens.Add(Tokenize(httpRequest.Path));
-                    }
-                }
-            }
-            return tokens;
-        }
-
-        public bool VerifyOperation(string tokenValue, string providerName)
-        {
-            return tokenValue.Substring(Providers.Length).Equals(providerName);
+            return tokenValue.Equals(resourceType);
         }
     }
 }
