@@ -39,8 +39,11 @@ namespace AutoRest.TestServer.Tests
             Assert.True(requestHeaders.TryGetValue("x-ms-meta-c", out value) && value == "c");
 
             Assert.True(responseHeaders.Headers.Metadata.TryGetValue("a", out value) && value == "a");
+            Assert.True(responseHeaders.Headers.Metadata.TryGetValue("A", out value) && value == "a");
             Assert.True(responseHeaders.Headers.Metadata.TryGetValue("b", out value) && value == "b");
             Assert.True(responseHeaders.Headers.Metadata.TryGetValue("c", out value) && value == "c");
+
+            Assert.False(responseHeaders.Headers.Metadata.IsReadOnly);
         }
     }
 }
