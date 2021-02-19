@@ -22,24 +22,30 @@ namespace Azure.Core
             _values.Add(new KeyValuePair<string?, string?> (parameter, value));
         }
 
-        public void Build ()
+        private void BuildIfNeeded ()
         {
-            _bytes = GetContentByteArray(_values);
-            _values.Clear();
+            if (_bytes.Length == 0)
+            {
+                _bytes = GetContentByteArray(_values);
+                _values.Clear();
+            }
         }
 
         public override async Task WriteToAsync(Stream stream, CancellationToken cancellation)
         {
+            BuildIfNeeded ();
             await stream.WriteAsync(_bytes, 0, _bytes.Length, cancellation).ConfigureAwait(false);
         }
 
         public override void WriteTo(Stream stream, CancellationToken cancellation)
         {
+            BuildIfNeeded ();
             stream.Write(_bytes, 0, _bytes.Length);
         }
 
         public override bool TryComputeLength(out long length)
         {
+            BuildIfNeeded ();
             length = _bytes.Length;
             return true;
         }

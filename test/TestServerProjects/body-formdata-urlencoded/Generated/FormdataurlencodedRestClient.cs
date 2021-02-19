@@ -57,7 +57,6 @@ namespace body_formdata_urlencoded
             {
                 content.Add("status", status);
             }
-            content.Build();
             request.Content = content;
             return message;
         }
