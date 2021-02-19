@@ -11,10 +11,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
         public List<NamedReferenceOrConstant> Values { get; set; }= new List<NamedReferenceOrConstant>();
 
-        public UrlEncodedBody()
-        {
-        }
-
         public void Add (string parameter, ReferenceOrConstant value)
         {
             Values.Add(new NamedReferenceOrConstant (parameter, value));
