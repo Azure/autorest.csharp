@@ -384,7 +384,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteConstantOrParameterAsString(CodeWriter writer, ReferenceOrConstant constantOrReference)
         {
             WriteConstantOrParameter(writer, constantOrReference, enumAsString: true);
-            if (constantOrReference.Type.IsFrameworkType &&constantOrReference.Type.FrameworkType != typeof(string))
+            if (constantOrReference.Type.IsFrameworkType && constantOrReference.Type.FrameworkType != typeof(string))
             {
                 writer.Append($".ToString()");
             }
