@@ -181,7 +181,6 @@ namespace AutoRest.CSharp.Input
         public Operation? NextLinkOperation { get; set; }
     }
 
-
     /// <summary>language metadata specific to schema instances</summary>
     internal partial class Language : IDictionary<string, object>
     {
