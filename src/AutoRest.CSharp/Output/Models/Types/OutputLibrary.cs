@@ -316,48 +316,51 @@ namespace AutoRest.CSharp.Output.Models.Types
                 for (int i = 0; i < tokenList.Count && (!foundTenant || !foundNonTenant); i++)
                 {
                     var token = tokenList[i];
-                    foundNonTenant = !foundNonTenant ? token.isFullProvider && !token.noPred && VerifyOperation(token.tokenValue, providerName) : true;
-                    foundTenant = !foundTenant ? token.isFullProvider && token.noPred && VerifyOperation(token.tokenValue, providerName) : true;
+                    foundNonTenant = !foundNonTenant ? token.isFullProvider && !token.noPredecessor && VerifyOperation(token.tokenValue, providerName) : true;
+                    foundTenant = !foundTenant ? token.isFullProvider && token.noPredecessor && VerifyOperation(token.tokenValue, providerName) : true;
                 }
             }
             return foundTenant && !foundNonTenant;
         }
 
+        //Extensions algo will use same tokens ADO #5523
         public static List<ProviderToken> Tokenize(string path)
         {
             string canidate = "";
-            var currentToken = new ProviderToken();
             string currentConstant = "";
+            var currentToken = new ProviderToken();
             var tokens = new List<ProviderToken>();
+            bool insideBrace = false;
             foreach (var ch in path)
             {
                 if (ch == '{')
                 {
                     if (canidate != "" && canidate != "/")
                     {
-                        var asSplit = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                        if (asSplit.Length != 0 && asSplit.First().Equals("providers"))
+                        var split = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                        if (split.Length != 0 && split[0].Equals("providers"))
                         {
                             currentToken.tokenValue = canidate;
-                            currentToken.noPred = currentConstant == "";
-                            currentToken.isFullProvider = asSplit.Length > 1;
+                            currentToken.noPredecessor = currentConstant == "";
+                            currentToken.isFullProvider = split.Length > 1;
                         }
                         currentConstant = canidate;
                     }
                     canidate = "";
+                    insideBrace = true;
                 }
                 else if (ch == '}')
                 {
-                    if (canidate != "" && currentToken.tokenValue != "")
+                    if (currentToken.tokenValue != "")
                     {
-                        currentToken.hasReferenceSuccessor = currentConstant == currentToken.tokenValue;
+                        currentToken.hasReferenceSuccessor = true;
                         tokens.Add(currentToken);
                         currentToken = new ProviderToken();
                     }
                     currentToken.hadSpecialReference = !currentToken.hadSpecialReference ? currentToken.tokenValue == "" && currentConstant == "" : true;
-                    canidate = "";
+                    insideBrace = false;
                 }
-                else
+                else if (!insideBrace)
                 {
                     canidate += ch;
                 }
@@ -365,11 +368,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (canidate != "" && canidate != "/")
             {
-                var asSplit = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                if (asSplit.Length > 1 && asSplit.First().Equals("providers"))
+                var split = canidate.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                if (split.Length != 0 && split[0].Equals("providers"))
                 {
-                    currentToken.noPred = currentConstant == "";
-                    currentToken.isFullProvider = true;
+                    currentToken.noPredecessor = currentConstant == "";
+                    currentToken.isFullProvider = split.Length > 1;
                     currentToken.tokenValue = canidate;
                     tokens.Add(currentToken);
                 }

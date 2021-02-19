@@ -5,7 +5,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class ProviderToken
     {
-        internal bool noPred;
+        internal bool noPredecessor;
         internal bool hasReferenceSuccessor;
         internal bool isFullProvider;
         internal string tokenValue;
@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         internal bool isLastProvider;
         internal ProviderToken()
         {
-            noPred = false;
+            noPredecessor = false;
             hasReferenceSuccessor = false;
             tokenValue = "";
             isFullProvider = false;
