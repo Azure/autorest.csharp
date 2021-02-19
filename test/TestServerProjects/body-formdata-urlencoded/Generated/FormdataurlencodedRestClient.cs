@@ -27,14 +27,14 @@ namespace body_formdata_urlencoded
         /// <param name="endpoint"> server parameter. </param>
         public FormdataurlencodedRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            endpoint ??= new Uri("");
+            endpoint ??= new Uri("http://localhost:3000");
 
             this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateUpdatePetWithFormRequest(int petId, PostContentSchemaPetType petType, PetFood petFood, int petAge, string name, string status)
+        internal HttpMessage CreateUpdatePetWithFormRequest(int petId, PetType petType, PetFood petFood, int petAge, string name, string status)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -46,7 +46,7 @@ namespace body_formdata_urlencoded
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             var content = new FormUrlEncodedContent();
-            content.Add("pet_type", petType.ToString());
+            content.Add("pet_type", petType.ToSerialString());
             content.Add("pet_food", petFood.ToString());
             content.Add("pet_age", petAge.ToString());
             if (name != null)
@@ -70,7 +70,7 @@ namespace body_formdata_urlencoded
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> UpdatePetWithFormAsync(int petId, PostContentSchemaPetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
+        public async Task<Response> UpdatePetWithFormAsync(int petId, PetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateUpdatePetWithFormRequest(petId, petType, petFood, petAge, name, status);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -92,7 +92,7 @@ namespace body_formdata_urlencoded
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response UpdatePetWithForm(int petId, PostContentSchemaPetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
+        public Response UpdatePetWithForm(int petId, PetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateUpdatePetWithFormRequest(petId, petType, petFood, petAge, name, status);
             _pipeline.Send(message, cancellationToken);

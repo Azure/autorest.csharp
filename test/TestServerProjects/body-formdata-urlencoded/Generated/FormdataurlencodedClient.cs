@@ -43,7 +43,7 @@ namespace body_formdata_urlencoded
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> UpdatePetWithFormAsync(int petId, PostContentSchemaPetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> UpdatePetWithFormAsync(int petId, PetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataurlencodedClient.UpdatePetWithForm");
             scope.Start();
@@ -66,7 +66,7 @@ namespace body_formdata_urlencoded
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response UpdatePetWithForm(int petId, PostContentSchemaPetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
+        public virtual Response UpdatePetWithForm(int petId, PetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataurlencodedClient.UpdatePetWithForm");
             scope.Start();

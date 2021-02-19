@@ -52,36 +52,6 @@ schemas: !Schemas
           description: Updated status of the pet
       protocol: !Protocols {}
   choices:
-    - !ChoiceSchema &ref_1
-      choices:
-        - !ChoiceValue 
-          value: dog
-          language:
-            default:
-              name: Dog
-              description: ''
-        - !ChoiceValue 
-          value: cat
-          language:
-            default:
-              name: Cat
-              description: ''
-        - !ChoiceValue 
-          value: fish
-          language:
-            default:
-              name: Fish
-              description: ''
-      type: choice
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      choiceType: *ref_0
-      language: !Languages 
-        default:
-          name: PostContentSchemaPetType
-          description: Can take a value of dog, or cat, or fish
-      protocol: !Protocols {}
     - !ChoiceSchema &ref_2
       choices:
         - !ChoiceValue 
@@ -111,6 +81,37 @@ schemas: !Schemas
         default:
           name: PetFood
           description: Can take a value of meat, or fish, or plant
+      protocol: !Protocols {}
+  sealedChoices:
+    - !SealedChoiceSchema &ref_1
+      choices:
+        - !ChoiceValue 
+          value: dog
+          language:
+            default:
+              name: Dog
+              description: ''
+        - !ChoiceValue 
+          value: cat
+          language:
+            default:
+              name: Cat
+              description: ''
+        - !ChoiceValue 
+          value: fish
+          language:
+            default:
+              name: Fish
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: PetType
+          description: Can take a value of dog, or cat, or fish
       protocol: !Protocols {}
   constants:
     - !ConstantSchema &ref_8
@@ -184,7 +185,7 @@ schemas: !Schemas
 globalParameters:
   - !Parameter &ref_6
     schema: *ref_0
-    clientDefaultValue: ''
+    clientDefaultValue: http://localhost:3000
     implementation: Client
     origin: modelerfour:synthesized/host
     required: true

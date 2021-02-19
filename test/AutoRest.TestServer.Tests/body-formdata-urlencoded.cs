@@ -20,6 +20,6 @@ namespace AutoRest.TestServer.Tests
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task UpdatePetWithForm() => TestStatus(async (host, pipeline) =>
             await new FormdataurlencodedClient(ClientDiagnostics, pipeline, host)
-                .UpdatePetWithFormAsync(1, PostContentSchemaPetType.Dog, "meat", 42, "Fido"));
+                .UpdatePetWithFormAsync(1, PetType.Dog, "meat", 42, "Fido"));
     }
 }

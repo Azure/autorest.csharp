@@ -14,7 +14,7 @@ namespace body_formdata_urlencoded.Models
         /// <param name="petType"> Can take a value of dog, or cat, or fish. </param>
         /// <param name="petFood"> Can take a value of meat, or fish, or plant. </param>
         /// <param name="petAge"> How many years is it old?. </param>
-        internal Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(PostContentSchemaPetType petType, PetFood petFood, int petAge)
+        internal Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(PetType petType, PetFood petFood, int petAge)
         {
             PetType = petType;
             PetFood = petFood;
@@ -22,7 +22,7 @@ namespace body_formdata_urlencoded.Models
         }
 
         /// <summary> Can take a value of dog, or cat, or fish. </summary>
-        public PostContentSchemaPetType PetType { get; }
+        public PetType PetType { get; }
         /// <summary> Can take a value of meat, or fish, or plant. </summary>
         public PetFood PetFood { get; }
         /// <summary> How many years is it old?. </summary>
