@@ -248,7 +248,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var urlContent = new CodeWriterDeclaration("content");
 
                         WriteHeaders(writer, clientMethod, request, content: true);
-                        writer.Append($"var {urlContent:D} = new Azure.Core.FormUrlEncodedContent ();\n");
+                        writer.Line($"var {urlContent:D} = new {typeof(FormUrlEncodedContent)}();");
 
                         foreach (var (name, value) in urlEncodedRequestBody.Values)
                         {
