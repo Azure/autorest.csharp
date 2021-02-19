@@ -5,11 +5,12 @@
 ``` yaml
 title: OperationGroupMappings
 require: $(this-folder)/../../../readme.md
-azure-arm: false
+azure-arm: true
 model-namespace: false
-input-file: $(this-folder)/OperationGroupMappings.json
+input-file: $(this-folder)/TenantOnly.json
 namespace: Azure.OperationGroupMappings
 operation-group-to-resource-type:
-   Operations: /providers/Microsoft.Compute/operations
+   AvailableBalances : Microsoft.Billing/billingAccounts/availableBalance
+   Agreements: "providers/Microsoft.Billing/billingAccounts/agreements"
 
 ```

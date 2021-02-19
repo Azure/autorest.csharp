@@ -53,7 +53,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AvailableBalance"
+              "$ref": "#/definitions/BillingAccountListResult"
             }
           },
           "default": {
@@ -105,7 +105,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AvailableBalance"
+              "$ref": "#/definitions/BillingAccount"
             }
           },
           "default": {
@@ -143,7 +143,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BillingAccountUpdateRequest"
+              "$ref": "#/definitions/BillingAccount"
             },
             "description": "Request parameters that are provided to the update billing account operation."
           }
@@ -152,7 +152,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AvailableBalance"
+              "$ref": "#/definitions/BillingAccount"
             }
           },
           "202": {
@@ -194,7 +194,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AvailableBalance"
+              "$ref": "#/definitions/InvoiceSectionListWithCreateSubPermissionResult"
             }
           },
           "default": {
@@ -281,7 +281,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Instruction"
+              "$ref": "#/definitions/InstructionListResult"
             }
           },
           "default": {
@@ -389,16 +389,123 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": {
+      "get": {
+        "tags": [
+          "Agreements"
+        ],
+        "x-ms-examples": {
+          "AgreementByName": {
+            "$ref": "./examples/AgreementByName.json"
+          }
+        },
+        "operationId": "Agreements_Get",
+        "description": "Gets an agreement by ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/agreementNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the participants.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Agreement"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
+    "BillingAccountListResult": {
+      "description": "The list of billing accounts.",
       "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "#/definitions/ErrorDetails"
+        "value": {
+          "description": "The list of billing accounts.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BillingAccount"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingAccount": {
+      "description": "A billing account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of the billing account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Resource"
+        }
+      }
+    },
+    "InstructionListResult": {
+      "description": "The list of billing instructions used during invoice generation.",
+      "properties": {
+        "value": {
+          "description": "The list of billing instructions used during invoice generation.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Instruction"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BillingProfile": {
+      "description": "A billing profile.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of the billing profile.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Resource"
         }
       }
     },
@@ -417,27 +524,6 @@
           "$ref": "#/definitions/InstructionProperties"
         }
       }
-    },
-    "Resource": {
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "InstructionProperties": {
       "description": "A billing instruction used during invoice generation.",
@@ -468,6 +554,116 @@
         }
       }
     },
+    "InvoiceSectionListWithCreateSubPermissionResult": {
+      "type": "object",
+      "description": "The list of invoice section properties with create subscription permission.",
+      "properties": {
+        "value": {
+          "description": "The list of invoice section properties with create subscription permission.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstructionProperties"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "The sub details of the error.",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorSubDetails"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorSubDetails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string",
+            "readOnly": true
+          },
+          "target": {
+            "description": "The target of the particular error.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TargetCloud": {
+      "type": "string",
+      "description": "Possible cloud environments.",
+      "enum": [
+        "USGov",
+        "USNat",
+        "USSec"
+      ],
+      "x-ms-enum": {
+        "name": "targetCloud",
+        "modelAsString": true
+      }
+    },
     "AvailableBalance": {
       "description": "The latest Azure credit balance. This is the balance available for pay now.",
       "type": "object",
@@ -483,6 +679,139 @@
           "title": "Available balance properties"
         }
       }
+    },
+    "AvailableBalanceProperties": {
+      "description": "The properties of available balance.",
+      "properties": {
+        "amount": {
+          "description": "Balance amount.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        }
+      }
+    },
+    "Amount": {
+      "description": "The amount.",
+      "properties": {
+        "currency": {
+          "description": "The currency for the amount value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Amount value.",
+          "type": "number"
+        }
+      }
+    },
+    "Agreement": {
+      "description": "An agreement.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of an agreement.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgreementProperties"
+        }
+      }
+    },
+    "AgreementProperties": {
+      "description": "The properties of an agreement.",
+      "properties": {
+        "agreementLink": {
+          "description": "The URL to download the agreement.",
+          "type": "string",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the agreement signed by a customer.",
+          "readOnly": true,
+          "enum": [
+            "MicrosoftCustomerAgreement",
+            "AffiliatePurchaseTerms",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          }
+        },
+        "acceptanceMode": {
+          "type": "string",
+          "description": "The mode of acceptance for an agreement.",
+          "readOnly": true,
+          "enum": [
+            "ClickToAccept",
+            "ESignEmbedded",
+            "ESignOffline"
+          ],
+          "x-ms-enum": {
+            "name": "acceptanceMode",
+            "modelAsString": true
+          }
+        },
+        "effectiveDate": {
+          "description": "The date from which the agreement is effective.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "The date when the agreement expires.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "participants": {
+          "description": "The list of participants that participates in acceptance of an agreement.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Participants"
+          }
+        },
+        "status": {
+          "description": "The current status of the agreement.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Participants": {
+      "description": "The details about a participant.",
+      "properties": {
+        "status": {
+          "description": "The acceptance status of the participant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "statusDate": {
+          "description": "The date when the status got changed.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "email": {
+          "description": "The email address of the participant.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Action": {
+      "description": "The action the caller is allowed to perform.",
+      "type": "string",
+      "readOnly": true
+    },
+    "NotAction": {
+      "description": "The set of actions that the caller is not allowed to perform.",
+      "type": "string",
+      "readOnly": true
     }
   },
   "parameters": {
@@ -515,6 +844,40 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "billingProfileNameParameter": {
+      "name": "billingProfileName",
+      "in": "path",
+      "description": "The ID that uniquely identifies a billing profile.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "agreementNameParameter": {
+      "name": "agreementName",
+      "in": "path",
+      "description": "The ID that uniquely identifies an agreement.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
