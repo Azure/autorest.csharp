@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "https://tinyurl.com/yyjwxzka"
+  "@autorest/modelerfour": "4.16.3-dev.2"
 modelerfour:
   always-create-content-type-parameter: true
   flatten-models: true

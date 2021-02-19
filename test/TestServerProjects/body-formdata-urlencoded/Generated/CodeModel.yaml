@@ -240,7 +240,7 @@ operationGroups:
               - !Parameter &ref_9
                 schema: *ref_1
                 implementation: Method
-                isInMultipart: true
+                isPartialBody: true
                 required: true
                 language: !Languages 
                   default:
@@ -253,7 +253,7 @@ operationGroups:
               - !Parameter &ref_10
                 schema: *ref_2
                 implementation: Method
-                isInMultipart: true
+                isPartialBody: true
                 required: true
                 language: !Languages 
                   default:
@@ -266,7 +266,7 @@ operationGroups:
               - !Parameter &ref_11
                 schema: *ref_3
                 implementation: Method
-                isInMultipart: true
+                isPartialBody: true
                 required: true
                 language: !Languages 
                   default:
@@ -279,7 +279,7 @@ operationGroups:
               - !Parameter &ref_12
                 schema: *ref_4
                 implementation: Method
-                isInMultipart: true
+                isPartialBody: true
                 language: !Languages 
                   default:
                     name: name
@@ -291,7 +291,7 @@ operationGroups:
               - !Parameter &ref_13
                 schema: *ref_5
                 implementation: Method
-                isInMultipart: true
+                isPartialBody: true
                 language: !Languages 
                   default:
                     name: status

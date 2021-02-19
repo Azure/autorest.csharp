@@ -952,9 +952,9 @@ namespace AutoRest.CSharp.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "groupedBy")]
         public RequestParameter? GroupedBy { get; set; }
 
-        /// <summary>If this parameter is to be included in a multipart request body.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "isInMultipart")]
-        public bool? IsInMultipart { get; set; }
+        /// <summary>If this parameter is only part of the body request(for multipart and form bodies.)</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "isPartialBody")]
+        public bool? IsPartialBody { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
