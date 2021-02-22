@@ -9,6 +9,7 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Type.Decorate;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -23,7 +24,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
-        private const string Providers = "/providers/";
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -166,7 +166,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _resourceContainers;
         }
 
-
         public TypeProvider FindTypeForSchema(Schema schema)
         {
             return SchemaMap[schema];
@@ -223,6 +222,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 MapHttpMethodToOperation(operationsGroup);
                 string? resourceType;
                 operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
+                operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
             }
         }
 
@@ -235,6 +235,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
                     {
+                        httpRequest.ProviderSegments = ProviderSegmentDetection.GetProviderSegments(httpRequest.Path);
                         List<ServiceRequest>? list;
                         if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
                         {
@@ -255,12 +256,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key} 
                                             Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
             }
-            var indexOfProvider = method.Path.IndexOf(Providers);
+            var indexOfProvider = method.Path.IndexOf(ProviderSegment.Providers);
             if (indexOfProvider < 0)
             {
-                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {Providers} string found in the URI");
+                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {ProviderSegment.Providers} string found in the URI");
             }
-            var resourceType = ConstructResourceType(method.Path.Substring(indexOfProvider + Providers.Length));
+            var resourceType = ConstructResourceType(method.Path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
 
             return resourceType.ToString().TrimEnd('/');
         }

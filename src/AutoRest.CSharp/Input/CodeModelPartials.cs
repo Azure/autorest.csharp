@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Utilities;
 using YamlDotNet.Serialization;
+using AutoRest.CSharp.Output.Models.Requests;
 
 #pragma warning disable SA1649
 #pragma warning disable SA1402
@@ -89,7 +90,13 @@ namespace AutoRest.CSharp.Input
     internal partial class OperationGroup
     {
         public string ResourceType { get; set; }
+        public bool IsTenantResource { get; set; }
         public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
+    }
+
+    internal partial class HttpRequest : Protocol
+    {
+        public List<ProviderSegment> ProviderSegments;
     }
 
     internal partial class ServiceResponse
