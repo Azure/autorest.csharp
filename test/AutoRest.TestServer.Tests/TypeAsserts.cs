@@ -17,9 +17,16 @@ namespace AutoRest.TestServer.Tests
             return methodInfo;
         }
 
+        public static ParameterInfo HasParameter(ConstructorInfo ctor, string name)
+        {
+            var parameterInfo = ctor.GetParameters().FirstOrDefault(p=>p.Name == name);
+            Assert.NotNull(parameterInfo);
+            return parameterInfo;
+        }
+
         public static ParameterInfo HasParameter(MethodInfo method, string name)
         {
-            var parameterInfo = method.GetParameters().FirstOrDefault(p=>p.Name == name);
+            var parameterInfo = method.GetParameters().FirstOrDefault(p => p.Name == name);
             Assert.NotNull(parameterInfo);
             return parameterInfo;
         }

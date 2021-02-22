@@ -21,10 +21,12 @@ namespace custom_baseUrl_paging
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PagingRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()
         {
         }
+
         /// <summary> Initializes a new instance of PagingClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[]? credentialScopes)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -21,6 +21,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ModelNamespace = modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
+            CredentialTypes = credentialTypes;
+            CredentialScopes = credentialScopes;
         }
 
 
@@ -34,10 +36,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool ModelNamespace { get; }
         public bool HeadAsBoolean { get; }
         public bool SkipCSProjPackageReference { get; }
+        public string[] CredentialTypes { get; }
+        public string[]? CredentialScopes { get; }
         public static string ProjectRelativeDirectory = "../";
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
+            string[] defaultCredentialType = { "None"};
             return new Configuration(
                     TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
                 autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
@@ -48,9 +53,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
                 autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("skip-csproj-packagereference").GetAwaiter().GetResult() ?? false
+                autoRest.GetValue<bool?>("skip-csproj-packagereference").GetAwaiter().GetResult() ?? false,
+                autoRest.GetValue<string[]?>("credential-types").GetAwaiter().GetResult() ?? defaultCredentialType,
+                autoRest.GetValue<string[]?>("credential-scopes").GetAwaiter().GetResult()
             );
-
         }
 
         private static T GetRequiredOption<T>(IPluginCommunication autoRest, string name)

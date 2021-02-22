@@ -2,6 +2,9 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
@@ -9,6 +12,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -18,6 +22,65 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ClientWriter
     {
+
+        public static void WriteClientOptions(CodeWriter writer, Client client, BuildContext context)
+        {
+            var cs = client.Type;
+            var @namespace = cs.Namespace;
+            var apiVersions = context.CodeModel.OperationGroups
+                .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
+                .Select(v => v.Version)
+                .Distinct()
+                .OrderBy(v => v)
+                .Select(v => (Version: v, Name: ToVersionProperty(v)))
+                .ToArray();
+
+            using (writer.Namespace(@namespace))
+            {
+                writer.WriteXmlDocumentationSummary($"Client options for {cs.Name}.");
+                using (writer.Scope($"public class {cs.Name}Options: {typeof(ClientOptions)}"))
+                {
+                    writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{apiVersions.Last().Name};");
+                    writer.Line();
+                    writer.WriteXmlDocumentationSummary("The version of the service to use.");
+                    using (writer.Scope($"public enum ServiceVersion"))
+                    {
+                        int i = 1;
+                        foreach (var apiVersion in apiVersions)
+                        {
+                            writer.WriteXmlDocumentationSummary($"Service version \"{apiVersion.Version}\"");
+                            writer.Line($"{apiVersion.Name} = {i:L},");
+                            i++;
+                        }
+                    }
+
+                    writer.Line();
+                    writer.Line($"internal string Version {{ get; }}");
+                    writer.Line();
+
+                    writer.WriteXmlDocumentationSummary($"Initializes new instance of {cs.Name}Options.");
+                    using (writer.Scope($"public {cs.Name}Options(ServiceVersion version = LatestVersion)"))
+                    {
+                        writer.Append($"Version = version ");
+                        using (writer.Scope($"switch", end: "};"))
+                        {
+                            foreach (var apiVersion in apiVersions)
+                            {
+                                writer.Line($"ServiceVersion.{apiVersion.Name} => {apiVersion.Version:L},");
+                            }
+
+                            writer.Line($"_ => throw new {typeof(NotSupportedException)}()");
+                        }
+                    }
+                }
+            }
+        }
+
+        private static string ToVersionProperty(string s)
+        {
+            return "V" + s.Replace(".", "_").Replace('-', '_');
+        }
+
         public void WriteClient(CodeWriter writer, Client client, Configuration configuration)
         {
             var cs = client.Type;
@@ -28,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client);
-                    WriteClientCtors(writer, client);
+                    WriteClientCtors(writer, client, configuration);
 
                     foreach (var clientMethod in client.Methods)
                     {
@@ -126,6 +189,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
         private const string PipelineVariable = "pipeline";
         private const string PipelineField = "_" + PipelineVariable;
+        private const string EndpointVariable = "endpoint";
+        private const string CredentialVariable = "credential";
+        private const string OptionsVariable = "options";
 
         private void WriteClientFields(CodeWriter writer, Client client)
         {
@@ -134,11 +200,70 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
         }
 
-        private void WriteClientCtors(CodeWriter writer, Client client)
+        private void WriteClientCtors(CodeWriter writer, Client client, Configuration configuration)
         {
+            writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
             using (writer.Scope($"protected {client.Type.Name:D}()"))
             {
+            }
+            writer.Line();
+
+            if (configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase))
+            {
+                writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
+                writer.WriteXmlDocumentationParameter(EndpointVariable, "server parameter.");
+                writer.WriteXmlDocumentationParameter(CredentialVariable, "A credential used to authenticate to an Azure Service..");
+                writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
+                writer.Append($"public {client.Type.Name:D}({typeof(Uri)} {EndpointVariable}, {typeof(AzureKeyCredential)} {CredentialVariable}, {client.Type.Name}Options {OptionsVariable} = null)");
+                using (writer.Scope())
+                {
+                    writer.Line($"{typeof(Argument)}.AssertNotNull({EndpointVariable}, nameof({EndpointVariable}));");
+                    writer.Line($"{typeof(Argument)}.AssertNotNull({CredentialVariable}, nameof({CredentialVariable}));");
+                    writer.Line();
+
+                    writer.Line($"{OptionsVariable} ??= new {client.Type.Name}Options();");
+                    writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"api-key\"));");
+                    writer.Append($"this.RestClient = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, {EndpointVariable});");
+                }
+                writer.Line();
+            }
+
+            if (configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase))
+            {
+                writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
+                writer.WriteXmlDocumentationParameter(EndpointVariable, "server parameter.");
+                writer.WriteXmlDocumentationParameter(CredentialVariable, "A credential used to authenticate to an Azure Service.");
+                writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
+                writer.Append($"public {client.Type.Name:D}({typeof(Uri)} {EndpointVariable}, {typeof(TokenCredential)} {CredentialVariable}, {client.Type.Name}Options {OptionsVariable} = null)");
+                using (writer.Scope())
+                {
+                    writer.Line($"{typeof(Argument)}.AssertNotNull({EndpointVariable}, nameof({EndpointVariable}));");
+                    writer.Line($"{typeof(Argument)}.AssertNotNull({CredentialVariable}, nameof({CredentialVariable}));");
+                    writer.Line();
+
+                    writer.Line($"{OptionsVariable} ??= new {client.Type.Name}Options();");
+                    writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    var scopesParam = new CodeWriterDeclaration("scopes");
+                    string scope = "";
+                    if (configuration.CredentialScopes != null)
+                    {
+                        if (configuration.CredentialScopes.Length == 1)
+                        {
+                            scope = $"\"{configuration.CredentialScopes[0]}\"";
+                        }
+                        else
+                        {
+                            string scopesArr = "{\"" + string.Join("\", \"", configuration.CredentialScopes) + "\"}";
+                            writer.Line($"string[] {scopesParam:D} = {scopesArr};");
+                            scope = scopesParam.ActualName;
+                        }
+                    }
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scope}));");
+                    writer.Append($"this.RestClient = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, {EndpointVariable});");
+                }
+                writer.Line();
             }
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");

@@ -1,0 +1,51 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Public Client Constructor",
+    "description": "Public Client Constructor",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/op": {
+      "get": {
+        "operationId": "TestOperation",
+        "description": "",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TestModel": {
+      "type": "object",
+      "properties": {
+        "Code": { "type": "string" },
+        "Status": { "type": "string" }
+      },
+      "description": "."
+    }
+  }
+}
