@@ -26,7 +26,7 @@ namespace AutoRest.TestServer.Tests
 
         public static ParameterInfo HasParameter(MethodInfo method, string name)
         {
-            var parameterInfo = method.GetParameters().FirstOrDefault(p => p.Name == name);
+            var parameterInfo = method.GetParameters().FirstOrDefault(p=>p.Name == name);
             Assert.NotNull(parameterInfo);
             return parameterInfo;
         }
