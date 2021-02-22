@@ -316,7 +316,7 @@ namespace Azure.Core
                 return;
             }
 
-            _pollUri = _originalUri.ToString();
+            _pollUri = _originalUri.AbsoluteUri;
             _headerFrom = HeaderFrom.None;
         }
 
@@ -353,7 +353,7 @@ namespace Azure.Core
 
                 if (_requestMethod == RequestMethod.Put || (_originalHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri))
                 {
-                    return _originalUri.ToString();
+                    return _originalUri.AbsoluteUri;
                 }
 
                 if (_originalHasLocation && _finalStateVia == OperationFinalStateVia.Location)
