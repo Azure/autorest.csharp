@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
         private const string Providers = "/providers/";
-        private Dictionary<Schema, OperationGroup> _operationGroups;
+        private Dictionary<string, List<OperationGroup>> _operationGroups;
         private Dictionary<Schema, TypeProvider>? _models;
         private Dictionary<Schema, TypeProvider>? _resourceModels;
 
@@ -66,26 +66,29 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 DecorateOperationGroup();
             }
-            _operationGroups = new Dictionary<Schema, OperationGroup>();
+            _operationGroups = new Dictionary<string, List<OperationGroup>>();
 
+            List<OperationGroup>? result;
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                _operationGroups.Add(GetSchemaFromOperationGroup(operationGroup), operationGroup);
+                if (!_operationGroups.TryGetValue(operationGroup.Resource, out result))
+                {
+                    result = new List<OperationGroup>();
+                    _operationGroups.Add(operationGroup.Resource, result);
+                }
+                result.Add(operationGroup);
             }
         }
 
         private Schema GetSchemaFromOperationGroup(OperationGroup operationGroup)
         {
-            foreach (var operation in operationGroup.Operations)
-            {
-                var putOperation = GetPut(operation);
-                var param = GetBodySchema(putOperation);
-                return param.Schema;
-            }
+            List<ServiceRequest>? output;
+            operationGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out output);
+            return GetBodyParameter(output.First()).Schema;
             throw new Exception("schema not found");
         }
 
-        private RequestParameter GetBodySchema(ServiceRequest request)
+        private RequestParameter GetBodyParameter(ServiceRequest request)
         {
             foreach (var param in request.Parameters)
             {
@@ -96,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             throw new Exception("No body param found");
         }
 
-        private ServiceRequest GetPut(Operation operation)
+        /*private ServiceRequest GetPut(Operation operation)
         {
             foreach (var request in operation.Requests)
             {
@@ -105,7 +108,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return request;
             }
             throw new Exception("No put found");
-        }
+        }*/
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
@@ -266,14 +269,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var schema in allSchemas)
             {
-                if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema))
+                /*if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
                 {
                     _resourceModels.Add(schema, BuildModel(schema));
                 }
                 else
-                {
-                    _models.Add(schema, BuildModel(schema));
-                }
+                {*/
+                _models.Add(schema, BuildModel(schema));
+                //}
             }
         }
 
@@ -316,6 +319,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 MapHttpMethodToOperation(operationsGroup);
                 string? resourceType;
                 operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
+                string? resource;
+                operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : GetSchemaFromOperationGroup(operationsGroup).Name;
             }
         }
 

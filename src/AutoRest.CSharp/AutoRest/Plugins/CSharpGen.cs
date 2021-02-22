@@ -46,31 +46,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
 
-            /*var operationGroups = new Dictionary<string, OperationGroup>();
-            if (context.Configuration.AzureArm)
-            {
-                foreach (var operation in context.Library.OperationGroups)
-                {
-                    var key = operation.Key;
-                    if (key.EndsWith('s'))
-                    {
-                        operationGroups.Add(operation.Key.Substring(0, operation.Key.Length - 1), operation);
-                        Console.WriteLine(operation.Key.Substring(0, operation.Key.Length - 1));
-                    }
-                    else
-                    {
-                        operationGroups.Add(operation.Key, operation);
-                        Console.WriteLine(operation.Key);
-                    }
-                }
-            }*/
             foreach (var model in context.Library.Models)
             {
                 var name = model.Type.Name;
-                /*if (context.Configuration.AzureArm && operationGroups.ContainsKey(name))
-                {
-                    continue;
-                }*/
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
 
