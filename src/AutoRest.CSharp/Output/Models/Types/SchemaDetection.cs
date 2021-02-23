@@ -8,14 +8,14 @@ using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class SchemaDetection
+    internal static class SchemaDetection
     {
         public static Schema GetSchema(OperationGroup operationGroup)
         {
             List<ServiceRequest>? output;
             operationGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out output);
             return GetBodyParameter(output.First()).Schema;
-            throw new Exception("Schema not found!");
+            throw new Exception("Schema not found! Please add the OperationGroup to schema name mapping to readme.md.");
         }
 
         private static RequestParameter GetBodyParameter(ServiceRequest request)
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (httpParam?.In == ParameterLocation.Body)
                     return param;
             }
-            throw new Exception("No body param found!");
+            throw new Exception("No body param found! Please add the OperationGroup to schema name mapping to readme.md.");
         }
     }
 }

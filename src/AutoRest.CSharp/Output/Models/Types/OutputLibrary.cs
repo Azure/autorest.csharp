@@ -66,17 +66,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (context.Configuration.AzureArm)
             {
                 DecorateOperationGroup();
-
-                List<OperationGroup>? result;
-                foreach (var operationGroup in _codeModel.OperationGroups)
-                {
-                    if (!_operationGroups.TryGetValue(operationGroup.Resource, out result))
-                    {
-                        result = new List<OperationGroup>();
-                        _operationGroups.Add(operationGroup.Resource, result);
-                    }
-                    result.Add(operationGroup);
-                }
             }
         }
 
@@ -293,6 +282,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
             }
+
+            foreach (var operationsGroup in _codeModel.OperationGroups)
+            {
+                AddOperationGroupToResourceMap(operationsGroup);
+            }
         }
 
         private void MapHttpMethodToOperation(OperationGroup operationsGroup)
@@ -374,6 +368,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }
             return null;
+        }
+
+        private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)
+        {
+            List<OperationGroup>? result;
+            if (!_operationGroups.TryGetValue(operationsGroup.Resource, out result))
+            {
+                result = new List<OperationGroup>();
+                _operationGroups.Add(operationsGroup.Resource, result);
+            }
+            result.Add(operationsGroup);
         }
     }
 }
