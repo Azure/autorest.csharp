@@ -21,4 +21,11 @@ operation-group-to-resource-type:
    Skus: Microsoft.Storage/skus
    Usages: Microsoft.Storage/locations/usages
    PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
+operation-group-to-resource:
+   BlobServices: BlobServiceProperties,
+   FileServices: FileServiceProperties,
+   Operations: Operation,
+   Skus: Sku,
+   Usages: Usage,
+   PrivateLinkResources: PrivateLinkResource
 ```

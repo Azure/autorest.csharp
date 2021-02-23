@@ -24,9 +24,9 @@
         "Operations": "Operation",
         "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
         "VirtualMachineImages": "VirtualMachineImage",
+        "Usage": "Usage",
         "VirtualMachineSizes": "VirtualMachineSize",
         "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
-        "LogAnalytics": "LogAnalyticsOperationResult",
-        "Usage": "Usage"
+        "LogAnalytics": "LogAnalyticsOperationResult"
     }
 }

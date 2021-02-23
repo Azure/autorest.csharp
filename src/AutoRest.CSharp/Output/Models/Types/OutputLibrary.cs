@@ -62,21 +62,21 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _codeModel = codeModel;
             _context = context;
+            _operationGroups = new Dictionary<string, List<OperationGroup>>();
             if (context.Configuration.AzureArm)
             {
                 DecorateOperationGroup();
-            }
-            _operationGroups = new Dictionary<string, List<OperationGroup>>();
 
-            List<OperationGroup>? result;
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                if (!_operationGroups.TryGetValue(operationGroup.Resource, out result))
+                List<OperationGroup>? result;
+                foreach (var operationGroup in _codeModel.OperationGroups)
                 {
-                    result = new List<OperationGroup>();
-                    _operationGroups.Add(operationGroup.Resource, result);
+                    if (!_operationGroups.TryGetValue(operationGroup.Resource, out result))
+                    {
+                        result = new List<OperationGroup>();
+                        _operationGroups.Add(operationGroup.Resource, result);
+                    }
+                    result.Add(operationGroup);
                 }
-                result.Add(operationGroup);
             }
         }
 

@@ -66,6 +66,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
                         }
                         writer.WriteEndObject();
                     }
+                    if (configuration.OperationGroupToResource.Count > 0)
+                    {
+                        writer.WriteStartObject(nameof(Configuration.OperationGroupToResource));
+                        foreach (var keyval in configuration.OperationGroupToResource)
+                        {
+                            writer.WriteString(keyval.Key, keyval.Value);
+                        }
+                        writer.WriteEndObject();
+                    }
                     writer.WriteEndObject();
                 }
 
