@@ -281,10 +281,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
-            }
-
-            foreach (var operationsGroup in _codeModel.OperationGroups)
-            {
                 AddOperationGroupToResourceMap(operationsGroup);
             }
         }
