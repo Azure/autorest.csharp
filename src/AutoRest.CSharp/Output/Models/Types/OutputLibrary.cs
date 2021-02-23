@@ -80,25 +80,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private Schema GetSchemaFromOperationGroup(OperationGroup operationGroup)
-        {
-            List<ServiceRequest>? output;
-            operationGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out output);
-            return GetBodyParameter(output.First()).Schema;
-            throw new Exception("schema not found");
-        }
-
-        private RequestParameter GetBodyParameter(ServiceRequest request)
-        {
-            foreach (var param in request.Parameters)
-            {
-                var httpParam = param.Protocol.Http as HttpParameter;
-                if (httpParam?.In == ParameterLocation.Body)
-                    return param;
-            }
-            throw new Exception("No body param found");
-        }
-
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public IEnumerable<TypeProvider> ResourceModels => ResourceSchemaMap.Values;
@@ -310,7 +291,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
                 string? resource;
-                operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : GetSchemaFromOperationGroup(operationsGroup).Name;
+                operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
             }
         }
 
