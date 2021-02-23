@@ -48,13 +48,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.Models)
             {
-                var name = model.Type.Name;
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
+                var name = model.Type.Name;
                 project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
